@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChannelDatabase\GHZ.ChannelDatabase.csproj" />
+    <ProjectReference Include="..\ChannelDatabase\GHZ.StoreHoursSample.ChannelDatabase.csproj" />
     <ProjectReference Include="..\CommerceRuntime\GHZ.StoreHoursSample.CommerceRuntime.csproj" />
   </ItemGroup>
 

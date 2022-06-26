@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1758
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSampe.Pos", "Pos\GHZ.StoreHoursSampe.Pos.csproj", "{466446F6-7053-4BF9-B6C5-A852B6F76A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.Pos", "Pos\GHZ.StoreHoursSample.Pos.csproj", "{466446F6-7053-4BF9-B6C5-A852B6F76A34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.CommerceRuntime", "CommerceRuntime\GHZ.StoreHoursSample.CommerceRuntime.csproj", "{548F1C56-C131-4AFE-B798-62301F4FE7C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleUnit", "ScaleUnit\GHZ.StoreHoursSample.ScaleUnit.csproj", "{57D3EC00-BEA7-4FEA-8751-5D65DAC32B85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.ChannelDatabase", "ChannelDatabase\GHZ.ChannelDatabase.csproj", "{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.StoreHoursSample.ChannelDatabase", "ChannelDatabase\GHZ.StoreHoursSample.ChannelDatabase.csproj", "{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
