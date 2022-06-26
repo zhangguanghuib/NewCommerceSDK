@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.Commer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleUnit", "ScaleUnit\GHZ.StoreHoursSample.ScaleUnit.csproj", "{57D3EC00-BEA7-4FEA-8751-5D65DAC32B85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.ChannelDatabase", "ChannelDatabase\GHZ.ChannelDatabase.csproj", "{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{57D3EC00-BEA7-4FEA-8751-5D65DAC32B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57D3EC00-BEA7-4FEA-8751-5D65DAC32B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57D3EC00-BEA7-4FEA-8751-5D65DAC32B85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425F761E-AD0B-4DFF-947C-FB9C7CDC12F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
