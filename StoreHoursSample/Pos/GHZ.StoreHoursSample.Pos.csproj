@@ -16,9 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <Folder Include="Controls\Dialogs\" />
     <Folder Include="Converter\" />
-    <Folder Include="Entities\" />
     <Folder Include="Views\" />
     <Folder Include="Resources\" />
     <Folder Include="Operations\" />
