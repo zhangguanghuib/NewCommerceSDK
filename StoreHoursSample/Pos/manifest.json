@@ -37,7 +37,7 @@
       ],
       "operations": [
         {
-          "operationId": "3001",
+          "operationId": "60003",
           "operationRequestFactoryPath": "Operations/StoreHours/StoreHoursOperationRequestFactory",
           "operationRequestHandlerPath": "Operations/StoreHours/StoreHoursOperationRequestHandler"
         }

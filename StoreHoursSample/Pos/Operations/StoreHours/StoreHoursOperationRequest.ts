@@ -7,6 +7,6 @@ import StoreHoursOperationResponse from "./StoreHoursOperationResponse";
  */
 export default class StoreHoursOperationRequest<TResponse extends StoreHoursOperationResponse> extends ExtensionOperationRequestBase<TResponse> {
     constructor(correlationId: string) {
-        super(3001, correlationId);
+        super(60003, correlationId);
     }
 }

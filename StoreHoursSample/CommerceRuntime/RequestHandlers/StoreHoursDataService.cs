@@ -90,16 +90,18 @@
                     throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ValueOutOfRange);
                 }
 
-                InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
-                    "ContosoRetailStoreHours_UpdateStoreHours",
-                    request.StoreDayHours.Id,
-                    request.StoreDayHours.DayOfWeek,
-                    request.StoreDayHours.OpenTime,
-                    request.StoreDayHours.CloseTime);
-                InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
-                ReadOnlyCollection<object> results = response.Result;
+                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+                //    "ContosoRetailStoreHours_UpdateStoreHours",
+                //    request.StoreDayHours.Id,
+                //    request.StoreDayHours.DayOfWeek,
+                //    request.StoreDayHours.OpenTime,
+                //    request.StoreDayHours.CloseTime);
+                //InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+                //ReadOnlyCollection<object> results = response.Result;
 
-                long recId = Convert.ToInt64(results[0]);
+                //long recId = Convert.ToInt64(results[0]);
+
+                long recId = Convert.ToInt64(request.StoreDayHours.Id);
 
                 using (var databaseContext = new DatabaseContext(request.RequestContext))
                 {
