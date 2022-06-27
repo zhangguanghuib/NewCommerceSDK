@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Store Hours Dialog</title>
+</head>
+<body>
+    <div class="StoreHoursDialog col grow">
+        <!-- HTMLLint Disable LabelExistsValidator -->
+        <!-- dialog content -->
+        <div>
+            <div class="h4">Select open hour:</div>
+            <select id="selectOpenHour" data-bind="options: availableHours,
+                                                   optionsText: 'displayText',
+                                                   optionsValue: 'hour',
+                                                   value: selectedOpenHour"></select>
+            <br />
+            <br />
+            <div class="h4">Select close hour:</div>
+            <select id="selectCloseHour" data-bind="options: availableHours,
+                                                    optionsText: 'displayText',
+                                                    optionsValue: 'hour',
+                                                    value: selectedCloseHour"></select>
+        </div>
+        <!-- HTMLLint Enable LabelExistsValidator -->
+        <div class="grow"></div>
+        <div class="row"></div>
+    </div>
+</body>
+</html>

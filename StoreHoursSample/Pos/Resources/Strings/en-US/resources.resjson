@@ -1,0 +1,24 @@
+﻿//======================================================================================================
+//======================================= Store Hour Sample comment. ===================================
+//======================================================================================================
+{
+    //======================== Store Hours View extensions strings. ========================
+    "string_0"                                      : "VIEW STORE HOURS",
+    "_string_0.comment"                             : "Store hours title label.",
+
+    //======================== Column names.  ========================
+    "string_1"                                      : "WEEK DAY",
+    "_string_1.comment"                             : "Week day column name.",
+
+    "string_2"                                      : "OPEN HOUR",
+    "_string_2.comment"                             : "Store open hour column name.",
+
+    "string_3"                                      : "CLOSE HOUR",
+    "_string_3.comment"                             : "Store close hour column name.",
+
+	"string_4"                                      : "Update",
+    "_string_4.comment"                             : "Update button on store hours dialog.", 
+
+	"string_5"                                      : "Cancel",
+    "_string_5.comment"                             : "Cancel button on store hours dialog."
+}

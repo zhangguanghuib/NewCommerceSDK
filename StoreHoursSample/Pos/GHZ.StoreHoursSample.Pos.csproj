@@ -15,14 +15,6 @@
     <ProjectReference Include="..\CommerceRuntime\GHZ.StoreHoursSample.CommerceRuntime.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controls\Dialogs\" />
-    <Folder Include="Converter\" />
-    <Folder Include="Views\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Operations\" />
-  </ItemGroup>
-
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
     <PropertyGroup>
       <KnockoutLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'knockoutjs'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\knockout-%(PackageDefinitions.Version).js</KnockoutLibraryFilePath>
