@@ -10,7 +10,8 @@
          .....
          
 ## Store hours sample migration
-    Before doing the below steps, you can refer to this link to understand how we can make store hours sample work on old retail SDK: https://github.com/zhangguanghuib/POS_Extension/tree/main/StoreHours
+    Before doing the below steps, you can refer to this link to understand how we can make store hours sample work on old retail SDK: 
+    https://github.com/zhangguanghuib/POS_Extension/tree/main/StoreHours
     1. Create a repo in you github
     2. Create a solution
     3. Add these C# projects, 
