@@ -62,5 +62,5 @@ https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/de
 ![image](https://user-images.githubusercontent.com/14832260/176575606-2487f0d4-92c3-4472-87ea-fbc0ae72e365.png)
 
 ##  Store Commerce App
-StoreCommerce.Installer.exe install --Verbosity Trace 
-useful link:  https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
+1. Install: StoreCommerce.Installer.exe install --Verbosity Trace 
+2. Useful link:  https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
