@@ -1,5 +1,3 @@
-# NewCommerceSDK
-
 ## New Commerce SDK benifit
    1.   Don't need LCS VM  + Retail SDK,  normal DEV Box(Visual stuido 2017(2019)/Visual Studio code + .Net Core/.Net Frameork) is OK  to develop commerce extension (POS, CRT，Retail Server).
    2.   Any changes in custom logic,  you can nonly build the corresponding extension installer, un-install and re-install the extension installer, not need build the whole retail SDK  and create a Deployable package.   MPOS->MPOS Installer,   RSSU ->RSSU Installer
@@ -28,7 +26,7 @@
 ## How to debug CPOS if you have difficulty to install Store Commerce App or Sealed MPOS:     
 https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/debug-pos-extension#run-and-debug-cloud-pos
 ### Steps:
-cd C:\RetailCloudPos\webroot\Extensions
-set ExtensionPackageName=GHZ.StoreHoursSample
-set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
-mklink /D %ExtensionPackageName% %AbsolutePathToExtensionPackageProject%
+#### cd C:\RetailCloudPos\webroot\Extensions
+#### set ExtensionPackageName=GHZ.StoreHoursSample
+#### set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
+#### mklink /D %ExtensionPackageName% %AbsolutePathToExtensionPackageProject%
