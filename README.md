@@ -1,5 +1,7 @@
 # NewCommerceSDK
 
+
+
 cd C:\RetailCloudPos\webroot\Extensions
 
 set ExtensionPackageName=GHZ.StoreHoursSample
