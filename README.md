@@ -22,7 +22,7 @@
             ScaleUnit             with reference POS, ChannelDatabase and CommerceRuntime.
         These projects with Target Framework .Net Framework 4.6.1, Output Type is Console Application, that is exe
             StoreCommerceApp.Installer:  with reference POS, ChannelDatabase and CommerceRuntime
-            ScaleUnit.Installer 
+            ScaleUnit.Installer : with referece POS, Channel
      4. The generated package from ScaleUnit project can be uploaded to LCS  for Cloud-Scale unit update
    
 ## How to debug CPOS if you have difficulty to install Store Commerce App or Sealed MPOS:     
