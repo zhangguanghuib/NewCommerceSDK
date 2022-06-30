@@ -30,5 +30,11 @@ https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/de
 #### set ExtensionPackageName=GHZ.StoreHoursSample
 #### set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
 #### mklink /D %ExtensionPackageName% %AbsolutePathToExtensionPackageProject%
+
+### How to load the POS extension packags
 ![image](https://user-images.githubusercontent.com/14832260/176575303-fb7fb06a-f822-4ac1-9a98-4215bf05be1e.png)
+
+###  Where is the generated CSU+CPOS packages
+![image](https://user-images.githubusercontent.com/14832260/176575606-2487f0d4-92c3-4472-87ea-fbc0ae72e365.png)
+
 
