@@ -10,6 +10,7 @@
          .....
          
 ## Store hours sample migration
+    Before doing the below steps, you can refer to this link to understand how we can make store hours sample work on old retail SDK: https://github.com/zhangguanghuib/POS_Extension/tree/main/StoreHours
     1. Create a repo in you github
     2. Create a solution
     3. Add these C# projects, 
@@ -26,10 +27,10 @@
 ## How to debug CPOS if you have difficulty to install Store Commerce App or Sealed MPOS:     
 https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/debug-pos-extension#run-and-debug-cloud-pos
 ### Steps:
-#### cd C:\RetailCloudPos\webroot\Extensions
-#### set ExtensionPackageName=GHZ.StoreHoursSample
-#### set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
-#### mklink /D %ExtensionPackageName% %AbsolutePathToExtensionPackageProject%
+1. cd C:\RetailCloudPos\webroot\Extensions
+2. set ExtensionPackageName=GHZ.StoreHoursSample
+3. set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
+4. mklink /D %ExtensionPackageName% %AbsolutePathToExtensionPackageProject%
 
 ### How to load the POS extension packags
 ![image](https://user-images.githubusercontent.com/14832260/176575303-fb7fb06a-f822-4ac1-9a98-4215bf05be1e.png)
