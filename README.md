@@ -27,6 +27,7 @@
    
 ## How to debug CPOS if you have difficulty to install Store Commerce App or Sealed MPOS:     
 https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/debug-pos-extension#run-and-debug-cloud-pos
+Steps:
 cd C:\RetailCloudPos\webroot\Extensions
 set ExtensionPackageName=GHZ.StoreHoursSample
 set AbsolutePathToExtensionPackageProject=C:\NewCommerceSDKRepro\NewCommerceSDK\StoreHoursSample\Pos
