@@ -13,10 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.Channe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.StoreCommerce.Installer", "StoreCommerce.Installer\GHZ.StoreHoursSample.StoreCommerce.Installer.csproj", "{276B2061-D23A-4FB9-8951-4D7005FE7D45}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "GHZ.StoreHoursSample.ModernPos", "ModernPos\GHZ.StoreHoursSample.ModernPos.jsproj", "{20292722-7895-4388-812B-837317D7FC0C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ModernPos.Installer", "ModernPos.Installer\GHZ.StoreHoursSample.ModernPos.Installer.csproj", "{9C3476BC-4C70-4E28-9A02-98AABC5C4248}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleUnit.Installer", "ScaleUnit.Installer\GHZ.StoreHoursSample.ScaleUnit.Installer.csproj", "{B0AEF562-FFB2-4226-ABDE-FD740A2269B6}"
 EndProject
 Global
