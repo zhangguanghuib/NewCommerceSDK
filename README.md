@@ -64,3 +64,26 @@ https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/de
 ##  Store Commerce App
 1. Install: StoreCommerce.Installer.exe install --Verbosity Trace 
 2. Useful link:  https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
+## Self-Hosted CSU development and debugging
+1. Clone this repro https://github.com/microsoft/Dynamics365Commerce.ScaleUnit
+2. Copy the below folder to your own repro:
+    ![image](https://user-images.githubusercontent.com/14832260/176613056-d69c8baf-6d71-43b2-b924-b13d185335e4.png)
+3. Update the Install.ps1:
+    ![image](https://user-images.githubusercontent.com/14832260/176613281-67a628ba-e1c2-4a4c-81c9-f1e71aa62b72.png)
+4. Put the OOB  Scale Unit Installer under the download folder:
+5. Press F5 to debug
+6. POSTMAN to test the API:
+   Get Store Hours API
+   url: http://localhost:1802/Commerce/StoreHours/GetStoreDaysByStore?$top=250&$count=true&api-version=7.3
+   header: oun 052
+   Body: {"StoreNumber":"HOUSTON"}
+   Method: POST
+   
+   Update store hours API:
+   url: http://localhost:1802/Commerce/StoreHours(3)/UpdateStoreDayHours?api-version=7.3
+   header: oun 052
+   Body: {"storeDayHours":{"DayOfWeek":2,"OpenTime":28800,"CloseTime":54800,"Id":2}}
+   Method: Post
+   
+   You can see the breakpoint is hit:
+   ![image](https://user-images.githubusercontent.com/14832260/176614996-53734607-f98e-4b1b-a10e-99cfaa0503cb.png)
