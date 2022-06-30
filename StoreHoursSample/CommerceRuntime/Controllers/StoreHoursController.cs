@@ -35,7 +35,7 @@
         /// <param name="parameters">The OData parameters.</param>
         /// <returns>The updated store hours.</returns>
         [HttpPost]
-        [Authorization(CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee)]
         public async Task<SampleDataModel.StoreDayHours> UpdateStoreDayHours(IEndpointContext context, [EntityKey] long key, SampleDataModel.StoreDayHours storeDayHours)
         {
             storeDayHours.Id = key;
