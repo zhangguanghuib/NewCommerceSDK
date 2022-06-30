@@ -15,14 +15,36 @@
     1. Create a repo in you github
     2. Create a solution
     3. Add these C# projects, 
-        These projects with Target Framework .NET Standard 2.0, Output Type Class Libarary
             ChannelDatabase
-            CommerceRuntime
-            POS                   with reference CommerceRuntime
-            ScaleUnit             with reference POS, ChannelDatabase and CommerceRuntime.
-        These projects with Target Framework .Net Framework 4.6.1, Output Type is Console Application, that is exe
-            StoreCommerceApp.Installer:  with reference POS, ChannelDatabase and CommerceRuntime
-            ScaleUnit.Installer : with referece POS, ChannelDatabase and CommerceRuntime
+                 Target Framework: .NET Standard 2.0
+                 Output Type     : Class Libarary
+                 Nuget Package   : Microsoft.Dynamics.Commerce.Sdk.ChannelDatabase
+            CommerceRuntime:
+                 Target Framework: .NET Standard 2.0
+                 Output Type     : Class Libarary
+                 Nuget Package   : Microsoft.Dynamics.Commerce.Sdk.Runtime
+            POS:
+                 Target Framework: .NET Standard 2.0
+                 Output Type     : Class Libarary
+                 Nuget Package   : Microsoft.Dynamics.Commerce.Sdk.Pos
+                                   knockoutjs
+                                   Microsoft.TypeScript.MSBuild
+                 Reference Project: CommerceRuntime
+            ScaleUnit:
+                 Target Framework: .NET Standard 2.0
+                 Output Type     : Class Libarary
+                 Nuget Package:     Microsoft.Dynamics.Commerce.Sdk.ScaleUnit
+                 Reference Project: POS, ChannelDatabase and CommerceRuntime.
+            StoreCommerceApp.Installer: 
+                 Target Framework:  .Net Framework 4.6.1
+                 Output Type:        Console Application, that is exe
+                 Reference Projects: POS, ChannelDatabase and CommerceRuntime.
+                 Nuget Package   :   Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce
+            ScaleUnit.Installer :
+                 Target Framework:  .Net Framework 4.6.1
+                 Output Type:       Console Application, that is exe
+                 Reference Projects: POS, ChannelDatabase and CommerceRuntime
+                 Nuget Packages:     Microsoft.Dynamics.Commerce.Sdk.Installers.ScaleUnit
      4. The generated package from ScaleUnit project can be uploaded to LCS  for Cloud-Scale unit update
    
 ## How to debug CPOS if you have difficulty to install Store Commerce App or Sealed MPOS:     
