@@ -73,17 +73,18 @@ https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/de
 4. Put the OOB  Scale Unit Installer under the download folder:
 5. Press F5 to debug
 6. POSTMAN to test the API:
-   Get Store Hours API
-       * url: http://localhost:1802/Commerce/StoreHours/GetStoreDaysByStore?$top=250&$count=true&api-version=7.3
-       * header: oun 052
-       * Body: {"StoreNumber":"HOUSTON"}
-       * Method: POST
+       
+       Get Store Hours API
+           * url: http://localhost:1802/Commerce/StoreHours/GetStoreDaysByStore?$top=250&$count=true&api-version=7.3
+           * header: oun 052
+           * Body: {"StoreNumber":"HOUSTON"}
+           * Method: POST
    
-   Update store hours API:
-       * url: http://localhost:1802/Commerce/StoreHours(3)/UpdateStoreDayHours?api-version=7.3
-       * header: oun 052
-       * Body: {"storeDayHours":{"DayOfWeek":2,"OpenTime":28800,"CloseTime":54800,"Id":2}}
-       * Method: Post
+       Update store hours API:
+           * url: http://localhost:1802/Commerce/StoreHours(3)/UpdateStoreDayHours?api-version=7.3
+           * header: oun 052
+           * Body: {"storeDayHours":{"DayOfWeek":2,"OpenTime":28800,"CloseTime":54800,"Id":2}}
+           * Method: Post
    
    You can see the breakpoint is hit:
    ![image](https://user-images.githubusercontent.com/14832260/176614996-53734607-f98e-4b1b-a10e-99cfaa0503cb.png)
