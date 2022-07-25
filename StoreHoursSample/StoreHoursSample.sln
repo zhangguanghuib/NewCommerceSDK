@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleU
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.HardwareStation.CoinDispenserSample", "HardwareStation.CoinDispenserSample\GHZ.HardwareStation.CoinDispenserSample.csproj", "{8BABB689-E304-4088-835C-D29E8FAE813C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentDeviceSample", "PaymentDevice\GHZ.PaymentDeviceSample.csproj", "{86497AE8-9784-4E5D-BF00-B566522DAFEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentDeviceSample.HardwareStation.Installer", "HardwareStation.Installer\GHZ.PaymentDeviceSample.HardwareStation.Installer.csproj", "{D8EC8EFA-E568-4A04-8E1A-983350D53341}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,22 @@ Global
 		{8BABB689-E304-4088-835C-D29E8FAE813C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8BABB689-E304-4088-835C-D29E8FAE813C}.Release|x86.ActiveCfg = Release|Any CPU
 		{8BABB689-E304-4088-835C-D29E8FAE813C}.Release|x86.Build.0 = Release|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Debug|x86.Build.0 = Debug|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{86497AE8-9784-4E5D-BF00-B566522DAFEB}.Release|x86.Build.0 = Release|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Debug|x86.Build.0 = Debug|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Release|x86.ActiveCfg = Release|Any CPU
+		{D8EC8EFA-E568-4A04-8E1A-983350D53341}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
