@@ -1,4 +1,5 @@
-﻿import * as Views from "PosApi/Create/Views";
+﻿import ko from "knockout";
+import * as Views from "PosApi/Create/Views";
 import ExampleViewModel from "./ExampleViewModel";
 
 import { ObjectExtensions} from "PosApi/TypeExtensions";
@@ -20,6 +21,9 @@ export default class ExampleView extends Views.CustomViewControllerBase {
     }
 
     onReady(element: HTMLElement): void {
+
+        ko.applyBindings(this, element);
+
         let pingCoinDispenserButton: HTMLButtonElement = element.querySelector("#pingCoinDispenserButton");
         pingCoinDispenserButton.addEventListener('click', (event) => {
             console.log("button pingCoinDispenserButton clicked");

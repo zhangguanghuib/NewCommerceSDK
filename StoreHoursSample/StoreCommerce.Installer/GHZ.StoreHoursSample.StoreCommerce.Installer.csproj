@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ChannelDatabase\GHZ.StoreHoursSample.ChannelDatabase.csproj" />
     <ProjectReference Include="..\CommerceRuntime\GHZ.StoreHoursSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\HardwareStation.CoinDispenserSample\GHZ.HardwareStation.CoinDispenserSample.csproj" />
     <ProjectReference Include="..\Pos\GHZ.StoreHoursSample.Pos.csproj" />
   </ItemGroup>
 </Project>

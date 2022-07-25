@@ -20,5 +20,7 @@
     "_string_4.comment"                             : "Update button on store hours dialog.", 
 
 	"string_5"                                      : "Cancel",
-    "_string_5.comment"                             : "Cancel button on store hours dialog."
+    "_string_5.comment"                             : "Cancel button on store hours dialog.",
+
+	"string_0001"                                   : "Coin Dispenser Example"
 }
