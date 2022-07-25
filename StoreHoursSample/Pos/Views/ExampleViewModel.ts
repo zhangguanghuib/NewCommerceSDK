@@ -28,7 +28,23 @@ export default class ExampleViewModel {
         this._dispenseCoins(1000);
     }
 
+    public dispenseTenCoins(): void {
+        this._dispenseCoins(10);
+    }
+
     private _dispenseCoins(amount: number): void {
+        let hardwareStatationDeviceActionRequest: HardwareStationDeviceActionRequest<HardwareStationDeviceActionResponse> =
+            new HardwareStationDeviceActionRequest("COINDISPENSER",
+                "DispenseChange", {
+                Amount: amount,
+                DeviceName: "MyCoinDispenser"
+            });
+        this._context.runtime.executeAsync(hardwareStatationDeviceActionRequest).then(() => {
+            this._context.logger.logInformational("Hardware Station request executed successfully");
+        }).catch((err) => {
+            this._context.logger.logInformational("Failure in executing Hardware Station request");
+            throw err;
+        });
 
     }
 }

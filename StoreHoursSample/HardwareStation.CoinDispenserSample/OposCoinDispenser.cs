@@ -42,17 +42,19 @@
 
                 if(requestType == typeof(OpenCoinDispenserDeviceRequest))
                 {
-                    var openReques = (OpenCoinDispenserDeviceRequest)request;
+                    var openRequest = (OpenCoinDispenserDeviceRequest)request;
+                    this.Open(openRequest.DeviceName);
 
                 }
                 else if (requestType == typeof(DispenseChangeCoinDispenserDeviceRequest))
                 {
                     var dispenseChangeRequest = (DispenseChangeCoinDispenserDeviceRequest)request;
+                    this.DispenseChange(dispenseChangeRequest.Amount);
 
                 }
                 else if(requestType == typeof(CloseCoinDispenserDeviceRequest))
                 {
-
+                    this.Close();
                 }
                 else
                 {

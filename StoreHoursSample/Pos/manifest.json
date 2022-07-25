@@ -33,6 +33,13 @@
           "phonePageName": "StoreHoursView",
           "viewDirectory": "Views/",
           "viewControllerPath": "Views/StoreHoursView"
+        },
+        {
+          "title": "Coin Dispenser View",
+          "pageName": "ExampleView",
+          "phonePageName": "ExampleView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/ExampleView"
         }
       ],
       "operations": [
