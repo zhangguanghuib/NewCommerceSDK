@@ -49,6 +49,13 @@
           "operationRequestHandlerPath": "Operations/StoreHours/StoreHoursOperationRequestHandler"
         }
       ]
+    },
+    "extend": {
+      "views": {
+        "ShowJournalView": {
+          "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/CoinDispenserCommand" } ]
+        }
+      }
     }
   }
 }
