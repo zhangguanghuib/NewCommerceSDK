@@ -11,6 +11,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HardwareStation.CoinDispenserSample\GHZ.HardwareStation.CoinDispenserSample.csproj" />
-    <ProjectReference Include="..\PaymentDevice\GHZ.PaymentDeviceSample.csproj" />
   </ItemGroup>
 </Project>

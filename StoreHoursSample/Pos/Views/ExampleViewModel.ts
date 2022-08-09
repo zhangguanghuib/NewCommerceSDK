@@ -12,7 +12,7 @@ export default class ExampleViewModel {
 
     public pingCoinDispenser(): void {
         let hardwareStationDeviceActionRequest: HardwareStationDeviceActionRequest<HardwareStationDeviceActionResponse> =
-            new HardwareStationDeviceActionRequest("CUSTOMPINGS",
+            new HardwareStationDeviceActionRequest("CUSTOMPING",
                 "CustomPing",
                 { Message: "Knock, knock!" }
             );
