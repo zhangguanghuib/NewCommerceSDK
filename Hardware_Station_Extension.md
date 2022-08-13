@@ -33,4 +33,61 @@ The steps of making this solution is as below:
 1. Hardware station project structure are like below:
     It is .Net Standard 2.0 Class Library project:
    ![image](https://user-images.githubusercontent.com/14832260/184473410-2e0f69d1-a79e-4d27-abf3-73c8749ab881.png)
+2. The POS project structure as below:
+    ![image](https://user-images.githubusercontent.com/14832260/184473506-7b4b6daa-7be5-4626-af2d-f9e89b967262.png)
+    You need make sure the manifest file is correct.
+3.  Some key code to implement this solution:
+    How to call hardware station in POS  Typescript code:
+    ```TS
+    import { IExtensionViewControllerContext } from "PosApi/Create/Views";
+    import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse } from "PosApi/Consume/Peripherals";
+
+    export default class ExampleViewModel {
+        public title: string;
+        private _context: IExtensionViewControllerContext;
+
+        constructor(context: IExtensionViewControllerContext) {
+            this._context = context;
+            this.title = this._context.resources.getString("string_0001");
+        }
+
+        public pingCoinDispenser(): void {
+            let hardwareStationDeviceActionRequest: HardwareStationDeviceActionRequest<HardwareStationDeviceActionResponse> =
+                new HardwareStationDeviceActionRequest("CUSTOMPING",
+                    "CustomPing",
+                    { Message: "Knock, knock!" }
+                );
+
+            this._context.runtime.executeAsync(hardwareStationDeviceActionRequest).then((result) => {
+                this._context.logger.logInformational("Message from HWS: " + result.data.response);
+            }).catch((err) => {
+                this._context.logger.logInformational("Failure in executing Hardware Station request");
+            });
+        }
+
+        public dispenseThousandCoins(): void {
+            this._dispenseCoins(1000);
+        }
+
+        public dispenseTenCoins(): void {
+            this._dispenseCoins(10);
+        }
+
+        private _dispenseCoins(amount: number): void {
+            let hardwareStatationDeviceActionRequest: HardwareStationDeviceActionRequest<HardwareStationDeviceActionResponse> =
+                new HardwareStationDeviceActionRequest("COINDISPENSER",
+                    "DispenseChange", {
+                    Amount: amount,
+                    DeviceName: "MyCoinDispenser"
+                });
+            this._context.runtime.executeAsync(hardwareStatationDeviceActionRequest).then(() => {
+                this._context.logger.logInformational("Hardware Station request executed successfully");
+            }).catch((err) => {
+                this._context.logger.logInformational("Failure in executing Hardware Station request");
+                throw err;
+            });
+
+        }
+    }
+    ```
 
