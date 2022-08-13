@@ -120,7 +120,8 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
    ```
    <hr/>
    Hardware station controller and service code like below:<br/>
-   ```csharp
+   
+   ```C#
     [RoutePrefix("COINDISPENSER")]
         public class CoinDispenserController : IController
         {
@@ -161,7 +162,8 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
             }
    ```
    <hr/>
-   ```
+   
+   ```C#
     public class OposCoinDispenser : INamedRequestHandler, IDisposable
         {
             private int coinAmount = 1000;
