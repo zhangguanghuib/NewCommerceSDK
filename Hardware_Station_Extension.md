@@ -27,3 +27,10 @@ The final effect of this sample is like this:
     ![image](https://user-images.githubusercontent.com/14832260/184473213-68e41a46-7d04-4788-8093-81ec8494f012.png)
 3. Click each button to call hardware station to do health check, or dispense 10 coin, or 1000 coin,  if there is no enough coin to dispense, the hardare station will return error:
     ![image](https://user-images.githubusercontent.com/14832260/184473324-1d7a3024-0625-4aeb-aede-ea573519da60.png)
+
+
+The steps of making this solution is as below:
+1. Hardware station project structure are like below:
+    It is .Net Standard 2.0 Class Library project:
+   ![image](https://user-images.githubusercontent.com/14832260/184473410-2e0f69d1-a79e-4d27-abf3-73c8749ab881.png)
+
