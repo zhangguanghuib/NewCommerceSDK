@@ -120,7 +120,7 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
    ```
    <hr/>
    `Hardware station controller and service code like below:<br/>
-   ```CS
+   ```
     [RoutePrefix("COINDISPENSER")]
         public class CoinDispenserController : IController
         {
