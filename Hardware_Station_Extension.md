@@ -26,3 +26,4 @@ The final effect of this sample is like this:
 2. The new page will open:
     ![image](https://user-images.githubusercontent.com/14832260/184473213-68e41a46-7d04-4788-8093-81ec8494f012.png)
 3. Click each button to call hardware station to do health check, or dispense 10 coin, or 1000 coin,  if there is no enough coin to dispense, the hardare station will return error:
+    ![image](https://user-images.githubusercontent.com/14832260/184473324-1d7a3024-0625-4aeb-aede-ea573519da60.png)
