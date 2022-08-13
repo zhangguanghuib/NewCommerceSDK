@@ -35,9 +35,10 @@ The steps of making this solution is as below:
    ![image](https://user-images.githubusercontent.com/14832260/184473410-2e0f69d1-a79e-4d27-abf3-73c8749ab881.png)
 2. The POS project structure as below:
     ![image](https://user-images.githubusercontent.com/14832260/184473506-7b4b6daa-7be5-4626-af2d-f9e89b967262.png)
-    You need make sure the manifest file is correct.
+    <br/>You need make sure the manifest file is correct.
 3.  Some key code to implement this solution:
-    How to call hardware station in POS  Typescript code:
+    How to call hardware station in POS  Typescript code:<br/>
+    ![image](https://user-images.githubusercontent.com/14832260/184473676-fb37c5d8-6437-4019-bfd2-78d631f31920.png)
     ```TS
     import { IExtensionViewControllerContext } from "PosApi/Create/Views";
     import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse } from "PosApi/Consume/Peripherals";
@@ -86,7 +87,6 @@ The steps of making this solution is as below:
                 this._context.logger.logInformational("Failure in executing Hardware Station request");
                 throw err;
             });
-
         }
     }
     ```
