@@ -218,4 +218,11 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
             }
             ...
    ```
+   4. Add POS project and Hardware station Project to Store Commerce installer and build it:
+      ![image](https://user-images.githubusercontent.com/14832260/184474503-ddc3a665-9874-497f-86be-9effc62b0723.png)
+      and then install the POS installer<br/>
+      ![image](https://user-images.githubusercontent.com/14832260/184474528-ca71a855-e68c-4033-8eac-da08f3c400d4.png)
+      
+   5. Debug it and you can the hardware station code is hit successfully:
+      ![image](https://user-images.githubusercontent.com/14832260/184474581-082ec8d5-04ae-4fba-9d53-57dedef7451f.png)
 
