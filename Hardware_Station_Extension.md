@@ -31,12 +31,12 @@ The final effect of this sample is like this:
 
 The steps of making this solution is as below:
 1. Hardware station project structure are like below:
-    It is .Net Standard 2.0 Class Library project:
+    It is .Net Standard 2.0 Class Library project:<br/>
    ![image](https://user-images.githubusercontent.com/14832260/184473410-2e0f69d1-a79e-4d27-abf3-73c8749ab881.png)
-2. The POS project structure as below:
+2. The POS project structure as below:<br/>
     ![image](https://user-images.githubusercontent.com/14832260/184473506-7b4b6daa-7be5-4626-af2d-f9e89b967262.png)
     <br/>You need make sure the manifest file is correct.
-3.  Some key code to implement this solution:
+3.  Some key code to implement this solution:<br/>
     How to call hardware station in POS  Typescript code:<br/>
     ![image](https://user-images.githubusercontent.com/14832260/184473676-fb37c5d8-6437-4019-bfd2-78d631f31920.png)
     ```TS
