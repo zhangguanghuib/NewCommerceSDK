@@ -18,3 +18,8 @@ There are 3 sample provide:
 <hr/>
 
 <font size="4">Sample #1 -  Coin Dispenser</font>
+
+The final effect of this sample is like this:
+
+1. Go to show journal, click the new command button we added:
+   ![image](https://user-images.githubusercontent.com/14832260/184473152-d17c3aa2-8718-465c-a965-c65342e4dba0.png)
