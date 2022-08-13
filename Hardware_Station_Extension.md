@@ -118,4 +118,102 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
     }
 }
    ```
+   <hr/>
+   `Hardware station controller and service code like below:<br/>
+   ```CS
+    [RoutePrefix("COINDISPENSER")]
+        public class CoinDispenserController : IController
+        {
+            private const string CoinDispenserTestName = "MockOPOSCoinDispenser";
+
+            [HttpPost]
+            public async Task<bool> DispenseChange(CoinDispenseRequest request, IEndpointContext context)
+            {
+                ThrowIf.Null(request, "request");
+
+                string deviceName = request.DeviceName;
+
+                if (string.IsNullOrWhiteSpace(deviceName))
+                {
+                    deviceName = CoinDispenserController.CoinDispenserTestName;
+                }
+
+                try
+                {
+                    var openCoinDispenserDeviceRequest = new OpenCoinDispenserDeviceRequest(deviceName, null);
+                    await context.ExecuteAsync<NullResponse>(openCoinDispenserDeviceRequest);
+
+
+                    var dispenseChangeCoinDispenserDeviceRequest = new DispenseChangeCoinDispenserDeviceRequest(request.Amount);
+                    await context.ExecuteAsync<NullResponse>(dispenseChangeCoinDispenserDeviceRequest);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new PeripheralException("Microsoft_Dynamics_Commerce_HardwareStation_CoinDispenser_Error", ex.Message, ex);
+                }
+                finally
+                {
+                    var closeCoinDispenserDeviceRequest = new CloseCoinDispenserDeviceRequest();
+                    await context.ExecuteAsync<NullResponse>(closeCoinDispenserDeviceRequest);
+                }
+            }
+   ```
+   <hr/>
+   ```CS
+    public class OposCoinDispenser : INamedRequestHandler, IDisposable
+        {
+            private int coinAmount = 1000;
+            private bool isOpen = false;
+
+            public string HandlerName
+            {
+                get { return PeripheralType.Opos; }
+            }
+
+            public IEnumerable<Type> SupportedRequestTypes
+            {
+                get
+                {
+                    return new[]
+                    {
+                        typeof(OpenCoinDispenserDeviceRequest),
+                        typeof(DispenseChangeCoinDispenserDeviceRequest),
+                        typeof(CloseCoinDispenserDeviceRequest)
+                    };
+                }
+            }
+
+            public Response Execute(Request request)
+            {
+                ThrowIf.Null(request, "request");
+
+                Type requestType = request.GetType();
+
+                if(requestType == typeof(OpenCoinDispenserDeviceRequest))
+                {
+                    var openRequest = (OpenCoinDispenserDeviceRequest)request;
+                    this.Open(openRequest.DeviceName);
+
+                }
+                else if (requestType == typeof(DispenseChangeCoinDispenserDeviceRequest))
+                {
+                    var dispenseChangeRequest = (DispenseChangeCoinDispenserDeviceRequest)request;
+                    this.DispenseChange(dispenseChangeRequest.Amount);
+
+                }
+                else if(requestType == typeof(CloseCoinDispenserDeviceRequest))
+                {
+                    this.Close();
+                }
+                else
+                {
+                    throw new NotSupportedException(string.Format("Request '{0}' is not supported", requestType));
+                }
+
+                return new NullResponse();
+            }
+            ...
+   ```
 
