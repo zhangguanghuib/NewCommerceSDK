@@ -23,3 +23,6 @@ The final effect of this sample is like this:
 
 1. Go to show journal, click the new command button we added:
    ![image](https://user-images.githubusercontent.com/14832260/184473152-d17c3aa2-8718-465c-a965-c65342e4dba0.png)
+2. The new page will open:
+    ![image](https://user-images.githubusercontent.com/14832260/184473213-68e41a46-7d04-4788-8093-81ec8494f012.png)
+3. Click each button to call hardware station to do health check, or dispense 10 coin, or 1000 coin,  if there is no enough coin to dispense, the hardare station will return error:
