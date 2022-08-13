@@ -37,7 +37,7 @@ The steps of making this solution is as below:
     ![image](https://user-images.githubusercontent.com/14832260/184473506-7b4b6daa-7be5-4626-af2d-f9e89b967262.png)
     <br/>You need make sure the manifest file is correct.
 3.  Some key code to implement this solution:<br/>
-     `How to call hardware station in POS  Typescript code:`<br/>
+     `<u>How to call hardware station in POS  Typescript code:</u>`<br/>
     ![image](https://user-images.githubusercontent.com/14832260/184473676-fb37c5d8-6437-4019-bfd2-78d631f31920.png)
     ```TS
     import { IExtensionViewControllerContext } from "PosApi/Create/Views";
