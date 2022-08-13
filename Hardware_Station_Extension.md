@@ -14,6 +14,7 @@ There are 3 sample provide:
 
 * In Sample #3, you will learn: <br/>
   1. How to delevelop a payment device.
-=======================================================================================================================================================
+
+<hr/>
 
 <font size="4">Sample #1 -  Coin Dispenser</font>
