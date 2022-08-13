@@ -10,7 +10,7 @@ In Sample#1, you will learn <br/>
 4. How to call hardware station API  in POS TS  code.
 
 In Sample #2 <br/>
-1.How to overide the existing hardware logic.
+1. How to overide the existing hardware logic.
 
 In Sample #3 <br/>
 1. How to delevelop a payment device.
