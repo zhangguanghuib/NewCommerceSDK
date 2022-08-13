@@ -231,7 +231,7 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
 
 <hr/>
 The steps to implement a payment device is like below:<br/>
-1. Go through this document: https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/end-to-end-payment-extension
+1. Go through this document: https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/end-to-end-payment-extension<br/>
 2. Go to hardware profile, change it as this:
 
    ![image](https://user-images.githubusercontent.com/14832260/184475560-b798dbd5-407f-4e11-892c-0f0d4bcbbfe9.png)
