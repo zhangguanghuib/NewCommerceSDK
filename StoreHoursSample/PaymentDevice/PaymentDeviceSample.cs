@@ -96,7 +96,7 @@ namespace Contoso.Commerce.HardwareStation.PaymentSample
         /// <summary>
         /// Gets the unique name for this request handler.
         /// </summary>
-        public string HandlerName => "SAMPLEDEVICE";
+        public string HandlerName => "MockPaymentTerminal";
 
         /// <summary>
         /// Represents the entry point of the request handler.

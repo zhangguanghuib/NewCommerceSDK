@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleU
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.HardwareStation.CoinDispenserSample", "HardwareStation.CoinDispenserSample\GHZ.HardwareStation.CoinDispenserSample.csproj", "{8BABB689-E304-4088-835C-D29E8FAE813C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentDeviceSample", "PaymentDevice\GHZ.PaymentDeviceSample.csproj", "{86497AE8-9784-4E5D-BF00-B566522DAFEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.HardwareStation.PaymentDeviceSample", "PaymentDevice\GHZ.HardwareStation.PaymentDeviceSample.csproj", "{86497AE8-9784-4E5D-BF00-B566522DAFEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentDeviceSample.HardwareStation.Installer", "HardwareStation.Installer\GHZ.PaymentDeviceSample.HardwareStation.Installer.csproj", "{D8EC8EFA-E568-4A04-8E1A-983350D53341}"
 EndProject
