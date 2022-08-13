@@ -161,7 +161,7 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
             }
    ```
    <hr/>
-   ```CS
+   ```
     public class OposCoinDispenser : INamedRequestHandler, IDisposable
         {
             private int coinAmount = 1000;
