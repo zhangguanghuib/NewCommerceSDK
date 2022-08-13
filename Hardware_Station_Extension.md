@@ -223,6 +223,9 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
       and then install the POS installer<br/>
       ![image](https://user-images.githubusercontent.com/14832260/184474528-ca71a855-e68c-4033-8eac-da08f3c400d4.png)
       
+      Check the Commerce store application installation folder<br/>
+      ![image](https://user-images.githubusercontent.com/14832260/184475109-d104cb20-6e27-4dd4-b82c-1305b257f833.png)
+
    5. Debug it and you can the hardware station code is hit successfully:
       ![image](https://user-images.githubusercontent.com/14832260/184474581-082ec8d5-04ae-4fba-9d53-57dedef7451f.png)
 
