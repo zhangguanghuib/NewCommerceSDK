@@ -229,3 +229,13 @@ export default class CoinDispenserCommand extends ShowJournalView.ShowJournalExt
    5. Debug it and you can the hardware station code is hit successfully:
       ![image](https://user-images.githubusercontent.com/14832260/184474581-082ec8d5-04ae-4fba-9d53-57dedef7451f.png)
 
+<hr/>
+The steps to implement a payment device is like below:<br/>
+1. Go through this document: https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/end-to-end-payment-extension
+2. Go to hardware profile, change it as this:<br/>
+    ![image](https://user-images.githubusercontent.com/14832260/184475278-af43fddb-f7be-4334-9b6b-f6e9be2a72b2.png)
+3. Clone the code from https://github.com/microsoft/Dynamics365Commerce.InStore/tree/release/9.39/src/HardwareStationSample/PaymentDevice
+4. Update the code as below:<br/>
+    ![image](https://user-images.githubusercontent.com/14832260/184475360-53eb7775-42b0-419f-a347-e0b0e88481b3.png)
+5. Make a cash and carry transaction, you can see the break point got hit:<br/>
+    ![image](https://user-images.githubusercontent.com/14832260/184475434-6b0b3cb0-6858-4677-a1c4-7c56c8aa5592.png)
