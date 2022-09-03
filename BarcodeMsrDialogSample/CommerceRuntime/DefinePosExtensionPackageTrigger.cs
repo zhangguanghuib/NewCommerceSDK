@@ -45,8 +45,8 @@ namespace BarcodeMsrDialogSample.CommerceRuntime
             var extensionPackageDefinition = new ExtensionPackageDefinition();
 
             // Should match the PackageName used when packaging the customization package (i.e. in CustomizationPackage.props).
-            extensionPackageDefinition.Name = "Contoso.BarcodeMsrDialogSample";
-            extensionPackageDefinition.Publisher = "Contoso";
+            extensionPackageDefinition.Name = "GHZ.BarcodeMsrDialogSample";
+            extensionPackageDefinition.Publisher = "GHZ";
             extensionPackageDefinition.IsEnabled = true;
 
             getExtensionsResponse.ExtensionPackageDefinitions.Add(extensionPackageDefinition);
