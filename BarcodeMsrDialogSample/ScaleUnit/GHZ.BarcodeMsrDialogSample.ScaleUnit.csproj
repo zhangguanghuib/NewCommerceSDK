@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+  
+   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.ScaleUnit" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\Pos\GHZ.BarcodeMsrDialogSample.Pos.csproj" />
+  </ItemGroup>
+
+</Project>
