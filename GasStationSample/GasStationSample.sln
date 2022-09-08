@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.GasStationSample.CommerceRuntime", "CommerceRuntime\GHZ.GasStationSample.CommerceRuntime.csproj", "{28018630-CD64-48F9-8961-7335DB104167}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.GasStationSample.Pos", "Pos\GHZ.GasStationSample.Pos.csproj", "{3DBFF33D-8053-4791-AECE-1DB2BDCA5FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{28018630-CD64-48F9-8961-7335DB104167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28018630-CD64-48F9-8961-7335DB104167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28018630-CD64-48F9-8961-7335DB104167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBFF33D-8053-4791-AECE-1DB2BDCA5FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBFF33D-8053-4791-AECE-1DB2BDCA5FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBFF33D-8053-4791-AECE-1DB2BDCA5FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBFF33D-8053-4791-AECE-1DB2BDCA5FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
