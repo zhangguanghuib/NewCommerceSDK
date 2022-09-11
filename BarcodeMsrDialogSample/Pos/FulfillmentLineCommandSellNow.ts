@@ -1,4 +1,4 @@
-// This code is demonstrating a way to skip adding serial number dialog and assign serial number to cart line with code
+// This code is demonstrating a way to skip serial number dialog and assign serial number to cart line with code
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
