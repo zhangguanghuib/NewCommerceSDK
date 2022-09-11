@@ -52,10 +52,14 @@ export default class FulfillmentLineCommandSellNow extends FulfillmentLineExtens
         }
 
         this.isProcessing = true;
+        // Product informtion
         let serailNumber: string = "1234";
+        let productIds: number[] = [68719500371];
+        let unitEa: string = "ea";
+
         let cart: ProxyEntities.Cart = null;
         let correlationId: string = this.context.logger.getNewCorrelationId();
-        let getProductsByIdsClientRequest: GetProductsByIdsClientRequest<GetProductsByIdsClientResponse> = new GetProductsByIdsClientRequest([68719500371], correlationId);
+        let getProductsByIdsClientRequest: GetProductsByIdsClientRequest<GetProductsByIdsClientResponse> = new GetProductsByIdsClientRequest(productIds, correlationId);
 
         return this.context.runtime.executeAsync(getProductsByIdsClientRequest).then
             ((getProductsByIdsClientResponse: ClientEntities.ICancelableDataResult<GetProductsByIdsClientResponse>): ClientEntities.IProductSaleReturnDetails => {
@@ -73,7 +77,7 @@ export default class FulfillmentLineCommandSellNow extends FulfillmentLineExtens
                     {
                         product: simpleProduct,
                         quantity: 1,
-                        unitOfMeasureSymbol: 'ea'
+                        unitOfMeasureSymbol: unitEa
                     };
                     return productSaleDetails;
                 } else {
