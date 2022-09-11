@@ -24,6 +24,11 @@
               "name": "Scan and Select Product Button",
               "description": "A sample extension command that shows a dialog to scan a product to be selected on the fulfillent lines page",
               "modulePath": "FulfillmentLineCommand"
+            },
+            {
+              "name": "Sell Now",
+              "description": "A sample extension command that shows  put a product into cart with providing serial number by code",
+              "modulePath": "FulfillmentLineCommandSellNow"
             }
           ]
         }
