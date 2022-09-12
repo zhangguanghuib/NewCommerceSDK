@@ -26,6 +26,9 @@ Steps:<br/>
    **In the "Redirect URI(Optional)", input the POS URL in Channel Profile**<br/>
    **Click "Register" button**<br/>
    ![image](https://user-images.githubusercontent.com/14832260/189590165-fce9e669-3946-4de7-a193-afbb0cb4e68e.png)
+    
+    **Manifest**
+    ![image](https://user-images.githubusercontent.com/14832260/189590864-076ba5aa-2f5d-4e86-9628-dac7b4ea56b8.png)
 
 
 
