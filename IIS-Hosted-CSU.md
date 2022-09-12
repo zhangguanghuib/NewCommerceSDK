@@ -112,7 +112,12 @@ Steps:<br/>
         ![image](https://user-images.githubusercontent.com/14832260/189666028-4d09e58a-47fc-4cc4-9248-dfa6351b3cd7.png)
         
         Finally it looks this this:
+        ![image](https://user-images.githubusercontent.com/14832260/189666806-712d7081-c2c1-4f0a-b3e6-c272305a6e8f.png)
         
+        Do the same thing for customized async client:
+        ![image](https://user-images.githubusercontent.com/14832260/189667020-b5ecb3d6-abd9-4c31-b2bb-087d6907f8a6.png)
+
+
         
 
 
