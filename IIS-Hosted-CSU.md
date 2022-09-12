@@ -65,6 +65,15 @@ Steps:<br/>
    ![image](https://user-images.githubusercontent.com/14832260/189652571-93eb1770-a9c5-4fff-ad97-931c15c15e73.png)
    **Finally it looks like that:**
    ![image](https://user-images.githubusercontent.com/14832260/189652817-da612d22-ea2f-4fca-b042-631165542ffd.png)
+   
+7. **Register customized retail server and customized async client id to D365 HQ:<br/>**
+   **Go to System administration > Setup > Azure Active Directory applications.<br/>**
+   **Enter the application ID (client ID) in the Client ID column,<br/>**
+   **Enter descriptive text in the Name column, <br/>**
+   **And enter RetailServiceAccount in the User ID column<br/>**
+   ![image](https://user-images.githubusercontent.com/14832260/189659229-70e75964-29e3-48c1-b05a-ab9d9427c5dd.png)
+
+
 
 
 
