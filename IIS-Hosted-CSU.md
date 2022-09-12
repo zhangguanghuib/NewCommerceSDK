@@ -128,7 +128,10 @@ Steps:<br/>
         **Download channel database config file**
         ![image](https://user-images.githubusercontent.com/14832260/189668539-67cb8794-5758-4fe9-9968-d0770b4fae05.png)
         
-12. Run the below command to install the sealed CSU in your local dev box:
+12. Download sealed version scale unit from LCS Shared Asset Library, and put it under some foldder in your local dev box
+    [Shared Asset Library](https://lcs.dynamics.com/V2/SharedAssetLibrary)
+    ![image](https://user-images.githubusercontent.com/14832260/189669934-3db1a3c7-6d36-4551-994b-cdea323e0195.png)
+14. Run the below command to install the sealed CSU in your local dev box:
 
 
 
