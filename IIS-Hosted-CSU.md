@@ -13,5 +13,11 @@ Steps:<br/>
     
     Click "Application ID URI", and take a note of it for future use.
     ![image](https://user-images.githubusercontent.com/14832260/189587661-39edb25e-b5ef-411e-922f-317397720f2f.png)
+    
+    Click "Add a scope" and provide the necessary information:
+    ![image](https://user-images.githubusercontent.com/14832260/189588259-6d96ece5-1ef4-43a6-be72-729a7b05ec9e.png)
+    
+    Finally it looks like this:
+    ![image](https://user-images.githubusercontent.com/14832260/189588545-ed3aa628-e869-4803-b9e9-dcbf1bfe302c.png)
 
 
