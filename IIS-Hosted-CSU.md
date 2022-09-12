@@ -116,6 +116,10 @@ Steps:<br/>
         
         Do the same thing for customized async client:
         ![image](https://user-images.githubusercontent.com/14832260/189667020-b5ecb3d6-abd9-4c31-b2bb-087d6907f8a6.png)
+        
+    11. Create channel database in D365 HQ:<br/>
+        Please follow the document [Create Channel Database](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/retail-store-scale-unit-configuration-installation#download-the-commerce-scale-unit-installer)
+        
 
 
         
