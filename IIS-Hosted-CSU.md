@@ -24,6 +24,7 @@ Steps:<br/>
 3. Create an application for Customized CPOS<br/>
    **Create "New Registration" as you did in step 2 for Retail Server:**<br/>
    **In the "Redirect URI(Optional)", input the POS URL in Channel Profile**<br/>
+   **Click "Register" button**<br/>
    ![image](https://user-images.githubusercontent.com/14832260/189590165-fce9e669-3946-4de7-a193-afbb0cb4e68e.png)
 
 
