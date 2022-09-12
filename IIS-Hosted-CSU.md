@@ -38,5 +38,13 @@ Steps:<br/>
     **In the right search panel, input the Application Id of Retail Server you created in step 2**
      ![image](https://user-images.githubusercontent.com/14832260/189591552-55524601-88c0-46ff-b02f-a6fbcc0f2459.png)
 
+     **Find the scope we created in step 2**<br/>
+     ![image](https://user-images.githubusercontent.com/14832260/189592189-856b7eb3-5218-4740-b963-cea36855d843.png)
+
+     **Finally it looks like this**
+     ![image](https://user-images.githubusercontent.com/14832260/189592301-6f59ad91-a988-44b4-82be-7e59e19a1094.png)
+     
+     **Take a note of Customized  CPOS application id**：
+     ![image](https://user-images.githubusercontent.com/14832260/189592866-ff84374d-6813-4b6d-be82-efaf5aefaafe.png)
 
 
