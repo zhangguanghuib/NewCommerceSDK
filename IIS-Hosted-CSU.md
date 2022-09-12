@@ -30,5 +30,13 @@ Steps:<br/>
     **Manifest**
     ![image](https://user-images.githubusercontent.com/14832260/189590864-076ba5aa-2f5d-4e86-9628-dac7b4ea56b8.png)
 
+    **Token configuration**
+    ![image](https://user-images.githubusercontent.com/14832260/189591174-6f662d91-5141-4fef-8e91-964b16054154.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189591218-3ef45953-92fc-4004-aab4-942cfc11c225.png)
+    
+    **Api Permissions**
+    **In the right search panel, input the Application Id of Retail Server you created in step 2**
+     ![image](https://user-images.githubusercontent.com/14832260/189591552-55524601-88c0-46ff-b02f-a6fbcc0f2459.png)
+
 
 
