@@ -46,5 +46,11 @@ Steps:<br/>
      
      **Take a note of Customized  CPOS application id**：
      ![image](https://user-images.githubusercontent.com/14832260/189592866-ff84374d-6813-4b6d-be82-efaf5aefaafe.png)
+     
+4. **For this part, I did not change that because I am not sure why we need do that:**<br/>
+   ![image](https://user-images.githubusercontent.com/14832260/189593613-995e88a4-4848-4318-84cc-e2ca6bd8b632.png)
+   **But I can find the config file described here**<br/>
+   ![image](https://user-images.githubusercontent.com/14832260/189593878-08f7870c-54ac-4d4e-b9e5-ad3638b90938.png)
+
 
 
