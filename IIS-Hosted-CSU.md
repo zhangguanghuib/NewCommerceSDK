@@ -52,5 +52,9 @@ Steps:<br/>
    **But I can find the config file described here**<br/>
    ![image](https://user-images.githubusercontent.com/14832260/189593878-08f7870c-54ac-4d4e-b9e5-ad3638b90938.png)
 
+5. Commerce Shared Parameter->Identity provider:
+   ![image](https://user-images.githubusercontent.com/14832260/189651468-6e0a91b2-8f75-426f-9700-8c9cdba01e65.png)
+
+
 
 
