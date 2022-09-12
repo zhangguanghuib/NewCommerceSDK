@@ -123,7 +123,7 @@ Steps:<br/>
         ![image](https://user-images.githubusercontent.com/14832260/189668114-580c1eff-6055-4215-9401-6dadd55b411b.png)
         
         **Create Channel profile**
-        ![image](https://user-images.githubusercontent.com/14832260/189668314-b3cd5575-9522-4ae7-b0ce-5dd331f07cbf.png)
+        ![image](https://user-images.githubusercontent.com/14832260/189672458-e8e41537-41ad-4dd8-8f57-816f23742675.png)
         
         **Download channel database config file**
         ![image](https://user-images.githubusercontent.com/14832260/189668539-67cb8794-5758-4fe9-9968-d0770b4fae05.png)
