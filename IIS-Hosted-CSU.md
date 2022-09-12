@@ -72,6 +72,12 @@ Steps:<br/>
    **Enter descriptive text in the Name column, <br/>**
    **And enter RetailServiceAccount in the User ID column<br/>**
    ![image](https://user-images.githubusercontent.com/14832260/189659229-70e75964-29e3-48c1-b05a-ab9d9427c5dd.png)
+   
+ 8. Create certificate:
+    ![image](https://user-images.githubusercontent.com/14832260/189659654-5eaf0d8e-a70d-49f7-a266-82d1a6e8e465.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189659870-30ace21f-ce50-4a03-ba11-b298b01eb435.png)
+
+
 
 
 
