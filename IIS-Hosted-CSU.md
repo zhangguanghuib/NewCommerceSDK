@@ -76,6 +76,19 @@ Steps:<br/>
  8. Create certificate:
     ![image](https://user-images.githubusercontent.com/14832260/189659654-5eaf0d8e-a70d-49f7-a266-82d1a6e8e465.png)
     ![image](https://user-images.githubusercontent.com/14832260/189659870-30ace21f-ce50-4a03-ba11-b298b01eb435.png)
+    
+ 9. Export the certificate:<br/>
+    **The steps are as below:**
+    ![image](https://user-images.githubusercontent.com/14832260/189660500-505c826d-87c7-4c24-acfe-62b30a594778.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189660535-e06d2c3a-a692-453f-8b57-fb987826197d.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189660653-fa08f500-6b74-4ba1-9ff5-93f596d29fe7.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189660725-7f4d3d07-9a27-49cd-972c-631ca302fbcd.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189660856-00807575-4fd0-4346-bfe6-2c0e644ba5f1.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189660939-a8f9cd2d-270e-424c-8b57-38b98ffa3324.png)
+
+
+
+
 
 
 
