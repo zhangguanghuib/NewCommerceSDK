@@ -105,6 +105,16 @@ Steps:<br/>
     ![image](https://user-images.githubusercontent.com/14832260/189664837-3e5a22aa-bdf3-4470-aeef-d99e413bc555.png)
     
     Click OK, it should shows Export Successfully.
+    
+    10. Upload the certificate to the Azure Portal for Customized Cloud Retail Server and Customized Async Client:<br/>
+        **Steps**<br/>
+        **Go to Azure portal, find Customized Retail  Server->Certificates and upload the certificates we created before:**
+        ![image](https://user-images.githubusercontent.com/14832260/189666028-4d09e58a-47fc-4cc4-9248-dfa6351b3cd7.png)
+        
+        Finally it looks this this:
+        
+        
+
 
 
 
