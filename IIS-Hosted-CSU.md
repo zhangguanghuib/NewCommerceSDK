@@ -131,9 +131,16 @@ Steps:<br/>
 12. Download sealed version scale unit from LCS Shared Asset Library, and put it under some foldder in your local dev box
     [Shared Asset Library](https://lcs.dynamics.com/V2/SharedAssetLibrary)
     ![image](https://user-images.githubusercontent.com/14832260/189669934-3db1a3c7-6d36-4551-994b-cdea323e0195.png)
+    
 14. Run the below command to install the sealed CSU in your local dev box:
+    **CommerceStoreScaleUnitSetup.exe install --port 446 --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<%CerticateThumbPrint%>" --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<%CerticateThumbPrint%>" --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<%CerticateThumbPrint%>" --RetailServerAadClientId "<Customized Retail Server ClientId>" --RetailServerAadResourceId "<Application ID URI of Customized Retail Server>" --CposAadClientId "<Customized CPOS ClientId>"  --AsyncClientAadClientId "<Customized Async ClientId>" --config "D:\IISHosted_CSU\StoreSystemSetup.xml" --SqlServerName "(localhost)\SQLEXPRESS" --TrustSqlServerCertificate true**<br/>
+   
+  **If installation can be done without any error, you should be able to see the retail server and CPOS under IIS**<br/>
+   ![image](https://user-images.githubusercontent.com/14832260/189671430-74cc8033-b039-4086-b23b-7993e758db60.png)
+   
+15. Run 9999 full sync on the channel database,  when all download sessions are applied, you can go ahead to activate CPOS, and make your Commerce SDK development in your local box and without depending on the Retail SDK and the DEV box from LCS.
 
-
+  
 
 
         
