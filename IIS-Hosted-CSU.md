@@ -80,13 +80,33 @@ Steps:<br/>
  9. Export the certificate:<br/>
     **The steps are as below:**
     ![image](https://user-images.githubusercontent.com/14832260/189660500-505c826d-87c7-4c24-acfe-62b30a594778.png)
+    
     ![image](https://user-images.githubusercontent.com/14832260/189660535-e06d2c3a-a692-453f-8b57-fb987826197d.png)
+    
     ![image](https://user-images.githubusercontent.com/14832260/189660653-fa08f500-6b74-4ba1-9ff5-93f596d29fe7.png)
+    
     ![image](https://user-images.githubusercontent.com/14832260/189660725-7f4d3d07-9a27-49cd-972c-631ca302fbcd.png)
+    
     ![image](https://user-images.githubusercontent.com/14832260/189660856-00807575-4fd0-4346-bfe6-2c0e644ba5f1.png)
+    
     ![image](https://user-images.githubusercontent.com/14832260/189660939-a8f9cd2d-270e-424c-8b57-38b98ffa3324.png)
+    
+    **Double click "Personal"**
     ![image](https://user-images.githubusercontent.com/14832260/189662784-81b572ed-a7dd-43fd-857a-26ebf11ffc82.png)
+    
+    Find the self-signed certificate you created in the step 8, and choose All Tasks->Export
     ![image](https://user-images.githubusercontent.com/14832260/189663653-5996a74c-eaf4-4b5b-a194-8703c17e52ad.png)
+    
+    ![image](https://user-images.githubusercontent.com/14832260/189664591-f7f85247-ff94-4bef-a5e7-dec17b669842.png)
+    
+    ![image](https://user-images.githubusercontent.com/14832260/189664682-52ab6196-ad12-44f9-b535-603f06c9e3c6.png)
+    
+    Choose a location to save the certificate:
+    ![image](https://user-images.githubusercontent.com/14832260/189664837-3e5a22aa-bdf3-4470-aeef-d99e413bc555.png)
+    
+    Click OK, it should shows Export Successfully.
+
+
 
     
     
