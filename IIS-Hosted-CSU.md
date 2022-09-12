@@ -10,5 +10,8 @@ Steps:<br/>
    
    Leave "Redirect URI" as it is, and click "Register" button
    ![image](https://user-images.githubusercontent.com/14832260/189586955-f2635115-9da7-48c1-b8d5-1aac7eeeb0be.png)
+    
+    Click "Application ID URI", and take a note of it for future use.
+    ![image](https://user-images.githubusercontent.com/14832260/189587661-39edb25e-b5ef-411e-922f-317397720f2f.png)
 
 
