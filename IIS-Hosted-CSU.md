@@ -95,7 +95,7 @@ Steps:<br/>
     ![image](https://user-images.githubusercontent.com/14832260/189662784-81b572ed-a7dd-43fd-857a-26ebf11ffc82.png)
     
     Find the self-signed certificate you created in the step 8, and choose All Tasks->Export
-    ![image](https://user-images.githubusercontent.com/14832260/189663653-5996a74c-eaf4-4b5b-a194-8703c17e52ad.png)
+    ![image](https://user-images.githubusercontent.com/14832260/189673757-a769d446-bcb5-4c3d-8d94-a87028327172.png)
     
     ![image](https://user-images.githubusercontent.com/14832260/189664591-f7f85247-ff94-4bef-a5e7-dec17b669842.png)
     
