@@ -106,7 +106,7 @@ Steps:<br/>
     
     Click OK, it should shows Export Successfully.
     
-    10. Upload the certificate to the Azure Portal for Customized Cloud Retail Server and Customized Async Client:<br/>
+ 10. Upload the certificate to the Azure Portal for Customized Cloud Retail Server and Customized Async Client:<br/>
         **Steps**<br/>
         **Go to Azure portal, find Customized Retail  Server->Certificates and upload the certificates we created before:**
         ![image](https://user-images.githubusercontent.com/14832260/189666028-4d09e58a-47fc-4cc4-9248-dfa6351b3cd7.png)
@@ -117,9 +117,20 @@ Steps:<br/>
         Do the same thing for customized async client:
         ![image](https://user-images.githubusercontent.com/14832260/189667020-b5ecb3d6-abd9-4c31-b2bb-087d6907f8a6.png)
         
-    11. Create channel database in D365 HQ:<br/>
-        Please follow the document [Create Channel Database](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/retail-store-scale-unit-configuration-installation#download-the-commerce-scale-unit-installer)
+ 11. Create channel database in D365 HQ:<br/>
+        Please follow the document [Create Channel Database](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/retail-store-scale-unit-configuration-installation#download-the-commerce-scale-unit-installer)<br/>
         
+        ![image](https://user-images.githubusercontent.com/14832260/189668114-580c1eff-6055-4215-9401-6dadd55b411b.png)
+        
+        **Create Channel profile**
+        ![image](https://user-images.githubusercontent.com/14832260/189668314-b3cd5575-9522-4ae7-b0ce-5dd331f07cbf.png)
+        
+        **Download channel database config file**
+        ![image](https://user-images.githubusercontent.com/14832260/189668539-67cb8794-5758-4fe9-9968-d0770b4fae05.png)
+        
+12. Run the below command to install the sealed CSU in your local dev box:
+
+
 
 
         
