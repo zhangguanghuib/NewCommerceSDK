@@ -69,6 +69,17 @@
             }
         }
 
+        private Response GetGasStationDetails(GetGasStationDetailsDataRequest request)
+        {
+            var station = GasStations.First(s=>s.StoreNumber == request.StoreNumber);
+            return new GetGasStationDetailsDataResponse(station);
+        }
+
+        private Response startAllPumps(StartAllPumpsDataRequest request)
+        {
+            var pums = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+        }
+
         private async Task InitializeGasPumps(Request request)
         {
             if(GasPumpsDataService.GasPumpsByStore != null)
@@ -77,7 +88,17 @@
             }
 
             var gasScanInfo = new ScanInfo();
-            //gasScanInfo.ScannedText = gAETgOS
+            gasScanInfo.ScannedText = GetGasolineItemId(request);
+            var getScanResultRequest = new GetScanResultRequest(gasScanInfo);
+            var response = await request.RequestContext.Runtime.ExecuteAsync<GetScanResultResponse>(getScanResultRequest, request.RequestContext);
+
+            if(response.Result.MaskType == BarcodeMaskType.Item)
+            {
+                GasPumpsDataService.COST_PER_UNIT = response.Result.Product.BasePrice;
+            }
+
+
+
         }
 
         private string GetGasolineItemId(Request request)
