@@ -41,26 +41,28 @@
                 throw new ArgumentNullException(nameof(request));
             }
 
+            await this.InitializeGasPumps(request);
+
             Type reqType = request.GetType();
             if(reqType == typeof(GetGasPumpsDataRequest))
             {
-
+                return this.GetGasPumps((GetGasPumpsDataRequest)request);
             }
             else if(reqType == typeof(UpdatePumpStateDataRequest))
             {
-
+                return this.UpdatePumpState((UpdatePumpStateDataRequest)request);
             }
             else if(reqType == typeof(StopAllPumpsDataRequest))
             {
-
+                return this.StopAllPumps((StopAllPumpsDataRequest)request);
             }
             else if(reqType == typeof(StartAllPumpsDataRequest))
             {
-
+                return this.startAllPumps((StartAllPumpsDataRequest)request);
             }
             else if (reqType == typeof(GetGasStationDetailsDataRequest))
             {
-
+                return this.GetGasStationDetails((GetGasStationDetailsDataRequest)request);
             }
             else
             {
@@ -77,7 +79,73 @@
 
         private Response startAllPumps(StartAllPumpsDataRequest request)
         {
-            var pums = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+            var pumps = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+            if(pumps == null){
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound);
+            }
+
+            foreach(var pump in pumps)
+            {
+                if(pump.State.GasPumpStatus == GasPumpStatus.Stopped)
+                {
+                    pump.State.GasPumpStatus = GasPumpStatus.Idle;
+                    pump.State.LastUpdateTime = DateTimeOffset.UtcNow;
+                }
+            }
+
+            return new StartAllPumpsDataResponse(pumps);
+        }
+
+        private Response UpdatePumpState(UpdatePumpStateDataRequest request)
+        {
+            var pumps = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+            if (pumps == null)
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound);
+            }
+
+            var pump = pumps.First(p=>p.Id == request.PumpId);
+            pump.State = request.state;
+            if(pump.State.GasPumpStatus == GasPumpStatus.Pumping || pump.State.GasPumpStatus == GasPumpStatus.PumpingComplete)
+            {
+                pump.State.SaleTotal = GetSaleTotal(pump.State.SaleVolume);
+            }
+
+            return new UpdatePumpStateDataResponse(pump);
+
+        }
+        private static decimal GetSaleTotal(decimal saleVolume)
+        {
+            return Math.Round(GasPumpsDataService.COST_PER_UNIT * saleVolume, 3);
+        }
+
+        private Response GetGasPumps(GetGasPumpsDataRequest request)
+        {
+            var pumps = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+            if(pumps == null)
+            {
+                pumps = new List<GasPump>();
+            }
+
+            return new GetGasPumpsDataResonse(pumps);
+        }
+
+        private Response StopAllPumps(StopAllPumpsDataRequest request)
+        {
+            var pumps = GasPumpsDataService.GasPumpsByStore[request.StoreNumber];
+            if (pumps == null)
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound);
+            }
+
+            foreach(var pump in pumps)
+            {
+                pump.State.GasPumpStatus = GasPumpStatus.Stopped;
+                pump.State.LastUpdateTime = DateTimeOffset.UtcNow;
+            }
+
+            return new StopAllPumpsDataResponse(pumps);
+
         }
 
         private async Task InitializeGasPumps(Request request)
@@ -97,8 +165,56 @@
                 GasPumpsDataService.COST_PER_UNIT = response.Result.Product.BasePrice;
             }
 
+            var orgUnits = await GetAllOrgUnitsAsync(request);
+            GasPumpsByStore = new Dictionary<string, IEnumerable<GasPump>>();
+            var itemId = GetGasolineItemId(request);
+            if (orgUnits.Any())
+            {
+                foreach(var orgUnit in orgUnits)
+                {
+                    var gasPums = CreateGasPumps(orgUnit);
+                    GasPumpsByStore.Add(orgUnit.OrgUnitNumber, gasPums);
 
+                    var stationDetails = new GasStationDetails(orgUnit.OrgUnitNumber, itemId);
+                    stationDetails.GasPumpCount = gasPums.Count;
 
+                    var daysSinceDelivery = (orgUnit.RecordId % 6) + 1;
+                    stationDetails.LastGasDeliveryTime = DateTimeOffset.UtcNow.AddDays(daysSinceDelivery * -1);
+                    var calculatedTime = DateTimeOffset.UtcNow.AddDays(7 - daysSinceDelivery).AddHours(orgUnit.RecordId % 8).AddMinutes(orgUnit.RecordId % 60);
+                    stationDetails.NextGasDeliveryTime = new DateTimeOffset(calculatedTime.Year, calculatedTime.Month, calculatedTime.Day, calculatedTime.Hour, 0, 0, calculatedTime.Offset);
+                    stationDetails.GasTankCapacity = stationDetails.GasPumpCount * 1000;
+                    stationDetails.GasTankLevel = stationDetails.GasTankCapacity - (stationDetails.GasTankCapacity / 10 * daysSinceDelivery);
+                    stationDetails.GasBasePrice = GasPumpsDataService.COST_PER_UNIT;
+                    GasStations.Add(stationDetails);
+                }
+            }
+        }
+
+        private List<GasPump> CreateGasPumps(OrgUnit orgUnit)
+        {
+            var pumpCount = (orgUnit.RecordId % 12) + 2;
+            List<GasPump> gasPumps = new List<GasPump>();
+            var saleAmountGenerator = new Random();
+            for(int i=1; i<=pumpCount; i++)
+            {
+                GasPumpStatus status = (GasPumpStatus)(((orgUnit.RecordId + i) % 5) + 1);
+                var gasPump = new GasPump() { Id = i, Name = $"Gas Pump {i.ToString()}", State = new GasPumpState(status) };
+                if (status == GasPumpStatus.Pumping || status == GasPumpStatus.PumpingComplete)
+                {
+                    gasPump.State.SaleVolume = Math.Round(Convert.ToDecimal(saleAmountGenerator.NextDouble() * 25), 3);
+                    gasPump.State.SaleTotal = GetSaleTotal(gasPump.State.SaleVolume);
+                }
+
+                gasPumps.Add(gasPump);
+            }
+
+            return gasPumps;
+        }
+
+        private Task<EntityDataServiceResponse<OrgUnit>> GetAllOrgUnitsAsync(Request request)
+        {
+            var orgUnitsRequest = new SearchOrgUnitDataRequest(new List<string>(), QueryResultSettings.AllRecords);
+            return request.RequestContext.Runtime.ExecuteAsync<EntityDataServiceResponse<OrgUnit>>(orgUnitsRequest, request.RequestContext);
         }
 
         private string GetGasolineItemId(Request request)

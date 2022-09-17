@@ -20,5 +20,8 @@
 
         [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public GasPumpState State { get; set; }
     }
 }
