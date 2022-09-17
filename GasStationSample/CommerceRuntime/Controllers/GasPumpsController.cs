@@ -5,7 +5,7 @@
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
     using System.Threading.Tasks;
 
-    [RoutePrefix("GasPums")]
+    [RoutePrefix("GasPumps")]
     [BindEntity(typeof(GasPump))]
     public class GasPumpsController : IController
     {
