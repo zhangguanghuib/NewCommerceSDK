@@ -47,6 +47,68 @@ export class GasStationDataStore {
         return this._storeNumber;
     }
 
+
+    public initAsync(context: IExtensionContext): Promise<void> {
+
+        return context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+            .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                return response.data.result;
+            })
+            .then((deviceConfiguration: ProxyEntities.DeviceConfiguration) => {
+                if (ObjectExtensions.isNullOrUndefined(deviceConfiguration)) {
+                    return Promise.resolve();
+                }
+                this._storeNumber = deviceConfiguration.StoreNumber;
+                let request = new GasPumps.GetGasPumpsByStoreRequest(this._storeNumber);
+                return context.runtime.executeAsync(request).then((result): void => {
+                    if (!result.canceled) {
+                        this._pumps = result.data.result;
+                    }
+                })
+            }).then((): Promise<void> => {
+
+                let stationDetailsRequest: GasPumps.GetGasStationDetailsByStoreRequest<GasPumps.GetGasStationDetailsByStoreResponse>
+                    = new GasPumps.GetGasStationDetailsByStoreRequest(this._storeNumber);
+
+                return context.runtime.executeAsync(stationDetailsRequest)
+                    .then((result: ClientEntities.ICancelableDataResult<GasPumps.GetGasStationDetailsByStoreResponse>): void => {
+                        if (!result.canceled) {
+                            this._gasStationDetails = result.data.result;
+                        }
+                    });
+            }).then((): void => {
+                setInterval((): void => {
+                    let request = new GasPumps.GetGasPumpsByStoreRequest<GasPumps.GetGasPumpsByStoreResponse>(this._storeNumber);
+                    context.runtime.executeAsync(request).then((result): void => {
+                        if (!result.canceled) {
+                            let pumpsById: { [id: number]: Entities.GasPump } = Object.create(null);
+                            let statusChanged: boolean = false;
+                            this._pumps.forEach((pump) => {
+                                pumpsById[pump.Id] = pump;
+                            });
+
+                            result.data.result.forEach((pump) => {
+                                let previousPump: Entities.GasPump = pumpsById[pump.Id];
+                                if (ObjectExtensions.isNullOrUndefined(previousPump)) {
+                                    statusChanged = true;
+                                } else if (JSON.stringify(previousPump) !== JSON.stringify(pump)) {
+                                    statusChanged = true;
+                                }
+                            });
+
+                            if (this._pumps.length !== result.data.result.length || statusChanged) {
+                                this._pumps = result.data.result;
+                                this._pumpStatusChangedHandlers.forEach((pair: StatusChangedHandlerWithId): void => {
+                                    pair.handler(this.pumps);
+                                });
+                            }
+
+                        }
+                    })
+                }, 4000)
+            });
+    }
+
     public stopAllPumpsAsync(context: IExtensionContext): Promise<ReadonlyArray<GasPump>> {
         let stopRequest: GasPumps.StopAllPumpsRequest<GasPumps.StopAllPumpsResponse> = new GasPumps.StopAllPumpsRequest(this._storeNumber);
 
@@ -119,6 +181,4 @@ export class GasStationDataStore {
             this._pumpStatusChangedHandlers.splice(handlerIndex, 1);
         }
     }
-
-
 }
