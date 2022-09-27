@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script id="Customer_BirthdayFieldSection" type="text/html">
+        <div class="gutter20x20"></div>
+        <div class="row">
+            <h2 class="marginBottom20 marginTop20" data-bind="text: customerBirdayLabel">Birthday</h2>
+        </div>
+        <div class="row">
+            <div class="col stretch">
+                <div>
+                    <label for="birthMonthInput" data-bind="text: birthMonthLabel">Birth month</label>
+                    <select id="birthMonthInput" data-bind="value: birthMonth">
+                        <option value="0"></option>
+                        <option value="1" data-bind="text: januaryLabel">January</option>
+                        <option value="2" data-bind="text: februaryLabel">February</option>
+                        <option value="3" data-bind="text: marchLabel">March</option>
+                        <option value="4" data-bind="text: aprilLabel">April</option>
+                        <option value="5" data-bind="text: mayLabel">May</option>
+                        <option value="6" data-bind="text: juneLabel">June</option>
+                        <option value="7" data-bind="text: julyLabel">July</option>
+                        <option value="8" data-bind="text: augustLabel">August</option>
+                        <option value="9" data-bind="text: septemberLabel">September</option>
+                        <option value="10" data-bind="text: octoberLabel">October</option>
+                        <option value="11" data-bind="text: novemberLabel">November</option>
+                        <option value="12" data-bind="text: decemberLabel">December</option>
+                    </select>
+                </div>
+                <div class="gutter40x40"></div>
+                <div class="col stretch">
+                    <label for="birthDay" data-bind="text: birthDayLabel">Birth day</label>
+                    <input type="text" id="birthDayInput" data-bind="value: birthDay" />
+                </div>
+                <div class="gutter20x20"></div>
+            </div>
+        </div>
+    </script>
+</body>
+</html>

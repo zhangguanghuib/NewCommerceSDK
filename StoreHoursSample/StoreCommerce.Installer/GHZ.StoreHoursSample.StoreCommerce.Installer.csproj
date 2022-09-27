@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ChannelDatabase\GHZ.StoreHoursSample.ChannelDatabase.csproj" />
     <ProjectReference Include="..\CommerceRuntime\GHZ.StoreHoursSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\GHZ.StoreCommercePackagingSample.HardwareStation\GHZ.StoreCommercePackagingSample.HardwareStation.csproj" />
     <ProjectReference Include="..\HardwareStation.CoinDispenserSample\GHZ.HardwareStation.CoinDispenserSample.csproj" />
     <ProjectReference Include="..\HardwareStation.OposPrinterDeviceSample\GHZ.HardwareStation.OposPrinterDeviceSample.csproj" />
     <ProjectReference Include="..\PaymentDevice\GHZ.HardwareStation.PaymentDeviceSample.csproj" />
