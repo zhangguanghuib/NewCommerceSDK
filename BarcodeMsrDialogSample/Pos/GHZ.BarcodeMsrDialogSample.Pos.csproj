@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\CustomizationPackage.props" />
 
   <PropertyGroup>
@@ -8,10 +8,22 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Pos" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.*" />
+    <PackageReference Include="knockoutjs" Version="3.5.*" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
   </ItemGroup>
 
+  <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
+    <PropertyGroup>
+      <KnockoutLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'knockoutjs'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\knockout-%(PackageDefinitions.Version).js</KnockoutLibraryFilePath>
+      <KnockoutjsFile>Libraries/knockout.js</KnockoutjsFile>
+    </PropertyGroup>
+    <Copy SourceFiles="$(KnockoutLibraryFilePath)" DestinationFiles="$(KnockoutjsFile)" SkipUnchangedFiles="true" />
+    <!-- Necessary for CPOS -->
+    <ItemGroup>
+      <Content Include="$(KnockoutjsFile)"></Content>
+    </ItemGroup>
+  </Target>
 </Project>

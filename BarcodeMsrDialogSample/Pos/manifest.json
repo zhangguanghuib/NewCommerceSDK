@@ -5,6 +5,13 @@
   "version": "1.0.0.0",
   "minimumPosVersion": "9.28.0.0",
   "description": "A sample that shows how to create a new dialog that listens to barcode scanner and MSR events.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
   "components": {
     "create": {
       "templatedDialogs": [
