@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32630.192
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.CommerceRuntime", "CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj", "{0A8E24B8-84E0-4061-BE51-DDB9F3B0EA44}"
 EndProject
