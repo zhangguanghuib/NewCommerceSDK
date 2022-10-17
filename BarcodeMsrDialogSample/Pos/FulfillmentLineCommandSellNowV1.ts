@@ -3,6 +3,7 @@ import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 
+
 import {
     FulfillmentLineExtensionCommandBase,
     FulfillmentLinesSelectedData,
@@ -62,7 +63,7 @@ export default class FulfillmentLineCommandSellNowV1 extends FulfillmentLineExte
 
         // Product informtion
         let serailNumber: string = "1234";
-        let productIds: number[] = [68719504871];//TestColorSize
+        let productIds: number[] = [68719504871];//TestColorSize LCS RecId: 68719523621
         let unitEa: string = "ea";
 
         let predefinedDimensions: Array<IPreDefinedDimension> = [{ DimensionType: '3', DimensionValue: "XSmall" }, { DimensionType: '1', DimensionValue: "Black" }];
@@ -90,6 +91,10 @@ export default class FulfillmentLineCommandSellNowV1 extends FulfillmentLineExte
                         (selectProductVariantClientResponse: ClientEntities.ICancelableDataResult<SelectProductVariantClientResponse>): Promise<ClientEntities.ICancelableDataResult<ProxyEntities.SimpleProduct>> => {
                             if (!selectProductVariantClientResponse.canceled &&
                                 selectProductVariantClientResponse.data.result.ProductTypeValue === ProxyEntities.ProductType.Variant) {
+                                // Skip Serial number dialog
+                                if (selectProductVariantClientResponse.data.result.Behavior.HasSerialNumber && serailNumber) {
+                                    selectProductVariantClientResponse.data.result.Behavior.HasSerialNumber = false;
+                                }
                                 return Promise.resolve({ canceled: false, data: selectProductVariantClientResponse.data.result });
                             }
                             else {
@@ -99,6 +104,10 @@ export default class FulfillmentLineCommandSellNowV1 extends FulfillmentLineExte
                     )
                 }
                 else {
+                     // Skip Serial number dialog
+                    if (simpleProduct.Behavior.HasSerialNumber && serailNumber) {
+                        simpleProduct.Behavior.HasSerialNumber = false;
+                    }
                     return Promise.resolve({ canceled: false, data: simpleProduct });
                 }
             }).then((productVariantResult: ClientEntities.ICancelableDataResult<ProxyEntities.SimpleProduct>): Promise<ClientEntities.IProductSaleReturnDetails> => {
