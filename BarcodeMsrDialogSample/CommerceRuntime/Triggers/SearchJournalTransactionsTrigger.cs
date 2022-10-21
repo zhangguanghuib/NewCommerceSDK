@@ -47,7 +47,12 @@ public class SearchJournalTransactions : IRequestTriggerAsync
         // If search other store,  throw an error message
         if (!string.IsNullOrEmpty(searchJournalTransactionsServiceRequest.Criteria.StoreId) && searchJournalTransactionsServiceRequest.Criteria.StoreId != currentStoreNumber)
         {
-            throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_InvalidStoreNumber, "Search other store instead of current store is not supported");
+            //throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_InvalidStoreNumber, "对不起，暂不支持搜索其他Store的交易记录");
+
+            throw new CommerceException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_InvalidStoreNumber.ToString(), "对不起，暂不支持搜索其他Store的交易记录")
+            {
+                LocalizedMessage = "对不起，暂不支持搜索其他Store的交易记录"
+            };
         }
 
         // If no store is specified,  search in current store
