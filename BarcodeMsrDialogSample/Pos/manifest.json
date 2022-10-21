@@ -42,6 +42,14 @@
         }
       },
       "triggers": [
+        {
+          "triggerType": "PreOperation",
+          "modulePath": "TriggerHandlers/FiscalRegisterPreCloseShiftTrigger"
+        },
+        {
+          "triggerType": "PreProductSale",
+          "modulePath": "TriggerHandlers/PreProductSaleTrigger"
+        }
       ]
     }
   }

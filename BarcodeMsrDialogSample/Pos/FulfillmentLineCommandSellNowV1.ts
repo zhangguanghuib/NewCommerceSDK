@@ -2,8 +2,6 @@
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
-
-
 import {
     FulfillmentLineExtensionCommandBase,
     FulfillmentLinesSelectedData,
