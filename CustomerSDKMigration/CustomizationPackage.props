@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="..\repo.props" />
+
+  <PropertyGroup>
+    <PackagePublisher Condition="'$(PackagePublisher)' == ''">$(Publisher)</PackagePublisher>
+    <PackagePublisherDisplayName Condition="'$(PackagePublisherDisplayName)' == ''">$(PublisherDisplayName)</PackagePublisherDisplayName>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">$(Version)</PackageVersion>
+    <PackageName Condition="'$(PackageName)' == ''">GHZ.CustomSDKMigration</PackageName>
+    <PackageDisplayName Condition="'$(PackageDisplayName)' == ''">Customer SDK Migration issues</PackageDisplayName>
+    <PackageDescription Condition="'$(PackageDescription)' == ''">This sample will record all issues during customer SDK migration.</PackageDescription>
+  </PropertyGroup>
+</Project>

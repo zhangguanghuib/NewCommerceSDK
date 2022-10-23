@@ -17,10 +17,10 @@
                id="toggleDetailsPanelButton"
                class="icon-20x20 width48 height48 center"
                type="button"
-               data-bind="click: toggleDetaisPanel, css: isDetailsPanelVisible() ? 'iconClosePane': 'iconOpenPane''"
+               data-bind="click: toggleDetaisPanel, css: isDetailsPanelVisible() ? 'iconClosePane': 'iconOpenPane'"
                style="position: fixed; right: 20px"></a>
 
-            <div class="col no-shrink width320 marginLeft20 marginBottom12 marginRight20" data-bind="visible: isDetailsPanelVisible()" >
+            <div class="col no-shrink width320 marginLeft20 marginBottom12 marginRight20" data-bind="visible: isDetailsPanelVisible()">
                 <h2 class="marginTop8 marginBottom8">Details</h2>
                 <div class="primaryPanelBackgroundColor highContrastBorder grow pad20">
                     <!-- ko if: !isGasPumpSelected() -->
@@ -37,11 +37,40 @@
                             <div class="row marginBottom4">
                                 <div class="h6 secondaryFontColor">Pump Status</div>
                             </div>
+                            <div class="row">
+                                <div class="width48 width280 wrapTextWithHyphen" data-bind="text: selectedPumpStatus"></div>
+                            </div>
+                        </div>
+                        <div class="marginBottom20">
+                            <div class="row marginBottom4">
+                                <div class="h6 secondaryFontColor">Description</div>
+                            </div>
+                            <div class="row">
+                                <div class="h4 width280 wrapTextWithHyphen" data-bind="text: selectedPumpDescription"></div>
+                            </div>
+                        </div>
+                        <div class="marginBottom20" data-bind="visible: isSelectedGasPumlPumping">
+                            <div class="row marginBottom4">
+                                <div class="h6 secondaryFontColor">Sale Total: </div>
+                            </div>
+                            <div class="row">
+                                <div class="h4 width280 wrapTextWithHyphen" data-bind="text: selectedGasPumpTotal"></div>
+                            </div>
+                        </div>
+                        <div class="marginBottom20" data-bind="visible: isSelectedGasPumpPumping">
+                            <div class="row marginBottom4">
+                                <div class="h6 secondaryFontColor">Sale Volume:</div>
+                            </div>
+                            <div>
+                                <div class="h4 width280 wrapTextWithHyphen" data-bind="text: selectedGasPumpVolume"></div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
+            </div>
+            <div class="col no-shrink width48 marginLeft20 marginTop48 marginBottom12 marginRight20 primaryPanelBackgroundColor highContrastBorder grow"
+                 data-bind="visible: !isDetaisPanelVisible()">
             </div>
         </div>
     </div>

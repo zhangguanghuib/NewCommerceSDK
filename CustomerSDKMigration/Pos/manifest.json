@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GHZ.BarcodeMsrDialogSample",
+  "publisher": "GHZ",
+  "version": "7.2.0",
+  "minimumPosVersion": "7.2.0.0",
+  "description": "A sample that shows how to create a new dialog that listens to barcode scanner and MSR events.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "create": {
+    },
+    "extend": {
+      "views": {
+      },
+      "triggers": [
+      ]
+    }
+  }
+}
