@@ -10,7 +10,7 @@
     public class GasPumpsController : IController
     {
         [HttpPost]
-        [Authorization(CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
         public async Task<PagedResult<GasPump>> GetGasPumpsByStore(IEndpointContext context, string storeNumber, QueryResultSettings queryResultSettings)
         {
             var request = new GetGasPumpsDataRequest(storeNumber);
@@ -19,7 +19,7 @@
         }
 
         [HttpPost]
-        [Authorization(CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
         public async Task<GasStationDetails> GetGasStationDetailsByStore(IEndpointContext context, string storeNumber)
         {
             var request = new GetGasStationDetailsDataRequest(storeNumber);
@@ -28,7 +28,7 @@
         }
 
         [HttpPost]
-        [Authorization(CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
         public async Task<PagedResult<GasPump>> StopAllPumps(IEndpointContext context, string storeNumber)
         {
             var request = new StopAllPumpsDataRequest(storeNumber);
@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        [Authorization(CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
         public async Task<PagedResult<GasPump>>  StartAllPumps(IEndpointContext context, string storeNumber)
         {
             var request = new StartAllPumpsDataRequest(storeNumber);
@@ -46,7 +46,7 @@
         }
 
         [HttpPost]
-        [Authorization(CommerceRoles.Device, CommerceRoles.Employee)]
+        [Authorization(CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
         public async Task<GasPump> UpdatePumpState(IEndpointContext context, string storeNumber, long id, GasPumpState state)
         {
             var request = new UpdatePumpStateDataRequest(storeNumber, id, state);
