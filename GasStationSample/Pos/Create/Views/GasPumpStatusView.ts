@@ -5,8 +5,17 @@ import { GasPumpStatus } from "../../GasStationTypes";
 
 import { CustomViewControllerBase, CustomViewControllerExecuteCommandArgs, ICommand, Icons, ICustomViewControllerConfiguration, ICustomViewControllerContext } from "PosApi/Create/Views";
 import { ArrayExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
-import { CurrencyFormatter } from "PosApi/Consume/Formatters";
+import { CurrencyFormatter, DateFormatter } from "PosApi/Consume/Formatters";
 import { NumberFormattingHelper } from "NumberFormattingHelper";
+import { GasStationDataStore } from "GasStationDataStore";
+import { GASOLINE_QUANTITY_EXTENSION_PROPERTY_NAME } from "GlobalConstants";
+import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+import { AddItemToCartOperationRequest, AddItemToCartOperationResponse, SaveExtensionPropertiesOnCartClientRequest, SaveExtensionPropertiesOnCartClientResponse } from "PosApi/Consume/Cart";
+import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/Consume/ScanResults";
+
+import ICancelableDataResult = ClientEntities.ICancelableDataResult;
+import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
+import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialogClientResponse } from "PosApi/Consume/Dialogs";
 
 export default class GasPumpStatusView extends CustomViewControllerBase {
     public readonly isDetailsPanelVisible: ko.Observable<boolean>;
@@ -174,6 +183,161 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
     }
 
     public onReady(element: HTMLElement): void {
+        let dataListElement: HTMLDivElement = element.querySelector(GasPumpStatusView.DATA_LIST_QUERY_SELECTOR) as HTMLDivElement;
+
+        this._dataList = this.context.controlFactory.create<Entities.GasPump>(
+            this.context.logger.getNewCorrelationId(),
+            "DataList",
+            {
+                columns: [
+                    {
+                        collapseOrder: 3,
+                        computeValue: (row: Entities.GasPump): string => {
+                            return row.Name;
+                        },
+                        isRightAligned: false,
+                        minWidth: 100,
+                        ratio: 40,
+                        title: "Name"
+                    },
+                    {
+                        collapseOrder: 2,
+                        computeValue: (row: Entities.GasPump): string => {
+                            return GasPumpStatus[row.State.GasPumpStatusValue];
+                        },
+                        isRightAligned: false,
+                        minWidth: 100,
+                        ratio: 30,
+                        title: "Status"
+                    },
+                    {
+                        collapseOrder: 1,
+                        computeValue: (row: Entities.GasPump): string => {
+                            return ObjectExtensions.isNullOrUndefined(row.State.LastUpdateTime)
+                                ? "Unknow"
+                                : DateFormatter.toShortDateAndTime(row.State.LastUpdateTime);
+                        },
+                        isRightAligned: false,
+                        minWidth: 50,
+                        ratio: 30,
+                        title: "Last Updated"
+                    }
+                ],
+                data: GasStationDataStore.instance.pumps,
+                interactionMode: DataListInteractionMode.SingleSelect,
+                equalityComparer: (left: Entities.GasPump, right: Entities.GasPump): boolean => {
+                    return left.Id === right.Id;
+                }
+            },
+            dataListElement
+        );
+
+        this._dataList.addEventListener("SelectionChanged", (selectionData: { items: Entities.GasPump[] }): void => {
+            if (ArrayExtensions.hasElements(selectionData.items)) {
+                this.selectedGasPump(selectionData.items[0]);
+                this._checkoutCommand.canExecute = selectionData.items[0].State.GasPumpStatusValue === GasPumpStatus.PumpingComplete;
+                this._toggleStartStopCommand.canExecute = true;
+            } else {
+                this.selectedGasPump(undefined);
+                this._checkoutCommand.canExecute = false;
+                this._toggleStartStopCommand.canExecute = false;
+            }
+        });
+
+        // Todo List
+        //this._refreshPumps(GasStationDataStore.instance.pumps); 
+        ko.applyBindings(this, element);
+    }
+
+    private _refreshPumps(pumps: ReadonlyArray<Entities.GasPump>): void {
+        this._dataList.data = pumps;
+        let pumpInEmergency: Entities.GasPump = ArrayExtensions.firstOrUndefined(pumps, (p) => p.State.GasPumpStatusValue === GasPumpStatus.Emergency);
+        if (!ObjectExtensions.isNullOrUndefined(pumpInEmergency)) {
+            this._dataList.selectItems([pumpInEmergency]);
+        }
+
+        // Allow stop all if some pumps are pumping
+        this._stopAllCommand.canExecute
+            = pumps.some((p) => p.State.GasPumpStatusValue !== GasPumpStatus.Stopped && p.State.GasPumpStatusValue !== GasPumpStatus.Unknown);
+
+        //Allow start all is ome pumps are not pumping
+        this._startAllComand.canExecute =
+            pumps.some((p) => p.State.GasPumpStatusValue === GasPumpStatus.Stopped || p.State.GasPumpStatusValue === GasPumpStatus.Unknown);
+    }
+
+    private _addGasolineToCartAsync(): Promise<void> {
+        this.state.isProcessing = true;
+        let extensionProperty: ProxyEntities.CommerceProperty = {
+            Key: GASOLINE_QUANTITY_EXTENSION_PROPERTY_NAME,
+            Value: {
+                StringValue: this.selectedGadPumpVolume()
+            }
+        };
+
+        const correlationId: string = this.context.logger.getNewCorrelationId();
+        let extensionPropertyRequest: SaveExtensionPropertiesOnCartClientRequest<SaveExtensionPropertiesOnCartClientResponse>
+        new SaveExtensionPropertiesOnCartClientRequest([extensionProperty], correlationId);
+
+        return this.context.runtime.executeAsync(extensionPropertyRequest)
+            .then((result): Promise<ICancelableDataResult<GetScanResultClientResponse>> => {
+                if (result.canceled) {
+                    return Promise.resolve({ canceled: true, data: null });
+                }
+
+                let getScanResult: GetScanResultClientRequest<GetScanResultClientResponse>
+                    = new GetScanResultClientRequest(GasStationDataStore.instance.gasStationDetails.GasolineItemId);
+                return this.context.runtime.executeAsync(getScanResult);
+            }).then((result): Promise<ICancelableDataResult<AddItemToCartOperationResponse>> => {
+                if (result.canceled) {
+                    return Promise.resolve({ canceled: true, data: null });
+                }
+
+                let details: ClientEntities.IProductSaleReturnDetails[] = [{
+                    product: result.data.result.Product,
+                    quantity: 0
+                }];
+
+                let addCartLineRequest: AddItemToCartOperationRequest<AddItemToCartOperationResponse>
+                    = new AddItemToCartOperationRequest(details, correlationId);
+                return this.context.runtime.executeAsync(addCartLineRequest);
+            }).then((result) => {
+                if (result.canceled) {
+                    return;
+                }
+
+                this.context.navigator.navigateToPOSView("CartView", new ClientEntities.CartViewNavigationParameters(correlationId));
+            }).catch((reason: any): void => {
+                GasPumpStatusView._displayErrorAsync(this.context, reason);
+            }).then((): void => {
+                this.state.isProcessing = false;
+            });
+    }
+
+    private static _displayErrorAsync(context: IExtensionContext, reason: any): Promise<ClientEntities.ICancelable> {
+        let messageDialogOptions: IMessageDialogOptions;
+
+        if (reason instanceof ClientEntities.ExtensionError) {
+            messageDialogOptions = {
+                message: reason.localizedMessage
+            };
+        } else if (reason instanceof Error) {
+            messageDialogOptions = {
+                message: reason.message
+            };
+        } else if (typeof reason === "string") {
+            messageDialogOptions = {
+                message: reason
+            };
+        } else {
+            messageDialogOptions = {
+                message: "An unexpected error occurred";
+            };
+        }
+
+        let errorMessageRequest: ShowMessageDialogClientRequest<ShowMessageDialogClientResponse>
+            = new ShowMessageDialogClientRequest(messageDialogOptions);
+
+        return context.runtime.executeAsync(errorMessageRequest);
     }
 
 }
