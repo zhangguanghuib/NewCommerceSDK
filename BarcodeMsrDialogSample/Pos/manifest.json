@@ -32,7 +32,6 @@
               "description": "A sample extension command that shows a dialog to scan a product to be selected on the fulfillent lines page",
               "modulePath": "ViewExtensions/FulfillmentLineView/FulfillmentLineCommand"
             },
-
             {
               "name": "Sell Now V1",
               "description": "A sample extension command that shows  put a product into cart with providing serial number by code",
