@@ -19,7 +19,7 @@ import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/
 //import { IBarcodeMsrDialogResult } from "./BarcodeMsrDialogTypes";
 
 import BarcodeMsrDialog  from "../../Views/BarcodeMsrDialog";
-import { IBarcodeMsrDialogResult } from "../../BarcodeMsrDialogTypes";
+import { IBarcodeMsrDialogResult } from "../../Views/BarcodeMsrDialogTypes";
 
 
 export default class FulfillmentLineCommand extends FulfillmentLineExtensionCommandBase {
