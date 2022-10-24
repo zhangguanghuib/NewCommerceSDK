@@ -7,13 +7,9 @@
 
   <ItemGroup>
     <Compile Remove="CustomEntities\**" />
-    <Compile Remove="Views\**" />
     <Content Remove="CustomEntities\**" />
-    <Content Remove="Views\**" />
     <EmbeddedResource Remove="CustomEntities\**" />
-    <EmbeddedResource Remove="Views\**" />
     <TypeScriptCompile Remove="CustomEntities\**" />
-    <TypeScriptCompile Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>

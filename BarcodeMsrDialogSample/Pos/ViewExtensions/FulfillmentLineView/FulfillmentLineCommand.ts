@@ -15,8 +15,12 @@ import {
 import { ShowMessageDialogClientRequest, ShowMessageDialogClientResponse, IMessageDialogOptions } from "PosApi/Consume/Dialogs";
 import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/Consume/ScanResults";
 
-import BarcodeMsrDialog from "./BarcodeMsrDialog";
-import { IBarcodeMsrDialogResult } from "./BarcodeMsrDialogTypes";
+//import BarcodeMsrDialog from "../FulfillmentLineView/BarcodeMsrDialog";
+//import { IBarcodeMsrDialogResult } from "./BarcodeMsrDialogTypes";
+
+import BarcodeMsrDialog  from "../../Views/BarcodeMsrDialog";
+import { IBarcodeMsrDialogResult } from "../../BarcodeMsrDialogTypes";
+
 
 export default class FulfillmentLineCommand extends FulfillmentLineExtensionCommandBase {
 

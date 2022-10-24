@@ -13,7 +13,7 @@ import {
 
 import { AddItemToCartOperationRequest, AddItemToCartOperationResponse, SaveExtensionPropertiesOnCartLinesClientResponse, SaveExtensionPropertiesOnCartLinesClientRequest } from "PosApi/Consume/Cart";
 import { GetProductsByIdsClientRequest, GetProductsByIdsClientResponse, SelectProductVariantClientRequest, SelectProductVariantClientResponse } from "PosApi/Consume/Products";
-import { StoreOperations } from "./DataService/DataServiceRequests.g";
+import { StoreOperations } from "../../DataService/DataServiceRequests.g";
 
 interface IPreDefinedDimension {
     DimensionType: string,
