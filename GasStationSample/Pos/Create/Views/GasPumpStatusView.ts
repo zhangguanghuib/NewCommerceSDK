@@ -16,6 +16,7 @@ import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/
 import ICancelableDataResult = ClientEntities.ICancelableDataResult;
 import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
 import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialogClientResponse } from "PosApi/Consume/Dialogs";
+import GasStationDetailsDialog from "Create/Dialogs/GasStationDetailsDialog";
 
 export default class GasPumpStatusView extends CustomViewControllerBase {
     public readonly isDetailsPanelVisible: ko.Observable<boolean>;
@@ -48,7 +49,7 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
                         isVisible: true,
                         canExecute: false,
                         execute: (args: CustomViewControllerExecuteCommandArgs): void => {
-                            //this._addGasolineToCartAsync();
+                            this._addGasolineToCartAsync();
                         }
                     },
                     {
@@ -58,7 +59,7 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
                         isVisible: true,
                         canExecute: false,
                         execute: (args: CustomViewControllerExecuteCommandArgs): void => {
-                            //this._enableDisablePumpAsync();
+                            this._enableDisablePumpAsync();
                         }
                     },
                     {
@@ -68,7 +69,13 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
                         isVisible: true,
                         canExecute: true,
                         execute: (args: CustomViewControllerExecuteCommandArgs): void => {
-                            //Place holder
+                            this.state.isProcessing = true;
+                            GasStationDataStore.instance.startAllPumpsAsync(this.context).then((updatedPumps): void => {
+                                this.state.isProcessing = false
+                            }).catch((reason: any) => {
+                                this.state.isProcessing = false;
+                                GasPumpStatusView._displayErrorAsync(this.context, reason);
+                            });
                         }
                     },
                     {
@@ -78,7 +85,13 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
                         isVisible: true,
                         canExecute: false,
                         execute: (args: CustomViewControllerExecuteCommandArgs): void => {
-                            //Place holder
+                            this.state.isProcessing = true;
+                            GasStationDataStore.instance.startAllPumpsAsync(this.context).then((updatedPumps): void => {
+                                this.state.isProcessing = false;
+                            }).catch((reason: any) => {
+                                this.state.isProcessing = false;
+                                GasPumpStatusView._displayErrorAsync(this.context, reason);
+                            });
                         }
                     },
                     {
@@ -88,7 +101,8 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
                         canExecute: true,
                         isVisible: true,
                         execute: (args: CustomViewControllerExecuteCommandArgs): void => {
-                            //Place holder
+                            let dialog = new GasStationDetailsDialog();
+                            dialog.open();
                         }
                     }
                 ]
@@ -245,8 +259,26 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
         });
 
         // Todo List
-        //this._refreshPumps(GasStationDataStore.instance.pumps); 
+        this._refreshPumps(GasStationDataStore.instance.pumps); 
         ko.applyBindings(this, element);
+    }
+
+    public onShown(): void {
+        this._gasPumpChangedHandlerId = GasStationDataStore.instance.addPumpStatusChangedHandler(() => {
+            this._refreshPumps(GasStationDataStore.instance.pumps);
+        });
+    }
+
+    public onHidden(): void {
+        if (typeof this._gasPumpChangedHandlerId === "number") {
+            let id: number = this._gasPumpChangedHandlerId;
+            this._gasPumpChangedHandlerId = undefined;
+            GasStationDataStore.instance.removePumpStatusChangedHandler(id);
+        }
+    }
+
+    public toggleDetailsPanel(): void {
+        this.isDetailsPanelVisible(!this.isDetailsPanelVisible());
     }
 
     private _refreshPumps(pumps: ReadonlyArray<Entities.GasPump>): void {
@@ -313,6 +345,29 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
             });
     }
 
+    private _enableDisablePumpAsync(): Promise<void> {
+        this.state.isProcessing = true;
+        let oldState: Entities.GasPumpState = this.selectedGasPump().State;
+        let newState: Entities.GasPumpState = new Entities.GasPumpState();
+        newState.LastUpdateTime = new Date();
+        newState.SaleTotal = 0;
+        newState.SaleVolume = 0;
+        if (oldState.GasPumpStatusValue === GasPumpStatus.Stopped || oldState.GasPumpStatusValue === GasPumpStatus.Unknown) {
+            newState.GasPumpStatusValue = GasPumpStatus.Idle;
+        } else {
+            newState.GasPumpStatusValue = GasPumpStatus.Stopped;
+        }
+
+        return GasStationDataStore.instance.updatePumpStatusAsync(this.context, this.selectedGasPump().Id, newState).then(
+            (updatedPump: Entities.GasPump): void => {
+                this.state.isProcessing = false;
+            }
+        ).catch((reason: any): void => {
+            this.state.isProcessing = false;
+            GasPumpStatusView._displayErrorAsync(this.context, reason);
+        });
+    }
+
     private static _displayErrorAsync(context: IExtensionContext, reason: any): Promise<ClientEntities.ICancelable> {
         let messageDialogOptions: IMessageDialogOptions;
 
@@ -330,7 +385,7 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
             };
         } else {
             messageDialogOptions = {
-                message: "An unexpected error occurred";
+                message: "An unexpected error occurred"
             };
         }
 
