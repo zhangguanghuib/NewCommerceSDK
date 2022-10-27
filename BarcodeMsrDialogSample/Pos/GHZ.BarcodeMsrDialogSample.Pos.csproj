@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <Folder Include="DataService\" />
+    <Folder Include="PromotionsSample\ViewExtensions\" />
+    <Folder Include="PromotionsSample\Resources\" />
   </ItemGroup>
 
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">

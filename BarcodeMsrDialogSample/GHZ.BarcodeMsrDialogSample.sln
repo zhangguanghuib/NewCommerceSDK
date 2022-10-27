@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.ScaleUnit", "ScaleUnit\GHZ.BarcodeMsrDialogSample.ScaleUnit.csproj", "{E6B0992F-737B-4DCD-B584-021CA659E83C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.HardwareStation", "HardwareStation\GHZ.BarcodeMsrDialogSample.HardwareStation.csproj", "{DE726713-6813-47D1-A670-33093B55088F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.StoreCommerce.Installer", "StoreCommerce.Installer\GHZ.BarcodeMsrDialogSample.StoreCommerce.Installer.csproj", "{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.BarcodeMsrDialogSample.HardwareStation.Windows", "GHZ.BarcodeMsrDialogSample.HardwareStation.Windows\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows.csproj", "{9485B189-4E42-4653-9689-F5632937C7C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE726713-6813-47D1-A670-33093B55088F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE726713-6813-47D1-A670-33093B55088F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE726713-6813-47D1-A670-33093B55088F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE726713-6813-47D1-A670-33093B55088F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9485B189-4E42-4653-9689-F5632937C7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9485B189-4E42-4653-9689-F5632937C7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9485B189-4E42-4653-9689-F5632937C7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9485B189-4E42-4653-9689-F5632937C7C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

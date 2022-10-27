@@ -18,8 +18,8 @@
         {
           "name": "Barcode MSR Dialog",
           "description": "A sample dialog showing how to listen to barcode scanner and MSR events",
-          "htmlPath": "BarcodeMsrDialog.html",
-          "modulePath": "BarcodeMsrDialog"
+          "htmlPath": "Views/BarcodeMsrDialog.html",
+          "modulePath": "Views/BarcodeMsrDialog"
         }
       ]
     },
@@ -41,6 +41,20 @@
               "name": "Update Cart Line",
               "description": "A sample extension command that shows  put a product into cart with providing serial number by code",
               "modulePath": "ViewExtensions/FulfillmentLineView/FulfillmentLineCmdUpdateCartLine"
+            }
+          ]
+        },
+        "PaymentView": {
+          "appBarCommands": [
+            {
+              "name": "KREPaymentEDCCommand",
+              "description": "KREPaymentEDCCommand",
+              "modulePath": "ViewExtensions/Payment/KREPaymentEDCCommand"
+            },
+            {
+              "name": "KREPaymentComand",
+              "description": "KREPaymentComand",
+              "modulePath": "ViewExtensions/Payment/KREPaymentComand"
             }
           ]
         }
