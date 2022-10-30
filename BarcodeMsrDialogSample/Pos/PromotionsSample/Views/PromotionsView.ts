@@ -1,10 +1,11 @@
-﻿import * as Views from "PosApi/Create/Views";
+﻿import ko from "knockout";
+import * as Views from "PosApi/Create/Views";
 import { IPivot, IPivotItem, IPivotOptions } from "PosApi/Consume/Controls"
 import { IPromotionViewModelOptions } from "./NavigationContract";
 import PromotionsViewModel from "./PromotionsViewModel";
 import * as Controls from "PosApi/Consume/Controls";
 import { ProxyEntities } from "PosApi/Entities";
-import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ArrayExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
 
 export default class PromotionsView extends Views.CustomViewControllerBase {
     public readonly viewModel: PromotionsViewModel;
@@ -95,8 +96,48 @@ export default class PromotionsView extends Views.CustomViewControllerBase {
     public dispose(): void {
         ObjectExtensions.disposeAllProperties(this);
     }
-    onReady(element: HTMLElement): void {
-        throw new Error("Method not implemented.");
+
+    private _getCommand(name: string): Views.ICommand {
+        //return ArrayExtensions.
+        return ArrayExtensions.firstOrUndefined(
+            this.state.commandBar.commands,
+            (c: Views.ICommand): boolean => {
+                return c.name === name;
+            });
+    }
+
+    public onReady(element: HTMLElement): void {
+        ko.applyBindings(this, element);
+        let correlationId: string = this.context.logger.getNewCorrelationId();
+
+        const APPLY_5PERCENT_DISCOUNT: string = "apply5PercentTotalDiscountMenuCommand";
+        const APPLY_10PERCENT_DISCOUNT: string = "apply10PercentTotalDiscountMenuCommand";
+
+        let menuOptions: Controls.IMenuOptions = {
+            commands: [{
+                id: APPLY_5PERCENT_DISCOUNT,
+                label: this.context.resources.getString("string_25")
+            }, {
+                id: APPLY_10PERCENT_DISCOUNT,
+                label: this.context.resources.getString("string26");
+                }],
+            directionalHint: Controls.DirectionalHint.TopCenter,
+            type: "button"
+        };
+
+        let menuRootElem: HTMLDivElement = element.querySelector("#constantPromotionDiscountsMenu") as HTMLDivElement;
+        this.constantPromotionDiscountsMenu = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Menu", menuOptions, menuRootElem);
+
+        this.constantPromotionDiscountsMenu.addEventListener("CommandInvoked",
+            (eventData: { id: string }) => {
+                if (eventData.id == APPLY_5PERCENT_DISCOUNT) {
+                    this.viewModel.setTransactionDiscount(5);
+                } else {
+                    this.viewModel.setTransactionDiscount(10);
+                }
+            });
+
+
     }
 
 }
