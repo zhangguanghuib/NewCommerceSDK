@@ -5,7 +5,8 @@ import { IPromotionViewModelOptions } from "./NavigationContract";
 import PromotionsViewModel from "./PromotionsViewModel";
 import * as Controls from "PosApi/Consume/Controls";
 import { ProxyEntities } from "PosApi/Entities";
-import { ArrayExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
+import { ArrayExtensions, ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import { BooleanFormatter, DateFormatter } from "PosApi/Consume/Formatters";
 
 export default class PromotionsView extends Views.CustomViewControllerBase {
     public readonly viewModel: PromotionsViewModel;
@@ -137,7 +138,126 @@ export default class PromotionsView extends Views.CustomViewControllerBase {
                 }
             });
 
+        let availablePromotionsDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.DiscountCode>> = {
+            columns: [
+                {
+                    title: this.context.resources.getString("string_10"),
+                    ratio: 10,
+                    collapseOrder: 4,
+                    minWidth: 50,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.Code) ? StringExtensions.EMPTY : event.Code;
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_11"),
+                    ratio: 50,
+                    collapseOrder: 3,
+                    minWidth: 100,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.Description) ? StringExtensions.EMPTY : event.Description;
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_13"),//End date
+                    ratio: 20,
+                    collapseOrder: 2,
+                    minWidth: 50,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.ValidTo) ?
+                            StringExtensions.EMPTY :
+                            DateFormatter.toShortDateAndTime(event.ValidTo);
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_14"),//Coupon required
+                    ratio: 20,
+                    collapseOrder: 1,
+                    minWidth: 25,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return BooleanFormatter.toYesNo(event.IsDiscountCodeRequired);
+                    }
+                },
+            ],
+            data: this.viewModel.availablePromotions,
+            interactionMode: Controls.DataListInteractionMode.None,
+        };
 
+        let dataListRootElem: HTMLDivElement = element.querySelector("#availableDiscountsListView") as HTMLDivElement;
+        this.availableDiscountsDataList = this.context.controlFactory.create(correlationId, "DataList", availablePromotionsDataListOptions, dataListRootElem);
+        this.availableDiscountsDataList.addEventListener("ItemInvoked", (eventData: { item: ProxyEntities.DiscountCode }) => {
+            this.viewModel.listItemInvoked(eventData.item);
+        });
+
+        let upcomingDiscountsDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.DiscountCode>> = {
+            interactionMode: Controls.DataListInteractionMode.None,
+            columns: [
+                {
+                    title: this.context.resources.getString("string_10"),
+                    ratio: 10,
+                    collapseOrder: 5,
+                    minWidth: 50,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.Code) ? StringExtensions.EMPTY : event.Code;
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_11"), // Name
+                    ratio: 40,
+                    collapseOrder: 4,
+                    minWidth: 100,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.Description) ? StringExtensions.EMPTY : event.Description;
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_12"), // Start date
+                    ratio: 15,
+                    collapseOrder: 3,
+                    minWidth: 50,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.ValidFrom) ?
+                            StringExtensions.EMPTY :
+                            DateFormatter.toShortDateAndTime(event.ValidFrom);
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_13"), // End date
+                    ratio: 15,
+                    collapseOrder: 2,
+                    minWidth: 50,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => {
+                        return ObjectExtensions.isNullOrUndefined(event.ValidTo) ?
+                            StringExtensions.EMPTY :
+                            DateFormatter.toShortDateAndTime(event.ValidTo);
+                    }
+                },
+                {
+                    title: this.context.resources.getString("string_14"), // Coupon required
+                    ratio: 20,
+                    collapseOrder: 1,
+                    minWidth: 25,
+                    computeValue: (event: ProxyEntities.DiscountCode): string => { return BooleanFormatter.toYesNo(event.IsDiscountCodeRequired); }
+                }
+            ],
+            data: this.viewModel.upcomingPromotions,
+        };
+
+        let upcomingDiscountsDataListRootElem: HTMLDivElement = element.querySelector("#upcomingDiscountsListView") as HTMLDivElement,
+        this.upcomingDiscountsDataList = this.context.controlFactory.create(correlationId, "DataList", upcomingDiscountsDataListOptions, upcomingDiscountsDataListRootElem);
+        this.upcomingDiscountsDataList.addEventListener("ItemInvoked", (eventData: { item: ProxyEntities.DiscountCode }) => {
+            this.viewModel.listItemInvoked(eventData.item);
+        });
+
+        this.viewModel.loadAsync(this._promotionsViewModelOptions).then(() => {
+            this.upcomingDiscountsDataList.data = this.viewModel.upcomingPromotions;
+            this.availableDiscountsDataList.data = this.viewModel.availablePromotions;
+        });
+
+        let command: Views.ICommand = this._getCommand(PromotionsView.SELL_NOW_COMMAND_NAME);
+        command.canExecute = this.viewModel.canAddItem();
+        command = this._getCommand(PromotionsView.ADD_TO_SALE_COMMAND_NAME);
+        command.canExecute = this.viewModel.canAddItem();
     }
-
+   
 }
