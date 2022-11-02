@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GHZ.PosSamples",
+  "publisher": "GHZ",
+  "version": "7.2.0",
+  "minimumPosVersion": "7.2.0.0",
+  "description": "A sample that shows how to create a new dialog that listens to barcode scanner and MSR events.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
+    "create": {
+      "templatedDialogs": [
+        
+      ],
+      "views": [
+        
+      ]
+    },
+    "extend": {
+      "views": {
+
+      },
+      "triggers": [
+        
+      ]
+    }
+  }
+}

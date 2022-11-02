@@ -13,6 +13,12 @@
     }
   ],
   "components": {
+    "resources": {
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
     "create": {
       "templatedDialogs": [
         {
@@ -20,6 +26,15 @@
           "description": "A sample dialog showing how to listen to barcode scanner and MSR events",
           "htmlPath": "Views/BarcodeMsrDialog.html",
           "modulePath": "Views/BarcodeMsrDialog"
+        }
+      ],
+      "views": [
+        {
+          "pageName": "PromotionsView",
+          "phonePageName": "PromotionsViewPhone",
+          "title": "Promotions",
+          "viewControllerPath": "PromotionsSample/Views/PromotionsView",
+          "viewDirectory": "PromotionsSample/Views/"
         }
       ]
     },

@@ -1,6 +1,6 @@
 ﻿import ko from "knockout";
 import * as Views from "PosApi/Create/Views";
-import { IPivot, IPivotItem, IPivotOptions } from "PosApi/Consume/Controls"
+import { IPivot, IPivotItem/*, IPivotOptions*/ } from "PosApi/Consume/Controls"
 import { IPromotionViewModelOptions } from "./NavigationContract";
 import PromotionsViewModel from "./PromotionsViewModel";
 import * as Controls from "PosApi/Consume/Controls";
@@ -120,7 +120,7 @@ export default class PromotionsView extends Views.CustomViewControllerBase {
                 label: this.context.resources.getString("string_25")
             }, {
                 id: APPLY_10PERCENT_DISCOUNT,
-                label: this.context.resources.getString("string26");
+                label: this.context.resources.getString("string26"),
                 }],
             directionalHint: Controls.DirectionalHint.TopCenter,
             type: "button"
@@ -243,7 +243,7 @@ export default class PromotionsView extends Views.CustomViewControllerBase {
             data: this.viewModel.upcomingPromotions,
         };
 
-        let upcomingDiscountsDataListRootElem: HTMLDivElement = element.querySelector("#upcomingDiscountsListView") as HTMLDivElement,
+        let upcomingDiscountsDataListRootElem: HTMLDivElement = element.querySelector("#upcomingDiscountsListView") as HTMLDivElement;
         this.upcomingDiscountsDataList = this.context.controlFactory.create(correlationId, "DataList", upcomingDiscountsDataListOptions, upcomingDiscountsDataListRootElem);
         this.upcomingDiscountsDataList.addEventListener("ItemInvoked", (eventData: { item: ProxyEntities.DiscountCode }) => {
             this.viewModel.listItemInvoked(eventData.item);
