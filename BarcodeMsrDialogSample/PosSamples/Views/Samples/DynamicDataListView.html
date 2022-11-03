@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="dynamicdatalistview">
+        <div class="grow scrollY">
+            <div class="pad20 col width680">
+                <div class="h3">Dynamics DataList</div>
+                <div class="pad8">
+                    <button id="reloadDataButton" class="primaryButton minWidth200">Change Data Source</button>
+                </div>
+                <div class="pad8 height220">
+                    <div id="dynamicDataListSample"></div>
+                </div>
+                <div class="h4 center">
+                    Selecting will be applied
+                    <span class="bold">&nbsp;ONLY&nbsp;</span> to the items that are already
+                    <span class="bold">&nbsp;loaded&nbsp;</span> in the Dyamic DataList
+                </div>
+                <div class="pad8 row centerY">
+                    <button id="selectRandomItemsByIdButton" class="primaryButton minWidth200">Select random item</button>
+                    <div id="selectByIdMessage" class="h4 marginLeft8 marginTopAuto marginBottomAuto">Tried to select an item with id=4</div>
+                </div>
+                <div class="pad8">
+                    <div class="marginBottom8">
+                        <input id="nameFilter" type="text" placeholder="Name" />
+                    </div>
+                    <button id="selectItemsByNameButton" class="primaryButton minWidth200">Select items by name</button>
+                </div>
+                <div class="h4 padTop40">ViewModel interface</div>
+                <textarea class="height220"></textarea>
+                <div class="h4 padTop40">Controller syntax</div>
+                <textarea class="height220"></textarea>
+                <div class="h4 padTop40">HTML Syntax</div>
+                <textarea class="height220"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
