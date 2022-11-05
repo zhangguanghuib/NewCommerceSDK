@@ -72,6 +72,64 @@ export default class DynamicDataListView extends Views.CustomViewControllerBase 
             pageSize: 5,
             loadDataPage: this._loadDataPage.bind(this),
         }
+
+        let dataListOptions: Readonly<Controls.IPaginatedDataListOptions<IShiftData>> = {
+            columns: [
+                {
+                    title: "ID",
+                    ratio: 20,
+                    collapseOrder: 3,
+                    minWidth: 100,
+                    computeValue: (value: IShiftData): string => {
+                        return value.requestId.toString();
+                    }
+                },
+                {
+                    title: "Name",
+                    ratio: 30,
+                    collapseOrder: 4,
+                    minWidth: 100,
+                    computeValue: (value: IShiftData): string => {
+                        return value.requestedWorkerName;
+                    }
+                },
+                {
+                    title: "Type",
+                    ratio: 25,
+                    collapseOrder: 1,
+                    minWidth: 100,
+                    computeValue: (value: IShiftData): string => {
+                        return value.requestType;
+                    }
+                },
+                {
+                    title: "Status",
+                    ratio: 25,
+                    collapseOrder: 2,
+                    minWidth: 100,
+                    computeValue: (value: IShiftData): string => {
+                        return value.requestStatus;
+                    }
+                }
+            ],
+
+            data: paginatedDataSource,
+            interactionMode: Controls.DataListInteractionMode.MultiSelect,
+            equalityComparer: (left: IShiftData, right: IShiftData): boolean => left.requestId == right.requestId
+        };
+
+        let dataListRootElem: HTMLDivElement = element.querySelector("#dynamicDataListSample") as HTMLDivElement;
+        this.paginatedDataList = this.context.controlFactory.create("", "PaginatedDataList", dataListOptions, dataListRootElem);
+        this.paginatedDataList.addEventListener("SelectionChanged", (eventData: { items: IShiftData[] }) => {
+            this._dataListSelectionChanged();
+        });
+
+
+        let reloadBtn: HTMLButtonElement = element.querySelector("#reloadDataButton") as HTMLButtonElement;
+        reloadBtn.addEventListener('click', () => {
+            this._isUsingAlternativeData = !this._isUsingAlternativeData;
+            this.paginatedDataList.reloadData();
+        });
     }
 
     private _loadDataPage(size: number, skip: number): Promise<IShiftData[]> {

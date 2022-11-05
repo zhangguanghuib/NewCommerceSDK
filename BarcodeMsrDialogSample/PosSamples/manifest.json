@@ -24,7 +24,14 @@
         
       ],
       "views": [
-        
+        {
+          "pageName": "DynamicDataListView",
+          "phonePageName": "DynamicDataListView",
+          "title": "Dynamic Data List View",
+          "viewControllerPath": "Views/Samples/DynamicDataList",
+          "viewDirectory": "Views/Samples/"
+        }
+
       ]
     },
     "extend": {
