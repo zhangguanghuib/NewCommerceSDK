@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Customer Registration View</title>
+</head>
+<body>
+    <div id="wrapper" style="background-color:white" >
+        <form autocomplete="off">
+            <div class="section main pad0" style="height:calc(100vh - 100px); overflow-y:scroll">
+                <div>
+                    <!-- Main content -->
+                    <div class="col grow-landscape maxWidth680 minWidth520 marginTop12" style="margin:auto">
+                        <div class="gutter20x20"></div>
+
+                        <div class="row">
+                            <!-- First name -->
+                            <div class="stretch" data-bind="enableAll: viewModel.isPerson()">
+                                <label style="font-size:small" for="customerFirstName" >First Name</label>
+                                <input tabindex="3" type="text" id="customerFirstName" disabled="disabled" data-bind="validator: {
+                                                                                                    data: viewModel,
+                                                                                                    field: 'firstName',
+                                                                                                    validatorType: 'CustomerValidator'
+                                                                                                },
+                                                                                                axBubbleAttr: 'customerAddEditView_customerFirstNameInput',
+                                                                                                enable: viewModel.isPerson()" />
+
+                            </div>
+
+                            <div class="gutter40x40"></div>
+
+                            <!-- Last name -->
+                            <div class="stretch" data-bind="enableAll: viewModel.isPerson()">
+                                <label style="font-size:small" for="customerLastName" >Last Name</label>
+                                <input tabindex="4" type="text" id="customerLastName" disabled="disabled" data-bind="validator: {
+                                                                                                    data: viewModel,
+                                                                                                    field: 'lastName',
+                                                                                                    validatorType: 'CustomerValidator'
+                                                                                                },
+                                                                                                axBubbleAttr: 'customerAddEditView_customerLastNameInput',
+                                                                                                enable: viewModel.isPerson()" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

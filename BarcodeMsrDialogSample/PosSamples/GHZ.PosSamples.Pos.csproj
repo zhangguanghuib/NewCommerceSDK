@@ -7,16 +7,19 @@
 
   <ItemGroup>
     <Compile Remove="CustomEntities\**" />
-    <Compile Remove="NewFolder\**" />
     <Compile Remove="PromotionsSample\**" />
     <Content Remove="CustomEntities\**" />
-    <Content Remove="NewFolder\**" />
     <EmbeddedResource Remove="CustomEntities\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
     <EmbeddedResource Remove="PromotionsSample\**" />
     <None Remove="PromotionsSample\**" />
     <TypeScriptCompile Remove="CustomEntities\**" />
-    <TypeScriptCompile Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="Views\BaseClasses\EntityValidatorBase.ts" />
+    <TypeScriptCompile Remove="Views\BaseClasses\FieldValidator.ts" />
+    <TypeScriptCompile Remove="Views\BaseClasses\IEntityValidator.ts" />
+    <TypeScriptCompile Remove="Views\BaseClasses\knockout.validator.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controls\Dialog\" />
     <Folder Include="Create\Dialogs\" />
     <Folder Include="DataService\" />
-    <Folder Include="TriggerHandlers\" />
-    <Folder Include="ViewExtensions\" />
   </ItemGroup>
 
   <ItemGroup>

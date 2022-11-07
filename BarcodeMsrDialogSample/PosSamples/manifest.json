@@ -35,17 +35,37 @@
           "pageName": "DynamicDataListView",
           "phonePageName": "DynamicDataListView",
           "title": "Dynamic Data List View",
-          "viewControllerPath": "Views/Samples/DynamicDataList",
+          "viewControllerPath": "Views/Samples/DynamicDataListView",
           "viewDirectory": "Views/Samples/"
+        },
+        {
+          "pageName": "CnlCACustomerRegistrationView",
+          "phonePageName": "CnlCACustomerRegistrationView",
+          "title": "CnlCA Customer Registration View",
+          "viewControllerPath": "Views/CnlCACustomer/CnlCACustomerRegistrationView",
+          "viewDirectory": "Views/CnlCACustomer/"
         }
       ]
     },
     "extend": {
       "views": {
+        "SearchView": {
+          "productAppBarCommands": [
+            { "modulePath": "ViewExtensions/Search/NavigateToSimpleExtensionViewCommand" }
+          ],
+          "customerAppBarCommands": [
+            {
+              "modulePath": "ViewExtensions/Search/ShowCustomerCommand"
+            }
+          ]
+        }
 
       },
       "triggers": [
-        
+        {
+          "triggerType": "PreCustomerAdd",
+          "modulePath": "TriggerHandlers/CnlCAPreCustomerSearchTrigger"
+        }
       ]
     }
   }
