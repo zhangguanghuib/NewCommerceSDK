@@ -10,6 +10,5 @@
   <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
     <ProjectReference Include="..\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows.csproj" />
-    <ProjectReference Include="..\Pos\GHZ.BarcodeMsrDialogSample.Pos.csproj" />
   </ItemGroup>
 </Project>

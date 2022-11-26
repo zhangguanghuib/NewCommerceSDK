@@ -58,8 +58,14 @@
               "modulePath": "ViewExtensions/Search/ShowCustomerCommand"
             }
           ]
+        },
+        "ShowJournalView": {
+          "transactionListConfiguration": {
+            "name": "TransactionListColumn",
+            "description": "TransactionListColumn",
+            "modulePath": "ViewExtensions/ShowJournal/TransactionListColumn"
+          } 
         }
-
       },
       "triggers": [
         {

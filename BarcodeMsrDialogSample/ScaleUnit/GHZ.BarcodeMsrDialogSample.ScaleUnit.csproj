@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\CRT_RetailSDKSample\CRT_RetailSDKSample.csproj" />
     <ProjectReference Include="..\PosSamples\GHZ.PosSamples.Pos.csproj" />
   </ItemGroup>
 

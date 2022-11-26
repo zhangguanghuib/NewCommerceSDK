@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.BarcodeMsrDialogSample.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PosSamples.Pos", "PosSamples\GHZ.PosSamples.Pos.csproj", "{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRT_RetailSDKSample", "CRT_RetailSDKSample\CRT_RetailSDKSample.csproj", "{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
