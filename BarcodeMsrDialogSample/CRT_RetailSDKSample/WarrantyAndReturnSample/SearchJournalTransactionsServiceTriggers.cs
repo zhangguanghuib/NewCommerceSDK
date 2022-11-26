@@ -103,9 +103,6 @@
             {
                 SalesOrder salesOrder = await this.GetOriginSalesOrderAsync(request.RequestContext, transaction);
                 transaction.SetProperty(CustomerNameExtensionPropertyName, salesOrder.CustomerName);
-                //transaction.SetProperty("CustomerName", salesOrder.CustomerName);
-
-                //transaction.ExtensionProperties.Add(new CommerceProperty("CustomerName", salesOrder.CustomerName));
 
                 if (returnMaxDays != null)
                 {
