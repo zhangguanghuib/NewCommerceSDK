@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentSdk.Connector.Sample.Model
+namespace Microsoft.Dynamics
 {
-    class AuthorizeRequest
+    namespace Retail.SampleConnector.Portable
     {
+        using System;
+        using System.Collections.Generic;
+        using Microsoft.Dynamics.Retail.PaymentSDK.Portable;
+        using Microsoft.Dynamics.Retail.PaymentSDK.Portable.Constants;
+
+        internal class AuthorizeRequest : RequestBase
+        {
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Composition;
 using System.Net;
+using Microsoft.Dynamics.Retail.Diagnostics;
 using Microsoft.Dynamics.Retail.PaymentSDK.Portable;
+using PaymentSdk.Connector.Sample.Model;
 
 namespace Microsoft.Dynamics
 {
@@ -61,12 +63,35 @@ namespace Microsoft.Dynamics
 
             #endregion
 
+            internal static Dictionary<string, decimal> ActivatedGiftCards
+            {
+                get
+                {
+                    return activatedGiftCards;
+                }
+            }
 
-            string IProcessorIdentifierV1.Name => throw new System.NotImplementedException();
+            #region IPaymentProcessor methods
+            public Response Authorize(Request request, PaymentProperty[] requiredInteractionProperties)
+            {
+                string methodName = "Authorize";
 
-            string IProcessorIdentifierV1.Copyright => throw new System.NotImplementedException();
+                RetailLogger.Log.PaymentConnectorLogOperation(methodName,  OperationStarting, this.Name, Platform);
 
-            ArrayList IProcessorIdentifierV1.SupportedCountries => throw new System.NotImplementedException();
+                AuthorizeRequest authorizeRequest = null;
+
+                throw new System.NotImplementedException();
+            }
+
+
+            #endregion
+
+
+            //string IProcessorIdentifierV1.Name => throw new System.NotImplementedException();
+
+            //string IProcessorIdentifierV1.Copyright => throw new System.NotImplementedException();
+
+            //ArrayList IProcessorIdentifierV1.SupportedCountries => throw new System.NotImplementedException();
 
             public Response ExecuteTask(Request request)
             {
@@ -88,10 +113,10 @@ namespace Microsoft.Dynamics
                 throw new System.NotImplementedException();
             }
 
-            Response IPaymentProcessorV1.Authorize(Request request, PaymentProperty[] requiredInteractionProperties)
-            {
-                throw new System.NotImplementedException();
-            }
+            //Response IPaymentProcessorV1.Authorize(Request request, PaymentProperty[] requiredInteractionProperties)
+            //{
+            //    throw new System.NotImplementedException();
+            //}
 
             Response IPaymentProcessorV1.BalanceOnGiftCard(Request request, PaymentProperty[] requiredInteractionProperties)
             {
