@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentSdk.Connector.Sample.Utilities
+namespace Microsoft.Dynamics
 {
-    class PaymentUtilities
+    namespace Retail.SampleConnector.Portable
     {
+        internal static class PaymentUtilities
+        {
+            private const string OperationCompleted = "completed";
+        }
     }
 }
