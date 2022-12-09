@@ -3,7 +3,7 @@ using System.Composition;
 using System.Net;
 using Microsoft.Dynamics.Retail.Diagnostics;
 using Microsoft.Dynamics.Retail.PaymentSDK.Portable;
-using PaymentSdk.Connector.Sample.Model;
+//using PaymentSdk.Connector.Sample.Model;
 
 namespace Microsoft.Dynamics
 {

@@ -19,9 +19,18 @@
       "culturesDirectoryPath": "Resources/Strings",
       "stringResourcesFileName": "resources.resjson"
     },
+    "dualDisplay": {
+      "customControl": {
+        "controlName": "DualDisplayCustomControl",
+        "htmlPath": "DualDisplaySample/CustomControl/DualDisplayCustomControl.html",
+        "modulePath": "DualDisplaySample/CustomControl/DualDisplayCustomControl",
+        "name": "DualDisplayCustomControl",
+        "description": "Dual Display Custom Control"
+      }
+    },
     "create": {
       "templatedDialogs": [
-        
+
       ],
       "views": [
         {
@@ -64,7 +73,7 @@
             "name": "TransactionListColumn",
             "description": "TransactionListColumn",
             "modulePath": "ViewExtensions/ShowJournal/TransactionListColumn"
-          } 
+          }
         }
       },
       "triggers": [
