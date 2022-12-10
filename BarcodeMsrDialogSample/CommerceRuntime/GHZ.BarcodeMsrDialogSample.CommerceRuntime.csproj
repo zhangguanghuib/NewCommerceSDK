@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Jewelry2Controller.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
 

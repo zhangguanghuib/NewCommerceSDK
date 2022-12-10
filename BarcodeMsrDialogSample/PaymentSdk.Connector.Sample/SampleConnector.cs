@@ -79,8 +79,11 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName,  OperationStarting, this.Name, Platform);
 
                 AuthorizeRequest authorizeRequest = null;
-
-                throw new System.NotImplementedException();
+                try
+                {
+                    authorizeRequest = AuthorizeRequest.ConvertFrom(request);
+                }
+               
             }
 
 
