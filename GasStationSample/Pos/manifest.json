@@ -1,7 +1,7 @@
 {
   "$schema": "./devDependencies/schemas/manifestSchema.json",
-  "name": "GasStationSample",
-  "publisher": "Contoso",
+  "name": "GHZ.GasStationSample",
+  "publisher": "GHZ",
   "version": "1.0.0.0",
   "minimumPosVersion": "9.32.0.0",
   "dependencies": [
@@ -26,7 +26,7 @@
       "triggers": [
         {
           "triggerType": "ApplicationStart",
-          "modulePath": "Extend/Triggers/InitializationTrigger",
+          "modulePath": "Extend/Triggers/InitializeStationTrigger",
           "name": "Initialize Gas Pumps Trigger",
           "description": "An application start trigget to initialize the gas pump status"
         }
