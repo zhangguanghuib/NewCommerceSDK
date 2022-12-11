@@ -15,10 +15,6 @@
     <ProjectReference Include="..\CommerceRuntime\GHZ.GasStationSample.CommerceRuntime.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extend\" />
-  </ItemGroup>
-
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
     <PropertyGroup>
       <KnockoutLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'knockoutjs'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\knockout-%(PackageDefinitions.Version).js</KnockoutLibraryFilePath>
