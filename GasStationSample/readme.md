@@ -25,3 +25,11 @@ curl --location --request POST 'https://usnconeboxax1ret.cloud.onebox.dynamics.c
 --data-raw '{
     "storeNumber": "BOSTON"
 }'
+
+4.  StopAllPumps  <br/>
+curl --location --request POST 'https://usnconeboxax1ret.cloud.onebox.dynamics.com/Commerce/GasPumps/StopAllPumps?$top=250&$count=true&api-version=7.3' \
+--header 'oun: 052' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "storeNumber": "BOSTON"
+}'
