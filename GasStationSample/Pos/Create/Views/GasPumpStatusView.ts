@@ -281,8 +281,9 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
         this.isDetailsPanelVisible(!this.isDetailsPanelVisible());
     }
 
-    private _refreshPumps(pumps: ReadonlyArray<Entities.GasPump>): void {
+    private _refreshPumps(pumps: Entities.GasPump[]): void {
         this._dataList.data = pumps;
+        
         let pumpInEmergency: Entities.GasPump = ArrayExtensions.firstOrUndefined(pumps, (p) => p.State.GasPumpStatusValue === GasPumpStatus.Emergency);
         if (!ObjectExtensions.isNullOrUndefined(pumpInEmergency)) {
             this._dataList.selectItems([pumpInEmergency]);
