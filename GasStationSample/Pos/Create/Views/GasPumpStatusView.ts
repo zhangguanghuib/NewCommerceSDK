@@ -6,9 +6,9 @@ import { GasPumpStatus } from "../../GasStationTypes";
 import { CustomViewControllerBase, CustomViewControllerExecuteCommandArgs, ICommand, Icons, ICustomViewControllerConfiguration, ICustomViewControllerContext } from "PosApi/Create/Views";
 import { ArrayExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
 import { CurrencyFormatter, DateFormatter } from "PosApi/Consume/Formatters";
-import { NumberFormattingHelper } from "NumberFormattingHelper";
-import { GasStationDataStore } from "GasStationDataStore";
-import { GASOLINE_QUANTITY_EXTENSION_PROPERTY_NAME } from "GlobalConstants";
+import { NumberFormattingHelper } from "../../NumberFormattingHelper";
+import { GasStationDataStore } from "../../GasStationDataStore";
+import { GASOLINE_QUANTITY_EXTENSION_PROPERTY_NAME } from "../../GlobalConstants";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { AddItemToCartOperationRequest, AddItemToCartOperationResponse, SaveExtensionPropertiesOnCartClientRequest, SaveExtensionPropertiesOnCartClientResponse } from "PosApi/Consume/Cart";
 import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/Consume/ScanResults";
@@ -16,7 +16,7 @@ import { GetScanResultClientRequest, GetScanResultClientResponse } from "PosApi/
 import ICancelableDataResult = ClientEntities.ICancelableDataResult;
 import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
 import { IMessageDialogOptions, ShowMessageDialogClientRequest, ShowMessageDialogClientResponse } from "PosApi/Consume/Dialogs";
-import GasStationDetailsDialog from "Create/Dialogs/GasStationDetailsDialog";
+import GasStationDetailsDialog from "../../Create/Dialogs/GasStationDetailsDialog";
 
 export default class GasPumpStatusView extends CustomViewControllerBase {
     public readonly isDetailsPanelVisible: ko.Observable<boolean>;
@@ -111,7 +111,7 @@ export default class GasPumpStatusView extends CustomViewControllerBase {
 
         super(context, config);
 
-        this.isDetailsPanelVisible = ko.observalble(true);
+        this.isDetailsPanelVisible = ko.observable(true);
         this.selectedGasPump = ko.observable(undefined);
         this.isGasPumpSelected = ko.computed((): boolean => {
             return !ObjectExtensions.isNullOrUndefined(this.selectedGasPump())

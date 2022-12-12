@@ -1,8 +1,8 @@
-﻿import PumpGasDialog from "Create/Dialogs/PumpGasDialog";
-import { Entities } from "DataService/DataServiceEntities.g";
-import { GasStationDataStore } from "GasStationDataStore";
-import { GasPumpStatus } from "GasStationTypes";
-import { NumberFormattingHelper } from "NumberFormattingHelper";
+﻿import PumpGasDialog from "../../Create/Dialogs/PumpGasDialog";
+import { Entities } from "../../DataService/DataServiceEntities.g";
+import { GasPumpStatus } from "../../GasStationTypes";
+import { NumberFormattingHelper } from "../../NumberFormattingHelper";
+import { GasStationDataStore } from "../../GasStationDataStore";
 import { ShowListInputDialogClientRequest, ShowListInputDialogClientResponse } from "PosApi/Consume/Dialogs";
 import { Icons } from "PosApi/Create/Views";
 import { ClientEntities } from "PosApi/Entities";

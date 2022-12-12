@@ -3,10 +3,10 @@
 import { Entities } from "../../DataService/DataServiceEntities.g";
 
 import ko from "knockout";
-import { GasPumpStatus } from "GasStationTypes";
+import { GasPumpStatus } from "../../GasStationTypes";
 
 import GasPump = Entities.GasPump;
-import { GasStationDataStore, PumpStatusChangedHandler } from "GasStationDataStore";
+import { GasStationDataStore, PumpStatusChangedHandler } from "../../GasStationDataStore";
 
 export default class GasPumpStatusPackingItem extends CustomPackingItem {
 
