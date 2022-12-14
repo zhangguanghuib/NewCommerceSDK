@@ -18,4 +18,10 @@ Steps：
    
    Also copy them into the below folder:
    ![image](https://user-images.githubusercontent.com/14832260/207484690-57a2db62-a3d1-457d-8b63-12e93a67e6be.png)
+   
+ 5. Create payment service, set its environment ONEBOX
+    ![image](https://user-images.githubusercontent.com/14832260/207485289-84eea51b-0b9b-4bae-891b-6de845cd43cd.png)
+    ![image](https://user-images.githubusercontent.com/14832260/207485541-42e5be6a-e91e-492f-b778-b145c318e136.png)
+ 
+
 
