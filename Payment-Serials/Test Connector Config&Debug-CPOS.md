@@ -25,6 +25,15 @@ Steps：
      C:\RetailServer\webroot\bin\Ext
  6. Go to CPOS,  web.config, add the below:
     ![image](https://user-images.githubusercontent.com/14832260/207490788-59fd1ecc-aa00-4a2c-9bbe-e475ee9d2fac.png)
+ 7.  Create hardware profile as below:
+     ![image](https://user-images.githubusercontent.com/14832260/207491105-72100eb0-7c2b-4f4e-90ed-434e36c8e410.png)
+  8. Attach the hardware profile to register, run 1090 job
+  9. Go to CPOS, make a transaction and pay card:
+     ![image](https://user-images.githubusercontent.com/14832260/207491720-460bbc21-793f-4050-b6ce-988c7b74332c.png)
+     ![image](https://user-images.githubusercontent.com/14832260/207491960-c4c18e11-b67d-4ea5-86d0-d671da3cba53.png)
+     ![image](https://user-images.githubusercontent.com/14832260/207492077-bcd0ffa5-9270-49a5-988e-8df5da44997c.png)
+
+
 
   
 
