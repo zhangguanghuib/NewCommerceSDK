@@ -6,5 +6,10 @@ Steps：
 2. In order to differentiate the existing test connector and the one here,  I would change some places:
    ![image](https://user-images.githubusercontent.com/14832260/207481178-8b2027bd-9850-4fc5-b013-d070a554189f.png)
    ![image](https://user-images.githubusercontent.com/14832260/207481283-0606e33d-09b8-4a0c-92bb-e1e16a37d98c.png)
-   ![image](https://user-images.githubusercontent.com/14832260/207481673-68bdea46-561d-4d6e-aaf0-7ae16900341e.png)
+   ![image](https://user-images.githubusercontent.com/14832260/207481673-68bdea46-561d-4d6e-aaf0-7ae16900341e.png)  
+3. Create database for PaymentAcceptWeb
+   ![image](https://user-images.githubusercontent.com/14832260/207482702-c9ed3a8d-edef-48a7-bd12-4adafdbc6b11.png)
+    Change the database connection string:
+    ![image](https://user-images.githubusercontent.com/14832260/207483006-a5356ae3-f6f0-4401-9f9e-d0dd86b614c4.png)
 
+  
