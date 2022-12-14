@@ -23,5 +23,10 @@ Steps：
     ![image](https://user-images.githubusercontent.com/14832260/207485289-84eea51b-0b9b-4bae-891b-6de845cd43cd.png)
     ![image](https://user-images.githubusercontent.com/14832260/207485541-42e5be6a-e91e-492f-b778-b145c318e136.png)
  
+ 6. Launch the website:
+    ![image](https://user-images.githubusercontent.com/14832260/207485914-6a41e8c4-02fe-4442-987e-4c620ed68cd8.png)
+    ![image](https://user-images.githubusercontent.com/14832260/207486092-d59b2348-718b-4309-a101-024cba87a0d1.png)
+ 7. Create a call center sales-order, and then complete it:
+    
 
 
