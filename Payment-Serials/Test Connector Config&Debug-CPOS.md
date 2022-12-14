@@ -18,6 +18,14 @@ Steps：
    
    Also copy them into the below folder:
    ![image](https://user-images.githubusercontent.com/14832260/207484690-57a2db62-a3d1-457d-8b63-12e93a67e6be.png)
+   
+ 5. Copy the dll to these below locations:
+     C:\RetailServer\webroot\bin
+     C:\RetailServer\webroot\bin\Connectors
+     C:\RetailServer\webroot\bin\Ext
+ 6. Go to CPOS,  web.config, add the below:
+    ![image](https://user-images.githubusercontent.com/14832260/207490788-59fd1ecc-aa00-4a2c-9bbe-e475ee9d2fac.png)
+
   
 
 
