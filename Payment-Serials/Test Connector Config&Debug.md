@@ -12,4 +12,10 @@ Steps：
     Change the database connection string:
     ![image](https://user-images.githubusercontent.com/14832260/207483006-a5356ae3-f6f0-4401-9f9e-d0dd86b614c4.png)
 
-  
+4. Debug this payment connector for call-center scenario:
+   Copy the dll and pdb to C:\AOSService\PackagesLocalDirectory\Bin\Connectors 
+   ![image](https://user-images.githubusercontent.com/14832260/207483635-b60587c4-b358-45d9-91cc-b6a086eb6390.png)
+   
+   Also copy them into the below folder:
+   ![image](https://user-images.githubusercontent.com/14832260/207484273-6ab0d147-0523-41a1-a34c-123aeefb8baa.png)
+
