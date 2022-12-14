@@ -12,7 +12,12 @@ Steps：
     Change the database connection string:
     ![image](https://user-images.githubusercontent.com/14832260/207483006-a5356ae3-f6f0-4401-9f9e-d0dd86b614c4.png)
 
-4. Debug this payment connector for CPOS scenario:
+4. Copy to AOS:
+   Copy the dll and pdb to C:\AOSService\PackagesLocalDirectory\Bin\Connectors 
+   ![image](https://user-images.githubusercontent.com/14832260/207484722-30858c7c-189e-4d5a-8181-1e9d060f438d.png)
+   
+   Also copy them into the below folder:
+   ![image](https://user-images.githubusercontent.com/14832260/207484690-57a2db62-a3d1-457d-8b63-12e93a67e6be.png)
   
 
 
