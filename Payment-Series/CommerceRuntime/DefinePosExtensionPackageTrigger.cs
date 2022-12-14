@@ -25,7 +25,7 @@
             var getExtensionsResponse = (GetExtensionPackageDefinitionsResponse)response;
             var extensionPackageDefinition = new ExtensionPackageDefinition();
 
-            extensionPackageDefinition.Name = "GHZ.BarcodeMsrDialogSample";
+            extensionPackageDefinition.Name = "GHZ.PaymentSDK";
             extensionPackageDefinition.Publisher = "GHZ";
             extensionPackageDefinition.IsEnabled = true;
 
