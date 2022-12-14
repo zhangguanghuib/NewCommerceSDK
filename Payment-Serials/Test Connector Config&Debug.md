@@ -34,7 +34,10 @@ Steps：
     ![image](https://user-images.githubusercontent.com/14832260/207487754-d652dfee-565b-40f1-bb55-e60dfad27c16.png)
      CardPage.aspx is showing:
      ![image](https://user-images.githubusercontent.com/14832260/207487971-446ddcb6-48ff-4389-9ae6-0e05ad097e3f.png)
-
+  9.When submit payment,  Athorize is called:
+    ![image](https://user-images.githubusercontent.com/14832260/207488293-fc034d77-7552-4234-8f24-6d615fd91466.png)
+    ![image](https://user-images.githubusercontent.com/14832260/207488385-5a8e3504-e4ec-4d55-bfb4-8b7e843eea1c.png)  
+  10. When post invoice, Capture is called:
 
     
 
