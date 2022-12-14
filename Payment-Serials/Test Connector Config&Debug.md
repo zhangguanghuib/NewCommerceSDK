@@ -27,6 +27,15 @@ Steps：
     ![image](https://user-images.githubusercontent.com/14832260/207485914-6a41e8c4-02fe-4442-987e-4c620ed68cd8.png)
     ![image](https://user-images.githubusercontent.com/14832260/207486092-d59b2348-718b-4309-a101-024cba87a0d1.png)
  7. Create a call center sales-order, and then complete it:
+ 8. When click the below button:
+    ![image](https://user-images.githubusercontent.com/14832260/207487491-b5476663-6bcb-4770-ac1a-1a823471f93d.png)
+    GetPaymentAcceptPoint is broken:
+    ![image](https://user-images.githubusercontent.com/14832260/207487650-c4e50779-aee2-4f05-8ecc-d476bc2f639d.png)
+    ![image](https://user-images.githubusercontent.com/14832260/207487754-d652dfee-565b-40f1-bb55-e60dfad27c16.png)
+     CardPage.aspx is showing:
+     ![image](https://user-images.githubusercontent.com/14832260/207487971-446ddcb6-48ff-4389-9ae6-0e05ad097e3f.png)
+
+
     
 
 
