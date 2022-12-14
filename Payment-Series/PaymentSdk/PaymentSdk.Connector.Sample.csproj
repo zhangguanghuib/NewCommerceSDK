@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Diagnostics" Version="$(DiagnosticsRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.PaymentSDK.Portable" Version="$(CommercePaymentsPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
+  </ItemGroup>
+
+</Project>
