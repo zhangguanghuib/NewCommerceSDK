@@ -14,8 +14,8 @@ Steps：
 
 4. Debug this payment connector for call-center scenario:
    Copy the dll and pdb to C:\AOSService\PackagesLocalDirectory\Bin\Connectors 
-   ![image](https://user-images.githubusercontent.com/14832260/207483635-b60587c4-b358-45d9-91cc-b6a086eb6390.png)
+   ![image](https://user-images.githubusercontent.com/14832260/207484722-30858c7c-189e-4d5a-8181-1e9d060f438d.png)
    
    Also copy them into the below folder:
-   ![image](https://user-images.githubusercontent.com/14832260/207484273-6ab0d147-0523-41a1-a34c-123aeefb8baa.png)
+   ![image](https://user-images.githubusercontent.com/14832260/207484690-57a2db62-a3d1-457d-8b63-12e93a67e6be.png)
 
