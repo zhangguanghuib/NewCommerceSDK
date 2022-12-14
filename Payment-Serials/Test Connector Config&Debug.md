@@ -3,7 +3,7 @@
 Steps：
 1. Go to RetailSDK, find the PaymentSDK solution:
    ![image](https://user-images.githubusercontent.com/14832260/207480907-64aff128-b7dd-4bfe-a842-b5150fbcec78.png)
-2. In order to differentiate the existing test connector and the one here,  I would change some places:
+2. In order to differentiate the existing test connector and the one here,  I would change some places, changing the "Test Connector" to "Contoso Payment Connector"
    ![image](https://user-images.githubusercontent.com/14832260/207481178-8b2027bd-9850-4fc5-b013-d070a554189f.png)
    ![image](https://user-images.githubusercontent.com/14832260/207481283-0606e33d-09b8-4a0c-92bb-e1e16a37d98c.png)
    ![image](https://user-images.githubusercontent.com/14832260/207481673-68bdea46-561d-4d6e-aaf0-7ae16900341e.png)  
