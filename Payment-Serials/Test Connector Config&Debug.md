@@ -1,1 +1,1 @@
-
+#This document will show how to config and debug the test connector for call center and retail CPOS to help you to understand the how payment process is working, and also help you dive into how to develop your own payment connector.
