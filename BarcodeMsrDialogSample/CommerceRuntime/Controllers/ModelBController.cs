@@ -21,7 +21,7 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Controllers
         {
             IList<ModelB> list = new List<ModelB>() { new ModelB()};
             var result = new PagedResult<ModelB>(new ReadOnlyCollection<ModelB>(list));
-            return await Task.FromResult(result); 
+            return await Task.FromResult(result).ConfigureAwait(false); 
         }
     }
    

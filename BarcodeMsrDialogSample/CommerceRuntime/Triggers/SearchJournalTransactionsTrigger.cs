@@ -28,7 +28,7 @@ public class SearchJournalTransactions : IRequestTriggerAsync
     /// <param name="response">The response.</param>
     public async Task OnExecuted(Request request, Response response)
     {
-        await Task.CompletedTask;
+        await Task.CompletedTask.ConfigureAwait(false);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class SearchJournalTransactions : IRequestTriggerAsync
 
         Channel currentChannel = request.RequestContext.GetChannel();
         var searchOrgUnitDataRequest = new SearchOrgUnitDataRequest(currentChannel.RecordId);
-        var searchOrgUnitDataResponse = await request.RequestContext.ExecuteAsync<EntityDataServiceResponse<OrgUnit>>(searchOrgUnitDataRequest);
+        var searchOrgUnitDataResponse = await request.RequestContext.ExecuteAsync<EntityDataServiceResponse<OrgUnit>>(searchOrgUnitDataRequest).ConfigureAwait(false);
         string currentStoreNumber = searchOrgUnitDataResponse.FirstOrDefault()?.OrgUnitNumber ?? string.Empty;
 
         // If search other store,  throw an error message
@@ -61,6 +61,6 @@ public class SearchJournalTransactions : IRequestTriggerAsync
             searchJournalTransactionsServiceRequest.Criteria.StoreId = currentStoreNumber;
         }
 
-        await Task.CompletedTask;
+        await Task.CompletedTask.ConfigureAwait(false);
     }
 }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentSDK.StoreCommerc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentSdk.Connector.Sample", "PaymentSdk\PaymentSdk.Connector.Sample.csproj", "{FF938420-86F6-4A27-9462-A395D9F43782}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentSdk.Connector.Sample.PaymentAcceptWeb", "Connector.Sample.PaymentAcceptWeb\PaymentSdk.Connector.Sample.PaymentAcceptWeb.csproj", "{6548FDBA-90ED-4A97-ABFB-F045C5023313}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

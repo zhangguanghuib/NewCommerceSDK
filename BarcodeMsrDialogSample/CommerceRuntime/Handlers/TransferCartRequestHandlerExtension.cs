@@ -17,13 +17,6 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
 
         protected override async Task<Response> Process(TransferCartRequest request)
         {
-            //NullResponse response;
-
-            //var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
-            //var response = await request.RequestContext.Runtime.ExecuteAsync<NullResponse>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
-
-            //return response;
-
             ThrowIf.Null(request, nameof(request));
             ThrowIf.Null(request.Cart, "request.Cart");
 
@@ -44,8 +37,13 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
 
             // Recalculate the whole sales transaction to gets sales tax group assigned and tax amount calculated 
             // after switching from online to offline.
-            CalculateSalesTransactionServiceRequest calculateServiceRequest = new CalculateSalesTransactionServiceRequest(transaction, null);
-            transaction =  (await request.RequestContext.ExecuteAsync<CalculateSalesTransactionServiceResponse>(calculateServiceRequest).ConfigureAwait(false)).Transaction;
+            // CalculateSalesTransactionServiceRequest calculateServiceRequest = new CalculateSalesTransactionServiceRequest(transaction, null);
+            // transaction =  (await request.RequestContext.ExecuteAsync<CalculateSalesTransactionServiceResponse>(calculateServiceRequest).ConfigureAwait(false)).Transaction;
+
+            // Assign tax codes for tax calculation.
+            var assignTaxCodesServiceRequest = new AssignTaxCodesServiceRequest(transaction);
+            assignTaxCodesServiceRequest.RequestContext = request.RequestContext;
+            transaction = (await request.RequestContext.ExecuteAsync<AssignTaxCodesServiceResponse>(assignTaxCodesServiceRequest).ConfigureAwait(false)).Transaction;
 
             await TransferSalesTransaction(request.RequestContext, transaction).ConfigureAwait(false);
 

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\GHZ.PaymentSDK.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\PaymentSdk\PaymentSdk.Connector.Sample.csproj" />
   </ItemGroup>
 
 </Project>
