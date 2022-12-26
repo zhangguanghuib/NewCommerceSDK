@@ -49,7 +49,7 @@
 
         public async Task OnExecuting(Request request)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false); 
         }
 
         private async Task<(int?, decimal?)>  GetConfigurationParametersAsync(Request request)
@@ -101,7 +101,7 @@
         {
             foreach (Transaction transaction in transactions)
             {
-                SalesOrder salesOrder = await this.GetOriginSalesOrderAsync(request.RequestContext, transaction);
+                SalesOrder salesOrder = await this.GetOriginSalesOrderAsync(request.RequestContext, transaction).ConfigureAwait(false);
                 transaction.SetProperty(CustomerNameExtensionPropertyName, salesOrder.CustomerName);
 
                 if (returnMaxDays != null)

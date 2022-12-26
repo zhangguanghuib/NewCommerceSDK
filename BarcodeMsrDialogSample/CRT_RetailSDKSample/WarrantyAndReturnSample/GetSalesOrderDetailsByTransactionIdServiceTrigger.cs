@@ -28,12 +28,12 @@ namespace CRT_RetailSDKSample.WarrantyAndReturnSample
 
             SalesOrder SalesOrder = ((GetSalesOrderDetailsServiceResponse)response).SalesOrder;
 
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false);
         }
 
         public async Task OnExecuting(Request request)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false);
         }
     }
 }

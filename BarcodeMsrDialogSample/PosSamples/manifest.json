@@ -80,6 +80,10 @@
         {
           "triggerType": "PreCustomerAdd",
           "modulePath": "TriggerHandlers/CnlCAPreCustomerSearchTrigger"
+        },
+        {
+          "triggerType": "ApplicationStart",
+          "modulePath": "Triggers/ApplicationStartTrigger"
         }
       ]
     }

@@ -34,7 +34,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private readonly _cart: ko.Observable<ProxyEntities.Cart>;
     private readonly _cartLinesObservable: ko.ObservableArray<ProxyEntities.CartLine>;
     private readonly _customer: ko.Observable<ProxyEntities.Customer>;
-    private readonly _loggedOn: ko.Observalble<boolean>;
+    private readonly _loggedOn: ko.Observable<boolean>;
     private readonly _employee: ko.Observable<ProxyEntities.Employee>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
@@ -159,7 +159,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                 name: DualDisplayCustomControl.TEMPLATE_ID,
                 data: this
             }
-        });
+        }, this);
     }
 
     public init(state: Commerce.Extensibility.DualDisplayExtensionTypes.IDualDisplayCustomControlState): void {
