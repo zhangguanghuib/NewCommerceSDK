@@ -35,6 +35,13 @@
           "title": "Promotions",
           "viewControllerPath": "PromotionsSample/Views/PromotionsView",
           "viewDirectory": "PromotionsSample/Views/"
+        },
+        {
+          "pageName": "MemberSignUpView",
+          "phonePageName": "MemberSignUpView",
+          "title": "Member sign up",
+          "viewControllerPath": "Views/MemberSignUpView/MemberSignUpView",
+          "viewDirectory": "Views/MemberSignUpView/"
         }
       ]
     },
@@ -70,6 +77,15 @@
               "name": "KREPaymentComand",
               "description": "KREPaymentComand",
               "modulePath": "ViewExtensions/Payment/KREPaymentComand"
+            }
+          ]
+        },
+        "SearchView": {
+          "customerAppBarCommands": [
+            {
+              "name": "NewMemberSignupCommand",
+              "description": "NewMemberSignupCommand",
+              "modulePath": "ViewExtensions/Search/NewMemberSignupCommand"
             }
           ]
         }

@@ -59,7 +59,7 @@ export default class CustomFieldsSection extends CustomerAddEditCustomControlBas
                 name: CustomFieldsSection.TEMPLATE_ID,
                 data: this
             }
-        });
+        }, this);
 
         let toggleOptions: Controls.IToggleOptions = {
             labelOn: this.context.resources.getString(""),

@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="Libraries\knockout.d.ts" />
+    <TypeScriptCompile Remove="Views\MemberSignUpView\DataService\DataServiceRequests.g.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Pos" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.*" />
     <PackageReference Include="knockoutjs" Version="3.5.*" />
@@ -24,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="DataService\" />
+    <Folder Include="Libraries\" />
     <Folder Include="PromotionsSample\ViewExtensions\" />
     <Folder Include="PromotionsSample\Resources\" />
   </ItemGroup>

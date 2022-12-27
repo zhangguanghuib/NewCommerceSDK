@@ -28,12 +28,12 @@ export default class PromotionsViewModel extends KnockoutExtensionViewModelBase 
         this._customViewControllerBaseState = state;
         this._customViewControllerBaseState.isProcessing = false;
         this.canAddItem = ko.computed<boolean>(() => {
-            return !this._customViewControllerBaseState.isProcessing && !ObjectExtensions.isNullOrUndefined(this._product)
+            return !this._customViewControllerBaseState.isProcessing && !ObjectExtensions.isNullOrUndefined(this._product())
         }, this);
     }
 
     get Product(): ProxyEntities.SimpleProduct {
-        return this._product;
+        return this._product();
     }
 
     set Product(product: ProxyEntities.SimpleProduct) {

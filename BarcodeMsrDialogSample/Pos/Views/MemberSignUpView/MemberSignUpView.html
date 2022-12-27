@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>New Member Signup</title>
+
+    <link href="../Customer/MemberSignUpView.css" rel="stylesheet" title="New Member Signup" />
+    <script>
+
+    </script>
+</head>
+<body>
+    <!--<form autocomplete="off">-->
+    <div class="fragment MemberSignUpView">
+        <!-- Indeterminate wait -->
+        <div data-bind="loader: { visible: viewModel.isBusy }"></div>
+        <!--<div data-bind="msPosLoader: loader"></div>-->
+        <!-- Page header -->
+        <!--<div data-bind="headerSplitView: { title: viewModel.title }">-->
+        <div data-bind="msPosHeaderSplitView: headerSplitView">
+            <section role="main" class="scrollY marginLeft24 marginRight24 marginTop12 pad0" data-bind="resx: { ariaLabel: 'string_4454' }">
+                <div class="col grow-landscape maxWidth680 minWidth520">
+                    <!-- Contact Info -->
+                    <div class="marginTop04" data-bind="sectionWrapper: {headerResx: 'string_1304' }">
+                        <div class="row">
+                            <div class="col stretch">
+                                <!-- First name -->
+                                <div class="marginBottom20">
+                                    <label for="customerFirstNameInput" data-bind="resx: { textContent: 'string_1305' }">First Name</label>
+                                    <input tabindex="1" type="text" onclick="doNothing();" id="customerFirstNameInput"
+                                           data-bind="value: viewModel.memberProxy().FirstName" />
+                                </div>
+                            </div>
+                            <div class="gutter40x40"></div>
+
+                            <div class="col stretch">
+                                <!-- Last name -->
+                                <div class="marginBottom20">
+                                    <label for="customerLastNameInput" data-bind="resx: { textContent: 'string_1307' }">Last Name</label>
+                                    <input tabindex="2" type="text" id="customerLastNameInput"
+                                           data-bind="value: viewModel.memberProxy().LastName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col stretch">
+                                <div class="marginBottom20" style="display:inline;">
+                                    <span style="display:inline-block">
+                                        <label for="customerCountryCodeInput" data-bind="resx: { ariaLabel: 'string_50045' }">Country Code</label>
+                                        <input tabindex="3" type="tel" id="customerCountryCodeInput" value="65"
+                                               data-bind="value: viewModel.memberProxy().CountryCode" style="max-width:95px;" />
+                                        <label for="customerPhoneNumberInput" data-bind="resx: { ariaLabel: 'string_50037' }">Mobile</label>
+
+                                        <input tabindex="4" type="tel" id="customerPhoneNumberInput" style="max-width:195px;"
+                                               data-bind="value: viewModel.memberProxy().Mobile" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col stretch">
+                                <div class="marginBottom20">
+                                    <label id="lblGender" data-bind="resx: { ariaLabel: 'string_50038' }">Gender</label>
+                                    <select name="ddlGender" tabindex="5" id="ddlGender"
+                                            data-bind="options: viewModel.genderList,
+                                                   optionsText: function (item) { return item.caption; },
+                                                   optionsValue: function (item) { return item.caption; },
+                                                    value: viewModel.memberProxy().Gender"></select>
+                                </div>
+
+                            </div>
+
+                            <div class="gutter40x40"></div>
+
+                            <div class="col stretch">
+                                <!-- Email address -->
+                                <div class="marginBottom20">
+                                    <label for="customerReceiptEmailInput" data-bind="resx: { textContent: 'string_1311' }">Email Address</label>
+                                    <input tabindex="6" type="text" id="customerReceiptEmailInput"
+                                           data-bind="value: viewModel.memberProxy().Email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Bottom app bar -->
+            <div id="commandAppBar" data-bind="appBar: {}, axBubbleAttr: 'MemberSignUpView_commandAppBar'">
+                <!--<button type="submit" data-bind="appBarCommand: {
+                                extraClass: 'iconSave',
+                                id:'cmdSaveCustomerDetails',
+                                labelResx: 'string_1327',
+                                enabled: true
+                            },
+                            invokeValidate: viewModel.createMember.bind(viewModel)"></button>-->
+
+                <button data-bind="appBarCommand: {
+                            extraClass: 'iconSave',
+                            id:'cmdSaveCustomerDetails',
+                            labelResx: 'string_1327',
+                            enabled: true
+                        },
+                        click: click_cmdSaveCustomerDetails"></button>
+
+                <!--save-->
+            </div>
+            <div class="gutter32x32"></div>
+        </div>
+
+
+
+    </div>
+    <!--</form>-->
+
+
+</body>
+</html>

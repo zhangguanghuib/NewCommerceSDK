@@ -1,9 +1,8 @@
 ﻿"use strict";
 
-import ko from "knockout";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 
-abstract class KnockoutExtensionViewModelBase implements ko.IDisposable {
+abstract class KnockoutExtensionViewModelBase  {
     public dispose(): void {
         ObjectExtensions.disposeAllProperties(this);
     }
