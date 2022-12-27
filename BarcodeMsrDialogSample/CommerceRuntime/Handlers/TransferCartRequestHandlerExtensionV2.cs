@@ -1,20 +1,24 @@
-﻿using Microsoft.Dynamics.Commerce.Runtime;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Dynamics.Commerce.Runtime;
 using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Messages;
 using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Dynamics.Retail.Diagnostics;
 
 namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
 {
-    public class TransferCartRequestHandlerExtension : SingleAsyncRequestHandler<TransferCartRequest>
+    public class TransferCartRequestHandlerExtensionV2 : SingleAsyncRequestHandler<TransferCartRequest>
     {
-        private const string RetailRecalculateTaxWhenTransferReturnCartOffline = "RETAIL_RECALCULATE_WHEN_TRANSFER_CART_OFFLINE";
+        // A parameter to control whether to reclculate when transfer cart to offline
+        private const string RetailRecalculateWhenTransferCartOffline = "RETAIL_RECALCULATE_WHEN_TRANSFER_CART_OFFLINE";
 
+        /// <summary>
+        /// Transfer the shopping cart on the request.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns><see cref="NullResponse"/> object containing nothing.</returns>
         protected override async Task<Response> Process(TransferCartRequest request)
         {
             ThrowIf.Null(request, nameof(request));
@@ -23,22 +27,11 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
             // After transfering the cart, it would remain as offline till the whole transaction is done.
             request.Cart.IsCreatedOffline = true;
 
-            CalculationModes? calculationMode = null;
-
-            // When transfer cart to offline, we should not recalculate charge and tax.
-            if (!(await ShouldRecalculateTaxWhenTransferReturnCartOfflineEnabled(request.RequestContext).ConfigureAwait(false)))
-            {
-                calculationMode = ~(CalculationModes.Charges | CalculationModes.Taxes);
-            }
+            var retailRecalculateWhenTransferCartOffline = await ShouldRecalculateWhenTransferCartOfflineEnabled(request.RequestContext).ConfigureAwait(false);
 
             // For offline cart, persist the object directly into database.
-            var convertRequest = new ConvertCartToSalesTransactionRequest(request.Cart/*, calculationMode: calculationMode*/);
+            var convertRequest = new ConvertCartToSalesTransactionRequest(request.Cart, shouldRecalculateSalesTransaction: retailRecalculateWhenTransferCartOffline);
             var transaction = (await request.RequestContext.ExecuteAsync<ConvertCartToSalesTransactionResponse>(convertRequest).ConfigureAwait(false)).SalesTransaction;
-
-            // Recalculate the whole sales transaction to gets sales tax group assigned and tax amount calculated 
-            // after switching from online to offline.
-            // CalculateSalesTransactionServiceRequest calculateServiceRequest = new CalculateSalesTransactionServiceRequest(transaction, null);
-            // transaction =  (await request.RequestContext.ExecuteAsync<CalculateSalesTransactionServiceResponse>(calculateServiceRequest).ConfigureAwait(false)).Transaction;
 
             // Assign tax codes for tax calculation.
             var assignTaxCodesServiceRequest = new AssignTaxCodesServiceRequest(transaction);
@@ -54,29 +47,32 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
         }
 
         /// <summary>
-        /// Gets the boolean to determine if we will recalculate tax when transfer return cart to offline.
+        /// Gets the boolean to determine if we will recalculate when transfer cart to offline.
         /// </summary>
         /// <param name="context">The request context.</param>
         /// <returns>True if we will reclculate.</returns>
-        private static async Task<bool> ShouldRecalculateTaxWhenTransferReturnCartOfflineEnabled(RequestContext context)
+        private static async Task<bool> ShouldRecalculateWhenTransferCartOfflineEnabled(RequestContext context)
         {
             var getConfigurationParametersDataRequest = new GetConfigurationParametersDataRequest(context.GetPrincipal().ChannelId);
             var getConfigurationParametersDataResponse = await context.ExecuteAsync<EntityDataServiceResponse<RetailConfigurationParameter>>(getConfigurationParametersDataRequest).ConfigureAwait(false);
-            RetailConfigurationParameter retailRecalculateTaxWhenTransferReturnCartOfflineConfigurations = getConfigurationParametersDataResponse?.SingleOrDefault(configuration => configuration.Name == RetailRecalculateTaxWhenTransferReturnCartOffline);
-            var retailRecalculateTaxWhenTransferReturnCartOffline = false;
+            RetailConfigurationParameter retailRecalculateWhenTransferCartOfflineConfigurations = getConfigurationParametersDataResponse?.SingleOrDefault(configuration => configuration.Name == RetailRecalculateWhenTransferCartOffline);
+            var retailRecalculateWhenTransferCartOffline = false;
 
-            if (retailRecalculateTaxWhenTransferReturnCartOfflineConfigurations != null)
+            if (retailRecalculateWhenTransferCartOfflineConfigurations != null)
             {
-                bool.TryParse(retailRecalculateTaxWhenTransferReturnCartOfflineConfigurations.Value, out retailRecalculateTaxWhenTransferReturnCartOffline);
+                bool.TryParse(retailRecalculateWhenTransferCartOfflineConfigurations.Value, out retailRecalculateWhenTransferCartOffline);
             }
 
-            return retailRecalculateTaxWhenTransferReturnCartOffline;
+            return retailRecalculateWhenTransferCartOffline;
         }
+
 
         public static async Task TransferSalesTransaction(RequestContext context, SalesTransaction transaction)
         {
             ThrowIf.Null(context, nameof(context));
             ThrowIf.Null(transaction, nameof(transaction));
+
+            RetailLogger.Log.CartWorkflowHelperTransferSalesTransactionBegin(transaction.InternalTransactionId.ToString(), transaction.CustomerId);
 
             // Transfer sales transaction has to be seamless.
             // Row version check need to be ignored since data gets transferred from different storage.
@@ -87,6 +83,8 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
         {
             ThrowIf.Null(context, nameof(context));
             ThrowIf.Null(transaction, nameof(transaction));
+
+            RetailLogger.Log.CartWorkflowHelperSaveSalesTransactionBegin(transaction.InternalTransactionId.ToString(), transaction.CustomerId);
 
             try
             {

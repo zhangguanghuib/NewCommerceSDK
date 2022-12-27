@@ -82,6 +82,10 @@
         {
           "triggerType": "PreProductSale",
           "modulePath": "TriggerHandlers/PreProductSaleTrigger"
+        },
+        {
+          "triggerType": "PostGetGiftCardNumber",
+          "modulePath": "TriggerHandlers/PostGetGiftCardNumberTrigger"
         }
       ],
       "requestHandlers": [

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\Jewelry2Controller.cs" />
+    <Compile Remove="Handlers\TransferCartRequestHandlerExtension.cs" />
   </ItemGroup>
 
   <ItemGroup>
