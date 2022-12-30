@@ -44,10 +44,10 @@ export default class MemberSignUpView extends  Views.CustomViewControllerBase {
                 commands: [
                     {
                         name: "newMemberSignUpCommand",
-                        label: context.resources.getString("string_22"),
-                        icon: Views.Icons.LightningBolt,
+                        label: "Save",
+                        icon: Views.Icons.Save,
                         isVisible: true,
-                        canExecute: false,
+                        canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
                             this.viewModel.createMember();
                         }
