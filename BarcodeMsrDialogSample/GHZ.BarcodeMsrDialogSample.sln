@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1525
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.CommerceRuntime", "CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj", "{0A8E24B8-84E0-4061-BE51-DDB9F3B0EA44}"
 EndProject
@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PosSamples.Pos", "PosSa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRT_RetailSDKSample", "CRT_RetailSDKSample\CRT_RetailSDKSample.csproj", "{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentSdk.Connector.Sample", "PaymentSdk.Connector.Sample\PaymentSdk.Connector.Sample.csproj", "{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentSdk.Connector.Sample", "PaymentSdk.Connector.Sample\PaymentSdk.Connector.Sample.csproj", "{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetailSDK.HardwareStation", "RetailSDK_HardwareStation\RetailSDK.HardwareStation.csproj", "{C28BC983-AE38-4BFF-A770-3BF32358DD05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C28BC983-AE38-4BFF-A770-3BF32358DD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C28BC983-AE38-4BFF-A770-3BF32358DD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C28BC983-AE38-4BFF-A770-3BF32358DD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C28BC983-AE38-4BFF-A770-3BF32358DD05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
