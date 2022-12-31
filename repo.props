@@ -17,14 +17,6 @@
     <CommerceHwsPackagesVersion>[9.38.*-*,9.39)</CommerceHwsPackagesVersion>
     <CommerceToolsPackagesVersion>[10.26.*-*,10.27)</CommerceToolsPackagesVersion>
     <CommercePaymentsPackagesVersion>[10.38.*-*,10.39)</CommercePaymentsPackagesVersion>
-	
-	<!--
-   <CommerceSdkPackagesVersion>[9.41.22335.6-preview,9.42)</CommerceSdkPackagesVersion>
-    <CommercePosPackagesVersion>[9.41.*,9.42)</CommercePosPackagesVersion>
-    <CommerceChannelPackagesVersion>[9.41.22333.10-preview,9.42)</CommerceChannelPackagesVersion>
-    <CommerceHwsPackagesVersion>[9.41.22334.5-preview,9.42)</CommerceHwsPackagesVersion>
-    <CommerceToolsPackagesVersion>[10.28.22314.4-preview,10.29)</CommerceToolsPackagesVersion>-->
-    <CommercePaymentsPackagesVersion>[10.38.*-*,10.39)</CommercePaymentsPackagesVersion>
 	  <DiagnosticsRepoPackagesVersion>[10.9.*,10.11)</DiagnosticsRepoPackagesVersion>
 	  <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
   </PropertyGroup>
