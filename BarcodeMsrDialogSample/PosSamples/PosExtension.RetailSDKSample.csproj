@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>PosExtension.RetailSDKSample</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +41,7 @@
     <Folder Include="Controls\Dialog\" />
     <Folder Include="Create\Dialogs\" />
     <Folder Include="DataService\" />
+    <Folder Include="PaymentSample\Peripherals\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,18 +39,17 @@ namespace BarcodeMsrDialogSample.CommerceRuntime
         /// <param name="response">The response.</param>
         public Task OnExecuted(Request request, Response response)
         {
-            //ThrowIf.Null(request, "request");
-            //ThrowIf.Null(response, "response");
+            ThrowIf.Null(request, "request");
+            ThrowIf.Null(response, "response");
 
-            //var getExtensionsResponse = (GetExtensionPackageDefinitionsResponse)response;
-            //var extensionPackageDefinition = new ExtensionPackageDefinition();
+            var getExtensionsResponse = (GetExtensionPackageDefinitionsResponse)response;
+            var extensionPackageDefinition = new ExtensionPackageDefinition();
 
-            //// Should match the PackageName used when packaging the customization package (i.e. in CustomizationPackage.props).
-            //extensionPackageDefinition.Name = "GHZ.BarcodeMsrDialogSample";
-            //extensionPackageDefinition.Publisher = "GHZ";
-            //extensionPackageDefinition.IsEnabled = true;
+            extensionPackageDefinition.Name = "GHZ.BarcodeMsrDialogSample";
+            extensionPackageDefinition.Publisher = "GHZ";
+            extensionPackageDefinition.IsEnabled = true;
 
-            //getExtensionsResponse.ExtensionPackageDefinitions.Add(extensionPackageDefinition);
+            getExtensionsResponse.ExtensionPackageDefinitions.Add(extensionPackageDefinition);
             return Task.CompletedTask;
         }
 

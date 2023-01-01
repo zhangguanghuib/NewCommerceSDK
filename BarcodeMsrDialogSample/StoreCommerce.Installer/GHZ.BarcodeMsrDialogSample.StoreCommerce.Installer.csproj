@@ -8,7 +8,8 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
-    <ProjectReference Include="..\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows.csproj" />
+    <ProjectReference Include="..\CRT_RetailSDKSample\CRT_RetailSDKSample.csproj" />
+    <ProjectReference Include="..\PosSamples\PosExtension.RetailSDKSample.csproj" />
+    <ProjectReference Include="..\RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj" />
   </ItemGroup>
 </Project>

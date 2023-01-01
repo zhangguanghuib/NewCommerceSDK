@@ -83,7 +83,36 @@
         },
         {
           "triggerType": "ApplicationStart",
-          "modulePath": "Triggers/ApplicationStartTrigger"
+          "modulePath": "TriggerHandlers/ApplicationStartTrigger"
+        }
+      ],
+      "requestHandlers": [
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/CardPaymentCheckGCBalancePeripheralRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/GetPaymentCardTypeByBinRangeClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalActivateGiftCardPeripheralRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalAuthorizePaymentRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalCapturePaymentRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalExecuteTaskRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalRefundPaymentRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalUpdateLinesRequestHandlerExt"
+        },
+        {
+          "modulePath": "PaymentSample/Peripherals/Handlers/PaymentTerminalVoidPaymentRequestHandlerExt"
         }
       ]
     }
