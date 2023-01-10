@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" name="format-detection" content="telephone=no" />
+    <title></title>
+    <link href="CustomerDetailsCustomControl.css" rel="stylesheet" />
+</head>
+<body>
+    <script id="WTR_Pos_Extension_CRMCustomerDetails" type="text/html">
+        <div data-bind="visible:!_isLoaderVisible()">
+            <table width="100%">
+                <tr>
+                    <td width="20%">
+                        <button id="btnSearchDialog" data-bind="resx: { ariaLabel: 'string_49' }, click: openSearchDialog, visible: isNonReturnTransaction">+</button>
+                    </td>
+                    <td width="60%">
+                        <div id="printedName" class="h2 activeStatus" data-bind="text: name">Printed Name</div>
+                    </td>
+                    <td width="20%" style="text-align:right;">
+                        <button data-bind="click: closeDialogClicked, visible: isNonReturnTransaction">X</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </script>
+</body>
+</html>

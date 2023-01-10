@@ -47,6 +47,23 @@
     },
     "extend": {
       "views": {
+        "CartView": {
+          "viewController": { "modulePath": "CustomControlExtensions/Cart/CartViewController" },
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "lineDetails",
+                "htmlPath": "CustomControlExtensions/Cart/LineDetailsCustomControl.html",
+                "modulePath": "CustomControlExtensions/Cart/LineDetailsCustomControl"
+              },
+              {
+                "controlName": "CRMCustomerDetails",
+                "htmlPath": "CustomControlExtensions/Cart/CustomerDetailsCustomControl.html",
+                "modulePath": "CustomControlExtensions/Cart/CustomerDetailsCustomControl"
+              }
+            ]
+          }
+        },
         "FulfillmentLineView": {
           "appBarCommands": [
             {
