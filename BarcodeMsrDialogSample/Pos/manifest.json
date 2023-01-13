@@ -119,6 +119,10 @@
         {
           "triggerType": "PostGetGiftCardNumber",
           "modulePath": "TriggerHandlers/PostGetGiftCardNumberTrigger"
+        },
+        {
+          "triggerType": "PostGetReasonCodeLine",
+          "modulePath": "TriggerHandlers/PostGetReasonCodeLineTrigger"
         }
       ],
       "requestHandlers": [
