@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<Import Project="..\CustomizationPackage.props" />
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>HardwareStation.Dev.Windows</AssemblyName>
+    <RootNamespace>HardwareStation.Dev.Windows</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="RemoteOrderDisplaySample\**" />
+    <EmbeddedResource Remove="RemoteOrderDisplaySample\**" />
+    <None Remove="RemoteOrderDisplaySample\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Diagnostics" Version="$(DiagnosticsRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.PaymentSDK.Portable" Version="$(CommercePaymentsPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
+  </ItemGroup>
+</Project>

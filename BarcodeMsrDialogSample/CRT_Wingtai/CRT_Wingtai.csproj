@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\MembershipSummaryDetailsController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\MemberVoucherController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_CancelDiscountController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_ConversionRateController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_InstantRedemptionController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_MemberController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_TransactionController.cs" />
+    <Compile Remove="WTR.RSExt.Custom\MembersonInt\WTR_TransVouchersPointsController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="WTR.RSExt.Custom\" />
+    <Folder Include="WTR.CRTExt.DataModel\" />
+    <Folder Include="WTR.RSExt.Custom\MembersonInt\" />
+  </ItemGroup>
+
+</Project>

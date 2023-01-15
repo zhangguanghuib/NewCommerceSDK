@@ -42,6 +42,13 @@
           "title": "Member sign up",
           "viewControllerPath": "Views/MemberSignUpView/MemberSignUpView",
           "viewDirectory": "Views/MemberSignUpView/"
+        },
+        {
+          "pageName": "MemberVouchersView",
+          "phonePageName": "MemberVouchersView",
+          "title": "Member Vouchers",
+          "viewControllerPath": "Views/MemberVouchersView/MemberVouchersView",
+          "viewDirectory": "Views/MemberVouchersView/"
         }
       ]
     },
@@ -103,6 +110,11 @@
               "name": "NewMemberSignupCommand",
               "description": "NewMemberSignupCommand",
               "modulePath": "ViewExtensions/Search/NewMemberSignupCommand"
+            },
+            {
+              "name": "MemberVouchersCommand",
+              "description": "Member Vouchers Command",
+              "modulePath": "ViewExtensions/Search/MemberVouchersCommand"
             }
           ]
         }

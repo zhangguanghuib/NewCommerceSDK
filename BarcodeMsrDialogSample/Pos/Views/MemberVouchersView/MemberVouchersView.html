@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MemberVouchers</title>
+    <link href="MemberVouchersView.css" rel="stylesheet" title="Show Member Vouchers" />
+</head>
+<body>
+
+    <!-- Main page -->
+    <div class="memberVouchersView">
+        <div id="memberVouchersListView" class="pad20">
+        </div>
+    </div>
+
+    <div id="memberVoucherViewAppBar" data-bind="msPosAppBar: appBar">
+        <button data-bind="msPosAppBarCommand: applyVoucherCommand"></button>
+        <button data-bind="msPosAppBarCommand: cancelVoucherCommand"></button>
+    </div>
+</body>
+</html>
