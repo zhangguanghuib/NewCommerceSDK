@@ -53,9 +53,18 @@ export default class MemberVouchersViewModel extends KnockoutExtensionViewModelB
         //        this.currentMemberVouchers(result.data.result);
         //    });
 
+        let memberVoucher: Entities.MemberVoucher = new Entities.MemberVoucher();
+        memberVoucher.Id = 111;
+        memberVoucher.VoucherNumber = "VoucherNumber";
+        memberVoucher.VoucherCode = "Voucher code";
+        memberVoucher.VoucherName = "Voucher Name";
+        memberVoucher.ValidFrom = new Date();
+        memberVoucher.ExpiryDate = new Date();
 
-        this.isBusy(false);
+        this.currentMemberVouchers().push(memberVoucher);
 
+       // this.isBusy(false);
+        this._customViewControllerBaseState.isProcessing = false;
     }
 
     /**

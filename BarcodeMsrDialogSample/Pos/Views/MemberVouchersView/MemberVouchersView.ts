@@ -33,8 +33,7 @@ export default class MemberVouchersView extends NewView.CustomViewControllerBase
     public _isNoItemSelected: ko.Observable<boolean>;
     public dataList: Controls.IDataList<IMemberVoucher>;
 
-    constructor(context: NewView.ICustomViewControllerContext, state: NewView.ICustomViewControllerBaseState,
-        options?: IMemberVouchersExtensionViewModelOptions) {
+    constructor(context: NewView.ICustomViewControllerContext, options?: IMemberVouchersExtensionViewModelOptions) {
 
         let config: NewView.ICustomViewControllerConfiguration = {
             title: "Member Vouchers",
@@ -42,7 +41,7 @@ export default class MemberVouchersView extends NewView.CustomViewControllerBase
                 commands: [
                     {
                         name: "applyVoucherCommand",
-                        label: "continue",
+                        label: "Continue",
                         icon: NewView.Icons.Buy,
                         isVisible: true,
                         canExecute: true,
@@ -52,7 +51,7 @@ export default class MemberVouchersView extends NewView.CustomViewControllerBase
                     },
                     {
                         name: "Cancel",
-                        label: "continue",
+                        label: "Cancel",
                         icon: NewView.Icons.Cancel,
                         isVisible: true,
                         canExecute: true,
