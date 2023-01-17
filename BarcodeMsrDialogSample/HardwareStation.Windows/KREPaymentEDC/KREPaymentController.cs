@@ -134,7 +134,6 @@ namespace KREPaymentEDC.HardwareStation
         {
             KREPaymentEDCResponse edcResponse;
             KREPaymentEDCResponseEntity responseEntity = new KREPaymentEDCResponseEntity();
-
             try
             {
                 //components = new System.ComponentModel.Container();
@@ -143,7 +142,7 @@ namespace KREPaymentEDC.HardwareStation
                 //EdcClick(edcRequest.amount, edcRequest.isQris);
 
                 SerialPort serialPort = new SerialPort();
-                serialPort.PortName = "COM1";
+                serialPort.PortName = "COM3";
                 //波特率
                 serialPort.BaudRate = 9600;
                 //奇偶校验
@@ -163,20 +162,11 @@ namespace KREPaymentEDC.HardwareStation
                 //参数2：参数中从零开始的字节偏移量，从此处开始将字节复制到端口。
                 //参数3：要写入的字节数。 
                 serialPort.Write(edcRequest.amount);
-
-                while (responApproval == null)
+                responApproval = await CheckApprovalAsyn(serialPort).ConfigureAwait(false);
+                if (responApproval != null)
                 {
-                    await Task.Delay(1000);
-                    //ReceivedTextCimb(serialPort1.ReadExisting(), edcRequest.isQris);
-                    if (serialPort.BytesToRead > 0)
-                    {
-                        byte[] result = new byte[serialPort.BytesToRead];
-                        serialPort.Read(result, 0, serialPort.BytesToRead);
-                        responseEntity.IsSucceed = "true";
-                        responApproval = "Approved";
-                        responseEntity.ResponApproval = responApproval;
-                        break;
-                    }
+                    responseEntity.IsSucceed = "true";
+                    responseEntity.ResponApproval = responApproval;
                 }
 
                 edcResponse = new KREPaymentEDCResponse(responseEntity);
@@ -191,6 +181,24 @@ namespace KREPaymentEDC.HardwareStation
             }
 
             return await Task.FromResult(responApproval);
+        }
+
+        private async Task<string> CheckApprovalAsyn(SerialPort serialPort)
+        {
+            responApproval = null;
+            while (responApproval == null)
+            {
+                await Task.Delay(1000);
+                //ReceivedTextCimb(serialPort1.ReadExisting(), edcRequest.isQris);
+                if (serialPort.BytesToRead > 0)
+                {
+                    byte[] result = new byte[serialPort.BytesToRead];
+                    serialPort.Read(result, 0, serialPort.BytesToRead);
+                    responApproval = "Approved";
+                    break;
+                }
+            }
+            return responApproval;
         }
 
         public string getEdcNameBca()
