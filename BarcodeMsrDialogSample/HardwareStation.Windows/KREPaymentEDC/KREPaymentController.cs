@@ -175,10 +175,6 @@ namespace KREPaymentEDC.HardwareStation
             {
                 throw ex;
             }
-            finally
-            {
-                responApproval = null;
-            }
 
             return await Task.FromResult(responApproval);
         }
@@ -186,10 +182,13 @@ namespace KREPaymentEDC.HardwareStation
         private async Task<string> CheckApprovalAsyn(SerialPort serialPort)
         {
             responApproval = null;
+            int i = 0;
             while (responApproval == null)
             {
                 await Task.Delay(1000);
                 //ReceivedTextCimb(serialPort1.ReadExisting(), edcRequest.isQris);
+
+                //If there is some data from serial port to be read
                 if (serialPort.BytesToRead > 0)
                 {
                     byte[] result = new byte[serialPort.BytesToRead];
@@ -197,6 +196,14 @@ namespace KREPaymentEDC.HardwareStation
                     responApproval = "Approved";
                     break;
                 }
+
+                //Simulate timeout after 10 times try, set cancelled
+                if (i >= 10)
+                {
+                    responApproval = "Canceled";
+                    break;
+                }
+                ++i;
             }
             return responApproval;
         }
