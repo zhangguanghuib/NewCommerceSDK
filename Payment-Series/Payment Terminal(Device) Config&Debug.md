@@ -5,9 +5,12 @@ Steps：
     ![image](https://user-images.githubusercontent.com/14832260/213173399-4a1d7b6c-8426-492c-8738-e5ca96c93662.png)
  2. Attach the Hardware Profile to Register:
     ![image](https://user-images.githubusercontent.com/14832260/213174231-77f3d07d-05e7-4544-a8a9-e081dad8ebec.png)
+ 3. Find the Hardware station project from here 
+    https://github.com/zhangguanghuib/NewCommerceSDK/tree/release/v9.36/BarcodeMsrDialogSample/RetailSDK_HardwareStation
+    Make sure the below code is like below:
+    ![image](https://user-images.githubusercontent.com/14832260/213175167-9bf00c0a-8cb0-4d1b-85c3-e3325ef79ee2.png)
 
  
-
 
   
 
