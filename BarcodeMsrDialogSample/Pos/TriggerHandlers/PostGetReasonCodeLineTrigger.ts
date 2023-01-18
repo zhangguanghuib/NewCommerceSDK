@@ -9,7 +9,17 @@ export default class PostGetReasonCodeLineTrigger extends Triggers.PostGetReason
             .map((prop: ProxyEntities.CommerceProperty) => prop.Value)[0];
 
         if (!ObjectExtensions.isNullOrUndefined(prop)) {
-            if (prop.StringValue !== "" && StringExtensions.beginsWith(options.reasonCodeLine.Information, prop.StringValue, false)) {
+            let patternMatch: boolean = false;
+            if (!ObjectExtensions.isNullOrUndefined(prop.StringValue) && prop.StringValue !== "") {
+                let patterns: string[] = prop.StringValue.split('|');
+                patterns.forEach((pattern: string) => {
+                    if (StringExtensions.beginsWith(options.reasonCodeLine.Information, pattern, false)) {
+                        patternMatch = true;
+                    }
+                });
+            }
+            // Patter Match Found
+            if (patternMatch) {
                 return Promise.resolve({ canceled: false, data: options });
             } else {
                 return Promise.reject(new ClientEntities.ExtensionError("The input information does not match require pattern"));

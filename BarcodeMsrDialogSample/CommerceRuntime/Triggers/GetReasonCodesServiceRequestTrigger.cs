@@ -27,7 +27,8 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Triggers
             {
                 if (reasonCode.ReasonCodeId.Equals("MatchPrice"))
                 {
-                    reasonCode.ExtensionProperties.Add(new CommerceProperty("BeginWith", "LOY"));
+                    reasonCode.ExtensionProperties.Add(new CommerceProperty("BeginWith", "LOY|LYX"));
+                    //reasonCode.ExtensionProperties.Add(new CommerceProperty("BeginWith", "LYX"));
                 }
             }
 
