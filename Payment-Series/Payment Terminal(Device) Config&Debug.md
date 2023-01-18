@@ -14,6 +14,10 @@ Steps：
     Install the package
   5. Install Peripheral Simulator for Retail, cofigure a Credit Card like below:
      ![image](https://user-images.githubusercontent.com/14832260/213176446-c3f99e40-dd08-480f-9a1a-37cc41242597.png)
+  6. Log into Store Commerce App and paired the dedicated hardware station
+     ![image](https://user-images.githubusercontent.com/14832260/213176847-29d8e7ed-2f68-4a2b-affd-8042409f71c2.png)
+  7.  Add some product into card, and click pay card:
+
 
 
 
