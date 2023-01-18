@@ -29,9 +29,15 @@ Steps：
       ![image](https://user-images.githubusercontent.com/14832260/213178755-0b8f9200-ce20-4835-a57f-99063df6a62e.png)
    11. Go back to Store Commerce, you will see the check out successfully.
       ![image](https://user-images.githubusercontent.com/14832260/213178915-1d845a28-a521-4160-a622-813b39ede0d4.png)
+    
+   12.  During this process, you can attach Visual Studio to Store Commerce Process to debug the payment terminal code:
+        ![image](https://user-images.githubusercontent.com/14832260/213179716-367ccba7-574b-4ac4-a3c6-091ba5ccdbcf.png)
+        ![image](https://user-images.githubusercontent.com/14832260/213180049-82a7b12c-ff26-4702-b748-dc590a37dd05.png)
+        
+        You can see authorize payment and capture payment methods are both called
 
 
-
+   
 
 
 
