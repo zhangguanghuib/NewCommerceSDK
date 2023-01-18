@@ -9,6 +9,10 @@ Steps：
     https://github.com/zhangguanghuib/NewCommerceSDK/tree/release/v9.36/BarcodeMsrDialogSample/RetailSDK_HardwareStation <br/>
     Make sure the below code is like below:
     ![image](https://user-images.githubusercontent.com/14832260/213175167-9bf00c0a-8cb0-4d1b-85c3-e3325ef79ee2.png)
+ 4. Build the Store Commerce Installer project to generate the Store Commerce Extension Package Installer,
+    ![image](https://user-images.githubusercontent.com/14832260/213175669-de7e3cd6-3812-45ee-bffa-fb30bab68a47.png) 
+    Install the package
+
 
  
 
