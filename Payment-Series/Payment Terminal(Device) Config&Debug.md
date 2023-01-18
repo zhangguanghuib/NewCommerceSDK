@@ -12,6 +12,9 @@ Steps：
  4. Build the Store Commerce Installer project to generate the Store Commerce Extension Package Installer,
     ![image](https://user-images.githubusercontent.com/14832260/213175669-de7e3cd6-3812-45ee-bffa-fb30bab68a47.png) 
     Install the package
+  5. Install Peripheral Simulator for Retail, cofigure a Credit Card like below:
+     ![image](https://user-images.githubusercontent.com/14832260/213176446-c3f99e40-dd08-480f-9a1a-37cc41242597.png)
+
 
 
  
