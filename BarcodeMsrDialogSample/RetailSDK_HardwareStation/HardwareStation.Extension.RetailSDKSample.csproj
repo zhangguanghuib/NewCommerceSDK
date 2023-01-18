@@ -2,7 +2,7 @@
 <Import Project="..\CustomizationPackage.props" />
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <AssemblyName>$(AssemblyNamePrefix).Commerce.HardwareStation.Extension.RetailSDKSample</AssemblyName>
+    <AssemblyName>Commerce.HardwareStation.Extension.RetailSDKSample</AssemblyName>
     <RootNamespace>Contoso.Commerce.HardwareStation.Extension.RetailSDKSample</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

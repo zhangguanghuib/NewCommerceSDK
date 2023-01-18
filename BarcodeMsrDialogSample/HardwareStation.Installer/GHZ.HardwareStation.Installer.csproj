@@ -11,5 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HardwareStation.Windows\HardwareStation.Dev.Windows.csproj" />
+    <ProjectReference Include="..\RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj" />
   </ItemGroup>
 </Project>

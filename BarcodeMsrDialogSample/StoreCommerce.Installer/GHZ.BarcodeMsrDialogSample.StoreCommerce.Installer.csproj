@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CRT_RetailSDKSample\CRT_RetailSDKSample.csproj" />
     <ProjectReference Include="..\PosSamples\PosExtension.RetailSDKSample.csproj" />
+    <ProjectReference Include="..\RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj" />
   </ItemGroup>
 </Project>
