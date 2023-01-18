@@ -22,6 +22,15 @@ Steps：
       Please make sure it is Swipe Card
    8. CLick "Tender Payment" button, and it will show "Waiting for customer input":
       ![image](https://user-images.githubusercontent.com/14832260/213178063-bc240488-dc62-46ee-ae03-2c8509b3d80f.png)
+   9. Go to simulator, and swipe card:
+      ![image](https://user-images.githubusercontent.com/14832260/213178518-87de6808-df5f-48aa-9c62-a873fbb9945c.png)
+      
+   10. Sign your name and click "Enter":
+      ![image](https://user-images.githubusercontent.com/14832260/213178755-0b8f9200-ce20-4835-a57f-99063df6a62e.png)
+   11. Go back to Store Commerce, you will see the check out successfully.
+      ![image](https://user-images.githubusercontent.com/14832260/213178915-1d845a28-a521-4160-a622-813b39ede0d4.png)
+
+
 
 
 
