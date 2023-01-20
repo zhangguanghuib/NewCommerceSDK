@@ -1,39 +1,49 @@
-## This document will show how to config and debug the test connector for retail CPOS to help you to understand the how payment process is working, and also help you dive into how to develop your own payment connector.
+## This document will show how to config and debug payment terminal (device code) in Store Commerce App.
 
 Steps：
-1. Go to RetailSDK, find the PaymentSDK solution:
-   ![image](https://user-images.githubusercontent.com/14832260/207480907-64aff128-b7dd-4bfe-a842-b5150fbcec78.png)
-2. In order to differentiate the existing test connector and the one here,  I would change some places, changing the "Test Connector" to "Contoso Payment Connector"
-   ![image](https://user-images.githubusercontent.com/14832260/207481178-8b2027bd-9850-4fc5-b013-d070a554189f.png)
-   ![image](https://user-images.githubusercontent.com/14832260/207481283-0606e33d-09b8-4a0c-92bb-e1e16a37d98c.png)
-   ![image](https://user-images.githubusercontent.com/14832260/207481673-68bdea46-561d-4d6e-aaf0-7ae16900341e.png)  
-3. Create database for PaymentAcceptWeb
-   ![image](https://user-images.githubusercontent.com/14832260/207484524-106049af-c739-424c-afd8-19926a1d3487.png)
-    Change the database connection string:
-    ![image](https://user-images.githubusercontent.com/14832260/207483006-a5356ae3-f6f0-4401-9f9e-d0dd86b614c4.png)
+1. Create a POS Hardware Profile like below, set the PIN Pad Device Name as <b>MockPaymentTerminal</b>
+    ![image](https://user-images.githubusercontent.com/14832260/213173399-4a1d7b6c-8426-492c-8738-e5ca96c93662.png)
+ 2. Attach the Hardware Profile to Register:
+    ![image](https://user-images.githubusercontent.com/14832260/213174231-77f3d07d-05e7-4544-a8a9-e081dad8ebec.png)
+ 3. Find the Hardware station project from here, the code is totally from Retail SDK, I did not any changes.
+    https://github.com/zhangguanghuib/NewCommerceSDK/tree/release/v9.36/BarcodeMsrDialogSample/RetailSDK_HardwareStation <br/>
+    Make sure the below code is like below:
+    ![image](https://user-images.githubusercontent.com/14832260/213175167-9bf00c0a-8cb0-4d1b-85c3-e3325ef79ee2.png)
+ 4. Build the Store Commerce Installer project to generate the Store Commerce Extension Package Installer,
+    ![image](https://user-images.githubusercontent.com/14832260/213175669-de7e3cd6-3812-45ee-bffa-fb30bab68a47.png) 
+    Install the package
+  5. Install Peripheral Simulator for Retail, cofigure a Credit Card like below:
+     ![image](https://user-images.githubusercontent.com/14832260/213176446-c3f99e40-dd08-480f-9a1a-37cc41242597.png)
+  6. Log into Store Commerce App and paired the dedicated hardware station
+     ![image](https://user-images.githubusercontent.com/14832260/213176847-29d8e7ed-2f68-4a2b-affd-8042409f71c2.png)
+  7.  Add some product into card, and click pay card, and go to payment view:
+      ![image](https://user-images.githubusercontent.com/14832260/213177583-b602487f-f263-497b-b37b-b3bbb3cbc28c.png)
+      
+      Please make sure it is Swipe Card
+   8. CLick "Tender Payment" button, and it will show "Waiting for customer input":
+      ![image](https://user-images.githubusercontent.com/14832260/213178063-bc240488-dc62-46ee-ae03-2c8509b3d80f.png)
+   9. Go to simulator, and swipe card:
+      ![image](https://user-images.githubusercontent.com/14832260/213178518-87de6808-df5f-48aa-9c62-a873fbb9945c.png)
+      
+   10. Sign your name and click "Enter":
+      ![image](https://user-images.githubusercontent.com/14832260/213178755-0b8f9200-ce20-4835-a57f-99063df6a62e.png)
+   11. Go back to Store Commerce, you will see the check out successfully.
+      ![image](https://user-images.githubusercontent.com/14832260/213178915-1d845a28-a521-4160-a622-813b39ede0d4.png)
+    
+   12.  During this process, you can attach Visual Studio to Store Commerce Process to debug the payment terminal code:
+        ![image](https://user-images.githubusercontent.com/14832260/213179716-367ccba7-574b-4ac4-a3c6-091ba5ccdbcf.png)
+        ![image](https://user-images.githubusercontent.com/14832260/213180049-82a7b12c-ff26-4702-b748-dc590a37dd05.png)
+        
+        You can see authorize payment and capture payment methods are both called
 
-4. Copy to AOS:
-   Copy the dll and pdb to C:\AOSService\PackagesLocalDirectory\Bin\Connectors 
-   ![image](https://user-images.githubusercontent.com/14832260/207484722-30858c7c-189e-4d5a-8181-1e9d060f438d.png)
+
    
-   Also copy them into the below folder:
-   ![image](https://user-images.githubusercontent.com/14832260/207484690-57a2db62-a3d1-457d-8b63-12e93a67e6be.png)
-   
- 5. Copy the dll to these below locations:
-     C:\RetailServer\webroot\bin
-     C:\RetailServer\webroot\bin\Connectors
-     C:\RetailServer\webroot\bin\Ext
- 6. Go to CPOS,  web.config, add the below:
-    ![image](https://user-images.githubusercontent.com/14832260/207490788-59fd1ecc-aa00-4a2c-9bbe-e475ee9d2fac.png)
- 7.  Create hardware profile as below:
-     ![image](https://user-images.githubusercontent.com/14832260/207491105-72100eb0-7c2b-4f4e-90ed-434e36c8e410.png)
-  8. Attach the hardware profile to register, run 1090 job
-  9. Go to CPOS, make a transaction and pay card:
-     ![image](https://user-images.githubusercontent.com/14832260/207491720-460bbc21-793f-4050-b6ce-988c7b74332c.png)
-     ![image](https://user-images.githubusercontent.com/14832260/207491960-c4c18e11-b67d-4ea5-86d0-d671da3cba53.png)
-     ![image](https://user-images.githubusercontent.com/14832260/207492077-bcd0ffa5-9270-49a5-988e-8df5da44997c.png)
 
 
+
+
+
+ 
 
   
 
