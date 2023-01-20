@@ -101,6 +101,11 @@
               "name": "KREPaymentComand",
               "description": "KREPaymentComand",
               "modulePath": "ViewExtensions/Payment/KREPaymentComand"
+            },
+            {
+              "name": "PaymentViewUpdCommand",
+              "description": "PaymentViewUpdCommand",
+              "modulePath": "ViewExtensions/Payment/PaymentViewUpdCommand"
             }
           ]
         },
@@ -135,6 +140,10 @@
         {
           "triggerType": "PostGetReasonCodeLine",
           "modulePath": "TriggerHandlers/PostGetReasonCodeLineTrigger"
+        },
+        {
+          "triggerType": "PostPayment",
+          "modulePath": "TriggerHandlers/PostPaymentTrigger"
         }
       ],
       "requestHandlers": [
