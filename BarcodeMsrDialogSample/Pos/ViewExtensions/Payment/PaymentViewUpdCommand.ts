@@ -22,11 +22,18 @@ export default class PaymentViewUpdCommand extends PaymentView.PaymentViewExtens
 
     protected init(state: PaymentView.IPaymentViewExtensionCommandState): void {
 
-        let numPadDiv: HTMLDivElement = document.querySelector('[data-ax-bubble="paymentView_totalAmountNumpad"]') as HTMLDivElement;
-        if (!ObjectExtensions.isNullOrUndefined(numPadDiv)) {
-            //(numPadDiv as any).disabled = true;
+        let numPadDivs: HTMLCollectionOf<Element> = document.getElementsByClassName("numpad-control-buttons");
+        if (!ObjectExtensions.isNullOrUndefined(numPadDivs) && numPadDivs.length > 0) {
+            let numPadDiv = numPadDivs[0] as any;
+            //navDiv.disabled = true;
             numPadDiv.style.visibility = "hidden";
         }
+
+        //let numPadDiv: HTMLDivElement = document.querySelector('[data-ax-bubble="paymentView_totalAmountNumpad"]') as HTMLDivElement;
+        //if (!ObjectExtensions.isNullOrUndefined(numPadDiv)) {
+        //    //(numPadDiv as any).disabled = true;
+        //    numPadDiv.style.visibility = "hidden";
+        //}
 
         let navDivs: HTMLCollectionOf<Element> = document.getElementsByClassName("navDiv");
         if (!ObjectExtensions.isNullOrUndefined(navDivs)  && navDivs.length > 0) {
