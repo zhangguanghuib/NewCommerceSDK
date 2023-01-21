@@ -14,81 +14,44 @@
   ],
   "components": {
     "resources": {
-      "supportedUICultures": [ "en-US" ],
+      "supportedUICultures": [ "de", "en-US", "fr" ],
       "fallbackUICulture": "en-US",
       "culturesDirectoryPath": "Resources/Strings",
       "stringResourcesFileName": "resources.resjson"
     },
     "create": {
-      "templatedDialogs": [
+      "operations": [
         {
-          "name": "Barcode MSR Dialog",
-          "description": "A sample dialog showing how to listen to barcode scanner and MSR events",
-          "htmlPath": "Views/BarcodeMsrDialog.html",
-          "modulePath": "Views/BarcodeMsrDialog"
+          "operationId": "10002",
+          "operationRequestFactoryPath": "WTRPayment/Operations/Cards/CreditCardOperationRequestFactory",
+          "operationRequestHandlerPath": "WTRPayment/Operations/Cards/CreditCardOperationRequestHandler"
+        },
+        {
+          "operationId": "10003",
+          "operationRequestFactoryPath": "WTRPayment/Operations/Cards/NETSOperationRequestFactory",
+          "operationRequestHandlerPath": "WTRPayment/Operations/Cards/NETSOperationRequestHandler"
         }
       ],
       "views": [
         {
-          "pageName": "PromotionsView",
-          "phonePageName": "PromotionsViewPhone",
-          "title": "Promotions",
-          "viewControllerPath": "PromotionsSample/Views/PromotionsView",
-          "viewDirectory": "PromotionsSample/Views/"
+          "title": "PaymentExtensionView",
+          "pageName": "PaymentExtensionView",
+          "phonePageName": "PaymentExtensionPhoneView",
+          "viewDirectory": "WTRPayment/Views/",
+          "viewControllerPath": "WTRPayment/Views/PaymentExtensionView"
         }
       ]
     },
     "extend": {
-      "views": {
-        "CartView": {
-          "viewController": { "modulePath": "CustomControlExtensions/Cart/CartViewController" },
-          "controlsConfig": {
-            "customControls": [
-              {
-                "controlName": "lineDetails",
-                "htmlPath": "CustomControlExtensions/Cart/LineDetailsCustomControl.html",
-                "modulePath": "CustomControlExtensions/Cart/LineDetailsCustomControl"
-              }
-            ]
-          }
-        },
-        "FulfillmentLineView": {
-          "appBarCommands": [
-            {
-              "name": "Scan and Select Product Button",
-              "description": "A sample extension command that shows a dialog to scan a product to be selected on the fulfillent lines page",
-              "modulePath": "ViewExtensions/FulfillmentLineView/FulfillmentLineCommand"
-            }
-          ]
-        },
-        "PaymentView": {
-          "appBarCommands": [
-            {
-              "name": "KREPaymentEDCCommand",
-              "description": "KREPaymentEDCCommand",
-              "modulePath": "ViewExtensions/Payment/KREPaymentEDCCommand"
-            }
-          ]
-        },
-        "SearchView": {
-          "customerAppBarCommands": [
-            {
-              "name": "NewMemberSignupCommand",
-              "description": "NewMemberSignupCommand",
-              "modulePath": "ViewExtensions/Search/NewMemberSignupCommand"
-            }
-          ]
-        }
-      },
-      "triggers": [
-        {
-          "triggerType": "PreOperation",
-          "modulePath": "TriggerHandlers/FiscalRegisterPreCloseShiftTrigger"
-        }
-      ],
       "requestHandlers": [
         {
-          "modulePath": "RequestHandlers/GetBankBagNumberClientRequestHandlerExt"
+          "modulePath": "WTRPayment/Peripherals/Handlers/GetPaymentCardTypeByBinRangeClientRequestHandlerExt"
+        }
+      ],
+      "triggers": [
+        {
+          "triggerType": "PreVoidPayment",
+          "modulePath": "WTRPayment/TriggerHandlers/PreVoidPaymentTrigger"
         }
       ]
     }
