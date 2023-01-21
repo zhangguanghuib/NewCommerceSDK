@@ -96,15 +96,16 @@ export default class KREPaymentComand extends PaymentView.PaymentViewExtensionCo
      * Executes the command.
      */
     protected execute(): void {
+        this.isProcessing = true;
         let hardwareStationDeviceActionRequest: HardwareStationDeviceActionRequest<HardwareStationDeviceActionResponse> =
-            new HardwareStationDeviceActionRequest("PAYMENTEDC", "EdcController", {});
+            new HardwareStationDeviceActionRequest("KREPAYMENTEDC", "EdcControllerV2", { amount: "30", isQris: false });
         this.context.runtime.executeAsync(hardwareStationDeviceActionRequest).then
             ((result) => {
                 MessageDialog.show(this.context, "PAYMENTEDC - EdcController ", "Message from HWS: " + result.data.response);
-                //this.isProcessing = false;
+                this.isProcessing = false;
             }).catch((err) => {
                 MessageDialog.show(this.context, "PAYMENTEDC - EdcController ", "Failure in executing HardwareStation request:" + err);
-                //this.isProcessing = false;
+                this.isProcessing = false;
                 throw err;
             });
     }

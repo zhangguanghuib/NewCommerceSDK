@@ -132,4 +132,14 @@ namespace GHZ.BarcodeMsrDialogSample.CommerceRuntime.Handlers
             return (await context.ExecuteAsync<UpdateCartServiceResponse>(serviceRequest).ConfigureAwait(false)).Cart;
         }
     }
+
+    internal class TransferCartResponse : Response
+    {
+        private Cart cart;
+
+        public TransferCartResponse(Cart cart)
+        {
+            this.cart = cart;
+        }
+    }
 }

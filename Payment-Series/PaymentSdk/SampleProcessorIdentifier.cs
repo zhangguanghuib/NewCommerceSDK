@@ -1,27 +1,56 @@
-ï»¿namespace Microsoft.Dynamics
+/*
+SAMPLE CODE NOTICE
+
+THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
+OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
+THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
+NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
+*/
+namespace Microsoft.Dynamics
 {
     namespace Retail.SampleConnector.Portable
     {
         using Microsoft.Dynamics.Retail.PaymentSDK.Portable;
 
+        /// <summary>
+        /// Identification information of the Sample payment processor.
+        /// </summary>
         public class SampleProcessorIdentifier : IProcessorIdentifier
         {
+            /// <summary>
+            /// Gets the name of payment connector.
+            /// </summary>
             public string Name
             {
-                get { return "TestConnector"; }
+                get { return "ContosoTestConnector"; }
             }
 
+            /// <summary>
+            /// Gets the copyright text for payment connector.
+            /// </summary>
             public string Copyright
             {
-                get { return "Copyright @ Microsoft 2022"; }
+                get { return "Copyright © Microsoft 2015"; }
             }
 
-            private bool PrimaryProcessor
+            /// <summary>
+            /// Gets or sets a value indicating whether [primary processor].
+            /// </summary>
+            /// <remarks>In the case where the processor drives a customer facing device the primary processor should have priority
+            /// (over other processors).</remarks>
+            /// <value>
+            ///   <c>True</c> if [primary processor]; otherwise, <c>false</c>.
+            /// </value>
+            public bool PrimaryProcessor
             {
                 get;
                 set;
             }
 
+            /// <summary>
+            /// Gets the supported country codes.
+            /// Processor operates in the following country codes: ISO 3166-1 alpha-2.
+            /// </summary>
             public ArrayList SupportedCountries
             {
                 get

@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.BarcodeMsrDialogSample.StoreCommerce.Installer", "StoreCommerce.Installer\GHZ.BarcodeMsrDialogSample.StoreCommerce.Installer.csproj", "{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHZ.BarcodeMsrDialogSample.HardwareStation.Windows", "GHZ.BarcodeMsrDialogSample.HardwareStation.Windows\GHZ.BarcodeMsrDialogSample.HardwareStation.Windows.csproj", "{9485B189-4E42-4653-9689-F5632937C7C7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosExtension.RetailSDKSample", "PosSamples\PosExtension.RetailSDKSample.csproj", "{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRT_RetailSDKSample", "CRT_RetailSDKSample\CRT_RetailSDKSample.csproj", "{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}"
@@ -22,6 +20,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentSdk.Connector.Sample", "PaymentSdk.Connector.Sample\PaymentSdk.Connector.Sample.csproj", "{FB6483ED-2F4B-4CB4-84A9-EE1D4BEFD10A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Extension.RetailSDKSample", "RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj", "{724F4BDE-EBA5-45DC-9022-83BE2344E076}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRT_Wingtai", "CRT_Wingtai\CRT_Wingtai.csproj", "{AEC89F25-C4D9-4FA3-8457-5FB6974BF947}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Dev.Windows", "HardwareStation.Windows\HardwareStation.Dev.Windows.csproj", "{449B3854-A244-4332-8192-55DB8698A645}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.HardwareStation.Installer", "HardwareStation.Installer\GHZ.HardwareStation.Installer.csproj", "{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +53,6 @@ Global
 		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9485B189-4E42-4653-9689-F5632937C7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9485B189-4E42-4653-9689-F5632937C7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9485B189-4E42-4653-9689-F5632937C7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9485B189-4E42-4653-9689-F5632937C7C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12BE54F-19EF-4CBD-BDB8-1DDEEE441E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +69,18 @@ Global
 		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC89F25-C4D9-4FA3-8457-5FB6974BF947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC89F25-C4D9-4FA3-8457-5FB6974BF947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC89F25-C4D9-4FA3-8457-5FB6974BF947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC89F25-C4D9-4FA3-8457-5FB6974BF947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449B3854-A244-4332-8192-55DB8698A645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449B3854-A244-4332-8192-55DB8698A645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449B3854-A244-4332-8192-55DB8698A645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449B3854-A244-4332-8192-55DB8698A645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

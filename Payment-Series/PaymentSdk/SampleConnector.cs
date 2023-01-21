@@ -134,6 +134,15 @@ namespace Microsoft.Dynamics
                     return PaymentUtilities.CreateAndLogResponseForReturn(methodName, this.Name, Platform, locale: request == null ? null : request.Locale, properties: null, errors: ex.Errors);
                 }
 
+                try
+                {
+                    Contoso.Retail.SampleConnector.Portable.HeartLandUntils.SendMultiuseTokenRequest(); ;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
                 // Validate merchant account
                 List<PaymentError> errors = new List<PaymentError>();
                 ValidateMerchantProperties(authorizeRequest, errors);
@@ -2000,6 +2009,8 @@ namespace Microsoft.Dynamics
             }
 
             #endregion
+
+           
         }
     }
 }

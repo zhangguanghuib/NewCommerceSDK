@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\CustomizationPackage.props" />
+
+	<PropertyGroup>
+		<RootNamespace>KREPaymentEDC.HardwareStation.Peripherals.PaymentDevice</RootNamespace>
+		<TargetFramework>net461</TargetFramework>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Dynamics.Commerce.HardwareStation.PeripheralRequests" Version="9.38.22291.13" />
+		<PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+		<PackageReference Include="System.IO.Ports" Version="6.0.0" />
+	</ItemGroup>
+</Project>

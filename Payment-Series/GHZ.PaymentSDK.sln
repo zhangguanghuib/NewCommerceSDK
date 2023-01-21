@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentSDK.HardwareStat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.PaymentSDK.StoreCommerce.Installer", "StoreCommerce.Installer\GHZ.PaymentSDK.StoreCommerce.Installer.csproj", "{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentSdk.Connector.Sample", "PaymentSdk\PaymentSdk.Connector.Sample.csproj", "{FF938420-86F6-4A27-9462-A395D9F43782}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentSdk.ContosoTestConnector.Sample", "PaymentSdk\PaymentSdk.ContosoTestConnector.Sample.csproj", "{FF938420-86F6-4A27-9462-A395D9F43782}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentSdk.Connector.Sample.PaymentAcceptWeb", "Connector.Sample.PaymentAcceptWeb\PaymentSdk.Connector.Sample.PaymentAcceptWeb.csproj", "{6548FDBA-90ED-4A97-ABFB-F045C5023313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeartLand", "HeartLand\HeartLand.csproj", "{40768EE3-2DEE-4C22-8D40-A8705B95FF77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF938420-86F6-4A27-9462-A395D9F43782}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{6548FDBA-90ED-4A97-ABFB-F045C5023313}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{40768EE3-2DEE-4C22-8D40-A8705B95FF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40768EE3-2DEE-4C22-8D40-A8705B95FF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40768EE3-2DEE-4C22-8D40-A8705B95FF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40768EE3-2DEE-4C22-8D40-A8705B95FF77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
