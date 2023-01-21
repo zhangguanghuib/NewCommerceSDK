@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Dev.Windows
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.HardwareStation.Installer", "HardwareStation.Installer\GHZ.HardwareStation.Installer.csproj", "{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosExtensions.WingTai", "Pos.WingTai\PosExtensions.WingTai.csproj", "{15E3DC97-1340-4DC4-99E9-F736309CB70D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Wingtai", "HardwareStation.Wingtai\HardwareStation.Wingtai.csproj", "{67FA0769-1C55-410C-9510-E92C13A5AC5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

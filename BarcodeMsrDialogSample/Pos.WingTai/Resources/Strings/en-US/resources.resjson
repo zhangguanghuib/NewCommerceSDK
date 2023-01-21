@@ -1,0 +1,80 @@
+﻿//======================================================================================================
+//======================================= Promotions Sample comment. ===================================
+//======================================================================================================
+{
+    //======================== Promotions View extensions strings. ========================
+    "string_0"                                      : "Promotions",
+    "_string_0.comment"                             : "Promotions title label without product name.",
+
+    "string_1"                                      : "Promotions: {0}",
+    "_string_1.comment"                             : "Promotions title label with product name.",
+
+    "string_2"                                      : "Error:\n{0}",
+    "_string_2.comment"                             : "Error message display string.",
+
+    //======================== Promotions View Tab names.  ========================
+    "string_5"                                      : "Available",
+    "_string_5.comment"                             : "Available tab name.",
+
+    "string_6"                                      : "Upcoming",
+    "_string_6.comment"                             : "Upcoming tab name.",
+
+    //======================== Promotions View Data List Column names.  ========================
+    "string_10"                                     : "Discount",
+    "_string_10.comment"                            : "Column name for discount code.",
+
+    "string_11"                                     : "Name",
+    "_string_11.comment"                            : "Column name for discount name.",
+
+    "string_12"                                     : "Start date",
+    "_string_12.comment"                            : "Column name for start date.", 
+
+    "string_13"                                     : "End date",
+    "_string_13.comment"                            : "Column name for end date.", 
+
+    "string_14"                                     : "Coupon required",
+    "_string_14.comment"                            : "Column name for whether a coupon is required.",
+
+    //======================== Promotions View App Bar Commands.  ========================
+    "string_20"                                     : "Discounts",
+    "_string_20.comment"                            : "App bar command label to show preset discounts.",
+
+    "string_21"                                     : "Add to sale",
+    "_string_21.comment"                            : "App bar command label to add the product to the sale.",
+
+    "string_22"                                     : "Sell now",
+    "_string_22.comment"                            : "App bar command label to add the product to the sale and navigate to the cart page.",
+
+    //======================== Promotions View Discount Menu Commands and Messages.  ========================
+    "string_25"                                     : "Apply 5% total discount",
+    "_string_25.comment"                            : "Menu item to apply 5% total discount to the transaction.",
+
+    "string_26"                                     : "Apply 10% total discount",
+    "_string_26.comment"                            : "Menu item to apply 10% total discount to the transaction.",
+
+    "string_27"                                     : "Total discount applied",
+    "_string_27.comment"                            : "Title for message dialog showing total discount applied.",
+
+    "string_28"                                     : "{0}% total discount has been applied to the cart.",
+    "_string_28.comment"                            : "Message to show when setting the cart to total discount percent has been successful.",
+
+	//======================== Promotions Error Messages.  ========================
+    "string_30"                                     : "Unable add item to the cart",
+    "_string_30.comment"                            : "Title of error to show when a product or catalog is not specified and attempting to add an item to the cart.",
+
+    "string_31"                                     : "A catalog or a product was not configured. Please go back and select a different product and try again.",
+    "_string_31.comment"                            : "Error message to show when a product or catalog is not specified and attempting to add an item to the cart.",
+
+	//======================== Show Promotions Command.  ========================
+    "string_40"                                     : "Promotions",
+    "_string_40.comment"                            : "Show promotions button label.",
+
+	//======================== Message Dialog Buttons.  ========================
+    "string_50"                                     : "OK",
+    "_string_50.comment"                            : "OK button label.",
+
+	//======================== Common Message Dialog Titles.  ========================
+    "string_70"                                     : "Error",
+    "_string_70.comment"                            : "Title for an error message dialog."
+
+}
