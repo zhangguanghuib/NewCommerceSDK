@@ -6,10 +6,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Create\**" />
+    <Compile Remove="CustomControlExtensions\**" />
     <Compile Remove="CustomEntities\**" />
+    <Compile Remove="RequestHandlers\**" />
+    <Compile Remove="TriggerHandlers\**" />
+    <Compile Remove="ViewExtensions\**" />
+    <Compile Remove="Views\**" />
+    <Content Remove="Create\**" />
+    <Content Remove="CustomControlExtensions\**" />
     <Content Remove="CustomEntities\**" />
+    <Content Remove="RequestHandlers\**" />
+    <Content Remove="TriggerHandlers\**" />
+    <Content Remove="ViewExtensions\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Create\**" />
+    <EmbeddedResource Remove="CustomControlExtensions\**" />
     <EmbeddedResource Remove="CustomEntities\**" />
+    <EmbeddedResource Remove="RequestHandlers\**" />
+    <EmbeddedResource Remove="TriggerHandlers\**" />
+    <EmbeddedResource Remove="ViewExtensions\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <TypeScriptCompile Remove="Create\**" />
+    <TypeScriptCompile Remove="CustomControlExtensions\**" />
     <TypeScriptCompile Remove="CustomEntities\**" />
+    <TypeScriptCompile Remove="RequestHandlers\**" />
+    <TypeScriptCompile Remove="TriggerHandlers\**" />
+    <TypeScriptCompile Remove="ViewExtensions\**" />
+    <TypeScriptCompile Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,14 +51,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Create\" />
-    <Folder Include="CustomControlExtensions\" />
     <Folder Include="DataService\" />
     <Folder Include="Libraries\" />
-    <Folder Include="RequestHandlers\" />
-    <Folder Include="TriggerHandlers\" />
-    <Folder Include="ViewExtensions\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
