@@ -71,11 +71,12 @@ namespace WTR.HWExt.PaymentTerminal
             //float amount = float.Parse(_request.Amount) * 100; //To convert to right amount to be charged
 
             int amount = Convert.ToInt32(float.Parse(_request.Amount) * 100);
+
             if (amount > 0)
                 id.SendSaleCommand(_request.COMPort, amount.ToString(), _request.IsContactLess);
             else
                 id.SendRefundCommand(_request.COMPort, amount.ToString());
-
+            /*
             WTR_PaymentTerminalResponse resp = new WTR_PaymentTerminalResponse();
             resp.ApprovalCode = id.ApprovalCode;
             resp.MerchantId = id.MerchantID;
@@ -97,7 +98,32 @@ namespace WTR.HWExt.PaymentTerminal
             resp.InvoiceNumber = id.InvoiceNumber;
             resp.ExpiryDate = id.ExpDate;
             // WTR RAD
-            resp.ResponseText = id.ResponseMessage;
+            resp.ResponseText = id.ResponseMessage;*/
+
+            id.ResponseCode = "00";
+
+            WTR_PaymentTerminalResponse resp = new WTR_PaymentTerminalResponse();
+            resp.ApprovalCode = "111111";// id.ApprovalCode;
+            resp.MerchantId = "merchand11";//id.MerchantID;
+            resp.TerminalID = "terminal11";//id.TerminalID;
+            resp.ResponseCode = "00";// id.ResponseCode;
+            resp.ResponseMessage1 = "";// id.ResponseMessage;
+            resp.RetrievalRefNumber = "";// id.RetrievalReferenceNumber;
+            resp.BatchNumber = "";// id.BatchNumber;
+            resp.CardNumberMasked = "";// (id.CardNumberMasked != null ? id.CardNumberMasked.Replace('X', '*') : null);
+            resp.TransactionAmount = _request.Amount;// id.Amount;
+            resp.TransactionDate = DateTimeOffset.Now.ToLocalTime().ToString();//id.TransactionDate;
+            resp.CardType = "V"; //id.CardType;
+            resp.EntryMode = "";// id.EntryMode;
+            resp.CardLabel = "Visa Card";//id.CardLabel;
+            resp.TVRTSI = ""; //id.TVRTSI;
+            resp.AID = "";// id.AID;
+            resp.ApplicationLabel = "";// id.ApplicationLabel;
+            resp.TC = "";//id.TC;
+            resp.InvoiceNumber = "Inv001";// id.InvoiceNumber;
+            resp.ExpiryDate = DateTime.Now.AddYears(3).ToLocalTime().ToShortDateString();//id.ExpDate;
+            // WTR RAD
+            resp.ResponseText = "";//id.ResponseMessage;
 
             if (id.ResponseCode == null && id.ResponseMessage == null)
             {

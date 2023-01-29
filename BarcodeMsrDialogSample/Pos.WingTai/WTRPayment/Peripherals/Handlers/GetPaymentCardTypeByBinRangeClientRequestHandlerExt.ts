@@ -26,7 +26,7 @@ export default class GetPaymentCardTypeByBinRangeClientRequestHandlerExt extends
         Promise<ClientEntities.ICancelableDataResult<GetPaymentCardTypeByBinRangeClientResponse>> {
         let req: NECPayment.GetCardTypesRequest<NECPayment.GetCardTypesResponse> = new NECPayment.GetCardTypesRequest();
         //req.
-        return this.context.runtime.executeAsync(req).then((res) => {
+        return this.context.runtime.executeAsync(req).then((res):any => {
             return res;
         });
     }

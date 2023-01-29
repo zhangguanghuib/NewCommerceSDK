@@ -537,7 +537,7 @@ namespace WTR.HWExt.Peripherals
                         inRecvCount++;
                         //lgPortStat = DBSTerminal.RecvResponse(stComSelected, out stResponse, RECV_INTERVAL);
                         lgPortStat = 0;
-                        stResponse = "R923";
+                        stResponse = "R600390200570211020201";
                         if (lgPortStat == 0)
                         {
                             if (String.Compare(stResponse, 0, "R923", 0, 4) == 0 || String.Compare(stResponse, 0, "R971", 0, 4) == 0)
@@ -678,10 +678,9 @@ namespace WTR.HWExt.Peripherals
                                 string Amount;
                              */
 
-
-
-
-
+                            //Comment out for test purpose:
+                            //==========================================================================================
+                            /*
                             if (getTagValue(stResponse, 2, out stValue) == 0)
                             {
                                 // card number
@@ -942,7 +941,9 @@ namespace WTR.HWExt.Peripherals
                             stReceiptValue += "\r\n";
 
                             Log(stReceiptValue);
-                            SetControlPropertyThreadSafe(textBoxReceipt, "Text", stReceiptValue);
+                            SetControlPropertyThreadSafe(textBoxReceipt, "Text", stReceiptValue);*/
+                            //End of comment
+                            //======================================================================================
                         }
                         else
                         {
