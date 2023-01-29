@@ -21,99 +21,99 @@
 <body>
     <div class="paymentExtensionView">
         <!-- Progress ring -->
-        <div data-bind="msPosLoader: loader"></div>
+       <!-- <div data-bind="msPosLoader: loader"></div>-->
 
         <!-- Page header -->
-        <div data-bind="msPosHeaderSplitView: headerSplitView">
+        <!--<div data-bind="msPosHeaderSplitView: headerSplitView">-->
+        <div>
 
+                <!-- Main content -->
+                <section class="section main row grow marginLeft20 marginRight20 margin0 pad0 height100Percent">
+                    <!-- Payment amount due area -->
+                    <div class="row no-shrink maxWidth640">
+                        <!-- Amount due and Eligible amount area -->
+                        <div class="col minWidth252">
+                            <!-- Amount Due-->
+                            <div data-bind="sectionWrapper: {headerResx: 'string_1817' }">
+                                <div class="padTop12">
+                                    <a class="accent h1" data-bind="text: viewModel.fullAmountTextCurrency">
+                                    </a>
+                                </div>
+                            </div>
 
-            <!-- Main content -->
-            <section class="section main row grow marginLeft20 marginRight20 margin0 pad0 height100Percent">
-                <!-- Payment amount due area -->
-                <div class="row no-shrink maxWidth640">
-                    <!-- Amount due and Eligible amount area -->
-                    <div class="col minWidth252">
-                        <!-- Amount Due-->
-                        <div data-bind="sectionWrapper: {headerResx: 'string_1817' }">
-                            <div class="padTop12">
-                                <a class="accent h1" data-bind="text: viewModel.fullAmountTextCurrency">
-                                </a>
+                            <!-- Payable Amount-->
+                            <div class="padTop20" data-bind="sectionWrapper: {headerResx: 'Amount tendered' }">
+                                <div class="padTop12">
+
+                                    <a class="accent h1" data-bind="text: maxAmountTenderedCurrency">
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Payable Amount-->
-                        <div class="padTop20" data-bind="sectionWrapper: {headerResx: 'Amount tendered' }">
-                            <div class="padTop12">
+                        <div class="gutter40x40"></div>
 
-                                <a class="accent h1" data-bind="text: maxAmountTenderedCurrency">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- Payment amount input area -->
+                        <div class="col no-shrink">
+                            <!-- Section header -->
+                            <div class="ellipsis" data-bind="sectionWrapper: {headerResx: numpadHeaderLabel}">
 
-                    <div class="gutter40x40"></div>
-
-                    <!-- Payment amount input area -->
-                    <div class="col no-shrink">
-                        <!-- Section header -->
-                        <div class="ellipsis" data-bind="sectionWrapper: {headerResx: numpadHeaderLabel}">
-
-                            <!-- Numpad input area -->
-                            <div class="padTop12 width320">
-                                <div data-bind="currencyNumpad: {
+                                <!-- Numpad input area -->
+                                <div class="padTop12 width320">
+                                    <div data-bind="currencyNumpad: {
                                          inputDataBinding: { resx: { ariaLabel: 'string_1107' } },
                                          onEnter: onNumPadEnterEventHandler,
                                          value: viewModel.numPadAmountText,
                                          decimalPrecision: Commerce.ApplicationContext.Instance.currenciesMap.getItem(Commerce.ApplicationContext.Instance.deviceConfiguration.Currency).NumberOfDecimals,
                                          numPadInputSource: numPadInputBroker
                                       }">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="gutter40x40"></div>
+                    <div class="gutter40x40"></div>
 
-                <div class="col grow">
-                 
-                    <div class="ellipsis" data-bind="sectionWrapper: {headerResx: 'string_1102' }">
-                        <div class="padTop12"></div>
+                    <div class="col grow">
 
-                        <h2 class="marginTop8 marginBottom8" data-bind="text: 'Manual entry'"></h2>
+                        <div class="ellipsis" data-bind="sectionWrapper: {headerResx: 'string_1102' }">
+                            <div class="padTop12"></div>
 
-                        <label class="ellipsis" for="inputManualApprovalCode">Approval Code</label>
-                        <input id="inputManualApprovalCode" type="number" class="textLeft width320" data-bind="value: WTR_ManualEntApprovalCode" maxLength="6" required="required" />
-                        <br />
-                        <label class="ellipsis" for="inputManualLast4Digits">Last 4 Digits</label>
-                        <input id="inputManualLast4Digits" type="number" class="textLeft width320" data-bind="value: WTR_ManualEntLast4Digits,attr: {'required': isLast4DigitsRequired}" maxLength="4" />
-                        <br />
-                        <button id ="btnWTR_ManualEnter" class="primaryButton" data-bind="click: WTR_ManualEnter, resx: { textContent: 'Manual Tender Pay' },
+                            <h2 class="marginTop8 marginBottom8" data-bind="text: 'Manual entry'"></h2>
+
+                            <label class="ellipsis" for="inputManualApprovalCode">Approval Code</label>
+                            <input id="inputManualApprovalCode" type="number" class="textLeft width320" data-bind="value: WTR_ManualEntApprovalCode" maxLength="6" required="required" />
+                            <br />
+                            <label class="ellipsis" for="inputManualLast4Digits">Last 4 Digits</label>
+                            <input id="inputManualLast4Digits" type="number" class="textLeft width320" data-bind="value: WTR_ManualEntLast4Digits,attr: {'required': isLast4DigitsRequired}" maxLength="4" />
+                            <br />
+                            <button id="btnWTR_ManualEnter" class="primaryButton" data-bind="click: WTR_ManualEnter, resx: { textContent: 'Manual Tender Pay' },
                                      axBubbleAttr: 'paymentView_tenderPaymentAppBar'">
-                            Manual Tender Payment
-                        </button>
+                                Manual Tender Payment
+                            </button>
 
-                        <div class="padTop20">
+                            <div class="padTop20">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
 
 
 
-        <div class="gutter40x40"></div>
+            <div class="gutter40x40"></div>
 
 
 
-        <!-- Bottom app bar -->
-        <div id="commandAppBar" data-bind="appBar: {}">
+            <!-- Bottom app bar -->
+            <!--<div id="commandAppBar" data-bind="appBar: {}">
 
-            <button data-bind="appBarCommand: {
+                <button data-bind="appBarCommand: {
                         extraClass: 'iconMoney',
                         id:'paymentExtensionViewAppBar_AddTender',
                         labelResx: 'string_1132'}, click: WTR_AutoEnter"></button>
+            </div>-->
         </div>
-    </div>
 </body>
 </html>

@@ -31,7 +31,6 @@
                     var openCoinDispenserDeviceRequest = new OpenCoinDispenserDeviceRequest(deviceName, null);
                     await context.ExecuteAsync<NullResponse>(openCoinDispenserDeviceRequest);
 
-
                     var dispenseChangeCoinDispenserDeviceRequest = new DispenseChangeCoinDispenserDeviceRequest(request.Amount);
                     await context.ExecuteAsync<NullResponse>(dispenseChangeCoinDispenserDeviceRequest);
 

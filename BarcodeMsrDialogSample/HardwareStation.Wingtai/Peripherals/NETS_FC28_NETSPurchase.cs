@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WTR.HWExt.Peripherals
+{
+    public class NETS_FC28_NETSPurchase : NETS
+    {
+        //construct amount format
+        protected override StringBuilder constructAmountRequest(string _amount)
+        {
+            try
+            {
+                StringBuilder amountFormat = new StringBuilder("000000000000");
+                _amount = _amount.Replace(".", "");
+                _amount = _amount.Replace(",", "");
+                StringBuilder AmountSB = new StringBuilder(_amount);
+
+                int amountcount = amountFormat.Length - _amount.Length;
+                for (int x = 0; x < _amount.Length; x++)
+                {
+                    amountFormat[amountcount] = AmountSB[x];
+                    amountcount++;
+                }
+
+                return amountFormat;
+            }
+            catch (Exception ex)
+            {
+                logHelper.saveLog("Error in construct amount format" + System.Environment.NewLine + "Error details : " + ex.Message + System.Environment.NewLine + "Error stack : " + ex.StackTrace);
+                throw new System.Exception("Error in construct amount format, please check log for error details");
+            }
+        }
+
+        //construct ECR format
+        protected override StringBuilder constructECRRequest(string _amount, string _ECR)
+        {
+            try
+            {
+                StringBuilder ECRFormat = new StringBuilder("0000000000000");
+                _ECR = _amount.Replace(".", "");
+                _ECR = _amount.Replace(",", "");
+                StringBuilder ECRSB = new StringBuilder(_ECR);
+
+                int j = ECRFormat.Length - _ECR.Length;
+                for (int x = 0; x < _ECR.Length; x++)
+                {
+                    ECRFormat[j] = ECRSB[x];
+                    j++;
+                }
+                return ECRFormat;
+            }
+            catch (Exception ex)
+            {
+                logHelper.saveLog("Error in construct ECR format" + System.Environment.NewLine + "Error details : " + ex.Message + System.Environment.NewLine + "Error stack : " + ex.StackTrace);
+                throw new System.Exception("Error in construct amount format, please check log for error details");
+            }
+        }
+
+        //construct request message to terminal
+        protected override byte[] constructRequestMessageToTerminal(string _amount, string _ECR)
+        {
+            try
+            {
+                logHelper.saveLog("Start construct request message to terminal with amount : " + _amount + " and ECR : " + _ECR);
+
+                // WTR RAD - NETS CERT
+                //byte[] MessageHeader = GetMessageHeader("28");  
+                byte[] MessageHeader = GetMessageHeader("30");
+                //
+
+                // WTR RAD - NETS CERT
+                byte[] MessageDataTransTypeInd = GenerateMessageData("T2", 2, "01");//TransType Indicator New field
+                byte[] MessageDataLoyRedem = GenerateMessageData("43", 1, "0");//loyal Redem New field
+                //END
+
+                byte[] MessageDataTransaction = GenerateMessageData("40", 12, _amount);//1C
+                byte[] MessageDataCashBack = GenerateMessageData("42", 12, "000000000000");//1C
+
+                //WTR RAD - NETS CERT
+                //byte[] MessageDataECR = GenerateMessageData("H4", 13, _ECR);//1C
+                byte[] MessageDataECR = GenerateMessageData("HD", 13, _ECR);//1C
+                //END
+
+                // WTR RAD - NETS CERT
+                //byte[] buffer = new byte[MessageHeader.Length + MessageDataTransaction.Length + MessageDataCashBack.Length + MessageDataECR.Length + 3];
+                byte[] buffer = new byte[MessageHeader.Length + MessageDataTransTypeInd.Length + MessageDataLoyRedem.Length +
+                                      MessageDataTransaction.Length + MessageDataCashBack.Length + MessageDataECR.Length + 3];
+                //END
+
+                Buffer.BlockCopy(MessageHeader, 0, buffer, 0, MessageHeader.Length);
+
+                List<byte> lst = MessageHeader.OfType<byte>().ToList();//To compute LENGTH
+
+                // WTR RAD - NETS CERT
+                lst.Add(0x1C);
+                lst.AddRange(MessageDataTransTypeInd);
+
+                lst.Add(0x1C);
+                lst.AddRange(MessageDataLoyRedem);
+                //END
+
+                lst.Add(0x1C);
+                lst.AddRange(MessageDataTransaction);
+                lst.Add(0x1C);
+                lst.AddRange(MessageDataCashBack);
+                lst.Add(0x1C);
+                lst.AddRange(MessageDataECR);
+                lst.Add(0x1C);
+
+
+                byte[] message = lst.ToArray();
+                byte[] messageLength = IntToBCD(message.Length);
+
+                List<byte> messageToLRC = messageLength.OfType<byte>().ToList();
+                messageToLRC.AddRange(message);
+                messageToLRC.Add(0x03);
+
+
+                byte[] messageToLRCArray = messageToLRC.ToArray();
+                var testLRC = BitConverter.ToString(messageToLRCArray);
+                byte LRC = calculateLRCRequest(messageToLRCArray);
+
+                messageToLRC.Add(LRC);
+
+                List<byte> FullCommand = new List<byte>();
+                FullCommand.Add(0x02);//STX
+                FullCommand.AddRange(messageToLRC);
+
+                byte[] messageToLRCArrayFull = FullCommand.ToArray();
+                var test = BitConverter.ToString(messageToLRCArrayFull);
+
+                return messageToLRCArrayFull;
+            }
+            catch (Exception ex)
+            {
+                logHelper.saveLog("Error in construct constructRequestMessageToTerminal" + System.Environment.NewLine + "Error details : " + ex.Message + System.Environment.NewLine + "Error stack : " + ex.StackTrace);
+                throw new System.Exception("Error in construct constructRequestMessageToTerminal, please check log for error details");
+            }
+        }
+    }
+}

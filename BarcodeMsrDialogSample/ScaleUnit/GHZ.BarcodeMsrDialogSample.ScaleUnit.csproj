@@ -11,8 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\GHZ.BarcodeMsrDialogSample.CommerceRuntime.csproj" />
-    <ProjectReference Include="..\CRT_RetailSDKSample\CRT_RetailSDKSample.csproj" />
-    <ProjectReference Include="..\Pos\GHZ.BarcodeMsrDialogSample.Pos.csproj" />
+    <ProjectReference Include="..\Pos.WingTai\PosExtensions.WingTai.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿import ko from "knockout";
 import * as NewView from "PosApi/Create/Views";
-import KnockoutExtensionViewControllerBase from "./BaseClasses/KnockoutExtensionViewControllerBase";
+/*import KnockoutExtensionViewControllerBase from "./BaseClasses/KnockoutExtensionViewControllerBase";*/
 import { PaymentExtensionViewModel } from "./PaymentExtensionViewModel";
 //import { Loader, ILoaderState } from "PosUISdk/Controls/Loader";
 import { IPaymentExtensionViewModelOptions } from "./NavigationContracts";
@@ -11,12 +11,18 @@ import { ListData } from "../Controls/DialogSample/ListInputDialog";
 import ListInputDialog from "../Controls/DialogSample/ListInputDialog";
 import { GetPaymentCardTypeByBinRangeClientRequest, GetPaymentCardTypeByBinRangeClientResponse } from "PosApi/Consume/Payments";
 import {GetHardwareProfileClientRequest, GetHardwareProfileClientResponse} from "PosApi/Consume/Device";
-import { StringExtensions } from "PosApi/TypeExtensions";
+import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
 import { WTR_PaymentTerminalEx, WTR_PaymentTerminalType, IWTR_PaymentTerminalEntity } from "./../Peripherals/IPaymentTerminal";
 import MessageDialog from "../Controls/DialogSample/MessageDialog";
 
 
-export default class PaymentExtensionView extends KnockoutExtensionViewControllerBase<PaymentExtensionViewModel> {
+//export default class PaymentExtensionView extends KnockoutExtensionViewControllerBase<PaymentExtensionViewModel> {
+export default class PaymentExtensionView extends NewView.CustomViewControllerBase {
+
+    public dispose(): void {
+        ObjectExtensions.disposeAllProperties(this);
+    }
+
     public viewModel: PaymentExtensionViewModel;
     //public headerSplitView: HeaderSplitView;
     //public loader: Loader;
@@ -44,9 +50,30 @@ export default class PaymentExtensionView extends KnockoutExtensionViewControlle
     public WTR_ManualEntApprovalCode: ko.Observable<string>;
     public WTR_ManualCardTypeInfo: ProxyEntities.CardTypeInfo;
     public tenderType: string;
-    constructor(context: NewView.IExtensionViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
+
+    constructor(context: NewView.ICustomViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
+    //constructor(context: NewView.IExtensionViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
         // Do not save in history
-        super(context, false);
+        let config: NewView.ICustomViewControllerConfiguration = {
+            title: "Payment Extension View",
+            commandBar: {
+                commands: [
+                    {
+                        name: "paymentExtensionViewAppBar_AddTender",
+                        label: context.resources.getString("string_1132"),
+                        icon: NewView.Icons.Money,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: NewView.CustomViewControllerExecuteCommandArgs): void => {
+                            this.WTR_AutoEnter();
+                        }
+                    }
+                ]
+            }
+        };
+
+        super(context, config);
+
         this.tenderedAmount = ko.observable(0);
         this.numpadHeaderLabel = ko.observable(context.resources.getString("necstring_0"));
         this.WTR_ManualEntApprovalCode = ko.observable("");
@@ -80,7 +107,7 @@ export default class PaymentExtensionView extends KnockoutExtensionViewControlle
 
 
     public onReady(element: HTMLElement): void {
-        super.onReady(element);
+        ko.applyBindings(this, element);
     }
 
     public setFullAmountDue(): void {

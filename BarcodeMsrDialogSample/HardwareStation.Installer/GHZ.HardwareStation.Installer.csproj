@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HardwareStation.Windows\HardwareStation.Dev.Windows.csproj" />
-    <ProjectReference Include="..\RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj" />
+    <ProjectReference Include="..\HardwareStation.Wingtai\HardwareStation.Wingtai.csproj" />
   </ItemGroup>
 </Project>
