@@ -60,7 +60,7 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
                 commands: [
                     {
                         name: "paymentExtensionViewAppBar_AddTender",
-                        label: context.resources.getString("string_1132"),
+                        label: "Auto Tender Pay",
                         icon: NewView.Icons.Money,
                         isVisible: true,
                         canExecute: true,
