@@ -35,7 +35,7 @@ export default class GetReceiptEmailAddressClientRequestHandlerExt extends GetRe
                 return Promise.resolve(currentCustomer);
             }).then((currentCustomer: ProxyEntities.Customer) => {
                 if (StringExtensions.isEmptyOrWhitespace(currentCustomer.Email) || StringExtensions.isEmptyOrWhitespace(currentCustomer.ReceiptEmail)) {
-                    currentCustomer.ReceiptEmail = "guazha03@microsoft.com";
+                    currentCustomer.ReceiptEmail = "guanghui03@microsoft.com";
                 }
                 return this.defaultExecuteAsync(request);
             });
