@@ -149,6 +149,9 @@
       "requestHandlers": [
         {
           "modulePath": "RequestHandlers/GetBankBagNumberClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/GetReceiptEmailAddressClientRequestHandlerExt"
         }
       ]
     }
