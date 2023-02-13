@@ -22,7 +22,8 @@ export default class SamplesView extends Views.CustomViewControllerBase {
             {
                 label: "Pos Controls",
                 items: [
-                    { label: "DataList (dynamic)", viewName: "DynamicDataListView" }
+                    { label: "DataList (dynamic)", viewName: "DynamicDataListView" },
+                    { label: "NumericNumPad", viewName: "NumericNumPadView" }
                 ]
             }
         ];

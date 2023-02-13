@@ -53,6 +53,13 @@
           "title": "CnlCA Customer Registration View",
           "viewControllerPath": "Views/CnlCACustomer/CnlCACustomerRegistrationView",
           "viewDirectory": "Views/CnlCACustomer/"
+        },
+        {
+          "pageName": "NumericNumPadView",
+          "phonePageName": "NumericNumPadView",
+          "title": "NumericNumPadView",
+          "viewControllerPath": "SampleExtensions/Views/Samples/NumericNumPadView",
+          "viewDirectory": "SampleExtensions/Views/Samples/"
         }
       ]
     },
