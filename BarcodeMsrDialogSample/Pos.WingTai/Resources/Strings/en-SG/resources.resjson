@@ -2,55 +2,61 @@
 //======================================= Payment extension comment. ===================================
 //======================================================================================================
 {
-    //======================== Payment View extensions strings. ========================
+  //======================== Payment View extensions strings. ========================
 
 
-    "necstring_0"                                      : "Payment amount",
-    "_necstring_0.comment"                             : "Payment amount",
+  "necstring_0": "Payment amount",
+  "_necstring_0.comment": "Payment amount",
 
-    "string_1"                                      : "Manual",
-    "_string_1.comment"                             : "Manual payment.",
+  "string_1": "Manual",
+  "_string_1.comment": "Manual payment.",
 
-    "string_2"                                      : "Auto",
-    "_string_2.comment"                             : "Auto payment.",
+  "string_2": "Auto",
+  "_string_2.comment": "Auto payment.",
 
-	"string_3"                                      : "Generate OTP",
-    "_string_3.comment"                             : "Payment generate OTP button label.",
+  "string_3": "Generate OTP",
+  "_string_3.comment": "Payment generate OTP button label.",
 
-	"string_4"                                      : "Enter meal voucher number",
-    "_string_4.comment"                             : "Payment enter meal voucher number label.",
+  "string_4": "Enter meal voucher number",
+  "_string_4.comment": "Payment enter meal voucher number label.",
 
-	"string_5"                                      : "Enter denomination",
-    "_string_5.comment"                             : "Payment enter denomination label.",
+  "string_5": "Enter denomination",
+  "_string_5.comment": "Payment enter denomination label.",
 
-	"string_6"                                      : "Denomination : {0}",
-    "_string_6.comment"                             : "Payment denomination label.",
+  "string_6": "Denomination : {0}",
+  "_string_6.comment": "Payment denomination label.",
 
-	"string_7"                                      : "VOUCHERS",
-    "_string_7.comment"                             : "Payment total voucher label.",
+  "string_7": "VOUCHERS",
+  "_string_7.comment": "Payment total voucher label.",
 
-	"string_8"                                      : "DENOMINATION",
-    "_string_8.comment"                             : "Payment total denomination label.",
+  "string_8": "DENOMINATION",
+  "_string_8.comment": "Payment total denomination label.",
 
-	"string_9"                                      : "Voucher number",
-    "_string_9.comment"                             : "Payment voucher number label.",
+  "string_9": "Voucher number",
+  "_string_9.comment": "Payment voucher number label.",
 
-	"string_10"                                     : "Denomination",
-    "_string_10.comment"                            : "Payment denomination label.",
+  "string_10": "Denomination",
+  "_string_10.comment": "Payment denomination label.",
 
-	"string_11"                                     : "Add Voucher",
-    "_string_11.comment"                            : "Payment add voucher label.",
+  "string_11": "Add Voucher",
+  "_string_11.comment": "Payment add voucher label.",
 
-	"string_12"                                     : "Remove Voucher",
-    "_string_12.comment"                            : "Payment remove voucher label.",
+  "string_12": "Remove Voucher",
+  "_string_12.comment": "Payment remove voucher label.",
 
-		"string_13"                                     : "Cart is empty.",
-    "_string_13.comment"                            : "Cart is empty.",
+  "string_13": "Cart is empty.",
+  "_string_13.comment": "Cart is empty.",
 
-	"string_14"                                     : "Card type.",
-    "_string_14.comment"                            : "Select card type.",
+  "string_14": "Card type.",
+  "_string_14.comment": "Select card type.",
 
-	"string_4908": "No active hardware station is available.",
-	"_string_4908.comment": "No active hardware station is available."
+  "string_1817": "Amount Due.",
+  "_string_1817.comment": "Amount Due.",
+
+  "string_1818": "Amount Tendered.",
+  "_string_1818.comment": "Amount Tendered.",
+
+  "string_4908": "No active hardware station is available.",
+  "_string_4908.comment": "No active hardware station is available."
 
 }

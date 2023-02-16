@@ -140,10 +140,8 @@ export class PaymentExtensionViewModel extends KnockoutExtensionViewModelBase {
 
     public addTenderToCart(preProcessedTenderLine: ProxyEntities.TenderLine): Promise<ClientEntities.ICancelableDataResult<AddPreprocessedTenderLineToCartClientResponse>> {
 
-
         let addPreProcessedTenderLineToCartClientRequest: AddPreprocessedTenderLineToCartClientRequest<AddPreprocessedTenderLineToCartClientResponse> =
             new AddPreprocessedTenderLineToCartClientRequest<AddPreprocessedTenderLineToCartClientResponse>(preProcessedTenderLine);
-
 
         return this._context.runtime.executeAsync(addPreProcessedTenderLineToCartClientRequest)
             .then((result) => {

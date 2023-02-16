@@ -34,7 +34,8 @@
                         <!-- Amount due and Eligible amount area -->
                         <div class="col minWidth252">
                             <!-- Amount Due-->
-                            <div data-bind="sectionWrapper: {headerResx: 'string_1817' }">
+                            <h2 class="marginTop8 marginBottom8">Amount Due</h2>
+                            <div data-bind="resx: { textContent: label }">
                                 <div class="padTop12">
                                     <a class="accent h1" data-bind="text: viewModel.fullAmountTextCurrency">
                                     </a>
@@ -42,13 +43,16 @@
                             </div>
 
                             <!-- Payable Amount-->
-                            <div class="padTop20" data-bind="sectionWrapper: {headerResx: 'Amount tendered' }">
+                            <h2 class="marginTop8 marginBottom8">Amount tendered</h2>
+                            <div class="padTop20" data-bind="resx: { textContent: 'string_1818' }">
                                 <div class="padTop12">
 
                                     <a class="accent h1" data-bind="text: maxAmountTenderedCurrency">
                                     </a>
+
+                                    <div class="padTop20" data-bind="resx: { textContent: label }">
+                                    </div>
                                 </div>
-                            </div>
                         </div>
 
                         <div class="gutter40x40"></div>
@@ -68,6 +72,10 @@
                                          numPadInputSource: numPadInputBroker
                                       }">
                                     </div>
+                                </div>
+                                <h2 class="marginTop8 marginBottom8">Payment amount</h2>
+                                <div class="pad8">
+                                    <div class="minWidth260 maxWidth320" id="CurrencyNumPad-Wingtai"></div>
                                 </div>
                             </div>
                         </div>

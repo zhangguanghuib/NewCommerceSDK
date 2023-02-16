@@ -15,6 +15,8 @@ import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
 import { WTR_PaymentTerminalEx, WTR_PaymentTerminalType, IWTR_PaymentTerminalEntity } from "./../Peripherals/IPaymentTerminal";
 import MessageDialog from "../Controls/DialogSample/MessageDialog";
 
+import * as Controls from "PosApi/Consume/Controls";
+
 
 //export default class PaymentExtensionView extends KnockoutExtensionViewControllerBase<PaymentExtensionViewModel> {
 export default class PaymentExtensionView extends NewView.CustomViewControllerBase {
@@ -51,6 +53,12 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
     public WTR_ManualCardTypeInfo: ProxyEntities.CardTypeInfo;
     public tenderType: string;
 
+    public numPad: Controls.ICurrencyNumPad;
+    public numPadValue: ko.Observable<string>;
+    public amountDueLabel: ko.Observable<string>;
+    public amountTenderedLabel: ko.Observable<string>;
+    public label: ko.Observable<string>;
+
     constructor(context: NewView.ICustomViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
     //constructor(context: NewView.IExtensionViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
         // Do not save in history
@@ -84,6 +92,8 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
         // Initialize the view model.
         this.viewModel = new PaymentExtensionViewModel(context, options);
 
+        this.label = ko.observable(context.resources.getString("string_1817"));
+
         //// Set the header
         //let loaderState: ILoaderState = {
         //    visible: this.viewModel.isBusy
@@ -103,11 +113,27 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
 
         this.WTR_IsManualEntered = ko.observable(false);
 
+        this.numPadValue = ko.observable("");
+        this.amountDueLabel = "Amount Due";
+        this.amountTenderedLabel = "Amount Tendered";
     }
-
 
     public onReady(element: HTMLElement): void {
         ko.applyBindings(this, element);
+
+        let inputBroker: Commerce.Peripherals.INumPadInputBroker = null;
+        let numPadOptions: Controls.ICurrencyNumPadOptions = {
+            currencyCode: "USD",
+            globalInputBroker: inputBroker,
+            label: "",
+            value: parseFloat(this.viewModel.numPadAmountText())
+        };
+
+        let numPadRootElem: HTMLDivElement = element.querySelector("#CurrencyNumPad-Wingtai") as HTMLDivElement;
+        this.numPad = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "CurrencyNumPad", numPadOptions, numPadRootElem);
+        this.numPad.addEventListener("EnterPressed", (eventData: { value: Commerce.Extensibility.NumPadValue }) => {
+            this.onNumPadEnterEventHandler(eventData.value);
+        });
     }
 
     public setFullAmountDue(): void {
@@ -133,10 +159,13 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
 
         this.maxAmountTenderedCurrency(CurrencyFormatter.toCurrency(resultValue));
         this.viewModel.numPadAmountText("");
+        console.log(this.viewModel.numPadAmountText);
+        console.log(this.viewModel.numPadAmountText());
+        this.numPad.value = 0;
     }
 
-    public onNumPadEnterEventHandler(result: any): void {
-        this.doAmountCalculation(result.value);
+    public onNumPadEnterEventHandler(value: Commerce.Extensibility.NumPadValue): void {
+        this.doAmountCalculation(value);
     }
 
     public tenderClick(): void {
