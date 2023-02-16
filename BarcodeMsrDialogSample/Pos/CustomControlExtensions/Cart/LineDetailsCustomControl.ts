@@ -23,9 +23,12 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
     private readonly _cartLine: ko.Observable<ProxyEntities.CartLine>;
     public _state: ICartViewCustomControlState;
 
+    public _isLoaderVisible: ko.Observable<boolean>;
+
     public constructor(id: string, context: ICartViewCustomControlContext) {
         super(id, context);
         this._cartLine = ko.observable(null);
+        this._isLoaderVisible = ko.observable(false);
 
         this.cartLineItemId = ko.computed(() => {
             let cartLine: ProxyEntities.CartLine = this._cartLine();
@@ -74,5 +77,13 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
     */
     public init(state: ICartViewCustomControlState): void {
         this._state = state;
+
+        setInterval((): void => {
+            if (this._isLoaderVisible()) {
+                this._isLoaderVisible(false);
+            } else {
+                this._isLoaderVisible(true);
+            }
+        }, 4000);
     }
 }
