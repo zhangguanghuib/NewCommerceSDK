@@ -12,15 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Create\Dialogs\" />
     <Folder Include="Create\Views\" />
+    <Folder Include="DataService\" />
     <Folder Include="Extend\RequestHandlers\" />
     <Folder Include="Extend\Triggers\" />
     <Folder Include="Extend\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" />
   </ItemGroup>
 
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">

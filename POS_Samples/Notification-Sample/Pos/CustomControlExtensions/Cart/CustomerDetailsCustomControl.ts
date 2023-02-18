@@ -12,17 +12,9 @@ import {
     StringExtensions
 } from "PosApi/TypeExtensions";
 import {ClientEntities } from "PosApi/Entities";
-//import CRMDataHelper from "../../Helper/CRMDataHelper";
-//import AddCustomerOperationRequest from "../../Operations/Customer/AddCustomerOperationRequest";
-//import {
-//    GetCurrentCartClientRequest, GetCurrentCartClientResponse,
-//    SetCustomerOnCartOperationResponse,
-//} from "PosApi/Consume/Cart";
-//import * as Loader from "PosUISdk/Controls/Loader";
 
 export default class CRMCustomerDetailsCustomControl extends CartViewCustomControlBase {
 
-    // public readonly loader: Loader.Loader;
     public isCustomerSelected: ko.Computed<boolean>;
     public _isLoaderVisible: ko.Observable<boolean>;
     public isNonReturnTransaction: ko.Observable<boolean>;
@@ -92,5 +84,4 @@ export default class CRMCustomerDetailsCustomControl extends CartViewCustomContr
         this.name(StringExtensions.EMPTY);
         console.log("closeDialogClicked");
     }
-
 }

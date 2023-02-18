@@ -21,7 +21,7 @@
         }
 
         .fade-in-out {
-            animation: fadeInOut 3s ease-in-out forwards;
+            animation: fadeInOut 2s ease-in-out forwards;
         }
 
         @keyframes fadeInOut {
@@ -40,16 +40,16 @@
                  id="Microsoft_Pos_Extensibility_Samples_LineDetails_Notification" 
                  class="fade-in-out">
                 <!-- ko ifnot: isCartLineSelected -->
-                <h4>No Order for pickup</h4>
+                <h4>No new orders created for pickup</h4>
                 <!-- /ko -->
                 <!-- ko if: isCartLineSelected -->
                 <div>
                     <h4>
                         Order XXXX for pickup from this store is created
                     </h4>
+                    <h4 data-bind="text: orderNoList">Item ID</h4>
                 </div>
-                <h4 data-bind="text: cartLineItemId">Item ID</h4>
-                <h4 data-bind="text: cartLineDescription">Item ID</h4>
+                
                 <!-- /ko -->;
             </div>
         </div>
