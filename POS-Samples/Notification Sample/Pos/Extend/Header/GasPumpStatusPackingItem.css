@@ -1,0 +1,20 @@
+﻿#gasPumpPackedButton {
+    width: inherit;
+    color: #fff;
+}
+
+#con {
+    height:48px;
+    width:48px;
+    position: relative;
+}
+
+.reddot {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}

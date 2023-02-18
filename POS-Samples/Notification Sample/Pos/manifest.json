@@ -1,0 +1,56 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {
+        "customPackingItems": [
+          {
+            "name": "Gas Pump Status Header Item",
+            "description": "An item showing the gas pump status on the POS header.",
+            "modulePath": "Extend/Header/GasPumpStatusPackingItem",
+            "htmlPath": "Extend/Header/GasPumpStatusPackingItem.html"
+          }
+        ]
+      },
+      "triggers": [
+      ],
+      "requestHandlers": [
+      ],
+      "views": {
+        "CartView": {
+          "viewController": { "modulePath": "CustomControlExtensions/Cart/CartViewController" },
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "lineDetails",
+                "htmlPath": "CustomControlExtensions/Cart/LineDetailsCustomControl.html",
+                "modulePath": "CustomControlExtensions/Cart/LineDetailsCustomControl"
+              },
+              {
+                "controlName": "CRMCustomerDetails",
+                "htmlPath": "CustomControlExtensions/Cart/CustomerDetailsCustomControl.html",
+                "modulePath": "CustomControlExtensions/Cart/CustomerDetailsCustomControl"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "create": {
+      "views": [],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}
