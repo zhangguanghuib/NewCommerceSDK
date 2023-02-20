@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.2017
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartLand_DotNetStandard", "HeartLand_DotNetStandard\HeartLand_DotNetStandard.csproj", "{82AB9803-F6C1-4147-8211-CEEAE03AC454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartLandClient_DotNetCore", "HeartLandClient_DotNetCore\HeartLandClient_DotNetCore.csproj", "{E737BCF0-54B0-4ED1-B8EB-4AE24F44C46C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82AB9803-F6C1-4147-8211-CEEAE03AC454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82AB9803-F6C1-4147-8211-CEEAE03AC454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82AB9803-F6C1-4147-8211-CEEAE03AC454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82AB9803-F6C1-4147-8211-CEEAE03AC454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E737BCF0-54B0-4ED1-B8EB-4AE24F44C46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E737BCF0-54B0-4ED1-B8EB-4AE24F44C46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E737BCF0-54B0-4ED1-B8EB-4AE24F44C46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E737BCF0-54B0-4ED1-B8EB-4AE24F44C46C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82B22994-E647-49CC-9AD9-2FA2CDE5C7FE}
+	EndGlobalSection
+EndGlobal
