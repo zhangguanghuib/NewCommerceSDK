@@ -43,6 +43,10 @@
                 "modulePath": "CustomControlExtensions/Cart/CustomerDetailsCustomControl"
               }
             ]
+          },
+          "linesGrid": {
+            "customColumn1": { "modulePath": "CustomControlExtensions/Cart/LinesGrid/CustomColumn1Configuration" },
+            "customColumn2": { "modulePath": "CustomControlExtensions/Cart/LinesGrid/CustomColumn2Configuration" }
           }
         }
       }

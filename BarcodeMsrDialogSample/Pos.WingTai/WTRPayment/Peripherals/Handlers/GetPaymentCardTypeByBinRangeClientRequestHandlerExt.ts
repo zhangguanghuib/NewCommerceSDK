@@ -10,7 +10,9 @@
 import { GetPaymentCardTypeByBinRangeClientRequestHandler } from "PosApi/Extend/RequestHandlers/PaymentRequestHandlers";
 import { GetPaymentCardTypeByBinRangeClientRequest, GetPaymentCardTypeByBinRangeClientResponse } from "PosApi/Consume/Payments";
 import { ClientEntities } from "PosApi/Entities";
+//import { NECPayment } from "../../DataService/DataServiceRequests.g";
 import { NECPayment } from "../../DataService/DataServiceRequests.g";
+
 /**
  * Override request handler class for getting price request.
  */
