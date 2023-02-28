@@ -1,4 +1,4 @@
-Recording can be found from here:
+Recording can be found from here<br/>:
 https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/Documents/Recordings/POS%20%20customization%20function%20demonstration-20230228_162704-Meeting%20Recording.mp4?web=1
 
 1.  This sample is to show how to give user notification when orders pickup comes:
