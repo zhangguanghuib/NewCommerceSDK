@@ -17,16 +17,16 @@
             Microsoft.Dynamics.Retail.SampleConnector.Portable.DoTransactionRequest tokenreq = new Microsoft.Dynamics.Retail.SampleConnector.Portable.DoTransactionRequest();
 
             //
-            string asmName = typeof(Microsoft.Dynamics.Retail.SampleConnector.Portable.PosGatewayInterfaceClient).Assembly.FullName;
-            string typeName = typeof(Microsoft.Dynamics.Retail.SampleConnector.Portable.PosGatewayInterfaceClient).FullName;
-            Assembly assem = AppDomain.CurrentDomain.Load(asmName);
+            //string asmName = typeof(Microsoft.Dynamics.Retail.SampleConnector.Portable.PosGatewayInterfaceClient).Assembly.FullName;
+            //string typeName = typeof(Microsoft.Dynamics.Retail.SampleConnector.Portable.PosGatewayInterfaceClient).FullName;
+            //Assembly assem = AppDomain.CurrentDomain.Load(asmName);
 
-            System.ServiceModel.Channels.Binding binding1 = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
-            binding1.Name = "PosGatewayInterface";
+            //System.ServiceModel.Channels.Binding binding1 = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+            //binding1.Name = "PosGatewayInterface";
 
-            Type t = assem.GetType(typeName);
-            ConstructorInfo st = t.GetConstructors()[3];
-            object o2 = st.Invoke(new object[] { binding1, new EndpointAddress(porticoGatewayURL) });
+            //Type t = assem.GetType(typeName);
+            //ConstructorInfo st = t.GetConstructors()[3];
+            //object o2 = st.Invoke(new object[] { binding1, new EndpointAddress(porticoGatewayURL) });
 
             tokenreq.PosRequest = new Microsoft.Dynamics.Retail.SampleConnector.Portable.PosRequest();
             tokenreq.PosRequest.Ver10 = new Microsoft.Dynamics.Retail.SampleConnector.Portable.PosRequestVer10();
@@ -99,10 +99,8 @@
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                throw e;
             }
-
-            return null;
         }
     }
 }

@@ -554,6 +554,14 @@ namespace Microsoft.Dynamics
 
                 if (acceptPointRequest.Environment.Equals(EnvironmentMock, StringComparison.OrdinalIgnoreCase))
                 {
+                    try
+                    {
+                        Contoso.Retail.SampleConnector.Portable.HeartLandUntils.SendMultiuseTokenRequest();
+                    }
+                    catch(Exception e)
+                    {
+                        throw e;
+                    }
                     // Only used by automation testing, sets the payment accept page contents to HTML string.
                     acceptPointResponse.PaymentAcceptUrl = string.Empty;
                     acceptPointResponse.PaymentAcceptPageContents = "<H4>Sample test</H4>";
