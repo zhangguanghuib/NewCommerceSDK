@@ -1,6 +1,7 @@
 ﻿import { ProxyEntities } from "PosApi/Entities";
 import { IExtensionCartViewControllerContext } from "PosApi/Extend/Views/CartView";
 import * as CartView from "PosApi/Extend/Views/CartView";
+import { ObjectExtensions } from "PosApi/TypeExtensions";
 
 export default class CartViewController extends CartView.CartExtensionViewControllerBase {
     public _selectedCartLines: ProxyEntities.CartLine[];
@@ -27,6 +28,20 @@ export default class CartViewController extends CartView.CartExtensionViewContro
 
         this.tenderLineSelectionClearedHandler = (): void => {
             this._selectedCartLines = undefined;
+        };
+
+        this.cartChangedHandler = (data: CartView.CartChangedData) => {
+
+            let discountedNodes: HTMLCollectionOf<Element> = document.getElementsByClassName("tillLayout-CustomColumn2 textRight");
+
+            if (!ObjectExtensions.isNullOrUndefined(discountedNodes) && discountedNodes.length > 0) {
+                Array.from(discountedNodes).forEach(elem => {
+                    let divElem: HTMLDivElement = elem as HTMLDivElement;
+                    if (divElem.innerText === "DISCOUNTED_YES") {
+                        divElem.parentElement.parentElement.style.backgroundColor = "red";
+                    }
+                });
+            }
         };
     }
 }

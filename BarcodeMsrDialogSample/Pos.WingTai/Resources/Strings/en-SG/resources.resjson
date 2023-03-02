@@ -50,11 +50,14 @@
   "string_14": "Card type.",
   "_string_14.comment": "Select card type.",
 
-  "string_1817": "Amount Due.",
-  "_string_1817.comment": "Amount Due.",
+  "string_1107": "Payment amount",
+  "_string_1107.comment": "Shared with NW",
 
-  "string_1818": "Amount Tendered.",
-  "_string_1818.comment": "Amount Tendered.",
+  "string_1817": "Amount due",
+  "_string_1817.comment": "Change due label",
+
+  "string_1818": "Amount Tendered",
+  "_string_1818.comment": "Amount Tendered",
 
   "string_4908": "No active hardware station is available.",
   "_string_4908.comment": "No active hardware station is available."

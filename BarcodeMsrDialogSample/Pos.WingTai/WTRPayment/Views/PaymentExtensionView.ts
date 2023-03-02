@@ -1,10 +1,7 @@
 ﻿import ko from "knockout";
 import * as NewView from "PosApi/Create/Views";
-/*import KnockoutExtensionViewControllerBase from "./BaseClasses/KnockoutExtensionViewControllerBase";*/
 import { PaymentExtensionViewModel } from "./PaymentExtensionViewModel";
-//import { Loader, ILoaderState } from "PosUISdk/Controls/Loader";
 import { IPaymentExtensionViewModelOptions } from "./NavigationContracts";
-//import { HeaderSplitView, IHeaderSplitViewState } from "PosUISdk/Controls/HeaderSplitView";
 import { ProxyEntities, ClientEntities } from "PosApi/Entities";
 import { CurrencyFormatter } from "PosApi/Consume/Formatters";
 import { ListData } from "../Controls/DialogSample/ListInputDialog";
@@ -18,7 +15,6 @@ import MessageDialog from "../Controls/DialogSample/MessageDialog";
 import * as Controls from "PosApi/Consume/Controls";
 
 
-//export default class PaymentExtensionView extends KnockoutExtensionViewControllerBase<PaymentExtensionViewModel> {
 export default class PaymentExtensionView extends NewView.CustomViewControllerBase {
 
     public dispose(): void {
@@ -26,8 +22,6 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
     }
 
     public viewModel: PaymentExtensionViewModel;
-    //public headerSplitView: HeaderSplitView;
-    //public loader: Loader;
 
     public isLast4DigitsRequired: ko.Observable<boolean>;
     public isNetsPayment: boolean;
@@ -57,11 +51,10 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
     public numPadValue: ko.Observable<string>;
     public amountDueLabel: ko.Observable<string>;
     public amountTenderedLabel: ko.Observable<string>;
+    public paymentAmountLabel: ko.Observable<string>;
     public label: ko.Observable<string>;
 
     constructor(context: NewView.ICustomViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
-    //constructor(context: NewView.IExtensionViewControllerContext, options?: IPaymentExtensionViewModelOptions) {
-        // Do not save in history
         let config: NewView.ICustomViewControllerConfiguration = {
             title: "Payment Extension View",
             commandBar: {
@@ -94,28 +87,18 @@ export default class PaymentExtensionView extends NewView.CustomViewControllerBa
 
         this.label = ko.observable(context.resources.getString("string_1817"));
 
-        //// Set the header
-        //let loaderState: ILoaderState = {
-        //    visible: this.viewModel.isBusy
-        //};
-
-        //this.loader = new Loader(loaderState);
         this.tenderType = options.tenderType.TenderTypeId;
         this.isNetsPayment = this.tenderType == WTR_PaymentTerminalEx.NETS.toString() ? true : false;
         this.isLast4DigitsRequired = ko.observable(this.isNetsPayment);
-        // Initialize the POS SDK Controls.
-        //let headerSplitViewState: IHeaderSplitViewState = {
-        //    title: this.viewModel.title
-        //};
-
-        //this.headerSplitView = new HeaderSplitView(headerSplitViewState);
+       
         this.setFullAmountDue();
 
         this.WTR_IsManualEntered = ko.observable(false);
 
         this.numPadValue = ko.observable("");
-        this.amountDueLabel = "Amount Due";
-        this.amountTenderedLabel = "Amount Tendered";
+        this.amountDueLabel = ko.observable(context.resources.getString("string_1817"));
+        this.amountTenderedLabel = ko.observable(context.resources.getString("string_1818"));
+        this.paymentAmountLabel = ko.observable(context.resources.getString("string_1107"));
     }
 
     public onReady(element: HTMLElement): void {

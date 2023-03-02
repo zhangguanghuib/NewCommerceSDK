@@ -53,6 +53,7 @@
   <ItemGroup>
     <Folder Include="DataService\" />
     <Folder Include="Libraries\" />
+    <Folder Include="WTRPayment\DataService\" />
   </ItemGroup>
 
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">

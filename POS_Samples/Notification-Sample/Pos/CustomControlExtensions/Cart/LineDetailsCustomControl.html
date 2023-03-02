@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="LineDetailsCustomControl.css" rel="stylesheet" />
     <style>
         body {
             position: relative;
@@ -25,9 +26,17 @@
         }
 
         @keyframes fadeInOut {
-            0% { opacity: 0;}
-            50% { opacity: 1;}
-            100% {opacity: 0;}
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -45,11 +54,10 @@
                 <!-- ko if: isCartLineSelected -->
                 <div>
                     <h4>
-                        Order list those need pick-up created from other stores:
+                        Orders those need pick-up created from other stores in the last 10 minutes:
                     </h4>
                     <h4 data-bind="text: orderNoList">Pickup Order List</h4>
-                </div>
-                
+                </div>               
                 <!-- /ko -->;
             </div>
         </div>

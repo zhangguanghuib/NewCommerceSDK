@@ -80,6 +80,8 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
                 data: this
             }
         }, this);
+
+        this.addRedDot();
     }
 
     /**
@@ -88,14 +90,6 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
     */
     public init(state: ICartViewCustomControlState): void {
         this._state = state;
-
-        //setInterval((): void => {
-        //    if (this._isLoaderVisible()) {
-        //        this._isLoaderVisible(false);
-        //    } else {
-        //        this._isLoaderVisible(true);
-        //    }
-        //}, 6000);
 
         this.context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
             .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
@@ -128,15 +122,37 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
                 }
             }).then((orderlist: string) => {
                 this.orderNoList(orderlist);
+                let divRedDot: HTMLElement = document.getElementById('notifyRedDot');
                 if (orderlist.length > 0) {
                     if (!this._isLoaderVisible()) {
                         this._isLoaderVisible(true);
                     }
+                    divRedDot.style.visibility = "visible";
+                } else {
+                    
+                    divRedDot.style.visibility = "hidden";
                 }
                 setTimeout((): void => {
                     this._isLoaderVisible(false);
                 }, 4000);
             });
         }, 10000);
+    }
+
+
+    public addRedDot(): void {
+        //let notificationIcon: HTMLCollectionOf<Element> = document.getElementsByClassName("iconActionCenterNotification");
+        const notificationIcons: Element[] = Array.from(document.querySelectorAll('[data-bind*="showNotificationCenterDialog"]'));
+    
+        if (!ObjectExtensions.isNullOrUndefined(notificationIcons) && notificationIcons.length > 0) {
+            let notificationDiv: HTMLDivElement = notificationIcons[0] as HTMLDivElement;
+            notificationDiv.classList.add("relativePos");
+
+            let divRedDot: HTMLDivElement = document.createElement("div");
+            divRedDot.id = "notifyRedDot"
+            divRedDot.classList.add('reddot');
+            notificationDiv.appendChild(divRedDot);
+            //console.log(notificationDiv);
+        }
     }
 }
