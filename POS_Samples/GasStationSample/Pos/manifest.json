@@ -13,24 +13,19 @@
   ],
   "components": {
     "extend": {
-      "header": {
+      "header": {     
       },
-      "triggers": [
-       
+      "triggers": [       
       ],
-      "requestHandlers": [
-        
+      "requestHandlers": [  
       ],
       "views": {
-
       }
     },
     "create": {
       "views": [
-        
       ],
       "templatedDialogs": [
-     
       ]
     }
   }
