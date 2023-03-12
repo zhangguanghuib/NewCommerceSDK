@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataService\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" />
   </ItemGroup>
 
