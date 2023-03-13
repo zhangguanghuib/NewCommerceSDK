@@ -7,5 +7,5 @@
 - Click OK, and then you can see the serail number you jus input is already on cart line:
 ![image](https://user-images.githubusercontent.com/14832260/224613559-9803528e-591f-4d19-be03-b13480bb350c.png)
 
-- But the problem here you can see is the user alert (or warning message is still there)
+- But the problem here you can see is the user alert (or warning message) is still there even the serial number is already on the cart line
 ![image](https://user-images.githubusercontent.com/14832260/224613660-10030b9e-67af-4917-8153-f4c962cb3ac2.png)
