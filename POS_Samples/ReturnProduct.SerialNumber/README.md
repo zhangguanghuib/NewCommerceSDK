@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/14832260/224613140-3e188efc-eb8a-42bc-97da-5a3e3509a8b4.png)
 Click OK to input reason code, then serial number dialog will pop-up automatically:
 ![image](https://user-images.githubusercontent.com/14832260/224613382-c15a3552-616f-40d1-a5b9-73b235ec8a32.png)
-Click OK, and then 
+Click OK, and then you can see the serail number you jus input is already on cart line:
 ![image](https://user-images.githubusercontent.com/14832260/224613559-9803528e-591f-4d19-be03-b13480bb350c.png)
 
 But the problem here you can see is the user alert (or warning message is still there)
