@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [
+        
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+        "ManageShiftsView": {
+          "appBarCommands": [
+            {
+              "name": "ManageShiftsUpdCommand",
+              "description": "ManageShiftsUpdCommand",
+              "modulePath": "Extend/ViewExtensions/ManageShifts/ManageShiftsUpdCommand"
+            }
+          ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}
