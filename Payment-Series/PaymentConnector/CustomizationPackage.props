@@ -1,5 +1,5 @@
 <Project>
-  <Import Project="..\repo.props" />
+  <Import Project="..\..\repo.props" />
 
   <PropertyGroup>
     <PackagePublisher Condition="'$(PackagePublisher)' == ''">$(Publisher)</PackagePublisher>

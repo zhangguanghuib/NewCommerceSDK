@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="repo.props" />
+
+  <PropertyGroup>
+    <PackagePublisher Condition="'$(PackagePublisher)' == ''">$(Publisher)</PackagePublisher>
+    <PackagePublisherDisplayName Condition="'$(PackagePublisherDisplayName)' == ''">$(PublisherDisplayName)</PackagePublisherDisplayName>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">$(Version)</PackageVersion>
+    <PackageName Condition="'$(PackageName)' == ''">GHZ.PaymentDeviceSample</PackageName>
+    <PackageDisplayName Condition="'$(PackageDisplayName)' == ''">Payment Device Sample</PackageDisplayName>
+    <PackageDescription Condition="'$(PackageDescription)' == ''">A sample that shows how to create Payment Device Sample.</PackageDescription>
+  </PropertyGroup>
+</Project>

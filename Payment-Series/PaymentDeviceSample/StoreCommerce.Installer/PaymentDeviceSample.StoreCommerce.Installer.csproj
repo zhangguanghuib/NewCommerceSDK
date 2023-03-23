@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CRT_RetailSDKSample\CRT_RetailSDKSample.csproj" />
-    <ProjectReference Include="..\RetailSDK_HardwareStation\HardwareStation.Extension.RetailSDKSample.csproj" />
+    <ProjectReference Include="..\CRT_RetailSDKSample\PaymentDeviceSample.Extension.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\RetailSDK_HardwareStation\PaymentDeviceSample.Extension.HardwareStation.csproj" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentDeviceSample.StoreCommerce.Installer", "StoreCommerce.Installer\PaymentDeviceSample.StoreCommerce.Installer.csproj", "{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentDeviceSample.Extension.CommerceRuntime", "CRT_RetailSDKSample\PaymentDeviceSample.Extension.CommerceRuntime.csproj", "{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentDeviceSample.Extension.HardwareStation", "RetailSDK_HardwareStation\PaymentDeviceSample.Extension.HardwareStation.csproj", "{724F4BDE-EBA5-45DC-9022-83BE2344E076}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D956CC59-BB2C-49F0-A1A2-8D5B5F0F0DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724F4BDE-EBA5-45DC-9022-83BE2344E076}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DD75DDB-7B61-4336-99C4-775DD92958C8}
+	EndGlobalSection
+EndGlobal

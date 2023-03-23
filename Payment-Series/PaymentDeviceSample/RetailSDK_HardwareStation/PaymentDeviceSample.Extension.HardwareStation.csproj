@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<Import Project="..\CustomizationPackage.props" />
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>Commerce.HardwareStation.Extension.RetailSDKSample</AssemblyName>
+    <RootNamespace>Contoso.Commerce.HardwareStation.Extension.RetailSDKSample</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.CardPayment">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Desktop">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary">
+      <HintPath>references\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.VirtualPeripherals.Framework">
+      <HintPath>references\Microsoft.Dynamics.Commerce.VirtualPeripherals.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.VirtualPeripherals.MessagePipelineHandler">
+      <HintPath>references\Microsoft.Dynamics.Commerce.VirtualPeripherals.MessagePipelineHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.VirtualPeripherals.MessagePipelineProxy">
+      <HintPath>references\Microsoft.Dynamics.Commerce.VirtualPeripherals.MessagePipelineProxy.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
