@@ -17,7 +17,8 @@ export default class NumericInputDialog {
                 title: "Voice Call",
                 subTitle: subTitleMsg,
                 numPadLabel: "Please enter code:",
-                defaultNumber: "2000",
+                defaultNumber: "4",
+                decimalPrecision: 2,
                 onBeforeClose: this.onBeforeClose.bind(this)
             };
 

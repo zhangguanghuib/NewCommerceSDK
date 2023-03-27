@@ -16,7 +16,10 @@
       "header": {     
       },
       "triggers": [
-        
+        {
+          "triggerType": "PreProductSale",
+          "modulePath": "TriggerHandlers/PreProductSaleTrigger"
+        }
       ],
       "requestHandlers": [  
       ],
