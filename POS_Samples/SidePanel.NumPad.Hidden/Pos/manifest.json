@@ -1,0 +1,45 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [
+        {
+          "triggerType": "PostPayment",
+          "modulePath": "TriggerHandlers/PostPaymentTrigger"
+        }
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+        "PaymentView": {
+          "appBarCommands": [
+            {
+              "name": "PaymentViewUpdCommand",
+              "description": "PaymentViewUpdCommand",
+              "modulePath": "ViewExtensions/Payment/PaymentViewUpdCommand"
+            }
+          ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}
