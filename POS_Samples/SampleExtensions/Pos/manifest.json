@@ -1,0 +1,58 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "supportedUICultures": [ "de", "en-US", "fr" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson",
+      "cultureInfoOverridesFilePath": "Resources/cultureInfoOverrides.json"
+    },
+    "extend": {
+      "header": {
+      },
+      "triggers": [
+      ],
+      "requestHandlers": [
+      ],
+      "views": {
+        "SearchView": {
+          "productAppBarCommands": [
+            { "modulePath": "ViewExtensions/Search/NavigateToSimpleExtensionViewCommand" }
+          ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+        {
+          "title": "Samples View",
+          "pageName": "SamplesView",
+          "phonePageName": "SamplesView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/SamplesView"
+        },
+        {
+          "title": "TextInputDialogView",
+          "pageName": "TextInputDialogView",
+          "phonePageName": "TextInputDialogView",
+          "viewDirectory": "Views/Samples/",
+          "viewControllerPath": "Views/Samples/TextInputDialogView"
+        }
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}
