@@ -56,7 +56,7 @@ namespace CRT_RetailSDKSample.Extensions.NotificationSample
             }
 
             var serviceResponse = new GetNotificationsExtensionServiceResponse(details);
-            return await Task.FromResult(serviceResponse);
+            return await Task.FromResult(serviceResponse).ConfigureAwait(false);
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿[ExtensionOf(classstr(RetailTransactionServiceTransactions))]
+final class RetailTransactionServiceTransactions_AppSuite_Extension
+{
+    public static container getOrderListSearch(str _xmlArgumentString)
+    {
+        XmlDocument                    argsXml;
+        XmlElement                     argsRoot;
+        RetailOrderChannelReferenceId  argChannelRefId;
+        RetailReceiptId                argReceiptId;
+        RetailTransactionPaymentTrans  retailTransactionPaymentTrans;
+        RetailTransactionTable         retailTransactionTable;
+        SalesTable                     salesTable;
+        RetailSalesTable               retailSalestable;
+
+        str getArg(str argName)
+        {
+            str result = '';
+            XmlElement xmlRoot = argsRoot.getNamedElement(argName);
+            if (xmlRoot != null)
+            {
+                result = xmlRoot.text();
+            }
+            return result;
+        }
+
+        argsXml   = new XmlDocument();
+        argsXml.loadXml(_xmlArgumentString);
+        argsRoot = argsXml.documentElement();
+
+        argreceiptId = getArg('ReceiptId');
+
+        if (argReceiptId)
+        {
+            select ChannelReferenceId from retailSalestable
+                exists join salesTable where salesTable.RecId == retailSalestable.SalesTable
+                exists join retailTransactionTable where retailTransactionTable.salesOrderId == salesTable.SalesId
+                exists join retailTransactionPaymentTrans 
+                    where retailTransactionPaymentTrans.transactionId == retailTransactionTable.transactionId
+                        && retailTransactionPaymentTrans.Channel == retailTransactionTable.Channel
+                        && retailTransactionPaymentTrans.terminal == retailTransactionTable.terminal
+                        && retailTransactionPaymentTrans.store == retailTransactionTable.store
+                        && retailTransactionPaymentTrans.receiptId == argReceiptId;
+
+            if  (retailSalestable && retailSalestable.ChannelReferenceId)
+            {
+                _xmlArgumentString = strReplace(_xmlArgumentString, argReceiptId, retailSalestable.ChannelReferenceId);
+            }
+        }
+
+        return next  getOrderListSearch(_xmlArgumentString);
+    }
+
+}
