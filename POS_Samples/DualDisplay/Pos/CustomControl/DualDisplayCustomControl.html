@@ -15,6 +15,16 @@
                 </div>
             </div>
 
+            <div>
+                <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(imageRotatorPath()) -->
+                <img data-bind=attr: { src: imageRotatorPath() }" />
+                <!-- /ko -->
+
+                <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(webBrowserUrl()) -->
+                <x-ms-webview id="webview" data-bind="attr: {src: webBrowserUrl}" width="300" height="300"></x-ms-webview>
+                <!-- /ko -->
+            </div>
+
             <div class="marginBottom20">
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount:</h2>
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2>

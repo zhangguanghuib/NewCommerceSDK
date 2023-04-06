@@ -37,8 +37,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private readonly _loggedOn: ko.Observable<boolean>;
     private readonly _employee: ko.Observable<ProxyEntities.Employee>;
 
-    public imageRotatorPath: string;
-    public webBrowserUrl: string;
+    public imageRotatorPath: ko.Observable<string>;
+    public webBrowserUrl: ko.Observable<string>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 
@@ -83,6 +83,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
         this.customerChangedHandler = (data: CustomerChangedData) => {
             this._customer(data.customer);
+        }
+
+        this.dualDisplayConfigurationChangedHandler = (data: Commerce.Extensibility.DualDisplayExtensionTypes.DualDisplayConfigurationChangedData) => {
+            this.imageRotatorPath(data.imageRotatorPath);
+            this.webBrowserUrl(data.webBrowserUrl);
         }
 
         this.logOnStatusChangedHandler = (data: LogOnStatusChangedData) => {
@@ -173,15 +178,17 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._employee(state.employee);
 
         if (StringExtensions.isEmptyOrWhitespace(state.configuration.imageRotatorPath)) {
-            this.imageRotatorPath = localStorage.getItem("DualDisplayWebBrowserUrl");
+            //this.imageRotatorPath = localStorage.getItem("DualDisplayWebBrowserUrl");
+            this.imageRotatorPath(localStorage.getItem("DualDisplayWebBrowserUrl"));
         } else {
-            this.imageRotatorPath = state.configuration.imageRotatorPath;
+            //this.imageRotatorPath = state.configuration.imageRotatorPath;
+            this.imageRotatorPath(state.configuration.imageRotatorPath);     
         }
 
         if (StringExtensions.isEmptyOrWhitespace(state.configuration.webBrowserUrl)) {
-            this.webBrowserUrl = localStorage.getItem("DualDisplayWebBrowserUrl");
+            this.webBrowserUrl(localStorage.getItem("DualDisplayWebBrowserUrl"));
         } else {
-            this.webBrowserUrl = state.configuration.webBrowserUrl;
+            this.webBrowserUrl(state.configuration.webBrowserUrl);
         }
 
         this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(this._cart()) ? [] : this._cart().CartLines);
