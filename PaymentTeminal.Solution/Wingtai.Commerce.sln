@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScaleUnit.Wingtai", "ScaleUnit\ScaleUnit.Wingtai.csproj", "{E6B0992F-737B-4DCD-B584-021CA659E83C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreCommerce.Wingtai.Installer", "StoreCommerce.Installer\StoreCommerce.Wingtai.Installer.csproj", "{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Wingtai.Installer", "HardwareStation.Installer\HardwareStation.Wingtai.Installer.csproj", "{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosExtensions.WingTai", "Pos.WingTai\PosExtensions.WingTai.csproj", "{15E3DC97-1340-4DC4-99E9-F736309CB70D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareStation.Wingtai", "HardwareStation.Wingtai\HardwareStation.Wingtai.csproj", "{67FA0769-1C55-410C-9510-E92C13A5AC5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRT.Wingtai", "CommerceRuntime.Wingtai\CRT.Wingtai.csproj", "{AC837DEF-06D1-4F06-A029-B2C694984626}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B0992F-737B-4DCD-B584-021CA659E83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB6E2C2-E566-4BDB-B6A8-815820A59DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3335ABD-25A9-4BDD-BA4C-1E4D16A3B674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E3DC97-1340-4DC4-99E9-F736309CB70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FA0769-1C55-410C-9510-E92C13A5AC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC837DEF-06D1-4F06-A029-B2C694984626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC837DEF-06D1-4F06-A029-B2C694984626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC837DEF-06D1-4F06-A029-B2C694984626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC837DEF-06D1-4F06-A029-B2C694984626}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DD75DDB-7B61-4336-99C4-775DD92958C8}
+	EndGlobalSection
+EndGlobal

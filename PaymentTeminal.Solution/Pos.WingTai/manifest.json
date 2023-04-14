@@ -1,0 +1,59 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GHZ.BarcodeMsrDialogSample",
+  "publisher": "GHZ",
+  "version": "7.2.0",
+  "minimumPosVersion": "7.2.0.0",
+  "description": "A sample that shows how to create a new dialog that listens to barcode scanner and MSR events.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "supportedUICultures": [ "de", "en-US", "fr" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
+    "create": {
+      "operations": [
+        {
+          "operationId": "10002",
+          "operationRequestFactoryPath": "WTRPayment/Operations/Cards/CreditCardOperationRequestFactory",
+          "operationRequestHandlerPath": "WTRPayment/Operations/Cards/CreditCardOperationRequestHandler"
+        },
+        {
+          "operationId": "10003",
+          "operationRequestFactoryPath": "WTRPayment/Operations/Cards/NETSOperationRequestFactory",
+          "operationRequestHandlerPath": "WTRPayment/Operations/Cards/NETSOperationRequestHandler"
+        }
+      ],
+      "views": [
+        {
+          "title": "PaymentExtensionView",
+          "pageName": "PaymentExtensionView",
+          "phonePageName": "PaymentExtensionPhoneView",
+          "viewDirectory": "WTRPayment/Views/",
+          "viewControllerPath": "WTRPayment/Views/PaymentExtensionView"
+        }
+      ]
+    },
+    "extend": {
+      "requestHandlers": [
+        {
+          "modulePath": "WTRPayment/Peripherals/Handlers/GetPaymentCardTypeByBinRangeClientRequestHandlerExt"
+        }
+      ],
+      "triggers": [
+        {
+          "triggerType": "PreVoidPayment",
+          "modulePath": "WTRPayment/TriggerHandlers/PreVoidPaymentTrigger"
+        }
+      ]
+    }
+  }
+}

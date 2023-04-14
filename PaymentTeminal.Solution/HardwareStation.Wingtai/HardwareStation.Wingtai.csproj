@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<Import Project="..\CustomizationPackage.props" />
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>HardwareStation.Wingtai</AssemblyName>
+    <RootNamespace>HardwareStation.Wingtai</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="RemoteOrderDisplaySample\**" />
+    <EmbeddedResource Remove="RemoteOrderDisplaySample\**" />
+    <None Remove="RemoteOrderDisplaySample\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition" Version="7.0.0" />
+    <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Diagnostics" Version="$(DiagnosticsRepoPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.PaymentSDK.Portable" Version="$(CommercePaymentsPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Web.Http.Common" Version="4.0.20126.16343" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Peripherals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Interop.CleanCash_1_1">
+      <HintPath>References\Interop.CleanCash_1_1.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MagIC3DBSECRLib">
+      <HintPath>References\Interop.MagIC3DBSECRLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>References\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+</Project>
