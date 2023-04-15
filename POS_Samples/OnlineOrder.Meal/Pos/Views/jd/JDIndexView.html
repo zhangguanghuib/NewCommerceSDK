@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .header{
+            width: 90%;
+            height: 160px;
+            background-color: yellow;
+            font-size: x-large;
+        }
+
+        .home{
+            position: relative;
+        }
+
+        .miaosha{
+            width: 90%;
+            height: 260px;
+            margin-bottom: 20px;
+            background-color: pink;
+            font-size: x-large;
+        }
+        .tese{
+            width: 90%;
+            height: 980px;
+            background-color: green;
+            font-size: x-large;
+        }
+        .guangchang{
+            width: 90%;
+            height: 1005px;
+            margin-bottom: 20px;
+            background-color: palevioletred;
+            font-size: x-large;
+        }
+        .forU{
+            width: 90%;
+            height: 666px;
+            background-color: blue;
+            font-size: x-large;
+        }
+        .elevator{
+            position:absolute;
+            top: 0;
+            left: 50%;
+            margin-left: 615px;
+            transition: all .5s;
+        }
+
+        .elevator>a{
+            display: block;
+            width: 58px;
+            height: 60px;
+            color: #333;
+            font-size: 14px;
+            line-height: 19px;
+            padding: 11px 0;
+            background-color: #fff;
+        }
+        .elevator-fix{
+            position: fixed;
+            top: 75px;
+
+        }
+    </style>
+     <script>
+        let elevator = document.querySelector(".elevator");
+        let header = document.querySelector(".header");
+
+        console.log(elevator);
+        window.scroll = function(){
+            let top = document.documentElement.scrollTop || document.body.scrollTop;
+            let top1 = header.clientHeight;
+            console.log(top1);
+            console.log(top);
+            if(top >= top1){
+                elevator.className = "elevator elevator-fix";
+            } else{
+                elevator.className = "elevator";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">顶部其他内容</div>
+    <div class="home">
+        <div class="wrap">           
+            <div class="miaosha">京东秒杀</div>
+            <div class="tese">特色优选</div>
+            <div class="guangchang">频道广场</div>
+            <div class="forU">为你推荐</div>
+            <div class="elevator">
+                <a href="javascript:;">京东<br/>秒杀</a>
+                <a href="javascript:;">特色<br/>优选</a>
+                <a href="javascript:;">频道<br/>广场</a>
+                <a href="javascript:;">为你<br/>推荐</a>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>
