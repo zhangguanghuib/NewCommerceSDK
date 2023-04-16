@@ -33,6 +33,13 @@
           "phonePageName": "JDIndexView",
           "viewDirectory": "Views/jd/",
           "viewControllerPath": "Views/jd/JDIndexView"
+        },
+        {
+          "title": "Floor Nav Index",
+          "pageName": "FloorNavIndex",
+          "phonePageName": "FloorNavIndex",
+          "viewDirectory": "Views/FloorNav/",
+          "viewControllerPath": "Views/FloorNav/FloorNavIndex"
         }
       ],
       "templatedDialogs": [

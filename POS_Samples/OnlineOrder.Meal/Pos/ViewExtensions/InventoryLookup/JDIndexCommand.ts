@@ -16,7 +16,7 @@ export default class JDIndexCommand extends InventoryLookupView.InventoryLookupE
     }
 
     protected execute(): void {
-        this.context.navigator.navigate("JDIndexView");
+        this.context.navigator.navigate("FloorNavIndex");
     }
 
 }
