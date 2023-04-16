@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+li {
+    list-style: none;
+}
+
+#red {
+    height: 800px;
+    background-color: red;
+}
+
+#orange {
+    height: 800px;
+    background-color: orange;
+}
+
+#yellow {
+    height: 800px;
+    background-color: yellow;
+}
+
+#green {
+    height: 800px;
+    background-color: green;
+}
+
+h1 {
+    text-align: center;
+    line-height: 800px;
+    color: white;
+}
+
+#nav {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.508);
+}
+
+#nav li {
+    width: 110px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.508);
+}
+
+#nav li:last-child {
+    border: none;
+}
+
+#nav li.active {
+    color: #000;
+    background-color: rgba(238, 238, 238, 0.7);
+}
