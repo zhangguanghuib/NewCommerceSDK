@@ -21,7 +21,10 @@
       ],
       "views": {
         "InventoryLookupView": {
-          "appBarCommands": [ { "modulePath": "ViewExtensions/InventoryLookup/JDIndexCommand" } ]
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/InventoryLookup/JDIndexCommand" },
+            { "modulePath": "ViewExtensions/InventoryLookup/FloorNavCommand" }
+          ]
         }
       }
     },
@@ -40,6 +43,13 @@
           "phonePageName": "FloorNavIndex",
           "viewDirectory": "Views/FloorNav/",
           "viewControllerPath": "Views/FloorNav/FloorNavIndex"
+        },
+        {
+          "title": "Flex2ColsFloorNavIndex",
+          "pageName": "Flex2ColsFloorNavIndex",
+          "phonePageName": "Flex2ColsFloorNavIndex",
+          "viewDirectory": "Views/Flex2ColsFloorNav/",
+          "viewControllerPath": "Views/Flex2ColsFloorNav/Flex2ColsFloorNavIndex"
         }
       ],
       "templatedDialogs": [

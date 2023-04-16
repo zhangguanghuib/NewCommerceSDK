@@ -1,12 +1,12 @@
 ﻿import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import * as InventoryLookupView from "PosApi/Extend/Views/InventoryLookupView";
 
-export default class JDIndexCommand extends InventoryLookupView.InventoryLookupExtensionCommandBase {
+export default class FloorNavCommand extends InventoryLookupView.InventoryLookupExtensionCommandBase {
 
  constructor(context: IExtensionCommandContext<InventoryLookupView.IInventoryLookupToExtensionCommandMessageTypeMap>) {
     super(context);
-     this.id = "JDIndexCommand";
-     this.label = "JD Index";
+     this.id = "FloorNavCommand";
+     this.label = "Floor NAV Index";
      this.extraClass = "iconInvoice";
 }
 
@@ -16,7 +16,7 @@ export default class JDIndexCommand extends InventoryLookupView.InventoryLookupE
     }
 
     protected execute(): void {
-        this.context.navigator.navigate("Flex2ColsFloorNavIndex");
+        this.context.navigator.navigate("FloorNavIndex");
     }
 
 }
