@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +28,49 @@
         <li>YELLOW</li>
         <li>GREEN</li>
     </ul>
-    <script type="text/javascript" src="Index.js"></script>
+    <script>
+        let nav = document.getElementById("nav");
+        let lis = document.querySelectorAll("#nav li");
+        let index;
+        /*         nav.addEventListener('click', function(event){
+                    if(event.target.tagName == 'LI'){
+                         for(let i=0; i<lis.length; ++i){
+                            lis[i].className='';
+                            lis[i].index = i;
+                         }
+                    }
+                    event.target.className="active";
+                    window.scrollTo({
+                        top: event.target.index * 800,
+                        behavior:"smooth"
+                    });
+                }, false); */
+
+        for (let i = 0; i < lis.length; ++i) {
+            lis[i].onclick = function () {
+                for (let j = 0; j < lis.length; j++) {
+                    lis[j].className = '';
+                }
+                this.className = "active";
+                window.scrollTo({
+                    top: i * 800,
+                    behavior: "smooth"
+                })
+            }
+        }
+
+        window.addEventListener("scroll", function () {
+            if (index != Math.floor((document.documentElement.scrollTop + 400) / 800)) {
+                index = Math.floor((document.documentElement.scrollTop + 400) / 800);
+                //console.log(index);
+                // console.log(document.documentElement.scrollTop);
+                for (let i = 0; i < lis.length; ++i) {
+                    lis[i].className = '';
+                }
+                lis[index].className = 'active'
+            }
+        }, false);
+    </script>
 </body>
 
 </html>
