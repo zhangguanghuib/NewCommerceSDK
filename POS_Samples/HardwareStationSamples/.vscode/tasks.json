@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build & Install Store Commerce Extension",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                "/p:Configuration=debug",
+                "/p:InstallStoreCommerceExtensionsAfterBuild=true",
+                "/t:build",
+                "/m",
+                "/consoleloggerparameters:NoSummary",
+                "${workspaceFolder}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        }
+    ]
+}
