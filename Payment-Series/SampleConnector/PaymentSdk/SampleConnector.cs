@@ -124,7 +124,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                AuthorizeRequest authorizeRequest = null;
+                AuthorizeRequest authorizeRequest;
                 try
                 {
                     authorizeRequest = AuthorizeRequest.ConvertFrom(request);
@@ -235,7 +235,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                CaptureRequest captureRequest = null;
+                CaptureRequest captureRequest;
                 try
                 {
                     captureRequest = CaptureRequest.ConvertFrom(request);
@@ -307,7 +307,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                VoidRequest voidRequest = null;
+                VoidRequest voidRequest;
                 try
                 {
                     voidRequest = VoidRequest.ConvertFrom(request);
@@ -365,7 +365,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                RefundRequest refundRequest = null;
+                RefundRequest refundRequest;
                 try
                 {
                     refundRequest = RefundRequest.ConvertFrom(request);
@@ -467,7 +467,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                GenerateCardTokenRequest tokenizeRequest = null;
+                GenerateCardTokenRequest tokenizeRequest;
                 try
                 {
                     tokenizeRequest = GenerateCardTokenRequest.ConvertFrom(request, requiredInteractionProperties);
@@ -552,11 +552,13 @@ namespace Microsoft.Dynamics
                 else
                 {
                     // Do not validate merchant account here, because the REST service will validate it.
+                    // Serialize request content
+                    string requestJson = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+
+                    // CodeQL [SM02185] CheckCertificateRevocationList property is not available on all platform used by customer.
                     using (HttpClient client = new HttpClient())
+                    using (var content = new StringContent(requestJson))
                     {
-                        // Serialize request content
-                        string requestJson = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                        HttpContent content = new StringContent(requestJson);
                         content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                         // Call REST service
@@ -642,11 +644,14 @@ namespace Microsoft.Dynamics
 
                 // Do not validate merchant account here, because the REST service will validate it.
                 Response response = null;
+
+                // Serialize request content
+                string requestJson = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+
+                // CodeQL [SM02185] CheckCertificateRevocationList property is not available on all platform used by customer.
                 using (HttpClient client = new HttpClient())
+                using (var content = new StringContent(requestJson))
                 {
-                    // Serialize request content
-                    string requestJson = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                    HttpContent content = new StringContent(requestJson);
                     content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                     // Call REST service
@@ -704,7 +709,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                ActivateGiftCardRequest activateGiftCardRequest = null;
+                ActivateGiftCardRequest activateGiftCardRequest;
 
                 try
                 {
@@ -773,7 +778,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                LoadGiftCardRequest loadGCRequest = null;
+                LoadGiftCardRequest loadGCRequest;
                 try
                 {
                     loadGCRequest = LoadGiftCardRequest.ConvertFrom(request);
@@ -836,7 +841,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                BalanceOnGiftCardRequest bogcRequest = null;
+                BalanceOnGiftCardRequest bogcRequest;
                 try
                 {
                     bogcRequest = BalanceOnGiftCardRequest.ConvertFrom(request);
@@ -983,7 +988,7 @@ namespace Microsoft.Dynamics
                 RetailLogger.Log.PaymentConnectorLogOperation(methodName, OperationStarting, this.Name, Platform);
 
                 // Convert request
-                ValidateMerchantAccountRequest validateRequest = null;
+                ValidateMerchantAccountRequest validateRequest;
                 try
                 {
                     validateRequest = ValidateMerchantAccountRequest.ConvertFrom(request);
@@ -1032,8 +1037,7 @@ namespace Microsoft.Dynamics
                 Hashtable hashRequestProperties = PaymentProperty.ConvertToHashtable(request.Properties);
 
                 // Get the task name from the request, For parameters please use the TransactionData name space for any parameters you pass for a task.
-                string taskName = string.Empty;
-                PaymentProperty.GetPropertyValue(hashRequestProperties, GenericNamespace.TransactionData, TransactionDataProperties.TaskName, out taskName);
+                PaymentProperty.GetPropertyValue(hashRequestProperties, GenericNamespace.TransactionData, TransactionDataProperties.TaskName, out string taskName);
 
                 Response response = new Response();
                 List<PaymentProperty> properties = new List<PaymentProperty>();
@@ -1330,11 +1334,10 @@ namespace Microsoft.Dynamics
 
                 // Update the available balance on the gift if approval is successful.
                 bool approvalHasFailed = response.AvailableBalance == 5.12M || !hasBeenActivated;
-                decimal availableAmount = decimal.Zero;
                 if (!approvalHasFailed)
                 {
                     // Retrieve existing amount on the gift card.
-                    availableAmount = activatedGiftCards[cardNumber];
+                    decimal availableAmount = activatedGiftCards[cardNumber];
 
                     // Add load amount from request to existing amount.
                     availableAmount += request.Amount.Value;
@@ -1368,7 +1371,7 @@ namespace Microsoft.Dynamics
                 decimal giftCardBalance = 0M;
                 bool isGiftCardTransaction = request.CardType.Equals(CardType.GiftCard.ToString(), StringComparison.OrdinalIgnoreCase);
 
-                string giftCardNumber = string.Empty;
+                string giftCardNumber;
                 if (isGiftCardTransaction)
                 {
                     giftCardNumber = request.CardNumber;
@@ -1910,7 +1913,7 @@ namespace Microsoft.Dynamics
 
             private static Uri GetPaymentAcceptBaseAddress(string requestEnvironment)
             {
-                string paymentAcceptBaseAddress = null;
+                string paymentAcceptBaseAddress;
                 if (string.IsNullOrWhiteSpace(requestEnvironment))
                 {
                     paymentAcceptBaseAddress = PaymentAcceptBaseAddressINT;
@@ -1968,7 +1971,7 @@ namespace Microsoft.Dynamics
 
                     Enum.TryParse<CardType>(cardTypeString, out CardType cardType);
 
-                    var bankIdentificationNumberStart = string.Empty;
+                    string bankIdentificationNumberStart;
                     switch (cardType)
                     {
                         case CardType.MasterCard:
@@ -2000,8 +2003,6 @@ namespace Microsoft.Dynamics
             }
 
             #endregion
-
-           
         }
     }
 }
