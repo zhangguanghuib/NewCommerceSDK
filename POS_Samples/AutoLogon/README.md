@@ -3,10 +3,10 @@
 
 This sample is to show how to implement POS  Auto Logon with providing OperatorId/Password in POS URL, like this:
 
-Write a html like:
+Write a html like:<br/>
 Go to <a href="https://<your CPOS>devpos.axcloud.dynamics.com/?username=000160&password=123">CPOS</a>
 
-and then see this:
+and then see this:<br/>
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00da02ac-92f1-4677-b1e9-b15b7282faff)
 
