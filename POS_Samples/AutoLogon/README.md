@@ -4,18 +4,7 @@
 This sample is to show how to implement POS  Auto Logon with providing OperatorId/Password in POS URL, like this:
 
 Write a html like:
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Go to <a href="https://<your CPOS>devpos.axcloud.dynamics.com/?username=000160&password=123">CPOS</a>
-</body>
-</html>
+Go to <a href="https://<your CPOS>devpos.axcloud.dynamics.com/?username=000160&password=123">CPOS</a>
 
 and then see this:
 
