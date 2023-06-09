@@ -3,6 +3,9 @@
 
 This sample is to show how to implement POS  Auto Logon with providing OperatorId/Password in POS URL, like this:
 
+Store password in Key Vault with this doc:
+https://guvensahin.com/how-to-use-azure-key-vault-in-dynamics-365-fo/
+
 Write a html like:<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c2509649-1af2-4a1f-a3be-c91c9f3ac778)
 
