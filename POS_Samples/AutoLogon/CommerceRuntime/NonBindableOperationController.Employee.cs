@@ -10,7 +10,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class NonBindableOperationController : IController
+    public partial class NonBindableOperationController : IController
     {
         [HttpPost]
         [Authorization(CommerceRoles.Anonymous)]
