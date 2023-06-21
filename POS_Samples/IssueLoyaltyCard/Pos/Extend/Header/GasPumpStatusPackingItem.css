@@ -1,0 +1,25 @@
+﻿#gasPumpPackedButton {
+    width: inherit;
+    color: #fff;
+}
+
+#con {
+    height:48px;
+    width:48px;
+    position: relative;
+}
+
+.reddot1 {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+#issueLoyaltyCardAppBar
+{
+    visibility:hidden;
+}
