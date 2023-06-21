@@ -17,7 +17,7 @@ CREATE TABLE [ext].[LOGISTICSADDRESSPARAMETERSExt](
 )
 ```
 
-Step 2:  Config CDX to push the column/field in existing table to extension table
+Step 2:  Config CDX to push the column/field in existing table(dbo.LOGISTICSADDRESSPARAMETERS) to extension table([ext].[LOGISTICSADDRESSPARAMETERSExt])
 1. Create a new channel table in this form:
 <img width="789" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a22d6e6d-0988-4670-88cc-60027b7f67c6">
 2. Create a scheduler subjob:
