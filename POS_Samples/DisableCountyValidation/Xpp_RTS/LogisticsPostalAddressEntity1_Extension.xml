@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>LogisticsPostalAddressEntity1_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(classstr(LogisticsPostalAddressEntity))]
+final class LogisticsPostalAddressEntity1_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>validate</Name>
+				<Source><![CDATA[
+    static boolean validate(LogisticsPostalAddressView view)
+    {
+        boolean ret = true;
+
+        ret = next validate(view);
+
+        if(!ret)
+        {
+            ret = LogisticsPostalAddressEntity::validateInternal(view);
+        }
+
+        return  ret;
+
+        //boolean ret = true;
+        //try
+        //{
+        //    throw Exception::Info;
+        //    ret = next validate(view);
+        //}
+        //catch
+        //{
+        //    exceptionTextFallThrough();
+        //}
+        //finally
+        //{
+        //    ret = LogisticsPostalAddressEntity::validateInternal(view);
+        //}
+
+        //return  ret;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>validateInternal</Name>
+				<Source><![CDATA[
+    public static boolean validateInternal(LogisticsPostalAddressView view)
+    {
+        LogisticsAddressState   state;
+        LogisticsAddressCounty  county;
+        tableId                 tableId;
+        boolean                 errorFlag = false;
+        boolean                 isStateSpecified = false;
+        boolean                 isCountySpecified = false;
+        boolean                 recordFound = false;
+
+        tableId = tablenum(LogisticsPostalAddress);
+        // No country/region
+        if (view.CountryRegionId == '')
+        {
+            // Check country/region
+            error("@SYS27185");
+            errorFlag = true;
+        }
+
+        // Check if state is specified and only one exists
+        if (view.State != '')
+        {
+            isStateSpecified = true;
+            recordFound = false;
+
+            while select RecId from state where
+                state.StateId == view.State && state.CountryRegionId == view.CountryRegionId
+            {
+                if (recordFound)
+                {
+                    errorFlag = true;
+                    // "Multiple states"
+                    error(strfmt("@SYS318792", fieldid2name(tableId, fieldnum(LogisticsPostalAddress, State))));
+                }
+                else
+                    recordFound = true;
+            }
+            if (!recordFound)
+            {
+                errorFlag = true;
+                // No state found
+                error(strfmt("@SYS76877", fieldid2name(tableId, fieldnum(LogisticsPostalAddress, State))));
+            }
+        }
+
+        // Check if state is specified and only one exists
+        LogisticsAddressParameters logisticsAddressParameters;
+
+        select firstonly DisableCountyValidation  from logisticsAddressParameters;
+
+        if (view.County != '' && !logisticsAddressParameters.DisableCountyValidation)
+        {
+            isCountySpecified = true;
+            recordFound = false;
+            // Error
+            if (!isStateSpecified)
+            {
+                // State required for county
+                error(strfmt("@SYS76877", fieldid2name(tableId, fieldnum(LogisticsPostalAddress, State))));
+                errorFlag = true;
+            }
+            // Check for county
+            while select RecId from county where
+                county.StateId == view.State && county.CountryRegionId == view.CountryRegionId &&
+                county.CountyId == view.County
+            {
+                if (recordFound)
+                {
+                    errorFlag = true;
+                    // Multiple matching County records
+                    error(strfmt("@SYS318792", fieldid2name(tableId, fieldnum(LogisticsPostalAddress, County))));
+                }
+                else
+                    recordFound = true;
+            }
+            if (!recordFound)
+            {
+                errorFlag = true;
+                // error("No county found");
+                error(strfmt("@SYS76877", fieldid2name(tableId, fieldnum(LogisticsPostalAddress, County))));
+            }
+        }
+
+        return !errorFlag;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
