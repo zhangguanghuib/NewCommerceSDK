@@ -6,7 +6,7 @@ Check the dbo.LOGISTICSADDRESSPARAMETERS, it has a field DISABLECOUNTYVALIDATION
 but channel database ax.LOGISTICSADDRESSPARAMETERS does not have this field
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5cdca57a-fc66-485d-ba37-e3cb40eb6627)
 
-<u>Our purpose is to push the data in dbo.LOGISTICSADDRESSPARAMETERS.DISABLECOUNTYVALIDATION to an extension table since the standard table does not support it</u>
+<span style="border-bottom:2px dashed yellow;">Our purpose is to push the data in dbo.LOGISTICSADDRESSPARAMETERS.DISABLECOUNTYVALIDATION to an extension table since the standard table does not support it</span>
 ## Step 1:  Create a table 
 ```sql
 CREATE TABLE [ext].[LOGISTICSADDRESSPARAMETERSExt](
