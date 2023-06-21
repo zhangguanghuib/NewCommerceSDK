@@ -27,5 +27,16 @@ Step 2:  Config CDX to push the column/field in existing table(dbo.LOGISTICSADDR
 4. Create distribution scheduler:
    <img width="1133" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a8acdd53-1da6-40d5-89fe-19e6399c7f3d">
 
+Step 3, run the new job, and you can see the download session can be applied:
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/13623bf9-a202-4853-9048-1789900fa338)
+
+Finally you see the data have been pushed to channel database:
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/25594c36-972a-43f9-bfef-a9b7757f77e6)
+
+Step 4, in the C# code,  we will call own own store procedure to support county validation enabled or not
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b3b981d2-1c79-4ddd-a1e5-0918dbec1b6b)
+
+Step 5， In HQ X++ code,  we made this customization to support that as well:
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9c549327-3af4-4ca0-b10a-d0ee06463555)
 
 
