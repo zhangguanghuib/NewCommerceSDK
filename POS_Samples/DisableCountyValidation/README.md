@@ -2,7 +2,8 @@
 
 ## Precondition:
 
-Check the dbo.LOGISTICSADDRESSPARAMETERS, it has a field DISABLECOUNTYVALIDATION, but channel database ax.LOGISTICSADDRESSPARAMETERS does not have this field
+Check the dbo.LOGISTICSADDRESSPARAMETERS, it has a field DISABLECOUNTYVALIDATION,<br/> 
+but channel database ax.LOGISTICSADDRESSPARAMETERS does not have this field
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5cdca57a-fc66-485d-ba37-e3cb40eb6627)
 
 ## Step 1:  Create a table 
