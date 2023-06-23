@@ -32,7 +32,7 @@ In case you see the SysPick Dialog in the right,  just skip that, you need manua
 <img width="827" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52cca225-db0b-43d9-9bc0-9967840b070c"><br/>
 
 #### Retail server side:
-##### 1) Create extension table:
+##### 1) Create extension table to store dispay order
 ```sql
 create TABLE [ext].[RETAILSTORETENDERTYPETABLE](
 	[CHANNEL] [bigint] NOT NULL,
@@ -46,7 +46,7 @@ create TABLE [ext].[RETAILSTORETENDERTYPETABLE](
 	[DATAAREAID] ASC
 )
 ```
-#### 2) Create the [ext].[CHANNELTENDERTYPEVIEW]
+#### 2) Create the [ext].[CHANNELTENDERTYPEVIEW], this comes the OOB view [crt].[CHANNELTENDERTYPEVIEW], but add table join with [ext].RETAILSTORETENDERTYPETABLE so that it support tender type display order.
 ```sql
 ....
 rsttt.USEFORDECLARESTARTAMOUNT,
