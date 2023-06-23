@@ -30,5 +30,20 @@ In case you see the SysPick Dialog in the right,  just skip that, you need manua
 #####  4) Create distribution scheduler:<br/>
 <img width="827" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52cca225-db0b-43d9-9bc0-9967840b070c"><br/>
 
+#### Retail server side:
+##### 1) Create extension table:
+```sql
+create TABLE [ext].[RETAILSTORETENDERTYPETABLE](
+	[CHANNEL] [bigint] NOT NULL,
+	[TENDERTYPEID] [nvarchar](10) NOT NULL,
+	[DATAAREAID] [nvarchar](4) NOT NULL,
+	[DISPLAYORDER] [numeric](32, 6) NOT NULL default 0,
+ CONSTRAINT [I_-1697922944_-828827534] PRIMARY KEY CLUSTERED 
+(
+	[CHANNEL] ASC,
+	[TENDERTYPEID] ASC,
+	[DATAAREAID] ASC
+)
+```
 
 
