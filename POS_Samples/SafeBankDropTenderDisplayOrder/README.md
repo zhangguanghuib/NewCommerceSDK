@@ -22,13 +22,13 @@
 ##### 1) Create all the field for the new table:
 <img width="1300" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/58ba5f5e-5424-4270-b98d-2faeaf5c8f2e">
 Important:
-In case you see the SysPick Dialog in the right,  just skip that, you need manually input the field name and save it.
-##### 2) Create scheduler subjob:
-<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2aad63ac-4c21-4419-830c-7da91e8b67c9">
-##### 3) Create scheduler job:
-<img width="878" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/42c4a9b4-e838-41d6-8c51-6ccc7942ee74">
-##### 4) Create distribution scheduler:
-<img width="827" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52cca225-db0b-43d9-9bc0-9967840b070c">
+In case you see the SysPick Dialog in the right,  just skip that, you need manually input the field name and save it.<br/>
+##### 2) Create scheduler subjob:<br/>
+<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2aad63ac-4c21-4419-830c-7da91e8b67c9"><br/>
+##### 3) Create scheduler job:<br/>
+<img width="878" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/42c4a9b4-e838-41d6-8c51-6ccc7942ee74"><br/>
+##### 4) Create distribution scheduler:<br/>
+<img width="827" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52cca225-db0b-43d9-9bc0-9967840b070c"><br/>
 
 
 
