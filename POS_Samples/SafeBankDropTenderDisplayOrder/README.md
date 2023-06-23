@@ -1,2 +1,1 @@
-The feature is in development, till now that has been done<br/>
-![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2db9fba6-c442-41b7-9429-162ee35554e5)
+### This feature is going to provide support display order on tender types for safe drop or bank drop
