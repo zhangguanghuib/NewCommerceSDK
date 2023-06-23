@@ -45,5 +45,35 @@ create TABLE [ext].[RETAILSTORETENDERTYPETABLE](
 	[DATAAREAID] ASC
 )
 ```
+#### 2) Create the [ext].[CHANNELTENDERTYPEVIEW]
+```sql
+....
+rsttt.USEFORDECLARESTARTAMOUNT,
+rstttext.DISPLAYORDER as DISPLAYORDER
+FROM [ax].RETAILSTORETENDERTYPETABLE rsttt
+    INNER JOIN [ext].RETAILSTORETENDERTYPETABLE rstttext
+	ON rsttt.DATAAREAID = rstttext.DATAAREAID
+	AND rsttt.CHANNEL = rstttext.CHANNEL
+	AND rsttt.TENDERTYPEID = rstttext.TENDERTYPEID
+INNER JOIN [ax].RETAILCHANNELTABLE rct
+...
+```
+#### 3）Overide GetChannelTenderTypesDataRequest to make it order by OperationId and then Display Order:
+```csharp
+query.From = ChannelTenderTypeViewName;
+query.DatabaseSchema = "ext";
+query.Where = whereClause;
+query.IsQueryByPrimaryKey = false;
+// query.OrderBy = RecIdColumn;
 
+SortColumn sortColumnOperationId = new SortColumn("OPERATIONID", false);
+SortColumn sortColumnDisplayOrder = new SortColumn("DISPLAYORDER", false);
+query.OrderBy = new SortingInfo(sortColumnOperationId, sortColumnDisplayOrder).ToString();
+
+using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext, DatabaseConnectionMode.IsReadOnly | ReadFromReplicaIfEnabled(request.RequestContext)))
+{
+    result = await databaseContext.ReadEntityAsync<TenderType>(query).ConfigureAwait(false);
+}
+
+```
 
