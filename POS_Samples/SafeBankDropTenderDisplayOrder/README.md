@@ -1,4 +1,4 @@
-## This feature is going to provide support display order on tender types for safe drop or bank drop
+## This feature is going to provide support display order on tender types for safe drop or bank drop, the current behavior on POS has limitation because tender table can only be sorted by RecId,  this is not friendly for customer.
 ### 1. How it works
 #### 1)In HQ side, set the dislay order for store tender types
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/58fe220f-9291-4752-bc63-9866965ecbb0)
