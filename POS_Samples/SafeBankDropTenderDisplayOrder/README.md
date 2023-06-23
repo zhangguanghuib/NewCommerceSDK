@@ -2,4 +2,11 @@
 ### 1. How it works
 #In HQ side, set the dislay order for store tender types
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/58fe220f-9291-4752-bc63-9866965ecbb0)
+#Run this download distribution job and make download session applied
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/872c1732-e947-4a49-bdf1-dc43dcc7c489)
+#On POS, go to safe drop or bank drop, you will find the tender type display order will be adjusted
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/efe09b42-5ff5-4739-8609-0de3804ced24)
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/54c232ab-336e-4431-9544-d235508c7033)
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f823f09e-9c91-428b-9720-503bac3547b6)
+
 
