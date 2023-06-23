@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.Runtime.DataManagers">
+      <HintPath>Microsoft.Dynamics.Commerce.Runtime.DataManagers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
