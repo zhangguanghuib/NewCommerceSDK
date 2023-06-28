@@ -11,19 +11,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    
+  <ItemGroup>   
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DBSDLL\x86\ECR32XP.dll">
+    <Content Include="DBSDLL\x86\ECR32XP.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="DBSDLL\x64\ECR64Win7.dll">
+    </Content>
+    <Content Include="DBSDLL\x64\ECR64Win7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   
 </Project>
