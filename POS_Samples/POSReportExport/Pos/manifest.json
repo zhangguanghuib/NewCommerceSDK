@@ -1,0 +1,49 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    },
+    {
+      "alias": "jspdf",
+      "format": "amd",
+      "modulePath": "Libraries/jspdf.min"
+    },
+    {
+      "alias": "html2canvas",
+      "format": "amd",
+      "modulePath": "Libraries/html2canvas"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [       
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+        "ReportDetailsView": {
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/ReportDetails/ReportDetailsCommand" },
+            { "modulePath": "ViewExtensions/ReportDetails/ReportExportCommand" },
+            { "modulePath": "ViewExtensions/ReportDetails/ExportToCSVCommand" }
+          ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}
