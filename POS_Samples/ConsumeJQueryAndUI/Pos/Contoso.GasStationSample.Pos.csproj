@@ -42,7 +42,7 @@
   <Target Name="ContentIncludeJQueryUILibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
     <PropertyGroup>
       <JQueryUILibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'jquery.ui.combined'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\jquery-ui-%(PackageDefinitions.Version).js</JQueryUILibraryFilePath>
-	    <JQueryUIFile>Libraries/jquery-ui-1.13.2.js</JQueryUIFile>
+	    <JQueryUIFile>Libraries/jquery-ui.js</JQueryUIFile>
     </PropertyGroup>
     <Copy SourceFiles="$(JQueryUILibraryFilePath)" DestinationFiles="$(JQueryUIFile)" SkipUnchangedFiles="true" /> 
     <ItemGroup>
