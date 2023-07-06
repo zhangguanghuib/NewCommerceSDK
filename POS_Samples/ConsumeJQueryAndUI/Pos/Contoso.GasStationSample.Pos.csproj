@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.*" />
     <PackageReference Include="knockoutjs" Version="3.5.*" />
     <PackageReference Include="jQuery" Version="3.7.*" />
+    <PackageReference Include="jQuery.UI.Combined" Version="1.13.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +33,20 @@
       <JQueryLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'jQuery'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\Jquery-%(PackageDefinitions.Version).js</JQueryLibraryFilePath>
 	    <jQueryFile>Libraries/jQuery.js</jQueryFile>
     </PropertyGroup>
-    <Copy SourceFiles="$(JQueryLibraryFilePath)" DestinationFiles="$(jQueryFile)" SkipUnchangedFiles="true" /> <!-- Necessary for CPOS -->
+    <Copy SourceFiles="$(JQueryLibraryFilePath)" DestinationFiles="$(jQueryFile)" SkipUnchangedFiles="true" />
     <ItemGroup>
       <Content Include="$(jQueryFile)"></Content>
+    </ItemGroup>
+  </Target>
+  
+  <Target Name="ContentIncludeJQueryUILibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
+    <PropertyGroup>
+      <JQueryUILibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'jquery.ui.combined'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\jquery-ui-%(PackageDefinitions.Version).js</JQueryUILibraryFilePath>
+	    <JQueryUIFile>Libraries/jquery-ui-1.13.2.js</JQueryUIFile>
+    </PropertyGroup>
+    <Copy SourceFiles="$(JQueryUILibraryFilePath)" DestinationFiles="$(JQueryUIFile)" SkipUnchangedFiles="true" /> 
+    <ItemGroup>
+      <Content Include="$(JQueryUIFile)"></Content>
     </ItemGroup>
   </Target>
 
