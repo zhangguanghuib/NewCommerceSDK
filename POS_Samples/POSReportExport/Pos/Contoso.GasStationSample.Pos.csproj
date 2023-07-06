@@ -40,7 +40,7 @@
   
   <Target Name="ContentIncludejsPDFLibrary" BeforeTargets="Build">
     <PropertyGroup>
-        <jsPDFLibraryFilePath>ExternalJSDependencies/jspdf.min.js</jsPDFLibraryFilePath>
+        <jsPDFLibraryFilePath>ExternalJSDependencies/jspdf.min</jsPDFLibraryFilePath>
 	      <jsPDFFile>Libraries/jspdf.min.js</jsPDFFile>
     </PropertyGroup>
     <Copy SourceFiles="$(jsPDFLibraryFilePath)" DestinationFiles="$(jsPDFFile)" SkipUnchangedFiles="false" />
@@ -51,7 +51,7 @@
 
   <Target Name="ContentIncludehtml2canvasFLibrary" BeforeTargets="Build">
     <PropertyGroup>
-      <html2canvasLibraryFilePath>ExternalJSDependencies/html2canvas.js</html2canvasLibraryFilePath>
+      <html2canvasLibraryFilePath>ExternalJSDependencies/html2canvas</html2canvasLibraryFilePath>
       <html2canvasFile>Libraries/html2canvas.js</html2canvasFile>
     </PropertyGroup>
     <Copy SourceFiles="$(html2canvasLibraryFilePath)" DestinationFiles="$(html2canvasFile)" SkipUnchangedFiles="false" />
