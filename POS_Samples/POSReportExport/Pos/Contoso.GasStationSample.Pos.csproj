@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="ExternalJSDependencies\html2canvas.js" />
+    <None Include="ExternalJSDependencies\jspdf.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Pos" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.*" />
     <PackageReference Include="knockoutjs" Version="3.5.*" />
@@ -47,7 +52,7 @@
   <Target Name="ContentIncludehtml2canvasFLibrary" BeforeTargets="Build">
     <PropertyGroup>
       <html2canvasLibraryFilePath>ExternalJSDependencies/html2canvas.js</html2canvasLibraryFilePath>
-      <html2canvasFile>Libraries/html2canvasn.js</html2canvasFile>
+      <html2canvasFile>Libraries/html2canvas.js</html2canvasFile>
     </PropertyGroup>
     <Copy SourceFiles="$(html2canvasLibraryFilePath)" DestinationFiles="$(html2canvasFile)" SkipUnchangedFiles="false" />
     <ItemGroup>
