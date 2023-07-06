@@ -6,16 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Libraries\**" />
-    <Content Remove="Libraries\**" />
-    <EmbeddedResource Remove="Libraries\**" />
-    <TypeScriptCompile Remove="Libraries\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Pos" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.*" />
     <PackageReference Include="knockoutjs" Version="3.5.*" />
+    <PackageReference Include="jQuery" Version="3.7.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,31 +21,21 @@
       <KnockoutLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'knockoutjs'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\knockout-%(PackageDefinitions.Version).js</KnockoutLibraryFilePath>
 	  <KnockoutjsFile>Libraries/knockout.js</KnockoutjsFile>
     </PropertyGroup>
-    <Copy SourceFiles="$(KnockoutLibraryFilePath)" DestinationFiles="$(KnockoutjsFile)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(KnockoutLibraryFilePath)" DestinationFiles="$(KnockoutjsFile)" SkipUnchangedFiles="true" /> <!-- Necessary for CPOS -->
     <ItemGroup>
       <Content Include="$(KnockoutjsFile)"></Content>
     </ItemGroup>
   </Target>
   
-  <Target Name="ContentIncludejsPDFLibrary" BeforeTargets="Build">
+  <Target Name="ContentIncludeJqueryLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
     <PropertyGroup>
-        <jsPDFLibraryFilePath>ExternalJSDependencies/jspdf.min.js</jsPDFLibraryFilePath>
-	      <jsPDFFile>Libraries/jspdf.min.js</jsPDFFile>
+      <JQueryLibraryFilePath Condition="'%(PackageDefinitions.Name)' == 'jQuery'">%(PackageDefinitions.ResolvedPath)\Content\Scripts\Jquery-%(PackageDefinitions.Version).js</JQueryLibraryFilePath>
+	    <jQueryFile>Libraries/jQuery.js</jQueryFile>
     </PropertyGroup>
-    <Copy SourceFiles="$(jsPDFLibraryFilePath)" DestinationFiles="$(jsPDFFile)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="$(JQueryLibraryFilePath)" DestinationFiles="$(jQueryFile)" SkipUnchangedFiles="true" /> <!-- Necessary for CPOS -->
     <ItemGroup>
-      <Content Include="$(jsPDFFile)"></Content>
+      <Content Include="$(jQueryFile)"></Content>
     </ItemGroup>
   </Target>
 
-  <Target Name="ContentIncludehtml2canvasFLibrary" BeforeTargets="Build">
-    <PropertyGroup>
-      <html2canvasLibraryFilePath>ExternalJSDependencies/html2canvas.js</html2canvasLibraryFilePath>
-      <html2canvasFile>Libraries/html2canvasn.js</html2canvasFile>
-    </PropertyGroup>
-    <Copy SourceFiles="$(html2canvasLibraryFilePath)" DestinationFiles="$(html2canvasFile)" SkipUnchangedFiles="false" />
-    <ItemGroup>
-      <Content Include="$(html2canvasFile)"></Content>
-    </ItemGroup>
-  </Target>
 </Project>
