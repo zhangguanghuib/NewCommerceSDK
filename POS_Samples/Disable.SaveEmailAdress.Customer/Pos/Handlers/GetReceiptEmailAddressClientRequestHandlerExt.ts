@@ -14,6 +14,8 @@ export default class GetReceiptEmailAddressClientRequestHandlerExt extends GetRe
 
         if (Object.prototype.hasOwnProperty.call(request, "disableSaveEmailToCustomer")) {
             request["disableSaveEmailToCustomer"] = true;
+        } if (Object.prototype.hasOwnProperty.call(request, "customer")) {
+            request["customer"] = null;
         }
 
         return this.defaultExecuteAsync(request);

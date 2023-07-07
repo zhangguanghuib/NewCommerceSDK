@@ -23,3 +23,13 @@
 {
     visibility:hidden;
 }
+
+#saveEmailCheckbox 
+{
+    visibility: hidden;
+}
+
+#saveEmailCheckbox + div
+{
+    visibility: hidden;
+}
