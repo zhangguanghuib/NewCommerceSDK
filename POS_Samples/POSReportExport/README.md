@@ -8,7 +8,7 @@
   <Target Name="ContentIncludejsPDFLibrary" BeforeTargets="AssignTargetPaths">
     <PropertyGroup>
         <jsPDFLibraryFilePath>ExternalJSDependencies/jspdf.min</jsPDFLibraryFilePath>
-	      <jsPDFFile>Libraries/jspdf.min.js</jsPDFFile>
+        <jsPDFFile>Libraries/jspdf.min.js</jsPDFFile>
     </PropertyGroup>
     <Copy SourceFiles="$(jsPDFLibraryFilePath)" DestinationFiles="$(jsPDFFile)" SkipUnchangedFiles="false" />
     <ItemGroup>
@@ -26,6 +26,15 @@
       <Content Include="$(html2canvasFile)"></Content>
     </ItemGroup>
   </Target>
+```
+
+###  Step 3.   Build the whole solution,  you can see these JS file will be copied to Scale Unit Package
+<img width="814" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/552e130e-a697-48dc-8ce4-1ddc25b80878">
+
+
+###  Step 4. Then you can consume these JS Libray
+```js
+import jspdf from "jspdf"; 
 ```
 
 1. Open POS Report:
