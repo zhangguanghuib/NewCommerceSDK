@@ -34,7 +34,37 @@
 
 ###  Step 4. Then you can consume these JS Libray
 ```js
-import jspdf from "jspdf"; 
+import jspdf from "jspdf";
+...
+        const doc = new jspdf({
+            format: "a3"
+        });
+        this._reportData.Output.forEach((row: ProxyEntities.ReportRow) => { 
+            row.RowData.forEach((property: ProxyEntities.CommerceProperty) => {
+                x = 20;
+                doc.text(x, y, property.Key + ":");
+                x += colWidth;
+                if (!ObjectExtensions.isNullOrUndefined(property.Value.BooleanValue)) {
+                    doc.text(x, y, property.Value.BooleanValue.toString());
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.StringValue)) {
+                    doc.text(x, y, property.Value.StringValue);
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.DateTimeOffsetValue)) {
+                    doc.text(x, y, property.Value.DateTimeOffsetValue.toString());
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.DecimalValue)) {
+                    doc.text(x, y, property.Value.DecimalValue.toString());
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.IntegerValue)) {
+                    doc.text(x, y, property.Value.IntegerValue.toString());
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.LongValue)) {
+                    doc.text(x, y, property.Value.LongValue.toString());
+                } else if (!ObjectExtensions.isNullOrUndefined(property.Value.ByteValue)) {
+                    doc.text(x, y, property.Value.ByteValue.toString());
+                }
+                y += lineHeight;
+            });
+            doc.line(20, y, x + colWidth, y);
+            y += lineHeight;
+        })
+        doc.save(this._reportTitle +'.pdf');
 ```
 ###  Step 5. Open POS Report:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5c537531-6bfa-4f9b-a0cb-91bd7150a474)
