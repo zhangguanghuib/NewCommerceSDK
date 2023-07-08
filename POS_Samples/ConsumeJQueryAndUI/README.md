@@ -1,4 +1,4 @@
-# How to consume external Javascript library in Commerce SDK  POS extension project
+# How to consume external Javascript library in Commerce SDK  POS extension project(Nuget Version)
 Please find the official doc for more details:
 
 https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/knockout-pos-extension
