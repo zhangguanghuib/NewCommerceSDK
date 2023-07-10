@@ -21,7 +21,7 @@ Steps:<br/>
 5. Upload certification (CER file):<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50b8e8e9-7c6a-4357-84a5-2386a3523f0b)
 6.  Go to HQ, create a Channel profile:<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00e4e207-7797-4e0f-bc57-fe839fb78b06)
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e620b6dc-ce12-4140-bda2-a84f3fb1b065)
 7. Set the store with new channel profile:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/32c93da7-b7f3-40b6-9c37-6e750cc498a1)
 8. Create a channel database, add the required channel, this steps has nothing special:<br/>
