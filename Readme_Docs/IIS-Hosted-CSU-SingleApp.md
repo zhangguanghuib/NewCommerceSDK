@@ -15,7 +15,7 @@ Steps:<br/>
 3. API Permissions:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fb973385-9be8-4f3f-b60b-c99ab76cf1aa)
    And choose the API exposed in last step<br/>:
-   <img width="636" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e68bd651-c98b-42ea-add9-e15b05cd9b87">
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1a3a1f73-78bc-476c-a4f2-f336b3ba8677)
 4. Authentication->Add a platform->Single page application:->Redrirect URL->Input CPOS  URL from Channel Profile<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/976af717-f045-4182-a3b2-7b18c58c019f)
 5. Upload certification (CER file):<br/>
