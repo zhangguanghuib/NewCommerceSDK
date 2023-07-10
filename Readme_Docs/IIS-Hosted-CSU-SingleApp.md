@@ -20,7 +20,8 @@ Steps:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/976af717-f045-4182-a3b2-7b18c58c019f)
 5. Upload certification (CER file):<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50b8e8e9-7c6a-4357-84a5-2386a3523f0b)
-
+6.  Go to HQ, create a Channel profile:<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00e4e207-7797-4e0f-bc57-fe839fb78b06)
 
 
 
