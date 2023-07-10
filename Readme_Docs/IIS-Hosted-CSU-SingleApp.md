@@ -10,6 +10,8 @@ More official document can be found from:
 Steps:<br/>
 1. Open [Azure portal](https://aad.portal.azure.com/), and create a new App Registrations, give it a name like CSUServer, and Supported Account Types - My Orgnization Only:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52e17e84-eab0-4193-bc4a-8fdf9c28e46f)
+2. Expose an API->Add a scope:
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8ea249b3-ebec-45a5-9441-80a6aee46976)
 
 
 
