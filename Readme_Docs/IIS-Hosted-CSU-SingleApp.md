@@ -22,6 +22,13 @@ Steps:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50b8e8e9-7c6a-4357-84a5-2386a3523f0b)
 6.  Go to HQ, create a Channel profile:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00e4e207-7797-4e0f-bc57-fe839fb78b06)
+7. Set the store with new channel profile:<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7ed445ba-50e2-4cd0-9e8f-b1f140b4559f)
+8. Create a channel database, add the required channel, this steps has nothing special:<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/81461121-6731-41c1-ab07-c9638a88f399)
+9. Record the Application Id(Client Id) we created into the below form(previously it is called Microsoft Azure Application):<br>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f761f3bc-059e-49da-b2b0-81f504140af5)
+
 
 
 
