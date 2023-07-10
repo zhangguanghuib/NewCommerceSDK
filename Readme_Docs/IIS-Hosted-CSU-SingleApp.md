@@ -18,6 +18,8 @@ Steps:<br/>
    <img width="636" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e68bd651-c98b-42ea-add9-e15b05cd9b87">
 4. Authentication->Add a platform->Single page application:->Redrirect URL->Input CPOS  URL from Channel Profile<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/976af717-f045-4182-a3b2-7b18c58c019f)
+5. Upload certification (CER file):<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50b8e8e9-7c6a-4357-84a5-2386a3523f0b)
 
 
 
