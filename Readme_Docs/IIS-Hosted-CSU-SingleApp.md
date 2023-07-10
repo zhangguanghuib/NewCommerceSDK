@@ -1,9 +1,7 @@
 This document is to demonstrate how to configure an IIS-Hosted CSU in local environment with <b>One Single Azure Application</b> for：
-- Item 1
-- Item 2
-- Item 3
-
-Retail Server,  Cloud POS and Async Client <br/>
+- Retail Server
+- Cloud POS
+- Async Client
 More official document can be found from:
 [How to configure CPOS to use your own Azure AD application](https://community.dynamics.com/ax/b/axforretail/posts/how-to-point-cpos-to-use-your-own-azure-ad-application)<br>
 [Introduction to Commerce Sealed Installers](https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers)<br/>
