@@ -31,8 +31,12 @@ Steps:<br/>
 10.  Commerce Shared Parameters form->Identity provider:<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ff80dbe9-f06f-44f2-878c-642827d029f5)
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e5b6c4fe-0ff7-4e00-a60f-a8229c20ae84)
-11.  
-
+11.  Download the channel database configuration xml file,  nothing needs be channged:<br/>
+     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d8bbd46-4fba-450f-acd9-8550d3990bce)<br/>
+12.  Run command to install CSU, please make sure the <ThumbprintOfCertificate> and <SingleAppIdCreated> are same as we created:<br/>
+    ```
+    CommerceStoreScaleUnit.StoreSystemSetup.exe install --port 443 --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" --RetailServerAadClientId "<SingleAppIdCreated>" --RetailServerAadResourceId "api://<SingleAppIdCreated>" --CposAadClientId "<SingleAppIdCreated>"  --AsyncClientAadClientId "<SingleAppIdCreated>" --config StoreSystemSetup.xml --TrustSqlServerCertificate --SkipScaleUnitHealthCheck  --SqlServerName "<MachineName>\SQLEXPRESS" 
+    ```
 
 
 
