@@ -28,6 +28,10 @@ Steps:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/81461121-6731-41c1-ab07-c9638a88f399)
 9. Record the Application Id(Client Id) we created into the below form(previously it is called Microsoft Azure Application):<br>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f761f3bc-059e-49da-b2b0-81f504140af5)
+10.  Commerce Shared Parameters form->Identity provider:<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ff80dbe9-f06f-44f2-878c-642827d029f5)
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e5b6c4fe-0ff7-4e00-a60f-a8229c20ae84)
+11.  
 
 
 
