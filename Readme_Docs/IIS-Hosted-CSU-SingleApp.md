@@ -35,18 +35,18 @@ Steps:<br/>
      ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d8bbd46-4fba-450f-acd9-8550d3990bce)<br/>
 12.  Run command to install CSU, please make sure the <ThumbprintOfCertificate> and <SingleAppIdCreated> are same as we created:<br/>
     ```
-    CommerceStoreScaleUnit.StoreSystemSetup.exe install --port 443 <br/>
-      --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" <br/>
-      --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" <br/>
-      --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" <br/>
-      --RetailServerAadClientId "<SingleAppIdCreated>" <br/>
-      --RetailServerAadResourceId "api://<SingleAppIdCreated>" <br/>
-      --CposAadClientId "<SingleAppIdCreated>" <br/>
-      --AsyncClientAadClientId "<SingleAppIdCreated>" <br/>
-      --config StoreSystemSetup.xml <br/>
-      --TrustSqlServerCertificate <br/>
-      --SkipScaleUnitHealthCheck <br/>
-      --SqlServerName "<MachineName>\SQLEXPRESS"  <br/>
+    CommerceStoreScaleUnit.StoreSystemSetup.exe install --port 443 
+      --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
+      --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
+      --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
+      --RetailServerAadClientId "<SingleAppIdCreated>" 
+      --RetailServerAadResourceId "api://<SingleAppIdCreated>" 
+      --CposAadClientId "<SingleAppIdCreated>" 
+      --AsyncClientAadClientId "<SingleAppIdCreated>" 
+      --config StoreSystemSetup.xml 
+      --TrustSqlServerCertificate 
+      --SkipScaleUnitHealthCheck 
+      --SqlServerName "<MachineName>\SQLEXPRESS"  
     ```
 13. Once the installation is done, please check the IIS:<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8a116394-7917-4380-bf59-eac847a564c8)
