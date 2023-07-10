@@ -14,7 +14,7 @@ Steps:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8ea249b3-ebec-45a5-9441-80a6aee46976)
 3. API Permissions:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fb973385-9be8-4f3f-b60b-c99ab76cf1aa)
-   And choose the API exposed in last step:
+   And choose the API exposed in last step<br/>:
    <img width="636" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e68bd651-c98b-42ea-add9-e15b05cd9b87">
 
 
