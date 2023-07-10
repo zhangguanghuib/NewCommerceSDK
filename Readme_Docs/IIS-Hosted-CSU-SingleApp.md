@@ -51,9 +51,11 @@ Steps:<br/>
 13. Once the installation is done, please check the IIS:<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8a116394-7917-4380-bf59-eac847a564c8)
 
-14. Run 9999 full sync for the newly-created channel database and make sure all download sessions got applied:
+14. Run 9999 full sync for the newly-created channel database and make sure all download sessions got applied:<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/eb056519-7992-4a11-b01f-8e345f0f02b0)
     
+15.  You can see the CPOS in Store Commerce App got activated successfully:<br/>
+     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/28659a44-9ecd-467e-8353-be83e0481a39)
 
 
 
