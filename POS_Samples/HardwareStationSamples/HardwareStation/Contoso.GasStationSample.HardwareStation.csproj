@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\CustomizationPackage.props" />
   
   <PropertyGroup>
@@ -6,7 +6,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.Dynamics.Commerce.OposInterop" Version="5.0.4" />
 	<PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
   <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Configuration">
+      <HintPath>References\Microsoft.Dynamics.Commerce.HardwareStation.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos">
+      <HintPath>References\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.Opos.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary">
+      <HintPath>References\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.OposLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary">
+      <HintPath>References\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PrinterLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Runtime">
+      <HintPath>References\Microsoft.Dynamics.Commerce.HardwareStation.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
