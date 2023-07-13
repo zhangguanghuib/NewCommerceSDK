@@ -15,18 +15,14 @@
     "extend": {
       "header": {     
       },
-      "triggers": [       
+      "triggers": [
       ],
-      "requestHandlers": [  
+      "requestHandlers": [
+        {
+          "modulePath": "Handlers/GetReceiptEmailAddressClientRequestHandlerExt"
+        }
       ],
       "views": {
-        "ReportDetailsView": {
-          "appBarCommands": [
-            { "modulePath": "ViewExtensions/ReportDetails/ReportDetailsCommand" },
-            { "modulePath": "ViewExtensions/ReportDetails/ReportExportCommand" },
-            { "modulePath": "ViewExtensions/ReportDetails/ExportToCSVCommand" }
-          ]
-        }
       }
     },
     "create": {

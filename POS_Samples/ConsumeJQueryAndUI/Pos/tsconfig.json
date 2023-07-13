@@ -2,11 +2,14 @@
     "extends": "./devDependencies/pos-tsconfig-base.json",
     "compilerOptions": {
         "baseUrl": ".",
-        "paths": {
-            "knockout": [
-                "Libraries/knockout"
-            ]
-        },
+      "paths": {
+        "knockout": [
+          "Libraries/knockout"
+        ],
+        "jquery": [
+          "Libraries/jQuery"
+        ]
+      },
         "noImplicitAny": false
     }
 }
