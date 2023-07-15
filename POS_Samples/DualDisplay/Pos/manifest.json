@@ -17,28 +17,38 @@
         "controlName": "DualDisplayCustomControl",
         "htmlPath": "CustomControl/DualDisplayCustomControl.html",
         "modulePath": "CustomControl/DualDisplayCustomControl"
-      },
-
-      "extend": {
-        "header": {
-        },
-        "triggers": [
-          {
-            "triggerType": "PostLogon",
-            "modulePath": "TriggerHandlers/PostLogonTrigger"
-          }
-        ],
-        "requestHandlers": [
-        ],
-        "views": {
-        }
-      },
-      "create": {
-        "views": [
-        ],
-        "templatedDialogs": [
-        ]
       }
+    },
+    "extend": {
+      "header": {
+      },
+      "triggers": [
+        {
+          "triggerType": "PostLogon",
+          "modulePath": "TriggerHandlers/PostLogonTrigger"
+        }
+      ],
+      "requestHandlers": [
+      ],
+      "views": {
+        "ShowJournalView": {
+          "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/OpenGasPumpStatusViewCommand" } ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+        {
+          "name": "Gas Pump Status View",
+          "description": "The view showing the status of the gas pumps",
+          "pageName": "GasPumpStatusView",
+          "phonePageName": "GasPumpStatusView",
+          "viewDirectory": "Create/Views/",
+          "viewControllerPath": "Create/Views/GasPumpStatusView"
+        }
+      ],
+      "templatedDialogs": [
+      ]
     }
   }
 }

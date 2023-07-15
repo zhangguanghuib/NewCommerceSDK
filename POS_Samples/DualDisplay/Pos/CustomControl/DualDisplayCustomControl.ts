@@ -40,6 +40,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public imageRotatorPath: ko.Observable<string>;
     public webBrowserUrl: ko.Observable<string>;
 
+    public cartTotalAmountV2: ko.Observable<number>;
+
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 
         super(id, context);
@@ -55,6 +57,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
+
+        this.cartTotalAmountV2 = ko.observable(0.0);
 
         this.cartTotalAmount = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._cart()) ? 0.00 : this._cart().TotalAmount;
@@ -78,6 +82,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
         this.cartChangedHandler = (data: CartChangedData) => {
             this._cart(data.cart);
+            console.log(this.cartTotalAmount);
+            this.cartTotalAmountV2(data.cart.TotalAmount);
+            //console.log(this.cartTotalAmount());
             this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines);
         }
 
@@ -101,64 +108,65 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this._employee(data.employee);
         }
 
-        let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
-            interactionMode: Controls.DataListInteractionMode.None,
-            data: this._cartLinesObservable(),
-            columns: [
-                {
-                    title: "ID",
-                    ratio: 20,
-                    collapseOrder: 2,
-                    minWidth: 50,
-                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
-                        return ObjectExtensions.isNullOrUndefined(cartLine.ItemId) ? StringExtensions.EMPTY : cartLine.ItemId;
-                    }
-                },
-                ,
-                {
-                    title: "Name", // Name
-                    ratio: 50,
-                    collapseOrder: 4,
-                    minWidth: 100,
-                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
-                        return ObjectExtensions.isNullOrUndefined(cartLine.Description) ? StringExtensions.EMPTY : cartLine.Description;
+    //    let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
+    //        interactionMode: Controls.DataListInteractionMode.None,
+    //        data: this._cartLinesObservable(),
+    //        columns: [
+    //            {
+    //                title: "ID",
+    //                ratio: 20,
+    //                collapseOrder: 2,
+    //                minWidth: 50,
+    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
+    //                    return ObjectExtensions.isNullOrUndefined(cartLine.ItemId) ? StringExtensions.EMPTY : cartLine.ItemId;
+    //                }
+    //            },
+    //            ,
+    //            {
+    //                title: "Name", // Name
+    //                ratio: 50,
+    //                collapseOrder: 4,
+    //                minWidth: 100,
+    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
+    //                    return ObjectExtensions.isNullOrUndefined(cartLine.Description) ? StringExtensions.EMPTY : cartLine.Description;
 
-                    }
-                },
-                {
-                    title: "Quantity", // Quantity
-                    ratio: 10,
-                    collapseOrder: 3,
-                    minWidth: 50,
-                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
-                        return ObjectExtensions.isNullOrUndefined(cartLine.Quantity) ? StringExtensions.EMPTY : cartLine.Quantity.toString();
+    //                }
+    //            },
+    //            {
+    //                title: "Quantity", // Quantity
+    //                ratio: 10,
+    //                collapseOrder: 3,
+    //                minWidth: 50,
+    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
+    //                    return ObjectExtensions.isNullOrUndefined(cartLine.Quantity) ? StringExtensions.EMPTY : cartLine.Quantity.toString();
 
-                    }
-                },
-                {
-                    title: "Discount", // Discount
-                    ratio: 10,
-                    collapseOrder: 1,
-                    minWidth: 50,
-                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
-                        return ObjectExtensions.isNullOrUndefined(cartLine.DiscountAmount) ? StringExtensions.EMPTY : cartLine.DiscountAmount.toString();
-                    }
-                },
-                {
-                    title: "Cost", // Cost
-                    ratio: 10,
-                    collapseOrder: 5,
-                    minWidth: 50,
-                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
-                        return ObjectExtensions.isNullOrUndefined(cartLine.TotalAmount) ? StringExtensions.EMPTY : cartLine.TotalAmount.toString();
-                    }
-                }
-            ]
-        };
+    //                }
+    //            },
+    //            {
+    //                title: "Discount", // Discount
+    //                ratio: 10,
+    //                collapseOrder: 1,
+    //                minWidth: 50,
+    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
+    //                    return ObjectExtensions.isNullOrUndefined(cartLine.DiscountAmount) ? StringExtensions.EMPTY : cartLine.DiscountAmount.toString();
+    //                }
+    //            },
+    //            {
+    //                title: "Cost", // Cost
+    //                ratio: 10,
+    //                collapseOrder: 5,
+    //                minWidth: 50,
+    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
+    //                    return ObjectExtensions.isNullOrUndefined(cartLine.TotalAmount) ? StringExtensions.EMPTY : cartLine.TotalAmount.toString();
+    //                }
+    //            }
+    //        ]
+    //    };
 
-        let dataListRootElem: HTMLDivElement = document.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
+    //    let dataListRootElem: HTMLDivElement = document.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
 
-        this.cartLinesDataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dataListRootElem);
+    //    this.cartLinesDataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dataListRootElem);
+        //
     }
 
 
@@ -177,19 +185,19 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._loggedOn(state.loggedOn);
         this._employee(state.employee);
 
-        if (StringExtensions.isEmptyOrWhitespace(state.configuration.imageRotatorPath)) {
-            //this.imageRotatorPath = localStorage.getItem("DualDisplayWebBrowserUrl");
-            this.imageRotatorPath(localStorage.getItem("DualDisplayWebBrowserUrl"));
-        } else {
-            //this.imageRotatorPath = state.configuration.imageRotatorPath;
-            this.imageRotatorPath(state.configuration.imageRotatorPath);     
-        }
+        //if (StringExtensions.isEmptyOrWhitespace(state.configuration.imageRotatorPath)) {
+        //    //this.imageRotatorPath = localStorage.getItem("DualDisplayWebBrowserUrl");
+        //    this.imageRotatorPath(localStorage.getItem("DualDisplayWebBrowserUrl"));
+        //} else {
+        //    //this.imageRotatorPath = state.configuration.imageRotatorPath;
+        //    this.imageRotatorPath(state.configuration.imageRotatorPath);     
+        //}
 
-        if (StringExtensions.isEmptyOrWhitespace(state.configuration.webBrowserUrl)) {
-            this.webBrowserUrl(localStorage.getItem("DualDisplayWebBrowserUrl"));
-        } else {
-            this.webBrowserUrl(state.configuration.webBrowserUrl);
-        }
+        //if (StringExtensions.isEmptyOrWhitespace(state.configuration.webBrowserUrl)) {
+        //    this.webBrowserUrl(localStorage.getItem("DualDisplayWebBrowserUrl"));
+        //} else {
+        //    this.webBrowserUrl(state.configuration.webBrowserUrl);
+        //}
 
         this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(this._cart()) ? [] : this._cart().CartLines);
     }
