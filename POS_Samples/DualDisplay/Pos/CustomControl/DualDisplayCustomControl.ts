@@ -5,6 +5,7 @@ import { CartChangedData, CustomerChangedData, DualDisplayCustomControlBase, IDu
 import * as Controls from "PosApi/Consume/Controls";
 import { ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import { CurrencyFormatter } from "PosApi/Consume/Formatters";
 
 //Sign in to the client.
 //Go to Retail and Commerce > Channel setup > POS setup > POS profiles > Hardware profiles.
@@ -41,6 +42,13 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public webBrowserUrl: ko.Observable<string>;
 
     public cartTotalAmountV2: ko.Observable<number>;
+
+    //Section for testing
+    public readonly selectedPumpStatus: ko.Computed<string>;
+    public readonly isSelectedGasPumpPumping: ko.Computed<boolean>;
+    public readonly selectedGasPumpTotal: ko.Computed<string>;
+    public readonly selectedGasPumpVolume: ko.Computed<string>;
+    public readonly selectedPumpDescription: ko.Computed<string>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 
@@ -107,6 +115,29 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this._loggedOn(data.loggedOn);
             this._employee(data.employee);
         }
+
+        // Section for testing
+        this.selectedPumpDescription = ko.computed((): string => {
+            return "Pump Description";
+        }, this);
+
+        this.selectedPumpStatus = ko.computed((): string => {
+            return "Pumping complete";
+        }, this);
+
+
+        this.isSelectedGasPumpPumping = ko.computed((): boolean => {
+            return true;
+        }, this);
+
+        this.selectedGasPumpTotal = ko.computed((): string => {
+            let total: number = 125;
+            return CurrencyFormatter.toCurrency(total);
+        }, this);
+
+        this.selectedGasPumpVolume = ko.computed((): string => {
+            return "23.456";
+        }, this);
 
     //    let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
     //        interactionMode: Controls.DataListInteractionMode.None,

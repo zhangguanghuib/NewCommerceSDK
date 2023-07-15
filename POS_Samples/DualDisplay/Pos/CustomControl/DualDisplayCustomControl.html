@@ -9,25 +9,23 @@
     <script id="Microsoft_Pos_Extensibility_Samples_DualDisplay" type="text/html">
         <div class="height100Percent width100Percent">
             <!--<div class="height700 width100Percent no-shirink col marginBottom20">
-                <div class="col grow marginBottom48">
-                    <div id="dualDisplayDataListSample" data-bind="msPosDataList: cartLinesDataList">
-                    </div>
-                </div>
-            </div>-->
-
+        <div class="col grow marginBottom48">
+            <div id="dualDisplayDataListSample" data-bind="msPosDataList: cartLinesDataList">
+            </div>
+        </div>
+    </div>-->
             <!--<div>-->
-                <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(imageRotatorPath()) -->
-                <!--<img data-bind=attr: { src: imageRotatorPath() }" />-->
-                <!-- /ko -->
-
-                <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(webBrowserUrl()) -->
-                <!--<x-ms-webview id="webview" data-bind="attr: {src: webBrowserUrl}" width="300" height="300"></x-ms-webview>-->
-                <!-- /ko -->
+            <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(imageRotatorPath()) -->
+            <!--<img data-bind=attr: { src: imageRotatorPath() }" />-->
+            <!-- /ko -->
+            <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(webBrowserUrl()) -->
+            <!--<x-ms-webview id="webview" data-bind="attr: {src: webBrowserUrl}" width="300" height="300"></x-ms-webview>-->
+            <!-- /ko -->
             <!--</div>-->
 
             <div class="marginBottom20">
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount:</h2>
-                <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2><br/>
+                <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2><br />
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount V2:</h2>
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountV2"></h2><br />
                 <h2 class="marginLeft8" data-bind="text: customerNameLabel">Customer Name:</h2>
@@ -36,6 +34,27 @@
                 <h2 class="marginLeft8" data-bind="text: isLoggedOn()? 'logged in': 'logged out'"></h2><br />
                 <h2 class="marginLeft8" data-bind="text: employeeNameLable">Employee Name:</h2>
                 <h2 class="marginLeft8" data-bind="text: employeeName"></h2><br />
+            </div>
+
+            <div class="GasPumpStatusView">
+                <div class="grow pad20 scrollX col">
+                    <div class="h4 pad8">Pump Status</div>
+                    <div>
+                        <div class="h4 pad8" data-bind="text: selectedPumpStatus"></div>
+                    </div>
+                    <div>
+                        <div class="h4 pad8">Description</div>
+                        <div class="h4 pad8" data-bind="text: selectedPumpDescription"></div>
+                    </div>
+                    <div data-bind="visible: isSelectedGasPumpPumping">
+                        <div class="h4 pad8">Sale Total: </div>
+                        <div class="h4 pad8" data-bind="text: selectedGasPumpTotal"></div>
+                    </div>
+                    <div data-bind="visible: isSelectedGasPumpPumping">
+                        <div class="h4 pad8">Sale Volume:</div>
+                        <div class="h4 pad8" data-bind="text: selectedGasPumpVolume"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </script>
