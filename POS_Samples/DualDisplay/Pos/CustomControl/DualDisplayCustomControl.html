@@ -8,31 +8,16 @@
 <body>
     <script id="Microsoft_Pos_Extensibility_Samples_DualDisplay" type="text/html">
         <div class="height100Percent width100Percent">
-            <!--<div class="height700 width100Percent no-shirink col marginBottom20">
-        <div class="col grow marginBottom48">
-            <div id="dualDisplayDataListSample" data-bind="msPosDataList: cartLinesDataList">
-            </div>
-        </div>
-    </div>-->
-            <!--<div>-->
-            <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(imageRotatorPath()) -->
-            <!--<img data-bind=attr: { src: imageRotatorPath() }" />-->
-            <!-- /ko -->
-            <!-- ko ifnot: ObjectExtensions.isNullOrUndefined(webBrowserUrl()) -->
-            <!--<x-ms-webview id="webview" data-bind="attr: {src: webBrowserUrl}" width="300" height="300"></x-ms-webview>-->
-            <!-- /ko -->
-            <!--</div>-->
-
             <div class="marginBottom20">
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount:</h2>
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2><br />
-                <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount V2:</h2>
+                <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount V4:</h2>
                 <h2 class="marginLeft8" data-bind="text: cartTotalAmountV2"></h2><br />
                 <h2 class="marginLeft8" data-bind="text: customerNameLabel">Customer Name:</h2>
                 <h2 class="marginLeft8" data-bind="text: customerName"></h2><br />
                 <h2 class="marginLeft8" data-bind="text: customerAccountNumberLabel">Customer Account Number:</h2><br />
                 <h2 class="marginLeft8" data-bind="text: isLoggedOn()? 'logged in': 'logged out'"></h2><br />
-                <h2 class="marginLeft8" data-bind="text: employeeNameLable">Employee Name:</h2>
+                <h2 class="marginLeft8" data-bind="text: employeeNameLabel">Employee Name:</h2>
                 <h2 class="marginLeft8" data-bind="text: employeeName"></h2><br />
             </div>
 

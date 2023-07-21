@@ -14,6 +14,22 @@ import { CurrencyFormatter } from "PosApi/Consume/Formatters";
 //Go to Retail and Commerce > Retail and Commerce IT > Distribution schedule.
 //Select the Registers(1090) job, and then select Run now.
 
+ko.bindingHandlers.fooBinding = {
+    init: (element: HTMLElement,
+        valueAccessor: () => any,
+        allBindingsAccessor: () => any,
+        viewModel: any,
+        bindingContext: any) => {
+        console.log("Here.init");
+    },
+    update: (element: HTMLElement,
+        valueAccessor: () => any,
+        allBindingsAccessor: () => any,
+        viewModel: any,
+        bindingContext: any) => {
+        console.log("Here.update");
+    }
+};
 
 export default class DualDisplayCustomControl extends DualDisplayCustomControlBase {
 
@@ -207,7 +223,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                 name: DualDisplayCustomControl.TEMPLATE_ID,
                 data: this
             }
-        }, this);
+        });
     }
 
     public init(state: Commerce.Extensibility.DualDisplayExtensionTypes.IDualDisplayCustomControlState): void {
