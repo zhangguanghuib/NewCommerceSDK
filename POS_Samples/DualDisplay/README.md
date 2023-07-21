@@ -1,4 +1,4 @@
-### how to set and extend dual display:<br/>  https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-dual-display-extension
+# how to set and extend dual display:<br/>  https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-dual-display-extension
 ## Step 1: Go to hardware profile
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4f4bc564-bbea-4a4e-b32e-2fcf63ec146e)
 
