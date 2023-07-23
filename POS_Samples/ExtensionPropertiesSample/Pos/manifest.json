@@ -21,7 +21,10 @@
       ],
       "views": {
         "ShowJournalView": {
-          "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/OpenGasPumpStatusViewCommand" } ]
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/ShowJournal/AddCouponCodeAndExtPropsCommand" },
+            { "modulePath": "ViewExtensions/ShowJournal/AddCouponExtPropsByTriggerCommand" }
+          ]
         }
       }
     },
