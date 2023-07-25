@@ -15,13 +15,18 @@
     "extend": {
       "header": {     
       },
-      "triggers": [       
+      "triggers": [
+        {
+          "triggerType": "PrePriceOverride",
+          "modulePath": "Triggers/DXC_PrePriceOverrideTrigger"
+        }
       ],
       "requestHandlers": [  
       ],
       "views": {
         "ShowJournalView": {
           "appBarCommands": [
+            { "modulePath": "ViewExtensions/ShowJournal/ReturnTransByCodeCommand" },
             { "modulePath": "ViewExtensions/ShowJournal/AddCouponCodeAndExtPropsCommand" },
             { "modulePath": "ViewExtensions/ShowJournal/AddCouponExtPropsByTriggerCommand" }
           ]
