@@ -1,11 +1,9 @@
 ﻿import ko from "knockout";
 
 import { CartChangedData, CustomerChangedData, DualDisplayCustomControlBase, IDualDisplayCustomControlContext, LogOnStatusChangedData } from "PosApi/Extend/DualDisplay";
-
 import * as Controls from "PosApi/Consume/Controls";
 import { ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
-import { CurrencyFormatter } from "PosApi/Consume/Formatters";
 
 //Sign in to the client.
 //Go to Retail and Commerce > Channel setup > POS setup > POS profiles > Hardware profiles.
@@ -14,26 +12,9 @@ import { CurrencyFormatter } from "PosApi/Consume/Formatters";
 //Go to Retail and Commerce > Retail and Commerce IT > Distribution schedule.
 //Select the Registers(1090) job, and then select Run now.
 
-ko.bindingHandlers.fooBinding = {
-    init: (element: HTMLElement,
-        valueAccessor: () => any,
-        allBindingsAccessor: () => any,
-        viewModel: any,
-        bindingContext: any) => {
-        console.log("Here.init");
-    },
-    update: (element: HTMLElement,
-        valueAccessor: () => any,
-        allBindingsAccessor: () => any,
-        viewModel: any,
-        bindingContext: any) => {
-        console.log("Here.update");
-    }
-};
-
 export default class DualDisplayCustomControl extends DualDisplayCustomControlBase {
 
-    public readonly cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>;
+    public cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>;
 
     public readonly cartTotalAmount: ko.Computed<number>;
     public readonly customerName: ko.Computed<string>;
@@ -54,17 +35,10 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private readonly _loggedOn: ko.Observable<boolean>;
     private readonly _employee: ko.Observable<ProxyEntities.Employee>;
 
-    public imageRotatorPath: ko.Observable<string>;
+    //public imageRotatorPath: ko.Observable<string>;
     public webBrowserUrl: ko.Observable<string>;
 
     public cartTotalAmountV2: ko.Observable<number>;
-
-    //Section for testing
-    public readonly selectedPumpStatus: ko.Computed<string>;
-    public readonly isSelectedGasPumpPumping: ko.Computed<boolean>;
-    public readonly selectedGasPumpTotal: ko.Computed<string>;
-    public readonly selectedGasPumpVolume: ko.Computed<string>;
-    public readonly selectedPumpDescription: ko.Computed<string>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 
@@ -74,10 +48,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this.customerNameLabel = "Customer Name:";
         this.customerAccountNumberLabel = "Customer Account Number:";
         this.employeeNameLabel = "Employee Name:";
-        this.imageRotatorPath = "";
 
         this._cart = ko.observable(null);
-        this._cartLinesObservable = ko.observableArray([]);
+        this._cartLinesObservable = ko.observableArray<ProxyEntities.CartLine>([]);
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
@@ -110,6 +83,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this.cartTotalAmountV2(data.cart.TotalAmount);
             //console.log(this.cartTotalAmount());
             this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines);
+            console.log(this._cartLinesObservable());
         }
 
         this.customerChangedHandler = (data: CustomerChangedData) => {
@@ -117,7 +91,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         }
 
         this.dualDisplayConfigurationChangedHandler = (data: Commerce.Extensibility.DualDisplayExtensionTypes.DualDisplayConfigurationChangedData) => {
-            this.imageRotatorPath(data.imageRotatorPath);
+            //this.imageRotatorPath(data.imageRotatorPath);
             this.webBrowserUrl(data.webBrowserUrl);
         }
 
@@ -131,89 +105,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this._loggedOn(data.loggedOn);
             this._employee(data.employee);
         }
-
-        // Section for testing
-        this.selectedPumpDescription = ko.computed((): string => {
-            return "Pump Description";
-        }, this);
-
-        this.selectedPumpStatus = ko.computed((): string => {
-            return "Pumping complete";
-        }, this);
-
-
-        this.isSelectedGasPumpPumping = ko.computed((): boolean => {
-            return true;
-        }, this);
-
-        this.selectedGasPumpTotal = ko.computed((): string => {
-            let total: number = 125;
-            return CurrencyFormatter.toCurrency(total);
-        }, this);
-
-        this.selectedGasPumpVolume = ko.computed((): string => {
-            return "23.456";
-        }, this);
-
-    //    let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
-    //        interactionMode: Controls.DataListInteractionMode.None,
-    //        data: this._cartLinesObservable(),
-    //        columns: [
-    //            {
-    //                title: "ID",
-    //                ratio: 20,
-    //                collapseOrder: 2,
-    //                minWidth: 50,
-    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
-    //                    return ObjectExtensions.isNullOrUndefined(cartLine.ItemId) ? StringExtensions.EMPTY : cartLine.ItemId;
-    //                }
-    //            },
-    //            ,
-    //            {
-    //                title: "Name", // Name
-    //                ratio: 50,
-    //                collapseOrder: 4,
-    //                minWidth: 100,
-    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
-    //                    return ObjectExtensions.isNullOrUndefined(cartLine.Description) ? StringExtensions.EMPTY : cartLine.Description;
-
-    //                }
-    //            },
-    //            {
-    //                title: "Quantity", // Quantity
-    //                ratio: 10,
-    //                collapseOrder: 3,
-    //                minWidth: 50,
-    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
-    //                    return ObjectExtensions.isNullOrUndefined(cartLine.Quantity) ? StringExtensions.EMPTY : cartLine.Quantity.toString();
-
-    //                }
-    //            },
-    //            {
-    //                title: "Discount", // Discount
-    //                ratio: 10,
-    //                collapseOrder: 1,
-    //                minWidth: 50,
-    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
-    //                    return ObjectExtensions.isNullOrUndefined(cartLine.DiscountAmount) ? StringExtensions.EMPTY : cartLine.DiscountAmount.toString();
-    //                }
-    //            },
-    //            {
-    //                title: "Cost", // Cost
-    //                ratio: 10,
-    //                collapseOrder: 5,
-    //                minWidth: 50,
-    //                computeValue: (cartLine: ProxyEntities.CartLine): string => {
-    //                    return ObjectExtensions.isNullOrUndefined(cartLine.TotalAmount) ? StringExtensions.EMPTY : cartLine.TotalAmount.toString();
-    //                }
-    //            }
-    //        ]
-    //    };
-
-    //    let dataListRootElem: HTMLDivElement = document.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
-
-    //    this.cartLinesDataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dataListRootElem);
-        //
     }
 
 
@@ -224,6 +115,65 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                 data: this
             }
         });
+        
+        let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
+            interactionMode: Controls.DataListInteractionMode.SingleSelect,
+            data: this._cartLinesObservable,
+            columns: [
+                {
+                    title: "ID",
+                    ratio: 20,
+                    collapseOrder: 2,
+                    minWidth: 50,
+                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
+                        return ObjectExtensions.isNullOrUndefined(cartLine.ItemId) ? StringExtensions.EMPTY : cartLine.ItemId;
+                    }
+                },
+                ,
+                {
+                    title: "Name", // Name
+                    ratio: 50,
+                    collapseOrder: 4,
+                    minWidth: 100,
+                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
+                        return ObjectExtensions.isNullOrUndefined(cartLine.Description) ? StringExtensions.EMPTY : cartLine.Description;
+
+                    }
+                },
+                {
+                    title: "Quantity", // Quantity
+                    ratio: 10,
+                    collapseOrder: 3,
+                    minWidth: 50,
+                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
+                        return ObjectExtensions.isNullOrUndefined(cartLine.Quantity) ? StringExtensions.EMPTY : cartLine.Quantity.toString();
+
+                    }
+                },
+                {
+                    title: "Discount", // Discount
+                    ratio: 10,
+                    collapseOrder: 1,
+                    minWidth: 50,
+                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
+                        return ObjectExtensions.isNullOrUndefined(cartLine.DiscountAmount) ? StringExtensions.EMPTY : cartLine.DiscountAmount.toString();
+                    }
+                },
+                {
+                    title: "Cost", // Cost
+                    ratio: 10,
+                    collapseOrder: 5,
+                    minWidth: 50,
+                    computeValue: (cartLine: ProxyEntities.CartLine): string => {
+                        return ObjectExtensions.isNullOrUndefined(cartLine.TotalAmount) ? StringExtensions.EMPTY : cartLine.TotalAmount.toString();
+                    }
+                }
+            ]
+        };
+
+        let dataListRootElem: HTMLDivElement = element.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
+  
+        this.cartLinesDataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dataListRootElem);
     }
 
     public init(state: Commerce.Extensibility.DualDisplayExtensionTypes.IDualDisplayCustomControlState): void {
@@ -231,21 +181,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer(state.customer);
         this._loggedOn(state.loggedOn);
         this._employee(state.employee);
-
-        //if (StringExtensions.isEmptyOrWhitespace(state.configuration.imageRotatorPath)) {
-        //    //this.imageRotatorPath = localStorage.getItem("DualDisplayWebBrowserUrl");
-        //    this.imageRotatorPath(localStorage.getItem("DualDisplayWebBrowserUrl"));
-        //} else {
-        //    //this.imageRotatorPath = state.configuration.imageRotatorPath;
-        //    this.imageRotatorPath(state.configuration.imageRotatorPath);     
-        //}
-
-        //if (StringExtensions.isEmptyOrWhitespace(state.configuration.webBrowserUrl)) {
-        //    this.webBrowserUrl(localStorage.getItem("DualDisplayWebBrowserUrl"));
-        //} else {
-        //    this.webBrowserUrl(state.configuration.webBrowserUrl);
-        //}
-
         this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(this._cart()) ? [] : this._cart().CartLines);
     }
 

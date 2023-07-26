@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="repo.props" />
+
+  <PropertyGroup>
+    <PackagePublisher Condition="'$(PackagePublisher)' == ''">$(Publisher)</PackagePublisher>
+    <PackagePublisherDisplayName Condition="'$(PackagePublisherDisplayName)' == ''">$(PublisherDisplayName)</PackagePublisherDisplayName>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">$(Version)</PackageVersion>
+    <PackageName Condition="'$(PackageName)' == ''">GHZ.PaymentSDK</PackageName>
+    <PackageDisplayName Condition="'$(PackageDisplayName)' == ''">PaymentSDK</PackageDisplayName>
+    <PackageDescription Condition="'$(PackageDescription)' == ''">PaymentSDK</PackageDescription>
+  </PropertyGroup>
+</Project>

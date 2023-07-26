@@ -33,6 +33,17 @@
       "views": {
         "ShowJournalView": {
           "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/OpenGasPumpStatusViewCommand" } ]
+        },
+        "SimpleProductDetailsView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "productAvailabilityPanel",
+                "htmlPath": "ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
+                "modulePath": "ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
+              }
+            ]
+          }
         }
       }
     },
