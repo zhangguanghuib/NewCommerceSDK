@@ -28,8 +28,21 @@
           "appBarCommands": [
             { "modulePath": "ViewExtensions/ShowJournal/ReturnTransByCodeCommand" },
             { "modulePath": "ViewExtensions/ShowJournal/AddCouponCodeAndExtPropsCommand" },
-            { "modulePath": "ViewExtensions/ShowJournal/AddCouponExtPropsByTriggerCommand" }
-          ]
+            { "modulePath": "ViewExtensions/ShowJournal/AddCouponExtPropsByTriggerCommand" },
+            { "modulePath": "ViewExtensions/ShowJournal/OpenGasPumpStatusViewCommand" }
+          ],
+          "linesGrid": {
+            "customItemSubfields": [
+              {
+                "itemSubfieldName": "fraudCheckReminderItemSubfield",
+                "modulePath": "ViewExtensions/ShowJournal/LinesGrid/FraudCheckReminderItemSubfield"
+              },
+              {
+                "itemSubfieldName": "subscribeAndSaveItemSubfield",
+                "modulePath": "ViewExtensions/ShowJournal/LinesGrid/SubscribeAndSaveItemSubfield"
+              }
+            ]
+          }
         }
       }
     },

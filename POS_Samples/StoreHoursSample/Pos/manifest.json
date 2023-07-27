@@ -1,0 +1,52 @@
+{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GHZ.Pos.StoreHoursSample",
+  "publisher": "GHZ",
+  "version": "9.36.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "description": "An extension package that showcases famous store hours example migration from RetailSDK to CommerceSDK.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
+    "create": {
+      "templatedDialogs": [
+        {
+          "htmlPath": "Controls/Dialogs/StoreHoursDialog.html",
+          "modulePath": "Controls/Dialogs/StoreHoursDialogModule"
+        }
+      ],
+      "views": [
+        {
+          "title": "Store Hours View",
+          "pageName": "StoreHoursView",
+          "phonePageName": "StoreHoursView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/StoreHoursView"
+        }
+      ],
+      "operations": [
+        {
+          "operationId": "60003",
+          "operationRequestFactoryPath": "Operations/StoreHours/StoreHoursOperationRequestFactory",
+          "operationRequestHandlerPath": "Operations/StoreHours/StoreHoursOperationRequestHandler"
+        }
+      ]
+    },
+    "extend": {
+      "views": {
+        
+      }
+    }
+  }
+}
