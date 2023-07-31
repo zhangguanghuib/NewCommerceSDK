@@ -32,7 +32,9 @@
       ],
       "views": {
         "ShowJournalView": {
-          "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/OpenGasPumpStatusViewCommand" } ]
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/ShowJournal/ShowCartLinesViewCommand" }
+          ]
         },
         "SimpleProductDetailsView": {
           "controlsConfig": {
@@ -50,12 +52,12 @@
     "create": {
       "views": [
         {
-          "name": "Gas Pump Status View",
-          "description": "The view showing the status of the gas pumps",
-          "pageName": "GasPumpStatusView",
-          "phonePageName": "GasPumpStatusView",
-          "viewDirectory": "Create/Views/",
-          "viewControllerPath": "Create/Views/GasPumpStatusView"
+          "name": "Show CartLines View",
+          "description": "Show CartLines View",
+          "pageName": "CartLinesView",
+          "phonePageName": "CartLinesView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/CartLinesView"
         }
       ],
       "templatedDialogs": [

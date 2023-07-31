@@ -3,7 +3,7 @@
     CustomLinesGridItemSubfieldBase
 } from "PosApi/Extend/Views/ShowJournalView";
 import { ProxyEntities } from "PosApi/Entities";
-import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import { /*ObjectExtensions,*/ StringExtensions } from "PosApi/TypeExtensions";
 
 export default class FraudCheckReminderItemSubfield extends CustomLinesGridItemSubfieldBase {
 
@@ -18,9 +18,11 @@ export default class FraudCheckReminderItemSubfield extends CustomLinesGridItemS
      */
     public computeValue(salesLine: ProxyEntities.SalesLine): string {
         let value: string = StringExtensions.EMPTY;
-        if (!ObjectExtensions.isNullOrUndefined(salesLine) && salesLine.TotalAmount > 100) {
-            value = "Please check the purchasers I.D. in order to prevent fraud.";
-        }
+
+        value = salesLine.Comment;
+        //if (!ObjectExtensions.isNullOrUndefined(salesLine) && salesLine.TotalAmount > 100) {
+        //    value = "Please check the purchasers I.D. in order to prevent fraud.";
+        //}
 
         return value;
     }
