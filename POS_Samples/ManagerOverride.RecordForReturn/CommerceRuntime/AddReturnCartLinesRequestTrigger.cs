@@ -42,19 +42,48 @@ namespace Contoso.GasStationSample.CommerceRuntime
             {
                string originTransactionId =  addReturnCartLinesRequest.ReturnCartLines.AsPagedResult().ToList().First().ReturnTransactionId;
 
-                var message = string.Format(
-                          "Manager with id '{0}' has approved override for operation with id '{1}' for original transaction {3} to the operator with id '{2}'.",
-                          commercePrincipal.StaffId,
-                          RetailOperation.ReturnTransaction,
-                          commercePrincipal.OriginalUserId,
-                          originTransactionId);
+                //var message = string.Format(
+                //          "Manager with id '{0}' has approved override for operation with id '{1}' for original transaction {3} to the operator with id '{2}'.",
+                //          commercePrincipal.StaffId,
+                //          RetailOperation.ReturnTransaction,
+                //          commercePrincipal.OriginalUserId,
+                //          originTransactionId);
 
-                await LogAuditEntry(
-                           request.RequestContext,
-                           ExtensibleAuditEventType.ManagerOverride,
-                           "ElevateUser",
-                           message,
-                           AuditLogTraceLevel.Trace).ConfigureAwait(false);
+                //await LogAuditEntry(
+                //           request.RequestContext,
+                //           ExtensibleAuditEventType.ManagerOverride,
+                //           "ElevateUser",
+                //           message,
+                //           AuditLogTraceLevel.Trace).ConfigureAwait(false);
+
+                TransactionSearchCriteria searchCriteria = new TransactionSearchCriteria()
+                {
+                    SearchLocationType = SearchLocation.All,
+                    TransactionIds = new[] { originTransactionId }
+                };
+
+
+                var searchJournalTransactionsServiceRequest = new SearchJournalTransactionsServiceRequest(searchCriteria, QueryResultSettings.AllRecords);
+                var searchJournalTransactionsServiceResponse =
+                    await request.RequestContext.ExecuteAsync<SearchJournalTransactionsServiceResponse>(searchJournalTransactionsServiceRequest).ConfigureAwait(false);
+                string receiptId = searchJournalTransactionsServiceResponse.Transactions.FirstOrDefault().ReceiptId;
+
+                if (!string.IsNullOrEmpty(receiptId))
+                {
+                    var message = string.Format(
+                              "Manager with id '{0}' has approved override for operation with id '{1}' for original receipt {3} to the operator with id '{2}'.",
+                              commercePrincipal.StaffId,
+                              RetailOperation.ReturnTransaction,
+                              commercePrincipal.OriginalUserId,
+                              receiptId);
+
+                    await LogAuditEntry(
+                               request.RequestContext,
+                               ExtensibleAuditEventType.ManagerOverride,
+                               "ElevateUser",
+                               message,
+                               AuditLogTraceLevel.Trace).ConfigureAwait(false);
+                }
             }
         }
 
