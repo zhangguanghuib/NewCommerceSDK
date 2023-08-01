@@ -1,4 +1,5 @@
 # Audit Event Log 
+Please check the code in the POS project
 
 1.  Set functional profile:
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/73c387b3-03d9-4267-91b4-837c796ed5b2)
