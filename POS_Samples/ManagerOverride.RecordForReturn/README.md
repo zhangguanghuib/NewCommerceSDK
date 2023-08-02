@@ -1,6 +1,6 @@
 # Audit Event Log 
 Please check the code in the POS project
-
+https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/ManagerOverride.RecordForReturn/CommerceRuntime/AddReturnCartLinesRequestTrigger.cs
 1.  Set functional profile:
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/73c387b3-03d9-4267-91b4-837c796ed5b2)
 
@@ -43,7 +43,8 @@ Please check the code in the POS project
         }
    ```
 
-   3.  Finally you should see the the original transaction is logged into the Audit Event Log Table:
-      ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/237d5a8e-0ba7-420f-9bc6-5b2101824a4f)
+   3.  Finally you should see the the original transaction is logged into the Audit Event Log Table, there is another version to log the original transaction id or Receipt Id
+      ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c127746e-aef8-45d2-a13e-49f76743ead9)
+
 
 
