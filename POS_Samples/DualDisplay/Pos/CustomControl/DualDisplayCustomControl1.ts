@@ -5,15 +5,9 @@ import * as Controls from "PosApi/Consume/Controls";
 import { ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
 
-//Sign in to the client.
-//Go to Retail and Commerce > Channel setup > POS setup > POS profiles > Hardware profiles.
-//Select the hardware profile that is linked to your register.
-//On the Dual display tab, set the Dual display in use option to Yes.
-//Go to Retail and Commerce > Retail and Commerce IT > Distribution schedule.
-//Select the Registers(1090) job, and then select Run now.
 
 export default class DualDisplayCustomControl extends DualDisplayCustomControlBase {
-    public cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>;
+
     public readonly cartTotalAmount: ko.Computed<number>;
     public readonly customerName: ko.Computed<string>;
     public readonly customerAccountNumber: ko.Computed<string>;
@@ -25,20 +19,17 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public readonly customerAccountNumberLabel: string;
     public readonly employeeNameLabel: string;
 
+    private readonly _customer: ko.Observable<ProxyEntities.Customer>;
+    private readonly _loggedOn: ko.Observable<boolean>;
+    private readonly _employee: ko.Observable<ProxyEntities.Employee>;
+    public webBrowserUrl: ko.Observable<string>;
+
     private static readonly TEMPLATE_ID: string = "Microsoft_Pos_Extensibility_Samples_DualDisplay";
 
     private readonly _cart: ko.Observable<ProxyEntities.Cart>;
     private readonly _cartLinesObservable: ko.ObservableArray<ProxyEntities.CartLine>;
-    public currentCartLines: ProxyEntities.CartLine[];
+    public cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>;
 
-    private readonly _customer: ko.Observable<ProxyEntities.Customer>;
-    private readonly _loggedOn: ko.Observable<boolean>;
-    private readonly _employee: ko.Observable<ProxyEntities.Employee>;
-
-    //public imageRotatorPath: ko.Observable<string>;
-    public webBrowserUrl: ko.Observable<string>;
-
-    public cartTotalAmountV2: ko.Observable<number>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 
@@ -49,15 +40,13 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this.customerAccountNumberLabel = "Customer Account Number:";
         this.employeeNameLabel = "Employee Name:";
 
-        this._cart = ko.observable(null);
-        this._cartLinesObservable = ko.observableArray<ProxyEntities.CartLine>([]);
-        this.currentCartLines = [];
-
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
+        this.webBrowserUrl = ko.observable('');
 
-        this.cartTotalAmountV2 = ko.observable(0.0);
+        this._cart = ko.observable(null);
+        this._cartLinesObservable = ko.observableArray<ProxyEntities.CartLine>([]);
 
         this.cartTotalAmount = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._cart()) ? 0.00 : this._cart().TotalAmount;
@@ -79,29 +68,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             return ObjectExtensions.isNullOrUndefined(this._employee())? StringExtensions.EMPTY: this._employee().Name;
         });
 
-        this.cartChangedHandler = (data: CartChangedData) => {
-            this._cart(data.cart);
-            console.log(this.cartTotalAmount);
-            this.cartTotalAmountV2(data.cart.TotalAmount);
-            //console.log(this.cartTotalAmount());
-            this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines);
-
-            data.cart.CartLines.forEach((cartline: ProxyEntities.CartLine) => {
-                this.currentCartLines.push(cartline);
-            });
-
-            this.cartLinesDataList.data = this._cartLinesObservable();
-
-
-            console.log(this._cartLinesObservable);
-        }
-
         this.customerChangedHandler = (data: CustomerChangedData) => {
             this._customer(data.customer);
         }
 
         this.dualDisplayConfigurationChangedHandler = (data: Commerce.Extensibility.DualDisplayExtensionTypes.DualDisplayConfigurationChangedData) => {
-            //this.imageRotatorPath(data.imageRotatorPath);
             this.webBrowserUrl(data.webBrowserUrl);
         }
 
@@ -115,6 +86,15 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this._loggedOn(data.loggedOn);
             this._employee(data.employee);
         }
+
+        this.cartChangedHandler = (data: CartChangedData) => {
+            this._cart(data.cart);
+            this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines);
+
+            if (!ObjectExtensions.isNullOrUndefined(this.cartLinesDataList)) {
+                this.cartLinesDataList.data = this._cartLinesObservable();
+            }
+        }
     }
 
 
@@ -127,9 +107,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         });
         
         let cartLinesDataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
-            interactionMode: Controls.DataListInteractionMode.SingleSelect,
-            data: this._cartLinesObservable,
-            //data: this.currentCartLines,
+            interactionMode: Controls.DataListInteractionMode.None,
+            data: this._cartLinesObservable(),
             columns: [
                 {
                     title: "ID",
@@ -194,5 +173,4 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._employee(state.employee);
         this._cartLinesObservable(ObjectExtensions.isNullOrUndefined(this._cart()) ? [] : this._cart().CartLines);
     }
-
 }

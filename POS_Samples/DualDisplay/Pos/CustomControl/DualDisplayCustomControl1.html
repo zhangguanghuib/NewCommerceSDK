@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script id="Microsoft_Pos_Extensibility_Samples_DualDisplay" type="text/html">
+        <div class="height100Percent width100Percent" style="width: 100%;height:100%">
+            <div style="width: 50%;height:100%;float: right;">
+                <div class="height400 width100Percent no-shrink col marginBottom20">
+                    <div class="col grow marginBottom48">
+                        <div id="dualDisplayDataListSample" data-bind="msPosDataList: cartLinesDataList"></div>
+                    </div>
+                </div>
+                <div class="marginBottom20">
+                    <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount:</h2>
+                    <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2><br />
+                    <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount V4:</h2>
+                    <h2 class="marginLeft8" data-bind="text: cartTotalAmountV2"></h2><br />
+                    <h2 class="marginLeft8" data-bind="text: customerNameLabel">Customer Name:</h2>
+                    <h2 class="marginLeft8" data-bind="text: customerName"></h2><br />
+                    <h2 class="marginLeft8" data-bind="text: customerAccountNumberLabel">Customer Account Number:</h2><br />
+                    <h2 class="marginLeft8" data-bind="text: isLoggedOn()? 'logged in': 'logged out'"></h2><br />
+                    <h2 class="marginLeft8" data-bind="text: employeeNameLabel">Employee Name:</h2>
+                    <h2 class="marginLeft8" data-bind="text: employeeName"></h2><br />
+                </div>
+            </div>
+        </div>
+    </script>
+</body>
+</html>

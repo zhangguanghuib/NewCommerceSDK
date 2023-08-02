@@ -15,8 +15,8 @@
     "dualDisplay": {
       "customControl": {
         "controlName": "DualDisplayCustomControl",
-        "htmlPath": "CustomControl/DualDisplayCustomControl.html",
-        "modulePath": "CustomControl/DualDisplayCustomControl"
+        "htmlPath": "CustomControl/DualDisplayCustomControl1.html",
+        "modulePath": "CustomControl/DualDisplayCustomControl1"
       }
     },
     "extend": {
