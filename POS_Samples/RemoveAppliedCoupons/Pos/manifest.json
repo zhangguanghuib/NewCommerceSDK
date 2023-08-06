@@ -1,0 +1,43 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [       
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+        "ShowJournalView": {
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/ShowAppliedCouponCommand" }
+          ]
+        }
+        }
+      },
+    "create": {
+      "views": [
+      ],
+      "templatedDialogs": [
+        {
+          "name": "Applied Coupons Dialog",
+          "description": "A dialog showing all the applied coupon of current cart.",
+          "modulePath": "Controls/AppliedCouponsDialog",
+          "htmlPath": "Controls/AppliedCouponsDialog.html"
+        }
+      ]
+    }
+  }
+}

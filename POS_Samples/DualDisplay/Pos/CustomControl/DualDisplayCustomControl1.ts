@@ -28,8 +28,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
     private readonly _cart: ko.Observable<ProxyEntities.Cart>;
     private readonly _cartLinesObservable: ko.ObservableArray<ProxyEntities.CartLine>;
-    public cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>;
-
+    public cartLinesDataList: Controls.IDataList<ProxyEntities.CartLine>
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
 

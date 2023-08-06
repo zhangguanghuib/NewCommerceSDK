@@ -26,7 +26,7 @@ export default class CartLinesView extends Views.CustomViewControllerBase {
 
         // DataList
         let dataListOptions: Readonly<Controls.IDataListOptions<ProxyEntities.CartLine>> = {
-            interactionMode: Controls.DataListInteractionMode.Invoke,
+            interactionMode: Controls.DataListInteractionMode.MultiSelect,
             //data: this.viewModel.currentCartLines,
             data: this.viewModel._cartLinesObservable,
             columns: [
