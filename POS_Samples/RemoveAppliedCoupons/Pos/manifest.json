@@ -37,6 +37,13 @@
           "modulePath": "Controls/AppliedCouponsDialog",
           "htmlPath": "Controls/AppliedCouponsDialog.html"
         }
+      ],
+      "operations": [
+        {
+          "operationId": "6004",
+          "operationRequestFactoryPath": "Operations/AppliedCoupons/RemoveAppliedCouponsOperationRequestFacory",
+          "operationRequestHandlerPath": "Operations/AppliedCoupons/RemoveAppliedCouponsOperationRequestHandler"
+        }
       ]
     }
   }

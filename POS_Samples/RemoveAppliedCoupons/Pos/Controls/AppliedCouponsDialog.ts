@@ -4,7 +4,10 @@ import * as Dialogs from "PosApi/Create/Dialogs";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { ArrayExtensions, ObjectExtensions} from "PosApi/TypeExtensions";
 import { IDataList, DataListInteractionMode } from "PosApi/Consume/Controls";
-import { GetCurrentCartClientRequest, GetCurrentCartClientResponse, RefreshCartClientRequest, RefreshCartClientResponse } from "PosApi/Consume/Cart";
+import {
+    GetCurrentCartClientRequest, GetCurrentCartClientResponse
+    , RefreshCartClientRequest, RefreshCartClientResponse
+} from "PosApi/Consume/Cart";
 import { Carts } from "./../DataService/DataServiceRequests.g";
 
 export default class AppliedCouponsDialog extends Dialogs.ExtensionTemplatedDialogBase {
@@ -83,7 +86,7 @@ export default class AppliedCouponsDialog extends Dialogs.ExtensionTemplatedDial
                     id: AppliedCouponsDialog.OK_BUTTON_ID,
                     label: "Remove",
                     isPrimary: true,
-                    onClick: this._removeCheckedCoupons.bind(this)
+                    onClick: this.buttonRemoveClickHandler.bind(this)
                 },
                 button2: {
                     id: AppliedCouponsDialog.CANCEL_BUTTON_ID,
@@ -139,7 +142,6 @@ export default class AppliedCouponsDialog extends Dialogs.ExtensionTemplatedDial
 
     public loadAsync(): Promise<void> {
         this.isProcessing = true;
-
         let correlationId: string = this.context.logger.getNewCorrelationId();
         let getCurrentCartClientRequest: GetCurrentCartClientRequest<GetCurrentCartClientResponse> = new GetCurrentCartClientRequest(correlationId);
         return this.context.runtime.executeAsync(getCurrentCartClientRequest)
@@ -167,8 +169,17 @@ export default class AppliedCouponsDialog extends Dialogs.ExtensionTemplatedDial
 
     private buttonCancelClickHandler(): boolean {
         this.resolvePromise();
-        return false;
+        return true;
     }
+
+  
+    private buttonRemoveClickHandler(): boolean {
+        this._removeCheckedCoupons().then(() => {
+            this.resolvePromise();
+        });
+        return true;
+    }
+
 
     private onCloseX(): boolean {
         this.resolvePromise();

@@ -36,7 +36,6 @@
             return response.Cart;
         }
 
-
         private List<Coupon> GetAppliedCouponsFromSalesTransaction(SalesTransaction transaction)
         {
             List<Coupon> appliedCoupons = new List<Coupon>();
