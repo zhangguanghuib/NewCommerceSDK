@@ -1,0 +1,45 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [       
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+        "ShowJournalView": {
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/ShowJournal/ShowMenusViewCommand" }
+          ]
+        }
+      }
+    },
+    "create": {
+      "views": [
+        {
+          "name": "Show Menus View",
+          "description": "Show Menus View",
+          "pageName": "MenusView",
+          "phonePageName": "MenusView",
+          "viewDirectory": "Create/Views/",
+          "viewControllerPath": "Create/Views/MenusView"
+        }
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+﻿[ExtensionOf(tableStr(MCRTmpCustPaymLookup))]
+final class MCRTmpCustPaymLookup_Extension
+{
+    public static void addCards(MCRTmpCustPaymLookup  _mcrTmpCustPaymLookup,
+                                        RetailChannelRecId _channel)
+    {
+        try
+        {
+            throw Exception::Info;
+            next addCards(_mcrTmpCustPaymLookup, _channel);
+        }
+        catch
+        {
+            exceptionTextFallThrough();
+        }
+        finally
+        {     
+            RetailStoreTenderTypeTable      retailStoreTenderTypeTable;
+            RetailStoreTenderTypeCardTable  retailStoreTenderTypeCardTable;
+            RetailTenderTypeCardTable       retailTenderTypeCardTable;
+
+            ttsBegin;
+
+            insert_recordset _mcrTmpCustPaymLookup
+            (RetailStoreTenderTypeId,
+             RetailTenderTypeName,
+             RetailCardTypeId)
+        select tenderTypeId, Name from retailStoreTenderTypeTable
+            where retailStoreTenderTypeTable.function == RetailTenderFunction::Card
+               && retailStoreTenderTypeTable.Channel == _channel
+                && retailStoreTenderTypeTable.Disabled == NoYes::No
+            join cardTypeId from retailStoreTenderTypeCardTable
+                where retailStoreTenderTypeCardTable.tenderTypeId == retailStoreTenderTypeTable.tenderTypeId
+                   && retailStoreTenderTypeCardTable.Channel == retailStoreTenderTypeTable.Channel
+            exists join retailTenderTypeCardTable
+                where retailTenderTypeCardTable.cardTypeId == retailStoreTenderTypeCardTable.cardTypeId;
+
+            ttsCommit;
+        }
+    }
+
+    public static void addNonCards(MCRTmpCustPaymLookup  _mcrTmpCustPaymLookup,
+                                        RetailChannelRecId _channel,
+                                        boolean _allowOnAccount)
+    {
+        try
+        {
+            throw Exception::Info;
+            next addNonCards(_mcrTmpCustPaymLookup, _channel, _allowOnAccount);
+        }
+        catch
+        {
+            exceptionTextFallThrough();
+        }
+        finally
+        {
+            RetailStoreTenderTypeTable retailStoreTenderTypeTable;
+          
+            ttsBegin;
+
+            while select tenderTypeId, Name, function, posOperation, Channel from retailStoreTenderTypeTable
+            where retailStoreTenderTypeTable.function != RetailTenderFunction::Card
+                && retailStoreTenderTypeTable.Channel == _channel
+                && retailStoreTenderTypeTable.Disabled == NoYes::No
+            {
+                if ((_allowOnAccount || retailStoreTenderTypeTable.function != RetailTenderFunction::Customer) &&
+                (retailStoreTenderTypeTable.isAvailableForCommercePayment()))
+                {
+                    _mcrTmpCustPaymLookup.clear();
+                    _mcrTmpCustPaymLookup.RetailStoreTenderTypeId = retailStoreTenderTypeTable.tenderTypeId;
+                    _mcrTmpCustPaymLookup.RetailTenderTypeName = retailStoreTenderTypeTable.name;
+                    _mcrTmpCustPaymLookup.insert();
+                }
+            }
+
+            ttsCommit;
+        }
+    }
+
+}

@@ -12,11 +12,17 @@
     }
   ],
   "components": {
+    "resources": {
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources",
+      "stringResourcesFileName": "resources.resjson"
+    },
     "dualDisplay": {
       "customControl": {
         "controlName": "DualDisplayCustomControl",
-        "htmlPath": "CustomControl/DualDisplayCustomControl1.html",
-        "modulePath": "CustomControl/DualDisplayCustomControl1"
+        "htmlPath": "CustomControl/DualDisplayCustomControl.html",
+        "modulePath": "CustomControl/DualDisplayCustomControl"
       }
     },
     "extend": {
