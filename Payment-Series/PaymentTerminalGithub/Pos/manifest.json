@@ -16,6 +16,10 @@
       "header": {     
       },
       "triggers": [
+        {
+          "triggerType": "PreEndTransaction",
+          "modulePath": "TriggerHandlers/PreEndTransactionTrigger"
+        }
       ],
       "requestHandlers": [
         {

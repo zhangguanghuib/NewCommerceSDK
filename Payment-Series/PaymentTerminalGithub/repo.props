@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <BuildNumber Condition="'$(BuildNumber)' == ''">0.0</BuildNumber>
-    <MajorVersion>9.42</MajorVersion>
+    <MajorVersion>9.44</MajorVersion>
     <Version>$(MajorVersion).$(BuildNumber)</Version>
   </PropertyGroup>
   <PropertyGroup>
@@ -14,7 +14,7 @@
     <EmitLegacyAssetsFileItems>true</EmitLegacyAssetsFileItems>
   </PropertyGroup>
   <PropertyGroup>
-   <CommerceSdkPackagesVersion>[9.44.*,9.45)</CommerceSdkPackagesVersion>
+    <CommerceSdkPackagesVersion>[9.44.*,9.45)</CommerceSdkPackagesVersion>
     <CommercePosPackagesVersion>[9.44.*,9.45)</CommercePosPackagesVersion>
     <CommerceChannelPackagesVersion>[9.44.*,9.45)</CommerceChannelPackagesVersion>
     <CommerceHwsPackagesVersion>[9.44.*,9.45)</CommerceHwsPackagesVersion>
