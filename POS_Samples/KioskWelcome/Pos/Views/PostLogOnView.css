@@ -1,0 +1,19 @@
+﻿.PostLogOnView .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .PostLogOnView .container div {
+        width: 100%;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .PostLogOnView .container button {
+        width: 50%;
+        height: 120px;
+        color: white;
+        font-size: 30px;
+        background-color: dodgerblue
+    }

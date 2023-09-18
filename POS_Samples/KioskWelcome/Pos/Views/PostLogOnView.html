@@ -4,19 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <title>PostLogOnView</title>
+    <link href="PostLogOnView.css" rel="stylesheet" />
 </head>
-<body style="height: 100vh;" data-bind="style: { backgroundImage: backgroundImageEncodingURL }">
+<body>
     <div class="PostLogOnView">
         <div class="grow marginBottom48 scrollY">
-            <div class="pad20 col width680">
+            <div class="pad20 col container">
                 <div>
-                    <div class="h4">Customer View</div>
                     <button id="confirmBtn">Customer View</button>
                 </div>
                 <div>
-                    <div class="h4">Cart View</div>
                     <button id="cartBtn">Cart View</button>
                 </div>
+                <div>
+                    <button id="inventlookupBtn">Inventory Lookup</button>
+                </div>
+                <div>
+                    <button id="searchOrdersBtn">Search Orders</button>
+                </div>
+                <div data-bind="style: { 'background-image': 'url(' + imageUrl + ')' }"></div>
             </div>
         </div>
     </div>

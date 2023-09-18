@@ -1,0 +1,10 @@
+﻿#gasPumpPackedButton {
+    width: inherit;
+    color: #fff;
+}
+
+#con {
+    height:48px;
+    width:120px;
+    position: relative;
+}

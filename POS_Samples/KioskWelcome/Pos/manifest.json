@@ -13,7 +13,15 @@
   ],
   "components": {
     "extend": {
-      "header": {     
+      "header": {
+        "customPackingItems": [
+          {
+            "name": "Gas Pump Status Header Item",
+            "description": "An item showing the gas pump status on the POS header.",
+            "modulePath": "Extend/Header/GasPumpStatusPackingItem",
+            "htmlPath": "Extend/Header/GasPumpStatusPackingItem.html"
+          }
+        ]
       },
       "triggers": [
         {

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Gas Pumps Status Item Templates</title>
+    <link href="PostLogOnView.css" rel="stylesheet" />
+</head>
+<body>
+    <script id="Microsoft_Pos_GasStationHeaderExtensionSample_UnpackedGasPumpStatusItem" type="text/html">
+        <div id="con">
+            <div class="reddot1"></div>
+            <button class="pad0 center row"
+                    data-bind="click: onItemClickedHandler, style: { 'background-color' :  backgroundColor }, attr: {'aria-label': label}">
+                Starting Page
+            </button>
+            </div>
+    </script>
+    <script id="Microsoft_Pos_GasStationHeaderExtensionSample_PackedGasPumpStatusItem" type="text/html">
+        <div id="con">
+            <button id="gasPumpPackedButton" class="row pad0"
+                    data-bind="click: onItemClickedHandler, style: { 'background-color' : backgroundColor }, attr: {'aria-label': label}">
+                Starting Page
+            </button>
+        </div>
+</script>
+</body>
+</html>
