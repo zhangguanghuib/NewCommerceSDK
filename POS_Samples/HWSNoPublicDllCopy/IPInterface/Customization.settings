@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <ISVCustomizationSettingsHasBeenImported>true</ISVCustomizationSettingsHasBeenImported>
+
+    <!-- This section is for global settings and code signing. Any built file will inherit these values if applicable. Package manifest files  will
+    also use these values during package generation. -->
+	<AssemblyNamePrefix Condition="'$(AssemblyNamePrefix)' == ''">Microchannel</AssemblyNamePrefix> 
+    <CustomAssemblyVersion Condition="'$(CustomAssemblyVersion)' == ''">10.0.5.3</CustomAssemblyVersion>
+    <CustomVersion Condition="'$(CustomVersion)' == ''">10.0.5.3</CustomVersion>
+    <CustomName Condition="'$(CustomName)' == ''">Microchannel NSW Trains Retail Customization</CustomName> 
+    <CustomDescription Condition="'$(CustomDescription)' == ''">Microchannel NSW Trains Retail Customization</CustomDescription>
+    <CustomPublisher Condition="'$(CustomPublisher)' == ''">CN=Microchannel</CustomPublisher>
+    <CustomPublisherDisplayName Condition="'$(CustomPublisherDisplayName)' == ''">Microchannel</CustomPublisherDisplayName>
+    <CustomCopyright Condition="'$(CustomCopyright)' == ''">Copyright © 2020</CustomCopyright>
+
+    <SignAssembly Condition="'$(SignAssembly)' == ''">false</SignAssembly>
+    <DelaySign Condition="'$(DelaySign)' == ''">false</DelaySign>
+    <AssemblyOriginatorKeyFile Condition="'$(AssemblyOriginatorKeyFile)' == '' and '$(SignAssembly)' == 'true'">$(MSBuildThisFileDirectory)\strongnamekey.snk</AssemblyOriginatorKeyFile>
+
+    <!--
+        The name of the cert must match the name of the publisher of the package which is the same as the CustomPublisher above. 
+        http://blogs.msdn.com/b/wsdevsol/archive/2014/02/12/create-a-windows-store-appx-package-and-sign-it.aspx
+        https://msdn.microsoft.com/en-us/library/windows/desktop/jj835832(v=vs.85).aspx
+
+        The sample cert was generated like this:
+        MakeCert /n "CN=Contoso Ltd." /r /h 0 /eku "1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13" /e ""12/31/2037"" /sv appxsignkey.pvk appxsignkey.cer
+        empty password as just for testing (Optional parameters for password protected cert [/pi "Password" /po "password"])
+        Pvk2Pfx.exe /pvk appxsignkey.pvk /spc appxsignkey.cer /pfx appxsignkey.pfx /pi ""
+
+        To use signing cert from certificate store, add thumbprint of the certificate below to ModernPOSPackageCertificateThumbprint property and 
+        comment out ModernPOSPackageCertificateKeyFile property.
+        If certificate being used is password protected, then this method must be used.
+
+        Use the following command get the Thumpprint of the certificate
+        powershell Get-ChildItem -Path Cert:\CurrentUser\My
+
+        ModernPOSPackageCertificateThumbprint cannot be used in VSTS builds, because the certificate can't be installed on the VSTS hosted machines.
+        Instead the certificate must be restored to the file system using a secret manager, such as Azure KeyVault, and the argument ModernPOSPackageCertificateKeyFile should specify the path to the certificate. 
+        When consuming the signing certificate via ModernPOSPackageCertificateKeyFile, leave the ModernPOSPackageCertificateThumbprint variable empty.
+    -->
+		<ModernPOSPackageCertificateKeyFile Condition="'$(ModernPOSPackageCertificateKeyFile)' == ''">$(MSBuildThisFileDirectory)\MicrochannelSigningCert.pfx</ModernPOSPackageCertificateKeyFile>
+		<ModernPOSPackageCertificateThumbprint Condition="'$(ModernPOSPackageCertificateThumbprint)' == '103124d27bceb60452a5a7a141dc9729ba327ad7'"></ModernPOSPackageCertificateThumbprint> <ModernPOSPackageCertificateTimestamp Condition="'$(ModernPOSPackageCertificateTimestamp)' == ''"></ModernPOSPackageCertificateTimestamp>
+
+    <!-- 
+        To generate a self-signed Code Signing Certificate, use the following Powershell command:
+        New-SelfSignedCertificate -CertStoreLocation Cert:\CurrentUser\My -Subject "CN=Contoso Ltd." -KeyAlgorithm RSA -KeyLength 2048 -KeyExportPolicy Exportable -KeyUsage DigitalSignature -Type CodeSigningCert
+
+        You can use the following Powershell command to get the thumbprint:
+        Get-ChildItem -Path Cert:\CurrentUser\My
+
+        SelfServicePackageCertificateThumbprint cannot be used in Azure DevOps Pipelines, because the certificate can't be installed on the hosted machines.
+        When using Azure DevOps Pipelines, SelfServicePackageCertificateKeyFile should specify the path to the certificate to sign the installer.
+        When consuming the signing certificate via SelfServicePackageCertificateKeyFile, leave the SelfServicePackageCertificateThumbprint variable empty.
+    -->
+    <SelfServicePackageCertificateKeyFile Condition="'$(SelfServicePackageCertificateKeyFile)' == ''"></SelfServicePackageCertificateKeyFile>
+    <SelfServicePackageCertificateThumbprint Condition="'$(SelfServicePackageCertificateThumbprint)' == ''"></SelfServicePackageCertificateThumbprint>
+    <SelfServicePackageCertificateTimestamp Condition="'$(SelfServicePackageCertificateTimestamp)' == ''"></SelfServicePackageCertificateTimestamp>
+
+    <!--
+        Specify the name of the Windows Phone Modern POS package.
+        Specify the name of the Android Modern POS phone package.
+        Specify the name of the iOS Modern POS phone package.
+    -->
+    <MPOSWindowsPhoneFile>$(SdkReferencesPath)\RetailModernPOS_ARM.appx</MPOSWindowsPhoneFile>
+    <MPOSAndroidFile>$(SdkReferencesPath)\SampleMPOSAndroidPackage.apk</MPOSAndroidFile>
+    <MPOSiOSFile>$(SdkReferencesPath)\SampleMPOSiOSPackage.ipk</MPOSiOSFile>
+  </PropertyGroup>
+
+  <!-- This section is for additional files related to a customization. -->
+  <ItemGroup>
+    <!-- This is where any additional CRT dlls should be specified -->
+    <!--ISV_CommerceRuntime_CustomizableFile Include="$(SdkReferencesPath)\MyCrtExtension.dll" /-->
+	 <ISV_CommerceRuntime_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.NSWTrains.Commerce.Runtime.Extensions.dll" />
+
+    <!-- This is where any additional RetailServer dlls should be specified -->
+    <!--ISV_RetailServer_CustomizableFile Include="$(SdkReferencesPath)\MyRetailServerExtension.dll" /-->
+	<ISV_CommerceRuntime_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.NSWTRains.RetailServer.Extensions.dll" />
+    <ISV_CommerceRuntime_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.PaymentConnector.dll" />
+
+    <!-- This is where any additional RetailProxy dlls should be specified -->
+    <!--ISV_RetailProxy_CustomizableFile Include="$(SdkReferencesPath)\MyRetailProxyExtension.dll" /-->
+	<ISV_RetailProxy_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.NSWTRains.RetailProxy.Extensions.dll" />
+
+    <!-- This is where any additional hardware station files should be specified -->
+    <!--ISV_HardwareStation_CustomizableFile Include="$(SdkReferencesPath)\MyHardwareStationExtension.dll" /-->
+	<ISV_HardwareStation_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.HardwareStation.Extensions.dll" />
+    <ISV_HardwareStation_CustomizableFile Include="$(SdkReferencesPath)\PCEFTPOS.EFTClient.IPInterface.dll" />
+    <ISV_HardwareStation_CustomizableFile Include="$(SdkReferencesPath)\Microchannel.PaymentConnector.dll" />
+
+    <!-- This is where any additional db upgrade scripts should be specified -->
+    <!-- ISV_CustomDatabaseFile_Upgrade_Custom Include="$(SdkRootPath)\Database\Upgrade\Custom\SqlUpdatev1.sql" /-->
+	<ISV_CustomDatabaseFile_Upgrade_Custom Include="$(SdkRootPath)\Database\Upgrade\Custom\MCSNSWTrainsRetailExtSchema1.sql" />
+	<ISV_CustomDatabaseFile_Upgrade_Custom Include="$(SdkRootPath)\Database\Upgrade\Custom\MCSNSWTrainsRetailExtSchema1_20200213.sql" />	
+ </ItemGroup>
+  
+  <!-- This section is for development only features -->
+  <PropertyGroup>
+    <RetailServerDropBinariesOnBuild Condition="'$(RetailServerDropBinariesOnBuild)' == ''">false</RetailServerDropBinariesOnBuild>
+    <RetailServerInstallationLocalBinariesPath Condition="'$(RetailServerInstallationLocalBinariesPath)' == ''"></RetailServerInstallationLocalBinariesPath>
+
+    <HardwareStationDropBinariesOnBuild Condition="'$(HardwareStationDropBinariesOnBuild)' == ''">false</HardwareStationDropBinariesOnBuild>
+    <HardwareStationInstallationLocalBinariesPath Condition="'$(HardwareStationInstallationLocalBinariesPath)' == ''"></HardwareStationInstallationLocalBinariesPath>
+  </PropertyGroup>
+ </Project>

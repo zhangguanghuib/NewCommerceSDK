@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)\global.props" Condition="Exists('$(MSBuildThisFileDirectory)\global.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)\globaluser.props" Condition="Exists('$(MSBuildThisFileDirectory)\globaluser.props')"/>
+  <Import Project="$(MSBuildProjectDirectory)\local.props" Condition="Exists('$(MSBuildProjectDirectory)\local.props')"/>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+
+    <!-- Path to TypeScript parent folder -->
+    <TypeScriptJsProjResourcesPath>$(RedboxRoot)\Extensions\Microsoft\VisualStudio\v14.0\TypeScript</TypeScriptJsProjResourcesPath>
+    <TypeScriptRootPath Condition="'$(TypeScriptRootPath)' == ''">$(MSBuildThisFileDirectory)..\References\Microsoft.TypeScript.MSBuild.2.2.2</TypeScriptRootPath>
+    <TypeScriptPath Condition="'$(TypeScriptPath)' == ''">$(TypeScriptRootPath)\Tools</TypeScriptPath>
+    <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <RetailSdkBuildPropsHasBeenImported>true</RetailSdkBuildPropsHasBeenImported>
+  </PropertyGroup>
+ </Project>

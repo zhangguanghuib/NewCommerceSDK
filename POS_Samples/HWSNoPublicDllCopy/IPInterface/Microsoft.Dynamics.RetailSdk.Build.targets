@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildProjectDirectory)\local.targets" Condition="Exists('$(MSBuildProjectDirectory)\local.targets')"/>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <PropertyGroup >
+    <PrepareForBuildDependsOn>$(PrepareForBuildDependsOn);GenerateCSBuildVersionFile</PrepareForBuildDependsOn>
+    <_BuildVersionFileCS>$(IntermediateOutputPath)bldver.g.cs</_BuildVersionFileCS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttributes Include="AssemblyCompany">
+      <_Parameter1>$(CustomPublisher)</_Parameter1>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyProduct">
+      <_Parameter1>$(CustomName)</_Parameter1>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyCopyright">
+      <_Parameter1>$(CustomCopyright)</_Parameter1>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyVersion">
+      <_Parameter1>$(CustomAssemblyVersion)</_Parameter1>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyFileVersion">
+      <_Parameter1>$(CustomVersion)</_Parameter1>
+    </AssemblyAttributes>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <CustomManifestAttributes Include="CustomPublisher">
+      <Value>$(CustomPublisher)</Value>
+    </CustomManifestAttributes>
+    <CustomManifestAttributes Include="CustomName">
+      <Value>$(CustomName)</Value>
+    </CustomManifestAttributes>
+    <CustomManifestAttributes Include="CustomDescription">
+      <Value>$(CustomDescription)</Value>
+    </CustomManifestAttributes>
+    <CustomManifestAttributes Include="CustomVersion">
+      <Value>$(CustomVersion)</Value>
+    </CustomManifestAttributes>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(ShouldGenerateJSONBuildVersionFile)' == 'true'">
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);GenerateJSONBuildVersionFile</PrepareForRunDependsOn>
+    <_BuildVersionFileJS>bldver.json</_BuildVersionFileJS>
+  </PropertyGroup>
+
+
+  <!-- 
+  Zip Task to compress a folder
+  -->
+  <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <InputFolder ParameterType="System.String" Required="true" />
+      <OutputFileName ParameterType="System.String" Required="true" />
+      <OverwriteExistingFile ParameterType="System.Boolean" Required="false" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        const int BufferSize = 64 * 1024;
+
+        var buffer = new byte[BufferSize];
+        var fileMode = OverwriteExistingFile ? FileMode.Create : FileMode.CreateNew;
+
+        using (var outputFileStream = new FileStream(OutputFileName, fileMode))
+        {
+            using (var archive = new ZipArchive(outputFileStream, ZipArchiveMode.Create))
+            {
+                foreach (var inputFileName in Directory.GetFiles(InputFolder, "*.*", SearchOption.AllDirectories))
+                {
+                    var relativeFilePath = inputFileName.Remove(0, InputFolder.Length);
+                    if (relativeFilePath[0] == '\\')
+                    {
+                        relativeFilePath = relativeFilePath.Remove(0, 1);
+                    }
+                    var archiveEntry = archive.CreateEntry(relativeFilePath);
+
+                    using (var fs = new FileStream(inputFileName, FileMode.Open))
+                    {
+                        using (var zipStream = archiveEntry.Open())
+                        {
+                            int bytesRead = -1;
+                            while ((bytesRead = fs.Read(buffer, 0, BufferSize)) > 0)
+                            {
+                                zipStream.Write(buffer, 0, bytesRead);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+    <!-- 
+  XamlChangeAssemblyNamesTask Task to fix up assemlby names in xaml files
+  -->
+  <UsingTask TaskName="XamlChangeAssemblyNamesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup> 
+      <AssemblynamePrefix ParameterType="System.String" Required="true"/>
+      <XamlFiles ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            string pattern1 = @"<AssemblyReference>.+\.Commerce\.Runtime\.WorkflowFoundation\.Activities</AssemblyReference>";
+            string replacementString1 = string.Format(@"<AssemblyReference>{0}.Commerce.Runtime.WorkflowFoundation.Activities</AssemblyReference>", AssemblynamePrefix);
+
+            string pattern2 = @"<AssemblyReference>.+\.Commerce\.Runtime\.Workflow</AssemblyReference>";
+            string replacementString2 = string.Format(@"<AssemblyReference>{0}.Commerce.Runtime.Workflow</AssemblyReference>", AssemblynamePrefix);
+
+            foreach(ITaskItem xamlFile in XamlFiles)
+            {
+                bool updated = false;
+                string content = File.ReadAllText(xamlFile.ItemSpec);
+                string pattern = string.Empty;
+                string replacementString = string.Empty;
+
+                for(int i = 1;i < 3;i++)
+                {
+                    switch(i)
+                    {
+                        case 1:
+                            pattern = pattern1;
+                            replacementString = replacementString1;
+                            break;
+
+                        case 2:
+                            pattern = pattern2;
+                            replacementString = replacementString2;
+                            break;
+                            
+                        default:
+                            Log.LogError("Not implemented");
+                            break;
+                    }
+
+                    if(!Regex.IsMatch(content, replacementString))
+                    {
+                        if(Regex.IsMatch(content, pattern))
+                        {
+                            updated = true;
+                            content = Regex.Replace(content, pattern, replacementString);
+                        }
+                        else
+                        {
+                            Log.LogMessage("XamlChangeAssemblyNamesTask: File {0} does not need to be updated.", xamlFile.ItemSpec);
+                        }
+                    }
+                    else
+                    {
+                        Log.LogMessage("XamlChangeAssemblyNamesTask: File {0} does not need to be updated (2).", xamlFile.ItemSpec);
+                    }
+                }
+                
+                if(updated)
+                {
+                    File.WriteAllText(xamlFile.ItemSpec, content);
+                    Log.LogMessage("XamlChangeAssemblyNamesTask: Updated file {0}.", xamlFile.ItemSpec);
+                }
+                
+            }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <!-- 
+  SetAppxVersion Task to update the publisher and version in appx manifest and write to a new xml file.
+  -->
+  <UsingTask TaskName="SetAppxVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <PackageManifest ParameterType="System.String" Required="true" />
+      <VersionString ParameterType="System.String" Required="true" />
+      <Publisher ParameterType="System.String" Required="true" />
+      <PublisherDisplayName ParameterType="System.String" Required="true" />
+      <TransformedManifest ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Using Namespace="System.Xml" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            const string identityXpath = "manifest:Identity/@Version";
+            const string publisherXpath = "manifest:Identity/@Publisher";
+            const string publisherDisplayNameXpath = "manifest:Properties/manifest:PublisherDisplayName";
+            bool updated = false;
+            try
+            {
+                XmlDocument xdoc = new XmlDocument();
+                XmlNamespaceManager nsManager = new XmlNamespaceManager(xdoc.NameTable);
+                xdoc.Load(PackageManifest);
+                nsManager.AddNamespace("manifest", xdoc.DocumentElement.NamespaceURI);
+                XmlNode identNode = xdoc.DocumentElement.SelectSingleNode(identityXpath, nsManager);
+                if (identNode != null)
+                {
+                    identNode.Value = VersionString;
+                    XmlNode publisherNode = xdoc.DocumentElement.SelectSingleNode(publisherXpath, nsManager);
+                    publisherNode.Value = Publisher;
+
+                    XmlNode publisherNode2 = xdoc.DocumentElement.SelectSingleNode(publisherDisplayNameXpath, nsManager);
+                    publisherNode2.InnerText = PublisherDisplayName;
+
+                    xdoc.Save(TransformedManifest);
+                    updated = true;
+                }
+                else
+                {
+                    System.IO.File.Copy(PackageManifest, TransformedManifest, true);
+                }
+            }
+            catch (XmlException ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+            catch (System.IO.IOException ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+
+            //Check if we successfully updated the manifest
+            if (updated)
+            {
+                Log.LogMessage("Package manifest {0} successfully updated to version {1}", PackageManifest, VersionString);
+                Log.LogMessage("Updated package manifest located at {0}", TransformedManifest);
+            }
+            else
+            {
+                Log.LogWarning("Unable to locate the version attribute in package manifest {0}. No version updated.", PackageManifest);
+                updated = true; //set updated to true to not fail the build task
+            }
+            return updated;
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <!-- 
+  SetInstallationManifestCustomInfo Task to update the custom fields in the manifest and write to a new xml file.
+  -->
+  <UsingTask TaskName="SetInstallationManifestCustomInfo" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <Manifest ParameterType="System.String" Required="true" />
+      <Key ParameterType="System.String" Required="true" />
+      <Value ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Using Namespace="System.Xml" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            string customSettingXpath = string.Format("/ServiceModelInstallationInfo/{0}", Key);
+            try
+            {
+                XmlDocument xdoc = new XmlDocument();
+                XmlNamespaceManager nsManager = new XmlNamespaceManager(xdoc.NameTable);
+                nsManager.AddNamespace("", "http://www.w3.org/2001/XMLSchema-instance");
+                xdoc.Load(Manifest);
+                XmlNode ServiceModelInstallationInfo = xdoc.SelectSingleNode("ServiceModelInstallationInfo");
+                XmlNode customSettingNode = xdoc.DocumentElement.SelectSingleNode(customSettingXpath, nsManager);
+                if (customSettingNode == null)
+                {
+                    XmlElement newCustomNode = xdoc.CreateElement(Key);
+                    newCustomNode.InnerText = Value;
+                    ServiceModelInstallationInfo.AppendChild(newCustomNode);
+                }
+                else
+                {
+                    customSettingNode.InnerText = Value;
+                }
+                xdoc.Save(Manifest);
+                Log.LogMessage("Package manifest {0} successfully loaded.", Manifest);
+                Log.LogMessage("Updated package manifest located at {0}", Manifest);
+                return true;
+            }
+            catch (XmlException ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+            catch (System.IO.IOException ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+  
+  <!-- 
+  GenerateHotfixInstallationInfo Task to create a hotfix installation info xml file for update installation packages
+  -->
+  <UsingTask TaskName="GenerateHotfixInstallationInfo" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <ContentFolder ParameterType="System.String" Required="true" />
+      <InstallationInfoDllFullPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="$(InstallationInfoDllFullPath)" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Reflection" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            const string hotfixInstallInfoTypeName = "Microsoft.Dynamics.AX.AXInstallationInfo.HotfixInstallationInfo";
+            const string axInstallInfoTypeName = "Microsoft.Dynamics.AX.AXInstallationInfo.AXInstallationInfo";
+            const string hotfixInstallInfoFileName = "HotfixInstallationInfo.xml";
+
+            Assembly assembly = Assembly.LoadFrom(InstallationInfoDllFullPath);
+
+            var hotfixInfo = assembly.CreateInstance(hotfixInstallInfoTypeName);
+            Type axInstallInfo = assembly.GetType(axInstallInfoTypeName);
+
+            MethodInfo staticMethodInfo = axInstallInfo.GetMethod("CreateHotfixInstallationInfoFromServiceModelDirectory");
+            hotfixInfo = staticMethodInfo.Invoke(null, new string[] { ContentFolder, "$(CustomName)", "$(CustomDescription)", "$(CustomPublisher)", "Custom Retail Package" });
+
+           assembly.GetType(hotfixInstallInfoTypeName)
+                   .GetMethod("ExportToFile")
+                   .Invoke(hotfixInfo, new string[] { Path.Combine(ContentFolder, hotfixInstallInfoFileName) }); ;
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <!-- 
+  GenerateCSBuildVersionFile target to generate a new version file and add it to the Compile Itemgroup (for all C# projects)
+  -->
+  <Target Name="GenerateCSBuildVersionFile" Inputs="$(MSBuildAllProjects)" Outputs="$(_BuildVersionFileCS)">
+    <MakeDir Directories="$(IntermediateOutputPath)" />
+    <WriteCodeFragment AssemblyAttributes="@(AssemblyAttributes)" OutputFile="$(_BuildVersionFileCS)" Language="C#">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
+
+  <!-- 
+  GenerateJSONBuildVersionFile target to generate a new version file and add it to the Content Itemgroup(for CloudPOS)
+  -->
+  <Target Name="GenerateJSONBuildVersionFile" BeforeTargets="PrepareForRunDependsOn" Inputs="$(MSBuildAllProjects)" Outputs="$(_BuildVersionFileJS)">
+
+    <ItemGroup>
+      <Line Include="line01">
+        <Text>{</Text>
+      </Line>
+      <Line Include="line02">
+        <Text>    "publisher": "$(CustomPublisher)",</Text>
+      </Line>
+      <Line Include="line03">
+        <Text>    "version": {</Text>
+      </Line>
+      <Line Include="line04">
+        <Text>        "major": "$([System.Version]::new($(CustomVersion)).Major)",</Text>
+      </Line>
+      <Line Include="line05">
+        <Text>        "minor": "$([System.Version]::new($(CustomVersion)).Minor)",</Text>
+      </Line>
+      <Line Include="line06">
+        <Text>        "build": "$([System.Version]::new($(CustomVersion)).Build)",</Text>
+      </Line>
+      <Line Include="line07">
+        <Text>        "revision": "$([System.Version]::new($(CustomVersion)).Revision)"</Text>
+      </Line>
+      <Line Include="line08">
+        <Text>    }</Text>
+      </Line>
+      <Line Include="line09">
+        <Text>}</Text>
+      </Line>
+    </ItemGroup>
+    <WriteLinesToFile File="$(_BuildVersionFileJS)" Lines="@(Line->'%(Text)')" Overwrite="true" />
+    <ItemGroup>
+      <Content Include="$(_BuildVersionFileJS)">
+        <InProject>True</InProject>
+      </Content>
+    </ItemGroup>
+  </Target>
+
+  <!-- 
+  TransformAppxManifestIdentityVersion target to update appx manifest file and replace the ItemGroup for it
+  -->
+  <Target Name="TransformAppxManifestIdentityVersion"
+    BeforeTargets="_ValidatePresenceOfAppxManifestItems" Inputs="$(MSBuildAllProjects)" Outputs="@(AppxManifest->'$(IntermediateOutputPath)\%(Filename)%(Extension)')" Condition="'@(AppxManifest)'!=''">
+    <!-- Output a package manifest with the current build version -->
+    <SetAppxVersion PackageManifest="@(AppxManifest)"
+          VersionString="$(CustomVersion)"
+          Publisher="$(CustomPublisher)"
+          PublisherDisplayName="$(CustomPublisherDisplayName)"
+          TransformedManifest="@(AppxManifest->'$(IntermediateOutputPath)\%(Filename)%(Extension)')" />
+
+    <!-- Replace the original package manifest path with our generated one -->
+    <ItemGroup>
+      <OrigAppxManifest Include="@(AppxManifest)" />
+      <AppxManifest Remove="*.*" />
+      <AppxManifest Include="@(OrigAppxManifest->'$(IntermediateOutputPath)\%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
+
+  <!-- 
+  TransformAppxManifestIdentityVersion target to update appx manifest file and replace the ItemGroup for it
+  -->
+  <Target Name="TransformInstallationInfoManifest"
+    AfterTargets="CopyPackageFiles" Condition="'$(OutputManifest)'!=''"> 
+    <!-- Output a package manifest with the additional info -->
+    <SetInstallationManifestCustomInfo
+          Manifest="$(OutputManifest)" Key="%(CustomManifestAttributes.Identity)" Value="%(CustomManifestAttributes.Value)"  />
+  </Target>
+
+  <!-- 
+  AfterBuild for any actions after build is done
+  -->
+  <Target Name="AfterBuild">
+    <Error Condition="'$(TypeScriptOutFile)' != '' AND !Exists('$(TypeScriptPath)\Microsoft.TypeScript.targets')" Text="The Typescript imports were not found at $(TypeScriptPath)\Microsoft.TypeScript.targets." />
+  </Target>
+
+  <!-- 
+  CopyRuntimeDependencies used by a few web projects
+  -->
+  <Target Name="CopyRuntimeDependencies" Inputs="@(RuntimeDependencies)" Outputs="@(RuntimeDependencies->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" BeforeTargets="CopyTests" AfterTargets="AfterBuild">
+    <Copy Condition="'@(RuntimeDependencies)'!=''" SourceFiles="@(RuntimeDependencies)" DestinationFiles="@(RuntimeDependencies->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <!-- 
+  AfterBuildPushBinaryToReferences to copy built binaries to References folder
+  -->
+  <Target Name="AfterBuildPushBinaryToReferences" AfterTargets="AfterBuild" Condition="'@(Compile)' != ''">
+    <Copy SourceFiles="$(TargetDir)$(TargetName)$(TargetExt)" DestinationFolder="$(SdkReferencesPath)" Condition="Exists('$(TargetDir)$(TargetName)$(TargetExt)')" SkipUnchangedFiles="true" ContinueOnError="false" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(SdkReferencesPath)" Condition="Exists('$(TargetDir)$(TargetName).pdb')" SkipUnchangedFiles="true" ContinueOnError="false" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName)$(TargetExt).config" DestinationFolder="$(SdkReferencesPath)" Condition="Exists('$(TargetDir)$(TargetName)$(TargetExt).config')" SkipUnchangedFiles="true" ContinueOnError="false" />
+    <ItemGroup>
+      <SatelliteDlls Include="$(TargetDir)**\$(TargetName).resources.dll"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(SatelliteDlls)" DestinationFolder="$(SdkReferencesPath)%(RecursiveDir)" Condition="Exists('%(SatelliteDlls.RootDir)%(SatelliteDlls.Directory)%(SatelliteDlls.Filename).dll')" SkipUnchangedFiles="true" ContinueOnError="false" />
+  </Target>
+  
+  <!-- 
+  Authenticode sign the target if set in the project and thumbprint is set.
+  Note: BuildingInVsts is a variable that can be manually defined build pipeline to signal to the build tools that a build is running in VSTS and skip this signing logic.
+  -->
+ <Target 
+    Name="CodeSigning" 
+    BeforeTargets="AfterBuildPushBinaryToReferences"
+    Condition="'$(AuthenticodeSignEnabled)' == 'true' AND '$(BuildingInVsts)' != 'true' AND '$(SelfServicePackageCertificateThumbprint)' != ''">
+      <Message
+      Text="Running CodeSigning:
+        Thumbprint: $(SelfServicePackageCertificateThumbprint)
+        Framework:  $(TargetFrameworkVersion)
+        Target:     $(TargetPath)" />
+      <SignFile
+        CertificateThumbprint="$(SelfServicePackageCertificateThumbprint)"
+        SigningTarget="$(TargetPath)"
+        TargetFrameworkVersion="$(TargetFrameworkVersion)" />
+  </Target>
+
+  <!-- 
+  Target that "changes the assembly name references" in xaml files
+  -->
+  <Target Name="XamlChangeAssemblyNamesTarget" BeforeTargets="XamlMarkupCompilePass1"
+    Inputs="$(MSBuildAllProjects);@(XamlAppDef)" Outputs="$(TargetDir)$(TargetName)$(TargetExt)">
+    <XamlChangeAssemblyNamesTask XamlFiles="@(XamlAppDef)" AssemblynamePrefix="$(AssemblyNamePrefix)" />
+  </Target>
+  
+  <!-- 
+  AfterBuildDropBinariesToRetailServer to copy built binaries to to RetailServer bin folder (for development purposes only)
+  Note: Missing files will not cause errors, as build order may cause some files not being created yet. But, files that do exist will be copied.
+  -->
+  <Target Name="AfterBuildDropBinariesToRetailServer" 
+          AfterTargets="AfterBuildPushBinaryToReferences" 
+          Condition="'$(RetailServerDropBinariesOnBuild)' == 'true' AND ('@(ISV_CommerceRuntime_CustomizableFile)' != '' OR '@(ISV_RetailServer_CustomizableFile)' != '')">
+    <Copy SourceFiles="%(ISV_CommerceRuntime_CustomizableFile.Identity)" 
+          DestinationFolder="$(RetailServerInstallationLocalBinariesPath)\ext" 
+          SkipUnchangedFiles="true" 
+          ContinueOnError="false" 
+          Condition="Exists('%(ISV_CommerceRuntime_CustomizableFile.Identity)')" />
+    <Copy SourceFiles="%(ISV_RetailServer_CustomizableFile.Identity)" 
+          DestinationFolder="$(RetailServerInstallationLocalBinariesPath)\ext" 
+          SkipUnchangedFiles="true" 
+          ContinueOnError="false"
+          Condition="Exists('%(ISV_RetailServer_CustomizableFile.Identity)')" />
+  </Target>
+
+  <!-- 
+  AfterBuildDropBinariesToHardwareStation to copy built binaries to to HardwareStation bin folder (for development purposes only)
+  Note: Missing files will not cause errors, as build order may cause some files not being created yet. But, files that do exist will be copied.
+  -->
+  <Target Name="AfterBuildDropBinariesToHardwareStation" 
+          AfterTargets="AfterBuildPushBinaryToReferences" 
+          Condition="'$(HardwareStationDropBinariesOnBuild)' == 'true' AND ('@(ISV_HardwareStation_CustomizableFile)' != '')">
+    <Copy SourceFiles="%(HardwareStation_CustomizableFile.Identity)" 
+          DestinationFolder="$(HardwareStationInstallationLocalBinariesPath)" 
+          SkipUnchangedFiles="true" 
+          ContinueOnError="false" 
+          Condition="Exists('%(HardwareStation_CustomizableFile.Identity)')" />
+  </Target>
+</Project>

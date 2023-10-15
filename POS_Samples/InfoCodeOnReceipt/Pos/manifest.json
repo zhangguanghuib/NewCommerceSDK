@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "GasStationSample",
+  "publisher": "Contoso",
+  "version": "1.0.0.0",
+  "minimumPosVersion": "9.32.0.0",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "extend": {
+      "header": {     
+      },
+      "triggers": [
+        {
+          "triggerType": "PreProductSale",
+          "modulePath": "TriggerHandlers/PreProductSaleTrigger"
+        },
+        {
+          "triggerType": "PostProductSale",
+          "modulePath": "TriggerHandlers/PostProductSaleTrigger"
+        }
+
+      ],
+      "requestHandlers": [  
+      ],
+      "views": {
+      }
+    },
+    "create": {
+      "views": [
+      ],
+      "templatedDialogs": [
+      ]
+    }
+  }
+}

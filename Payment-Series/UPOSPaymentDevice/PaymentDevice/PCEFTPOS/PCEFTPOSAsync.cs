@@ -33,18 +33,21 @@ namespace Contoso
         using PSDK = Microsoft.Dynamics.Retail.PaymentSDK.Portable;
         // using DataModel;
         using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+        using Microsoft.Dynamics.Commerce.HardwareStation.Models;
         using Microsoft.Dynamics.Retail.PaymentSDK.Portable;
         using Helper;
         using Microsoft.Dynamics.Commerce.Runtime;
         using UPOS_HardwareStation.DataModel;
         using PCEFTPOS.EFTClient.IPInterface;
-       
+        using Request = Microsoft.Dynamics.Retail.PaymentSDK.Portable.Request;
+
         //using PCEFTPOS.Messaging;
 
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDispoUPOSle", Justification = "long running task, so the file system watcher will be disposed when the program ends")]
-        [Obsolete]
-        public class PCEFTPOSAsync : INamedRequestHandlerAsync
+#pragma warning disable CS0618 // Type or member is obsolete
+        public class PCEFTPOSAsync : INamedRequestHandler
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             public enum UPOS_PaymentType { payment, refund }
 
@@ -58,8 +61,8 @@ namespace Contoso
             private PSDK.PaymentProperty[] merchantProperties;
             private SettingsInfo terminalSettings;
             private string paymentConnectorName;
-           // private readonly TenderInfo tenderInfo;
-           // private PSDK.IPaymentProcessor processor;
+            //private readonly TenderInfo tenderInfo;
+            //private PSDK.IPaymentProcessor processor;
 
             //-->UPOS/Wojtek/009443 EFT integration
             public string transactionid = string.Empty;
@@ -78,7 +81,7 @@ namespace Contoso
             private Settings _settings;
             private EFTTransactionResponse transactionResponse;
             private EFTGetLastTransactionResponse getLastTransactionResponse;
-            IEFTClientIPAsync _eftAsync = null;           
+            IEFTClientIPAsync _eftAsync = null;
             string errorMessage;
             //<--UPOS/Wojtek/009443 EFT integration
 
@@ -115,7 +118,8 @@ namespace Contoso
                         typeof(AuthorizePaymentTerminalDeviceRequest),
                         typeof(CapturePaymentTerminalDeviceRequest),
                         typeof(VoidPaymentTerminalDeviceRequest),
-                        typeof(RefundPaymentTerminalDeviceRequest),                      
+                        typeof(RefundPaymentTerminalDeviceRequest),
+                        typeof(FetchTokenPaymentTerminalDeviceRequest),
                         typeof(EndTransactionPaymentTerminalDeviceRequest),
                         typeof(ClosePaymentTerminalDeviceRequest),
                         typeof(ActivateGiftCardPaymentTerminalRequest),
@@ -131,132 +135,132 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The payment terminal device simulator request message.</param>
             /// <returns>Returns the payment terminal device simulator response.</returns>
-            public async Task<Microsoft.Dynamics.Commerce.Runtime.Messages.Response> Execute(Microsoft.Dynamics.Commerce.Runtime.Messages.Request request)
+            public Microsoft.Dynamics.Commerce.Runtime.Messages.Response Execute(Microsoft.Dynamics.Commerce.Runtime.Messages.Request request)
             {
                 Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
 
                 Type requestType = request.GetType();
-                
+
                 if (requestType == typeof(OpenPaymentTerminalDeviceRequest))
                 {
-                    await Open((OpenPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    this.Open((OpenPaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(BeginTransactionPaymentTerminalDeviceRequest))
                 {
-                    await BeginTransaction((BeginTransactionPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    this.BeginTransaction((BeginTransactionPaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(UpdateLineItemsPaymentTerminalDeviceRequest))
                 {
-                    await UpdateLineItems((UpdateLineItemsPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    this.UpdateLineItems((UpdateLineItemsPaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(AuthorizePaymentTerminalDeviceRequest))
                 {
-                     await AuthorizePayment((AuthorizePaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.AuthorizePayment((AuthorizePaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(CapturePaymentTerminalDeviceRequest))
                 {
-                    return await CapturePayment((CapturePaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.CapturePayment((CapturePaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(VoidPaymentTerminalDeviceRequest))
                 {
-                    await  VoidPayment((VoidPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.VoidPayment((VoidPaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(RefundPaymentTerminalDeviceRequest))
                 {
-                    return await RefundPayment((RefundPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.RefundPayment((RefundPaymentTerminalDeviceRequest)request);
                 }
-                //else if (requestType == typeof(FetchTokenPaymentTerminalDeviceRequest))
-                //{
-                //    return this.FetchToken((FetchTokenPaymentTerminalDeviceRequest)request);
-                //}
+                else if (requestType == typeof(FetchTokenPaymentTerminalDeviceRequest))
+                {
+                    return this.FetchToken((FetchTokenPaymentTerminalDeviceRequest)request);
+                }
                 else if (requestType == typeof(EndTransactionPaymentTerminalDeviceRequest))
                 {
-                    await EndTransaction((EndTransactionPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    this.EndTransaction((EndTransactionPaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(ClosePaymentTerminalDeviceRequest))
                 {
-                    await Close((ClosePaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    this.Close((ClosePaymentTerminalDeviceRequest)request);
                 }
                 else if (requestType == typeof(CancelOperationPaymentTerminalDeviceRequest))
                 {
-                    await CancelOperation((CancelOperationPaymentTerminalDeviceRequest)request).ConfigureAwait(false) ;
+                    this.CancelOperation((CancelOperationPaymentTerminalDeviceRequest)request);
                 }
-                else if (requestType == typeof(CancelOperationPaymentTerminalDeviceRequest))
+                else if (requestType == typeof(ActivateGiftCardPaymentTerminalRequest))
                 {
-                    await CancelOperation((CancelOperationPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.ActivateGiftCard((ActivateGiftCardPaymentTerminalRequest)request);
                 }
-                //else if (requestType == typeof(ActivateGiftCardPaymentTerminalRequest))
-                //{
-                //    return this.ActivateGiftCard((ActivateGiftCardPaymentTerminalRequest)request);
-                //}
-                //else if (requestType == typeof(AddBalanceToGiftCardPaymentTerminalRequest))
-                //{
-                //    return this.AddBalanceToGiftCard((AddBalanceToGiftCardPaymentTerminalRequest)request);
-                //}
-                //else if (requestType == typeof(GetGiftCardBalancePaymentTerminalRequest))
-                //{
-                //    return this.GetGiftCardBalance((GetGiftCardBalancePaymentTerminalRequest)request);
-                //}
+                else if (requestType == typeof(AddBalanceToGiftCardPaymentTerminalRequest))
+                {
+                    return this.AddBalanceToGiftCard((AddBalanceToGiftCardPaymentTerminalRequest)request);
+                }
+                else if (requestType == typeof(GetGiftCardBalancePaymentTerminalRequest))
+                {
+                    return this.GetGiftCardBalance((GetGiftCardBalancePaymentTerminalRequest)request);
+                }
                 else if (requestType == typeof(ExecuteTaskPaymentTerminalDeviceRequest))
                 {
-                    return await ExecutePaymentTerminal((ExecuteTaskPaymentTerminalDeviceRequest)request).ConfigureAwait(false);
+                    return this.ExecutePaymentTerminal((ExecuteTaskPaymentTerminalDeviceRequest)request);
                 }
                 else
                 {
                     throw new NotSupportedException(string.Format("Request '{0}' is not supported.", request.GetType()));
                 }
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 return new NullResponse();
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             /// <summary>
             /// Opens the payment terminal device.
             /// </summary>
             /// <param name="request">The open payment terminal device request.</param>
-            public async Task Open(OpenPaymentTerminalDeviceRequest request)
+            public void Open(OpenPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-                // Utilities.WaitAsyncTask(() => this.OpenAsync(request.DeviceName, request.TerminalSettings, request.DeviceConfig));
-               await  OpenAsync(request.DeviceName, request.TerminalSettings, request.DeviceConfig).ConfigureAwait(false);
+                Utilities.WaitAsyncTask(() => this.OpenAsync(request.DeviceName, request.TerminalSettings, request.DeviceConfig));
             }
 
             /// <summary>
             ///  Begins the transaction.
             /// </summary>
             /// <param name="request">The begin transaction request.</param>
-            public async Task BeginTransaction(BeginTransactionPaymentTerminalDeviceRequest request)
+            public void BeginTransaction(BeginTransactionPaymentTerminalDeviceRequest request)
             {
-                //Utilities.WaitAsyncTask(() => Task.Run(async () =>
-                //{
-                    
+                Utilities.WaitAsyncTask(() => Task.Run(async () =>
+                {
+                    //PSDK.PaymentProperty[] merchantProperties = CardPaymentManager.ToLocalProperties(request.MerchantInformation);
                     PSDK.PaymentProperty[] merchantProperties = ToLocalPropertiesAsync(request.MerchantInformation);
+                    await BeginTransactionAsync(merchantProperties, request.PaymentConnectorName, request.InvoiceNumber, request.IsTestMode).ConfigureAwait(false);
+                }));
 
-                     await this.BeginTransactionAsync(merchantProperties, request.PaymentConnectorName, request.InvoiceNumber, request.IsTestMode).ConfigureAwait(false);
-                //}));
+
+
             }
             public static PaymentProperty[] ToLocalPropertiesAsync(string paymentPropertiesXml)
             {
                 PaymentProperty[] localProperties = (PaymentProperty[])null;
                 if (!string.IsNullOrWhiteSpace(paymentPropertiesXml))
-                    localProperties =   PaymentProperty.ConvertXMLToPropertyArray(paymentPropertiesXml);
+                    localProperties = PaymentProperty.ConvertXMLToPropertyArray(paymentPropertiesXml);
                 return localProperties;
             }
+
             /// <summary>
             /// Update the line items.
             /// </summary>
             /// <param name="request">The update line items request.</param>
-            public async Task UpdateLineItems(UpdateLineItemsPaymentTerminalDeviceRequest request)
+            public void UpdateLineItems(UpdateLineItemsPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-                await  UpdateLineItemsAsync(request.TotalAmount, request.TaxAmount, request.DiscountAmount, request.SubTotalAmount, request.Items).ConfigureAwait(false);
+                Utilities.WaitAsyncTask(() => this.UpdateLineItemsAsync(request.TotalAmount, request.TaxAmount, request.DiscountAmount, request.SubTotalAmount, request.Items));
             }
 
             /// <summary>
@@ -264,8 +268,8 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The authorize payment request.</param>
             /// <returns>The authorize payment response.</returns>
-            public async Task<AuthorizePaymentTerminalDeviceResponse> AuthorizePayment(AuthorizePaymentTerminalDeviceRequest request)
-            {                
+            public AuthorizePaymentTerminalDeviceResponse AuthorizePayment(AuthorizePaymentTerminalDeviceRequest request)
+            {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
@@ -275,20 +279,19 @@ namespace Contoso
                 this.GetExtensionProperties(request.ExtensionTransactionProperties);
 
                 PaymentInfo paymentInfo = null;
-                
+
                 if (this.signatureVerifiedProcess == true)
                 {
-                    paymentInfo = await ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.payment).ConfigureAwait(false);
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.payment));
                 }
                 else
                 {
-                    //paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.payment));
-                    paymentInfo = await  ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.payment).ConfigureAwait(false);
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.payment));
                 }
-                
+
                 //<--UPOS/Wojtek/009443 EFT integration
                 return new AuthorizePaymentTerminalDeviceResponse(paymentInfo);
-                
+
             }
 
             /// <summary>
@@ -296,16 +299,15 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The capture payment request.</param>
             /// <returns>The capture payment response.</returns>
-            public async Task<CapturePaymentTerminalDeviceResponse> CapturePayment(CapturePaymentTerminalDeviceRequest request)
+            public CapturePaymentTerminalDeviceResponse CapturePayment(CapturePaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
-                
-                PSDK.PaymentProperty[] merchantProperties = ToLocalPropertiesAsync(request.PaymentPropertiesXml);
-                //PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.CapturePaymentAsync(request.Amount, request.Currency, merchantProperties, request.ExtensionTransactionProperties));
-                PaymentInfo paymentInfo = await  CapturePaymentAsync(request.Amount, request.Currency, merchantProperties, request.ExtensionTransactionProperties).ConfigureAwait(false);
+
+                //PSDK.PaymentProperty[] merchantProperties = ToLocalPropertiesAsync(request.PaymentPropertiesXml);
+                PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.CapturePaymentAsync(request.Amount, request.Currency, merchantProperties, request.ExtensionTransactionProperties));
 
                 return new CapturePaymentTerminalDeviceResponse(paymentInfo);
             }
@@ -315,14 +317,14 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The void payment request.</param>
             /// <returns>The void payment response.</returns>
-            public async Task<VoidPaymentTerminalDeviceResponse> VoidPayment(VoidPaymentTerminalDeviceRequest request)
+            public VoidPaymentTerminalDeviceResponse VoidPayment(VoidPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-                PSDK.PaymentProperty[] merchantProperties = ToLocalPropertiesAsync(request.PaymentPropertiesXml);
+                //PSDK.PaymentProperty[] merchantProperties = ToLocalPropertiesAsync(request.PaymentPropertiesXml);
 
                 //get extension properties
                 //-->UPOS/Wojtek/009443 EFT integration
@@ -332,12 +334,11 @@ namespace Contoso
 
                 if (this.signatureVerifiedProcess == true)
                 {
-                    paymentInfo = await ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.refund).ConfigureAwait(false);
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
                 }
                 else
                 {
-                    //paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
-                    paymentInfo = await  ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund).ConfigureAwait(false);
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
                 }
                 //<--UPOS/Wojtek/009443 EFT integration
                 return new VoidPaymentTerminalDeviceResponse(paymentInfo);
@@ -348,7 +349,7 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The refund payment request.</param>
             /// <returns>The refund payment response.</returns>
-            public async Task<RefundPaymentTerminalDeviceResponse> RefundPayment(RefundPaymentTerminalDeviceRequest request)
+            public RefundPaymentTerminalDeviceResponse RefundPayment(RefundPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
@@ -362,17 +363,14 @@ namespace Contoso
 
                 if (this.signatureVerifiedProcess == true)
                 {
-                    //paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
-                    paymentInfo = await ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.refund).ConfigureAwait(false);
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationSignatureVeryfiedAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
                 }
                 else
                 {
-                    //paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
-                    paymentInfo = await  ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund).ConfigureAwait(false);
-
+                    paymentInfo = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationAsync(request.Amount, request.Currency, UPOS_PaymentType.refund));
                 }
                 //<--UPOS/Wojtek/009443 EFT integration
-                return new RefundPaymentTerminalDeviceResponse(paymentInfo);        
+                return new RefundPaymentTerminalDeviceResponse(paymentInfo);
             }
 
             /// <summary>
@@ -380,61 +378,58 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The fetch token request.</param>
             /// <returns>The fetch token response.</returns>
-            //public FetchTokenPaymentTerminalDeviceResponse FetchToken(FetchTokenPaymentTerminalDeviceRequest request)
-            //{
-            //    if (request == null)
-            //    {
-            //        throw new ArgumentNullException("request");
-            //    }
-
-            //    PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.FetchTokenAsync(request.IsManualEntry, request.ExtensionTransactionProperties));
-
-            //    return new FetchTokenPaymentTerminalDeviceResponse(paymentInfo);
-            //}
-
-            /// <summary>
-            /// Ends the transaction.
-            /// </summary>
-            /// <param name="request">The end transaction request.</param>
-            public async Task EndTransaction(EndTransactionPaymentTerminalDeviceRequest request)
+            public FetchTokenPaymentTerminalDeviceResponse FetchToken(FetchTokenPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-               // Utilities.WaitAsyncTask(() => this.EndTransactionAsync());
-               await this.EndTransactionAsync().ConfigureAwait(false);
+                PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.FetchTokenAsync(request.IsManualEntry, request.ExtensionTransactionProperties));
+
+                return new FetchTokenPaymentTerminalDeviceResponse(paymentInfo);
+            }
+
+            /// <summary>
+            /// Ends the transaction.
+            /// </summary>
+            /// <param name="request">The end transaction request.</param>
+            public void EndTransaction(EndTransactionPaymentTerminalDeviceRequest request)
+            {
+                if (request == null)
+                {
+                    throw new ArgumentNullException("request");
+                }
+
+                Utilities.WaitAsyncTask(() => this.EndTransactionAsync());
             }
 
             /// <summary>
             /// Closes the payment terminal device.
             /// </summary>
             /// <param name="request">The close payment terminal request.</param>
-            public async Task Close(ClosePaymentTerminalDeviceRequest request)
+            public void Close(ClosePaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-                //Utilities.WaitAsyncTask(() => this.CloseAsync());
-                await CloseAsync().ConfigureAwait(false);
+                Utilities.WaitAsyncTask(() => this.CloseAsync());
             }
 
             /// <summary>
             /// Cancels the operation.
             /// </summary>
             /// <param name="request">The cancel operation request.</param>
-            public async Task CancelOperation(CancelOperationPaymentTerminalDeviceRequest request)
+            public void CancelOperation(CancelOperationPaymentTerminalDeviceRequest request)
             {
                 if (request == null)
                 {
                     throw new ArgumentNullException("request");
                 }
 
-                //Utilities.WaitAsyncTask(() => this.CancelOperationAsync());
-                await CancelOperationAsync().ConfigureAwait(false);
+                Utilities.WaitAsyncTask(() => this.CancelOperationAsync());
             }
 
             /// <summary>
@@ -442,44 +437,44 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The activate gift card request.</param>
             /// <returns>The gift card payment response.</returns>
-            //public GiftCardPaymentResponse ActivateGiftCard(ActivateGiftCardPaymentTerminalRequest request)
-            //{
-            //    Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
+            public GiftCardPaymentResponse ActivateGiftCard(ActivateGiftCardPaymentTerminalRequest request)
+            {
+                Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
 
-            //    PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.ActivateGiftCardAsync(request.PaymentConnectorName, request.Amount, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
+                PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.ActivateGiftCardAsync(request.PaymentConnectorName, request.Amount, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
 
-            //    return new GiftCardPaymentResponse(paymentInfo);
-            //}
+                return new GiftCardPaymentResponse(paymentInfo);
+            }
 
             /// <summary>
             /// Add balance to the gift card.
             /// </summary>
             /// <param name="request">The add balance to gift card request.</param>
             /// <returns>The gift card payment response.</returns>
-            //public GiftCardPaymentResponse AddBalanceToGiftCard(AddBalanceToGiftCardPaymentTerminalRequest request)
-            //{
-            //    Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
-            //    Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request.TenderInfo, "tenderInfo");
+            public GiftCardPaymentResponse AddBalanceToGiftCard(AddBalanceToGiftCardPaymentTerminalRequest request)
+            {
+                Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
+                Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request.TenderInfo, "tenderInfo");
 
-            //    PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.AddBalanceToGiftCardAsync(request.PaymentConnectorName, request.Amount, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
+                PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.AddBalanceToGiftCardAsync(request.PaymentConnectorName, request.Amount, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
 
-            //    return new GiftCardPaymentResponse(paymentInfo);
-            //}
+                return new GiftCardPaymentResponse(paymentInfo);
+            }
 
             /// <summary>
             /// Get gift card balance.
             /// </summary>
             /// <param name="request">The get gift card balance request.</param>
             /// <returns>The gift card payment response.</returns>
-            //public GiftCardPaymentResponse GetGiftCardBalance(GetGiftCardBalancePaymentTerminalRequest request)
-            //{
-            //    Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
-            //    Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request.TenderInfo, "tenderInfo");
+            public GiftCardPaymentResponse GetGiftCardBalance(GetGiftCardBalancePaymentTerminalRequest request)
+            {
+                Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
+                Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request.TenderInfo, "tenderInfo");
 
-            //    PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.GetGiftCardBalanceAsync(request.PaymentConnectorName, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
+                PaymentInfo paymentInfo = Utilities.WaitAsyncTask(() => this.GetGiftCardBalanceAsync(request.PaymentConnectorName, request.Currency, request.TenderInfo, request.ExtensionTransactionProperties));
 
-            //    return new GiftCardPaymentResponse(paymentInfo);
-            //}
+                return new GiftCardPaymentResponse(paymentInfo);
+            }
 
             //-->SAB/Wojtek/009443 EFT integration Power failure  
             /// <summary>
@@ -487,14 +482,13 @@ namespace Contoso
             /// </summary>
             /// <param name="request">The Execute Task Card request.</param>
             /// <returns>Execute Task Card response.</returns>
-            public async Task<Microsoft.Dynamics.Commerce.Runtime.Messages.Response> ExecutePaymentTerminal(ExecuteTaskPaymentTerminalDeviceRequest request)
+            public Microsoft.Dynamics.Commerce.Runtime.Messages.Response ExecutePaymentTerminal(ExecuteTaskPaymentTerminalDeviceRequest request)
             {
                 Microsoft.Dynamics.Commerce.Runtime.ThrowIf.Null(request, "request");
 
                 this.GetExtensionProperties(request.ExtensionTransactionProperties);
 
-                //ExtensionTransaction extensionTransaction = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationPowerFailure());
-                ExtensionTransaction extensionTransaction =await ExecuteIntegrationPowerFailure().ConfigureAwait(false);
+                ExtensionTransaction extensionTransaction = Utilities.WaitAsyncTask(() => this.ExecuteIntegrationPowerFailure());
 
                 return new ExecuteTaskPaymentTerminalDeviceResponse(extensionTransaction);
 
@@ -551,16 +545,14 @@ namespace Contoso
             public async Task CancelOperationAsync()
             {
                 //-->UPOS/Wojtek/009443 EFT integration
-                //await Task.Run(() => this.InternalCancelOperation()).ConfigureAwait(false);
-                await  InternalCancelOperation().ConfigureAwait(false);
+                await Task.Run(() => InternalCancelOperation()).ConfigureAwait(false);
                 //<--UPOS/Wojtek/009443 EFT integration
                 // await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds);
             }
             //-->UPOS/Wojtek/009443 EFT integration
             public async Task CancelOperation()
             {
-                //await Task.Run(() => this.InternalCancelOperation()).ConfigureAwait(false);
-                await InternalCancelOperation().ConfigureAwait(false);
+                await Task.Run(() => InternalCancelOperation()).ConfigureAwait(false);
             }
             private async Task InternalCancelOperation()
             {
@@ -601,7 +593,7 @@ namespace Contoso
             /// <returns>A task that can be awaited until the connection is closed.</returns>
             public async Task CloseAsync()
             {
-                await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds).ConfigureAwait(false);
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -610,12 +602,59 @@ namespace Contoso
             /// <returns>A task that can be awaited until the end transaction screen is displayed.</returns>
             public async Task EndTransactionAsync()
             {
-                await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds).ConfigureAwait(false);
-            }           
-            
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
+            }
 
             /// <summary>
-            /// Open payment device using simulator.
+            /// Fetch token for credit card.
+            /// </summary>
+            /// <param name="isManualEntry">The value indicating whether credit card should be entered manually.</param>
+            /// <param name="extensionTransactionProperties">Optional extension transaction properties.</param>
+            /// <returns>A task that can await until the token generation has completed.</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            public async Task<PaymentInfo> FetchTokenAsync(bool isManualEntry, ExtensionTransaction extensionTransactionProperties)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            {
+                PaymentInfo paymentInfo = new PaymentInfo();
+
+                // Get tender
+                //TenderInfo maskedTenderInfo = await FetchTenderInfoAsync().ConfigureAwait(false);
+
+                //PSDK.PaymentProperty[] defaultMerchantProperties = this.merchantProperties;
+
+                //paymentInfo.CardNumberMasked = maskedTenderInfo.CardNumber;
+                //paymentInfo.CashbackAmount = maskedTenderInfo.CashBackAmount;
+                //paymentInfo.CardType = (Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.CardType)maskedTenderInfo.CardTypeId;
+
+                //if (this.merchantProperties != null &&
+                //    this.merchantProperties.Length > 0 &&
+                //    this.merchantProperties[0].Namespace.Equals(GenericNamespace.Connector) &&
+                //    this.merchantProperties[0].Name.Equals(ConnectorProperties.Properties))
+                //{
+                //    defaultMerchantProperties = this.merchantProperties[0].PropertyList;
+                //}
+
+
+                //if (this.processor == null)
+                //{
+                //    this.processor = GetPaymentProcessor(this.merchantProperties, this.paymentConnectorName);
+                //}
+
+                //// Generate card token
+                //PSDK.Request request = GetTokenRequest(defaultMerchantProperties, this.tenderInfo, this.terminalSettings.Locale, extensionTransactionProperties);
+                //PSDK.Response response = this.processor.GenerateCardToken(request, null);
+                //CardPaymentManager.MapTokenResponse(response, paymentInfo);
+
+                return paymentInfo;
+            }
+
+            /// <summary>Gets the payment processor.</summary>
+            /// <param name="merchantProperties">The merchant properties.</param>
+            /// <param name="paymentConnectorName">The payment connector name.</param>
+            /// <returns>Returns the payment processor.</returns>
+
+            ///// <summary>
+            ///// Open payment device using simulator.
             /// </summary>
             /// <param name="peripheralName">Name of peripheral device.</param>
             /// <param name="terminalSettings">The terminal settings for the peripheral device.</param>
@@ -624,7 +663,7 @@ namespace Contoso
             [Obsolete("This method will be removed once IPaymentDevice is deprecated.")]
             public async Task OpenAsync(string peripheralName, SettingsInfo terminalSettings, IDictionary<string, string> deviceConfig)
             {
-                await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds).ConfigureAwait(false);
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -634,7 +673,7 @@ namespace Contoso
             /// <param name="terminalSettings">The terminal settings for the peripheral device.</param>
             /// <param name="deviceConfig">Device Configuration parameters.</param>
             /// <returns>A task that can be awaited until the connection is opened.</returns>
-            public async Task OpenAsync(string peripheralName, SettingsInfo terminalSettings, PeripheralConfiguration deviceConfig)
+            public async Task OpenAsync(string peripheralName, SettingsInfo terminalSettings, Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.PeripheralConfiguration deviceConfig)
             {
                 var openTask = Task.Factory.StartNew(() =>
                 {
@@ -728,7 +767,7 @@ namespace Contoso
             //{
             //    /*this.SignatureCaptureHandler();*/
 
-            //    string signature = await this.GetSignatureData().ConfigureAwait(false);
+            //    string signature = await GetSignatureData().ConfigureAwait(false);
 
             //    // Show processing info here...
             //    return signature;
@@ -790,7 +829,7 @@ namespace Contoso
 
             //private async Task<TenderInfo> FetchTenderInfoAsync()
             //{
-            //    TenderInfo tenderInfo = await this.FillTenderInfo().ConfigureAwait(false);
+            //    TenderInfo tenderInfo = await FillTenderInfo().ConfigureAwait(false);
 
             //    // Show processing info here...
             //    return tenderInfo;
@@ -884,7 +923,7 @@ namespace Contoso
             //        var paymentTerminalCardSwipePipeline = new PaymentTerminalPipeline(string.Format("{0}{1}", PCEFTPOSAsync.PaymentTerminalDevice, PaymentTerminalMessageHandler.CardState));
             //        paymentTerminalCardSwipePipeline.EnableCardSwipe();
 
-            //        PaymentCardData cardSwipeData = Task.FromResult(getCardTrackData);
+            //        PaymentCardData cardSwipeData = getCardTrackData.Task.Result;
 
             //        var tenderInfo = new TenderInfo();
 
@@ -900,7 +939,7 @@ namespace Contoso
             //        return tenderInfo;
             //    });
 
-            //    return await tenderInfoTask;
+            //    return await tenderInfoTask.ConfigureAwait(false);
             //}
 
             /// <summary>
@@ -956,11 +995,11 @@ namespace Contoso
             /// <param name="tenderInfo">The tender information.</param>
             /// <param name="extensionTransactionProperties">Optional extension transaction properties.</param>
             /// <returns>A task that can await until the void has completed.</returns>
-            //private async Task<PaymentInfo> ActivateGiftCardAsync(string paymentConnectorName, decimal? amount, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
-            //{
-            //    await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds);
-            //    throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
-            //}
+            private async Task<PaymentInfo> ActivateGiftCardAsync(string paymentConnectorName, decimal? amount, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
+            {
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
+                throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
+            }
 
             /// <summary>
             /// Add balance to gift card.
@@ -971,11 +1010,11 @@ namespace Contoso
             /// <param name="tenderInfo">The tender information.</param>
             /// <param name="extensionTransactionProperties">Optional extension transaction properties.</param>
             /// <returns>A task that can await until the void has completed.</returns>
-            //private async Task<PaymentInfo> AddBalanceToGiftCardAsync(string paymentConnectorName, decimal? amount, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
-            //{
-            //    await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds);
-            //    throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
-            //}
+            private async Task<PaymentInfo> AddBalanceToGiftCardAsync(string paymentConnectorName, decimal? amount, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
+            {
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
+                throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
+            }
 
             /// <summary>
             /// Get gift card balance.
@@ -985,11 +1024,11 @@ namespace Contoso
             /// <param name="tenderInfo">The tender information.</param>
             /// <param name="extensionTransactionProperties">Optional extension transaction properties.</param>
             /// <returns>A task that can await until the void has completed.</returns>
-            //private async Task<PaymentInfo> GetGiftCardBalanceAsync(string paymentConnectorName, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
-            //{
-            //    await Task.Delay(PCEFTPOSAsync.TaskDelayInMilliSeconds);
-            //    throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
-            //}
+            private async Task<PaymentInfo> GetGiftCardBalanceAsync(string paymentConnectorName, string currencyCode, TenderInfo tenderInfo, ExtensionTransaction extensionTransactionProperties)
+            {
+                await Task.Delay(TaskDelayInMilliSeconds).ConfigureAwait(false);
+                throw new PeripheralException(PeripheralException.PaymentTerminalError, "Operation is not supported by payment terminal.", inner: null);
+            }
 
             /// <summary>
             /// Task that handles closing the connection after a timeout period.
@@ -1001,14 +1040,14 @@ namespace Contoso
 
                 try
                 {
-                    await Task.Delay(timeout * 1000, this.timeoutTask.Token).ConfigureAwait(false);
+                    await Task.Delay(timeout * 1000, timeoutTask.Token).ConfigureAwait(false);
                 }
                 catch (TaskCanceledException)
                 {
                     RetailLogger.Instance.AxGenericInformationalEvent("Task is canceled.");
                 }
 
-                await this.EndTransactionAsync().ConfigureAwait(false);
+                await EndTransactionAsync().ConfigureAwait(false);
             }
             //-->UPOS/Wojtek/009443 EFT integration
             #region PC-EFTPOS PRINTER
@@ -1036,7 +1075,7 @@ namespace Contoso
                 //}
             }
             #endregion
-           
+
             #region PC-EFTPOS PROPERTIES
             public void GetExtensionProperties(ExtensionTransaction extensionTransactionProperties)
             {
@@ -1107,7 +1146,7 @@ namespace Contoso
                 }
             }
 
-            private  async Task<List<PaymentProperty>> GetPaymentProperties(decimal amountPurchase, string cardType, string cardPAN)
+            private List<PaymentProperty> GetPaymentProperties(decimal amountPurchase, string cardType, string cardPAN)
             {
                 List<PaymentProperty> paymentProperties = new List<PaymentProperty>();
 
@@ -1117,12 +1156,12 @@ namespace Contoso
                       GenericNamespace.Connector,
                       ConnectorProperties.ConnectorName,
                       "UPOS Connector");
-                     paymentProperties.Add(paymentProperty);
-                   
-                     paymentProperty = new PaymentProperty(
-                      GenericNamespace.TransactionData,
-                      TransactionDataProperties.IndustryType,
-                      IndustryType.Retail.ToString());
+                    paymentProperties.Add(paymentProperty);
+
+                    paymentProperty = new PaymentProperty(
+                     GenericNamespace.TransactionData,
+                     TransactionDataProperties.IndustryType,
+                     IndustryType.Retail.ToString());
                     paymentProperties.Add(paymentProperty);
 
                     // Amount.
@@ -1131,7 +1170,7 @@ namespace Contoso
                         TransactionDataProperties.Amount,
                         Math.Abs(amountPurchase)); // for refunds request amount must be positive
                     paymentProperties.Add(paymentProperty);
-                    
+
                     //cardType type
                     paymentProperty = new PaymentProperty(
                     GenericNamespace.TransactionData,
@@ -1169,7 +1208,7 @@ namespace Contoso
                 {
                     RetailLogger.Instance.PaymentConnectorLogException("PaymentProperties", "Connector Name PCEFTPOS", "platform", ex);
                 }
-                return await Task.FromResult(paymentProperties).ConfigureAwait(false);
+                return paymentProperties;
             }
             private string GetPaymentSdkData(List<PaymentProperty> paymentProperties)
             {
@@ -1204,7 +1243,7 @@ namespace Contoso
                     await ConnectAsync().ConfigureAwait(false);
                     //Power failure call get last transaction       
                     EFTGetLastTransactionRequest r = new EFTGetLastTransactionRequest(this.transactionid);
-                    
+
                     await EftDoGetLastTransaction(r).ConfigureAwait(false);
                     //get last receipt
                     if (string.IsNullOrEmpty(this.errorMessage))
@@ -1227,11 +1266,11 @@ namespace Contoso
                 }
 
                 if (!string.IsNullOrEmpty(errorMessage))
-                {                   
+                {
                     throw new CardPaymentException("Error message", errorMessage);
                 }
 
-                List<PaymentProperty> paymentProperties = await GetPaymentProperties(getLastTransactionResponse.AmtPurchase, getLastTransactionResponse.CardType, getLastTransactionResponse.Pan).ConfigureAwait(false);
+                List<PaymentProperty> paymentProperties = this.GetPaymentProperties(getLastTransactionResponse.AmtPurchase, getLastTransactionResponse.CardType, getLastTransactionResponse.Pan);
 
                 string paymentSdkData = string.Empty;
                 try
@@ -1267,11 +1306,15 @@ namespace Contoso
             }
             public async Task<PaymentInfo> ExecuteIntegrationSignatureVeryfiedAsync(decimal amount, string currency, UPOS_PaymentType paymentType)
             {
+
                 try
                 {
+
                     // send request accept/declined from MPOS
                     var key = this.signatureVerified == true ? EFTPOSKey.YesAccept : EFTPOSKey.NoDecline;
+
                     await EFTClientIPHelper._eftAsync.WriteRequestAsync(new EFTSendKeyRequest() { Key = key }).ConfigureAwait(false);
+
                     //call integration
                     EFTTransactionRequest r = new EFTTransactionRequest();
 
@@ -1294,17 +1337,18 @@ namespace Contoso
                     // Set application. Used for gift card & 3rd party payment
                     r.Application = TerminalApplication.EFTPOS;
                     r.PurchaseAnalysisData = new PadField(this.merchant);
-
                     await EftOnTransaction(r).ConfigureAwait(false);
+
                 }
                 catch (System.Exception ex)
                 {
                     RetailLogger.Instance.PaymentConnectorLogException("call frmEFT", "Connector Name PCEFTPOS", "platform", ex);
                 }
 
-                List<PaymentProperty> paymentProperties = await GetPaymentProperties(transactionResponse.AmtPurchase, transactionResponse.CardType, transactionResponse.Pan).ConfigureAwait(false);
 
+                List<PaymentProperty> paymentProperties = this.GetPaymentProperties(transactionResponse.AmtPurchase, transactionResponse.CardType, transactionResponse.Pan);
                 string paymentSdkData = string.Empty;
+
                 try
                 {
                     if (paymentProperties != null && paymentProperties.Count > 0)
@@ -1320,7 +1364,6 @@ namespace Contoso
                 {
                     RetailLogger.Instance.PaymentConnectorLogException("ConvertPropertyArrayToXML", "Connector Name PCEFTPOS", "platform", ex);
                 }
-
                 return new PaymentInfo
                 {
                     CardNumberMasked = CardTypeHelper.getCardNumber(this.transactionResponse.Pan, this.cardTypeCollection, this.defaultCard),
@@ -1332,8 +1375,8 @@ namespace Contoso
                     IsApproved = this.transactionResponse.Success,
                     Errors = null
                 };
-
             }
+
             public async Task<PaymentInfo> ExecuteIntegrationAsync(decimal amount, string currency, UPOS_PaymentType paymentType)
             {
                 bool showDialogInMPOS = false;
@@ -1374,6 +1417,7 @@ namespace Contoso
                 {
                     RetailLogger.Instance.PaymentConnectorLogException("call frmEFT", "Connector Name PCEFTPOS", "platform", ex);
                 }
+
                 if (showDialogInMPOS == true)
                 {
                     return new PaymentInfo
@@ -1388,18 +1432,19 @@ namespace Contoso
                         Errors = null
                     };
                 }
-                List<PaymentProperty> paymentProperties = await GetPaymentProperties(transactionResponse.AmtPurchase, transactionResponse.CardType, transactionResponse.Pan).ConfigureAwait(false);
+
+                List<PaymentProperty> paymentProperties = this.GetPaymentProperties(transactionResponse.AmtPurchase, transactionResponse.CardType, transactionResponse.Pan);
 
                 EFTClientIPHelper._eftAsync = null;
-
                 return new PaymentInfo
                 {
                     CardNumberMasked = CardTypeHelper.getCardNumber(this.transactionResponse.Pan, this.cardTypeCollection, this.defaultCard),
                     CardType = Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.CardType.Unknown,
-                    SignatureData = "",
+                    SignatureData = this.transactionResponse.ResponseCode.ToString() + " , " + this.transactionResponse.ResponseText,
                     PaymentSdkData = GetPaymentSdkData(paymentProperties),
                     CashbackAmount = 0.0m,
                     ApprovedAmount = this.transactionResponse.AmtPurchase,
+
                     IsApproved = this.transactionResponse.Success,
                     Errors = null
                 };
@@ -1432,13 +1477,15 @@ namespace Contoso
                     // Wait for response
                     var waitingForResponse = true;
                     do
-                    {                     
+                    {
                         try
                         {
-                            var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0));
-                            
-                            EFTResponse eftResponse = await _eftAsync.ReadResponseAsync(timeoutToken.Token).ConfigureAwait(false);
-                            { 
+                            //var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0));
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                            var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0)).Token;
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                            EFTResponse eftResponse = await _eftAsync.ReadResponseAsync(timeoutToken).ConfigureAwait(false);
+                            {
                                 // Handle response
                                 if (eftResponse == null)
                                 {
@@ -1477,7 +1524,6 @@ namespace Contoso
                                     OnDuplicateReceipt(eftResponse as EFTReprintReceiptResponse);
                                 }
                             }
-                            timeoutToken.Dispose();
                         }
                         catch (TaskCanceledException)
                         {
@@ -1493,7 +1539,7 @@ namespace Contoso
                         {
                             // Unhandled exception                        
                             waitingForResponse = false;
-                        }                       
+                        }
                     }
                     while (waitingForResponse);
                 }
@@ -1526,7 +1572,7 @@ namespace Contoso
                     }
                     PrintReceipt(receipt.ToString());
                 }
-            }           
+            }
             void OnTransaction(EFTTransactionResponse r)
             {
                 this.transactionResponse = r;
@@ -1540,7 +1586,7 @@ namespace Contoso
                     {
                         receipt.AppendLine(l);
                     }
-                    PrintReceipt(receipt.ToString());           
+                    PrintReceipt(receipt.ToString());
                 }
             }
             void PrintReceipt(string receipt)
@@ -1557,65 +1603,57 @@ namespace Contoso
                         printerRequest.Header = "\n";
                         printerRequest.Lines = receipt.ToString();
                         printerRequest.Footer = "\n\n\n\n\n\n";
-
-                        PrintPrinterDeviceRequest printPrinterDeviceRequest = new PrintPrinterDeviceRequest(printerRequest.Header, printerRequest.Lines, printerRequest.Footer);
-                        if (this.deviceType == "OPOS")
-                        {
-                            OpenPrinterDeviceRequest request = new OpenPrinterDeviceRequest(this.deviceName, null, this.characterSet, this.binaryConversion);
-                            //RetailLogger.Log.HardwareStationPrinterDeviceRequestInformation(printRequestConfigKey.DeviceName, printRequestConfigKey.DeviceType, printRequestConfigKey.CharacterSet, printRequestConfigKey.BinaryConversion);
-                            var deviceTypeOpenRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(OpenPrinterDeviceRequest), this.deviceType);//"OPOS"
-                              
-                            deviceTypeOpenRequest.Execute(request);
-                            var deviceTypeRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(PrintPrinterDeviceRequest), this.deviceType);//"OPOS"
-                            if (deviceTypeRequest != null)
-                            {
-
-                                deviceTypeRequest.Execute(printPrinterDeviceRequest);
-                            }
-                            else
-                            {
-                                var deviceNameRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(PrintPrinterDeviceRequest), this.deviceName);
-                                deviceNameRequest.Execute(printPrinterDeviceRequest);
-                            }
-                            ClosePrinterDeviceRequest request1 = new ClosePrinterDeviceRequest();
-
-                            var deviceTypeCloseRequest = request1.RequestContext.Runtime.GetAsyncRequestHandler(typeof(ClosePrinterDeviceRequest), this.deviceType);//"OPOS"
-                            deviceTypeCloseRequest.Execute(request1);
-
-                        }
-                        else
-                        {
-                            printPrinterDeviceRequest.RequestContext.Runtime.ExecuteAsync<Microsoft.Dynamics.Commerce.Runtime.Messages.Response>(printPrinterDeviceRequest, printPrinterDeviceRequest.RequestContext);
-                        }
-                        // this.request.RequestContext.Runtime.Execute<Response>(printPrinterDeviceRequest, this.request.RequestContext);
-
-
-                        /*Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController pc = new Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController();
-
-                        System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest> list = new System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest>();
-                        list.Add(printerRequest);
-                        pc.Print(list);*/
-
+                        //using (Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController pc = new Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController())
+                        //{
+                        //    System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest> list = new System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest>();
+                        //    list.Add(printerRequest);
+                        //    pc.Print(list);
+                        //}
                     }
                     catch (Exception ex)
                     {
-                        ClosePrinterDeviceRequest request2 = new ClosePrinterDeviceRequest();
-
-                        var deviceTypeCloseRequest = request2.RequestContext.Runtime.GetAsyncRequestHandler(typeof(ClosePrinterDeviceRequest), this.deviceType);//"OPOS"
-                        deviceTypeCloseRequest.Execute(request2);
-                        new PeripheralException(PeripheralException.PaymentTerminalError, String.Format("Printer is not available."), ex);
+                        throw new CardPaymentException("Print Receipt", String.Format("Printer '{0}' is not available. '{1}'", this.deviceName, ex.Message));
                     }
-                    //    Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController pc = new Microsoft.Dynamics.Commerce.HardwareStation.Controllers.PrinterController();
+                    //    PrintPrinterDeviceRequest printPrinterDeviceRequest = new PrintPrinterDeviceRequest(printerRequest.Header, printerRequest.Lines, printerRequest.Footer);
+                    //    if (this.deviceType == "OPOS")
+                    //    {
+                    //        OpenPrinterDeviceRequest request = new OpenPrinterDeviceRequest(this.deviceName, null, this.characterSet, this.binaryConversion);
+                    //        //RetailLogger.Log.HardwareStationPrinterDeviceRequestInformation(printRequestConfigKey.DeviceName, printRequestConfigKey.DeviceType, printRequestConfigKey.CharacterSet, printRequestConfigKey.BinaryConversion);
+                    //        var deviceTypeOpenRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(OpenPrinterDeviceRequest), this.deviceType);//"OPOS"
 
-                    //    System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest> list = new System.Collections.ObjectModel.Collection<Microsoft.Dynamics.Commerce.HardwareStation.Models.PrintRequest>();
-                    //    list.Add(printerRequest);
-                    //    pc.(list);
+                    //        deviceTypeOpenRequest.Execute(request);
+                    //        var deviceTypeRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(PrintPrinterDeviceRequest), this.deviceType);//"OPOS"
+                    //        if (deviceTypeRequest != null)
+                    //        {
+
+                    //            deviceTypeRequest.Execute(printPrinterDeviceRequest);
+                    //        }
+                    //        else
+                    //        {
+                    //            var deviceNameRequest = request.RequestContext.Runtime.GetAsyncRequestHandler(typeof(PrintPrinterDeviceRequest), this.deviceName);
+                    //            deviceNameRequest.Execute(printPrinterDeviceRequest);
+                    //        }
+                    //        ClosePrinterDeviceRequest request1 = new ClosePrinterDeviceRequest();
+
+                    //        var deviceTypeCloseRequest = request1.RequestContext.Runtime.GetAsyncRequestHandler(typeof(ClosePrinterDeviceRequest), this.deviceType);//"OPOS"
+                    //        deviceTypeCloseRequest.Execute(request1);
+
+                    //    }
+                    //    else
+                    //    {
+                    //        printPrinterDeviceRequest.RequestContext.Runtime.ExecuteAsync<Microsoft.Dynamics.Commerce.Runtime.Messages.Response>(printPrinterDeviceRequest, printPrinterDeviceRequest.RequestContext);
+                    //    }
+
+
                     //}
                     //catch (Exception ex)
                     //{
-                    //    throw new CardPaymentException("Print Receipt", String.Format("Printer '{0}' is not available. '{1}'", this.deviceName, ex.Message));
-                    //}
+                    //    ClosePrinterDeviceRequest request2 = new ClosePrinterDeviceRequest();
 
+                    //    var deviceTypeCloseRequest = request2.RequestContext.Runtime.GetAsyncRequestHandler(typeof(ClosePrinterDeviceRequest), this.deviceType);//"OPOS"
+                    //    deviceTypeCloseRequest.Execute(request2);
+                    //    new PeripheralException(PeripheralException.PaymentTerminalError, String.Format("Printer is not available."), ex);
+                    //}
                 }
             }
             bool OnDisplay(EFTDisplayResponse r)
@@ -1665,7 +1703,7 @@ namespace Contoso
                 var addr = _settings.EFTClientAddress.Split(new char[] { ':' });
                 var tmpPort = 0;
                 if (addr.Length < 2 || int.TryParse(addr[1], out tmpPort) == false)
-                {                    
+                {
                     throw new CardPaymentException("ConnectEFTAsync", "PCEFTPOS INVALID ADDRESS");
                 }
 
@@ -1690,9 +1728,11 @@ namespace Contoso
                         //  var waiting = await _eft.WriteRequestAsync(new EFTCloudLogonRequest() { ClientID = _settings.Username, Password = _settings.Password, PairingCode = _settings.PairingCode });
                         while (waiting)
                         {
-                            //var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0));
-                            var timeoutToken = new CancellationTokenSource(new TimeSpan(45000));
-                            var eftResponse = await _eftAsync.ReadResponseAsync(timeoutToken.Token).ConfigureAwait(false);
+
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                            var eftResponse = await _eftAsync.ReadResponseAsync(new CancellationTokenSource(45000).Token).ConfigureAwait(false);
+#pragma warning restore CA2000 // Dispose objects before losing scope
+
                             if (eftResponse is EFTCloudLogonResponse)
                             {
                                 var cloudLogonResponse = eftResponse as EFTCloudLogonResponse;
@@ -1703,20 +1743,22 @@ namespace Contoso
                                 }
                                 waiting = false;
                             }
-                            timeoutToken.Dispose();
                         }
-                        
                     }
                 }
 
                 if (connected)
                 {
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                    var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0)).Token;
+#pragma warning restore CA2000 // Dispose objects before losing scope
                     _isServerVerified = true;
-                    var timeoutToken = new CancellationTokenSource(new TimeSpan(0, 5, 0));
+                    
                     // This is only required if we aren't using the PC-EFTPOS dialog
                     await _eftAsync.WriteRequestAsync(new SetDialogRequest() { DialogType = DialogType.Hidden }).ConfigureAwait(false);
-                    await _eftAsync.ReadResponseAsync(timeoutToken.Token).ConfigureAwait(false);
-                    timeoutToken.Dispose();
+
+                   await _eftAsync.ReadResponseAsync(timeoutToken).ConfigureAwait(false);
+
                 }
                 else
                 {

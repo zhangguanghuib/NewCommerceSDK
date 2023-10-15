@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="retailPackagePaths.settings" Condition="Exists('retailPackagePaths.settings') AND $(PkgMicrosoft_Dynamics_Commerce_Runtime) == ''"/>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects> 
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildProjectFullPath)</MSBuildAllProjects>
+
+    <RetailSdkBuildSettingsHasBeenImported>true</RetailSdkBuildSettingsHasBeenImported>
+
+    <SdkRootPath Condition="'$(SdkRootPath)' == ''">$(MSBuildThisFileDirectory)..</SdkRootPath>
+    <SdkReferencesPath Condition="'$(SdkReferencesPath)' == ''">$(SdkRootPath)\References\</SdkReferencesPath>
+    <SdkAssetsPath Condition="'$(SdkAssetsPath)' == ''">$(SdkRootPath)\Assets\</SdkAssetsPath>
+    <RetailServerExtensionLibraryDirectory>$(SdkReferencesPath)</RetailServerExtensionLibraryDirectory>
+  </PropertyGroup>
+  <Import Project="Customization.settings" />
+  <ItemGroup>
+    <CommerceProxyGeneratorFile Include="$(PkgCommerceProxyGenerator)\tools\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- @(ISV_CommerceRuntime_CustomizableFile) should be defined in Customization.settings -->
+    <CommerceRuntime_CustomizableFile Include="@(ISV_CommerceRuntime_CustomizableFile)" />
+    <CommerceRuntime_CustomizableFile Include="$(SdkAssetsPath)\commerceruntime.ext.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- @(ISV_RetailProxy_CustomizableFile) should be defined in Customization.settings -->
+    <RetailProxy_CustomizableFile Include="@(ISV_RetailProxy_CustomizableFile)" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- @(ISV_RetailServer_CustomizableFile should be defined in Customization.settings -->
+    <RetailServer_CustomizableFile Include="@(ISV_RetailServer_CustomizableFile)" />
+  </ItemGroup>
+  <ItemGroup>
+    <DatabaseFile_Upgrade_Custom Include="$(SdkRootPath)\Database\Upgrade\Custom\Readme.txt" />
+    <!-- @(ISV_CustomDatabaseFile_Upgrade_Custom) should be defined in Customization.settings -->
+    <DatabaseFile_Upgrade_Custom Include="@(ISV_CustomDatabaseFile_Upgrade_Custom)" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- @(ISV_HardwareStation_CustomizableFile) should be defined in Customization.settings -->
+    <HardwareStation_CustomizableFile Include="@(ISV_HardwareStation_CustomizableFile)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClientBroker_CustomizableFile Include="@(ISV_CommerceRuntime_CustomizableFile)" Exclude="CommerceRuntime.ext.config" />
+    <ClientBroker_CustomizableFile Include="$(SdkAssetsPath)\CommerceRuntime.MPOSOffline.Ext.config" />
+    <ClientBroker_CustomizableFile Include="@(ISV_RetailProxy_CustomizableFile)" />
+    <ClientBroker_CustomizableFile Include="$(SdkAssetsPath)\RetailProxy.MPOSOffline.Ext.config" />
+  </ItemGroup>
+
+  <!-- This item group defines the location of payment-specific files that need to be deployed -->
+  <PropertyGroup>
+    <PaymentsIPaymentDeviceAssemblies_RootFolder>$(SdkRootPath)\PaymentExternals\IPaymentDeviceAssemblies</PaymentsIPaymentDeviceAssemblies_RootFolder>
+    <PaymentsIPaymentProcessorAssemblies_RootFolder>$(SdkRootPath)\PaymentExternals\IPaymentProcessorAssemblies</PaymentsIPaymentProcessorAssemblies_RootFolder>
+    <PaymentsWebArtifacts_RootFolder>$(SdkRootPath)\PaymentExternals\PaymentWebFiles</PaymentsWebArtifacts_RootFolder>
+  </PropertyGroup>
+</Project>

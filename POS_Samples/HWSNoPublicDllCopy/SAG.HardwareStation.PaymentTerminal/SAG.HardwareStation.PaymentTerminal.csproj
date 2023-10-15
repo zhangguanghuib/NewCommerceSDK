@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>   
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.CardPayment">
+      <HintPath>..\..\SAG.HWS.Sample\SAG.HardwareStation.PaymentTerminal\Virtual\Microsoft.Dynamics.Commerce.HardwareStation.CardPayment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary">
+      <HintPath>..\..\SAG.HWS.Sample\SAG.HardwareStation.PaymentTerminal\Virtual\Microsoft.Dynamics.Commerce.HardwareStation.Peripherals.SignatureCaptureLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  
+</Project>

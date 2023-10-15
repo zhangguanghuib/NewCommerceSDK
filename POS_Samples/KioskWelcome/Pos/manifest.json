@@ -32,6 +32,9 @@
       "requestHandlers": [  
       ],
       "views": {
+        "SearchOrdersView": {
+          "appBarCommands": [ { "modulePath": "ViewExtensions/SearchOrders/SampleSearchOrdersCommand" } ]
+        }
       }
     },
     "create": {

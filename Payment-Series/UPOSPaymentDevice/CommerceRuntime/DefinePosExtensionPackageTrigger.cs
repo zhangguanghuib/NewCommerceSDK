@@ -15,6 +15,7 @@ namespace GasStationSample.CommerceRuntime
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using System.Diagnostics.Eventing;
 
     /// <summary>
     /// Class that implements a post trigger for the GetExtensionPackageDefinitionsRequest request type.
