@@ -16,23 +16,14 @@
       "header": {
       },
       "triggers": [
+        {
+          "triggerType": "PreVoidTransaction",
+          "modulePath": "TriggerHandlers/PreVoidTransactionTriggerHandler"
+        }
       ],
       "requestHandlers": [
       ],
       "views": {
-        "CartView": {
-          "viewController": { "modulePath": "ViewExtensions/Cart/CartViewController" },
-          "controlsConfig": {
-            "customControls": [
-              {
-                "controlName": "customerDetails",
-                "htmlPath": "ViewExtensions/Cart/CustomerDetailsCustomControl.html",
-                "modulePath": "ViewExtensions/Cart/CustomerDetailsCustomControl"
-              }
-            ]
-          }
-        },
-
         "ReturnTransactionView": {
           "appBarCommands": [ { "modulePath": "ViewExtensions/ReturnTransaction/ReturnTransactionCommand" } ]
         }
