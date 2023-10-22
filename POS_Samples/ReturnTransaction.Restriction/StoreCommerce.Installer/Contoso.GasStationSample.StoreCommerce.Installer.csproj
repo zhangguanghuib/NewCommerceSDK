@@ -11,6 +11,7 @@
     <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" />
     <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
