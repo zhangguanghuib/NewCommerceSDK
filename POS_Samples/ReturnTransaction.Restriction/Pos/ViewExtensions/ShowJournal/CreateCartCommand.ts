@@ -1,15 +1,21 @@
 ﻿import { CreateEmptyCartServiceRequest, CreateEmptyCartServiceResponse, SetCustomerOnCartOperationRequest, SetCustomerOnCartOperationResponse } from "PosApi/Consume/Cart";
 import { ClientEntities } from "PosApi/Entities";
+import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import * as ShowJournalView from "PosApi/Extend/Views/ShowJournalView";
 export default class CreateCartCommand extends ShowJournalView.ShowJournalExtensionCommandBase {
 
     public _mode: ClientEntities.ShowJournalMode;
 
-    protected init(state: ShowJournalView.IShowJournalExtensionCommandState): void {
+    constructor(context: IExtensionCommandContext<ShowJournalView.IShowJournalToExtensionCommandMessageTypeMap>) {
+        super(context);
+
         this.id = "CreateCartCommand";
         this.label = "Create Cart";
         this.extraClass = "iconInvoice";
         this.isVisible = true;
+    }
+
+    protected init(state: ShowJournalView.IShowJournalExtensionCommandState): void {
         this._mode = state.mode;
     }
 
