@@ -3,10 +3,14 @@ import { ClientEntities } from "PosApi/Entities";
 import * as ShowJournalView from "PosApi/Extend/Views/ShowJournalView";
 export default class CreateCartCommand extends ShowJournalView.ShowJournalExtensionCommandBase {
 
+    public _mode: ClientEntities.ShowJournalMode;
+
     protected init(state: ShowJournalView.IShowJournalExtensionCommandState): void {
         this.id = "CreateCartCommand";
         this.label = "Create Cart";
         this.extraClass = "iconInvoice";
+        this.isVisible = true;
+        this._mode = state.mode;
     }
 
     protected execute(): void {
@@ -14,6 +18,7 @@ export default class CreateCartCommand extends ShowJournalView.ShowJournalExtens
         let createEmptyCartServiceRequest: CreateEmptyCartServiceRequest =
             new CreateEmptyCartServiceRequest(correlationId);
 
+        this.isProcessing = true;
         this.context.runtime.executeAsync(createEmptyCartServiceRequest)
             .then((result: ClientEntities.ICancelableDataResult<CreateEmptyCartServiceResponse>) => {
                 if (!result.canceled) {
@@ -26,6 +31,7 @@ export default class CreateCartCommand extends ShowJournalView.ShowJournalExtens
             }).then((result: ClientEntities.ICancelableDataResult<SetCustomerOnCartOperationResponse>) => {
                 let cartViewOptions: ClientEntities.CartViewNavigationParameters = new ClientEntities.CartViewNavigationParameters(correlationId);
                 this.context.navigator.navigateToPOSView("CartView", cartViewOptions);
+                this.isProcessing = false;
             });
     }
 }
