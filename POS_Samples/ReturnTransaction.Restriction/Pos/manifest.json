@@ -16,10 +16,6 @@
       "header": {
       },
       "triggers": [
-        {
-          "triggerType": "PostProductSale",
-          "modulePath": "TriggerHandlers/PostProductSaleTrigger"
-        }
       ],
       "requestHandlers": [
       ],

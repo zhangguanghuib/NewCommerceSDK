@@ -103,7 +103,7 @@ export default class SetReasonCodeToSelectedCartLineHandler<TResponse extends Se
                 if (result.canceled) {
                     return Promise.resolve(<ClientEntities.ICancelableDataResult<string>>{ canceled: true, data: StringExtensions.EMPTY });
                 } else {
-                    return Promise.resolve(<ClientEntities.ICancelableDataResult<string>>{ canceled: true, data: result.data.result.value.value });
+                    return Promise.resolve(<ClientEntities.ICancelableDataResult<string>>{ canceled: false, data: result.data.result.value.value });
                 }
             })
     }
