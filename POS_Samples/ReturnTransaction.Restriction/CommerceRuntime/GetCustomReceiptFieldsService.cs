@@ -44,7 +44,7 @@
 
                 if (requestedType == typeof(GetSalesTransactionCustomReceiptFieldServiceRequest))
                 {
-                    return await this.GetCustomReceiptFieldForSalesTransactionReceiptsAsync((GetSalesTransactionCustomReceiptFieldServiceRequest)request).ConfigureAwait(false);
+                    return  this.GetCustomReceiptFieldForSalesTransactionReceiptsAsync((GetSalesTransactionCustomReceiptFieldServiceRequest)request);
                 }
 
                 throw new NotSupportedException(string.Format("Request '{0}' is not supported.", request.GetType()));
