@@ -67,7 +67,7 @@
                     case "ITEMNUMBER":
                         {
                             var reasonCodes  = salesLine.ReasonCodeLines.Select(x => x.Information).ToArray();
-                            returnValue = String.Join("", reasonCodes);
+                            returnValue = String.Join(" | ", reasonCodes);
                         }
 
                         break;

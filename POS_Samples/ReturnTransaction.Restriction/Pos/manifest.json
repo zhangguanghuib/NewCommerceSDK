@@ -35,6 +35,9 @@
 
         "ReturnTransactionView": {
           "appBarCommands": [ { "modulePath": "ViewExtensions/ReturnTransaction/ReturnTransactionCommand" } ]
+        },
+        "ShowJournalView": {
+          "appBarCommands": [ { "modulePath": "ViewExtensions/ShowJournal/CreateCartCommand" } ]
         }
       }
     },
