@@ -81,7 +81,7 @@ export default class CustomerDetailsCustomControl extends CartViewCustomControlB
         });
 
         this.cartChangedHandler = (data: CartChangedData) => {
-            if (this._customer() || this._customer().AccountNumber != data.cart.CustomerId) {
+            if (ObjectExtensions.isNullOrUndefined(this._customer()) || this._customer().AccountNumber !== data.cart.CustomerId) {
                 let req: GetCustomerClientRequest<GetCustomerClientResponse> = new GetCustomerClientRequest(data.cart.CustomerId);
                 this.context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetCustomerClientResponse>): void => {
                     this._customer(res.data.result);
