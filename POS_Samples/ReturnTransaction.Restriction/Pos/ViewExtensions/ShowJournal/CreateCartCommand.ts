@@ -13,6 +13,7 @@ export default class CreateCartCommand extends ShowJournalView.ShowJournalExtens
         this.label = "Create Cart";
         this.extraClass = "iconInvoice";
         this.isVisible = true;
+        this.canExecute = true;
     }
 
     protected init(state: ShowJournalView.IShowJournalExtensionCommandState): void {
