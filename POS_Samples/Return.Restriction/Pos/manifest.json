@@ -54,8 +54,8 @@
       "operations": [
         {
           "operationId": "9003",
-          "operationRequestFactoryPath": "Operations/SetReasonCodeToSelectedCartLine/SetReasonCodeToSelectedCartLineFactory",
-          "operationRequestHandlerPath": "Operations/SetReasonCodeToSelectedCartLine/SetReasonCodeToSelectedCartLineHandler"
+          "operationRequestFactoryPath": "Operations/SetReasonCodeToCartLine/SetReasonCodeToSelectedCartLineFactory",
+          "operationRequestHandlerPath": "Operations/SetReasonCodeToCartLine/SetReasonCodeToSelectedCartLineHandler"
         }
       ]
     }

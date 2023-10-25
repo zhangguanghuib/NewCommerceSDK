@@ -42,7 +42,7 @@ export default class QtyInlineUpdateCustomControl extends CartViewCustomControlB
         this.newPrice = ko.observable(0);
 
         this.isCartLineSelecteded = ko.computed(() => {
-            return !ObjectExtensions.isNullOrUndefined(this._cartLine);
+            return !ObjectExtensions.isNullOrUndefined(this._cartLine());
         });
 
         this.cartLineSelectedHandler = (data: CartLineSelectedData) => {
