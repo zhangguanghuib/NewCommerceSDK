@@ -28,6 +28,10 @@
       <img width="1472" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0b7f051d-a87f-4d08-855e-2d081fe8eb2b">
       Please make sure the value set on the screenlayout does make the values in manifest.
    </li>
+   <li>
+      All source code can be found from:<br/>
+      https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Return.Restriction/Pos/ViewExtensions/Cart
+   </li>
 </ol>
    
 
