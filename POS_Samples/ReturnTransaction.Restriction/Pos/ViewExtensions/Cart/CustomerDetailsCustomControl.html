@@ -7,30 +7,32 @@
 </head>
 <body>
     <script id="Microsot_Pos_Extensibility_Samples_CustomerDetails" type="text/html">
-        <!-- ko if: isCustomerSelected -->
-        <div class="row">
-            <div class="col stretch">
-                <div class="marginBottom10">
-                    <label for="SampleExtension_CustomerDetails_AccountHolder" data-bind="text: accountHolderLabel">Account holder</label>
-                    <input id="SampleExtension_CustomerDetails_AccountHolder" type="text" readonly data-bind="value: accountHolder" />
-                </div>
-                <div class="marginBottom10">
-                    <label for="SampleExtension_CustomerDetails_AccountNumber" data-bind="text: accountNumberLabel">Account number</label>
-                    <input id="SampleExtension_CustomerDetails_AccountNumber" type="text" readonly data-bind="value: accountNumber" />
-                </div>
-                <div class="col stetch">
+        <div style="border:thin">
+            <!-- ko if: isCustomerSelected -->
+            <div class="row">
+                <div class="col stretch">
                     <div class="marginBottom10">
-                        <label for="SampleExtensions_CustomerDetails_Phone" data-bind="text: phoneLabel">Phone</label>
-                        <input id="SampleExtensions_CustomerDetails_Phone" type="text" readonly data-bind="value: phone" />
+                        <label for="SampleExtension_CustomerDetails_AccountHolder" data-bind="text: accountHolderLabel">Account holder</label>
+                        <input id="SampleExtension_CustomerDetails_AccountHolder" type="text" readonly data-bind="value: accountHolder" />
                     </div>
                     <div class="marginBottom10">
-                        <label for="SampleExtensions_CustomerDetails_Email" data-bind="text: emailLabel">Email</label>
-                        <input id="SampleExtensions_CustomerDetails_Email" type="text" readonly data-bind="value: email" />
+                        <label for="SampleExtension_CustomerDetails_AccountNumber" data-bind="text: accountNumberLabel">Account number</label>
+                        <input id="SampleExtension_CustomerDetails_AccountNumber" type="text" readonly data-bind="value: accountNumber" />
+                    </div>
+                    <div class="col stetch">
+                        <div class="marginBottom10">
+                            <label for="SampleExtensions_CustomerDetails_Phone" data-bind="text: phoneLabel">Phone</label>
+                            <input id="SampleExtensions_CustomerDetails_Phone" type="text" readonly data-bind="value: phone" />
+                        </div>
+                        <div class="marginBottom10">
+                            <label for="SampleExtensions_CustomerDetails_Email" data-bind="text: emailLabel">Email</label>
+                            <input id="SampleExtensions_CustomerDetails_Email" type="text" readonly data-bind="value: email" />
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /ko-->
         </div>
-        <!-- /ko-->
     </script>
 </body>
 </html>

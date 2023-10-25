@@ -7,7 +7,8 @@
 </head>
 <body>
     <script id="Pos_CustomControl_Transaction_LineDetails" type="text/html">
-        <fieldset class="marginTop80">
+        <!-- ko if: isCartLineSelecteded -->
+        <fieldset class="marginTop04">
             <div>
                 <div style="float:left" class="marginLeft06">
                     <h6>Qty:</h6>
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset  class="marginTop06">
+        <fieldset class="marginTop04">
             <div>
                 <div style="float:left" class="marginLeft06">
                     <h6>Price:</h6>
@@ -52,7 +53,8 @@
                     </div>
                 </div>
             </div>
-</fieldset>
+        </fieldset>
+        <!-- /ko-->
     </script>
 </body>
 </html>
