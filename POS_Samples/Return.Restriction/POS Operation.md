@@ -35,7 +35,7 @@
       </li>
       <li>
          There is an important thing that is how we can know which cart line is selected,  the way is to make CartViewController to record which line will be selected:<br/>
-         <img width="772" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d9a1590-b910-40a8-b0d1-d37c364dfa13">
+         <img width="772" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d9a1590-b910-40a8-b0d1-d37c364dfa13"><br/>
          Anytime you can call this code to get the current selected cart line:<br/>
          <img width="987" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7b8d5d5b-c320-4fa5-a7d2-9b24816e6ff4">
       </li>
