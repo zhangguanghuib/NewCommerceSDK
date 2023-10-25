@@ -12,8 +12,7 @@
          Run 1090 job
       </li>
       <li>
-         <img width="1482" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2ca0d1b0-3a14-4f73-ae53-d4f81e770094">
-         
+         <img width="1482" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2ca0d1b0-3a14-4f73-ae53-d4f81e770094">       
       </li>
    </ol>
 
