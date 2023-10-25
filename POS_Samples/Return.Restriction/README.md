@@ -1,5 +1,5 @@
 # POS operation demonstration
-# Custom Control Demonstration
+# Custom Control Demonstration<br/>
 
 This sample will showcase two things:<br/>
 
