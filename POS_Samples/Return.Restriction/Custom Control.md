@@ -13,6 +13,9 @@
       </ul>
    </li>
    <li>
+      When there is not cart line selected,  the Qty Inline Update Control will not be showing:
+      <img width="1058" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4ef8e553-671b-4054-a160-591a36a92f83">
+   <li>
       When you need do is to make these development:<br/>
       <img width="276" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/017eac5d-e1aa-4909-a4dc-9da78ddc8cf5">
    </li>
