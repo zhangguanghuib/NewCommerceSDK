@@ -39,10 +39,5 @@
          Anytime you can call this code to get the current selected cart line:<br/>
          <img width="987" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7b8d5d5b-c320-4fa5-a7d2-9b24816e6ff4">
       </li>
-   </ol>
-
-
-
-# Custom Control Demonstration<br/>
-   
+   </ol>   
 
