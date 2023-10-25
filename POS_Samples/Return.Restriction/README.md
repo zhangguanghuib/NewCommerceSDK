@@ -12,21 +12,21 @@
          Run 1090 job
       </li>
       <li>
-         Make POS development for the new POS operation, those contains Respose/Request/Handler/Factor
+         Make POS development for the new POS operation, those contains Respose/Request/Handler/Factor<br/>
          <img width="1482" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2ca0d1b0-3a14-4f73-ae53-d4f81e770094">
          Source code can be found from
          https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Return.Restriction/Pos/Operations/SetReasonCodeToCartLine
       </li>
       <li>
-         Log on to POS,  choose one cart line and click the "Set Reason Code" button
+         Log on to POS,  choose one cart line and click the "Set Reason Code" button<br/>
          <img width="1905" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/68b0aa04-067b-4be4-b9bf-3109fab22bb2">
       </li>
       <li>
-         Finally,  you will be able to see the reason code is already set on the selected cart:
+         Finally,  you will be able to see the reason code is already set on the selected cart:<br/>
          <img width="563" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d5714c59-e2f6-4d7d-98cf-1768fa70a29f">
       </li>
       <li>
-         You can also put the operation on other screen:
+         You can also put the operation on other screen:<br/>
          <img width="367" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c9fe9dab-9b23-4dce-9653-9c4c64a43e7b">
       </li>
       <li>
