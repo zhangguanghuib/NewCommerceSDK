@@ -3,10 +3,10 @@ import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
 import { ClientEntities } from "PosApi/Entities";
 
 export default class MessageDialog {
-    public static show(context: IExtensionContext, message: string): Promise<string> {
+    public static show(context: IExtensionContext, message: string, title: string = "Extension Message Dialog"): Promise<string> {
         let promise: Promise<string> = new Promise<string>((resolve: (value: string) => void, reject: (reason?: any) => void) => {
             let messageDialogOptions: IMessageDialogOptions = {
-                title: "Extension Message Dialog",
+                title: title,
                 message: message,
                 showCloseX: true, // Result for dialog will be return as canceled when "X" is clicked to close dialog.
                 button1: {

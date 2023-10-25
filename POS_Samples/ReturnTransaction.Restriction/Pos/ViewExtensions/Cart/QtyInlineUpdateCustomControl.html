@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script id="Pos_CustomControl_Transaction_LineDetails" type="text/html">
+        <fieldset class="marginTop80">
+            <div>
+                <div style="float:left" class="marginLeft06">
+                    <h6>Qty:</h6>
+                </div>
+                <div style="float:left" class="marginLeft12">
+                    <button class="width32 height40" data-bind="click:decreaseCartLineQty">-</button>
+                </div>
+                <div style="display: none">
+                    <div style="float:left" class="marginLeft06">
+                        <input type="number" id="number" class="width96 height40" data-bind="value:currentQty, event: {change: onInputQtyChanged}" placeholder="Input Qty" step="1" />
+                    </div>
+                    <div style="float:left" class="marginLeft06">
+                        <button class="width48 height40">√</button>
+                    </div>
+                </div>
+                <div style="display: block">
+                    <div style="float:left" class="marginLeft06">
+                        <input type="number" id="number2" class="width96 height40" data-bind="value: newQty, valueUpdate: 'afterkeydown'" placeholder="Input Qty" />
+                    </div>
+                </div>
+                <div style="float:left" class="marginLeft06">
+                    <button class="width32 height40" data-bind="click:increaseCartLineQty">+</button>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset  class="marginTop06">
+            <div>
+                <div style="float:left" class="marginLeft06">
+                    <h6>Price:</h6>
+                </div>
+                <div style="display: none">
+                    <div style="float:left" class="marginLeft06">
+                        <input type="number" id="price" class="width128 height40" data-bind="value:currentPrice, event: {change: onInputPriceChanged}" placeholder="Input Price" />
+                    </div>
+                    <div style="float:left" class="marginLeft06">
+                        <button class="width48 height40">√</button>
+                    </div>
+                </div>
+                <div style="display: block">
+                    <div style="float:left" class="marginLeft06">
+                        <input type="number" id="price2" class="width128 height40" data-bind="value:newPrice, valueUpdate: 'afterkeydown'" placeholder="Input Price" />
+                    </div>
+                </div>
+            </div>
+</fieldset>
+    </script>
+</body>
+</html>

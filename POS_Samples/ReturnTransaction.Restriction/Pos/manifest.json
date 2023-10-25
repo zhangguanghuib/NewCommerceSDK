@@ -28,6 +28,11 @@
                 "controlName": "customerDetails",
                 "htmlPath": "ViewExtensions/Cart/CustomerDetailsCustomControl.html",
                 "modulePath": "ViewExtensions/Cart/CustomerDetailsCustomControl"
+              },
+              {
+                "controlName": "qtyInlineUpdate",
+                "htmlPath": "ViewExtensions/Cart/QtyInlineUpdateCustomControl.html",
+                "modulePath": "ViewExtensions/Cart/QtyInlineUpdateCustomControl"
               }
             ]
           }
