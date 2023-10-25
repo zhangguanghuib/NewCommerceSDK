@@ -25,6 +25,14 @@
          Finally,  you will be able to see the reason code is already set on the selected cart:
          <img width="563" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d5714c59-e2f6-4d7d-98cf-1768fa70a29f">
       </li>
+      <li>
+         You can also put the operation on other screen:
+         <img width="367" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c9fe9dab-9b23-4dce-9653-9c4c64a43e7b">
+      </li>
+      <li>
+         When click it, you are able to choose one single line to be set reason code:
+         <img width="577" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bc8d502d-b792-4e51-b96d-b5e946ad755e">
+      </li>
    </ol>
 
 
