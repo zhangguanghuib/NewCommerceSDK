@@ -17,6 +17,14 @@
          Source code can be found from
          https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Return.Restriction/Pos/Operations/SetReasonCodeToCartLine
       </li>
+      <li>
+         Log on to POS,  choose one cart line and click the "Set Reason Code" button
+         <img width="1905" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/68b0aa04-067b-4be4-b9bf-3109fab22bb2">
+      </li>
+      <li>
+         Finally,  you will be able to see the reason code is already set on the selected cart:
+         <img width="563" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d5714c59-e2f6-4d7d-98cf-1768fa70a29f">
+      </li>
    </ol>
 
 
