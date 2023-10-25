@@ -12,6 +12,19 @@
          <li>Input a new price then click "Enter" to update price of the current selected cart line  </li>
       </ul>
    </li>
+   <li>
+      When you need do is to make these development:<br/>
+      <img width="276" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/017eac5d-e1aa-4909-a4dc-9da78ddc8cf5">
+   </li>
+   <li>
+      In manifest file, you should put this kind of section:
+      <img width="708" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4180094a-b237-4278-b816-c28a95b8f807">
+   </li>
+   <li>
+      In Screen layout,  add a custom control to the cart screen:
+      <img width="1472" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0b7f051d-a87f-4d08-855e-2d081fe8eb2b">
+      Please make sure the value set on the screenlayout does make the values in manifest.
+   </li>
 </ol>
    
 
