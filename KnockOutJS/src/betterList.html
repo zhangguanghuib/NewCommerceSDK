@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: arial;
+            font-size: 14px;
+        }
+
+        .liveExample {
+            padding: 1em;
+            background-color: #EEEEDD;
+            border: 1px solid #CCC;
+            max-width: 655px;
+        }
+
+        .liveExample input {
+            font-family: Arial;
+        }
+
+        .liveExample b {
+            font-weight: bold;
+        }
+
+        .liveExample p {
+            margin-top: 0.9em;
+            margin-bottom: 0.9em;
+        }
+
+        .liveExample select[multiple] {
+            width: 100%;
+            height: 8em;
+        }
+
+        .liveExample h2 {
+            margin-top: 0.4em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='liveExample'>
+
+        <form data-bind="submit:addItem">
+            Add item: <input type="text" data-bind='value:itemToAdd, valueUpdate: "afterkeydown"' />
+            <button type="submit" data-bind="enable: itemToAdd().length > 0">Add</button>
+        </form>
+
+        <p>Your values:</p>
+        <select multiple="multiple" height="5" data-bind="options:allItems, selectedOptions:selectedItems"> </select>
+
+        <div>
+            <button data-bind="click: removeSelected, enable: selectedItems().length > 0">Remove</button>
+            <button data-bind="click: sortItems, enable: allItems().length > 1">Sort</button>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script>
+        var BetterListModel = function () {
+            this.itemToAdd = ko.observable("");
+            this.allItems = ko.observableArray(["Fries", "Eggs Benedict", "Ham", "Cheese"]); // Initial items
+            this.selectedItems = ko.observableArray(["Ham"]);                                // Initial selection
+
+            this.addItem = function () {
+                if ((this.itemToAdd() != "") && (this.allItems.indexOf(this.itemToAdd()) < 0)) // Prevent blanks and duplicates
+                    this.allItems.push(this.itemToAdd());
+                this.itemToAdd(""); // Clear the text box
+            };
+
+            this.removeSelected = function () {
+                this.allItems.removeAll(this.selectedItems());
+                this.selectedItems([]); // Clear selection
+            };
+
+            this.sortItems = function () {
+                this.allItems.sort();
+            };
+        };
+
+        ko.applyBindings(new BetterListModel());
+    </script>
+</body>
+
+</html>

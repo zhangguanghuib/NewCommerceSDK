@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: arial;
+            font-size: 14px;
+        }
+
+        .liveExample {
+            padding: 1em;
+            background-color: #EEEEDD;
+            border: 1px solid #CCC;
+            max-width: 655px;
+        }
+
+        .liveExample input {
+            font-family: Arial;
+        }
+
+        .liveExample b {
+            font-weight: bold;
+        }
+
+        .liveExample p {
+            margin-top: 0.9em;
+            margin-bottom: 0.9em;
+        }
+
+        .liveExample select[multiple] {
+            width: 100%;
+            height: 8em;
+        }
+
+        .liveExample h2 {
+            margin-top: 0.4em;
+        }
+
+        .ko-grid {
+            margin-bottom: 1em;
+            width: 25em;
+            border: 1px solid silver;
+            background-color: White;
+        }
+
+        .ko-grid th {
+            text-align: left;
+            background-color: Black;
+            color: White;
+        }
+
+        .ko-grid td,
+        th {
+            padding: 0.4em;
+        }
+
+        .ko-grid tr:nth-child(odd) {
+            background-color: #DDD;
+        }
+
+        .ko-grid-pageLinks {
+            margin-bottom: 1em;
+        }
+
+        .ko-grid-pageLinks a {
+            padding: 0.5em;
+        }
+
+        .ko-grid-pageLinks a.selected {
+            background-color: Black;
+            color: White;
+        }
+
+        .liveExample {
+            height: 50em;
+            overflow: auto
+        }
+
+        /* Mobile Safari reflows pages slowly, so fix the height to avoid the need for reflows */
+
+        li {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='liveExample'>
+
+        <div data-bind='simpleGrid: gridViewModel'> </div>
+
+        <button data-bind='click: addItem'>
+            Add item
+        </button>
+
+        <button data-bind='click: sortByName'>
+            Sort by name
+        </button>
+
+        <button data-bind='click: jumpToFirstPage, enable: gridViewModel.currentPageIndex'>
+            Jump to first page
+        </button>
+
+        <div class="container">
+            <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-bind="text: isAdding() ? 'Add New Item' : 'Edit Item'"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" data-bind="value: tempItem().name">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price"
+                                    data-bind="value: tempItem().price">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bind="click: saveItem">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script src="./resources/knockout.simpleGrid.3.0.js"></script>
+    <script>
+        class Item {
+            constructor(name, sales, price) {
+                this.name = ko.observable(name);
+                this.sales = ko.observable(sales);
+                this.price = ko.observable(price);
+            }
+        }
+
+        const initialData = [
+            new Item("Well-Travelled Kitten", 352, 75.95),
+            new Item("Speedy Coyote", 89, 190.00),
+            new Item("Furious Lizard", 152, 25.00),
+            new Item("Indifferent Monkey", 1, 99.95),
+            new Item("Brooding Dragon", 0, 6350),
+            new Item("Ingenious Tadpole", 39450, 0.35),
+            new Item("Optimistic Snail", 420, 1.50)
+        ];
+
+        // Use class syntax instead of function
+        class PagedGridModel {
+            constructor(items) {
+                this.items = ko.observableArray(items);
+
+                this.tempItem = ko.observable(new Item("", 0, 0));
+
+                // Use arrow functions to avoid binding issues
+                this.addItem = () => {
+                    //this.items.push({ name: "New item", sales: 0, price: 100 });
+                    this.items.push(new Item("New item", 0, 100));
+                };
+
+                this.sortByName = () => {
+                    this.items.sort((a, b) => a.name() < b.name() ? -1 : 1);
+                };
+
+                this.jumpToFirstPage = () => {
+                    this.gridViewModel.currentPageIndex(0);
+                };
+
+                this.gridViewModel = new ko.simpleGrid.viewModel({
+                    data: this.items,
+                    columns: [
+                        { headerText: "Item Name", rowText: "name" },
+                        { headerText: "Sales Count", rowText: "sales" },
+                        // Use template literals instead of concatenation
+                        { headerText: "Price", rowText: (item) => `$${item.price().toFixed(2)}` }
+                    ],
+                    pageSize: 20
+                });
+            }
+        }
+
+        ko.applyBindings(new PagedGridModel(initialData));
+
+    </script>
+</body>
+
+</html>
