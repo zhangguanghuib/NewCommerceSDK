@@ -52,7 +52,8 @@ export default class StoreHourConverter {
             id: storeHours.Id,
             weekDay: storeHours.DayOfWeek,
             openHour: storeHours.OpenTime / 3600,
-            closeHour: storeHours.CloseTime / 3600
+            closeHour: storeHours.CloseTime / 3600,
+            channelId: storeHours.ChannelId
         };
     }
 
@@ -61,7 +62,8 @@ export default class StoreHourConverter {
             Id: storeHours.id,
             DayOfWeek: storeHours.weekDay,
             OpenTime: storeHours.openHour * 3600,
-            CloseTime: storeHours.closeHour * 3600
+            CloseTime: storeHours.closeHour * 3600,
+            ChannelId: storeHours.channelId
         });
     }
 }

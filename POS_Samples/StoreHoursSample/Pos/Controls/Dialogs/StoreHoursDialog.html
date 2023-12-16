@@ -9,6 +9,12 @@
         <!-- HTMLLint Disable LabelExistsValidator -->
         <!-- dialog content -->
         <div>
+            <div class="h4">Select Week Day:</div>
+            <select id="selectedWeekDay" data-bind="options: availableWeekDays,
+                                                   optionsText: 'displayText',
+                                                   optionsValue: 'weekDay',
+                                                   value: selectedWeekDay"></select>
+            <br />
             <div class="h4">Select open hour:</div>
             <select id="selectOpenHour" data-bind="options: availableHours,
                                                    optionsText: 'displayText',

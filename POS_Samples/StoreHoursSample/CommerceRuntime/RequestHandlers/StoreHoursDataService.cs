@@ -30,6 +30,7 @@
                     {
                         typeof(GetStoreHoursDataRequest),
                         typeof(UpdateStoreDayHoursDataRequest),
+                        typeof(InsertStoreDayHoursDataRequest)
                     };
                 }
             }
@@ -55,6 +56,10 @@
                 {
                     return await this.UpdateStoreDayHoursAsync((UpdateStoreDayHoursDataRequest)request).ConfigureAwait(false);
                 }
+                else if (reqType == typeof(InsertStoreDayHoursDataRequest))
+                {
+                    return await this.InsertStoreDayHoursAsync((InsertStoreDayHoursDataRequest)request).ConfigureAwait(false);
+                }
                 else
                 {
                     string message = string.Format(CultureInfo.InvariantCulture, "Request '{0}' is not supported.", reqType);
@@ -72,7 +77,7 @@
                     var query = new SqlPagedQuery(request.QueryResultSettings)
                     {
                         DatabaseSchema = "ext",
-                        Select = new ColumnSet("DAY", "OPENTIME", "CLOSINGTIME", "RECID"),
+                        Select = new ColumnSet("DAY", "OPENTIME", "CLOSINGTIME", "RECID", "STORENUMBER"),
                         From = "CONTOSORETAILSTOREHOURSVIEW",
                         Where = "STORENUMBER = @storeNumber",
                     };
@@ -115,6 +120,31 @@
                 }
 
                 return new UpdateStoreDayHoursDataResponse(request.StoreDayHours);
+            }
+
+
+            private async Task<Response> InsertStoreDayHoursAsync(InsertStoreDayHoursDataRequest request)
+            {
+                ThrowIf.Null(request, "request");
+                ThrowIf.Null(request.StoreDayHours, "request.StoreDayHours");
+                if (request.StoreDayHours.DayOfWeek < 1 || request.StoreDayHours.DayOfWeek > 7)
+                {
+                    throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ValueOutOfRange);
+                }
+
+                long recId = Convert.ToInt64(request.StoreDayHours.Id);
+
+                using (var databaseContext = new SqlServerDatabaseContext(request.RequestContext))
+                {
+                    ParameterSet parameters = new ParameterSet();
+                    parameters["@i_Day"] = request.StoreDayHours.DayOfWeek;
+                    parameters["@i_OpenTime"] = request.StoreDayHours.OpenTime;
+                    parameters["@i_ClosingTime"] = request.StoreDayHours.CloseTime;
+                    parameters["@bi_ChannelId"] = Int64.Parse(request.StoreDayHours.ChannelId);
+                    int ret = await databaseContext.ExecuteStoredProcedureNonQueryAsync("[ext].INSERTSTOREDAYHOURS", parameters, resultSettings: null).ConfigureAwait(false);
+                }
+
+                return new InsertStoreDayHoursDataResponse(request.StoreDayHours);
             }
         }
     }

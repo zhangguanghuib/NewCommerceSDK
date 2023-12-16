@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataService\" />
     <Folder Include="ViewExtensions\ShowJournal\" />
   </ItemGroup>
 

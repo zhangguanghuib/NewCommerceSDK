@@ -1,13 +1,4 @@
-﻿/**
- * SAMPLE CODE NOTICE
- * 
- * THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
- * OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
- * THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
- * NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
- */
-
-import ko from "knockout";
+﻿import ko from "knockout";
 import * as Views from "PosApi/Create/Views";
 import StoreHoursViewModel from "./StoreHoursViewModel";
 import * as StoreHours from "../Entities/IStoreHours";
@@ -25,7 +16,26 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
 
     constructor(context: Views.ICustomViewControllerContext, state: Views.ICustomViewControllerBaseState,
         options?: IStoreHoursExtensionViewModelOptions) {
-        super(context);
+
+        let config: Views.ICustomViewControllerConfiguration = {
+            title: "",
+            commandBar: {
+                commands: [
+                    {
+                        name: "createStoreHours",
+                        label: "Create",
+                        icon: Views.Icons.Add,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.viewModel.createNewItem();
+                        }
+                    }
+                ]
+            }
+        }
+
+        super(context, config);
 
         // Initialize the view model.
         this.viewModel = new StoreHoursViewModel(context, this.state, options);

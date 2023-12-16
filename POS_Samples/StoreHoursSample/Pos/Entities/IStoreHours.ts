@@ -3,6 +3,12 @@
     weekDay: WeekDays;
     openHour: Hours;
     closeHour: Hours;
+    channelId: string;
+}
+
+export interface IAvailableWeekDay {
+    weekDay: WeekDays;
+    displayText: string;
 }
 
 export interface IAvailableHour {

@@ -43,5 +43,21 @@
             var response = await context.ExecuteAsync<UpdateStoreDayHoursDataResponse>(request).ConfigureAwait(false);
             return response.StoreDayHours;
         }
+
+        /// <summary>
+        /// Updates the store day hours for a given store.
+        /// </summary>
+        /// <param name="key">The OData key.</param>
+        /// <param name="parameters">The OData parameters.</param>
+        /// <returns>The updated store hours.</returns>
+        [HttpPost]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee)]
+        public async Task<SampleDataModel.StoreDayHours> InsertStoreDayHours(IEndpointContext context, [EntityKey] long key, SampleDataModel.StoreDayHours storeDayHours)
+        {
+            storeDayHours.Id = key;
+            var request = new InsertStoreDayHoursDataRequest(storeDayHours);
+            var response = await context.ExecuteAsync<InsertStoreDayHoursDataResponse>(request).ConfigureAwait(false);
+            return response.StoreDayHours;
+        }
     }
 }

@@ -16,6 +16,7 @@
             private const string OpenTimeColumn = "OPENTIME";
             private const string CloseTimeColumn = "CLOSINGTIME";
             private const string IdColumn = "RECID";
+            private const string StoreNumberColumn = "STORENUMBER";
 
             /// <summary>
             /// Initializes a new instance of the <see cref="StoreDayHours"/> class.
@@ -69,6 +70,17 @@
             {
                 get { return (long)this[IdColumn]; }
                 set { this[IdColumn] = value; }
+            }
+
+            /// <summary>
+            /// Gets or sets the channel id.
+            /// </summary>
+            [DataMember]
+            [Column(StoreNumberColumn)]
+            public string ChannelId
+            {
+                get { return (string)this[StoreNumberColumn]; }
+                set { this[StoreNumberColumn] = value; }
             }
         }
     }

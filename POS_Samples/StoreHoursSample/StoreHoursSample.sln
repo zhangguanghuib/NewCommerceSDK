@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.Channe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.StoreCommerce.Installer", "StoreCommerce.Installer\GHZ.StoreHoursSample.StoreCommerce.Installer.csproj", "{276B2061-D23A-4FB9-8951-4D7005FE7D45}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHZ.StoreHoursSample.ScaleUnit.Installer", "ScaleUnit.Installer\GHZ.StoreHoursSample.ScaleUnit.Installer.csproj", "{7DF90570-777E-40D3-BC98-2A5845066134}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{276B2061-D23A-4FB9-8951-4D7005FE7D45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{276B2061-D23A-4FB9-8951-4D7005FE7D45}.Release|x86.ActiveCfg = Release|Any CPU
 		{276B2061-D23A-4FB9-8951-4D7005FE7D45}.Release|x86.Build.0 = Release|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DF90570-777E-40D3-BC98-2A5845066134}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

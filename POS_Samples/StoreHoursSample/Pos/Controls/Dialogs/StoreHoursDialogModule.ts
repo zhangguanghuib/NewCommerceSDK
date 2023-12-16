@@ -2,7 +2,7 @@
 import ko from "knockout";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { IStoreHoursDialogResult } from "./IStoreHoursDialogResult";
-import { Hours, IAvailableHour, IStoreHours } from "../../Entities/IStoreHours";
+import { Hours, IAvailableHour, IStoreHours, IAvailableWeekDay, WeekDays } from "../../Entities/IStoreHours";
 import StoreHourConverter from "../../Converter/StoreHourConverter";
 
 type StoreHoursDialogResolve = (value: IStoreHoursDialogResult) => void;
@@ -10,6 +10,10 @@ type StoreHoursDialogReject = (reason: any) => void;
 
 export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialogBase {
     public messagePassedToDialog: ko.Observable<string>;
+
+    public availableWeekDays: ko.ObservableArray<IAvailableWeekDay>;
+    public selectedWeekDay: ko.Observable<WeekDays>;
+
     public availableHours: ko.ObservableArray<IAvailableHour>;
     public selectedOpenHour: ko.Observable<Hours>;
     public selectedCloseHour: ko.Observable<Hours>;
@@ -46,6 +50,19 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
             { hour: Hours.twentyThree, displayText: "23:00" },
             { hour: Hours.twentyFour, displayText: "24:00" }
         ]);
+
+        this.availableWeekDays = ko.observableArray([
+            { weekDay: WeekDays.Sunday, displayText: "Sunday" },
+            { weekDay: WeekDays.Monday, displayText: "Monday" },
+            { weekDay: WeekDays.Tuesday, displayText: "Tuesday" },
+            { weekDay: WeekDays.Wednesday, displayText: "Wednesday" },
+            { weekDay: WeekDays.Thursday, displayText: "Thursday" },
+            { weekDay: WeekDays.Friday, displayText: "Friday" },
+            { weekDay: WeekDays.Saturday, displayText: "Saturday" },
+
+        ]);
+
+        this.selectedWeekDay = ko.observable(WeekDays.Sunday);
         this.selectedOpenHour = ko.observable(Hours.nine);
         this.selectedCloseHour = ko.observable(Hours.twenty);
     }
@@ -56,6 +73,7 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
 
     public open(origStoreHours: IStoreHours): Promise<IStoreHoursDialogResult> {
         // set selected open and close hour
+        this.selectedWeekDay(origStoreHours.weekDay);
         this.selectedOpenHour(origStoreHours.openHour);
         this.selectedCloseHour(origStoreHours.closeHour);
         this._originalStoreHour = origStoreHours;
@@ -86,9 +104,11 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
     private btnUpdateClickHandler(): boolean {
         this.resolvePromise({
             id: this._originalStoreHour.id,
-            weekDay: this._originalStoreHour.weekDay,
+            // weekDay: this._originalStoreHour.weekDay,
+            weekDay: this.selectedWeekDay(),
             openHour: this.selectedOpenHour(),
-            closeHour: this.selectedCloseHour()
+            closeHour: this.selectedCloseHour(),
+            channelId: this._originalStoreHour.channelId
         });
 
         return true;

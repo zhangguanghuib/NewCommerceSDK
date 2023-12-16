@@ -1,12 +1,4 @@
-﻿/**
- * SAMPLE CODE NOTICE
- * 
- * THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
- * OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
- * THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
- * NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
- */
-import ko from "knockout";
+﻿import ko from "knockout";
 
 import { ICustomViewControllerContext, ICustomViewControllerBaseState } from "PosApi/Create/Views";
 import { GetDeviceConfigurationClientRequest, GetDeviceConfigurationClientResponse } from "PosApi/Consume/Device";
@@ -73,6 +65,81 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
             }).catch((reason: any) => {
                 this._context.logger.logError("StoreHoursView.StoreHoursDialog: " + JSON.stringify(reason));
                 this._customViewControllerBaseState.isProcessing = false;
+            });
+    }
+
+    public createNewItem(): Promise<void> {
+
+        console.log("Creating a new store hours");
+
+        let dialog: StoreHoursDialogModule = new StoreHoursDialogModule();
+        let emptyStoreHours: ClientStoreHours.IStoreHours = {
+            id: 200,
+            weekDay: ClientStoreHours.WeekDays.Sunday,
+            openHour: ClientStoreHours.Hours.eight,
+            closeHour: ClientStoreHours.Hours.fourteen,
+            channelId: "0"
+        };
+
+        return dialog.open(emptyStoreHours)
+            .then((result: IStoreHoursDialogResult): Promise<void> => {
+
+                if (ObjectExtensions.isNullOrUndefined(result.updatedStoreHours)) {
+                    return Promise.resolve();
+                }
+
+                this._customViewControllerBaseState.isProcessing = true;
+
+                let rsStoreDayHours: Entities.StoreDayHours = StoreHourConverter.convertToServerStoreHours(result.updatedStoreHours);
+                let storeNumber: string = "";
+
+                return this._context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+                    .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                        return response.data.result;
+                    })
+                    // get store hours
+                    .then((deviceConfiguration: ProxyEntities.DeviceConfiguration) => {
+                        storeNumber = deviceConfiguration.StoreNumber;
+                        rsStoreDayHours.ChannelId = deviceConfiguration.ChannelId+"";
+                        return this._context.runtime.executeAsync(
+                            new StoreHours.InsertStoreDayHoursRequest<StoreHours.InsertStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
+                        );
+                    }).then((response: ClientEntities.ICancelableDataResult<StoreHours.InsertStoreDayHoursResponse>):
+                        Promise<ClientEntities.ICancelableDataResult<StoreHours.GetStoreDaysByStoreResponse>> => {
+                        if (ObjectExtensions.isNullOrUndefined(response)
+                            || ObjectExtensions.isNullOrUndefined(response.data)
+                            || response.canceled) {
+
+                            return Promise.resolve({
+                                canceled: true,
+                                data: null
+                            });
+                        }
+
+                        return this._context.runtime.executeAsync(
+                            new StoreHours.GetStoreDaysByStoreRequest<StoreHours.GetStoreDaysByStoreResponse>(storeNumber));
+                    }).then((response: ClientEntities.ICancelableDataResult<StoreHours.GetStoreDaysByStoreResponse>): Promise<void> => {
+                        if (ObjectExtensions.isNullOrUndefined(response)
+                            || ObjectExtensions.isNullOrUndefined(response.data)
+                            || response.canceled) {
+                            return Promise.resolve();
+                        }
+
+                        let storeDayHours: ClientStoreHours.IStoreHours[] = [];
+                        response.data.result.forEach((storeHour: Entities.StoreDayHours): void => {
+                            storeDayHours.push(StoreHourConverter.convertToClientStoreHours(storeHour));
+                        });
+                        this.currentStoreHours = storeDayHours;
+                        this._customViewControllerBaseState.isProcessing = false;
+                        return Promise.resolve();
+                }).catch((reason: any) => {
+                    this._context.logger.logError("StoreHoursView.StoreHoursDialog.UpdateStoreDayHoursRequest: " + JSON.stringify(reason));
+                    this._customViewControllerBaseState.isProcessing = false;
+                    return Promise.reject();
+                });
+            }).catch((reason: any) => {
+                this._context.logger.logError("StoreHoursView.StoreHoursDialog: " + JSON.stringify(reason));
+                return Promise.reject();
             });
     }
 
