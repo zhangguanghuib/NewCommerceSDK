@@ -31,18 +31,22 @@
           "productAppBarCommands": [
             { "modulePath": "ViewExtensions/Search/NavigateToSimpleExtensionViewCommand" }
           ]
+        },
+        "CustomerAddEditView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "customFieldsSection",
+                "htmlPath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection.html",
+                "modulePath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection"
+              }
+            ]
+          }
         }
       }
     },
     "create": {
       "views": [
-        {
-          "title": "Samples View",
-          "pageName": "SamplesView",
-          "phonePageName": "SamplesView",
-          "viewDirectory": "Views/",
-          "viewControllerPath": "Views/SamplesView"
-        },
         {
           "title": "TextInputDialogView",
           "pageName": "TextInputDialogView",
