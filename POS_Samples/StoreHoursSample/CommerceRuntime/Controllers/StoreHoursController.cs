@@ -59,5 +59,14 @@
             var response = await context.ExecuteAsync<InsertStoreDayHoursDataResponse>(request).ConfigureAwait(false);
             return response.StoreDayHours;
         }
+
+        [HttpPost]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee)]
+        public async Task<long> DeleteStoreDayHours(IEndpointContext context, long id)
+        {
+            var request = new DeleteStoreDayHoursDataRequest(id);
+            var response = await context.ExecuteAsync<DeleteStoreDayHoursDataResponse>(request).ConfigureAwait(false);
+            return response.Id;
+        }
     }
 }

@@ -60,6 +60,10 @@
                 {
                     return await this.InsertStoreDayHoursAsync((InsertStoreDayHoursDataRequest)request).ConfigureAwait(false);
                 }
+                else if (reqType == typeof(DeleteStoreDayHoursDataRequest))
+                {
+                    return await this.DeleteStoreDayHoursAsync((DeleteStoreDayHoursDataRequest)request).ConfigureAwait(false);
+                }
                 else
                 {
                     string message = string.Format(CultureInfo.InvariantCulture, "Request '{0}' is not supported.", reqType);
@@ -145,6 +149,25 @@
                 }
 
                 return new InsertStoreDayHoursDataResponse(request.StoreDayHours);
+            }
+
+            private async Task<Response> DeleteStoreDayHoursAsync(DeleteStoreDayHoursDataRequest request)
+            {
+                ThrowIf.Null(request, "request");
+                if (request.Id <= 0)
+                {
+                    throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ValueOutOfRange);
+                }
+
+                using (var databaseContext = new SqlServerDatabaseContext(request.RequestContext))
+                {
+                    ParameterSet parameters = new ParameterSet();
+                    parameters["@bi_Id"] = request.Id;
+
+                    int ret = await databaseContext.ExecuteStoredProcedureNonQueryAsync("[ext].DELETESTOREDAYHOURS", parameters, resultSettings: null).ConfigureAwait(false);
+                }
+
+                return new DeleteStoreDayHoursDataResponse(request.Id);
             }
         }
     }

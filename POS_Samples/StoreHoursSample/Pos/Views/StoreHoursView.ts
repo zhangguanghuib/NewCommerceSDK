@@ -28,7 +28,9 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         isVisible: true,
                         canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
-                            this.viewModel.createNewItem();
+                            this.viewModel.createNewItem().then(() => {
+                                this.dataList.data = this.viewModel.currentStoreHours;
+                            });;
                         }
                     }
                 ]

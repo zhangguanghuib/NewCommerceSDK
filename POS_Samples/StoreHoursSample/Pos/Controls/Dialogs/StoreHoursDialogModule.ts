@@ -2,11 +2,12 @@
 import ko from "knockout";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { IStoreHoursDialogResult } from "./IStoreHoursDialogResult";
-import { Hours, IAvailableHour, IStoreHours, IAvailableWeekDay, WeekDays } from "../../Entities/IStoreHours";
+import { Hours, IAvailableHour, IStoreHours, IAvailableWeekDay, WeekDays, IAction, UpdateDeleteAction } from "../../Entities/IStoreHours";
 import StoreHourConverter from "../../Converter/StoreHourConverter";
 
 type StoreHoursDialogResolve = (value: IStoreHoursDialogResult) => void;
 type StoreHoursDialogReject = (reason: any) => void;
+
 
 export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialogBase {
     public messagePassedToDialog: ko.Observable<string>;
@@ -17,6 +18,9 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
     public availableHours: ko.ObservableArray<IAvailableHour>;
     public selectedOpenHour: ko.Observable<Hours>;
     public selectedCloseHour: ko.Observable<Hours>;
+
+    public actions: ko.ObservableArray<IAction>;
+    public updateDeleteAction: ko.Observable<UpdateDeleteAction>;
 
     private _resolve: StoreHoursDialogResolve;
     private _originalStoreHour: IStoreHours;
@@ -62,9 +66,16 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
 
         ]);
 
+
+        this.actions = ko.observableArray([
+            { action: UpdateDeleteAction.Update, displayText: "Update" },
+            { action: UpdateDeleteAction.Delete, displayText: "Delete" },
+        ]);
+
         this.selectedWeekDay = ko.observable(WeekDays.Sunday);
         this.selectedOpenHour = ko.observable(Hours.nine);
         this.selectedCloseHour = ko.observable(Hours.twenty);
+        this.updateDeleteAction = ko.observable(UpdateDeleteAction.Update);
     }
 
     public onReady(element: HTMLElement): void {
@@ -92,7 +103,7 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
                     id: "btnCancel",
                     label: this.context.resources.getString("string_5"),
                     onClick: this.btnCancelClickHandler.bind(this)
-                }
+                },
             };
 
             this.openDialog(option);
@@ -108,7 +119,8 @@ export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialog
             weekDay: this.selectedWeekDay(),
             openHour: this.selectedOpenHour(),
             closeHour: this.selectedCloseHour(),
-            channelId: this._originalStoreHour.channelId
+            channelId: this._originalStoreHour.channelId,
+            action: this.updateDeleteAction()
         });
 
         return true;

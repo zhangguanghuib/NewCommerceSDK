@@ -13,6 +13,9 @@ import StoreHourConverter from "../Converter/StoreHourConverter";
 import { StoreHours } from "../DataService/DataServiceRequests.g";
 import { Entities } from "../DataService/DataServiceEntities.g";
 
+import { UpdateDeleteAction } from "../Entities/IStoreHours";
+
+
 
 /**
  * The ViewModel for SimpleExtensionView.
@@ -147,6 +150,48 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
      * Handler for list item selection.
      * @param {any} item
      */
+    //public listItemSelected(item: any): Promise<void> {
+    //    this._context.logger.logInformational("Item selected on:" + item.weekDay);
+
+    //    // Open update store hours dialog
+    //    let dialog: StoreHoursDialogModule = new StoreHoursDialogModule();
+
+    //    return dialog.open(item)
+    //        .then((result: IStoreHoursDialogResult): Promise<void> => {
+    //            // No action if it is cancel
+    //            if (ObjectExtensions.isNullOrUndefined(result.updatedStoreHours)) {
+    //                return Promise.resolve();
+    //            }
+
+    //            this._customViewControllerBaseState.isProcessing = true;
+
+    //            let rsStoreDayHours: Entities.StoreDayHours = StoreHourConverter.convertToServerStoreHours(result.updatedStoreHours);
+    //            return this._context.runtime.executeAsync(
+    //                new StoreHours.UpdateStoreDayHoursRequest<StoreHours.UpdateStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
+    //            ).then((response: ClientEntities.ICancelableDataResult<StoreHours.UpdateStoreDayHoursResponse>): Promise<void> => {
+    //                if (ObjectExtensions.isNullOrUndefined(response)
+    //                    || ObjectExtensions.isNullOrUndefined(response.data)
+    //                    || response.canceled) {
+    //                    return Promise.resolve();
+    //                }
+
+    //                this._context.logger.logInformational("Updated hours is: " + result.updatedStoreHours.openHour.toString());
+    //                let returnedStoreHours: ClientStoreHours.IStoreHours = StoreHourConverter.convertToClientStoreHours(response.data.result);
+    //                this.currentStoreHours[item.id - 1].openHour = returnedStoreHours.openHour;
+    //                this.currentStoreHours[item.id - 1].closeHour = returnedStoreHours.closeHour;
+    //                this._customViewControllerBaseState.isProcessing = false; 
+    //                return Promise.resolve();
+    //            }).catch((reason: any) => {
+    //                this._context.logger.logError("StoreHoursView.StoreHoursDialog.UpdateStoreDayHoursRequest: " + JSON.stringify(reason));
+    //                this._customViewControllerBaseState.isProcessing = false;
+    //                return Promise.reject();
+    //            });
+    //        }).catch((reason: any) => {
+    //            this._context.logger.logError("StoreHoursView.StoreHoursDialog: " + JSON.stringify(reason));
+    //            return Promise.reject();
+    //        });
+    //}
+
     public listItemSelected(item: any): Promise<void> {
         this._context.logger.logInformational("Item selected on:" + item.weekDay);
 
@@ -162,23 +207,11 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
 
                 this._customViewControllerBaseState.isProcessing = true;
 
-                let rsStoreDayHours: Entities.StoreDayHours = StoreHourConverter.convertToServerStoreHours(result.updatedStoreHours);
-                return this._context.runtime.executeAsync(
-                    new StoreHours.UpdateStoreDayHoursRequest<StoreHours.UpdateStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
-                ).then((response: ClientEntities.ICancelableDataResult<StoreHours.UpdateStoreDayHoursResponse>): Promise<void> => {
-                    if (ObjectExtensions.isNullOrUndefined(response)
-                        || ObjectExtensions.isNullOrUndefined(response.data)
-                        || response.canceled) {
-                        return Promise.resolve();
-                    }
-
-                    this._context.logger.logInformational("Updated hours is: " + result.updatedStoreHours.openHour.toString());
-                    let returnedStoreHours: ClientStoreHours.IStoreHours = StoreHourConverter.convertToClientStoreHours(response.data.result);
-                    this.currentStoreHours[item.weekDay - 1].openHour = returnedStoreHours.openHour;
-                    this.currentStoreHours[item.weekDay - 1].closeHour = returnedStoreHours.closeHour;
-                    this._customViewControllerBaseState.isProcessing = false; 
-                    return Promise.resolve();
-                }).catch((reason: any) => {
+                return this.updatetItemSelected(result).then(() => {
+                    return this.deleteItemSelected(result);
+                }).then(() => {
+                    this._customViewControllerBaseState.isProcessing = false;                })
+                .catch ((reason: any) => {
                     this._context.logger.logError("StoreHoursView.StoreHoursDialog.UpdateStoreDayHoursRequest: " + JSON.stringify(reason));
                     this._customViewControllerBaseState.isProcessing = false;
                     return Promise.reject();
@@ -188,4 +221,49 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
                 return Promise.reject();
             });
     }
+
+    public deleteItemSelected(result: IStoreHoursDialogResult): Promise<void> {
+        if (result.updatedStoreHours.action === UpdateDeleteAction.Delete && result.updatedStoreHours.id) {
+            return this._context.runtime.executeAsync(
+                new StoreHours.DeleteStoreDayHoursRequest<StoreHours.DeleteStoreDayHoursResponse>(result.updatedStoreHours.id)
+            ).then((response: ClientEntities.ICancelableDataResult<StoreHours.DeleteStoreDayHoursResponse>): Promise<void> => {
+                if (ObjectExtensions.isNullOrUndefined(response)
+                    || ObjectExtensions.isNullOrUndefined(response.data)
+                    || response.canceled) {
+                    return Promise.resolve();
+                }
+
+                this.currentStoreHours = this.currentStoreHours.filter((item: ClientStoreHours.IStoreHours) => { item.id !== result.updatedStoreHours.id });
+
+                this._customViewControllerBaseState.isProcessing = false;
+                return Promise.resolve();
+            })
+        }
+        return Promise.resolve();
+    }
+
+    public updatetItemSelected(result: IStoreHoursDialogResult): Promise<void> {
+        if (result.updatedStoreHours.action === UpdateDeleteAction.Update && result.updatedStoreHours.id) {
+            let rsStoreDayHours: Entities.StoreDayHours = StoreHourConverter.convertToServerStoreHours(result.updatedStoreHours);
+            return this._context.runtime.executeAsync(
+                new StoreHours.UpdateStoreDayHoursRequest<StoreHours.UpdateStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
+            ).then((response: ClientEntities.ICancelableDataResult<StoreHours.UpdateStoreDayHoursResponse>): Promise<void> => {
+                if (ObjectExtensions.isNullOrUndefined(response)
+                    || ObjectExtensions.isNullOrUndefined(response.data)
+                    || response.canceled) {
+                    return Promise.resolve();
+                }
+
+                this._context.logger.logInformational("Updated hours is: " + result.updatedStoreHours.openHour.toString());
+                let returnedStoreHours: ClientStoreHours.IStoreHours = StoreHourConverter.convertToClientStoreHours(response.data.result);
+                this.currentStoreHours[result.updatedStoreHours.id - 1].openHour = returnedStoreHours.openHour;
+                this.currentStoreHours[result.updatedStoreHours.id - 1].closeHour = returnedStoreHours.closeHour;
+                this._customViewControllerBaseState.isProcessing = false;
+                return Promise.resolve();
+            });
+        } else {
+            return Promise.resolve();
+        }
+    }
+
 }

@@ -4,6 +4,7 @@
     openHour: Hours;
     closeHour: Hours;
     channelId: string;
+    action?: UpdateDeleteAction;
 }
 
 export interface IAvailableWeekDay {
@@ -58,4 +59,15 @@ export enum Hours {
     twentyTwo = 22,
     twentyThree = 23,
     twentyFour = 24
+}
+
+
+export interface IAction {
+    action: UpdateDeleteAction;
+    displayText: string;
+}
+
+export enum UpdateDeleteAction {
+    Update = 0,
+    Delete = 1
 }
