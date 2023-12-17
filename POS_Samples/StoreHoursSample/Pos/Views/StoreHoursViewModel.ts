@@ -7,7 +7,7 @@ import KnockoutExtensionViewModelBase from "./BaseClasses/KnockoutExtensionViewM
 import * as ClientStoreHours from "../Entities/IStoreHours";
 import StoreHoursDialogModule from "../Controls/Dialogs/StoreHoursDialogModule";
 import { IStoreHoursDialogResult } from "../Controls/Dialogs/IStoreHoursDialogResult";
-import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ArrayExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import StoreHourConverter from "../Converter/StoreHourConverter";
 import { StoreHours } from "../DataService/DataServiceRequests.g";
@@ -233,7 +233,13 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
                     return Promise.resolve();
                 }
 
-                this.currentStoreHours = this.currentStoreHours.filter((item: ClientStoreHours.IStoreHours) => { item.id !== result.updatedStoreHours.id });
+            let filteredArr: ClientStoreHours.IStoreHours[] = this.currentStoreHours.filter(
+                (item: ClientStoreHours.IStoreHours) => item.id === result.updatedStoreHours.id);
+
+                if (ArrayExtensions.hasElements(filteredArr)) {
+                    let index: number = this.currentStoreHours.indexOf(filteredArr[0]);
+                    this.currentStoreHours.splice(index, 1);
+                }
 
                 this._customViewControllerBaseState.isProcessing = false;
                 return Promise.resolve();
