@@ -19,10 +19,13 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
   <img width="310" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00f0229f-1697-45da-9d58-130c6a01a528">
 - Nomrally when you build it, you will see the store commerce extension and Scale unit extension deploy automatically
 - Alternatively, you can make run this command to deploy Scale Unit package:
-<img width="845" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d3fddd5-952c-4478-9773-6580d5ff01e2">
+<img width="845" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d3fddd5-952c-4478-9773-6580d5ff01e2"><br/>
 - And run this command to deploy Store Commerce Package:
 <img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/798aa40f-745d-400e-aa96-8e5a053574e3">
 
+- Finally you can go to control panel to verify the package deployed successfully:
+  <img width="857" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ec0af66a-86ed-4c25-a61b-def22312181c">
+  <img width="841" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0a8f5d9a-a6a3-4263-8d5a-be39cbafd994">
 ## Running the sample
 - Go to Cart Screen, find the button "Store Hours", click it HQ <br/>
   <img width="481" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3527cfc1-d8c9-4aad-80a5-84826f2c4b25">
