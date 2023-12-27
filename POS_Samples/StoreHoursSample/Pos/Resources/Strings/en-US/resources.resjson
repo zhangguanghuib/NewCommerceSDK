@@ -16,7 +16,7 @@
     "string_3"                                      : "CLOSE HOUR",
     "_string_3.comment"                             : "Store close hour column name.",
 
-	"string_4"                                      : "Update",
+	"string_4"                                      : "OK",
     "_string_4.comment"                             : "Update button on store hours dialog.", 
 
 	"string_5"                                      : "Cancel",
