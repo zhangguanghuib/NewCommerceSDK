@@ -61,6 +61,103 @@ Commerce Runtime support these request:
 - typeof(InsertStoreDayHoursDataRequest),
 - typeof(DeleteStoreDayHoursDataRequest)
 
+# POS:
+- Load the data from database
+```ts:
+response.data.result.forEach((storeHour: Entities.StoreDayHours): void => {
+    storeDayHours.push(StoreHourConverter.convertToClientStoreHours(storeHour));
+});
+this.currentStoreHours = storeDayHours;
+```
+- Update existing store hours data:
+```ts
+let rsStoreDayHours: Entities.StoreDayHours = StoreHourConverter.convertToServerStoreHours(result.updatedStoreHours);
+return this._context.runtime.executeAsync(
+    new StoreHours.UpdateStoreDayHoursRequest<StoreHours.UpdateStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
+).then((response: ClientEntities.ICancelableDataResult<StoreHours.UpdateStoreDayHoursResponse>): Promise<void> => {
+    if (ObjectExtensions.isNullOrUndefined(response)
+        || ObjectExtensions.isNullOrUndefined(response.data)
+        || response.canceled) {
+        return Promise.resolve();
+    }
+
+    this._context.logger.logInformational("Updated hours is: " + result.updatedStoreHours.openHour.toString());
+    let returnedStoreHours: ClientStoreHours.IStoreHours = StoreHourConverter.convertToClientStoreHours(response.data.result);
+
+    let filteredArr: ClientStoreHours.IStoreHours[] = this.currentStoreHours.filter(
+        (item: ClientStoreHours.IStoreHours) => item.id === result.updatedStoreHours.id);
+
+    if (ArrayExtensions.hasElements(filteredArr)) {
+        filteredArr[0].openHour = returnedStoreHours.openHour;
+        filteredArr[0].closeHour = returnedStoreHours.closeHour;
+    }
+
+    this._customViewControllerBaseState.isProcessing = false;
+```
+
+- Delete existing store hours data:
+```ts
+  return this._context.runtime.executeAsync(
+      new StoreHours.DeleteStoreDayHoursRequest<StoreHours.DeleteStoreDayHoursResponse>(result.updatedStoreHours.id)
+  ).then((response: ClientEntities.ICancelableDataResult<StoreHours.DeleteStoreDayHoursResponse>): Promise<void> => {
+      if (ObjectExtensions.isNullOrUndefined(response)
+          || ObjectExtensions.isNullOrUndefined(response.data)
+          || response.canceled) {
+          return Promise.resolve();
+      }
+
+  let filteredArr: ClientStoreHours.IStoreHours[] = this.currentStoreHours.filter(
+      (item: ClientStoreHours.IStoreHours) => item.id === result.updatedStoreHours.id);
+
+      if (ArrayExtensions.hasElements(filteredArr)) {
+          let index: number = this.currentStoreHours.indexOf(filteredArr[0]);
+          this.currentStoreHours.splice(index, 1);
+      }
+
+      this._customViewControllerBaseState.isProcessing = false;
+```
+
+- Create a new item:
+  ```ts
+  this._context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+                    .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                        return response.data.result;
+                    })
+                    // get store hours
+                    .then((deviceConfiguration: ProxyEntities.DeviceConfiguration) => {
+                        storeNumber = deviceConfiguration.StoreNumber;
+                        rsStoreDayHours.ChannelId = deviceConfiguration.ChannelId+"";
+                        return this._context.runtime.executeAsync(
+                            new StoreHours.InsertStoreDayHoursRequest<StoreHours.InsertStoreDayHoursResponse>(rsStoreDayHours.Id, rsStoreDayHours)
+                        );
+                    }).then((response: ClientEntities.ICancelableDataResult<StoreHours.InsertStoreDayHoursResponse>):
+                        Promise<ClientEntities.ICancelableDataResult<StoreHours.GetStoreDaysByStoreResponse>> => {
+                        if (ObjectExtensions.isNullOrUndefined(response)
+                            || ObjectExtensions.isNullOrUndefined(response.data)
+                            || response.canceled) {
+
+                            return Promise.resolve({
+                                canceled: true,
+                                data: null
+                            });
+                        }
+
+                        return this._context.runtime.executeAsync(
+                            new StoreHours.GetStoreDaysByStoreRequest<StoreHours.GetStoreDaysByStoreResponse>(storeNumber));
+                    }).then((response: ClientEntities.ICancelableDataResult<StoreHours.GetStoreDaysByStoreResponse>): Promise<void> => {
+                        if (ObjectExtensions.isNullOrUndefined(response)
+                            || ObjectExtensions.isNullOrUndefined(response.data)
+                            || response.canceled) {
+                            return Promise.resolve();
+                        }
+
+                        let storeDayHours: ClientStoreHours.IStoreHours[] = [];
+                        response.data.result.forEach((storeHour: Entities.StoreDayHours): void => {
+                            storeDayHours.push(StoreHourConverter.convertToClientStoreHours(storeHour));
+                        });
+                        this.currentStoreHours = storeDayHours;
+                        this._customViewControllerBaseState.isProcessing = false;
+  ```
 
 
 
