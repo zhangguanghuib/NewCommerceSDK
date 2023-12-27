@@ -54,6 +54,13 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
 - API: UpdateStoreDayHours
 - API: InsertStoreDayHours
 - API: DeleteStoreDayHours
+# Commerce Runtime:
+Commerce Runtime support these request:
+- typeof(GetStoreHoursDataRequest),
+- typeof(UpdateStoreDayHoursDataRequest),
+- typeof(InsertStoreDayHoursDataRequest),
+- typeof(DeleteStoreDayHoursDataRequest)
+
 
 
 
