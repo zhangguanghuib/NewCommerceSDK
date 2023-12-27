@@ -30,7 +30,8 @@
                     {
                         typeof(GetStoreHoursDataRequest),
                         typeof(UpdateStoreDayHoursDataRequest),
-                        typeof(InsertStoreDayHoursDataRequest)
+                        typeof(InsertStoreDayHoursDataRequest),
+                        typeof(DeleteStoreDayHoursDataRequest)
                     };
                 }
             }

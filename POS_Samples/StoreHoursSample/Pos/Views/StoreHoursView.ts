@@ -30,9 +30,22 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
                             this.viewModel.createNewItem().then(() => {
                                 this.dataList.data = this.viewModel.currentStoreHours;
-                            });;
+                            });
                         }
-                    }
+                    },
+                    {
+                        name: "Reload",
+                        label: "Reload",
+                        icon: Views.Icons.Search,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.viewModel.loadAsync().then(() => {
+                                this.dataList.data = this.viewModel.currentStoreHours;
+                            });
+                        }
+                    },
+
                 ]
             }
         }
@@ -44,7 +57,6 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
 
         this.state.title = this.viewModel.title();
     }
-
 
     /**
      * Bind the html element with view controller.

@@ -42,6 +42,9 @@
               }
             ]
           }
+        },
+        "ShowJournalView": {
+          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ]
         }
       }
     },

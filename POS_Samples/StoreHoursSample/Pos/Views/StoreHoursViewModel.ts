@@ -15,11 +15,6 @@ import { Entities } from "../DataService/DataServiceEntities.g";
 
 import { UpdateDeleteAction } from "../Entities/IStoreHours";
 
-
-
-/**
- * The ViewModel for SimpleExtensionView.
- */
 export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase {
     public title: ko.Observable<string>;
     public currentStoreHours: ClientStoreHours.IStoreHours[];
@@ -262,8 +257,15 @@ export default class StoreHoursViewModel extends KnockoutExtensionViewModelBase 
 
                 this._context.logger.logInformational("Updated hours is: " + result.updatedStoreHours.openHour.toString());
                 let returnedStoreHours: ClientStoreHours.IStoreHours = StoreHourConverter.convertToClientStoreHours(response.data.result);
-                this.currentStoreHours[result.updatedStoreHours.id - 1].openHour = returnedStoreHours.openHour;
-                this.currentStoreHours[result.updatedStoreHours.id - 1].closeHour = returnedStoreHours.closeHour;
+
+                let filteredArr: ClientStoreHours.IStoreHours[] = this.currentStoreHours.filter(
+                    (item: ClientStoreHours.IStoreHours) => item.id === result.updatedStoreHours.id);
+
+                if (ArrayExtensions.hasElements(filteredArr)) {
+                    filteredArr[0].openHour = returnedStoreHours.openHour;
+                    filteredArr[0].closeHour = returnedStoreHours.closeHour;
+                }
+
                 this._customViewControllerBaseState.isProcessing = false;
                 return Promise.resolve();
             });
