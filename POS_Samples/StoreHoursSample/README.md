@@ -14,6 +14,15 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
   <img width="300" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bec31cf6-4dcc-4227-9ffb-cfb7ec292db3">
 
 - Run job 9999
+## Deploy the sample locally
+- Firstly make sure your project contains Scale Unit Installer and Store Commerce Installer <br/>
+  <img width="310" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/00f0229f-1697-45da-9d58-130c6a01a528">
+- Nomrally when you build it, you will see the store commerce extension and Scale unit extension deploy automatically
+- Alternatively, you can make run this command to deploy Scale Unit package:
+<img width="845" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d3fddd5-952c-4478-9773-6580d5ff01e2">
+- And run this command to deploy Store Commerce Package:
+<img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/798aa40f-745d-400e-aa96-8e5a053574e3">
+
 ## Running the sample
 - Go to Cart Screen, find the button "Store Hours", click it HQ <br/>
   <img width="481" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3527cfc1-d8c9-4aad-80a5-84826f2c4b25">
