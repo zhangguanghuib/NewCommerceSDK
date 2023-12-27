@@ -38,13 +38,13 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
   you will see a new record created in the view:<br/>
   <img width="1181" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/85acc934-5166-44fb-b70e-9ed642807c99">
 
-  - Update:<br/>
+- Update:<br/>
   Click one existing record,  one dialog is opened automatically, make the changes you want, and then click "Update" button<br/>
   <img width="1473" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0176ca03-4607-451a-8528-dfafa6042862">
   You will see the changes reflected on the existing grid
   <img width="1244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8da3dd82-ded2-4de7-932b-4ddaa03a25fe">
 
- - Delete:<br/>
+- Delete:<br/>
    Click one existing record,  one dialog is opened automatically, make sure the delete is "Delete"<br/>
   <img width="1462" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4ad682eb-522e-483e-a9c3-91f963d87c4c">
    Click "Update" button, you will see the record got deleted from UI and database
