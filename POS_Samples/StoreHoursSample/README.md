@@ -5,6 +5,7 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
 - update an existing store hours sample
 - Delete an exisiting store hours sample
 - Reload the page to get the latest data
+- Refresh the UI to reflect the change
 ## Configuring the sample
 - Create a POS  Operation in HQ
 - Add the POS Operation on the POS screen designer
