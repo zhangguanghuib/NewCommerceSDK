@@ -42,6 +42,18 @@ This sample is a showcase an improved Store Hours Sample which exists in Retail 
   Click "Reload" button on then command bar, and the it will refresh the view with the latest data from database:<br/>
   <img width="137" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/23453879-74d2-4b32-b863-1ba333ad6232"><br/>
   <img width="1364" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0e0467f1-437d-4a7e-b022-f26864a73d48">
+## Implemenation details
+# SQL
+- Create table [ext].[CONTOSORETAILSTOREHOURSTABLE]
+- Create View [ext].[CONTOSORETAILSTOREHOURSVIEW]
+- Store Procedure: [ext].[UPDATESTOREDAYHOURS]
+- Store Procedure: [ext].DELETESTOREDAYHOURS
+- Store Procedure: [ext].INSERTSTOREDAYHOURS
+# Retail Server
+- API: GetStoreDaysByStore
+- API: UpdateStoreDayHours
+- API: InsertStoreDayHours
+- API: DeleteStoreDayHours
 
 
 
