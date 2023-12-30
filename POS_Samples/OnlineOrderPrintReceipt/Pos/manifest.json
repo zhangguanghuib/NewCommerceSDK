@@ -32,6 +32,13 @@
       "views": [
       ],
       "templatedDialogs": [
+      ],
+      "operations": [
+        {
+          "operationId": "60004",
+          "operationRequestFactoryPath": "Operations/PrintOnlineOrderReceiptRequestFactory",
+          "operationRequestHandlerPath": "Operations/PrintOnlineOrderReceiptRequestHandler"
+        }
       ]
     }
   }
