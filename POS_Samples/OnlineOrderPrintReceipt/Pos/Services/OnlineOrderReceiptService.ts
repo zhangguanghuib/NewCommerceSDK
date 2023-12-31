@@ -55,11 +55,11 @@ export default class OnlineOrderReceiptService {
             });
     }
 
-    public processByPromiseInSequence(): void {
+    public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
 
-        let searchCriteria: ProxyEntities.TransactionSearchCriteria = {
-            TransactionIds: ['HOUSTON-HOUSTON-42-1702992146072', 'HOUSTON-HOUSTON-42-1703923544442']
-        };
+        //let searchCriteria: ProxyEntities.TransactionSearchCriteria = {
+        //    TransactionIds: ['HOUSTON-HOUSTON-42-1702992146072', 'HOUSTON-HOUSTON-42-1703923544442']
+        //};
 
         let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
             new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
@@ -89,11 +89,11 @@ export default class OnlineOrderReceiptService {
             });
     }
 
-    public async processByAsyncAwait(): Promise<void> {
+    public async processByAsyncAwait(searchCriteria: ProxyEntities.TransactionSearchCriteria): Promise<void> {
 
-        let searchCriteria: ProxyEntities.TransactionSearchCriteria = {
-            TransactionIds: ['HOUSTON-HOUSTON-42-1702992146072', 'HOUSTON-HOUSTON-42-1703923544442']
-        };
+        //let searchCriteria: ProxyEntities.TransactionSearchCriteria = {
+        //    TransactionIds: ['HOUSTON-HOUSTON-42-1702992146072', 'HOUSTON-HOUSTON-42-1703923544442']
+        //};
 
         let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
             new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);

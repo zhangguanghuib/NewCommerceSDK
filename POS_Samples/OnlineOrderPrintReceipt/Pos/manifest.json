@@ -30,8 +30,19 @@
     },
     "create": {
       "views": [
+        {
+          "title": "DatePickerView",
+          "pageName": "DatePickerView",
+          "phonePageName": "DatePickerView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/DatePickerView"
+        }
       ],
       "templatedDialogs": [
+        {
+          "htmlPath": "Controls/Dialogs/SearchTransactionsDialog.html",
+          "modulePath": "Controls/Dialogs/SearchTransactionsDialog"
+        }
       ],
       "operations": [
         {

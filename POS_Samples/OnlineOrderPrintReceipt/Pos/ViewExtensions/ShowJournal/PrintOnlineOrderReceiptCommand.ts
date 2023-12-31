@@ -118,7 +118,8 @@ export default class PrintOnlineOrderReceiptCommand extends ShowJournalView.Show
      */
     protected async execute(): Promise<void> {
         // await this.processByAsyncAwait();
-        this.processByPromiseInSequence();
+        //this.processByPromiseInSequence();
+        this.context.navigator.navigate('DatePickerView');
     }
 
     public processByPromiseInSequence(): void {
