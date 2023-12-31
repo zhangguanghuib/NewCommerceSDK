@@ -16,11 +16,20 @@ export default class SearchTransactionsDialog extends Dialogs.ExtensionTemplated
     private endDate: Date;
     public transactionIds: ko.Observable<string>;
 
+    public toggleSwitchStartDate: Controls.IToggle;
+    public toggleSwitchEndDate: Controls.IToggle;
+
+    public isStartDateDisabled: ko.Observable<boolean>;
+    public isEndDateDisabled: ko.Observable<boolean>;
+
     constructor() {
         super();
         this.transactionIds = ko.observable("");
         this.startDate = DateExtensions.getDate(new Date());
         this.endDate = DateExtensions.getDate(new Date());
+
+        this.isStartDateDisabled = ko.observable(true);
+        this.isEndDateDisabled = ko.observable(true);
     }
 
     public onReady(element: HTMLElement): void {
@@ -44,10 +53,46 @@ export default class SearchTransactionsDialog extends Dialogs.ExtensionTemplated
             this._dateChangedHandler(eventData.date);
             this.endDate = eventData.date;
         });
+
+
+        let toggleOptions: Controls.IToggleOptions = {
+            labelOn: "On",
+            labelOff: "Off",
+            checked: !this.isStartDateDisabled(),
+            enabled: true,
+            tabIndex: 0
+        };
+
+        let toggleRootElemStartDate: HTMLDivElement = element.querySelector("#isStartDateOn") as HTMLDivElement;
+        this.toggleSwitchStartDate = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Toggle", toggleOptions, toggleRootElemStartDate);
+        this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
+            this.toggleStartDate(eventData.checked);
+        });
+
+        let toggleOptionsEndDate: Controls.IToggleOptions = {
+            labelOn: "On",
+            labelOff: "Off",
+            checked: !this.isEndDateDisabled(),
+            enabled: true,
+            tabIndex: 0
+        };
+
+        let toggleRootElemEndDate: HTMLDivElement = element.querySelector("#isEndDateOn") as HTMLDivElement;
+        this.toggleSwitchEndDate = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Toggle", toggleOptionsEndDate, toggleRootElemEndDate);
+        this.toggleSwitchEndDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
+            this.toggleEndDate(eventData.checked);
+        });
+    }
+
+    public toggleStartDate(checked: boolean): void {
+        this.isStartDateDisabled(!checked);
+    }
+
+    public toggleEndDate(checked: boolean): void {
+        this.isEndDateDisabled(!checked);
     }
 
     public open(): Promise<ProxyEntities.TransactionSearchCriteria> {
-
         let promise: Promise<ProxyEntities.TransactionSearchCriteria> = new Promise((resolve: SearchTransactionsDialogResolve, reject: SearchTransactionsDialogReject) => {
             this._resolve = resolve;
             let option: Dialogs.ITemplatedDialogOptions = {
@@ -74,10 +119,20 @@ export default class SearchTransactionsDialog extends Dialogs.ExtensionTemplated
     private btnUpdateClickHandler(): boolean {
 
         let searchCriteria: ProxyEntities.TransactionSearchCriteria = {
-            StartDateTime: this.startDate,
-            EndDateTime: this.endDate,
-            SearchLocationTypeValue: 1,
+            SearchLocationTypeValue: 1
         };
+
+        if (this.isStartDateDisabled()) {
+            searchCriteria.StartDateTime = DateExtensions.addDays(DateExtensions.getDate(new Date()), -3);
+        } else {
+            searchCriteria.StartDateTime = this.startDate;
+        }
+
+        if (this.isEndDateDisabled()) {
+            searchCriteria.EndDateTime = DateExtensions.getDate(new Date());
+        } else {
+            searchCriteria.EndDateTime = this.endDate;
+        }
 
         if (this.transactionIds()) {
             searchCriteria.TransactionIds = this.transactionIds().split(',');

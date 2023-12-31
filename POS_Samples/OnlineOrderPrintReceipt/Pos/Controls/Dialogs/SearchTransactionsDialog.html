@@ -11,12 +11,18 @@
         <!-- dialog content -->
         <div>
             <div class="h4">Start Date:</div>
+            <div class="col stretch">
+                <div id="isStartDateOn" />
+            </div>
             <div class="pad8">
-                <div id="datePickerStart">
+                <div id="datePickerStart" data-bind="disabled: isStartDateDisabled">
                 </div>
             </div>
             <br />
             <div class="h4">End Date:</div>
+            <div class="col stretch">
+                <div id="isEndDateOn" />
+            </div>
             <div class="pad8">
                 <div id="datePickerEnd">
                 </div>
