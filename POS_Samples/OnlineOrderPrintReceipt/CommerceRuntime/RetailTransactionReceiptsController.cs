@@ -22,23 +22,35 @@ namespace Contoso.GasStationSample.CommerceRuntime
                 searchCriteria.SearchLocationType = SearchLocation.Local;
             }
 
+            // By Search Criteria to find all Transactions:
             var request = new SearchJournalTransactionsServiceRequest(searchCriteria, queryResultSettings);
             var response = await context.ExecuteAsync<SearchJournalTransactionsServiceResponse>(request).ConfigureAwait(false);
 
-            //IEnumerable<Transaction> transactions = 
-            //response.Transactions.Where<Transaction>(t => !(t.ExtensionProperties.Where<CommerceProperty>(p => p.Key.Equals("ISRECIPT")).Any()) && t.ExtensionProperties.Where<CommerceProperty>(p => p.Key.Equals("ISRECIPT") && p.Value.IntegerValue.Equals(0)).Any());
+            //IEnumerable<Transaction> transactions = response.Transactions.Where<Transaction>(t =>
+            //{
+            //    return !(t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED"))) || t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED") && p.Value.IntegerValue.Equals(0));
+            //});
 
-            //SearchJournalTransactionsServiceResponse filteredResponse = new SearchJournalTransactionsServiceResponse((PagedResult<Transaction>)transactions);
-            //return response.Transactions;
+            // Get All Transaction IDs whose Receipt has already printed:
+            List<string> transactionIDListOrig = response.Transactions.Select(transaction => transaction.Id).ToList<string>();
+            GetTransactionIDListDataRequest getTransactionIDListRequest = new GetTransactionIDListDataRequest(string.Join(",", transactionIDListOrig), QueryResultSettings.AllRecords);
+            var getTransactionIDListDataResponse = await context.ExecuteAsync<GetTransactionIDListDataResponse>(getTransactionIDListRequest).ConfigureAwait(false);
 
-            IEnumerable<Transaction> transactions = response.Transactions.Where<Transaction>(t => 
+            // Get all transaction ids with Receipt Printed 
+            List<string> transactionIDListPrinted = getTransactionIDListDataResponse.TransactionIDList.ToList<string>();
+
+            // Get all transaction ids with Receipt Not Printed 
+            List<string> unPrintedTransactionIDList = transactionIDListOrig.Where(t1 => !transactionIDListPrinted.Any(t2 => t2.Equals(t1))).ToList();
+
+            IEnumerable <Transaction> transactions = response.Transactions.Where<Transaction>(t =>
             {
-                return !(t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED"))) || t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED") && p.Value.IntegerValue.Equals(0));
+                return unPrintedTransactionIDList.Any(s => t.Id.Equals(s));
             });
 
-            return response.Transactions;
+            PagedResult<Transaction> filteredTransactions =
+                new PagedResult<Transaction>(new System.Collections.ObjectModel.ReadOnlyCollection<Transaction>((IList<Transaction>)transactions));
 
-            //return (PagedResult<Transaction>)transactions;
+            return filteredTransactions;
         }
     }
 }
