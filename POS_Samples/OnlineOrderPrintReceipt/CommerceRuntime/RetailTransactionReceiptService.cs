@@ -7,11 +7,14 @@
     using System.Threading.Tasks;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.Data;
+    using Microsoft.Dynamics.Commerce.Runtime.Data.Types;
     using Microsoft.Dynamics.Commerce.Runtime.DataAccess.SqlServer;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
+    using static System.Net.Mime.MediaTypeNames;
 
     public class RetailTransactionReceiptService : IRequestHandlerAsync
     {
@@ -51,19 +54,25 @@
         {
             ThrowIf.Null(request, "request");
 
-            using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
+            using (DataTable transIdTable = new DataTable("STRINGIDTABLETYPE")) 
             {
-                var query = new SqlPagedQuery(request.QueryResultSettings)
+                using (SqlServerDatabaseContext databaseContext = new SqlServerDatabaseContext(request.RequestContext))
                 {
-                    DatabaseSchema = "ext",
-                    Select = new ColumnSet("TRANSACTIONID"),
-                    From = "CONTOSORETAILTRANSACTIONTABLE",
-                    Where = "ISRECEIPTPRINTED = 1 AND TRANSACTIONID IN ({@TRANSACTIONIDS})",
-                };
+                    transIdTable.Columns.Add("STRINGID", typeof(string));
+                    foreach (string transId in request.TransactionIDList)
+                    {
+                        transIdTable.Rows.Add(transId);
+                    }
 
-                query.Parameters["@TRANSACTIONIDS"] = request.TransactionIDList;
-                ReadOnlyCollection<string> transactionIDs = await databaseContext.ExecuteScalarCollectionAsync<string>(query).ConfigureAwait(false);
-                return new GetTransactionIDListDataResponse(new PagedResult<string>(transactionIDs));
+                    ParameterSet parameters = new ParameterSet();
+                    parameters["@AllTransIds"] = transIdTable;
+                    parameters["@MinDate"] = DateTimeOffset.Now;
+                    parameters["@MaxDate"] = DateTimeOffset.Now;
+
+                    PagedResult<Transaction> PrintedTransactions = (await databaseContext.ExecuteStoredProcedureAsync<Transaction>("[ext].GETPRINTEDTRANSACTIONS", parameters, QueryResultSettings.AllRecords).ConfigureAwait(false)).Item2;
+
+                    return new GetTransactionIDListDataResponse(PrintedTransactions);
+                }
             }
         }
     }
