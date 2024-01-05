@@ -21,13 +21,14 @@ namespace Contoso.GasStationSample.CommerceRuntime.Handlers
                 string hardwareProfileId = request.RequestContext.GetDeviceConfiguration().HardwareProfile;
 
                 GetHardwareProfileDataRequest getHardwareProfileDataRequest = new GetHardwareProfileDataRequest(hardwareProfileId, QueryResultSettings.SingleRecord);
-                HardwareProfile hardwareProfile = (await request.RequestContext.Runtime.ExecuteAsync<SingleEntityDataServiceResponse<HardwareProfile>>(getHardwareProfileDataRequest, request.RequestContext).ConfigureAwait(false)).Entity;
+                HardwareProfile hardwareProfile =
+                    (await request.RequestContext.Runtime.ExecuteAsync<SingleEntityDataServiceResponse<HardwareProfile>>(getHardwareProfileDataRequest, request.RequestContext).ConfigureAwait(false)).Entity;
 
                 bool noneCashDrawer = hardwareProfile.CashDrawers.All<HardwareProfileCashDrawer>(cashDrawer => cashDrawer.DeviceType == DeviceType.None);
-                //if (noneCashDrawer)
-                //{
-                //    request.CanForceClose = true;
-                //}
+                if (noneCashDrawer)
+                {
+                    request.CanForceClose = true;
+                }
             }
 
             var response = await this.ExecuteNextAsync<ChangeShiftStatusResponse>(request).ConfigureAwait(false);
