@@ -4,6 +4,7 @@ namespace Contoso.GasStationSample.CommerceRuntime
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Contoso.GasStationSample.CommerceRuntime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
@@ -33,8 +34,8 @@ namespace Contoso.GasStationSample.CommerceRuntime
 
             // Get All Transaction IDs whose Receipt has already printed:
             List<string> transactionIDListOrig = response.Transactions.Select(transaction => transaction.Id).ToList<string>();
-            GetTransactionIDListDataRequest getTransactionIDListRequest = new GetTransactionIDListDataRequest(transactionIDListOrig, QueryResultSettings.AllRecords);
-            var getTransactionIDListDataResponse = await context.ExecuteAsync<GetTransactionIDListDataResponse>(getTransactionIDListRequest).ConfigureAwait(false);
+            GetTransactionListDataRequest getTransactionIDListRequest = new GetTransactionListDataRequest(transactionIDListOrig, QueryResultSettings.AllRecords);
+            var getTransactionIDListDataResponse = await context.ExecuteAsync<GetTransactionListDataResponse>(getTransactionIDListRequest).ConfigureAwait(false);
             List<string> printedTransList = getTransactionIDListDataResponse.TransactionList.Select(transaction => transaction.Id).ToList<string>();
             List<string> unPrintedTransactionIDList = transactionIDListOrig.Except(printedTransList).ToList();
 
@@ -50,10 +51,25 @@ namespace Contoso.GasStationSample.CommerceRuntime
                 return unPrintedTransactionIDList.Any(s => t.Id.Equals(s));
             });
 
-            PagedResult<Transaction> filteredTransactions =
-                new PagedResult<Transaction>(new System.Collections.ObjectModel.ReadOnlyCollection<Transaction>((IList<Transaction>)transactions));
+            List<Transaction> transactionList = new List<Transaction>();
+            foreach( Transaction transaction in transactions)
+            {
+                transactionList.Add(transaction);
+            }
 
-            return getTransactionIDListDataResponse.TransactionList;
+            PagedResult<Transaction> filteredTransactions =
+                new PagedResult<Transaction>(new System.Collections.ObjectModel.ReadOnlyCollection<Transaction>(transactionList));
+
+            return filteredTransactions;
+        }
+
+        [HttpPost]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee)]
+        public async Task<int> SetTransactionPrinted(IEndpointContext context, Transaction transaction)
+        {
+            var request = new SetTransactionPrintedDataRequest(transaction, true);
+            var response = await context.ExecuteAsync<SetTransactionPrintedDataResponse>(request).ConfigureAwait(false);
+            return response.Result;
         }
     }
 }

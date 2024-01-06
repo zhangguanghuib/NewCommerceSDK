@@ -1,4 +1,4 @@
-﻿namespace Contoso.GasStationSample.CommerceRuntime
+﻿namespace Contoso.GasStationSample.CommerceRuntime.Messages
 {
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
@@ -7,9 +7,9 @@
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
 
     [DataContract]
-    public sealed class GetTransactionIDListDataResponse: Response
+    public sealed class GetTransactionListDataResponse : Response
     {
-        public GetTransactionIDListDataResponse(PagedResult<Transaction> transactionList)
+        public GetTransactionListDataResponse(PagedResult<Transaction> transactionList)
         {
             TransactionList = transactionList;
         }

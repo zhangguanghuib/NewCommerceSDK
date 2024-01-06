@@ -104,6 +104,10 @@ export default class OnlineOrderReceiptService {
 
                 let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
                 await this._context.runtime.executeAsync(printRequest);
+
+                let setTransactionPrinted: StoreOperations.SetTransactionPrintedRequest<StoreOperations.SetTransactionPrintedResponse>
+                    = new StoreOperations.SetTransactionPrintedRequest(trans);
+                await this._context.runtime.executeAsync(setTransactionPrinted);
             }
             finally {
                 console.log(`transaction ${trans.Id} receipt printed is done`);

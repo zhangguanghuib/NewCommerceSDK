@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Threading.Tasks;
+    using Contoso.GasStationSample.CommerceRuntime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.Data;
     using Microsoft.Dynamics.Commerce.Runtime.Data.Types;
@@ -24,11 +25,11 @@
             {
                 return new[]
                 {
-                    typeof(GetTransactionIDListDataRequest)
+                    typeof(GetTransactionListDataRequest),
+                    typeof(SetTransactionPrintedDataRequest)
                 };
             }
         }
-
 
         public async Task<Response> Execute(Request request)
         {
@@ -38,9 +39,13 @@
             }
 
             Type reqType = request.GetType();
-            if (reqType == typeof(GetTransactionIDListDataRequest))
+            if (reqType == typeof(GetTransactionListDataRequest))
             {
-                return await this.GetTransactionList((GetTransactionIDListDataRequest)request).ConfigureAwait(false);
+                return await this.GetTransactionList((GetTransactionListDataRequest)request).ConfigureAwait(false);
+            }
+            else if (reqType == typeof(SetTransactionPrintedDataRequest))
+            {
+                return await this.SetTransactionPrinted((SetTransactionPrintedDataRequest)request).ConfigureAwait(false);
             }
             else
             {
@@ -50,7 +55,7 @@
             }
         }
 
-        private async Task<Response> GetTransactionList(GetTransactionIDListDataRequest request)
+        private async Task<Response> GetTransactionList(GetTransactionListDataRequest request)
         {
             ThrowIf.Null(request, "request");
 
@@ -59,7 +64,7 @@
                 using (SqlServerDatabaseContext databaseContext = new SqlServerDatabaseContext(request.RequestContext))
                 {
                     transIdTable.Columns.Add("STRINGID", typeof(string));
-                    foreach (string transId in request.TransactionIDList)
+                    foreach (string transId in request.TransactionList)
                     {
                         transIdTable.Rows.Add(transId);
                     }
@@ -71,8 +76,26 @@
 
                     PagedResult<Transaction> PrintedTransactions = (await databaseContext.ExecuteStoredProcedureAsync<Transaction>("[ext].GETPRINTEDTRANSACTIONS", parameters, QueryResultSettings.AllRecords).ConfigureAwait(false)).Item2;
 
-                    return new GetTransactionIDListDataResponse(PrintedTransactions);
+                    return new GetTransactionListDataResponse(PrintedTransactions);
                 }
+            }
+        }
+
+        private async Task<Response> SetTransactionPrinted(SetTransactionPrintedDataRequest request)
+        {
+            ThrowIf.Null(request, "request");
+
+            using (var sqlDatanaseContext = new SqlServerDatabaseContext(request.RequestContext))
+            {
+                ParameterSet parameters = new ParameterSet();
+                parameters["@s_TRANSACTIONID"] = request.Transaction.Id;
+                parameters["@s_STORE"] = request.Transaction.StoreId;
+                parameters["@bi_CHANNEL"] = request.RequestContext.GetChannel().RecordId;
+                parameters["@s_TERMINAL"] = request.Transaction.TerminalId;
+                parameters["@s_DATAAREAID"] = request.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
+                parameters["@i_ISRECEIPTPRIENTED"] = request.IsReceiptPrinted ? 1: 0;
+                int ret = await sqlDatanaseContext.ExecuteStoredProcedureNonQueryAsync("[ext].[SETTRANSACTIONPRINTED]", parameters, resultSettings: null).ConfigureAwait(false);
+                return new SetTransactionPrintedDataResponse(ret);
             }
         }
     }
