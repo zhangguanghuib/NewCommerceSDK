@@ -44,6 +44,11 @@
           "modulePath": "Controls/Dialogs/SearchTransactionsDialog"
         }
       ],
+      "requestHandlers": [
+        {
+          "modulePath": "RequestHandlers/OnlineOrderReceiptPrintHandler"
+        }
+      ],
       "operations": [
         {
           "operationId": "60004",
