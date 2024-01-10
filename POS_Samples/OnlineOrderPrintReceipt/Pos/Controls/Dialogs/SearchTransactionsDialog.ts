@@ -28,8 +28,8 @@ export default class SearchTransactionsDialog extends Dialogs.ExtensionTemplated
         this.startDate = DateExtensions.getDate(new Date());
         this.endDate = DateExtensions.getDate(new Date());
 
-        this.isStartDateDisabled = ko.observable(true);
-        this.isEndDateDisabled = ko.observable(true);
+        this.isStartDateDisabled = ko.observable(false);
+        this.isEndDateDisabled = ko.observable(false);
     }
 
     public onReady(element: HTMLElement): void {

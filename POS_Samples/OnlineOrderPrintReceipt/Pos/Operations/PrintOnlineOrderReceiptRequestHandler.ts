@@ -1,6 +1,6 @@
 ﻿import { ExtensionOperationRequestType, ExtensionOperationRequestHandlerBase } from "PosApi/Create/Operations";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
-import OnlineOrderReceiptService from "../Services/OnlineOrderReceiptService";
+//import OnlineOrderReceiptService from "../Services/OnlineOrderReceiptService";
 import PrintOnlineOrderReceiptRequest from "./PrintOnlineOrderReceiptRequest";
 import PrintOnlineOrderReceiptResponse from "./PrintOnlineOrderReceiptResponse";
 import SearchTransactionsDialog from "../Controls/Dialogs/SearchTransactionsDialog";
@@ -16,8 +16,7 @@ export default class PrintOnlineOrderReceiptRequestHandler<TResponse extends Pri
 
     public executeAsync(request: PrintOnlineOrderReceiptRequest<TResponse>): Promise<ClientEntities.ICancelableDataResult<TResponse>> {
 
-        let onlineOrderReceiptService: OnlineOrderReceiptService = new OnlineOrderReceiptService(this.context);
-
+        //let onlineOrderReceiptService: OnlineOrderReceiptService = new OnlineOrderReceiptService(this.context);
         let response: PrintOnlineOrderReceiptResponse = new PrintOnlineOrderReceiptResponse();
 
         //Debounce
@@ -29,11 +28,12 @@ export default class PrintOnlineOrderReceiptRequestHandler<TResponse extends Pri
         let dialog: SearchTransactionsDialog = new SearchTransactionsDialog();
         return dialog.open().then(async (searchCriteria: ProxyEntities.TransactionSearchCriteria) => {
             if (!ObjectExtensions.isNullOrUndefined(searchCriteria)) {
-                //this.timerId = setInterval(async (): Promise<void> => {
-                   let clientReq: OnlineOrderReceiptPrintClientRequest<OnlineOrderReceiptPrintClientResponse> = new OnlineOrderReceiptPrintClientRequest("", searchCriteria);
-                   await this.context.runtime.executeAsync(clientReq);
-                   await onlineOrderReceiptService.processByAsyncAwait(searchCriteria);
-                //}, 15000);
+                this.timerId = setInterval(async (): Promise<void> => {
+                    let clientReq: OnlineOrderReceiptPrintClientRequest<OnlineOrderReceiptPrintClientResponse> = new OnlineOrderReceiptPrintClientRequest("", searchCriteria);
+                    console.log("Online Order Receipt Print Job is starting, and it will search order every 20 seconds and print them!!!!");
+                    await this.context.runtime.executeAsync(clientReq);
+                   // await onlineOrderReceiptService.processByAsyncAwait(searchCriteria);
+                }, 20000);
 
                 localStorage.setItem(this.PrintOnlineOrderReceiptTimerId, this.timerId.toString());
             }

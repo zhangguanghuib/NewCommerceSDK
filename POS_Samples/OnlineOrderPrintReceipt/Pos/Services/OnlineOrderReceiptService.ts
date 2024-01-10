@@ -56,7 +56,6 @@ export default class OnlineOrderReceiptService {
     }
 
     public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
-
         let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
             new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
 
@@ -86,13 +85,11 @@ export default class OnlineOrderReceiptService {
     }
 
     public async processByAsyncAwait(searchCriteria: ProxyEntities.TransactionSearchCriteria): Promise<void> {
-
         let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
             new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
 
         let response: ClientEntities.ICancelableDataResult<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> = await this._context.runtime.executeAsync(request);
         let transactions: ProxyEntities.Transaction[] = response.data.result;
-
         transactions.forEach(async (trans: ProxyEntities.Transaction) => {
             try {
                 let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
