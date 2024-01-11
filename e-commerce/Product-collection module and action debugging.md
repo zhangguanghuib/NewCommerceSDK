@@ -1,4 +1,4 @@
-# Dynamics 365 Commerce Customer Migration Tool
+# Dynamics 365 e-Commerce product-collection and data action debugging tips 
 **Important:** Due to the nature of data being handled for migration, it is highly recommended to set up and execute the following Tooling only on machines and networks that meet your company’s security protocol for sensitive information.
 
 The tool provided exhibits how an Azure Application can be used to make Graph API calls to populate AAD B2C and generate a linking reference in Dynamics Commerce to the customer account records. If starting with the customer data export from Dynamics Commerce, the exported data can be transformed and used with the migration tool to create B2C Records. Those records must then be linked in Dynamics to connect the created B2C record with the existing customer account record.
