@@ -1,5 +1,5 @@
 # Dynamics 365 e-Commerce product-collection and data action debugging tips 
-**Important:** product-collection is the e-commerce module that shows the product list from recommendation service, this docs showcases how to configure this module to show it on e-Commerce site,  and how to debug the underlying code to understand the logic before you want to customize it.
+Product-collection is the e-commerce module that shows the product list from recommendation service, this docs showcases how to configure this module to show it on e-Commerce site,  and how to debug the underlying code to understand the logic before you want to customize it.
 
 
 ## Configuration Steps for Graph API
