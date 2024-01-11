@@ -33,7 +33,7 @@ Product-collection is the e-commerce module that shows the product list from rec
 ### Customization suggestion:
 1. Product-collection:
    In the product-collection, after products returns from data action, customer can add logic to customize the products
-2. CRT: 
+2. CRT side,  can customize the below request:<br/> 
    <img width="794" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d4e28e8-60be-45f8-a601-b423143353c4">
 
 
