@@ -8,6 +8,7 @@ import { GetDeviceConfigurationClientRequest, GetDeviceConfigurationClientRespon
 import { GetReceiptsClientRequest, GetReceiptsClientResponse, GetSalesOrderDetailsByTransactionIdClientRequest, GetSalesOrderDetailsByTransactionIdClientResponse } from "PosApi/Consume/SalesOrders";
 import { StoreOperations } from "../DataService/DataServiceRequests.g";
 import { PrinterPrintRequest, PrinterPrintResponse } from "PosApi/Consume/Peripherals";
+import Waiter from "../Utils/Waiter";
 
 export default class OnlineOrderReceiptPrintHandler<TResponse extends PrintOnlineOrderReceiptResponse> extends ExtensionRequestHandlerBase<TResponse>
 {
@@ -77,6 +78,9 @@ export default class OnlineOrderReceiptPrintHandler<TResponse extends PrintOnlin
 
         transactions.forEach(async (trans: ProxyEntities.Transaction) => {
             try {
+                let waiter = new Waiter();
+                await waiter.waitOneSecond();
+
                 let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
                     = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>(trans.Id, ProxyEntities.SearchLocation.Local);
 
@@ -125,4 +129,6 @@ export default class OnlineOrderReceiptPrintHandler<TResponse extends PrintOnlin
                 }, Promise.resolve({ canceled: true }));
             });
     }
+
+
 }
