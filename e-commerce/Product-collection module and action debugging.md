@@ -24,7 +24,7 @@ Product-collection is the e-commerce module that shows the product list from rec
 2. Product-list-hydrator:
    <img width="1298" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/05dddade-e6af-44fe-a48d-40a626b6df5c">
 3.Products-by-recommendation:
-  <img width="1313" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9fc543a2-2787-4336-a8cf-364c6f4196a5">
+<img width="1312" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/32ad9d5a-f032-424d-a530-9f32b6bed358">
 4.Products Data Actions:
 <img width="1303" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/65ffb2ee-bfdf-4e61-93d0-ad0d32aaf65a">
 5.Finally it will go to ProductsController in retail server:
