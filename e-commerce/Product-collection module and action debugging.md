@@ -13,19 +13,10 @@ Product-collection is the e-commerce module that shows the product list from rec
 5.Open the url, and you will see the page shows some products in it:
   <img width="1334" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cc2b34b5-df0c-42ea-908d-1377c3751d58">
 
-### Create the Application:
-
-1. Sign in to the Azure portal.
-2. Choose your Azure AD B2C tenant by selecting your account in the top right corner of the page.
-3. In the left-hand navigation pane, choose **All Services**, click **App Registrations**, and click **Add**.
-4. Follow the prompts and create a new application.
-    1. Select **Web App/API** as the Application Type.
-    2. Provide **any Sign-on URL** (e.g. https://B2CGraphAPI) as it's not relevant for this example
-Provide any Sign-on URL (e.g. https://B2CGraphAPI) as it's not relevant for this example.
-
-5. The application will now show up in the list of applications, click on it to obtain the **Application ID** (also known as Client ID). Copy it as you'll need it for **“B2CClientId”** in user migration configuration.
-6. In the Settings menu, click **Keys**.
-7.	In the **Passwords** section, enter the key description and select a duration, and then click **Save**. Copy it as you will need it for **“B2CClientSecret”** in user migration configuration.
+### Debug Tips:
+**Important:**  Because e-Commerce utilized the Node-Server Side Rendering to reduce the while-screen time,  so the Typescript code outside SSK modules is not able to debug,  in order to debug these kind of code,  you need make sure:
+1. You have the Site Builder permission
+2. Append ?setswitch=node_lazyload_all:1 to e-Commerce URL to enable lazy load all.
 
 ### Update permissions for the application:
 1.	Continuing in the Azure portal's App Registrations menu, select your application.
