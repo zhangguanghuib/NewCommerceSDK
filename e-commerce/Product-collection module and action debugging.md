@@ -1,7 +1,5 @@
 # Dynamics 365 e-Commerce product-collection and data action debugging tips 
-**Important:** Due to the nature of data being handled for migration, it is highly recommended to set up and execute the following Tooling only on machines and networks that meet your company’s security protocol for sensitive information.
-
-The tool provided exhibits how an Azure Application can be used to make Graph API calls to populate AAD B2C and generate a linking reference in Dynamics Commerce to the customer account records. If starting with the customer data export from Dynamics Commerce, the exported data can be transformed and used with the migration tool to create B2C Records. Those records must then be linked in Dynamics to connect the created B2C record with the existing customer account record.
+**Important:** product-collection is the e-commerce module that shows the product list from recommendation service, this docs showcases how to configure this module to show it on e-Commerce site,  and how to debug the underlying code to understand the logic before you want to customize it.
 
 
 ## Configuration Steps for Graph API
