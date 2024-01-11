@@ -21,6 +21,20 @@ Product-collection is the e-commerce module that shows the product list from rec
 ### Breakpoints can be put(Take Fabrikam as example):
 1.	In Product-Collection module:
    <img width="1290" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/07ad29b3-0665-47ae-bbdb-ef13e7fd51a0">
+2. Product-list-hydrator:
+   <img width="1298" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/05dddade-e6af-44fe-a48d-40a626b6df5c">
+3.Products-by-recommendation:
+  <img width="1313" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9fc543a2-2787-4336-a8cf-364c6f4196a5">
+4.Products Data Actions:
+<img width="1303" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/65ffb2ee-bfdf-4e61-93d0-ad0d32aaf65a">
+5.Finally it will go to ProductsController in retail server:
+   <img width="761" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4f5e0634-7012-411c-aab4-2b33b433552f">
+
+### Customization suggestion:
+1. Product-collection:
+   In the product-collection, after products returns from data action, customer can add logic to customize the products
+2. CRT: 
+   <img width="794" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d4e28e8-60be-45f8-a601-b423143353c4">
 
 
 
