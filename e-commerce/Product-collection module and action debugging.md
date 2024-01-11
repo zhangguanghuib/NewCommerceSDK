@@ -2,10 +2,17 @@
 Product-collection is the e-commerce module that shows the product list from recommendation service, this docs showcases how to configure this module to show it on e-Commerce site,  and how to debug the underlying code to understand the logic before you want to customize it.
 
 
-## Configuration Steps for Graph API
-Graph API will be used to read & create the user accounts in B2C tenant.
-
-To use the Graph API with your B2C tenant, you need to register an application using the App Registrations service in the Azure portal, NOT Azure AD B2C's Applications menu. The following instructions lead you to the appropriate menu. You can't reuse existing B2C applications that you registered in the Azure AD B2C's Applications menu.
+## Configuration Steps for the module
+1. Go to site builder, create a new page, choose a template,  and put a generic container in the main slot, and then put a prouct-collection module in it, finally it should like below:
+   <img width="1445" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/37f6398b-50b0-458b-a339-fc2561427aa2">
+2. Click the "List Style" button to open the dialog:
+   <img width="1144" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/91821b34-c0fb-4a7a-be43-b30ed365389a">
+3. Choose the editorial list(or any others) and then click next until close the dialog
+   <img width="673" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c8b06916-ffc4-4f53-9578-4903f85cb510">
+4. Go to urls, double if it already exists, or you can create a new one:
+   <img width="1190" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ee7c8206-41a0-40f6-9a78-165bbb6d36da">
+5.Open the url, and you will see the page shows some products in it:
+  <img width="1392" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/feded6ab-e67d-4688-8880-871462f5fe14">
 
 ### Create the Application:
 
