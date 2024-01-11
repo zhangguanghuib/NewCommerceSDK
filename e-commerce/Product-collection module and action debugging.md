@@ -1,7 +1,6 @@
 # Dynamics 365 e-Commerce product-collection and data action debugging tips 
 Product-collection is the e-commerce module that shows the product list from recommendation service, this docs showcases how to configure this module to show it on e-Commerce site,  and how to debug the underlying code to understand the logic before you want to customize it.
 
-
 ## Configuration Steps for the module
 1. Go to site builder, create a new page, choose a template,  and put a generic container in the main slot, and then put a prouct-collection module in it, finally it should like below:
    <img width="1445" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/37f6398b-50b0-458b-a339-fc2561427aa2">
@@ -12,7 +11,7 @@ Product-collection is the e-commerce module that shows the product list from rec
 4. Go to urls, double if it already exists, or you can create a new one:
    <img width="1190" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ee7c8206-41a0-40f6-9a78-165bbb6d36da">
 5.Open the url, and you will see the page shows some products in it:
-  <img width="1392" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/feded6ab-e67d-4688-8880-871462f5fe14">
+  <img width="1334" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cc2b34b5-df0c-42ea-908d-1377c3751d58">
 
 ### Create the Application:
 
