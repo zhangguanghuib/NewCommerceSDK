@@ -11,7 +11,7 @@
 ```
 Save it as config.xml
 
-2.  Prepare power-shell script like
+2.  Prepare power-shell script like below and save it as deployCSU.ps1
 ```console
 # Load the XML configuration file
 [xml]$config = Get-Content -Path 'config.xml'
