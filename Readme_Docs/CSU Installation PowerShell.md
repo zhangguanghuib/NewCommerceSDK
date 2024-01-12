@@ -12,7 +12,7 @@
 Save it as config.xml
 
 2.  Prepare power-shell script like
-```ps
+```console
 # Load the XML configuration file
 [xml]$config = Get-Content -Path 'config.xml'
 
