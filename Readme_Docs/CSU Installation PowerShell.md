@@ -35,6 +35,10 @@ Write-Host "Command: $$command"
 Invoke-Expression -Command:$command
 ```
 
+3. The folder run script should like this:
+<img width="559" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01f27f2a-3f7f-4509-9d83-841c1125caaa">
+
+
 
 
 
