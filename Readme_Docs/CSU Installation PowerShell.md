@@ -12,7 +12,7 @@
 Save it as config.xml
 
 2.  Prepare power-shell script like
-3.  ```
+```
     # Load the XML configuration file
 [xml]$config = Get-Content -Path 'config.xml'
 
@@ -33,7 +33,7 @@ Write-Host "Command: $$command"
 
 # Execute the command
 Invoke-Expression -Command:$command
-    ```
+```
 
 
 
