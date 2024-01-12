@@ -20,6 +20,11 @@
       "requestHandlers": [
       ],
       "views": {
+        "PaymentView": {
+          "appBarCommands": [
+            { "modulePath": "ViewExtensions/Payment/PaymentViewCommand" }
+          ]
+        },
         "ShowJournalView": {
           "appBarCommands": [
             { "modulePath": "ViewExtensions/ShowJournal/DownloadDocumentCommand" },
