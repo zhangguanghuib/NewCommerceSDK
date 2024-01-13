@@ -1,61 +1,44 @@
-This document is to demonstrate how to configure an IIS-Hosted CSU in local environment with <b>One Single Azure Application</b> for：
-- Retail Server
-- Cloud POS
-- Async Client<br/>
+# This document is to demonstrate install sealed CSU by PowerShell:
 
-More official document can be found from:
-- [How to configure CPOS to use your own Azure AD application](https://community.dynamics.com/ax/b/axforretail/posts/how-to-point-cpos-to-use-your-own-azure-ad-application)<br>
-- [Introduction to Commerce Sealed Installers](https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers)<br/>
+1. Please create a xml file that contains Client Id and ThumbPrint
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Thumbprint>***</Thumbprint>
+	<ClientId>***</ClientId>
+</Configuration>
 
-Steps:<br/>
-1. Open [Azure portal](https://aad.portal.azure.com/), and create a new App Registrations, give it a name like CSUServer, and Supported Account Types - My Orgnization Only:
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/52e17e84-eab0-4193-bc4a-8fdf9c28e46f)
-2. Expose an API->Add a scope:
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8ea249b3-ebec-45a5-9441-80a6aee46976)
-3. API Permissions:
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fb973385-9be8-4f3f-b60b-c99ab76cf1aa)
-   And choose the API exposed in last step<br/>:
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1a3a1f73-78bc-476c-a4f2-f336b3ba8677)
-4. Authentication->Add a platform->Single page application:->Redrirect URL->Input CPOS  URL from Channel Profile<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/976af717-f045-4182-a3b2-7b18c58c019f)
-5. Upload certification (CER file):<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50b8e8e9-7c6a-4357-84a5-2386a3523f0b)
-6.  Go to HQ, create a Channel profile:<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e620b6dc-ce12-4140-bda2-a84f3fb1b065)
-7. Set the store with new channel profile:<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/32c93da7-b7f3-40b6-9c37-6e750cc498a1)
-8. Create a channel database, add the required channel, this steps has nothing special:<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bbd28732-6030-4df0-8b36-a41e54548d81)
-9. Record the Application Id(Client Id) we created into the below form(previously it is called Microsoft Azure Application):<br>
-    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f761f3bc-059e-49da-b2b0-81f504140af5)
-10.  Commerce Shared Parameters form->Identity provider:<br/>
-    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ff80dbe9-f06f-44f2-878c-642827d029f5)
-    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e5b6c4fe-0ff7-4e00-a60f-a8229c20ae84)
-11.  Download the channel database configuration xml file,  nothing needs be channged:<br/>
-     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d8bbd46-4fba-450f-acd9-8550d3990bce)<br/>
-12.  Run command to install CSU, please make sure the <ThumbprintOfCertificate> and <SingleAppIdCreated> are same as we created:<br/>
-    ```
-    CommerceStoreScaleUnit.StoreSystemSetup.exe install --port 443 
-      --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
-      --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
-      --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<ThumbprintOfCertificate>" 
-      --RetailServerAadClientId "<SingleAppIdCreated>" 
-      --RetailServerAadResourceId "api://<SingleAppIdCreated>" 
-      --CposAadClientId "<SingleAppIdCreated>" 
-      --AsyncClientAadClientId "<SingleAppIdCreated>" 
-      --config StoreSystemSetup.xml 
-      --TrustSqlServerCertificate 
-      --SkipScaleUnitHealthCheck 
-      --SqlServerName "<MachineName>\SQLEXPRESS"  
-    ```
-13. Once the installation is done, please check the IIS:<br/>
-    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8a116394-7917-4380-bf59-eac847a564c8)
+```
+Save it as config.xml
 
-14. Run 9999 full sync for the newly-created channel database and make sure all download sessions got applied:<br/>
-    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/eb056519-7992-4a11-b01f-8e345f0f02b0)
-    
-15.  You can see the CPOS in Store Commerce App got activated successfully:<br/>
-     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/28659a44-9ecd-467e-8353-be83e0481a39)
+2.  Prepare power-shell script like below and save it as deployCSU.ps1
+```console
+# Load the XML configuration file
+[xml]$config = Get-Content -Path 'config.xml'
+
+# Extract the Thumbprint and ClientId
+$thumbprint = $config.Configuration.Thumbprint
+$clientId = $config.Configuration.ClientId
+
+Write-Host "Thumbprint: $thumbprint"
+Write-Host "ClientId: $clientId"
+
+$command = '.\CommerceStoreScaleUnitSetup.exe install --port 443 --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --RetailServerAadClientId "<ClientId>" --RetailServerAadResourceId "api://<ClientId>" --CposAadClientId "<ClientId>" --AsyncClientAadClientId "<ClientId>" --config StoreSystemSetup.xml --TrustSqlServerCertificate --SkipScaleUnitHealthCheck --SqlServerName ".\SQLEXPRESS"'
+
+# Replace the placeholders with the actual values
+$command = $command.Replace('<Thumbprint>', $thumbprint)
+$command = $command.Replace('<ClientId>', $clientId)
+
+Write-Host "Command: $$command"
+
+# Execute the command
+Invoke-Expression -Command:$command
+```
+
+3. The folder run script should like this:
+<img width="559" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01f27f2a-3f7f-4509-9d83-841c1125caaa">
+
+
 
 
 
