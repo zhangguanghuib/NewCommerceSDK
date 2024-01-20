@@ -11,6 +11,7 @@ This sample showcases a sample Store Commerce extension that prints a QR code on
     - Language ID: en-us
     - Text ID: 10001
     - Text: QR Code
+    <img width="646" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/087e2cd4-431a-43c0-b2f9-b2b161b35377">
 5. On the Action Pane, select Save to save your changes.
 6. Go to Retail and Commerce > Channel setup > POS setup > POS profiles > Custom fields.
 7. On the Action Pane, select Add to add a new custom field, and specify the following information:
