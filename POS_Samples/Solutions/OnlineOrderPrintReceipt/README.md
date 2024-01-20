@@ -24,16 +24,16 @@
 ```
 ## Technical Details
 ### SQL
-- table: [ext].[CONTOSORETAILTRANSACTIONTABLE]
+- table: [ext].[CONTOSORETAILTRANSACTIONTABLE]<br/>
   Once the receipt got printed for the transaction,  one record will be created in this table to avoid it will be printed again
-- Store Procedure: [ext].[GETPRINTEDTRANSACTIONS]
+- Store Procedure: [ext].[GETPRINTEDTRANSACTIONS]<br/>
   Among the transaction list,  find all the transactions with receipt printed
-- Store Procedure: [ext].[SETTRANSACTIONPRINTED]
+- Store Procedure: [ext].[SETTRANSACTIONPRINTED]<br/>
   Once receipt got printed,  set the transaction IsReceiptPrinted in the table [ext].[CONTOSORETAILTRANSACTIONTABLE]
 ### Retail Server
--  SearchJournalTransactionsWithUnPrintReceipt
+-  SearchJournalTransactionsWithUnPrintReceipt<br/>
    Based on the SearchCriteria, find all the transactions whose receipt has not been printed yet
--  SetTransactionPrinted
+-  SetTransactionPrinted<br/>
   Set one single transaction IsReceiptPrinted as YES
 ### POS
 
