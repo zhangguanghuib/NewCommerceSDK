@@ -22,11 +22,10 @@
     delete from ext.CONTOSORETAILTRANSACTIONTABLE
     select * from ext.CONTOSORETAILTRANSACTIONTABLE
 ```
- 
-## APIs and extension points used
-### "PosApi/Create/Dialogs"
+## Technical Details
+### SQL
 
+### Retail Server
 
-### "PosApi/Create/Views"
-- CustomViewControllerBase:
+### POS
 
