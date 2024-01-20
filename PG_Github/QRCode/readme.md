@@ -42,6 +42,10 @@ This sample showcases a sample Store Commerce extension that prints a QR code on
   <img width="460" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6e540b12-ac41-47bc-b7c7-b8576a4c3805"> <br/>
   Then using the below code to convert PNG to BMP:
   ```cs
+    using SixLabors.ImageSharp.PixelFormats;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.Formats.Bmp;
+
     public static string ConvertBase64PngToBase64JpgImageSharp(string base64Png)
     {
         byte[] imageBytes = Convert.FromBase64String(base64Png);
