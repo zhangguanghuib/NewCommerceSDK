@@ -10,10 +10,12 @@
   <img width="285" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/410547ec-14d1-4ae2-a6cf-685ea3d3beb4">
 
 ## Running the sample
-- Logon POS, find the button, click
+- Logon POS, find the button, click<br/>
   <img width="484" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9c899c92-fef4-45ae-bcbe-27c037f5b1e4">
-- Specify the start date and end date you wish the online orders created in this period:
+- Specify the start date and end date you wish the online orders created in this period:<br/>
   <img width="1489" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a932d652-3fa7-4bd9-8b9d-00ed72d72d6f">
+- In the simutor, you will see the receipt will be printed one by one:<br/>
+<img width="1176" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c3cda0f0-b8c6-4943-bb52-891635d3127a">
 
  
 ## APIs and extension points used
