@@ -42,9 +42,8 @@
   In the operation, an interval will send OnlineOrderReceiptPrintClientRequest every 20 seconds:<br/>
   
   ```ts
-   let response: PrintOnlineOrderReceiptResponse = new PrintOnlineOrderReceiptResponse();
+  let response: PrintOnlineOrderReceiptResponse = new PrintOnlineOrderReceiptResponse();
 
- //Debounce
  if (localStorage.getItem(this.PrintOnlineOrderReceiptTimerId)) {
      this.timerId = Number(localStorage.getItem(this.PrintOnlineOrderReceiptTimerId));
      clearInterval(this.timerId);
