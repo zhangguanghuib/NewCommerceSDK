@@ -40,6 +40,7 @@
   <img width="238" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8649d5d5-d3a1-4ac3-bc87-b84e2cf8cc8e">
   <br/>
   In the operation, an interval will send OnlineOrderReceiptPrintClientRequest every 20 seconds:<br/>
+  
   ```ts
    let response: PrintOnlineOrderReceiptResponse = new PrintOnlineOrderReceiptResponse();
 
@@ -70,7 +71,7 @@
          data: response
      };
  });
-  ```
+```
   
 
 
