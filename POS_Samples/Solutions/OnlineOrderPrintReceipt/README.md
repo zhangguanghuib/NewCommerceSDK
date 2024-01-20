@@ -36,4 +36,41 @@
 -  SetTransactionPrinted<br/>
   Set one single transaction IsReceiptPrinted as YES
 ### POS
+- Operation <br/>
+  <img width="238" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8649d5d5-d3a1-4ac3-bc87-b84e2cf8cc8e">
+  <br/>
+  In the operation, an interval will send OnlineOrderReceiptPrintClientRequest every 20 seconds:<br/>
+  ```ts
+   let response: PrintOnlineOrderReceiptResponse = new PrintOnlineOrderReceiptResponse();
+
+ //Debounce
+ if (localStorage.getItem(this.PrintOnlineOrderReceiptTimerId)) {
+     this.timerId = Number(localStorage.getItem(this.PrintOnlineOrderReceiptTimerId));
+     clearInterval(this.timerId);
+ }
+
+ let dialog: SearchTransactionsDialog = new SearchTransactionsDialog();
+ return dialog.open().then(async (searchCriteria: ProxyEntities.TransactionSearchCriteria) => {
+     if (!ObjectExtensions.isNullOrUndefined(searchCriteria)) {
+         this.timerId = setInterval(async (): Promise<void> => {
+             let clientReq: OnlineOrderReceiptPrintClientRequest<OnlineOrderReceiptPrintClientResponse> =
+                 new OnlineOrderReceiptPrintClientRequest(this.context.logger.getNewCorrelationId(), searchCriteria);
+
+             console.log("Online Order Receipt Print Job is starting, and it will search order every 20 seconds and print them!!!!");
+             await this.context.runtime.executeAsync(clientReq);
+            // await onlineOrderReceiptService.processByAsyncAwait(searchCriteria);
+         }, 20000);
+
+         localStorage.setItem(this.PrintOnlineOrderReceiptTimerId, this.timerId.toString());
+     }
+     return Promise.resolve();
+ }).then((): ClientEntities.ICancelableDataResult<TResponse> => {
+     return <ClientEntities.ICancelableDataResult<TResponse>>{
+         canceled: false,
+         data: response
+     };
+ });
+  ```
+  
+
 
