@@ -30,7 +30,7 @@
    </li>
    <li>
       All source code can be found from:<br/>
-      https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Return.Restriction/Pos/ViewExtensions/Cart
+      https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/QtyInlineUpdate/Pos/ViewExtensions/Cart
    </li>
 </ol>
    
