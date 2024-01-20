@@ -31,6 +31,9 @@
 - Store Procedure: [ext].[SETTRANSACTIONPRINTED]
   Once receipt got printed,  set the transaction IsReceiptPrinted in the table [ext].[CONTOSORETAILTRANSACTIONTABLE]
 ### Retail Server
-
+-  SearchJournalTransactionsWithUnPrintReceipt
+   Based on the SearchCriteria, find all the transactions whose receipt has not been printed yet
+-  SetTransactionPrinted
+  Set one single transaction IsReceiptPrinted as YES
 ### POS
 
