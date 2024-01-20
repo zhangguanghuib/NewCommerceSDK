@@ -18,6 +18,7 @@ This sample showcases a sample Store Commerce extension that prints a QR code on
     - Name: QRCODESAMPLE
     - Type: Receipt
     - Caption text ID: 10001
+    <img width="463" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/06f9a5ab-f416-466d-80f2-31d486d46b98">
 8. On the Action Pane, select Save to save your changes.
 9. Go to Retail and Commerce > Channel setup > POS setup > POS profiles > Receipt formats.
 10. Select an existing or create a new receipt format and then select Designer on the Action Pane.
