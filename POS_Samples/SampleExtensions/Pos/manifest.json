@@ -45,9 +45,16 @@
         },
         "ShowJournalView": {
           "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ]
+        },
+        "FulfillmentLineView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/FulfillmentLine/FulfillmentLineCommand"
+            }
+          ]
         }
-      }
-    },
+        }
+      },
     "create": {
       "views": [
         {
@@ -59,6 +66,10 @@
         }
       ],
       "templatedDialogs": [
+        {
+          "htmlPath": "Controls/BarcodeMsrDialog/BarcodeMsrDialog.html",
+          "modulePath": "Controls/BarcodeMsrDialog/BarcodeMsrDialog"
+        }
       ]
     }
   }
