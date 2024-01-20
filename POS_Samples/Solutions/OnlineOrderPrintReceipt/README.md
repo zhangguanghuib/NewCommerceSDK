@@ -70,6 +70,45 @@
      };
  });
 ```
-  
+- Request Handler <br/>
+<img width="231" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f188f837-3b1a-4366-b345-0f184f48e2d0"><br/>
+In the request handler, we have two ways to implement GetReceipt and Print Receipt One by One:<br/>
+
+1. Async & Await:
+```js
+ public async processByAsyncAwait(searchCriteria: ProxyEntities.TransactionSearchCriteria): Promise<void> {
+     let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
+         new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
+
+     let response: ClientEntities.ICancelableDataResult<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> = await this.context.runtime.executeAsync(request);
+     let transactions: ProxyEntities.Transaction[] = response.data.result;
+
+     transactions.forEach(async (trans: ProxyEntities.Transaction) => {
+         try {
+             let waiter = new Waiter();
+             await waiter.waitOneSecond();
+
+             let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
+                 = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>(trans.Id, ProxyEntities.SearchLocation.Local);
+
+             let res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse> = await this.context.runtime.executeAsync(req);
+
+             let recreatedReceipts: ProxyEntities.Receipt[] = await this.recreateSalesReceiptsForSalesOrder(res.data.result);
+
+             let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
+             await this.context.runtime.executeAsync(printRequest);
+
+             let setTransactionPrinted: StoreOperations.SetTransactionPrintedRequest<StoreOperations.SetTransactionPrintedResponse>
+                 = new StoreOperations.SetTransactionPrintedRequest(trans);
+             await this.context.runtime.executeAsync(setTransactionPrinted);
+         }
+         finally {
+             console.log(`transaction ${trans.Id} receipt printed is done`);
+         }
+     });
+ }
+```
+
+
 
 
