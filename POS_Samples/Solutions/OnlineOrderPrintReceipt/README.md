@@ -17,10 +17,10 @@
 - In the simutor, you will see the receipt will be printed one by one:<br/>
 <img width="1176" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c3cda0f0-b8c6-4943-bb52-891635d3127a">
 - From test purpose, you can run these two SQL in Channel DB to reset the status:<br/>
-  ```
+```
     delete from ext.CONTOSORETAILTRANSACTIONTABLE
     select * from ext.CONTOSORETAILTRANSACTIONTABLE
-  ```
+```
  
 ## APIs and extension points used
 ### "PosApi/Create/Dialogs"
