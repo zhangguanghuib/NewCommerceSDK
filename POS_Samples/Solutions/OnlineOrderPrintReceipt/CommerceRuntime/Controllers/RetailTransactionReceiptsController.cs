@@ -27,24 +27,12 @@ namespace Contoso.GasStationSample.CommerceRuntime
             var request = new SearchJournalTransactionsServiceRequest(searchCriteria, queryResultSettings);
             var response = await context.ExecuteAsync<SearchJournalTransactionsServiceResponse>(request).ConfigureAwait(false);
 
-            //IEnumerable<Transaction> transactions = response.Transactions.Where<Transaction>(t =>
-            //{
-            //    return !(t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED"))) || t.ExtensionProperties.Any(p => p.Key.Equals("ISRECIPTPRINTED") && p.Value.IntegerValue.Equals(0));
-            //});
-
             // Get All Transaction IDs whose Receipt has already printed:
             List<string> transactionIDListOrig = response.Transactions.Select(transaction => transaction.Id).ToList<string>();
             GetTransactionListDataRequest getTransactionIDListRequest = new GetTransactionListDataRequest(transactionIDListOrig, QueryResultSettings.AllRecords);
             var getTransactionIDListDataResponse = await context.ExecuteAsync<GetTransactionListDataResponse>(getTransactionIDListRequest).ConfigureAwait(false);
             List<string> printedTransList = getTransactionIDListDataResponse.TransactionList.Select(transaction => transaction.Id).ToList<string>();
             List<string> unPrintedTransactionIDList = transactionIDListOrig.Except(printedTransList).ToList();
-
-
-            //// Get all transaction ids with Receipt Printed 
-            //List<string> transactionIDListPrinted = getTransactionIDListDataResponse.TransactionIDList.ToList<string>();
-
-            //// Get all transaction ids with Receipt Not Printed 
-            //List<string> unPrintedTransactionIDList = transactionIDListOrig.Where(t1 => !transactionIDListPrinted.Any(t2 => t2.Equals(t1))).ToList();
 
             IEnumerable<Transaction> transactions = response.Transactions.Where<Transaction>(t =>
             {

@@ -29,7 +29,9 @@ export default class PrintOnlineOrderReceiptRequestHandler<TResponse extends Pri
         return dialog.open().then(async (searchCriteria: ProxyEntities.TransactionSearchCriteria) => {
             if (!ObjectExtensions.isNullOrUndefined(searchCriteria)) {
                 this.timerId = setInterval(async (): Promise<void> => {
-                    let clientReq: OnlineOrderReceiptPrintClientRequest<OnlineOrderReceiptPrintClientResponse> = new OnlineOrderReceiptPrintClientRequest("", searchCriteria);
+                    let clientReq: OnlineOrderReceiptPrintClientRequest<OnlineOrderReceiptPrintClientResponse> =
+                        new OnlineOrderReceiptPrintClientRequest(this.context.logger.getNewCorrelationId(), searchCriteria);
+
                     console.log("Online Order Receipt Print Job is starting, and it will search order every 20 seconds and print them!!!!");
                     await this.context.runtime.executeAsync(clientReq);
                    // await onlineOrderReceiptService.processByAsyncAwait(searchCriteria);
