@@ -24,7 +24,12 @@
 ```
 ## Technical Details
 ### SQL
-
+- table: [ext].[CONTOSORETAILTRANSACTIONTABLE]
+  Once the receipt got printed for the transaction,  one record will be created in this table to avoid it will be printed again
+- Store Procedure: [ext].[GETPRINTEDTRANSACTIONS]
+  Among the transaction list,  find all the transactions with receipt printed
+- Store Procedure: [ext].[SETTRANSACTIONPRINTED]
+  Once receipt got printed,  set the transaction IsReceiptPrinted in the table [ext].[CONTOSORETAILTRANSACTIONTABLE]
 ### Retail Server
 
 ### POS
