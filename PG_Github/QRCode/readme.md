@@ -38,7 +38,7 @@ This sample showcases a sample Store Commerce extension that prints a QR code on
 - [Generate QR codes and print them on receipts](https://learn.microsoft.com/en-us/dynamics365/commerce/localizations/ind-generate-qr-code-print-receipt)
 - Because of System.Drawing is not supported by .Net Standard, so the recommended way is using ImageSharp:
   https://github.com/SixLabors/ImageSharp
-- So firstly Nuget Package ImageSharp will be added to the project:
+- So firstly Nuget Package ImageSharp will be added to the project:<br/>
   <img width="460" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6e540b12-ac41-47bc-b7c7-b8576a4c3805"> <br/>
   Then using the below code to convert PNG to BMP:
   ```cs
