@@ -137,8 +137,9 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
                 return _prev.then(() => _cur);
             }, Promise.resolve({ canceled: true }));
         });
-}
+   }
 ```
+More techinical details can be found from MDN
 
 
 
