@@ -1,4 +1,4 @@
-<img width="486" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2f085e92-d601-4b14-b703-4092ed27f78d"># Printing QR Code Sample
+# Printing QR Code Sample
 ## Overview
 This sample showcases a sample Store Commerce extension that prints a QR code on the receipt. The QR code can be scanned by a mobile device to open the receipt in the browser.
 
