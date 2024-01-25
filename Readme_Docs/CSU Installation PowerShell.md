@@ -48,7 +48,8 @@ Invoke-Expression -Command:$command
 4. It is verified working fine in my environment:<br/>
    Run it in powershell: <img width="276" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3385e8ff-639d-480b-b943-77378fa9e7ef"><br/>
 
-   <img width="1231" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9cad6c58-93dc-4f84-a3e8-9aef963ac2b6">
+   <img width="900" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5b896ea2-052e-4a20-9652-fae85494863d">
+
 
 
 
