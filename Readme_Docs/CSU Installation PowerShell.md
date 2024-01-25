@@ -1,4 +1,7 @@
-# This document is to demonstrate install sealed CSU by PowerShell:
+# This document is to demonstrate install sealed CSU by PowerShell.
+
+## The benifit is Thumbprint and Client is put into the config file and then you don't replace the same thumbprint and client id in the command multiple time, that will help avoid mistakes.
+## If you have new Thumbprint and Client, you will need replace one and feel quite convenient.
 
 1. Please create a xml file that contains Client Id and ThumbPrint
 ```xml
@@ -41,6 +44,10 @@ Invoke-Expression -Command:$command
    - CSU config file: StoreSystemSetup.xml
    - CSU installer: CommerceStoreScaleUnitSetup.exe
 <img width="625" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e66d530f-4b56-4be5-8980-57fefd1d1cbc">
+
+4. It is verified working fine in my environment:
+   <img width="1231" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9cad6c58-93dc-4f84-a3e8-9aef963ac2b6">
+
 
 
 
