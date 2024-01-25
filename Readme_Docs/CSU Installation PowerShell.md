@@ -1,6 +1,6 @@
 # This document is to demonstrate install sealed CSU by PowerShell.
 
-- ## The benifit is Thumbprint and Client is put into the config file and then you don't replace the same thumbprint and client id in the command multiple time, that will help avoid mistakes.
+- ## The benifit is : Thumbprint and Client is put into the config file and then you don't replace the same thumbprint and client id in the command multiple time, that will help avoid mistakes.
 - ## If you have new Thumbprint and Client, you will need replace one and feel quite convenient.
 
 1. Please create a xml file that contains Client Id and ThumbPrint
