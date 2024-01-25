@@ -41,8 +41,8 @@ Invoke-Expression -Command:$command
 3. The folder run script should like this:
    - Config file with Thumbprint and Client id: config.xml
    - PowerShell Script: deployCSU.ps1
-   - CSU config file: StoreSystemSetup.xml
-   - CSU installer: CommerceStoreScaleUnitSetup.exe
+   - CSU config file, download from HQ  channel database: StoreSystemSetup.xml
+   - CSU installer, download from LCS shared library: CommerceStoreScaleUnitSetup.exe
 <img width="625" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e66d530f-4b56-4be5-8980-57fefd1d1cbc">
 
 4. It is verified working fine in my environment:
