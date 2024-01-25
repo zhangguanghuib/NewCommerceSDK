@@ -36,6 +36,10 @@ Invoke-Expression -Command:$command
 ```
 
 3. The folder run script should like this:
+   - Config file with Thumbprint and Client id
+   - PowerShell Script
+   - CSU config file
+   - CSU installer
 <img width="625" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e66d530f-4b56-4be5-8980-57fefd1d1cbc">
 
 
