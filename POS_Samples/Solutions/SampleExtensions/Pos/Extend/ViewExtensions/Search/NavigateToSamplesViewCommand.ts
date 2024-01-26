@@ -1,5 +1,4 @@
-﻿
-import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
+﻿import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import * as SearchView from "PosApi/Extend/Views/SearchView";
 
 export default class NavigateToSimpleExtensionViewCommand extends SearchView.ProductSearchExtensionCommandBase {

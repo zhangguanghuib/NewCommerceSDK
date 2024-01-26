@@ -29,7 +29,7 @@
       "views": {
         "SearchView": {
           "productAppBarCommands": [
-            { "modulePath": "ViewExtensions/Search/NavigateToSimpleExtensionViewCommand" }
+            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" }
           ]
         },
         "CustomerAddEditView": {
@@ -57,6 +57,13 @@
       },
     "create": {
       "views": [
+        {
+          "title": "Samples View",
+          "pageName": "SamplesView",
+          "phonePageName": "SamplesView",
+          "viewDirectory": "Create/Views/",
+          "viewControllerPath": "Create/Views/SamplesView"
+        },
         {
           "title": "TextInputDialogView",
           "pageName": "TextInputDialogView",
