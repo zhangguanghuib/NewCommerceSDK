@@ -8,7 +8,7 @@
   }
   ```
   Please notice here viewName and items is nullable, that means some Item only has viewName, but other item only has items, then two kinds of items can resume the same type.
-  - Secondly define th
+- Secondly define th
 
 
 
