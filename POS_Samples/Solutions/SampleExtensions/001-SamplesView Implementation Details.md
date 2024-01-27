@@ -5,7 +5,7 @@
     label: string;
     viewName?: string;
     items?: ISampleItem[];
-}
+  }
   ```
 
 
