@@ -4,8 +4,8 @@ import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { FulfillmentLineExtensionCommandBase, FulfillmentLinePackingSlipSelectedData, FulfillmentLinesLoadedData, FulfillmentLinesSelectedData, IFulfillmentLineToExtensionCommandMessageTypeMap } from "PosApi/Extend/Views/FulfillmentLineView";
 import { ArrayExtensions, ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
-import BarcodeMsrDialog from "../../Controls/BarcodeMsrDialog/BarcodeMsrDialog";
-import { IBarcodeMsrDialogResult } from "../../Controls/BarcodeMsrDialog/BarcodeMsrDialogTypes";
+import BarcodeMsrDialog from "../../Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialog";
+import { IBarcodeMsrDialogResult } from "../../Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialogTypes";
 
 export default class FulfillmentLineCommand extends FulfillmentLineExtensionCommandBase {
 

@@ -74,8 +74,8 @@
       ],
       "templatedDialogs": [
         {
-          "htmlPath": "Controls/BarcodeMsrDialog/BarcodeMsrDialog.html",
-          "modulePath": "Controls/BarcodeMsrDialog/BarcodeMsrDialog"
+          "htmlPath": "Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialog.html",
+          "modulePath": "Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialog"
         }
       ]
     }
