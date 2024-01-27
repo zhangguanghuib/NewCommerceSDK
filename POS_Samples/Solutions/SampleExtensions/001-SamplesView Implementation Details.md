@@ -15,6 +15,9 @@ From the data you can see:<br/>
   - The second level has lable and viewName
 - Thirdly, in the html:<br/>
   <img width="1380" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2ca60f37-f558-4a6e-b1e6-43035c424428">
+- Then finally it looks like:
+  <img width="897" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0b824c4c-24a2-4f88-a4e2-2bffb51e2cfe">
+
 
 
 
