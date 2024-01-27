@@ -8,9 +8,6 @@ export interface ISampleItem {
     items?: ISampleItem[];
 }
 
-/**
- * The controller for SamplesView.
- */
 export default class SamplesView extends Views.CustomViewControllerBase {
     samplesList: { label: string; items: { label: string; viewName: string; }[]; }[];
 
