@@ -10,13 +10,9 @@ The steps:
    <img width="437" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/29de661e-beed-4c8c-a208-39a67e546d8b">
    <br/>
    Click "OK" button.<br/>
+3. Copy all the imgage folders from Legacy Retail Server:<br/>
+   <img width="850" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d26f970-bc39-4cdd-b922-67be0514349b">
 
-3. The folder run script should like this:
-   - Config file with Thumbprint and Client id: config.xml
-   - PowerShell Script: deployCSU.ps1
-   - CSU config file, download from HQ  channel database: StoreSystemSetup.xml
-   - CSU installer, download from LCS shared library: CommerceStoreScaleUnitSetup.exe
-<img width="625" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e66d530f-4b56-4be5-8980-57fefd1d1cbc">
 
 4. It is verified working fine in my environment:<br/>
    Run it in powershell: <img width="276" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3385e8ff-639d-480b-b943-77378fa9e7ef"><br/>
