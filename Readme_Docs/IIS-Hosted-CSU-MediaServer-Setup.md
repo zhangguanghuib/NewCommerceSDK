@@ -6,31 +6,10 @@ The steps:
 1. Go to IIS, create a new website:<br/>
 <img width="312" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/60915e40-b876-47bd-bd4c-b292742aa8ed">
 <br/>
-
-
-2.  Prepare power-shell script like below and save it as deployCSU.ps1
-```console
-# Load the XML configuration file
-[xml]$config = Get-Content -Path 'config.xml'
-
-# Extract the Thumbprint and ClientId
-$thumbprint = $config.Configuration.Thumbprint
-$clientId = $config.Configuration.ClientId
-
-Write-Host "Thumbprint: $thumbprint"
-Write-Host "ClientId: $clientId"
-
-$command = '.\CommerceStoreScaleUnitSetup.exe install --port 443 --SslCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --AsyncClientCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --RetailServerCertFullPath "store:///My/LocalMachine?FindByThumbprint=<Thumbprint>" --RetailServerAadClientId "<ClientId>" --RetailServerAadResourceId "api://<ClientId>" --CposAadClientId "<ClientId>" --AsyncClientAadClientId "<ClientId>" --config StoreSystemSetup.xml --TrustSqlServerCertificate --SkipScaleUnitHealthCheck --SqlServerName "." --SkipTelemetryCheck --SkipSChannelCheck --TrustSqlServerCertificate'
-
-# Replace the placeholders with the actual values
-$command = $command.Replace('<Thumbprint>', $thumbprint)
-$command = $command.Replace('<ClientId>', $clientId)
-
-Write-Host "Command: $$command"
-
-# Execute the command
-Invoke-Expression -Command:$command
-```
+2.  Input the site name and its Physical path and port:<br/>
+   <img width="437" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/29de661e-beed-4c8c-a208-39a67e546d8b">
+   <br/>
+   Click "OK" button.<br/>
 
 3. The folder run script should like this:
    - Config file with Thumbprint and Client id: config.xml
