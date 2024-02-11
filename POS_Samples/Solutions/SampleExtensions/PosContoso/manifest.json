@@ -13,10 +13,11 @@
   ],
   "components": {
     "resources": {
-      "supportedUICultures": [ "de", "de-CH", "en-US", "fr", "fr-CH" ],
+      "supportedUICultures": [ "de", "en-US", "fr" ],
       "fallbackUICulture": "en-US",
       "culturesDirectoryPath": "Resources/Strings",
-      "stringResourcesFileName": "resources.resjson"
+      "stringResourcesFileName": "resources.resjson",
+      "cultureInfoOverridesFilePath": "Resources/cultureInfoOverrides.json"
     },
     "extend": {
       "header": {
@@ -64,7 +65,7 @@
           }
         }
       }
-    },
+      },
     "create": {
       "views": [
         {

@@ -16,15 +16,26 @@ export default class OnlineOrderReceiptPrintHandler<TResponse extends PrintOnlin
         return OnlineOrderReceiptPrintClientRequest;
     }
 
+    //public executeAsync(request: OnlineOrderReceiptPrintClientRequest<TResponse>): Promise<ClientEntities.ICancelableDataResult<TResponse>> {
+    //    // console.log(request.searchCriteria);
+    //    return this.processByAsyncAwait(request.searchCriteria).then(() => {
+    //        let res: OnlineOrderReceiptPrintClientResponse = new OnlineOrderReceiptPrintClientResponse();
+    //        return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{
+    //            canceled: false,
+    //            data: res
+    //        });
+    //    });   
+    //}
+
     public executeAsync(request: OnlineOrderReceiptPrintClientRequest<TResponse>): Promise<ClientEntities.ICancelableDataResult<TResponse>> {
         // console.log(request.searchCriteria);
-        return this.processByAsyncAwait(request.searchCriteria).then(() => {
+        return this.processByPromiseInSequence(request.searchCriteria).then(() => {
             let res: OnlineOrderReceiptPrintClientResponse = new OnlineOrderReceiptPrintClientResponse();
             return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{
                 canceled: false,
                 data: res
             });
-        });   
+        });
     }
 
     public recreateSalesReceiptsForSalesOrder(salesOrder: ProxyEntities.SalesOrder): Promise<ProxyEntities.Receipt[]> {
@@ -101,11 +112,11 @@ export default class OnlineOrderReceiptPrintHandler<TResponse extends PrintOnlin
         });
     }
 
-    public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
+    public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): Promise<void> {
         let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
             new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
 
-        this.context.runtime.executeAsync(request).then(
+        return this.context.runtime.executeAsync(request).then(
             (response: ClientEntities.ICancelableDataResult<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse>) => {
                 let transactions: ProxyEntities.Transaction[] = response.data.result;
 

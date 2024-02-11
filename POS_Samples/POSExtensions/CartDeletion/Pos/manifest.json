@@ -29,6 +29,11 @@
               "modulePath": "Extend/ViewExtensions/ManageShifts/ManageShiftsUpdCommand"
             }
           ]
+        },
+        "SearchView": {
+          "productAppBarCommands": [
+            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" }
+          ]
         }
       }
     },
