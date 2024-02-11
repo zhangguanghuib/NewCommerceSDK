@@ -21,6 +21,12 @@ The steps:
 6. Browse the site in Browser and make sure all images are visible:<br/>
    <img width="449" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7ec32b6b-14b6-43a9-ab6c-4620301dce3d"><br/>
     <img width="579" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0e8940b2-1f8d-4b25-a7a4-7f0ca254b004">
+7. Set Channel Profile as below:<br/>
+   <img width="595" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8f2ce4bb-b29e-4922-8c07-95eee4d38fdd">
+
+8. Run 9999 job<br/>
+9. Logon to POS,  find product 0001:<br/>
+
 
 
 
