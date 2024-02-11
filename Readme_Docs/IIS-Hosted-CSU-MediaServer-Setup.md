@@ -10,7 +10,7 @@ The steps:
    <img width="437" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/29de661e-beed-4c8c-a208-39a67e546d8b">
    <br/>
    Click "OK" button.<br/>
-3. Copy all the imgage folders from Legacy Retail Server:<br/>
+3. Copy all the images folders from Legacy Retail Server:<br/>
    <img width="850" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6d26f970-bc39-4cdd-b922-67be0514349b"><br/>
 4. Click Directory Browsing:<br/>
   <img width="810" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/67345982-a3af-4b19-8c87-bbd1e6014d85"><br/>
