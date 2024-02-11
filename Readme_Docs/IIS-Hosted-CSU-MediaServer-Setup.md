@@ -25,7 +25,8 @@ The steps:
    <img width="595" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8f2ce4bb-b29e-4922-8c07-95eee4d38fdd">
 
 8. Run 9999 job<br/>
-9. Logon to POS,  find product 0001:<br/>
+9. Logon to POS,  find product 0001, you will find the product images are showing properly:<br/>
+   <img width="1475" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c041b502-6921-4830-b389-742e3c314753">
 
 
 
