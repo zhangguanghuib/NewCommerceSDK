@@ -1,18 +1,12 @@
-# This document is to demonstrate install sealed CSU by PowerShell.
+# This document is to demonstrate IIS-Hosted CSU Media Server Setup.
 
-- ## The benifit is : Thumbprint and Client is put into the config file and then you don't replace the same thumbprint and client id in the command multiple times, that will help avoid mistakes.
-- ## If you have new Thumbprint and Client, you will need replace one and feel quite convenient.
+- ## The background is currently the Sealed-Version CSU installation does not include Media Server Setup, so user need manually set the media server externally or internally.
 
-1. Please create a xml file that contains Client Id and ThumbPrint
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
-	<Thumbprint>***</Thumbprint>
-	<ClientId>***</ClientId>
-</Configuration>
+The steps:
+1. Go to IIS, create a new website:<br/>
+<img width="312" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/60915e40-b876-47bd-bd4c-b292742aa8ed">
+<br/>
 
-```
-Save it as config.xml
 
 2.  Prepare power-shell script like below and save it as deployCSU.ps1
 ```console
