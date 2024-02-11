@@ -15,6 +15,9 @@ The steps:
 4. Click Directory Browsing:<br/>
   <img width="810" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/67345982-a3af-4b19-8c87-bbd1e6014d85"><br/>
   <img width="636" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/95479968-bed2-45e8-abe2-4d82e0743d7f"><br/>
+5.Add a new binding with type https:<br/>
+  <img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3c257247-223c-4ae1-990e-44a4488aa576">
+
 
 
 
