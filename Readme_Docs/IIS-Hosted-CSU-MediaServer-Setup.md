@@ -4,7 +4,7 @@
 
 The steps:
 1. Go to IIS, create a new website:<br/>
-<img width="312" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/60915e40-b876-47bd-bd4c-b292742aa8ed">
+<img width="243" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/003946de-6221-4636-9578-51eaa2d7fec5">
 <br/>
 2.  Input the site name and its Physical path and port:<br/>
    <img width="437" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/29de661e-beed-4c8c-a208-39a67e546d8b">
