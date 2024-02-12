@@ -2,6 +2,7 @@
 import * as ReportDetailsView from "PosApi/Extend/Views/ReportDetailsView";
 import { ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import $ from 'jquery';
 
 export default class ExportToCSVCommand extends ReportDetailsView.ReportDetailsExtensionCommandBase {
 
@@ -28,13 +29,15 @@ export default class ExportToCSVCommand extends ReportDetailsView.ReportDetailsE
     }
 
     protected execute(): void {
-        this.context.logger.logInformational("Report title: " + JSON.stringify(this._reportTitle));
-        this.context.logger.logInformational("Report Id: " + JSON.stringify(this._reportId));
-        this.context.logger.logInformational("Print report data: " + JSON.stringify(this._reportData));
-
         let headerInited: boolean = false;
         let csvRPTHeader: string = "";
         let csvRPTContent: string = "";
+
+        $('sampleExportToCSVCommand').hide();
+
+        this.context.logger.logInformational("Report title: " + JSON.stringify(this._reportTitle));
+        this.context.logger.logInformational("Report Id: " + JSON.stringify(this._reportId));
+        this.context.logger.logInformational("Print report data: " + JSON.stringify(this._reportData));
 
         this._reportData.Output.forEach((row: ProxyEntities.ReportRow) => {
             row.RowData.forEach((property: ProxyEntities.CommerceProperty) => {

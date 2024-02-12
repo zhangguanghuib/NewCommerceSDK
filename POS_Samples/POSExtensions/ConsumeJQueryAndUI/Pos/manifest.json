@@ -9,6 +9,11 @@
       "alias": "knockout",
       "format": "amd",
       "modulePath": "Libraries/knockout"
+    },
+    {
+      "alias": "jquery",
+      "format": "amd",
+      "modulePath": "Libraries/jQuery"
     }
   ],
   "components": {
