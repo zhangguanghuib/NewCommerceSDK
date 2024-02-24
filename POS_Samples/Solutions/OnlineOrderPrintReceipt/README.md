@@ -141,11 +141,10 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
             }, Promise.resolve({ canceled: true }));
         });
    }
-   
 ```
 
-
 Dialog contain toggle switch to specify start date and end date:<br/>
+
 ```js
 let toggleOptions: Controls.IToggleOptions = {
     labelOn: "On",
