@@ -143,7 +143,6 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
    }
 ```
 
-```js
 let toggleOptions: Controls.IToggleOptions = {
     labelOn: "On",
     labelOff: "Off",
@@ -157,6 +156,5 @@ this.toggleSwitchStartDate = this.context.controlFactory.create(this.context.log
 this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
     this.toggleStartDate(eventData.checked);
 });
-```
 
 
