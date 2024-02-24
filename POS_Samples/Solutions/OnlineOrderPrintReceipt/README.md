@@ -148,19 +148,19 @@ More techinical details can be found from MDN <br/>
 - Dialog contain toggle switch to specify start date and end date:<br/>
 
 ```js
-  let toggleOptions: Controls.IToggleOptions = {
-      labelOn: "On",
-      labelOff: "Off",
-      checked: !this.isStartDateDisabled(),
-      enabled: true,
-      tabIndex: 0
-  };
+let toggleOptions: Controls.IToggleOptions = {
+    labelOn: "On",
+    labelOff: "Off",
+    checked: !this.isStartDateDisabled(),
+    enabled: true,
+    tabIndex: 0
+};
 
-  let toggleRootElemStartDate: HTMLDivElement = element.querySelector("#isStartDateOn") as HTMLDivElement;
-  this.toggleSwitchStartDate = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Toggle", toggleOptions, toggleRootElemStartDate);
-  this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
-      this.toggleStartDate(eventData.checked);
-  });
+let toggleRootElemStartDate: HTMLDivElement = element.querySelector("#isStartDateOn") as HTMLDivElement;
+this.toggleSwitchStartDate = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Toggle", toggleOptions, toggleRootElemStartDate);
+this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
+    this.toggleStartDate(eventData.checked);
+});
 ```
 
 
