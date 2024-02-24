@@ -112,6 +112,21 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
 
 2. Promise.Reduce, more techinical details can be found from MDN <br/><br/>
 3. Dialog contain toggle switch to specify start date and end date:<br/>
+```js
+let toggleOptions: Controls.IToggleOptions = {
+    labelOn: "On",
+    labelOff: "Off",
+    checked: !this.isStartDateDisabled(),
+    enabled: true,
+    tabIndex: 0
+};
+
+let toggleRootElemStartDate: HTMLDivElement = element.querySelector("#isStartDateOn") as HTMLDivElement;
+this.toggleSwitchStartDate = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "Toggle", toggleOptions, toggleRootElemStartDate);
+this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { checked: boolean }) => {
+    this.toggleStartDate(eventData.checked);
+});
+```
    ```js
    public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
     let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
