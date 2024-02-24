@@ -111,6 +111,7 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
 ```
 
 2. Promise.Reduce, more techinical details can be found from MDN <br/><br/>
+3. Dialog contain toggle switch to specify start date and end date:<br/>
 
    ```js
    public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
