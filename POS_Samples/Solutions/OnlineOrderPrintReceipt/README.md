@@ -143,6 +143,7 @@ In the request handler, we have two ways to implement GetReceipt and Print Recei
    }
    
 ```
+
 More techinical details can be found from MDN <br/>
 Dialog contain toggle switch to specify start date and end date:<br/>
 ```js
