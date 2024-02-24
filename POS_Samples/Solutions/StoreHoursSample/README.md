@@ -1,4 +1,4 @@
-# Improved Store Hours Sample
+# Enhanced Store Hours Sample to support CRUD
 ## Overview
 This sample is a showcase an improved Store Hours Sample which exists in Retail SDK  for a long time, this sample improved the existing sample so that the new sample fixed some bugs to make the POS view can refresh automatically, and this page also support the traditional CRUD functions, that means this sample can support 
 - Create a store hour entry
