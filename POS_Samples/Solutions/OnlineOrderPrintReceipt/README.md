@@ -127,33 +127,33 @@ this.toggleSwitchStartDate.addEventListener("CheckedChanged", (eventData: { chec
     this.toggleStartDate(eventData.checked);
 });
 ```
-   ```js
-   public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
-    let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
-        new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
+```js
+public processByPromiseInSequence(searchCriteria: ProxyEntities.TransactionSearchCriteria): void {
+let request: StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse> =
+    new StoreOperations.SearchJournalTransactionsWithUnPrintReceiptRequest(searchCriteria);
 
-    this.context.runtime.executeAsync(request).then(
-        (response: ClientEntities.ICancelableDataResult<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse>) => {
-            let transactions: ProxyEntities.Transaction[] = response.data.result;
+this.context.runtime.executeAsync(request).then(
+    (response: ClientEntities.ICancelableDataResult<StoreOperations.SearchJournalTransactionsWithUnPrintReceiptResponse>) => {
+        let transactions: ProxyEntities.Transaction[] = response.data.result;
 
-            let arrPromise: Promise<ClientEntities.ICancelable>[] = transactions.map((trans: ProxyEntities.Transaction): Promise<ClientEntities.ICancelable> => {
-                let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
-                    = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>(trans.Id, ProxyEntities.SearchLocation.Local);
+        let arrPromise: Promise<ClientEntities.ICancelable>[] = transactions.map((trans: ProxyEntities.Transaction): Promise<ClientEntities.ICancelable> => {
+            let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
+                = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>(trans.Id, ProxyEntities.SearchLocation.Local);
 
-                return this.context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse>): Promise<ProxyEntities.Receipt[]> => {
-                    return this.recreateSalesReceiptsForSalesOrder(res.data.result);
-                }).then((recreatedReceipts: ProxyEntities.Receipt[]): Promise<ClientEntities.ICancelableDataResult<PrinterPrintResponse>> => {
-                    let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
-                    return this.context.runtime.executeAsync(printRequest);
-                }).then((): Promise<ClientEntities.ICancelable> => {
-                    console.log(`transaction ${trans.Id} receipt printed is done`);
-                    return Promise.resolve({ canceled: true });
-                });
+            return this.context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse>): Promise<ProxyEntities.Receipt[]> => {
+                return this.recreateSalesReceiptsForSalesOrder(res.data.result);
+            }).then((recreatedReceipts: ProxyEntities.Receipt[]): Promise<ClientEntities.ICancelableDataResult<PrinterPrintResponse>> => {
+                let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
+                return this.context.runtime.executeAsync(printRequest);
+            }).then((): Promise<ClientEntities.ICancelable> => {
+                console.log(`transaction ${trans.Id} receipt printed is done`);
+                return Promise.resolve({ canceled: true });
             });
-
-            arrPromise.reduce((_prev: Promise<ClientEntities.ICancelable>, _cur: Promise<ClientEntities.ICancelable>) => {
-                return _prev.then(() => _cur);
-            }, Promise.resolve({ canceled: true }));
         });
-   }
+
+        arrPromise.reduce((_prev: Promise<ClientEntities.ICancelable>, _cur: Promise<ClientEntities.ICancelable>) => {
+            return _prev.then(() => _cur);
+        }, Promise.resolve({ canceled: true }));
+    });
+}
 ```
