@@ -1,10 +1,14 @@
-# How to consume external Javascript library in Commerce SDK  POS extension project(Nuget Version)
+# How to consume jQuery in Commerce SDK  POS extension project
 Please find the official doc for more details:
 
-https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/knockout-pos-extension
+https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/knockout-pos-extension, especially this section:
+<img width="632" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5294225b-6cc2-4ca4-bc42-c6ccf787a678">
 
-### Step 1.   please check if there is Nuget Package for the JS  library,  as far I know,  KnockOut JS / Jquery / JQuery UI have corresponding Nuget Package
-<img width="1252" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9ee0541a-de6e-4684-9224-071c55995275">
+### Step 1.   Download this Nuget Package:
+https://www.nuget.org/packages/jquery.TypeScript.DefinitelyTyped/<br/>
+<img width="917" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d11cadb3-6deb-4915-ab84-9907a69154f1"><br/>
+<img width="708" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b4561ba9-0be6-4d96-bb4c-816ac392b7e2"><br/>
+
 
 ### Step 2. Go to Commerce SDK  Project,  add these 3 packages:
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fbb387b2-47f3-4023-8def-d980f4a97cfb)
