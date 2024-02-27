@@ -7,11 +7,13 @@ https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/k
 ### Step 1.   Download this Nuget Package:
 https://www.nuget.org/packages/jquery.TypeScript.DefinitelyTyped/<br/>
 <img width="917" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d11cadb3-6deb-4915-ab84-9907a69154f1"><br/>
+Find this file<br/>
 <img width="708" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b4561ba9-0be6-4d96-bb4c-816ac392b7e2"><br/>
 
 
-### Step 2. Go to Commerce SDK  Project,  add these 3 packages:
-![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fbb387b2-47f3-4023-8def-d980f4a97cfb)
+### Step 2. Create any folder in this project, and put the jquery.d.ts into this folder:<br/>
+<img width="1301" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cc83ea15-4279-4f7f-a597-ab3d6fe8109a">
+<br/>
 
 ### Step 3. Add these three sections:
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08d367ee-ee59-465d-93b6-9ee891055e10)
