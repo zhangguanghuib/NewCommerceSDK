@@ -2,7 +2,7 @@
 import * as ReportDetailsView from "PosApi/Extend/Views/ReportDetailsView";
 import { ProxyEntities } from "PosApi/Entities";
 import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
-import $ from 'jquery';
+/*import $ from 'jquery';*/
 
 export default class ExportToCSVCommand extends ReportDetailsView.ReportDetailsExtensionCommandBase {
 
@@ -33,7 +33,10 @@ export default class ExportToCSVCommand extends ReportDetailsView.ReportDetailsE
         let csvRPTHeader: string = "";
         let csvRPTContent: string = "";
 
-        $('sampleExportToCSVCommand').hide();
+        let jqObj1 = $('#ReportDetailsView_sampleExportToCSVCommandCommand');
+        console.log(jqObj1);
+
+        $('#ReportDetailsView_sampleExportToCSVCommandCommand').hide();
 
         this.context.logger.logInformational("Report title: " + JSON.stringify(this._reportTitle));
         this.context.logger.logInformational("Report Id: " + JSON.stringify(this._reportId));
