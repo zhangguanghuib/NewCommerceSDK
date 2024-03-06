@@ -1,0 +1,63 @@
+{
+  "FiscalRegistrationEventTypeValue": 21,
+  "IsRemoteTransaction": false,
+  "QueryBySalesId": false,
+  "ShiftId": 4,
+  "ShiftTerminalId": "000031",
+  "TransactionId": "",
+  "DocumentContext": {
+    "AuditEvent": {
+      "EventId": 638441313542432500,
+      "EventIdString": "638441313542432512",
+      "Channel": 5637144576,
+      "Store": "FR01",
+      "Terminal": "000031",
+      "UploadType": 0,
+      "EventType": 0,
+      "EventDateTime": "2024-02-21T16:55:54.266Z",
+      "DurationInMilliseconds": 0,
+      "Source": "AddOnFeatures.Localization.AuditEvent.Common.AuditEventManager.registerConnectionStatusChangeAsync()",
+      "EventMessage": "Offline mode is activated.",
+      "LogLevel": 0,
+      "Staff": "000011",
+      "ShiftId": 4,
+      "ClosedShiftId": 0,
+      "ReferenceId": 0,
+      "RefChannel": 0,
+      "RefStore": "",
+      "RefTerminal": "",
+      "RefTransactionId": "",
+      "AuditEventTypeValue": 11,
+      "FiscalTransactions": [],
+      "FiscalRegistrationLines": [],
+      "ExtensionProperties": []
+    },
+    "SignatureData": [
+      {
+        "SequenceKey": "LAST_SEQUENTIAL_SIGNATURE_4DDAB597-69E6-41C3-BA63-9FEFCFF3A112",
+        "SequentialNumber": 5,
+        "LastRegisterResponse": "{\"ExtensionProperties\":[],\"CertificateThumbprint\":\"3D11E96D8D788221216FA97C1C6AE019DFCB53DF\",\"HashAlgorithm\":\"SHA256\",\"Signature\":\"Q_jZfikPB3Y1e4c28hOJDhHWLd0guuCqJyIXGuVfth3aPaAXBzPArvWMdO07YhsvYdoMYUz8b3X05pi1W7Bn0o0xPCqJ9x1uESFqFjh4LYFVEbWlyK02ZuFEXWZ149ZfI8ujADQ7bR9rD_w3Ml-xJcobVyFkH9388yflQqsvbBUW8kN5Uqwrb9UxH0sLasMq6qotNv8Bn6jqMSE6npnxoUJcApaGFVfBgH_1tvRF2mxNmzF9KpE2rpk6FROBsZyS8BVsWZcyIua1-SyKR4eWaCypOJqN1GZtWXEDfJ8tG_pQZXTCIGj34QLTu411LDBbOmZ6U0aJ972yC7CFymlWrg\"}",
+        "IsOffline": false
+      },
+      {
+        "LastRegisterResponse": "",
+        "SequenceKey": "LAST_RECEIPT_COPY_91C74450-D4B3-4067-AEB3-D9C66D0BE6CF",
+        "IsOffline": false,
+        "SequentialNumber": 0,
+        "ExtensionProperties": []
+      },
+      {
+        "SequenceKey": "LAST_TECHNICAL_EVENT_2426E85B-A2E6-4842-B5B0-F422CE60FBCF",
+        "SequentialNumber": 18,
+        "LastRegisterResponse": "{\"ExtensionProperties\":[],\"CertificateThumbprint\":\"3D11E96D8D788221216FA97C1C6AE019DFCB53DF\",\"HashAlgorithm\":\"SHA256\",\"Signature\":\"K9Sc32Kd9TBfVxdz4WWmLi-0VwD4oyl0VqrO_efD52neZj1oSu8HOFkgyNpBkHygw76zoxct7t9W3r7AR11-lODA-CaykvU5m3ib5pYHOhPE_MqjWHrmmBk_8byt3P4mY1bbPsQOy0HAggPWNaXSCeXbnOCDk1D8fbs19mxo_xO_CUnEIue6zxcNXEp1qwoQkOyV9AuufQo8UxOcgUv2vlciTA4VpPtpE073h00eYKzh7nizPhUJZdnCiKKuPA3MB8SAynmL6xDig1CjSWSaV5wnt5Mhfnahwnb4B_Duc--vuREsHLGlBC0lel0eONCe0sqRFKGrsrnaz7L85RssWA\"}",
+        "IsOffline": false
+      },
+      {
+        "SequenceKey": "LAST_CLOSE_SHIFT_EVENT_74E9D344-4133-4C88-BE45-EEF2572CB2EA",
+        "SequentialNumber": 5,
+        "LastRegisterResponse": "{\"ExtensionProperties\":[],\"CertificateThumbprint\":\"3D11E96D8D788221216FA97C1C6AE019DFCB53DF\",\"HashAlgorithm\":\"SHA256\",\"Signature\":\"O8NyLjPv-OZX_EZVH0J46GoHHJh8AJomAkzpddlCw308o03hbgv1wTeEg05eEqt8Y1GzM9HN0Tt8H7WgR8uba926RmsnLp6j9l7crp1WfA9yZ-FPxEXwQCEzC8ACGq9VSa8jbRRCwJ0bwVP2lawpHaOshuFn8nUgUQbs8_u1PQK_DAqvdm3BZHWs1zVUSb9T7wN4krRcK2bAGP9foyFrQ-CUUCLgG-H66xdL8_fJcbigh8885DgRsWwww_und8SDoC9jdcrQbnNE8WGYR7AdfUIVjtT6J3rpGgIS5gdX5sCN7Y3dZeTI2ocr97YrDYd2vV6T6Us1R-G8Oi2QUmf2UA\"}",
+        "IsOffline": false
+      }
+    ]
+  }
+}
