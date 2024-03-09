@@ -134,6 +134,12 @@ export default class ExampleViewModel {
                         let pingResultDialog: PingResultDialog = new PingResultDialog();
                         return pingResultDialog.open(pingGetResponse.data.result, pingPostResponse.data.result);
                     });
-            });
+            }).catch((error: any): void => {
+             this._context.logger.logError("runPingTest Error");
+             let pingResultDialog: PingResultDialog = new PingResultDialog();
+             pingResultDialog.open(false, false);
+        });
     }
+
+
 }

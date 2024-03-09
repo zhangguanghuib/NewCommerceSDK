@@ -49,6 +49,11 @@
                 }
 
                 Type reqType = request.GetType();
+
+                Type type1 = typeof(GetStoreHoursDataRequest);
+
+                GetStoreHoursDataRequest getStoreHoursDataRequest = (GetStoreHoursDataRequest) request;
+
                 if (reqType == typeof(GetStoreHoursDataRequest))
                 {
                     return await this.GetStoreDayHoursAsync((GetStoreHoursDataRequest)request).ConfigureAwait(false);
