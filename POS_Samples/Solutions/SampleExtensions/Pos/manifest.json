@@ -26,6 +26,9 @@
       "requestHandlers": [
       ],
       "views": {
+        "CartView": {
+          "viewController": { "modulePath": "Extend/ViewExtensions/Cart/CartViewController" }
+        },
         "SearchView": {
           "productAppBarCommands": [
             { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" }

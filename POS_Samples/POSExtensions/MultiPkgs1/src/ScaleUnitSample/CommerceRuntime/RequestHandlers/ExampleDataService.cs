@@ -23,6 +23,7 @@ namespace Contoso.CommerceRuntime.RequestHandlers
     using System.IO;
     using Newtonsoft.Json;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
 
     /// <summary>
     /// Sample service to demonstrate managing a collection of entities.
@@ -90,6 +91,9 @@ namespace Contoso.CommerceRuntime.RequestHandlers
                     .ConfigureAwait(continueOnCapturedContext: false);
                 insertedId = result.Item2.Single().UnusualEntityId;
             }
+
+            GetEmployeeIdentityByExternalIdentityRealtimeRequest getEmployeeIdentityByExternalIdentityRealtimeRequest = new GetEmployeeIdentityByExternalIdentityRealtimeRequest("", "5bf05ec4-ba9e-4000-a0fa-d9c81e778fa6");
+            var response = await request.RequestContext.ExecuteAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(getEmployeeIdentityByExternalIdentityRealtimeRequest).ConfigureAwait(false);
 
             return new CreateExampleEntityDataResponse(insertedId);
         }

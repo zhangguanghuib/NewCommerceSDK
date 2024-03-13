@@ -19,11 +19,7 @@ This sample showcases a sample where the Store Commerce App is extended to show 
 To find your custom code in the debugger, you should use Developer tools (F12) in the second Store Commerce window. In the main window, the dual display extensions will not be visible.
 ![Example of debug window](DebugWindow.png)
 
-## Enhancement:
-- Add a new class to track the selected cart lines:
-  <img width="847" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3be99cc0-9775-4637-97d5-7d520e77fee5">
-
-- Whenever cart changes, Dual Display will scroll to the same cart lines to match the main cart screen:
-  <img width="1101" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5fa7c200-93dc-4f52-992a-6d0822bcce9e">
-
-
+## Additional Resources
+- [Using POS Controls](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/controls-pos-extension)
+- [Use knockout.js in POS Extensions](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/knockout-pos-extension)
+- [Extend the point of sale (POS) Dual display view](https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-dual-display-extension)

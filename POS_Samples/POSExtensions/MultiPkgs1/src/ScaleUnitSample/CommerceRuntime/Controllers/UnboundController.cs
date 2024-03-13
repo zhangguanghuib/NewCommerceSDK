@@ -8,6 +8,7 @@ namespace Contoso.CommerceRuntime.Controllers
     using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
     using SO=Contoso.Commerce.Runtime.StoreHoursSample.Messages;
 
 
@@ -27,6 +28,13 @@ namespace Contoso.CommerceRuntime.Controllers
             // Call request from another package
             var getStoreHoursDataRequest = new SO.GetStoreHoursDataRequest("HOUSTON") { QueryResultSettings = QueryResultSettings.AllRecords };
             var hoursResponse = await context.ExecuteAsync<SO.GetStoreHoursDataResponse>(getStoreHoursDataRequest).ConfigureAwait(false);
+
+            UserResetPasswordRealtimeRequest request = new UserResetPasswordRealtimeRequest("000160", "123", true);
+            // var requestHandler = new UserAuthenticationTransactionService();
+
+            
+
+
             return true;
         }
 

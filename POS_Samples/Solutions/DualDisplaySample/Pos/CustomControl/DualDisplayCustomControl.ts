@@ -15,10 +15,9 @@ import {
     CustomerChangedData,
     LogOnStatusChangedData
 } from "PosApi/Extend/DualDisplay";
-import { IDataList, IDataListOptions, DataListInteractionMode  } from "PosApi/Consume/Controls";
-import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import { IDataList, IDataListOptions, DataListInteractionMode } from "PosApi/Consume/Controls";
+import { ArrayExtensions, ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
 import { ProxyEntities } from "PosApi/Entities";
-import CartViewController from "ViewExtensions/Cart/CartViewController";
 import ko from "knockout";
 
 export default class DualDisplayCustomControl extends DualDisplayCustomControlBase {
@@ -49,6 +48,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private _cartLines: Array<ProxyEntities.CartLine>;
     private _dataList: IDataList<ProxyEntities.CartLine>;
 
+    private _intervalId: number;
+
     constructor(id: string, context: IDualDisplayCustomControlContext) {
         super(id, context);
 
@@ -64,6 +65,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
+        this._intervalId = 0;
+
+        //ObjectExtensions.isNullOrUndefined(CartViewController) ? true : false;
 
         this.cartTotalAmount = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._cart()) ? 0.00 : this._cart().TotalAmount;
@@ -89,20 +93,52 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             this._cart(data.cart);
             this._dataList.data = ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines;
 
-            // Option #1
+            let currentCartLineId: string = localStorage.getItem("currentCartLineId");
+
+            //Debounce
+            if (this._intervalId) {
+                clearInterval(this._intervalId);
+            }
+
             if (data.cart && data.cart.CartLines.length > 0) {
-                if (!StringExtensions.isNullOrWhitespace(CartViewController.selectedCartLineId)) {
-                    let selectedLines: ProxyEntities.CartLine[] = data.cart.CartLines.filter(line => line.LineId === CartViewController.selectedCartLineId);
+                if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
+                    //Way 1: Not work
+                    let selectedLines: ProxyEntities.CartLine[] = data.cart.CartLines.filter(line => line.LineId === currentCartLineId);
                     this._dataList.selectItems(selectedLines);
+
+                    //Way 2: DOM
+                    let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
+                    let selectedLineElement = null;
+                    let listLines = document.querySelectorAll(".dataListLine");
+
+                    //Length of listLines less than CartLines, means a new is adding
+                    // Set Interval until list rendered done
+                    if (listLines.length < data.cart.CartLines.length) {
+                        this._intervalId = setInterval(() => {
+                            listLines = document.querySelectorAll(".dataListLine");
+                            if (listLines.length === data.cart.CartLines.length) {
+                                selectedLineElement = listLines[listLines.length - 1];
+                                clearInterval(this._intervalId);
+                            }
+                        }, 500);
+                    } else {
+                        // Otherwise, means it is updating the existing lines, then scroll to right line
+                        selectedLineElement = listLines[selectedIndex];
+                    }
+
+                    if (selectedLineElement) {
+                        selectedLineElement.scrollIntoView();
+                    }
                 } else {
                     this._dataList.clearSelection();
                 }
             }
 
-            // Option #2
-            if (data.cart && data.cart.CartLines.length > 0) {
-                CartViewController.selectedCartLines.length > 0 ? this._dataList.selectItems(CartViewController.selectedCartLines) : this._dataList.clearSelection();   
-            }     
+            // Way3, not working
+            //if (data.cart && data.cart.CartLines.length > 0 && !ObjectExtensions.isNullOrUndefined(CartViewController)) {
+            //    CartViewController.selectedCartLines.length > 0 ?
+            //        this._dataList.selectItems(CartViewController.selectedCartLines) : this._dataList.clearSelection();
+            //}  
         };
 
         this.customerChangedHandler = (data: CustomerChangedData) => {
@@ -110,7 +146,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         };
 
         this.logOnStatusChangedHandler = (data: LogOnStatusChangedData) => {
-
             // Displays the busy indicator here, even though it's not necessary, in order to showcase and test the scenario.
             this.isProcessing = true;
             window.setTimeout(() => {
@@ -131,9 +166,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
      * @param {HTMLElement} element The element to which the control should be bound.
      */
     public onReady(element: HTMLElement): void {
-         // Initializes the cart lines data list
-         let cartLinesDataListOptions: IDataListOptions<ProxyEntities.CartLine> = {
-            interactionMode: DataListInteractionMode.None,
+        // Initializes the cart lines data list
+        let cartLinesDataListOptions: IDataListOptions<ProxyEntities.CartLine> = {
+            interactionMode: DataListInteractionMode.MultiSelect,
             data: this._cartLines,
             columns: [
                 {

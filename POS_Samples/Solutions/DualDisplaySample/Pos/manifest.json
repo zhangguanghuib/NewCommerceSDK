@@ -26,12 +26,6 @@
       }
     },
     "extend": {
-      "header": {
-      },
-      "triggers": [
-      ],
-      "requestHandlers": [
-      ],
       "views": {
         "CartView": {
           "viewController": { "modulePath": "ViewExtensions/Cart/CartViewController" }
