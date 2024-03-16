@@ -34,40 +34,45 @@
             { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" }
           ]
         },
-        "CustomerAddEditView": {
-          "controlsConfig": {
-            "customControls": [
-              {
-                "controlName": "customFieldsSection",
-                "htmlPath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection.html",
-                "modulePath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection"
-              }
-            ]
-          }
-        },
-        "ShowJournalView": {
-          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ]
-        },
-        "FulfillmentLineView": {
+        "CustomerDetailsView": {
           "appBarCommands": [
-            {
-              "modulePath": "ViewExtensions/FulfillmentLine/FulfillmentLineCommand"
-            }
+            { "modulePath": "ViewExtensions/CustomerDetails/CustomerCrossLoyaltyCommand" }
           ]
         },
-        "SimpleProductDetailsView": {
-          "controlsConfig": {
-            "customControls": [
+          "CustomerAddEditView": {
+            "controlsConfig": {
+              "customControls": [
+                {
+                  "controlName": "customFieldsSection",
+                  "htmlPath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection.html",
+                  "modulePath": "ViewExtensions/CustomerAddEdit/CustomFieldsSection"
+                }
+              ]
+            }
+          },
+          "ShowJournalView": {
+            "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ]
+          },
+          "FulfillmentLineView": {
+            "appBarCommands": [
               {
-                "controlName": "productAvailabilityPanel",
-                "htmlPath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
-                "modulePath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
+                "modulePath": "ViewExtensions/FulfillmentLine/FulfillmentLineCommand"
               }
             ]
+          },
+          "SimpleProductDetailsView": {
+            "controlsConfig": {
+              "customControls": [
+                {
+                  "controlName": "productAvailabilityPanel",
+                  "htmlPath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
+                  "modulePath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
+                }
+              ]
+            }
           }
         }
-      }
-    },
+      },
     "create": {
       "views": [
         {
