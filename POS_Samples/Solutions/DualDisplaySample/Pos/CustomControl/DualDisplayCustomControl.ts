@@ -48,7 +48,16 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private _cartLines: Array<ProxyEntities.CartLine>;
     private _dataList: IDataList<ProxyEntities.CartLine>;
 
-    private _intervalId: number;
+    public _lastCartLine: ko.Computed<ProxyEntities.CartLine>;
+    public readonly itemId: ko.Computed<string>;
+    public readonly productName: ko.Computed<string>;
+    public readonly productQuantity: ko.Computed<string>;
+    public readonly productDiscount: ko.Computed<string>;
+    public readonly productCost: ko.Computed<string>;
+    public imgUrl: ko.Observable<string>;
+    public imgIndex: number;
+    public mediaServerUrl: string = "https://cn-guazha-1112.fareast.corp.microsoft.com:446/DualDisplay/";
+    public readonly IMGTOTAL: number = 10;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
         super(id, context);
@@ -65,9 +74,14 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
-        this._intervalId = 0;
+        this._lastCartLine = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._cart()) || ObjectExtensions.isNullOrUndefined(this._cart().CartLines) || this._cart().CartLines.Length <= 0 ?
+                null : this._cart().CartLines[this._cart().CartLines.length - 1];
+            //return this._cartLines.length <= 0 ? null : this._cartLines[this._cartLines.length - 1];
+        });
 
-        //ObjectExtensions.isNullOrUndefined(CartViewController) ? true : false;
+        this.imgIndex = 0;
+        this.imgUrl = ko.observable('');
 
         this.cartTotalAmount = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._cart()) ? 0.00 : this._cart().TotalAmount;
@@ -89,16 +103,32 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             return ObjectExtensions.isNullOrUndefined(this._employee()) ? StringExtensions.EMPTY : this._employee().Name;
         });
 
+        this.itemId = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().ItemId;
+        });
+
+        this.productName = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) || StringExtensions.isEmptyOrWhitespace(this._lastCartLine().Description) ?
+                StringExtensions.EMPTY : this._lastCartLine().Description;
+        });
+
+        this.productQuantity = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().Quantity.toString();
+        });
+
+        this.productDiscount = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().DiscountAmount.toString();
+        });
+
+        this.productCost = ko.computed(() => {
+            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().TotalAmount.toString();
+        });
+
         this.cartChangedHandler = (data: CartChangedData) => {
             this._cart(data.cart);
             this._dataList.data = ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines;
 
             let currentCartLineId: string = localStorage.getItem("currentCartLineId");
-
-            //Debounce
-            if (this._intervalId) {
-                clearInterval(this._intervalId);
-            }
 
             if (data.cart && data.cart.CartLines.length > 0) {
                 if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
@@ -112,21 +142,20 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                     let listLines = document.querySelectorAll(".dataListLine");
 
                     //Length of listLines less than CartLines, means a new is adding
-                    // Set Interval until list rendered done
                     if (listLines.length < data.cart.CartLines.length) {
-                        this._intervalId = setInterval(() => {
-                            listLines = document.querySelectorAll(".dataListLine");
-                            if (listLines.length === data.cart.CartLines.length) {
-                                selectedLineElement = listLines[listLines.length - 1];
-                                clearInterval(this._intervalId);
-                            }
-                        }, 500);
+                        selectedLineElement = listLines[listLines.length - 1];
+                        selectedLineElement.scrollIntoView();
+                        //setTimeout(() => {
+                        //    let listLines = document.querySelectorAll(".win-itemscontainer .win-itemsblock");
+                        //    selectedLineElement = listLines[listLines.length - 1];
+                        //    // Scroll to the bottom
+                        //    selectedLineElement.scrollTop = selectedLineElement.scrollHeight;
+                        //    selectedLineElement.scrollBy(0, 20);
+                        //    console.log("Scroll done");
+                        //}, 5000);                      
                     } else {
                         // Otherwise, means it is updating the existing lines, then scroll to right line
                         selectedLineElement = listLines[selectedIndex];
-                    }
-
-                    if (selectedLineElement) {
                         selectedLineElement.scrollIntoView();
                     }
                 } else {
@@ -168,7 +197,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public onReady(element: HTMLElement): void {
         // Initializes the cart lines data list
         let cartLinesDataListOptions: IDataListOptions<ProxyEntities.CartLine> = {
-            interactionMode: DataListInteractionMode.MultiSelect,
+            interactionMode: DataListInteractionMode.SingleSelect,
             data: this._cartLines,
             columns: [
                 {
@@ -230,6 +259,14 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         let dualDisplayRootElem: HTMLDivElement = element.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
         this._dataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dualDisplayRootElem);
 
+        setInterval(() => {
+            this.imgIndex++;
+            if (this.imgIndex >= this.IMGTOTAL) {
+                this.imgIndex = 0;
+            }
+            this.imgUrl(this.mediaServerUrl + `desktop_${this.imgIndex}.jpg`);
+            console.log(this.imgUrl());
+        }, 4000);
     }
 
     /**
