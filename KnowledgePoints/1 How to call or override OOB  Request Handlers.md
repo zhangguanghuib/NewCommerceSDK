@@ -158,3 +158,5 @@ So in this way we will provide some samples how to override the OOB  handler, or
      }
  }
 ```
+
+4.  The complete project to test that is:  https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/RQL-UserAuthService/src/ScaleUnitSample/CommerceRuntime/RequestHandlers
