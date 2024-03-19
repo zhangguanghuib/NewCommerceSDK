@@ -50,9 +50,9 @@
    ```
 
    . Way#2, Implement SingleAsyncRequestHandler, get OOB  request Handler, and then when call request with the OOB  request handler:
-   ```
-     public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandlerV2
-      : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
+
+  ```
+  public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandlerV2 : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
   {
       public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
   
@@ -84,7 +84,7 @@
           }
       }
   }
-   ```
+  ```
 . Way#3,Implement IRequestHandlerAsync,  then get OOB  request handler, and when send request using the base request handler:
 ```
  public class UserAuthService : IRequestHandlerAsync
