@@ -1,7 +1,153 @@
-## Dynamics 365 Commerce Release Plan
+## How to call or override OOB request handlers?
 
-https://releaseplans.microsoft.com/en-US/?app=Commerce
+1. Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
+2. Some code samples:
+   .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
+   ```
+   public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
+    {
+        public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities
+            = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
 
-## Ashish Blog
+        protected override async Task<Response> Process(GetEmployeeIdentityByExternalIdentityRealtimeRequest request)
+        {
+            ThrowIf.Null(request, "request");
 
-https://cloudblogs.microsoft.com/dynamics365/it/2024/02/26/empowering-business-innovation-for-modernizing-retailers-and-manufacturers-with-copilot-unleashing-dynamics-365-commerce-investments-for-2024-wave-1/
+            GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
+
+            try
+            {
+                if (request == null)
+                {
+                    var exception = new ArgumentNullException("request");
+                   
+                    throw exception;
+                }
+                else if (request is GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+                {
+                    GetEmployeeIdentityByExternalIdentityRealtimeRequest employeeRequest = request as GetEmployeeIdentityByExternalIdentityRealtimeRequest;
+
+                    if (foundIdentities.TryGetValue(employeeRequest.ExternalIdentityId, out val))
+                    {    
+                        return val;
+                    }
+                    else
+                    {
+                        var response = await this.ExecuteNextAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request).ConfigureAwait(false);
+                        foundIdentities.GetOrAdd(employeeRequest.ExternalIdentityId, response);
+                        return response;
+                    }
+                }
+            }
+            finally
+            {
+                //logger.StopOperation(operation);
+            }
+            // Do no checks.
+            return NullResponse.Instance;
+        }
+    }
+   ```
+
+   . Way#2, Implement SingleAsyncRequestHandler, get OOB  request Handler, and then when call request with the OOB  request handler:
+   ```
+     public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandlerV2
+      : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
+  {
+      public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
+  
+      protected async override Task<Response> Process(GetEmployeeIdentityByExternalIdentityRealtimeRequest request)
+      {
+          ThrowIf.Null(request, "request");
+  
+          // The extension should do nothing If fiscal registration is enabled and legacy extension were used to run registration process.
+          if (!string.IsNullOrEmpty(request.RequestContext.GetChannelConfiguration().FiscalRegistrationProcessId))
+          {
+              return NotHandledResponse.Instance;
+          }
+  
+          GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
+  
+          if (foundIdentities.TryGetValue(request.ExternalIdentityId, out val))
+          {
+              return val;
+          }
+          else
+          {
+              // Execute original logic.
+              var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+              var response = await request.RequestContext.Runtime.ExecuteAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
+  
+              foundIdentities.GetOrAdd(request.ExternalIdentityId, response);
+  
+              return response;
+          }
+      }
+  }
+   ```
+. Way#3,Implement IRequestHandlerAsync,  then get OOB  request handler, and when send request using the base request handler:
+```
+ public class UserAuthService : IRequestHandlerAsync
+ {
+     public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities 
+         = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
+
+     public IEnumerable<Type> SupportedRequestTypes
+     {
+         get
+         {
+             return new Type[]
+             {
+                     //typeof(CheckAccessServiceRequest),
+                     //typeof(CheckAccessToCartServiceRequest),
+                     //typeof(CheckAccessToCustomerAccountServiceRequest),
+                     typeof(GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+             };
+         }
+     }
+
+     /// <summary>
+     /// Executes the request.
+     /// </summary>
+     /// <param name="request">The request.</param>
+     /// <returns>The response.</returns>
+     public async Task<Response> Execute(Request request)
+     {
+         GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
+
+         try
+         {
+             if (request == null)
+             {
+                 var exception = new ArgumentNullException("request");
+                 throw exception;
+             }
+             else if (request is GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+             {
+                 GetEmployeeIdentityByExternalIdentityRealtimeRequest employeeRequest = request as GetEmployeeIdentityByExternalIdentityRealtimeRequest;
+
+                 if (foundIdentities.TryGetValue(employeeRequest.ExternalIdentityId, out val))
+                 {
+                     //return foundIdentities[employeeRequest.ExternalIdentityId];
+                     return val;
+                 }
+                 else
+                 {
+                     var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+                     var response = await request.RequestContext.Runtime.ExecuteAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
+
+                     foundIdentities.GetOrAdd(employeeRequest.ExternalIdentityId, response);
+                     return response;
+                 }
+             }
+         }
+         finally
+         {
+             Console.WriteLine("Finally");
+         }
+
+         // Do no checks.
+         return NullResponse.Instance;
+     }
+ }
+```
