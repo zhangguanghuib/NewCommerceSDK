@@ -105,10 +105,7 @@ So in this way we will provide some samples how to override the OOB  handler, or
          {
              return new Type[]
              {
-                     //typeof(CheckAccessServiceRequest),
-                     //typeof(CheckAccessToCartServiceRequest),
-                     //typeof(CheckAccessToCustomerAccountServiceRequest),
-                     typeof(GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+                 typeof(GetEmployeeIdentityByExternalIdentityRealtimeRequest)
              };
          }
      }
