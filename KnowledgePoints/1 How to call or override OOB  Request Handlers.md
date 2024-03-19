@@ -8,7 +8,7 @@ var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeI
 So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
 
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
-3. Some code samples:
+3. Some code samples:<br/>
    .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
    ```cs
    public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
@@ -55,7 +55,7 @@ So in this way we will provide some samples how to override the OOB  handler, or
         }
     }
    ```
-
+<br/>
    . Way#2, Implement SingleAsyncRequestHandler, get OOB  request Handler, and then when call request with the OOB  request handler:
 
   ```cs
@@ -92,6 +92,7 @@ So in this way we will provide some samples how to override the OOB  handler, or
       }
   }
   ```
+<br/>
 . Way#3,Implement IRequestHandlerAsync,  then get OOB  request handler, and when send request using the base request handler:
 ```cs
  public class UserAuthService : IRequestHandlerAsync
