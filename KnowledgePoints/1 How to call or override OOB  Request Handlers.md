@@ -94,7 +94,8 @@ So in this way we will provide some samples how to override the OOB  handler, or
   ```
 <br/>
 . Way#3,Implement IRequestHandlerAsync,  then get OOB  request handler, and when send request using the base request handler:
-```cs
+
+ ```cs
  public class UserAuthService : IRequestHandlerAsync
  {
      public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities 
@@ -155,6 +156,6 @@ So in this way we will provide some samples how to override the OOB  handler, or
          return NullResponse.Instance;
      }
  }
-```
+ ```
 
 4.  The complete project to test that is:  https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/RQL-UserAuthService/src/ScaleUnitSample/CommerceRuntime/RequestHandlers
