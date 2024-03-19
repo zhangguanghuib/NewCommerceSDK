@@ -1,4 +1,4 @@
-## How to call or override OOB request handlers?
+## How to expliciltly call request handlers when send request or override OOB request handlers?
 
 1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
 ```cs
