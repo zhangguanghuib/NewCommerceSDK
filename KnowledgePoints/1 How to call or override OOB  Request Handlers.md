@@ -1,7 +1,14 @@
 ## How to call or override OOB request handlers?
 
-1. Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
-2. Some code samples:
+1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
+```cs
+var requestHandler = new UserAuthenticationTransactionService();
+var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
+```
+So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
+
+2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
+3. Some code samples:
    .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
    ```cs
    public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
