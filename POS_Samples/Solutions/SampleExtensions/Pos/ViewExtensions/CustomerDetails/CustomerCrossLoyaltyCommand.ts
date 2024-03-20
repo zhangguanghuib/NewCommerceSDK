@@ -24,7 +24,18 @@ export default class CustomerCrossLoyaltyCommand extends CustomerDetailsView.Cus
         this.isVisible = false;
         this.canExecute = true;
 
+       
+        // Find Loyalty Card Div
         let loyaltyCardListDiv: HTMLDivElement = document.querySelector("#loyaltyCardList") as HTMLDivElement;
+
+        // Find loyalty Cars's Parent
+        let sectionContainer: HTMLDivElement = loyaltyCardListDiv?.parentElement?.parentElement?.parentElement as HTMLDivElement;
+        if (sectionContainer) {
+            // Find times Line
+            let timelineSection: HTMLDivElement = sectionContainer.children[1] as HTMLDivElement;
+            timelineSection?.remove();
+        }
+
         loyaltyCardListDiv?.parentElement?.parentElement?.remove();
 
         let wishListDiv: HTMLDivElement = document.querySelector("#wishList") as HTMLDivElement;
