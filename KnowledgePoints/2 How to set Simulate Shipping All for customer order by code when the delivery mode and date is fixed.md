@@ -16,7 +16,7 @@ What customer want is:<br/>
  <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38"><br/>
 * They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
 
-2. The idea to fix this issue:<br/>
+2. <ins>The idea to fix this issue:</ins><br/>
    * By code set the transaction level delivery specification and line level specification:<br/>
    ```cs
    public async Task<Cart> updateLinesDeliverySpecifications(IEndpointContext context, string cartId, SalesTransaction transaction, Address shippingAddress)
@@ -101,7 +101,7 @@ What customer want is:<br/>
         }
     }
     ```
-2.  In POS extension, when click Pay Cash or Pay Card,  the above logic will be call to set the Delivery Specification for the customer order by code, the will simplify the user operation and improve user experience:
+3.  <ins>In POS extension, when click Pay Cash or Pay Card,  the above logic will be call to set the Delivery Specification for the customer order by code, the will simplify the user operation and improve user experience:</ins>
 ```ts
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
@@ -138,7 +138,7 @@ export default class PreOperationTrigger extends Triggers.PreOperationTrigger {
     }
 }
 ```
-4.  The complete project to test that is:
+4.  <ins>The complete project to test that is:</ins>
    * https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/CommerceRuntime/Controllers/UnboundController.cs
 
 * https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/POS/TriggerHandlers/PreOperationTrigger.ts
