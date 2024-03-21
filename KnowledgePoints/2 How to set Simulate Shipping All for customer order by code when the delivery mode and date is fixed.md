@@ -10,18 +10,47 @@ So these steps seems too complex for them and they really don't need that:<br/>
 What customer want is:<br/>
 . Add customer account
 . Add product
-. Create customer order:
+. Create customer order:<br/>
  <img width="121" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cb809bfd-bee8-4551-95be-2b138069a359">
-. Click Pay Cash/Card and Checkout:
- <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38">
-. They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set
+. Click Pay Cash/Card and Checkout:<br/>
+ <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38"><br/>
+. They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
 
 2. The idea to fix this issue:
-   # By code set the transaction level delivery specification and line level specification:
-```cs
-var requestHandler = new UserAuthenticationTransactionService();
-var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
-```
+   . By code set the transaction level delivery specification and line level specification:<br/>
+   ```cs
+   public async Task<Cart> updateLinesDeliverySpecifications(IEndpointContext context, string cartId, SalesTransaction transaction, Address shippingAddress)
+   {
+       var lineDeliverySpecs = this.CreateLineDeliverySpecifications(transaction, shippingAddress);
+       var updateDeliveryRequest = new UpdateDeliverySpecificationsRequest(cartId, lineDeliverySpecs);
+ 
+       Cart cart = (await context.ExecuteAsync<UpdateDeliverySpecificationsResponse>(updateDeliveryRequest).ConfigureAwait(false)).Cart;
+ 
+       return cart;
+   }
+ 
+   public  IEnumerable<LineDeliverySpecification> CreateLineDeliverySpecifications(SalesTransaction transaction, Address shipAddress)
+   {
+       var lineDeliverySpecifications = new Collection<LineDeliverySpecification>();
+       foreach (var salesLine in transaction.SalesLines)
+       {
+           var deliverySpec = new LineDeliverySpecification()
+           {
+               LineId = salesLine.LineId,
+               DeliverySpecification = new DeliverySpecification()
+               {
+                   DeliveryModeId = "99",
+                   DeliveryAddress = shipAddress,
+                   DeliveryPreferenceType = DeliveryPreferenceType.ShipToAddress,
+                   RequestedDeliveryDate = System.DateTimeOffset.Now.AddDays(2),
+               },
+           };
+           lineDeliverySpecifications.Add(deliverySpec);
+       }
+ 
+       return lineDeliverySpecifications;
+   }
+   ```
 So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
 
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
