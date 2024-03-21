@@ -8,13 +8,13 @@ So these steps seems too complex for them and they really don't need that:<br/>
 <img width="251" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5620f2da-dfbd-459f-a554-752a58492765"><br/>
 
 What customer want is:<br/>
-. Add customer account
-. Add product
-. Create customer order:<br/>
+* Add customer account
+* Add product
+* Create customer order:<br/>
  <img width="121" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cb809bfd-bee8-4551-95be-2b138069a359">
-. Click Pay Cash/Card and Checkout:<br/>
+* Click Pay Cash/Card and Checkout:<br/>
  <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38"><br/>
-. They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
+* They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
 
 2. The idea to fix this issue:<br/>
    . By code set the transaction level delivery specification and line level specification:<br/>
