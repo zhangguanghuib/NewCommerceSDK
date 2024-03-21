@@ -1,6 +1,20 @@
-## How to expliciltly call request handlers when send request or override OOB request handlers?
+##  How to simulate Shipping All customer order by code when the delivery mode and date is fixed to simplify the user operation?
 
-1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
+1.Background:<br/>
+For some retail customer,  they have only one fixed Shipping Method for customer like Standard, and the shipping date is also fixed like two days later, so they don't need click "Ship All" button, to choose Shipping Address because that is always customer's primary address, and nor choose Shipping Method and Shipping Date.<br/>
+So these steps seems too complex for them and they really don't need that:<br/>
+<img width="128" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c424688c-968d-4480-ab54-61f8c4cc5ae4"><br/>
+<img width="523" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/be9cf250-876e-4099-aa0e-a700f768ab8a"><br/>
+<img width="251" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5620f2da-dfbd-459f-a554-752a58492765"><br/>
+
+What customer want is:<br/>
+# Add customer account
+# Add product
+# Click Pay Cash/Card and Checkout
+# They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set
+
+2. The idea to fix this issue:
+   # By code set the transaction level delivery specification and line level specification:
 ```cs
 var requestHandler = new UserAuthenticationTransactionService();
 var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
