@@ -1,6 +1,6 @@
 ##  How to simulate Shipping All customer order by code when the delivery mode and date is fixed to simplify the user operation?
 
-1.Background:<br/>
+1. <ins>Background:</ins><br/>
 For some retail customer,  they have only one fixed Shipping Method for customer like Standard, and the shipping date is also fixed like two days later, so they don't need click "Ship All" button, to choose Shipping Address because that is always customer's primary address, and nor choose Shipping Method and Shipping Date.<br/>
 So these steps seems too complex for them and they really don't need that:<br/>
 <img width="128" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c424688c-968d-4480-ab54-61f8c4cc5ae4"><br/>
