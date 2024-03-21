@@ -101,8 +101,44 @@ What customer want is:<br/>
         }
     }
     ```
-2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
-3. Some code samples:<br/>
+2.  In POS extension, when click Pay Cash or Pay Card,  the above logic will be call to set the Delivery Specification for the customer order by code, the will simplify the user operation and improve user experience:
+```ts
+import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+import * as Triggers from "PosApi/Extend/Triggers/OperationTriggers"
+import { GetCurrentCartClientRequest, GetCurrentCartClientResponse, RefreshCartClientRequest, RefreshCartClientResponse } from "PosApi/Consume/Cart";
+import * as Messages from "../DataService/DataServiceRequests.g";
+
+export default class PreOperationTrigger extends Triggers.PreOperationTrigger {
+    public execute(options: Triggers.IOperationTriggerOptions): Promise<Commerce.Client.Entities.ICancelable> {
+        if (ObjectExtensions.isNullOrUndefined(options)) {
+            // This will never happen, but is included to demonstrate how to return a rejected promise when validation fails.
+            let error: ClientEntities.ExtensionError
+                = new ClientEntities.ExtensionError("The options provided to the PreTenderPaymentTrigger were invalid. Please select a product and try again.");
+            return Promise.reject(error);
+        } 
+
+        if (options.operationRequest.operationId == ProxyEntities.RetailOperation.PayCash
+            || options.operationRequest.operationId == ProxyEntities.RetailOperation.PayCard) {
+
+            let correlationId: string = this.context.logger.getNewCorrelationId();
+            let getCurrentCartClientRequest: GetCurrentCartClientRequest<GetCurrentCartClientResponse> = new GetCurrentCartClientRequest(correlationId);
+
+            return this.context.runtime.executeAsync(getCurrentCartClientRequest).then((response: ClientEntities.ICancelableDataResult<GetCurrentCartClientResponse>) => {
+                return this.context.runtime.executeAsync(new Messages.StoreOperations.SimplePingGetRequest(response.data.result.Id));
+            }).then(pingGetResponse => {
+                let refreshCartClientRequest: RefreshCartClientRequest<RefreshCartClientResponse> = new RefreshCartClientRequest();
+                return this.context.runtime.executeAsync(refreshCartClientRequest);
+            }).then(() => {
+                return Promise.resolve({ canceled: false });
+            });
+        }
+
+        return Promise.resolve({ canceled: false });    
+    }
+}
+```
+4. Some code samples:<br/>
    .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
    ```cs
    public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
