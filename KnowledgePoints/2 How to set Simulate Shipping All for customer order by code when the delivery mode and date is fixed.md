@@ -142,3 +142,5 @@ export default class PreOperationTrigger extends Triggers.PreOperationTrigger {
    * https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/CommerceRuntime/Controllers/UnboundController.cs
 
 * https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/POS/TriggerHandlers/PreOperationTrigger.ts
+
+5.  With these customization, the process of customer order creation is simplified much, that is just like the normal cash and carry transaction, the only addition step is they need click "Create customer Order",  that is mandatory and can not be eliminated.
