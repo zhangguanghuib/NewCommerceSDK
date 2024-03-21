@@ -73,7 +73,34 @@ What customer want is:<br/>
         return (cart, salesTransaction);
     }
     ```
+    .  Controller level API :<br/>
+    ```
+    [HttpGet]
+    [Authorization(CommerceRoles.Anonymous, CommerceRoles.Application, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Storefront)]
+    public async Task<Cart> SimplePingGet(IEndpointContext context, string cartId)
+    {
+        var getCartServiceRequest = new GetCartServiceRequest(new CartSearchCriteria(cartId), QueryResultSettings.SingleRecord);
+        GetCartServiceResponse getCartServiceResponse = await context.ExecuteAsync<GetCartServiceResponse>(getCartServiceRequest).ConfigureAwait(false);
+        SalesTransaction transaction = getCartServiceResponse.Transactions.SingleOrDefault();
 
+        if(transaction.CartType == CartType.CustomerOrder && 
+            (string.IsNullOrEmpty(transaction.DeliveryMode) || transaction.SalesLines.Any(sl => string.IsNullOrEmpty(sl.DeliveryMode))))
+        {
+            GetCustomersServiceRequest getCustomersServiceRequest = new GetCustomersServiceRequest(QueryResultSettings.SingleRecord, transaction.CustomerId, SearchLocation.Local);
+            GetCustomersServiceResponse getCustomersServiceResponse = await context.ExecuteAsync<GetCustomersServiceResponse>(getCustomersServiceRequest).ConfigureAwait(false);
+            Address shippingAddress = getCustomersServiceResponse.Customers.FirstOrDefault().GetPrimaryAddress();
+
+            (Cart cart, transaction) = await this.updateOrderDeliverySpecifications(context, transaction, shippingAddress).ConfigureAwait(false);
+
+            cart = await this.updateLinesDeliverySpecifications(context, cartId, transaction, shippingAddress).ConfigureAwait(false);
+            return cart;
+        }
+        else
+        {
+           return getCartServiceResponse.Carts.FirstOrDefault();
+        }
+    }
+    ```
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
 3. Some code samples:<br/>
    .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
