@@ -14,7 +14,7 @@ What customer want is:<br/>
  <img width="121" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cb809bfd-bee8-4551-95be-2b138069a359"><br/>
 * Click Pay Cash/Card and Checkout:<br/>
  <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38"><br/>
-* They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
+* They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set instead of by several times click.
 
 2. <ins>The idea to fix this issue:</ins><br/>
    * By code set the transaction level delivery specification and line level specification:<br/>
