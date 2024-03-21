@@ -17,7 +17,7 @@ What customer want is:<br/>
 * They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
 
 2. The idea to fix this issue:<br/>
-   . By code set the transaction level delivery specification and line level specification:<br/>
+   * By code set the transaction level delivery specification and line level specification:<br/>
    ```cs
    public async Task<Cart> updateLinesDeliverySpecifications(IEndpointContext context, string cartId, SalesTransaction transaction, Address shippingAddress)
    {
@@ -51,7 +51,7 @@ What customer want is:<br/>
        return lineDeliverySpecifications;
    }
    ```
-   . By this code set the header level delivery specification:<br/>
+   * By this code set the header level delivery specification:<br/>
     ```cs
     public async Task<(Cart, SalesTransaction)> updateOrderDeliverySpecifications(IEndpointContext context, SalesTransaction salesTransaction, Address shippingAddress)
     {
@@ -73,7 +73,7 @@ What customer want is:<br/>
         return (cart, salesTransaction);
     }
     ```
-    .  Controller level API :<br/>
+    *  Controller level API :<br/>
     ```cs
     [HttpGet]
     [Authorization(CommerceRoles.Anonymous, CommerceRoles.Application, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Storefront)]
@@ -139,6 +139,6 @@ export default class PreOperationTrigger extends Triggers.PreOperationTrigger {
 }
 ```
 4.  The complete project to test that is:
-   https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/CommerceRuntime/Controllers/UnboundController.cs
+   * https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/CommerceRuntime/Controllers/UnboundController.cs
 
-https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/POS/TriggerHandlers/PreOperationTrigger.ts
+* https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/CreateCustomerOrderByCode/src/ScaleUnitSample/POS/TriggerHandlers/PreOperationTrigger.ts
