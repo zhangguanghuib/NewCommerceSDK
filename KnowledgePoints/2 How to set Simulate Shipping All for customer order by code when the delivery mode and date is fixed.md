@@ -11,7 +11,7 @@ What customer want is:<br/>
 * Add customer account
 * Add product
 * Create customer order:<br/>
- <img width="121" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cb809bfd-bee8-4551-95be-2b138069a359">
+ <img width="121" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cb809bfd-bee8-4551-95be-2b138069a359"><br/>
 * Click Pay Cash/Card and Checkout:<br/>
  <img width="244" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/49ecc7d2-0d31-4815-83fb-8eaa3e864b38"><br/>
 * They expected the Shipping Address, Delivery Mode and Delivery Date will be automatically set.
