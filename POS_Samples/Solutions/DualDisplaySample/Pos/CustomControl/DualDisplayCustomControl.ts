@@ -126,48 +126,39 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
         this.cartChangedHandler = (data: CartChangedData) => {
             this._cart(data.cart);
+            let currentCartLineId: string = localStorage.getItem("currentCartLineId");
+            let isNewLine: boolean = !StringExtensions.isEmptyOrWhitespace(currentCartLineId) && this._dataList.data.filter(line => line.LineId === currentCartLineId).length > 0 ? false : true;
             this._dataList.data = ObjectExtensions.isNullOrUndefined(data.cart) ? [] : data.cart.CartLines;
 
-            let currentCartLineId: string = localStorage.getItem("currentCartLineId");
-
-            if (data.cart && data.cart.CartLines.length > 0) {
-                if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
-                    //Way 1: Not work
-                    let selectedLines: ProxyEntities.CartLine[] = data.cart.CartLines.filter(line => line.LineId === currentCartLineId);
-                    this._dataList.selectItems(selectedLines);
-
-                    //Way 2: DOM
-                    let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
-                    let selectedLineElement = null;
-                    let listLines = document.querySelectorAll(".dataListLine");
-
-                    //Length of listLines less than CartLines, means a new is adding
-                    if (listLines.length < data.cart.CartLines.length) {
-                        selectedLineElement = listLines[listLines.length - 1];
-                        selectedLineElement.scrollIntoView();
-                        //setTimeout(() => {
-                        //    let listLines = document.querySelectorAll(".win-itemscontainer .win-itemsblock");
-                        //    selectedLineElement = listLines[listLines.length - 1];
-                        //    // Scroll to the bottom
-                        //    selectedLineElement.scrollTop = selectedLineElement.scrollHeight;
-                        //    selectedLineElement.scrollBy(0, 20);
-                        //    console.log("Scroll done");
-                        //}, 5000);                      
-                    } else {
-                        // Otherwise, means it is updating the existing lines, then scroll to right line
-                        selectedLineElement = listLines[selectedIndex];
-                        selectedLineElement.scrollIntoView();
+            // Find the line height
+            let listLine: HTMLDivElement = document.querySelector(".dataListLine") as HTMLDivElement;
+            let rowHeight = 39;
+            if (listLine?.clientHeight) {
+                rowHeight = listLine?.clientHeight;
+            } 
+            // If a new line is adding
+            if (data.cart && data.cart.CartLines.length > 0 && !StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
+                if (isNewLine) {
+                    if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
+                        if (data.cart.CartLines.length >= 16) {
+                            setTimeout(() => {
+                                let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
+                                let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
+                                let shouldScrollTop = totalHeight - rowHeight * 15;
+                                dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                            }, 700);
+                        }
                     }
-                } else {
-                    this._dataList.clearSelection();
+                }
+                else {//Update existing line
+                    setTimeout(() => {
+                        let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
+                        let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
+                        let shouldScrollTop = rowHeight * selectedIndex;
+                        dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                    }, 700);
                 }
             }
-
-            // Way3, not working
-            //if (data.cart && data.cart.CartLines.length > 0 && !ObjectExtensions.isNullOrUndefined(CartViewController)) {
-            //    CartViewController.selectedCartLines.length > 0 ?
-            //        this._dataList.selectItems(CartViewController.selectedCartLines) : this._dataList.clearSelection();
-            //}  
         };
 
         this.customerChangedHandler = (data: CustomerChangedData) => {
