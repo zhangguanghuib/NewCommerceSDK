@@ -14,4 +14,4 @@ This article is going to help introduce the underlying logic and help you unders
 3. <ins>Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<ins><br/>
 <img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7f614090-eef2-4c1b-a2fd-700ad2d506a6">
 <img width="1117" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f50442d4-f456-4a79-93db-33527db3ff59">
-
+<img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5a40a9a9-1e8b-41a8-9419-a39dbc291b50">
