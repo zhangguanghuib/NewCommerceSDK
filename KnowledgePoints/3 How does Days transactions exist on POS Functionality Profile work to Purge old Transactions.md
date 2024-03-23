@@ -19,13 +19,14 @@ From these steps,  you can see the first step is to close Shift, and then the re
 <img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ae01d8b9-1f44-4004-ba03-4e4193057357">
 <img width="1095" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d04d5e7b-01fa-4894-9072-07a8bba7ea9a">
 
-4. Finally these 4 SQL  procesure will be called to delete the old transactions:<br>
+4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
 * PURGESALESONTERMINAL
 * PURGESALESONTERMINAL
 * PURGEASYNCCUSTOMERS
 * PURGERETAILTRANSACTIONFISCALCUSTOMERS
 
-5. Finally if you analyze the below store Procedure, you will find "i_RetentionDays" will be considered to delete old transactions:<br/>
+5. <ins>Finally if you analyze the below store Procedure, you will find "i_RetentionDays" will be considered to delete old transactions:<ins><br/>
 <img width="480" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c20090fa-3128-437b-b96c-e16be66e2388">
 
+6. If you still have trouble,  I would suggest you check in the SQL Store Procedure,  what conditions are not met.
    
