@@ -1,4 +1,4 @@
-<img width="480" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d60a0f07-ab5b-4f6e-8a81-c61165505ddc">##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
+##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
 
 1. <ins>Background:</ins><br/>
 Recently some support engineers asks they set the "Days transactions exist" but it seems the old transaction still there and never been deleted automatically<br/>
