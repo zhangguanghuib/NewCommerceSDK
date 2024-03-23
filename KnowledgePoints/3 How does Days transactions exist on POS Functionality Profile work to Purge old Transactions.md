@@ -8,7 +8,7 @@ This article is going to help introduce the underlying logic and help you unders
 
 2. <ins>Precoditions of this feature will work<ins>
 * set the "Days transactions exist" on POS  functionality profile
-* Run 1070 or 9999 jon
+* Run 1070 or 9999 job
 * Close shift from POS
 
 3. <ins>Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<ins><br/>
