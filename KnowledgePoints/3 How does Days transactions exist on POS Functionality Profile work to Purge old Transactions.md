@@ -1,9 +1,18 @@
-##  How to simulate Shipping All customer order by code when the delivery mode and date is fixed to simplify the user operation?
+##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
 
 1. <ins>Background:</ins><br/>
-For some retail customer,  they have only one fixed Shipping Method for customer like Standard, and the shipping date is also fixed like two days later, so they don't need click "Ship All" button, to choose Shipping Address because that is always customer's primary address, and nor choose Shipping Method and Shipping Date.<br/>
-So these steps seems too complex for them and they really don't need that:<br/>
-<img width="128" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c424688c-968d-4480-ab54-61f8c4cc5ae4"><br/>
+Recently some support engineers asks they set the "Days transactions exist" but it seems the old transaction still there and never been deleted automatically<br/>
+<img width="1013" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ede5dbb3-deb4-4187-87bf-582f2e85f7ac">
+<br/>
+This article is going to help introduce the underlying logic and help you understand how it does work.<br/>
+
+2. <ins>Precoditions of this feature will work<ins>
+* set the "Days transactions exist" on POS  functionality profile
+* Run 1070 or 9999 jon
+* Close shift from POS
+
+3. Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<br/>
+  mg width="128" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c424688c-968d-4480-ab54-61f8c4cc5ae4"><br/>
 <img width="523" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/be9cf250-876e-4099-aa0e-a700f768ab8a"><br/>
 <img width="251" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5620f2da-dfbd-459f-a554-752a58492765"><br/>
 
