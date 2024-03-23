@@ -15,4 +15,6 @@ This article is going to help introduce the underlying logic and help you unders
 <img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7f614090-eef2-4c1b-a2fd-700ad2d506a6">
 <img width="1117" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f50442d4-f456-4a79-93db-33527db3ff59">
 <img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5a40a9a9-1e8b-41a8-9419-a39dbc291b50">
-<img width="1297" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f0d9011a-b8f3-4512-99b4-14ae7f089299">
+<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ae01d8b9-1f44-4004-ba03-4e4193057357">
+<img width="1095" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d04d5e7b-01fa-4894-9072-07a8bba7ea9a">
+
