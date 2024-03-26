@@ -1,11 +1,10 @@
-## How to expliciltly call request handlers when send request or override OOB request handlers?
+## How to generate custom receipt and print it?
 
-1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
-```cs
-var requestHandler = new UserAuthenticationTransactionService();
-var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
-```
-So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
+1.HQ Configuration:
+  # Receipt format
+  # Receipt designer(no screenshot)
+  # Receipt Profile
+  <img width="839" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/96969aae-dab2-48e5-8ec4-bf25ddf8f64f">
 
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
 3. Some code samples:<br/>
