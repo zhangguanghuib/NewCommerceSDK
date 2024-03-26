@@ -1,9 +1,9 @@
 ## How to generate custom receipt and print it?
 
 1.HQ Configuration:
-  # Receipt format
-  # Receipt designer(no screenshot)
-  # Receipt Profile
+  * Receipt format
+  * Receipt designer(no screenshot)
+  * Receipt Profile
   <img width="839" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/96969aae-dab2-48e5-8ec4-bf25ddf8f64f">
 
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
