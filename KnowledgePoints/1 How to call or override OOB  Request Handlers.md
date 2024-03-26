@@ -56,7 +56,7 @@ public runPingTest(): Promise<void> {
 3. In the beginning, how the GetCustomReceiptsRequest will be called?<br/>
 <img width="939" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7537e82d-2178-4ff9-a5d9-8e4aa57ad1c6">
 
-4. Commerce runtime code:<br/>
+4. Extension Commerce runtime code:<br/>
   * Call GetCustomReceiptsRequest<br/>
   <img width="1094" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7e91061b-5a07-44f3-8c3f-94e8b9ea6bf1">
   * GetReceiptServiceRequest
