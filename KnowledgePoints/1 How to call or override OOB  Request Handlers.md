@@ -59,7 +59,7 @@ public runPingTest(): Promise<void> {
   * GetReceiptServiceRequest
   <img width="971" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947828fb-dbad-4ae1-99fc-3cda50f9dd17">
   * Call overriden request handler for GetReceiptServiceRequest to build the customer receipt:
-    <img width="761" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1686e094-7fd7-4965-b6e5-e32845d53aba">
+    <img width="761" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1686e094-7fd7-4965-b6e5-e32845d53aba"><br/>
   * Call OOB handler for GetReceiptServiceRequest to build the custom receipt:<br/>
   
   ```cs
