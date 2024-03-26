@@ -69,8 +69,10 @@ public runPingTest(): Promise<void> {
   <br/>
   <img width="1190" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8856114f-98f6-4993-abe0-5f45abf15546">
 4. How the OOB Receipt Service build the custom receipt:<br/>
- * In the GetFormattedReceipt, no condition will be met until go to default:
+ *  In the GetFormattedReceipt, no condition will be met until go to default:
 <img width="1135" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ecdcafd0-532b-48bc-95e4-5f680a04be62">
 
+5. Finally it goes to GetReceiptFromTransaction to build the receipt:<br/>
+   <img width="1263" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/db77555b-7318-434a-9bb5-7e54ea4c4433">
 
 
