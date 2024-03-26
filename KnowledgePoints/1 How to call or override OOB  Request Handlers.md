@@ -56,3 +56,6 @@ public runPingTest(): Promise<void> {
 3. Commerce runtime code:<br/>
   * Call GetCustomReceiptsRequest<br/>
   <img width="1094" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7e91061b-5a07-44f3-8c3f-94e8b9ea6bf1">
+  * GetReceiptServiceRequest
+  <img width="971" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947828fb-dbad-4ae1-99fc-3cda50f9dd17">
+
