@@ -60,5 +60,13 @@ public runPingTest(): Promise<void> {
   <img width="971" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947828fb-dbad-4ae1-99fc-3cda50f9dd17">
   * Call overriden request handler for GetReceiptServiceRequest to build the customer receipt:
     <img width="761" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1686e094-7fd7-4965-b6e5-e32845d53aba">
+  * Call OOB handler for GetReceiptServiceRequest to build the custom receipt:
+    ```cs
+    var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+
+    GetReceiptServiceResponse originalReceiptsResponse = await request.RequestContext.Runtime.ExecuteAsync<GetReceiptServiceResponse>(request, request.RequestContext, requestHandler, skipRequestTriggers: false).ConfigureAwait(false);
+   ```
+    <img width="1190" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8856114f-98f6-4993-abe0-5f45abf15546">
+
 
 
