@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>RetailTransactionService_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.Collections.Specialized;
+using System.Reflection;
+using Microsoft.Dynamics.Commerce.Runtime.Services.CustomerOrder;
+
+[ExtensionOf(classStr(RetailTransactionServiceEx))]
+final class RetailTransactionService_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>sendEmail</Name>
+				<Source><![CDATA[
+    public static container sendEmail(str custOrderXmlStr)
+    {
+        container result = conNull();
+        TransDate	_transactionDate = dateNull();
+        try
+        {
+            //Always call this in Async mode.
+            Global::runAsync(classNum(RetailTransactionServiceEx),
+                                staticMethodStr(RetailTransactionServiceEx,processOrderInfoForEmail),
+                                [custOrderXmlStr]);
+            result = [true,"Success","Send Email"];
+        }
+        catch
+        {
+            result = [false,"Failed order creation during email send"];
+        }
+        return result;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>processOrderInfoForEmail</Name>
+				<Source><![CDATA[
+    public static void processOrderInfoForEmail(container _parameters)
+    {
+        ContactPersonId		giftRecipient;
+        str					custOrderXmlStr;
+        String30            rewardType;
+ 
+
+        [custOrderXmlStr] = _parameters;
+        var customerOrderInfo = CustomerOrderInfo::FromXml(custOrderXmlStr);
+        ItemInfoCollection items = customerOrderInfo.Items;
+        if (items.get_Count() == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < items.get_Count(); i++)
+        {
+            ItemInfo itemInfo = items.get_Item(i) as ItemInfo;
+            AttributeValueInfoCollection attribute  = itemInfo.AttributeValues;
+            if (attribute.get_Count() != 0)
+            {
+                int a = 0;
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
