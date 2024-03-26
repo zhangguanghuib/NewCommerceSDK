@@ -78,4 +78,13 @@ public runPingTest(): Promise<void> {
 6. Finally it goes to GetReceiptFromTransaction to build the receipt:<br/>
    <img width="1263" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/db77555b-7318-434a-9bb5-7e54ea4c4433">
 
+7. Finally you can see the front end code get the custom receipt:<br/>
+<img width="881" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cc61bc23-19ff-448a-8bcb-2cd940552a2f"><br/>
+
+If you have hardware station, you will see the custom receipt get printed.
+
+8. All the source code is in :
+   https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/CustomReceiptPrint/src/ScaleUnitSample
+
+
 
