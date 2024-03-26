@@ -6,7 +6,53 @@
   * Receipt Profile
   <img width="839" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/96969aae-dab2-48e5-8ec4-bf25ddf8f64f">
 
-2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
+2.  POS front-end code<br/>
+```ts
+public runPingTest(): Promise<void> {
+    let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
+        = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>("HOUSTON-HOUSTON-42-1711458887804", ProxyEntities.SearchLocation.Local);
+
+    return this._context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse>): Promise<ProxyEntities.Receipt[]> => {
+        let salesOrder: ProxyEntities.SalesOrder = res.data.result;
+
+        return Promise.all([
+            this._context.runtime.executeAsync(new GetHardwareProfileClientRequest())
+                .then((response: ClientEntities.ICancelableDataResult<GetHardwareProfileClientResponse>): ProxyEntities.HardwareProfile => {
+                    return response.data.result;
+                }),
+            this._context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+                .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                    return response.data.result;
+                })])
+            .then((results: any[]): Promise<ClientEntities.ICancelableDataResult<GetReceiptsClientResponse>> => {
+                let hardwareProfile: ProxyEntities.HardwareProfile = results[0];
+                let deviceConfiguration: ProxyEntities.DeviceConfiguration = results[1];
+
+                let criteria: ProxyEntities.ReceiptRetrievalCriteria = {
+                    IsCopy: true,
+                    IsRemoteTransaction: salesOrder.StoreId !== deviceConfiguration.StoreNumber,
+                    IsPreview: false,
+                    QueryBySalesId: true,
+                    ReceiptTypeValue: ProxyEntities.ReceiptType.CustomReceipt6,
+                    HardwareProfileId: hardwareProfile.ProfileId
+                };
+
+                let getReceiptsRequest: GetReceiptsClientRequest<GetReceiptsClientResponse> = new GetReceiptsClientRequest(salesOrder.SalesId ? salesOrder.SalesId : salesOrder.Id, criteria);
+                return this._context.runtime.executeAsync(getReceiptsRequest);
+            })
+            .then((response: ClientEntities.ICancelableDataResult<GetReceiptsClientResponse>): ProxyEntities.Receipt[] => {
+                return response.data.result;
+            });
+    }).then((recreatedReceipts: ProxyEntities.Receipt[]): Promise<ClientEntities.ICancelableDataResult<PrinterPrintResponse>> => {
+        let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
+        return this._context.runtime.executeAsync(printRequest);
+    }).then((): Promise<void> => {
+        return Promise.resolve();
+    }).catch((reason: any) => {
+        console.error(reason);
+    });
+}
+```
 3. Some code samples:<br/>
    .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
    ```cs
