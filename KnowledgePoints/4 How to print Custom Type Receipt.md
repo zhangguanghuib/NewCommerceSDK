@@ -1,32 +1,90 @@
-##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
+## How to generate custom receipt and print it?
 
-1. <ins>Background:</ins><br/>
-Recently some support engineers asks they set the "Days transactions exist" but it seems the old transaction still there and never been deleted automatically<br/>
-<img width="1013" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ede5dbb3-deb4-4187-87bf-582f2e85f7ac">
-<br/>
-This article is going to help introduce the underlying logic and help you understand how it does work.<br/>
+1.HQ Configuration:
+  * Receipt format
+  * Receipt designer(no screenshot)
+  * Receipt Profile
+  <img width="839" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/96969aae-dab2-48e5-8ec4-bf25ddf8f64f">
 
-2. <ins>Precoditions of this feature will work<ins>
-* set the "Days transactions exist" on POS  functionality profile
-* Run 1070 or 9999 job
-* Close shift from POS
+2.  POS front-end code<br/>
+```ts
+public runPingTest(): Promise<void> {
+    let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
+        = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>("HOUSTON-HOUSTON-42-1711458887804", ProxyEntities.SearchLocation.Local);
 
-3. <ins>Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<ins><br/>
-From these steps,  you can see the first step is to close Shift, and then the request Chain will call PurgeSalesTransactionsDataRequest API will be called finally<br>
-<img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7f614090-eef2-4c1b-a2fd-700ad2d506a6">
-<img width="1117" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f50442d4-f456-4a79-93db-33527db3ff59">
-<img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5a40a9a9-1e8b-41a8-9419-a39dbc291b50">
-<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ae01d8b9-1f44-4004-ba03-4e4193057357">
-<img width="1095" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d04d5e7b-01fa-4894-9072-07a8bba7ea9a">
+    return this._context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse>): Promise<ProxyEntities.Receipt[]> => {
+        let salesOrder: ProxyEntities.SalesOrder = res.data.result;
 
-4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
-* PURGESALESONTERMINAL
-* PURGESALESONTERMINAL
-* PURGEASYNCCUSTOMERS
-* PURGERETAILTRANSACTIONFISCALCUSTOMERS
+        return Promise.all([
+            this._context.runtime.executeAsync(new GetHardwareProfileClientRequest())
+                .then((response: ClientEntities.ICancelableDataResult<GetHardwareProfileClientResponse>): ProxyEntities.HardwareProfile => {
+                    return response.data.result;
+                }),
+            this._context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+                .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                    return response.data.result;
+                })])
+            .then((results: any[]): Promise<ClientEntities.ICancelableDataResult<GetReceiptsClientResponse>> => {
+                let hardwareProfile: ProxyEntities.HardwareProfile = results[0];
+                let deviceConfiguration: ProxyEntities.DeviceConfiguration = results[1];
 
-5. <ins>Finally if you analyze the below store Procedure, you will find "i_RetentionDays" will be considered to delete old transactions:<ins><br/>
-<img width="480" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c20090fa-3128-437b-b96c-e16be66e2388">
+                let criteria: ProxyEntities.ReceiptRetrievalCriteria = {
+                    IsCopy: true,
+                    IsRemoteTransaction: salesOrder.StoreId !== deviceConfiguration.StoreNumber,
+                    IsPreview: false,
+                    QueryBySalesId: true,
+                    ReceiptTypeValue: ProxyEntities.ReceiptType.CustomReceipt6,
+                    HardwareProfileId: hardwareProfile.ProfileId
+                };
 
-6. If you still have trouble,  I would suggest you check in the SQL Store Procedure,  what conditions are not met.
-   
+                let getReceiptsRequest: GetReceiptsClientRequest<GetReceiptsClientResponse> = new GetReceiptsClientRequest(salesOrder.SalesId ? salesOrder.SalesId : salesOrder.Id, criteria);
+                return this._context.runtime.executeAsync(getReceiptsRequest);
+            })
+            .then((response: ClientEntities.ICancelableDataResult<GetReceiptsClientResponse>): ProxyEntities.Receipt[] => {
+                return response.data.result;
+            });
+    }).then((recreatedReceipts: ProxyEntities.Receipt[]): Promise<ClientEntities.ICancelableDataResult<PrinterPrintResponse>> => {
+        let printRequest: PrinterPrintRequest<PrinterPrintResponse> = new PrinterPrintRequest(recreatedReceipts);
+        return this._context.runtime.executeAsync(printRequest);
+    }).then((): Promise<void> => {
+        return Promise.resolve();
+    }).catch((reason: any) => {
+        console.error(reason);
+    });
+}
+```
+3. In the beginning, how the GetCustomReceiptsRequest will be called?<br/>
+<img width="939" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7537e82d-2178-4ff9-a5d9-8e4aa57ad1c6">
+
+4. Extension Commerce runtime code:<br/>
+  * Call GetCustomReceiptsRequest<br/>
+  <img width="1094" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7e91061b-5a07-44f3-8c3f-94e8b9ea6bf1">
+  * GetReceiptServiceRequest
+  <img width="971" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947828fb-dbad-4ae1-99fc-3cda50f9dd17">
+  * Call overriden request handler for GetReceiptServiceRequest to build the customer receipt:
+    <img width="761" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1686e094-7fd7-4965-b6e5-e32845d53aba"><br/>
+  * Call OOB handler for GetReceiptServiceRequest to build the custom receipt:<br/>
+  
+  ```cs
+    var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+    GetReceiptServiceResponse originalReceiptsResponse = await request.RequestContext.Runtime.ExecuteAsync<GetReceiptServiceResponse>(request, request.RequestContext, requestHandler, skipRequestTriggers: false).ConfigureAwait(false);
+  ```
+  <br/>
+  <img width="1190" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8856114f-98f6-4993-abe0-5f45abf15546">
+5. How the OOB Receipt Service build the custom receipt:<br/>
+ *  In the GetFormattedReceipt, no condition will be met until go to default:
+<img width="1135" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ecdcafd0-532b-48bc-95e4-5f680a04be62">
+
+6. Finally it goes to GetReceiptFromTransaction to build the receipt:<br/>
+   <img width="1263" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/db77555b-7318-434a-9bb5-7e54ea4c4433">
+
+7. Finally you can see the front end code get the custom receipt:<br/>
+<img width="881" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/cc61bc23-19ff-448a-8bcb-2cd940552a2f"><br/>
+
+If you have hardware station, you will see the custom receipt get printed.
+
+8. All the source code is in :
+   https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/CustomReceiptPrint/src/ScaleUnitSample
+
+
+
