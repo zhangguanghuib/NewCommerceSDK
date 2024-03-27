@@ -82,7 +82,7 @@ This article is going to develop a customization to support Dual Display to supp
        }
    }
    ```
-   7. How to scroll? <br/>
+7. How to scroll? <br/>
 
    - Calculate the line height of each cart line:
    ```ts
@@ -93,4 +93,20 @@ This article is going to develop a customization to support Dual Display to supp
         rowHeight = listLine?.clientHeight;
     } 
    ```
+   - When a new line is added and the cart line is already over 15 lines, calculate the scrolltop,  the formula is the totalHeight of the scroll container  minus the first 15 lines total height, that is<br/>
+     let shouldScrollTop = totalHeight - rowHeight * 15;
+    ```ts
+     if (isNewLine) {
+     if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
+         if (data.cart.CartLines.length >= 16) {
+             setTimeout(() => {
+                 let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
+                 let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
+                 let shouldScrollTop = totalHeight - rowHeight * 15;
+                 dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+             }, 700);
+          }
+      }
+    }
+    ```
    
