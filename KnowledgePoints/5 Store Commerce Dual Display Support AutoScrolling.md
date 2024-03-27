@@ -2,12 +2,12 @@
 
 1. <ins>Background:</ins><br/>
 As you know the Store Commerce Out-Of-Box did not support Dual Display,  when enable Dual Display in the Funcationality Profile,  the Dual Display only show a simple amount due likee below<br/>
-
+<img width="1161" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bf92dfab-68b8-4709-a2b3-431031d04916">
 <br/>
 This article is going to develop a customization to support Dual Display to support auto-scroll when more and more product are putting into cart that overflow the  Dual Display cart space.<br/>
-
 2. <ins>Precoditions of this feature will work<ins>
-* Enable Dual Display from Hardware profile
+* Enable Dual Display from Hardware profile:
+  <img width="689" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08cd5a67-deff-4f30-ac7d-23d6595c30dc">
 * Run 1070 or 9999 job
 * Log on POS
 
