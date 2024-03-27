@@ -82,4 +82,15 @@ This article is going to develop a customization to support Dual Display to supp
        }
    }
    ```
+   7. How to scroll? <br/>
+
+   - Calculate the line height of each cart line:
+   ```ts
+    // Find the line height
+    let listLine: HTMLDivElement = document.querySelector(".dataListLine") as HTMLDivElement;
+    let rowHeight = 39;
+    if (listLine?.clientHeight) {
+        rowHeight = listLine?.clientHeight;
+    } 
+   ```
    
