@@ -15,8 +15,11 @@ This article is going to develop a customization to support Dual Display to supp
 <div style="border:1">
    https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/embed.aspx?UniqueId=42f1c6d9-3159-43fe-87d0-e3ddf392e589&nav=%7B%22playbackOptions%22%3A%7B%22startTimeInSeconds%22%3A0%7D%7D&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="Store Commerce Dual Display Demo-20240327_181558-Meeting Recording.mp4"
 </div>
-4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
-* PURGESALESONTERMINAL
+<br/>
+4. <ins>You can see:<ins><br>
+* When a new product added to the cart, the dual dispaly will show a product:
+   <img width="1679" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b52bb1d8-5739-4ed2-8b49-3fd17c3bee10">
+
 * PURGESALESONTERMINAL
 * PURGEASYNCCUSTOMERS
 * PURGERETAILTRANSACTIONFISCALCUSTOMERS
