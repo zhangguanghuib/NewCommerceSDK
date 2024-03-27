@@ -8,7 +8,7 @@ This article is going to develop a customization to support Dual Display to supp
 2. Precoditions of this feature will work
 * Enable Dual Display from Hardware profile:
   <img width="689" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08cd5a67-deff-4f30-ac7d-23d6595c30dc">
-* Run 1070 or 9999 job
+* Run 1070 or 9999 job.
 * Log on POS
 
 3. <ins>Below is the recording to show how it is working:</ins><br/>
