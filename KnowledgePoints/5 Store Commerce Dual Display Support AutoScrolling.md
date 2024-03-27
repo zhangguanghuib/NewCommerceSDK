@@ -5,13 +5,13 @@ As you know the Store Commerce Out-Of-Box did not support Dual Display,  when en
 <img width="1161" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bf92dfab-68b8-4709-a2b3-431031d04916">
 <br/>
 This article is going to develop a customization to support Dual Display to support auto-scroll when more and more product are putting into cart that overflow the  Dual Display cart space.<br/>
-2. <ins>Precoditions of this feature will work<ins>
+2. <ins>Precoditions of this feature will work</ins>
 * Enable Dual Display from Hardware profile:
   <img width="689" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08cd5a67-deff-4f30-ac7d-23d6595c30dc">
 * Run 1070 or 9999 job
 * Log on POS
 
-3. <ins>Below is the recording to show how it is working:<ins><br/>
+3. <ins>Below is the recording to show how it is working:</ins><br/>
 <div style="border:1">
    https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/embed.aspx?UniqueId=42f1c6d9-3159-43fe-87d0-e3ddf392e589&nav=%7B%22playbackOptions%22%3A%7B%22startTimeInSeconds%22%3A0%7D%7D&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="Store Commerce Dual Display Demo-20240327_181558-Meeting Recording.mp4"
 </div>
