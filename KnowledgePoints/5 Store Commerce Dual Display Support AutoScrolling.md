@@ -33,5 +33,53 @@ This article is going to develop a customization to support Dual Display to supp
 <img width="1891" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ece104ee-e9e5-4805-832a-daf055811cd4">
 
 
-6. If you still have trouble,  I would suggest you check in the SQL Store Procedure,  what conditions are not met.
+6. Technical point.
+   - Whenever cart changed, like adding a new cart line or update existing cart line, the line id will be recorded and stored in the local storage
+   ```ts
+   import { ProxyEntities } from "PosApi/Entities";
+import * as CartView from "PosApi/Extend/Views/CartView";
+import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
+
+export default class CartViewController extends CartView.CartExtensionViewControllerBase {
+    public static selectedCartLineId: string = StringExtensions.EMPTY;
+    public static selectedCartLines: ProxyEntities.CartLine[];
+    public _selectedTenderLines: ProxyEntities.TenderLine[];
+    public _isProcessingAddItemOrCustomer: boolean;
+
+    constructor(context: CartView.IExtensionCartViewControllerContext) {
+        super(context);
+        CartViewController.selectedCartLines = [];
+        CartViewController.selectedCartLineId = null;
+        this.cartLineSelectedHandler = (data: CartView.CartLineSelectedData): void => {
+            CartViewController.selectedCartLines = data.cartLines;
+            if (ArrayExtensions.hasElements(CartViewController.selectedCartLines)) {
+                CartViewController.selectedCartLineId = CartViewController.selectedCartLines[0].LineId;
+                localStorage.setItem("currentCartLineId", CartViewController.selectedCartLineId);
+            }
+        }
+
+        this.cartLineSelectionClearedHandler = (): void => {
+            CartViewController.selectedCartLines = [];
+            CartViewController.selectedCartLineId = null;
+            localStorage.setItem("currentCartLineId", StringExtensions.EMPTY);
+        }
+
+        this.tenderLineSelectedHandler = (data: CartView.TenderLineSelectedData): void => {
+            this._selectedTenderLines = data.tenderLines;
+        }
+
+        this.tenderLineSelectionClearedHandler = (): void => {
+            this._selectedTenderLines = [];
+        }
+
+        this.processingAddItemOrCustomerChangedHandler = (processing: boolean): void => {
+            this._isProcessingAddItemOrCustomer = processing;
+        }
+
+        this.cartChangedHandler = (data: CartView.CartChangedData): void => {
+            console.log(data);
+        }
+    }
+}
+   ```
    
