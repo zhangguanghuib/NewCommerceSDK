@@ -12,7 +12,11 @@ This article is going to develop a customization to support Dual Display to supp
 * Log on POS
 
 3. <ins>Below is the recording to show how it is working:<ins><br/>
-<iframe src="https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/embed.aspx?UniqueId=42f1c6d9-3159-43fe-87d0-e3ddf392e589&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="1280" height="720" frameborder="0" scrolling="no" allowfullscreen title="Store Commerce Dual Display Demo-20240327_181558-Meeting Recording.mp4"></iframe>
+<video width="1820" height="720" autoplay>
+  <source src="https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/embed.aspx?UniqueId=42f1c6d9-3159-43fe-87d0-e3ddf392e589&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="1280" height="720" frameborder="0" scrolling="no" allowfullscreen title="Store Commerce Dual Display Demo-20240327_181558-Meeting Recording.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
 * PURGESALESONTERMINAL
