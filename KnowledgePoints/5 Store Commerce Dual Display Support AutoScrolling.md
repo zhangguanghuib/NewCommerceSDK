@@ -1,23 +1,18 @@
-##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
+## Store Commerce Dual Display Support AutoScrolling.
 
 1. <ins>Background:</ins><br/>
-Recently some support engineers asks they set the "Days transactions exist" but it seems the old transaction still there and never been deleted automatically<br/>
-<img width="1013" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ede5dbb3-deb4-4187-87bf-582f2e85f7ac">
+As you know the Store Commerce Out-Of-Box did not support Dual Display,  when enable Dual Display in the Funcationality Profile,  the Dual Display only show a simple amount due likee below<br/>
+
 <br/>
-This article is going to help introduce the underlying logic and help you understand how it does work.<br/>
+This article is going to develop a customization to support Dual Display to support auto-scroll when more and more product are putting into cart that overflow the  Dual Display cart space.<br/>
 
 2. <ins>Precoditions of this feature will work<ins>
-* set the "Days transactions exist" on POS  functionality profile
+* Enable Dual Display from Hardware profile
 * Run 1070 or 9999 job
-* Close shift from POS
+* Log on POS
 
-3. <ins>Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<ins><br/>
-From these steps,  you can see the first step is to close Shift, and then the request Chain will call PurgeSalesTransactionsDataRequest API will be called finally<br>
-<img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7f614090-eef2-4c1b-a2fd-700ad2d506a6">
-<img width="1117" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f50442d4-f456-4a79-93db-33527db3ff59">
-<img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5a40a9a9-1e8b-41a8-9419-a39dbc291b50">
-<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ae01d8b9-1f44-4004-ba03-4e4193057357">
-<img width="1095" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d04d5e7b-01fa-4894-9072-07a8bba7ea9a">
+3. <ins>Below is the recording to show how it is working:<ins><br/>
+<iframe src="https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/embed.aspx?UniqueId=42f1c6d9-3159-43fe-87d0-e3ddf392e589&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="1280" height="720" frameborder="0" scrolling="no" allowfullscreen title="Store Commerce Dual Display Demo-20240327_181558-Meeting Recording.mp4"></iframe>
 
 4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
 * PURGESALESONTERMINAL
