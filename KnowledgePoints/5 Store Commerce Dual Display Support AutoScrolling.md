@@ -109,4 +109,15 @@ This article is going to develop a customization to support Dual Display to supp
       }
     }
     ```
+   - When editing the existing line, the scrolltop is line number * line hight, the code is
+   ```ts
+   else {//Update existing line
+    setTimeout(() => {
+        let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
+        let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
+        let shouldScrollTop = rowHeight * selectedIndex;
+        dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+     }, 700);
+   }
+   ```
    
