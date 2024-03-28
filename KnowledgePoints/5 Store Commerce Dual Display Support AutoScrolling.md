@@ -12,6 +12,7 @@ This article is going to develop a customization to support Dual Display to supp
 - Log on POS
 
 3. <ins>Below is the recording to show how it is working:</ins><br/>
+[!VIDEO https://youtu.be/L1SN7kqq9lQ]
 [![Alternate Text](http://img.youtube.com/vi/L1SN7kqq9lQ/0.jpg)](https://youtu.be/L1SN7kqq9lQ)
 <br/>
 4. <ins>You can see:</ins><br>
