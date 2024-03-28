@@ -1,32 +1,161 @@
-##  How does Days transactions exist on POS Functionality Profile work to Purge old Transactions from CSU channel database?
+## How to expliciltly call request handlers when send request or override OOB request handlers?
 
-1. <ins>Background:</ins><br/>
-Recently some support engineers asks they set the "Days transactions exist" but it seems the old transaction still there and never been deleted automatically<br/>
-<img width="1013" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ede5dbb3-deb4-4187-87bf-582f2e85f7ac">
+1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
+```cs
+var requestHandler = new UserAuthenticationTransactionService();
+var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
+```
+So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
+
+2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
+3. Some code samples:<br/>
+   .Way #1,  Override the OOB request Handler and then call the OOB request in the Process
+   ```cs
+   public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
+    {
+        public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities
+            = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
+
+        protected override async Task<Response> Process(GetEmployeeIdentityByExternalIdentityRealtimeRequest request)
+        {
+            ThrowIf.Null(request, "request");
+
+            GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
+
+            try
+            {
+                if (request == null)
+                {
+                    var exception = new ArgumentNullException("request");
+                   
+                    throw exception;
+                }
+                else if (request is GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+                {
+                    GetEmployeeIdentityByExternalIdentityRealtimeRequest employeeRequest = request as GetEmployeeIdentityByExternalIdentityRealtimeRequest;
+
+                    if (foundIdentities.TryGetValue(employeeRequest.ExternalIdentityId, out val))
+                    {    
+                        return val;
+                    }
+                    else
+                    {
+                        var response = await this.ExecuteNextAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request).ConfigureAwait(false);
+                        foundIdentities.GetOrAdd(employeeRequest.ExternalIdentityId, response);
+                        return response;
+                    }
+                }
+            }
+            finally
+            {
+                //logger.StopOperation(operation);
+            }
+            // Do no checks.
+            return NullResponse.Instance;
+        }
+    }
+   ```
 <br/>
-This article is going to help introduce the underlying logic and help you understand how it does work.<br/>
+   . Way#2, Implement SingleAsyncRequestHandler, get OOB  request Handler, and then when call request with the OOB  request handler:
 
-2. <ins>Precoditions of this feature will work<ins>
-* set the "Days transactions exist" on POS  functionality profile
-* Run 1070 or 9999 job
-* Close shift from POS
+  ```cs
+  public class GetEmployeeIdentityByExternalIdentityRealtimeRequestHandlerV2 : SingleAsyncRequestHandler<GetEmployeeIdentityByExternalIdentityRealtimeRequest>
+  {
+      public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
+  
+      protected async override Task<Response> Process(GetEmployeeIdentityByExternalIdentityRealtimeRequest request)
+      {
+          ThrowIf.Null(request, "request");
+  
+          // The extension should do nothing If fiscal registration is enabled and legacy extension were used to run registration process.
+          if (!string.IsNullOrEmpty(request.RequestContext.GetChannelConfiguration().FiscalRegistrationProcessId))
+          {
+              return NotHandledResponse.Instance;
+          }
+  
+          GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
+  
+          if (foundIdentities.TryGetValue(request.ExternalIdentityId, out val))
+          {
+              return val;
+          }
+          else
+          {
+              // Execute original logic.
+              var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+              var response = await request.RequestContext.Runtime.ExecuteAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
+  
+              foundIdentities.GetOrAdd(request.ExternalIdentityId, response);
+  
+              return response;
+          }
+      }
+  }
+  ```
+<br/>
+. Way#3,Implement IRequestHandlerAsync,  then get OOB  request handler, and when send request using the base request handler:
 
-3. <ins>Why only when close shift from POS, Purge old transactions will happen?   Please see the below process:<ins><br/>
-From these steps,  you can see the first step is to close Shift, and then the request Chain will call PurgeSalesTransactionsDataRequest API will be called finally<br>
-<img width="1107" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7f614090-eef2-4c1b-a2fd-700ad2d506a6">
-<img width="1117" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f50442d4-f456-4a79-93db-33527db3ff59">
-<img width="1090" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5a40a9a9-1e8b-41a8-9419-a39dbc291b50">
-<img width="1103" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ae01d8b9-1f44-4004-ba03-4e4193057357">
-<img width="1095" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d04d5e7b-01fa-4894-9072-07a8bba7ea9a">
+ ```cs
+ public class UserAuthService : IRequestHandlerAsync
+ {
+     public static ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse> foundIdentities 
+         = new ConcurrentDictionary<string, GetEmployeeIdentityByExternalIdentityRealtimeResponse>();
 
-4. <ins>Finally these 4 SQL  procesure will be called to delete the old transactions:<ins><br>
-* PURGESALESONTERMINAL
-* PURGESALESONTERMINAL
-* PURGEASYNCCUSTOMERS
-* PURGERETAILTRANSACTIONFISCALCUSTOMERS
+     public IEnumerable<Type> SupportedRequestTypes
+     {
+         get
+         {
+             return new Type[]
+             {
+                 typeof(GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+             };
+         }
+     }
 
-5. <ins>Finally if you analyze the below store Procedure, you will find "i_RetentionDays" will be considered to delete old transactions:<ins><br/>
-<img width="480" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c20090fa-3128-437b-b96c-e16be66e2388">
+     /// <summary>
+     /// Executes the request.
+     /// </summary>
+     /// <param name="request">The request.</param>
+     /// <returns>The response.</returns>
+     public async Task<Response> Execute(Request request)
+     {
+         GetEmployeeIdentityByExternalIdentityRealtimeResponse val;
 
-6. If you still have trouble,  I would suggest you check in the SQL Store Procedure,  what conditions are not met.
-   
+         try
+         {
+             if (request == null)
+             {
+                 var exception = new ArgumentNullException("request");
+                 throw exception;
+             }
+             else if (request is GetEmployeeIdentityByExternalIdentityRealtimeRequest)
+             {
+                 GetEmployeeIdentityByExternalIdentityRealtimeRequest employeeRequest = request as GetEmployeeIdentityByExternalIdentityRealtimeRequest;
+
+                 if (foundIdentities.TryGetValue(employeeRequest.ExternalIdentityId, out val))
+                 {
+                     //return foundIdentities[employeeRequest.ExternalIdentityId];
+                     return val;
+                 }
+                 else
+                 {
+                     var requestHandler = request.RequestContext.Runtime.GetNextAsyncRequestHandler(request.GetType(), this);
+                     var response = await request.RequestContext.Runtime.ExecuteAsync<GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler, false).ConfigureAwait(false);
+
+                     foundIdentities.GetOrAdd(employeeRequest.ExternalIdentityId, response);
+                     return response;
+                 }
+             }
+         }
+         finally
+         {
+             Console.WriteLine("Finally");
+         }
+
+         // Do no checks.
+         return NullResponse.Instance;
+     }
+ }
+ ```
+
+4.  The complete project to test that is:  https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/RQL-UserAuthService/src/ScaleUnitSample/CommerceRuntime/RequestHandlers
