@@ -145,7 +145,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                                 let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
                                 let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
                                 let shouldScrollTop = totalHeight - rowHeight * 15;
-                                dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                                // dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                                dualDisplayScrollingContainer.scrollTo({
+                                    top: shouldScrollTop, // Replace with the position you want to scroll to
+                                    behavior: 'smooth'
+                                });
                             }, 700);
                         }
                     }
@@ -155,7 +159,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                         let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
                         let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
                         let shouldScrollTop = rowHeight * selectedIndex;
-                        dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                        // dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
+                        dualDisplayScrollingContainer.scrollTo({
+                            top: shouldScrollTop, 
+                            behavior: 'smooth'
+                        });
                     }, 700);
                 }
             }
