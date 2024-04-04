@@ -55,7 +55,7 @@
             <div class="dualDisplayContainer marginBottom8">
                  <div style="flex: 1">
                      <div style="border:solid">
-                         <h2 style="font-weight: bold; text-decoration: underline;">The last cart line is here:</h2>
+                         <h2 style="font-weight: bold; text-decoration: underline;">The the current adding or updating line is here:</h2>
                          <div class="header-row">
                             <h2  style="font-weight: bold; text-decoration: underline;">Item Id:</h2>
                             <h2 class="marginLeft8" data-bind="text: itemId">Item Id:</h2>
@@ -82,10 +82,16 @@
                     <div style="border:solid">
                         <h2 class="marginLeft8" data-bind="text: cartTotalAmountLabel">Total Amount:</h2>
                         <h2 class="marginLeft8" data-bind="text: cartTotalAmount"></h2>
-                        <h2 class="marginLeft8" data-bind="text: customerNameLabel">Customer Name:</h2>
-                        <h2 class="marginLeft8" data-bind="text: customerName"></h2>
-                        <h2 class="marginLeft8" data-bind="text: customerAccountNumberLabel">Customer Account Number:</h2>
-                        <h2 class="marginLeft8" data-bind="text: customerAccountNumber"></h2>
+                        <div>
+                            <h2 class="marginLeft8"  style="display:inline" data-bind="text: customerNameLabel">Customer Name:</h2>
+                            <h2 class="marginLeft8"  style="display:inline" data-bind="text: customerName"></h2>
+                        </div>
+
+                        <div>
+                            <h2 class="marginLeft8" style="display:inline" data-bind="text: customerAccountNumberLabel">Customer Account Number:</h2>
+                            <h2 class="marginLeft8" style="display:inline" data-bind="text: customerAccountNumber"></h2>
+                        </div>
+
                         <h2 class="marginLeft8" data-bind="text: isLoggedOn() ? 'logged in' : 'logged out'"></h2>
                         <div class="header-row">
                             <h2 class="marginLeft8" data-bind="text: employeeNameLabel">Employee Name:</h2>

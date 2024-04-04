@@ -48,7 +48,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     private _cartLines: Array<ProxyEntities.CartLine>;
     private _dataList: IDataList<ProxyEntities.CartLine>;
 
-    public _lastCartLine: ko.Computed<ProxyEntities.CartLine>;
+    // The current adding or updating cartline
+    public currentCartLine: ko.Observable<ProxyEntities.CartLine>;
+
     public readonly itemId: ko.Computed<string>;
     public readonly productName: ko.Computed<string>;
     public readonly productQuantity: ko.Computed<string>;
@@ -57,6 +59,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public imgUrl: ko.Observable<string>;
     public imgIndex: number;
     public mediaServerUrl: string = "https://cn-guazha-1112.fareast.corp.microsoft.com:446/DualDisplay/";
+    //public mediaServerUrl: ko.Observable<string>;
     public readonly IMGTOTAL: number = 10;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
@@ -74,14 +77,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer = ko.observable(null);
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
-        this._lastCartLine = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._cart()) || ObjectExtensions.isNullOrUndefined(this._cart().CartLines) || this._cart().CartLines.Length <= 0 ?
-                null : this._cart().CartLines[this._cart().CartLines.length - 1];
-            //return this._cartLines.length <= 0 ? null : this._cartLines[this._cartLines.length - 1];
-        });
+        //this.mediaServerUrl = ko.observable('');
 
         this.imgIndex = 0;
         this.imgUrl = ko.observable('');
+        this.currentCartLine = ko.observable(null);
 
         this.cartTotalAmount = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._cart()) ? 0.00 : this._cart().TotalAmount;
@@ -104,24 +104,24 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         });
 
         this.itemId = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().ItemId;
+            return ObjectExtensions.isNullOrUndefined(this.currentCartLine()) ? StringExtensions.EMPTY : this.currentCartLine().ItemId;
         });
 
         this.productName = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) || StringExtensions.isEmptyOrWhitespace(this._lastCartLine().Description) ?
-                StringExtensions.EMPTY : this._lastCartLine().Description;
+            return ObjectExtensions.isNullOrUndefined(this.currentCartLine()) || StringExtensions.isEmptyOrWhitespace(this.currentCartLine().Description) ?
+                StringExtensions.EMPTY : this.currentCartLine().Description;
         });
 
         this.productQuantity = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().Quantity.toString();
+            return ObjectExtensions.isNullOrUndefined(this.currentCartLine()) ? StringExtensions.EMPTY : this.currentCartLine().Quantity.toString();
         });
 
         this.productDiscount = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().DiscountAmount.toString();
+            return ObjectExtensions.isNullOrUndefined(this.currentCartLine()) ? StringExtensions.EMPTY : this.currentCartLine().DiscountAmount.toString();
         });
 
         this.productCost = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._lastCartLine()) ? StringExtensions.EMPTY : this._lastCartLine().TotalAmount.toString();
+            return ObjectExtensions.isNullOrUndefined(this.currentCartLine()) ? StringExtensions.EMPTY : this.currentCartLine().TotalAmount.toString();
         });
 
         this.cartChangedHandler = (data: CartChangedData) => {
@@ -138,6 +138,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             } 
             // If a new line is adding
             if (data.cart && data.cart.CartLines.length > 0 && !StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
+                //Find the current cart line:
+                this.currentCartLine(this._dataList.data.filter(line => line.LineId === currentCartLineId)[0]);
+
                 if (isNewLine) {
                     if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
                         if (data.cart.CartLines.length >= 16) {
@@ -161,11 +164,13 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
                         let shouldScrollTop = rowHeight * selectedIndex;
                         // dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
                         dualDisplayScrollingContainer.scrollTo({
-                            top: shouldScrollTop, 
+                            top: shouldScrollTop,
                             behavior: 'smooth'
                         });
                     }, 700);
                 }
+            } else {
+                this.currentCartLine(null);
             }
         };
 
@@ -277,6 +282,9 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer(state.customer);
         this._loggedOn(state.loggedOn);
         this._employee(state.employee);
+        //his.imgUrl(state.configuration.imageRotatorPath);
+        //this.mediaServerUrl(state.configuration.imageRotatorPath);
+        //console.log("imageRotatorPath:" + this.mediaServerUrl());
         this._cartLines = ObjectExtensions.isNullOrUndefined(this._cart()) ? [] : this._cart().CartLines;
     }
 }
