@@ -4,6 +4,7 @@
 2. Create a  Loyalty reward points, like below, some highlight field should get attention:<br/>          
 <img width="1345" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08470036-b093-4307-81f0-61690e65e174">
 3. Create loyalty program:<br/>
+
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2c079295-d199-41aa-8c4e-f8bed3490d0d)
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a27e8dc7-bec6-45b0-a690-2f59e115a397)
