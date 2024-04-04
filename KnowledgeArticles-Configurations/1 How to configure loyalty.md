@@ -9,6 +9,7 @@
 4. Create Loyalty Scheme:<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a27e8dc7-bec6-45b0-a690-2f59e115a397)
 
+5.  On the loyalty Scheme form, please don't forget add the channel, otherwise the loyalty point will not be earned:<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/361a17e6-eaf6-4753-9bc6-35c16c980403)
 
 <img width="266" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0e49be60-9510-4da1-a95e-eaac7e52564d"><br/>
