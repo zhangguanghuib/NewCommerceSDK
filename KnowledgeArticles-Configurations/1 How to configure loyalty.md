@@ -21,3 +21,6 @@
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d4e396e2-b20b-4f71-8123-cb8e405754d9)
 
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1f44cb39-4b6d-499d-bfc0-8793dba2e644)
+
+
