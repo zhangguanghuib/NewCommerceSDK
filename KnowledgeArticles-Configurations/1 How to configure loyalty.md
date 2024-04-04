@@ -11,6 +11,7 @@
 
 <img width="266" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0e49be60-9510-4da1-a95e-eaac7e52564d">
 
+<img width="236" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d7c65e1f-1c5b-4c5b-9e90-ad00396e591d">
 
 
 
