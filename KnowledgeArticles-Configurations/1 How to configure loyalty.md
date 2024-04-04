@@ -1,7 +1,7 @@
 ## This article will show loyalty related configurations including earn and redem loyalty points for basic bug reporting;
-- Go to D365 FO and then this section, most of the settings came from these area.<br/>
+1. Go to D365 FO and then this section, most of the settings came from these area.<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2c32a5d1-0af0-4c36-a3c5-177e84002df7)
-
+2. Create a  Loyalty reward points, like below, some highlight field should get attention:<br/>          
 <img width="1345" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08470036-b093-4307-81f0-61690e65e174">
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2c079295-d199-41aa-8c4e-f8bed3490d0d)
