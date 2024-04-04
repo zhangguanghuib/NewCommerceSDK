@@ -19,6 +19,7 @@
 8.  And then Issue Loyalty card， click  "Issue and Add" button, finally it looks like:<br/>
 <img width="236" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d7c65e1f-1c5b-4c5b-9e90-ad00396e591d"><br/>
 
+9. Go back to HQ,  and find the newly-created loyalty card,  and remove all the pre-defined configuration and only leave our own previous configurations:<br/>
 <img width="1203" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947b7639-7923-4488-9670-5f443cc69c8d">
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a0d2c129-a492-474b-973f-f250efb59068)
