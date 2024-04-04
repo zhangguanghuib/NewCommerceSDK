@@ -38,8 +38,15 @@
 15.  You will see the loyalty card already get some points<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dff96211-aa92-4fed-ab99-30a3a82cb9b0)
 
+16.  When pickup another product,  you can pay the reminder amount due by loyalty card, of course if it is not enough, you can pay cash<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d4e396e2-b20b-4f71-8123-cb8e405754d9)
+
+17.  Finally you will see the loyalty card transactions<br/>
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1f44cb39-4b6d-499d-bfc0-8793dba2e644)
 
+18.   The Commerce Shared parameters maybe has related configurations:<br/>
+<img width="1650" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/81858197-b0d6-49b0-a4dd-14abf5a5d3c6">
 
+
+Finally,  the above steps you be should to work for the basic loyalty scenario,  if you face any issue that the loyalty point will not be earned,  please double check and run 9999 job.
