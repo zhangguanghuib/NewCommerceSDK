@@ -6,7 +6,7 @@
 3. Create loyalty program:<br/>
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2c079295-d199-41aa-8c4e-f8bed3490d0d)
-
+4. Create Loyalty Scheme:<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a27e8dc7-bec6-45b0-a690-2f59e115a397)
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/361a17e6-eaf6-4753-9bc6-35c16c980403)
