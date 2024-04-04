@@ -25,6 +25,13 @@
 10. Please run batch job :<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e49e4749-20e9-4c72-9e4f-283a3cb71f0f)
 
+12.  If you want, you can create two different points,  those itemid are:<br/>
+     TestPoint1<br/>
+     TestPoint2<br/>
+     The category choose Fashion that is from " Loyalty Scheme"<br/>
+     Run product assortment, and run process delivery mode<br/>
+13. Run 9999 job and make sure all applied.<br/>
+
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a0d2c129-a492-474b-973f-f250efb59068)
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dff96211-aa92-4fed-ab99-30a3a82cb9b0)
