@@ -49,4 +49,6 @@
 <img width="1650" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/81858197-b0d6-49b0-a4dd-14abf5a5d3c6">
 
 <br/>
+<br/>
+<hr/>
 Finally,  the above steps you be should to work for the basic loyalty scenario,  if you face any issue that the loyalty point will not be earned,  please double check and run 9999 job.
