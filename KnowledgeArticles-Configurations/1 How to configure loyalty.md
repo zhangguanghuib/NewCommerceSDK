@@ -1,5 +1,5 @@
 ## This article will show loyalty related configurations including earn and redem loyalty points for basic bug reporting;
-- Go to D365 FO and then this section, most of the settings came from these area.
+- Go to D365 FO and then this section, most of the settings came from these area.<br/>
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2c32a5d1-0af0-4c36-a3c5-177e84002df7)
 
 <img width="1345" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08470036-b093-4307-81f0-61690e65e174">
