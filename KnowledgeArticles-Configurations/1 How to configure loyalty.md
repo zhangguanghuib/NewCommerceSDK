@@ -13,6 +13,7 @@
 
 <img width="236" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d7c65e1f-1c5b-4c5b-9e90-ad00396e591d"><br/>
 
+<img width="1203" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/947b7639-7923-4488-9670-5f443cc69c8d">
 
 
 
