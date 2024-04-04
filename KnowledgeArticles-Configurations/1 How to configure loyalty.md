@@ -9,5 +9,9 @@
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/361a17e6-eaf6-4753-9bc6-35c16c980403)
 
+<img width="266" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0e49be60-9510-4da1-a95e-eaac7e52564d">
+
+
+
 
 
