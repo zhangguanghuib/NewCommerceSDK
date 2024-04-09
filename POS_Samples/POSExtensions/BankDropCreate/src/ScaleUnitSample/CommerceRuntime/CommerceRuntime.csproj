@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RequestHandlers\GetEmployeeIdentityByExternalIdentityRealtimeRequestHandler.cs" />
+    <Compile Remove="RequestHandlers\GetEmployeeIdentityByExternalIdentityRealtimeRequestHandlerV2.cs" />
+    <Compile Remove="RequestHandlers\UserAuthService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>

@@ -51,7 +51,12 @@
           }
         },
         "ShowJournalView": {
-          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ]
+          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/ShowJournal/DisableEmailReceiptCommand"
+            }
+          ]
         },
         "FulfillmentLineView": {
           "appBarCommands": [
