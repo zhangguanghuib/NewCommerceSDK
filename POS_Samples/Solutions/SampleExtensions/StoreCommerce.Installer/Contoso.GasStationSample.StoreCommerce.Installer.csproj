@@ -8,18 +8,14 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Installers.StoreCommerce" Version="$(CommerceSdkPackagesVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" />
-    <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <!-- Settings included in the CommerceRuntimeExtensionSettings item group will be added to the generated CommerceRuntime config file and available at runtime in the CommerceRuntime extension. -->
     <CommerceRuntimeExtensionSettings Include="ext.Contoso.GasolineItemId">
       <Value>gasoline</Value>
     </CommerceRuntimeExtensionSettings>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" />
+    <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj" />
   </ItemGroup>
 </Project>

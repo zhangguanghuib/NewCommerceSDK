@@ -100,6 +100,13 @@
           "phonePageName": "TextInputDialogView",
           "viewDirectory": "Views/Samples/",
           "viewControllerPath": "Views/Samples/TextInputDialogView"
+        },
+        {
+          "title": "NumericInputDialogView",
+          "pageName": "NumericInputDialogView",
+          "phonePageName": "NumericInputDialogView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/NumericInputDialogView"
         }
       ],
       "templatedDialogs": [

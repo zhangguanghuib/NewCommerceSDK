@@ -1,7 +1,7 @@
 ﻿import { StringExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
 import { ProxyEntities } from "PosApi/Entities";
 import { CancelableTriggerResult } from "PosApi/Extend/Triggers/Triggers";
-import MessageDialog from "../Controls/DialogSample/MessageDialog";
+import MessageDialog from "../Create/Dialogs/DialogSample/MessageDialog";
 import * as Triggers from "PosApi/Extend/Triggers/SalesOrderTriggers";
 import IPreElevateUserTriggerOptions = Triggers.IPreSearchOrdersTriggerOptions;
 
