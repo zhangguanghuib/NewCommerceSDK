@@ -13,6 +13,7 @@ export default class DisableEmailReceiptCommand extends JournalView.ShowJournalE
         this.extraClass = "iconGo";
         this.isVisible = false;
     }
+
     protected init(state: JournalView.IShowJournalExtensionCommandState): void {
         const buttons = document.querySelectorAll('#HomeView_showEmailReceiptsMenuCommand');
 

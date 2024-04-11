@@ -14,8 +14,8 @@
     </CommerceRuntimeExtensionSettings>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" />
-    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" />
-    <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj" />
+    <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj"  ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+    <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj"  ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
 </Project>
