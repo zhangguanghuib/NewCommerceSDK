@@ -86,5 +86,7 @@ If you have hardware station, you will see the custom receipt get printed.
 8. All the source code is in :
    https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/CustomReceiptPrint/src/ScaleUnitSample
 
+9.  Customer shows this code return duplication, will investigate it
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/54541092-0048-4050-9d5a-11848a9de3b3)
 
 
