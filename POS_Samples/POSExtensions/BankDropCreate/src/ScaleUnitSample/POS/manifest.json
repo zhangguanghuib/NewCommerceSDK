@@ -16,7 +16,12 @@
       "views": {
         "SearchView": {
           "productAppBarCommands": [
-            { "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand" }
+            {
+              "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/Search/NavigateToContosoTenderCountingViewCommand"
+            }
           ]
         }
       }
@@ -43,6 +48,13 @@
           "phonePageName": "ExampleView",
           "viewDirectory": "Views/",
           "viewControllerPath": "Views/ExampleView"
+        },
+        {
+          "title": "Contoso Tender Counting View",
+          "pageName": "ContosoTenderCountingView",
+          "phonePageName": "ContosoTenderCountingView",
+          "viewDirectory": "Views/ContosoTenderCounting/",
+          "viewControllerPath": "Views/ContosoTenderCounting/ContosoTenderCountingView"
         }
       ]
     }

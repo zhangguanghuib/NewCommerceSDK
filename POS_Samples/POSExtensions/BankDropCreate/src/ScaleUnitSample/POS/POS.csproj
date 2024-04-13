@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommerceRuntime\CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+    <Folder Include="DataService\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataService\" />
+    <ProjectReference Include="..\CommerceRuntime\CommerceRuntime.csproj" ReferenceOutputAssembly="True" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
 </Project>

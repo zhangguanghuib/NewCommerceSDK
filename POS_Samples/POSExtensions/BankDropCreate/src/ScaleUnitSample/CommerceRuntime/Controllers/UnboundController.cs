@@ -4,6 +4,7 @@ namespace Contoso.CommerceRuntime.Controllers
     using System.Globalization;
     using System.Threading.Tasks;
     using Azure.Core;
+    using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
