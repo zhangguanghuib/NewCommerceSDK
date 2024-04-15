@@ -1,8 +1,8 @@
 ## How to pave a Commerce SDK especially Store Commerce development environment?
 
 1.Background<br/>
-    - Apparently developer engineer have to prepare a Commerce SDK development environment before you start extension development work like coding,  deploy, debugging.
-    - This document to contains the basic steps of Commerce SDK development environment preparation, some corner scenarios like network/certificate/TLS that need open support ticket for trouble shooting,  so we can not cover all the details, but it is approved if you follow this document, most of develper can make commerce SDK  environment ready.
+    . Apparently developer engineer have to prepare a Commerce SDK development environment before you start extension development work like coding,  deploy, debugging.
+    . This document to contains the basic steps of Commerce SDK development environment preparation, some corner scenarios like network/certificate/TLS that need open support ticket for trouble shooting,  so we can not cover all the details, but it is approved if you follow this document, most of develper can make commerce SDK  environment ready.
 
 
 So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
