@@ -38,7 +38,8 @@
           + StoreCommerce.Installer.exe install --enablewebviewdevtools --trustsqlservercertificate --installoffline --SqlServerName .\sqlexpress
           + (if for CPOS) StoreCommerce.Installer.exe install --enablewebviewdevtools --useremoteappcontent
       * Mode useful command can be found from here:
-          + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/enhanced-mass-deployment    
+          + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/enhanced-mass-deployment
+      Till now the development environment should be ready for your development work.    
 
           
 
