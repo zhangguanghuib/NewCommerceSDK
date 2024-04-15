@@ -5,6 +5,13 @@
   "version": "1.0.0",
   "minimumPosVersion": "9.29.0.0",
   "description": "An extension package that makes use of a Retail Server extension. Also works off-line.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
   "components": {
     "resources": {
       "supportedUICultures": [ "en-US" ],
@@ -55,6 +62,13 @@
           "phonePageName": "ContosoTenderCountingView",
           "viewDirectory": "Views/ContosoTenderCounting/",
           "viewControllerPath": "Views/ContosoTenderCounting/ContosoTenderCountingView"
+        },
+        {
+          "title": "Contoso Denomination Detail View",
+          "pageName": "ContosoDenominationDetailView",
+          "phonePageName": "ContosoDenominationDetailView",
+          "viewDirectory": "Views/DenominationDetail/",
+          "viewControllerPath": "Views/DenominationDetail/ContosoDenominationDetailView"
         }
       ]
     }

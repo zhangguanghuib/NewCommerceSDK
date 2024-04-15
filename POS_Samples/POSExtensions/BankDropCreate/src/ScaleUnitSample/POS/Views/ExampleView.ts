@@ -139,7 +139,7 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                 {
                     title: this.context.resources.getString("string_1002"), // String data
                     ratio: 30, collapseOrder: 2, minWidth: 100,
-                    computeValue: (data: Entities.ExampleEntity): string => `<button onclick="localStorage.setItem(${data.IntData}+'myKeyghz', 'myValueghz')">Click me</ button >`
+                    computeValue: (data: Entities.ExampleEntity): string => `<button onclick="localStorage.setItem(${data.IntData}+'myKeyghz', 'myValueghz')">Click me</button >`
                 },                {
                     title: this.context.resources.getString("string_1003"), // Extension property string data
                     ratio: 30, collapseOrder: 3, minWidth: 100,

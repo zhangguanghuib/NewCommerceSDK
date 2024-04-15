@@ -10,6 +10,7 @@ import * as Messages from "../../DataService/DataServiceRequests.g";
 import { Contoso } from "./Dictionary";
 import { GetCurrentShiftClientRequest, GetCurrentShiftClientResponse } from "PosApi/Consume/Shifts";
 import ContosoNumberExtensions from "./ContosoNumberExtensions";
+import ko from "knockout";
 
 declare var Commerce: any;
 
@@ -29,6 +30,9 @@ export default class ContosoTenderCountingViewModel {
     public _currencyAmountMap: Contoso.Dictionary<ProxyEntities.CurrencyAmount>;
     public _primaryCurrencyCode: string;
     private _shiftToUse: ProxyEntities.Shift;
+    public _tenderCountingType: ClientEntities.ExtensibleTransactionType;
+    public tenderCountingLines: ko.ObservableArray<ContosoTenderCountingLine>;
+    //private _tenderCountingLines: ContosoTenderCountingLine[];
 
     constructor(context: IExtensionViewControllerContext) {
         this._context = context;
@@ -40,8 +44,9 @@ export default class ContosoTenderCountingViewModel {
         // From product code
         this._currencyAmountMap = new Contoso.Dictionary<ProxyEntities.CurrencyAmount>();
         this._primaryCurrencyCode = Commerce.ApplicationContext.Instance.deviceConfiguration.Currency;
-
-
+        this._tenderCountingType = ClientEntities.ExtensibleTransactionType.BankDrop;
+        this.tenderCountingLines = ko.observableArray([]);
+        //this._tenderCountingLines = [];
     }
 
 
@@ -67,7 +72,7 @@ export default class ContosoTenderCountingViewModel {
         return this._context.runtime.executeAsync(new Messages.StoreOperations.GetCurrenciesAmounExtRequest<Messages.StoreOperations.GetCurrenciesAmounExtResponse>(this._primaryCurrencyCode, primaryCurrencyMainDenominationValue))
             .then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetCurrenciesAmounExtResponse>) => {
                 console.log(response.data.result);
-                let currencyAmounts: ProxyEntities.CurrencyAmount[]
+                let currencyAmounts: ProxyEntities.CurrencyAmount[] = response.data.result;
                 if (ArrayExtensions.hasElements(currencyAmounts)) {
                     this._currencyAmountMap = new Contoso.Dictionary<ProxyEntities.CurrencyAmount>();
                     currencyAmounts.forEach((currencyAmount: ProxyEntities.CurrencyAmount) => {
@@ -78,6 +83,23 @@ export default class ContosoTenderCountingViewModel {
         });
     }
 
+    private _getCashDeclarationsMapAsync(): Promise<Contoso.Dictionary<ProxyEntities.CashDeclaration[]>> {
+        return this._context.runtime.executeAsync(new Messages.StoreOperations.GetCashDeclarationsExtRequest<Messages.StoreOperations.GetCashDeclarationsExtResponse>(Commerce.ApplicationContext.Instance.channelConfiguration.RecordId))
+            .then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetCashDeclarationsExtResponse>): Promise<Contoso.Dictionary<ProxyEntities.CashDeclaration[]>> => {
+                let cashDeclarations: ProxyEntities.CashDeclaration[] = response.data.result;
+                let cashDeclarationsMap: Contoso.Dictionary<ProxyEntities.CashDeclaration[]> = new Contoso.Dictionary<ProxyEntities.CashDeclaration[]>();
+
+                cashDeclarations.forEach((value: ProxyEntities.CashDeclaration) => {
+                    if (!cashDeclarationsMap.hasItem(value.Currency)) {
+                        cashDeclarationsMap.setItem(value.Currency, []);
+                    }
+                    cashDeclarationsMap.getItem(value.Currency).push(value);
+                });
+                return Promise.resolve(cashDeclarationsMap);
+            });
+    };
+   
+
     private _getTenderLinesForCountingAsync(correlationId: string, currencies?: ProxyEntities.CurrencyAmount[]): Promise<ContosoTenderCountingLine[]> {
 
         let cashDeclarationsMap: Contoso.Dictionary<ProxyEntities.CashDeclaration[]>;
@@ -86,7 +108,7 @@ export default class ContosoTenderCountingViewModel {
         let tenderTypesForSalesTransaction: ProxyEntities.TenderType[] = tenderTypesMap.getTenderTypesForSalesTransactions();
         let tenderDetails: ProxyEntities.TenderDetail[] = [];
 
-        return Promise.resolve(Commerce.ApplicationContext.Instance.cashDeclarationsMapAsync.value)
+        return this._getCashDeclarationsMapAsync()
             .then((result: Contoso.Dictionary<ProxyEntities.CashDeclaration[]>) => {
                 // Stores the populated map of cash declarations to use later.
                 if (!ObjectExtensions.isNullOrUndefined(result)) {
@@ -268,39 +290,52 @@ export default class ContosoTenderCountingViewModel {
 
         let dictCashDeclaration: Contoso.Dictionary<ProxyEntities.CashDeclaration> = new Contoso.Dictionary();
         console.log(dictCashDeclaration);
-
-        //operationIds.forEach((operationId: ProxyEntities.RetailOperation) => {
-        //    let tenderTypes: ProxyEntities.TenderType[] = storeTenderTypeMap.getItem(operationId);
-        //    console.log(tenderTypes);
-        //});
-
         console.log(storeTenderTypeMap);
-
         console.log(accountNumber);
 
-        return Promise.all([
-            this._context.runtime.executeAsync(new GetOrgUnitTenderTypesClientRequest<GetOrgUnitTenderTypesClientResponse>(correlationId))
-                .then((response: ClientEntities.ICancelableDataResult<GetOrgUnitTenderTypesClientResponse>): ProxyEntities.TenderType[] => {
-                    return response.data.result;
-                }),
+        return this._getCurrenciesForCurrentStoreAsync(correlationId).then((countingLines: ContosoTenderCountingLine[]): void => {
+            countingLines.forEach((countingLine: ContosoTenderCountingLine): void => {
+                let tenderDeclarationNeeded: boolean =
+                    ClientEntities.ExtensibleTransactionType.TenderDeclaration.equals(this._tenderCountingType) &&
+                    countingLine.tenderType.CountingRequired === 1;
 
-            this._context.runtime.executeAsync(new GetCurrenciesServiceRequest(correlationId))
-                .then((response: ClientEntities.ICancelableDataResult<GetCurrenciesServiceResponse>): ProxyEntities.Currency[] => {
-                    return response.data.currencies;
-                }),
+                let bankDropNeeded: boolean =
+                    ClientEntities.ExtensibleTransactionType.BankDrop.equals(this._tenderCountingType) &&
+                    countingLine.tenderType.TakenToBank === 1;
 
-            this._context.runtime.executeAsync(new GetChannelConfigurationClientRequest<GetChannelConfigurationClientResponse>(correlationId))
-                .then((response: ClientEntities.ICancelableDataResult<GetChannelConfigurationClientResponse>): ProxyEntities.ChannelConfiguration => {
-                    return response.data.result;
-                })])
-            .then((results: any[]) => {
-               // this.TenderTypres = results[0];
-                this.ChannelConfig = results[2]
-                return this._context.runtime.executeAsync(new Messages.StoreOperations.GetCurrenciesAmounExtRequest<Messages.StoreOperations.GetCurrenciesAmounExtResponse>(this.ChannelConfig.Currency, 1));
-            }).then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetCurrenciesAmounExtResponse>) => {
-                console.log(response.data.result);
-            }).catch((reason: any) => {
-                console.log(reason);
+                let safeDropNeeded: boolean =
+                    ClientEntities.ExtensibleTransactionType.SafeDrop.equals(this._tenderCountingType) &&
+                    countingLine.tenderType.TakenToSafe === 1;
+
+                if (tenderDeclarationNeeded || bankDropNeeded || safeDropNeeded) {
+                    this.tenderCountingLines.push(countingLine);
+                }
             });
+        })
+
+        //return Promise.all([
+        //    this._context.runtime.executeAsync(new GetOrgUnitTenderTypesClientRequest<GetOrgUnitTenderTypesClientResponse>(correlationId))
+        //        .then((response: ClientEntities.ICancelableDataResult<GetOrgUnitTenderTypesClientResponse>): ProxyEntities.TenderType[] => {
+        //            return response.data.result;
+        //        }),
+
+        //    this._context.runtime.executeAsync(new GetCurrenciesServiceRequest(correlationId))
+        //        .then((response: ClientEntities.ICancelableDataResult<GetCurrenciesServiceResponse>): ProxyEntities.Currency[] => {
+        //            return response.data.currencies;
+        //        }),
+
+        //    this._context.runtime.executeAsync(new GetChannelConfigurationClientRequest<GetChannelConfigurationClientResponse>(correlationId))
+        //        .then((response: ClientEntities.ICancelableDataResult<GetChannelConfigurationClientResponse>): ProxyEntities.ChannelConfiguration => {
+        //            return response.data.result;
+        //        })])
+        //    .then((results: any[]) => {
+        //       // this.TenderTypres = results[0];
+        //        this.ChannelConfig = results[2]
+        //        return this._context.runtime.executeAsync(new Messages.StoreOperations.GetCurrenciesAmounExtRequest<Messages.StoreOperations.GetCurrenciesAmounExtResponse>(this.ChannelConfig.Currency, 1));
+        //    }).then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetCurrenciesAmounExtResponse>) => {
+        //        console.log(response.data.result);
+        //    }).catch((reason: any) => {
+        //        console.log(reason);
+        //    });
     }
 }
