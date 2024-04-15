@@ -26,17 +26,19 @@
            + IIS, just follow this to enable it:<br/>
              ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/37f38d6e-6ad1-459b-89d0-fc45f79d11cd)
    2.2 Install Sealed Version CSU:<br/>
-       + Please follow this below link that is veried worked for many people: <br/>
+       * Please follow this below link that is veried worked for many people: <br/>
            + https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Readme_Docs/IIS-Hosted-CSU-SingleApp.md <br/>
-       + Official document is here:<br/>
+       * Official document is here:<br/>
            + https://community.dynamics.com/blogs/?redirectedFrom=https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
            + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/install-csu-dev-env
   2.3 Install Store Commerce Application<br/>
-      + Install Microsoft Edge WebView2, download from:
+      * Install Microsoft Edge WebView2, download from:
           + https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH
-      + Download Store Commerce Installer and run this command to install it:
-          + StoreCommerce.Installer10.0.32.exe install --enablewebviewdevtools --trustsqlservercertificate --installoffline --SqlServerName .\sqlexpress
-          + (if for CPOS) StoreCommerce.Installer.exe install --enablewebviewdevtools --useremoteappcontent     
+      * Download Store Commerce Installer and run this command to install it:
+          + StoreCommerce.Installer.exe install --enablewebviewdevtools --trustsqlservercertificate --installoffline --SqlServerName .\sqlexpress
+          + (if for CPOS) StoreCommerce.Installer.exe install --enablewebviewdevtools --useremoteappcontent
+      * Mode useful command can be found from here:
+          + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/enhanced-mass-deployment    
 
           
 
