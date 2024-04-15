@@ -12,7 +12,19 @@
        + Deploy installer
        + Verify the extension function and debugging for trouble shooting
 
-2.  Steps to pave a Commerce SDK development environment
+2.  Steps to pave a Commerce SDK development environment<br/>
    2.1 System preparation
-       + 
+       + This link contains very detailed and useful information https://github.com/microsoft/Dynamics365Commerce.ScaleUnit/tree/release/9.45/src/ScaleUnitSample#shared-across-self-hosted-and-iis-hosted-modes
+       + Some point my preferrence are:
+           + Prefer Visual Studio 2022  instead of Visual Studio code
+           + Install .Net Framework 472 to support Store Commerce Extension  Installer and Scale Unit Extension Installer
+           + Install .Net 6.0 insteal of .Net 3.1:  https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+           + Install Hosting Bundle from same page<br/>
+           <img width="502" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7540e0d1-280c-4875-ba9a-ad0777f57128"><br/>
+           + Install SQL Server(or SQL server Express) please do remember mix-authentication and enable full-text search<br/>
+               ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f1094e7b-5238-4305-b2ae-72b75112bef3)<br/>
+           + IIS, just follow this to enable it:<br/>
+             ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/37f38d6e-6ad1-459b-89d0-fc45f79d11cd)
+
+          
 
