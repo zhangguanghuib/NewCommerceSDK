@@ -16,6 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\BaseClasses\KnockoutExtensionViewControllerBase.js" />
+    <None Include="Views\BaseClasses\KnockoutExtensionViewControllerBase.js.map" />
+    <None Include="Views\BaseClasses\KnockoutExtensionViewModelBase.js" />
+    <None Include="Views\BaseClasses\KnockoutExtensionViewModelBase.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CommerceRuntime\CommerceRuntime.csproj" ReferenceOutputAssembly="True" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
 

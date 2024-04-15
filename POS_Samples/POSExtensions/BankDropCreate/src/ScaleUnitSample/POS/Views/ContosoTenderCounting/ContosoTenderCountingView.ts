@@ -56,7 +56,7 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                     computeValue: (data: ContosoTenderCountingLine): string => {
                         if (data.tenderName === 'Cash' || data.tenderName === 'Other') {
                             let btnKey = `${data.tenderName}_msPOSKey`;
-                            return `<button onclick="localStorage.setItem('${data.tenderName}_myKeyghz', 'msPOSKey')">Click me</button>`;
+                            return `<button class='btnDenominationCount' onclick="localStorage.setItem('${data.tenderName}_myKeyghz', 'msPOSKey')">Click me</button>`;
                         } else {
                             return "";
                         }
@@ -87,14 +87,15 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                     localStorage.removeItem(keyStr);
                     // First line selected
                     if (firstItem.tenderName === "Cash") {
-                        /*
+                        
                         let options: IContosoDenominationDetailViewOptions = {
-                            title: this._title,
+                            title: firstItem.tenderName,
                             denominations: firstItem.denominations
                         }
 
-                        this.context.navigator.navigate("ContosoDenominationDetailView", options);*/
+                        this.context.navigator.navigate("ContosoDenominationDetailView", options);
 
+                        /*
                         let options: IDenominationsViewOptions = {
                             operationTitle: this._title,
                             tenderName: firstItem.tenderName,
@@ -104,18 +105,23 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                             shouldShowFilteringIcon: false
                         };
 
-                        //this.context.navigator.navigate("DenominationsView", options);
-
-                        Commerce.ViewModelAdapter.navigate("DenominationsView", options);
+                        Commerce.ViewModelAdapter.navigate("DenominationsView", options);*/
 
 
                         //this.context.navigator.navigateToPOSView("CartView");
 
                     } else if (firstItem.tenderName === "Other") {
-                        let customerDetailsOptions: ClientEntities.CustomerDetailsNavigationParameters
-                            = new ClientEntities.CustomerDetailsNavigationParameters("004007");
+                        //let customerDetailsOptions: ClientEntities.CustomerDetailsNavigationParameters
+                        //    = new ClientEntities.CustomerDetailsNavigationParameters("004007");
 
-                        this.context.navigator.navigateToPOSView("CustomerDetailsView", customerDetailsOptions);
+                        //this.context.navigator.navigateToPOSView("CustomerDetailsView", customerDetailsOptions);
+
+                        let options: IContosoDenominationDetailViewOptions = {
+                            title: firstItem.tenderName,
+                            denominations: firstItem.denominations
+                        }
+
+                        this.context.navigator.navigate("ContosoDenominationDetailView", options);
                     }
                     return;
                 }

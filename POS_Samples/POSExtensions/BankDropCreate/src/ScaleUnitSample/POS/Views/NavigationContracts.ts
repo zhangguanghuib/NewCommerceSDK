@@ -25,6 +25,11 @@ export interface IContosoDenominationDetailViewOptions {
     denominations: ProxyEntities.DenominationDetail[];
 }
 
+export interface IContosoDenominationDetailViewModelOptions {
+    title?: string;
+    denominations: ProxyEntities.DenominationDetail[];
+}
+
 
  export interface IDenominationsViewOptions {
         /**
