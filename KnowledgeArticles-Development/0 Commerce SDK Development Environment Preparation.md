@@ -48,4 +48,5 @@
         * If you have never use the tool git, please download from https://git-scm.com/downloads, and then run these two command:
             + git clone https://github.com/microsoft/Dynamics365Commerce.InStore.git
             + git clone https://github.com/microsoft/Dynamics365Commerce.InStore.git
-            + git checkout release/9.49     
+            + git checkout release/9.49 
+            + h
