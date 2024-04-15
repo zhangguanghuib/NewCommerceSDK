@@ -31,7 +31,12 @@
        + Official document is here:<br/>
            + https://community.dynamics.com/blogs/?redirectedFrom=https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
            + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/install-csu-dev-env
- 
+  2.3 Install Store Commerce Application<br/>
+      + Install Microsoft Edge WebView2, download from:
+          + https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH
+      + Download Store Commerce Installer and run this command to install it:
+          + StoreCommerce.Installer10.0.32.exe install --enablewebviewdevtools --trustsqlservercertificate --installoffline --SqlServerName .\sqlexpress
+          + (if for CPOS) StoreCommerce.Installer.exe install --enablewebviewdevtools --useremoteappcontent     
 
           
 
