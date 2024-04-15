@@ -43,6 +43,6 @@
 
 3. Start your development work:<br/>
     3.1. There are two github repros need clone for a very a good starting point:<br/>      
-        + https://github.com/microsoft/Dynamics365Commerce.ScaleUnit
-        + https://github.com/microsoft/Dynamics365Commerce.InStore
+        * https://github.com/microsoft/Dynamics365Commerce.ScaleUnit
+        * https://github.com/microsoft/Dynamics365Commerce.InStore
         
