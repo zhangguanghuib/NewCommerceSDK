@@ -27,7 +27,7 @@
              ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/37f38d6e-6ad1-459b-89d0-fc45f79d11cd)
    2.2 Install Sealed Version CSU:<br/>
        + Please follow this below link that is veried worked for many people: <br/>
-         https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Readme_Docs/IIS-Hosted-CSU-SingleApp.md <br/>
+           + https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Readme_Docs/IIS-Hosted-CSU-SingleApp.md <br/>
        + Official document is here:<br/>
            + https://community.dynamics.com/blogs/?redirectedFrom=https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
            + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/install-csu-dev-env
