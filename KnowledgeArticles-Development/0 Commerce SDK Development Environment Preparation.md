@@ -1,10 +1,10 @@
 ## How to pave a Commerce SDK especially Store Commerce development environment?
 
-1.Background:Because in commerce SDK, we don't recommend creating RequestHandler explicitly and use it when send request,  like this code:
-```cs
-var requestHandler = new UserAuthenticationTransactionService();
-var response = await request.RequestContext.Runtime.ExecuteAsync<RS.GetEmployeeIdentityByExternalIdentityRealtimeResponse>(request, request.RequestContext, requestHandler).ConfigureAwait(false);
-```
+1.Background<br/>
+    - Apparently developer engineer have to prepare a Commerce SDK development environment before you start extension development work like coding,  deploy, debugging.
+    - This document to contains the basic steps of Commerce SDK development environment preparation, some corner scenarios like network/certificate/TLS that need open support ticket for trouble shooting,  so we can not cover all the details, but it is approved if you follow this document, most of develper can make commerce SDK  environment ready.
+
+
 So in this way we will provide some samples how to override the OOB  handler, or get the OOB  handler and explicitly use it when send request:
 
 2.  Official document is https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/commerce-runtime-extensibility
