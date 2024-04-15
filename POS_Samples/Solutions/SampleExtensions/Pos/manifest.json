@@ -122,6 +122,13 @@
           "phonePageName": "NumericInputDialogView",
           "viewDirectory": "Create/Views/Samples/",
           "viewControllerPath": "Create/Views/Samples/NumericInputDialogView"
+        },
+        {
+          "title": "AlphanumericInputDialogView",
+          "pageName": "AlphanumericInputDialogView",
+          "phonePageName": "AlphanumericInputDialogView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/AlphanumericInputDialogView"
         }
       ],
       "templatedDialogs": [
