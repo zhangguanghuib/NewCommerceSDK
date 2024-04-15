@@ -30,7 +30,7 @@
            + https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Readme_Docs/IIS-Hosted-CSU-SingleApp.md <br/>
        * Official document is here:<br/>
            + https://community.dynamics.com/blogs/?redirectedFrom=https://community.dynamics.com/ax/b/axforretail/posts/introducing-sealed-installers
-           + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/install-csu-dev-env
+           + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/install-csu-dev-env <br/>
   2.3 Install Store Commerce Application<br/>
       * Install Microsoft Edge WebView2, download from:
           + https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH
