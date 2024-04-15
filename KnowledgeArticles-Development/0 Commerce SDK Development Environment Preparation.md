@@ -12,7 +12,7 @@
        + Deploy installer
        + Verify the extension function and debugging for trouble shooting
 
-2.  Steps to pave a Commerce SDK development environment<br/>
+2. Steps to pave a Commerce SDK development environment<br/>
    2.1 System preparation
        + This link contains very detailed and useful information https://github.com/microsoft/Dynamics365Commerce.ScaleUnit/tree/release/9.45/src/ScaleUnitSample#shared-across-self-hosted-and-iis-hosted-modes
        + Some point my preferrence are:
@@ -39,7 +39,10 @@
           + (if for CPOS) StoreCommerce.Installer.exe install --enablewebviewdevtools --useremoteappcontent
       * Mode useful command can be found from here:
           + https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/enhanced-mass-deployment
-      Till now the development environment should be ready for your development work.    
+      Till now the development environment should be ready for your development work.    <br/>
 
-          
-
+3. Start your development work:<br/>
+    3.1 There are two github repros need clone for a very a good starting point:<br/>      
+        + https://github.com/microsoft/Dynamics365Commerce.ScaleUnit
+        + https://github.com/microsoft/Dynamics365Commerce.InStore
+        
