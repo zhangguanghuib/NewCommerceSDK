@@ -97,6 +97,13 @@
               "modulePath": "Extend/ViewExtensions/AddressAddEditView/HiddenAddressFieldsCommand"
             }
           ]
+        },
+        "InventoryDocumentListView": {
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/InventoryDocumentListView/DisableCreateNewBtn"
+            }
+          ]
         }
       }
       },
