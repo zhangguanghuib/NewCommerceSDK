@@ -11,12 +11,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <CommerceSdkPackagesVersion>[9.42.*-*,9.43)</CommerceSdkPackagesVersion>
-    <CommercePosPackagesVersion>[9.42.*-*,9.43)</CommercePosPackagesVersion>
-    <CommerceChannelPackagesVersion>[9.42.*-*,9.43)</CommerceChannelPackagesVersion>
-    <CommerceHwsPackagesVersion>[9.42.*-*,9.43)</CommerceHwsPackagesVersion>
-    <CommerceToolsPackagesVersion>[10.29.*-*,10.30)</CommerceToolsPackagesVersion>
-    <CommercePaymentsPackagesVersion>[10.42.*-*,10.43)</CommercePaymentsPackagesVersion>
-	  <NewtonsoftJsonVersion>13.0.2</NewtonsoftJsonVersion>
+     <CommerceSdkPackagesVersion>[9.48.*-*,9.49)</CommerceSdkPackagesVersion>
+    <CommercePosPackagesVersion>[9.48.*-*,9.49)</CommercePosPackagesVersion>
+    <CommerceChannelPackagesVersion>[9.48.*-*,9.49)</CommerceChannelPackagesVersion>
+    <CommerceHwsPackagesVersion>[9.48.*-*,9.49)</CommerceHwsPackagesVersion>
+    <CommerceToolsPackagesVersion>[10.32.*-*,10.33)</CommerceToolsPackagesVersion>
+    <CommercePaymentsPackagesVersion>[10.48.*-*,10.49)</CommercePaymentsPackagesVersion>
+	<NewtonsoftJsonVersion>13.0.2</NewtonsoftJsonVersion>
   </PropertyGroup>
 </Project>
