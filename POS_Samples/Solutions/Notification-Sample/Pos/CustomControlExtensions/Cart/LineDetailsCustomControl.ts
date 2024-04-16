@@ -35,11 +35,14 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
     public orderNoList: ko.Observable<string>;
     public _isLoaderVisible: ko.Observable<boolean>;
 
+    public intervalId: number;
+
     public constructor(id: string, context: ICartViewCustomControlContext) {
         super(id, context);
         this._cartLine = ko.observable(null);
         this._isLoaderVisible = ko.observable(false);
         this.orderNoList = ko.observable("");
+        this.intervalId = 0;
 
         this.cartLineItemId = ko.computed(() => {
             let cartLine: ProxyEntities.CartLine = this._cartLine();
@@ -81,7 +84,7 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
             }
         }, this);
 
-        this.addRedDot();
+        //this.addRedDot();
     }
 
     /**
@@ -100,7 +103,7 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
                 return Promise.resolve();
             });
 
-        setInterval((): void => {
+        this.intervalId = setInterval((): void => {
             let request: StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>
                 = new StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest(this.currentChannelId);
 
@@ -122,16 +125,25 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
                 }
             }).then((orderlist: string) => {
                 this.orderNoList(orderlist);
-                let divRedDot: HTMLElement = document.getElementById('notifyRedDot');
+                let divRedDots: NodeListOf<Element> = document.querySelectorAll('.reddot1');
+
                 if (orderlist.length > 0) {
                     if (!this._isLoaderVisible()) {
                         this._isLoaderVisible(true);
                     }
-                    divRedDot.style.visibility = "visible";
+
+                    divRedDots.forEach((element: Element) => {
+                        let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                        divRedDot.style.display = "block";
+
+                    });
                 } else {
-                    
-                    divRedDot.style.visibility = "hidden";
+                    divRedDots.forEach((element: Element) => {
+                        let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                        divRedDot.style.display = "none";
+                    });
                 }
+
                 setTimeout((): void => {
                     this._isLoaderVisible(false);
                 }, 4000);
@@ -140,19 +152,25 @@ export default class LineDetailsCustomControl extends CartViewCustomControlBase 
     }
 
 
-    public addRedDot(): void {
-        //let notificationIcon: HTMLCollectionOf<Element> = document.getElementsByClassName("iconActionCenterNotification");
-        const notificationIcons: Element[] = Array.from(document.querySelectorAll('[data-bind*="showNotificationCenterDialog"]'));
+    //public addRedDot(): void {
+    //    //let notificationIcon: HTMLCollectionOf<Element> = document.getElementsByClassName("iconActionCenterNotification");
+    //    const notificationIcons: Element[] = Array.from(document.querySelectorAll('[data-bind*="showNotificationCenterDialog"]'));
     
-        if (!ObjectExtensions.isNullOrUndefined(notificationIcons) && notificationIcons.length > 0) {
-            let notificationDiv: HTMLDivElement = notificationIcons[0] as HTMLDivElement;
-            notificationDiv.classList.add("relativePos");
+    //    if (!ObjectExtensions.isNullOrUndefined(notificationIcons) && notificationIcons.length > 0) {
+    //        let notificationDiv: HTMLDivElement = notificationIcons[0] as HTMLDivElement;
+    //        notificationDiv.classList.add("relativePos");
 
-            let divRedDot: HTMLDivElement = document.createElement("div");
-            divRedDot.id = "notifyRedDot"
-            divRedDot.classList.add('reddot');
-            notificationDiv.appendChild(divRedDot);
-            //console.log(notificationDiv);
-        }
+    //        let divRedDot: HTMLDivElement = document.createElement("div");
+    //        divRedDot.id = "notifyRedDot"
+    //        divRedDot.classList.add('reddot');
+    //        //divRedDot.style.visibility = "hidden";
+    //        notificationDiv.appendChild(divRedDot);
+    //        //console.log(notificationDiv);
+    //    }
+    //}
+
+    public dispose(): void {
+        clearInterval(this.intervalId);
+        ObjectExtensions.disposeAllProperties(this);
     }
 }

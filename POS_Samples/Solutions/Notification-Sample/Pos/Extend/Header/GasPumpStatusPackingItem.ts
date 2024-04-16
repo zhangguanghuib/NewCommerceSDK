@@ -50,6 +50,13 @@ export default class GasPumpStatusPackingItem extends CustomPackingItem {
 
     protected init(state: Commerce.Extensibility.ICustomHeaderPackingItemState): void {
         this.visible = true;
+        setTimeout(() => {
+            let divRedDots: NodeListOf<Element> = document.querySelectorAll('.reddot1');
+            divRedDots.forEach((element: Element) => {
+                let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                divRedDot.style.display = "none";
+            });
+        }, 100);
     }
 
     public dispose(): void {

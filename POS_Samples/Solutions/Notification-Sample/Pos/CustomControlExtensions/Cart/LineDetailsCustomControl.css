@@ -3,13 +3,13 @@
 }
 
 .reddot {
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
     background-color: red;
     border-radius: 50%;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 7.5px;
+    right: 7.5px;
 }
 .reddotHidden{
     visibility:hidden
