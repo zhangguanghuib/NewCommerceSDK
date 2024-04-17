@@ -82,28 +82,28 @@
      ```
    - Scale Unit API:
      ```csharp
-     public partial class NonBindableOperationCustomController : IController
-{
-    [HttpPost]
-    [Authorization(CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
-    public async Task<PagedResult<SalesOrder>> GetPickupOrdersCreatedFromOtherStore(IEndpointContext context, long currentChannelId, QueryResultSettings settings)
-    {
-        ThrowIf.Null(settings, nameof(settings));
-
-        // Only get the orders created last 10 minutes
-        OrderSearchCriteria criteria = new OrderSearchCriteria();
-        criteria.FulfillmentTypes.Add(FulfillmentOperationType.Pickup);
-        criteria.StartDateTime = DateTimeOffset.UtcNow.AddDays(-1);
-        criteria.EndDateTime = DateTimeOffset.UtcNow;
-
-        var request = new SearchOrdersServiceRequest(criteria, settings);
-        var response = await context.ExecuteAsync<SearchOrdersServiceResponse>(request).ConfigureAwait(false);
-
-        var pagedOrders = response.Orders;
-        //Only take the orders created from other store:
-        //var pagedOrders = response.Orders.Where(o => o.ChannelId != currentChannelId).AsPagedResult<SalesOrder>();
-
-        return pagedOrders;
-    }
-}
+      public partial class NonBindableOperationCustomController : IController
+      {
+          [HttpPost]
+          [Authorization(CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
+          public async Task<PagedResult<SalesOrder>> GetPickupOrdersCreatedFromOtherStore(IEndpointContext context, long currentChannelId, QueryResultSettings settings)
+          {
+              ThrowIf.Null(settings, nameof(settings));
+      
+              // Only get the orders created last 10 minutes
+              OrderSearchCriteria criteria = new OrderSearchCriteria();
+              criteria.FulfillmentTypes.Add(FulfillmentOperationType.Pickup);
+              criteria.StartDateTime = DateTimeOffset.UtcNow.AddDays(-1);
+              criteria.EndDateTime = DateTimeOffset.UtcNow;
+      
+              var request = new SearchOrdersServiceRequest(criteria, settings);
+              var response = await context.ExecuteAsync<SearchOrdersServiceResponse>(request).ConfigureAwait(false);
+      
+              var pagedOrders = response.Orders;
+              //Only take the orders created from other store:
+              //var pagedOrders = response.Orders.Where(o => o.ChannelId != currentChannelId).AsPagedResult<SalesOrder>();
+      
+              return pagedOrders;
+          }
+      }
      ```
