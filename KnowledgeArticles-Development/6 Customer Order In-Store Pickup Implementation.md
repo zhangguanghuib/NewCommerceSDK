@@ -7,8 +7,11 @@
    ![Customer Order Notification](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)<br/>
 
    The video can be found:
-   https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fguazha%5Fmicrosoft%5Fcom%2FDocuments%2FRecordings%2FCustomer%20Order%20In%2DStore%20Pickup%20Notification%2D20240417%5F225004%2DMeeting%20Recording%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview&ga=1<br/>
-   https://www.youtube.com/watch?v=YoEazXIJhB0
+## Video Links:
+
+1. [Customer Order In-Store Pickup Notification](https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fguazha%5Fmicrosoft%5Fcom%2FDocuments%2FRecordings%2FCustomer%20Order%20In%2DStore%20Pickup%20Notification%2D20240417%5F225004%2DMeeting%20Recording%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview&ga=1)
+
+2. [YouTube Video](https://www.youtube.com/watch?v=YoEazXIJhB0)
 
 3. **Implementation details:**
    
