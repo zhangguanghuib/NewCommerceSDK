@@ -13,90 +13,66 @@ The final function is like this:
 3. <ins>Install Scale Unit Extension Package</ins><br/>
 4. <ins>Install Store Commerce Extension Package</ins><br>
 6. Technical point.
-   - Whenever cart changed, like adding a new cart line or update existing cart line, the line id will be recorded and stored in the local storage
+   - Periodically check if there are new customer order need pickup from the current store
    ```ts
-   import { ProxyEntities } from "PosApi/Entities";
-   import * as CartView from "PosApi/Extend/Views/CartView";
-   import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
-   
-   export default class CartViewController extends CartView.CartExtensionViewControllerBase {
-       public static selectedCartLineId: string = StringExtensions.EMPTY;
-       public static selectedCartLines: ProxyEntities.CartLine[];
-       public _selectedTenderLines: ProxyEntities.TenderLine[];
-       public _isProcessingAddItemOrCustomer: boolean;
-   
-       constructor(context: CartView.IExtensionCartViewControllerContext) {
-           super(context);
-           CartViewController.selectedCartLines = [];
-           CartViewController.selectedCartLineId = null;
-           this.cartLineSelectedHandler = (data: CartView.CartLineSelectedData): void => {
-               CartViewController.selectedCartLines = data.cartLines;
-               if (ArrayExtensions.hasElements(CartViewController.selectedCartLines)) {
-                   CartViewController.selectedCartLineId = CartViewController.selectedCartLines[0].LineId;
-                   localStorage.setItem("currentCartLineId", CartViewController.selectedCartLineId);
-               }
-           }
-   
-           this.cartLineSelectionClearedHandler = (): void => {
-               CartViewController.selectedCartLines = [];
-               CartViewController.selectedCartLineId = null;
-               localStorage.setItem("currentCartLineId", StringExtensions.EMPTY);
-           }
-   
-           this.tenderLineSelectedHandler = (data: CartView.TenderLineSelectedData): void => {
-               this._selectedTenderLines = data.tenderLines;
-           }
-   
-           this.tenderLineSelectionClearedHandler = (): void => {
-               this._selectedTenderLines = [];
-           }
-   
-           this.processingAddItemOrCustomerChangedHandler = (processing: boolean): void => {
-               this._isProcessingAddItemOrCustomer = processing;
-           }
-   
-           this.cartChangedHandler = (data: CartView.CartChangedData): void => {
-               console.log(data);
-           }
-       }
-   }
-   ```
-7. How to scroll? <br/>
+    public init(state: ICartViewCustomControlState): void {
+     this._state = state;
 
-   - Calculate the line height of each cart line:
-   ```ts
-    // Find the line height
-    let listLine: HTMLDivElement = document.querySelector(".dataListLine") as HTMLDivElement;
-    let rowHeight = 39;
-    if (listLine?.clientHeight) {
-        rowHeight = listLine?.clientHeight;
-    } 
-   ```
-   - When a new line is added and the cart line is already over 15 lines, calculate the scrolltop,  the formula is the totalHeight of the scroll container  minus the first 15 lines total height, that is<br/>
-     let shouldScrollTop = totalHeight - rowHeight * 15;
-    ```ts
-     if (isNewLine) {
-     if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
-         if (data.cart.CartLines.length >= 16) {
-             setTimeout(() => {
-                 let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
-                 let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
-                 let shouldScrollTop = totalHeight - rowHeight * 15;
-                 dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
-             }, 700);
-          }
-      }
-    }
-    ```
-   - When editing the existing line, the scrolltop is line number * line hight, the code is
-   ```ts
-   else {//Update existing line
-    setTimeout(() => {
-        let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
-        let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
-        let shouldScrollTop = rowHeight * selectedIndex;
-        dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
-     }, 700);
-   }
-   ```
+     this.context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+         .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+             return response.data.result;
+         }).then((deviceConfiguration: ProxyEntities.DeviceConfiguration)
+             : Promise<void> => {
+             this.currentChannelId = deviceConfiguration.ChannelId;
+             return Promise.resolve();
+         });
+
+     this.intervalId = setInterval((): void => {
+         let request: StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>
+             = new StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest(this.currentChannelId);
+
+         this.context.runtime.executeAsync(request).then((getPickupOrdersCreatedFromOtherStoreResponse: ClientEntities.ICancelableDataResult<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>):
+             Promise<string> => {
+             if (getPickupOrdersCreatedFromOtherStoreResponse.canceled) {
+                 return Promise.resolve("");
+             } else {
+                 if (getPickupOrdersCreatedFromOtherStoreResponse.data.result.length <= 0) {
+                     return Promise.resolve("");
+                 } else {
+                     let orderNoStr: string = '';
+                     getPickupOrdersCreatedFromOtherStoreResponse.data.result.forEach((order: ProxyEntities.SalesOrder) => {
+                         orderNoStr += order.SalesId + " ";
+                     });
+                     console.log(orderNoStr);
+                     return Promise.resolve(orderNoStr);
+                 }
+             }
+         }).then((orderlist: string) => {
+             this.orderNoList(orderlist);
+             let divRedDots: NodeListOf<Element> = document.querySelectorAll('.reddot1');
+
+             if (orderlist.length > 0) {
+                 if (!this._isLoaderVisible()) {
+                     this._isLoaderVisible(true);
+                 }
+
+                 divRedDots.forEach((element: Element) => {
+                     let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                     divRedDot.style.display = "block";
+
+                 });
+             } else {
+                 divRedDots.forEach((element: Element) => {
+                     let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                     divRedDot.style.display = "none";
+                 });
+             }
+
+             setTimeout((): void => {
+                 this._isLoaderVisible(false);
+             }, 4000);
+         });
+     }, 10000);
+ }
+ ```
    
