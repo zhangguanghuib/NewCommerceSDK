@@ -15,64 +15,92 @@ The final function is like this:
 6. Technical point.
    - Periodically check if there are new customer order need pickup from the current store
    ```ts
-    public init(state: ICartViewCustomControlState): void {
-     this._state = state;
+       public init(state: ICartViewCustomControlState): void {
+        this._state = state;
+   
+        this.context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
+            .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
+                return response.data.result;
+            }).then((deviceConfiguration: ProxyEntities.DeviceConfiguration)
+                : Promise<void> => {
+                this.currentChannelId = deviceConfiguration.ChannelId;
+                return Promise.resolve();
+            });
+   
+        this.intervalId = setInterval((): void => {
+            let request: StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>
+                = new StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest(this.currentChannelId);
+   
+            this.context.runtime.executeAsync(request).then((getPickupOrdersCreatedFromOtherStoreResponse: ClientEntities.ICancelableDataResult<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>):
+                Promise<string> => {
+                if (getPickupOrdersCreatedFromOtherStoreResponse.canceled) {
+                    return Promise.resolve("");
+                } else {
+                    if (getPickupOrdersCreatedFromOtherStoreResponse.data.result.length <= 0) {
+                        return Promise.resolve("");
+                    } else {
+                        let orderNoStr: string = '';
+                        getPickupOrdersCreatedFromOtherStoreResponse.data.result.forEach((order: ProxyEntities.SalesOrder) => {
+                            orderNoStr += order.SalesId + " ";
+                        });
+                        console.log(orderNoStr);
+                        return Promise.resolve(orderNoStr);
+                    }
+                }
+            }).then((orderlist: string) => {
+                this.orderNoList(orderlist);
+                let divRedDots: NodeListOf<Element> = document.querySelectorAll('.reddot1');
+   
+                if (orderlist.length > 0) {
+                    if (!this._isLoaderVisible()) {
+                        this._isLoaderVisible(true);
+                    }
+   
+                    divRedDots.forEach((element: Element) => {
+                        let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                        divRedDot.style.display = "block";
+   
+                    });
+                } else {
+                    divRedDots.forEach((element: Element) => {
+                        let divRedDot: HTMLDivElement = element as HTMLDivElement;
+                        divRedDot.style.display = "none";
+                    });
+                }
+   
+                setTimeout((): void => {
+                    this._isLoaderVisible(false);
+                }, 4000);
+            });
+        }, 10000);
+    }
+```
+- Scale Unit API :<br/>
+```cs
+public partial class NonBindableOperationCustomController : IController
+{
+    [HttpPost]
+    [Authorization(CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Anonymous)]
+    public async Task<PagedResult<SalesOrder>> GetPickupOrdersCreatedFromOtherStore(IEndpointContext context, long currentChannelId, QueryResultSettings settings)
+    {
+        ThrowIf.Null(settings, nameof(settings));
 
-     this.context.runtime.executeAsync(new GetDeviceConfigurationClientRequest())
-         .then((response: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>): ProxyEntities.DeviceConfiguration => {
-             return response.data.result;
-         }).then((deviceConfiguration: ProxyEntities.DeviceConfiguration)
-             : Promise<void> => {
-             this.currentChannelId = deviceConfiguration.ChannelId;
-             return Promise.resolve();
-         });
+        // Only get the orders created last 10 minutes
+        OrderSearchCriteria criteria = new OrderSearchCriteria();
+        criteria.FulfillmentTypes.Add(FulfillmentOperationType.Pickup);
+        criteria.StartDateTime = DateTimeOffset.UtcNow.AddDays(-1);
+        criteria.EndDateTime = DateTimeOffset.UtcNow;
 
-     this.intervalId = setInterval((): void => {
-         let request: StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>
-             = new StoreOperations.GetPickupOrdersCreatedFromOtherStoreRequest(this.currentChannelId);
+        var request = new SearchOrdersServiceRequest(criteria, settings);
+        var response = await context.ExecuteAsync<SearchOrdersServiceResponse>(request).ConfigureAwait(false);
 
-         this.context.runtime.executeAsync(request).then((getPickupOrdersCreatedFromOtherStoreResponse: ClientEntities.ICancelableDataResult<StoreOperations.GetPickupOrdersCreatedFromOtherStoreResponse>):
-             Promise<string> => {
-             if (getPickupOrdersCreatedFromOtherStoreResponse.canceled) {
-                 return Promise.resolve("");
-             } else {
-                 if (getPickupOrdersCreatedFromOtherStoreResponse.data.result.length <= 0) {
-                     return Promise.resolve("");
-                 } else {
-                     let orderNoStr: string = '';
-                     getPickupOrdersCreatedFromOtherStoreResponse.data.result.forEach((order: ProxyEntities.SalesOrder) => {
-                         orderNoStr += order.SalesId + " ";
-                     });
-                     console.log(orderNoStr);
-                     return Promise.resolve(orderNoStr);
-                 }
-             }
-         }).then((orderlist: string) => {
-             this.orderNoList(orderlist);
-             let divRedDots: NodeListOf<Element> = document.querySelectorAll('.reddot1');
+        var pagedOrders = response.Orders;
+        //Only take the orders created from other store:
+        //var pagedOrders = response.Orders.Where(o => o.ChannelId != currentChannelId).AsPagedResult<SalesOrder>();
 
-             if (orderlist.length > 0) {
-                 if (!this._isLoaderVisible()) {
-                     this._isLoaderVisible(true);
-                 }
+        return pagedOrders;
+    }
+}
+```
 
-                 divRedDots.forEach((element: Element) => {
-                     let divRedDot: HTMLDivElement = element as HTMLDivElement;
-                     divRedDot.style.display = "block";
-
-                 });
-             } else {
-                 divRedDots.forEach((element: Element) => {
-                     let divRedDot: HTMLDivElement = element as HTMLDivElement;
-                     divRedDot.style.display = "none";
-                 });
-             }
-
-             setTimeout((): void => {
-                 this._isLoaderVisible(false);
-             }, 4000);
-         });
-     }, 10000);
- }
- ```
    
