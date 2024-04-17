@@ -1,11 +1,11 @@
-## Store Commerce Dual Display Support AutoScrolling.
+## Customer Order(Call Center Order) In-Store Pickup Notification
 
 1. <ins>Background:</ins><br/>
-As you know the Store Commerce Out-Of-Box did not support Dual Display,  when enable Dual Display in the Funcationality Profile,  the Dual Display only show a simple amount due likee below<br/>
-<img width="1161" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bf92dfab-68b8-4709-a2b3-431031d04916">
-<br/>
-This article is going to develop a customization to support Dual Display to support auto-scroll when more and more product are putting into cart that overflow the  Dual Display cart space.<br/>
-2. Precoditions of this feature will work
+As you know D365 Commerce Solution Support Customer order (Call Center Order) In-Store Pick-up, some Store Manager want to get notification to show new order created and thatneed pickup from the current store =<br/>
+The final function is like this 
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)
+
+2. Implementation details
 - Enable Dual Display from Hardware profile:
   <img width="689" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08cd5a67-deff-4f30-ac7d-23d6595c30dc"><br/>
 - Run 1070 or 9999 job.
