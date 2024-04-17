@@ -4,19 +4,23 @@
 
    As you know, D365 Commerce Solution supports Customer order (Call Center Order) In-Store Pick-up. Some Store Managers want to get notifications to show new orders created that need pickup from the current store. The final function is like this:
    
-   ![Customer Order Notification](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)
+   ![Customer Order Notification](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)<br/>
 
-2. **Implementation details:**
+   The video can be found:
+   https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fguazha%5Fmicrosoft%5Fcom%2FDocuments%2FRecordings%2FCustomer%20Order%20In%2DStore%20Pickup%20Notification%2D20240417%5F225004%2DMeeting%20Recording%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview&ga=1<br/>
+   https://www.youtube.com/watch?v=YoEazXIJhB0
+
+3. **Implementation details:**
    
    - Add Custom Control on Screen Layout Designer
      ![Image 1](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/68f80dad-79cd-42a3-8ece-1149f8e7e587)
      ![Image 2](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8d92e1cd-2c70-48dc-b279-b0e728afe1a1)
 
-3. **Install Scale Unit Extension Package**
+4. **Install Scale Unit Extension Package**
 
-4. **Install Store Commerce Extension Package**
+5. **Install Store Commerce Extension Package**
 
-5. **Technical Point:**
+6. **Technical Point:**
    
    - Periodically check if there are new customer orders that need pickup from the current store.
      ```typescript
