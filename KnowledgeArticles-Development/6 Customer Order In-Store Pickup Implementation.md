@@ -85,6 +85,21 @@
      ```csharp
      public partial class NonBindableOperationCustomController : IController
      {
-         // Implementation details
+            ThrowIf.Null(settings, nameof(settings));
+
+            // Only get the orders created last 10 minutes
+            OrderSearchCriteria criteria = new OrderSearchCriteria();
+            criteria.FulfillmentTypes.Add(FulfillmentOperationType.Pickup);
+            criteria.StartDateTime = DateTimeOffset.UtcNow.AddDays(-1);
+            criteria.EndDateTime = DateTimeOffset.UtcNow;
+
+            var request = new SearchOrdersServiceRequest(criteria, settings);
+            var response = await context.ExecuteAsync<SearchOrdersServiceResponse>(request).ConfigureAwait(false);
+
+            var pagedOrders = response.Orders;
+            //Only take the orders created from other store:
+            //var pagedOrders = response.Orders.Where(o => o.ChannelId != currentChannelId).AsPagedResult<SalesOrder>();
+
+            return pagedOrders;
      }
      ```
