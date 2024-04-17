@@ -1,8 +1,8 @@
 ## Customer Order(Call Center Order) In-Store Pickup Notification
 
 1. <ins>Background:</ins><br/>
-As you know D365 Commerce Solution Support Customer order (Call Center Order) In-Store Pick-up, some Store Manager want to get notification to show new order created and thatneed pickup from the current store =<br/>
-The final function is like this 
+As you know D365 Commerce Solution Support Customer order (Call Center Order) In-Store Pick-up, some Store Manager want to get notification to show new order created and thatneed pickup from the current store<br/>
+The final function is like this:
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)
 
 2. Implementation details
