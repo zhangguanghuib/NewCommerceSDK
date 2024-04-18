@@ -39,7 +39,8 @@
         },
         "SearchView": {
           "productAppBarCommands": [
-            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" }
+            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" },
+            { "modulePath": "Extend/ViewExtensions/Search/CreateTenderDeclarationCommand" }
           ]
         },
         "CustomerDetailsView": {

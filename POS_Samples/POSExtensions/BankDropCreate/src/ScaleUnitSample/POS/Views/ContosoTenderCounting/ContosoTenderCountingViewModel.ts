@@ -38,7 +38,7 @@ export default class ContosoTenderCountingViewModel {
 
     constructor(context: IExtensionViewControllerContext) {
         this._context = context;
-        this.title = context.resources.getString("string_0001");
+        this.title = "Contoso Bank Drop";
         this.tenderDetails = [];
         this.isItemSelected = () => !ObjectExtensions.isNullOrUndefined(this._selectedItem);
         //this.tenderTypes:  ProxyEntities.TenderType[];
