@@ -77,7 +77,9 @@ export default class ContosoDenominationDetailView extends Views.CustomViewContr
         this.dataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", dataListOptions, dataListRootElem);
 
         this.dataList.addEventListener("ItemInvoked", (eventData: { item: ProxyEntities.DenominationDetail }) => {
-            console.log(eventData.item);
+            this.viewModel.listItemSelected(eventData.item).then(() => {
+                this.dataList.data = this.viewModel.denominationDetailLines();
+            })
         });
 
 

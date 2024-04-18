@@ -87,7 +87,7 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                     localStorage.removeItem(keyStr);
                     // First line selected
                     if (firstItem.tenderName === "Cash") {
-                        
+
                         let options: IContosoDenominationDetailViewOptions = {
                             title: firstItem.tenderName,
                             denominations: firstItem.denominations
@@ -122,13 +122,13 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                         }
 
                         this.context.navigator.navigate("ContosoDenominationDetailView", options);
-                    }
-                    return;
-                }
+                    } 
+                } else {
+                    this.viewModel.listItemSelected(firstItem).then(() => {
+                        this.dataList.data = this.viewModel.tenderCountingLines();
+                    })
+                };
             }
-
-            // Else open dialog
-            alert("Will open a current numpad");
         });
 
         this.state.isProcessing = true;

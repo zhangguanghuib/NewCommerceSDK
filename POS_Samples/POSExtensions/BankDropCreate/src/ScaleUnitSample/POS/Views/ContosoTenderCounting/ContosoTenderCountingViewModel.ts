@@ -10,6 +10,8 @@ import * as Messages from "../../DataService/DataServiceRequests.g";
 import { Contoso } from "./Dictionary";
 import { GetCurrentShiftClientRequest, GetCurrentShiftClientResponse } from "PosApi/Consume/Shifts";
 import ContosoNumberExtensions from "./ContosoNumberExtensions";
+import NumericInputDialog from "../../Create/Dialogs/NumericInputDialog";
+
 import ko from "knockout";
 
 declare var Commerce: any;
@@ -264,6 +266,18 @@ export default class ContosoTenderCountingViewModel {
         return this._convertCashDeclarationsToDenominationDetails(cashDeclarations);
     }
 
+    public listItemSelected(item: ContosoTenderCountingLine): Promise<void> {
+
+        let numericInputDialog: NumericInputDialog = new NumericInputDialog();
+        return numericInputDialog.show(this._context, this.title)
+            .then((result: string) => {
+                item.totalAmount = parseFloat(result);
+                return Promise.resolve();
+            }).catch((reason: any) => {
+                return Promise.reject(reason);
+            });
+    }
+
     public loadAsync(): Promise<void> {
 
         //let tenderTypesMap: TenderTypeMap = ApplicationContext.Instance.tenderTypesMap;
@@ -312,6 +326,8 @@ export default class ContosoTenderCountingViewModel {
                 }
             });
         })
+
+
 
         //return Promise.all([
         //    this._context.runtime.executeAsync(new GetOrgUnitTenderTypesClientRequest<GetOrgUnitTenderTypesClientResponse>(correlationId))
