@@ -61,6 +61,6 @@ export default class CreateTenderDeclarationCommand extends SearchView.ProductSe
             }).catch((reason: any) => {
                 this.context.logger.logError("NumericInputDialog: " + JSON.stringify(reason));
                 return Promise.reject(reason);
-            });;
+            });
     }
 }

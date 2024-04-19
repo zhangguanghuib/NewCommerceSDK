@@ -141,7 +141,7 @@ export default class ExampleViewModel {
         //    });
 
         let req: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>
-            = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>("HOUSTON-HOUSTON-42-1711458887804", ProxyEntities.SearchLocation.Local);
+            = new GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse>("HOUSTON-HOUSTON-42-1713517755745", ProxyEntities.SearchLocation.Local);
 
         return this._context.runtime.executeAsync(req).then((res: ClientEntities.ICancelableDataResult<GetSalesOrderDetailsByTransactionIdClientResponse>): Promise<ProxyEntities.Receipt[]> => {
             let salesOrder: ProxyEntities.SalesOrder = res.data.result;

@@ -30,6 +30,10 @@
         ]
       },
       "triggers": [
+        {
+          "triggerType": "PostVoidTransaction",
+          "modulePath": "TriggerHandlers/PostVoidTransactionTrigger"
+        }
       ],
       "requestHandlers": [
       ],
