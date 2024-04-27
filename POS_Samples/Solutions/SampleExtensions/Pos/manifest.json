@@ -111,7 +111,7 @@
           ]
         }
       }
-      },
+    },
     "create": {
       "views": [
         {
@@ -125,28 +125,53 @@
           "title": "TextInputDialogView",
           "pageName": "TextInputDialogView",
           "phonePageName": "TextInputDialogView",
-          "viewDirectory": "Views/Samples/",
+          "viewDirectory": "Views/Samples/Samples",
           "viewControllerPath": "Views/Samples/TextInputDialogView"
         },
         {
           "title": "NumericInputDialogView",
           "pageName": "NumericInputDialogView",
           "phonePageName": "NumericInputDialogView",
-          "viewDirectory": "Create/Views/Samples/",
+          "viewDirectory": "Create/Views/Samples/Samples",
           "viewControllerPath": "Create/Views/Samples/NumericInputDialogView"
         },
         {
           "title": "AlphanumericInputDialogView",
           "pageName": "AlphanumericInputDialogView",
           "phonePageName": "AlphanumericInputDialogView",
-          "viewDirectory": "Create/Views/Samples/",
+          "viewDirectory": "Create/Views/Samples/Create",
           "viewControllerPath": "Create/Views/Samples/AlphanumericInputDialogView"
+        },
+        {
+          "title": "NumericNumPadView",
+          "pageName": "NumericNumPadView",
+          "phonePageName": "NumericNumPadView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/NumericNumPadView"
+        },
+        {
+          "title": "CurrencyNumPadView",
+          "pageName": "CurrencyNumPadView",
+          "phonePageName": "CurrencyNumPadView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/CurrencyNumPadView"
         }
       ],
       "templatedDialogs": [
         {
           "htmlPath": "Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialog.html",
           "modulePath": "Create/Dialogs/BarcodeMsrDialog/BarcodeMsrDialog"
+        },
+        {
+          "htmlPath": "Create/Dialogs/GiftCardBalanceDialog/GiftCardBalanceDialog.html",
+          "modulePath": "Create/Dialogs/GiftCardBalanceDialog/GiftCardBalanceDialog"
+        }
+      ],
+      "operations": [
+        {
+          "operationId": "5002",
+          "operationRequestFactoryPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceFactory",
+          "operationRequestHandlerPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceHandler"
         }
       ]
     }

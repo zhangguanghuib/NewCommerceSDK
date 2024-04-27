@@ -1,0 +1,101 @@
+{
+  "@odata.context": "https://scum0e8pdj637683597-rs.su.retail.dynamics.com/Commerce/$metadata#Collection(Microsoft.Dynamics.Commerce.Runtime.DataModel.SearchSuggestion)",
+  "value": [
+    {
+      "Value": "{MS-1965} PADEYEASSY57",
+      "SuggestionType": "Keyword",
+      "ExtensionProperties": []
+    },
+    {
+      "Value": "PADEYE ASSY-57MM W/HD POST (H-22095B)",
+      "SuggestionType": "Product",
+      "Id": "5637208491",
+      "ImageUrl": "Products/MS-1965_000_001.png",
+      "Value2": {
+        "Key": "ItemId",
+        "Value": {
+          "StringValue": "MS-1965"
+        }
+      },
+      "Value3": {
+        "Key": "AdjustedPrice",
+        "Value": {
+          "DecimalValue": 1919
+        }
+      },
+      "ExtensionProperties": []
+    },
+    {
+      "Value": "Marine B2B|Spare Parts|Block Spare Parts",
+      "SuggestionType": "ScopedCategory",
+      "Id": "5637165629",
+      "Value2": {
+        "Key": "CategoryLevel",
+        "Value": {
+          "IntegerValue": 2
+        }
+      },
+      "Value3": {
+        "Key": "Count",
+        "Value": {
+          "IntegerValue": 9
+        }
+      },
+      "Value4": {
+        "Key": "Rank",
+        "Value": {
+          "DecimalValue": 158.133960393094
+        }
+      },
+      "ExtensionProperties": []
+    },
+    {
+      "Value": "Marine B2B|Spare Parts|Furling Spare Parts",
+      "SuggestionType": "ScopedCategory",
+      "Id": "5637165631",
+      "Value2": {
+        "Key": "CategoryLevel",
+        "Value": {
+          "IntegerValue": 2
+        }
+      },
+      "Value3": {
+        "Key": "Count",
+        "Value": {
+          "IntegerValue": 4
+        }
+      },
+      "Value4": {
+        "Key": "Rank",
+        "Value": {
+          "DecimalValue": 18.5599454372211
+        }
+      },
+      "ExtensionProperties": []
+    },
+    {
+      "Value": "Marine B2B|Spare Parts|Cam Cleats",
+      "SuggestionType": "ScopedCategory",
+      "Id": "5637165626",
+      "Value2": {
+        "Key": "CategoryLevel",
+        "Value": {
+          "IntegerValue": 2
+        }
+      },
+      "Value3": {
+        "Key": "Count",
+        "Value": {
+          "IntegerValue": 3
+        }
+      },
+      "Value4": {
+        "Key": "Rank",
+        "Value": {
+          "DecimalValue": 15.3160131353207
+        }
+      },
+      "ExtensionProperties": []
+    }
+  ]
+}

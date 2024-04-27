@@ -2,7 +2,7 @@
 import * as Views from "PosApi/Create/Views";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 
-import TextInputDialog from "../../Create/Dialogs/DialogSample/TextInputDialog";
+import TextInputDialog from "../../../Create/Dialogs/DialogSample/TextInputDialog";
 
 /**
  * The controller for TextInputDialogView.
