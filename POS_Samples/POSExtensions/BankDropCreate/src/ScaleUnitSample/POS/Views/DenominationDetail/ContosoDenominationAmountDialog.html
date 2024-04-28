@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="ContosoDenominationNumericDialog.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="ContosoDenominationAmountDialog col grow maxWidth320">
+        <div id="denominationDialogTemplate">
+            <div class="grow">
+                <!-- current denomination -->
+                <div class="h4 secondaryFontColor padTop16">Denomination</div>
+                <div class="row padBottom12 denominationLine">
+                    <div class="grow centerY">
+                        <div class="h1" data-bind="text: currency">USD</div>
+                    </div>
+                    <div class="grow centerY alignRight">
+                        <div class="h1" data-bind="text: denominationLabel">1.00</div>
+                    </div>
+                </div>
+                <!-- current calculated denomination -->
+                <div class="padTop12">
+                    <div class="row padBottom12">
+                        <div class="grow">
+                            <div class="h4 secondaryFontColor">Denomination total</div>
+                        </div>
+                        <div class="grow textRight">
+                            <div class="h4" data-bind="text: denominationValue">0.00</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- calculated total -->
+                <div class="padTop12">
+                    <div class="row padBottom12">
+                        <div class="grow">
+                            <div class="h4 secondaryFontColor">Currency total</div>
+                        </div>
+                        <div class="grow textRight">
+                            <div class="h4" data-bind="text: denominationTotalValue">0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grow"></div>
+        <div class="pad20 col maxWidth320">
+            <div class="pad8">
+                <div class="minWidth260 maxWidth320" id="CurrencyNumPad"></div>
+                <div class="h4" data-bind="text: numPadValue"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

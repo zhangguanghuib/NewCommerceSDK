@@ -12,8 +12,13 @@ export default class ContosoDenominationDetailView extends Views.CustomViewContr
 
     public viewModel: ContosoDenominationDetailViewModel;
     public dataList: IDataList<ProxyEntities.DenominationDetail>;
+    public keyQuantityDeclared: string; 
+    public keyAmountDeclared: string; 
 
     public constructor(context: Views.ICustomViewControllerContext, options?: IContosoDenominationDetailViewOptions) {
+
+        let keyQuantityDeclared = 'QuantityDeclared_DenominationDetailView';
+        let keyAmountDeclared = 'AmountDeclared_DenominationDetailView';
 
         let config: Views.ICustomViewControllerConfiguration = {
             title: options.title,
@@ -34,6 +39,7 @@ export default class ContosoDenominationDetailView extends Views.CustomViewContr
         };
 
         super(context, config);
+
 
         this.viewModel = new ContosoDenominationDetailViewModel(context, this.state, options);
 
@@ -59,14 +65,15 @@ export default class ContosoDenominationDetailView extends Views.CustomViewContr
                 {
                     title: "QUANTITY",
                     ratio: 30, collapseOrder: 2, minWidth: 100,
-                    computeValue: (data: ProxyEntities.DenominationDetail): string => {
-                        return data.QuantityDeclared.toFixed(0);
+                    computeValue: (data: ProxyEntities.DenominationDetail): string => { 
+                        return `<button class='btnDenominationCount' onclick="localStorage.setItem('QuantityDeclared_DenominationDetailView', '')">${data.QuantityDeclared.toFixed(0) }</button>`;                         
                     }
                 }, {
                     title: "TOTAL",
                     ratio: 30, collapseOrder: 3, minWidth: 100,
                     computeValue: (data: ProxyEntities.DenominationDetail): string => {
-                        return CurrencyFormatter.toCurrency(data.AmountDeclared);
+                        //return CurrencyFormatter.toCurrency(data.AmountDeclared);
+                        return `<button class='btnDenominationCount' onclick="localStorage.setItem('AmountDeclared_DenominationDetailView', '')">${data.AmountDeclared.toFixed(2)}</button>`;                         
                     }
                 }
             ]
@@ -79,7 +86,10 @@ export default class ContosoDenominationDetailView extends Views.CustomViewContr
         this.dataList.addEventListener("ItemInvoked", (eventData: { item: ProxyEntities.DenominationDetail }) => {
             this.viewModel.listItemSelected(eventData.item).then(() => {
                 this.dataList.data = this.viewModel.denominationDetailLines();
-            })
+            }).then(() => {
+                !ObjectExtensions.isNullOrUndefined(localStorage.getItem(this.keyQuantityDeclared)) ? localStorage.removeItem(this.keyQuantityDeclared) : '';
+                !ObjectExtensions.isNullOrUndefined(localStorage.getItem(this.keyAmountDeclared)) ? localStorage.removeItem(this.keyAmountDeclared) : '';
+            });
         });
 
 

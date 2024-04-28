@@ -46,6 +46,14 @@
         {
           "htmlPath": "Controls/Dialogs/Display/PingResultDialog.html",
           "modulePath": "Controls/Dialogs/Display/PingResultDialogModule"
+        },
+        {
+          "htmlPath": "Views/DenominationDetail/ContosoDenominationNumericDialog.html",
+          "modulePath": "Views/DenominationDetail/ContosoDenominationNumericDialog"
+        },
+        {
+          "htmlPath": "Views/DenominationDetail/ContosoDenominationAmountDialog.html",
+          "modulePath": "Views/DenominationDetail/ContosoDenominationAmountDialog"
         }
       ],
       "views": [

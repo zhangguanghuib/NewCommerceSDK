@@ -1,0 +1,10 @@
+﻿.ContosoDenominationNumericDialog !.btnDenominationCount {
+    width: auto;
+    height: 25px;
+    min-width: 50px;
+    min-height: 25px;
+    font-size: 18px;
+    line-height: 25px;
+    display: inline-block;
+    border: none;
+}

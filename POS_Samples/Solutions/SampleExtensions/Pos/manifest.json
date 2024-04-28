@@ -125,21 +125,21 @@
           "title": "TextInputDialogView",
           "pageName": "TextInputDialogView",
           "phonePageName": "TextInputDialogView",
-          "viewDirectory": "Views/Samples/Samples",
-          "viewControllerPath": "Views/Samples/TextInputDialogView"
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/TextInputDialogView"
         },
         {
           "title": "NumericInputDialogView",
           "pageName": "NumericInputDialogView",
           "phonePageName": "NumericInputDialogView",
-          "viewDirectory": "Create/Views/Samples/Samples",
+          "viewDirectory": "Create/Views/Samples/",
           "viewControllerPath": "Create/Views/Samples/NumericInputDialogView"
         },
         {
           "title": "AlphanumericInputDialogView",
           "pageName": "AlphanumericInputDialogView",
           "phonePageName": "AlphanumericInputDialogView",
-          "viewDirectory": "Create/Views/Samples/Create",
+          "viewDirectory": "Create/Views/Samples/",
           "viewControllerPath": "Create/Views/Samples/AlphanumericInputDialogView"
         },
         {
