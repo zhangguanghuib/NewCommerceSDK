@@ -4,8 +4,9 @@
 
    As you know in the age of Retail SDK, MPOS or Cloud CPOS, the POS extension is totally integrated with the Out-of-Box CPOS or MPOS, so when develop engineers develop  POS View, POS dialog,  they even can just utilize the OOB POS Control in their customization code, it is working fine.
    But moving forward to Commerce SDK,  when develop Store Commerce Extensions, there are a lot of new limitations, the major one is a lot PosUI Control is no longer usable, one typical sampel the Numpad. In Commerce SDK  we have to implement Numpad in a totally different way instead of just putting the Numpad Control on the POS view. More official document can be found  [Use POS controls in extensions](https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/controls-pos-extension)
-   
-   The video can be found:
+   From the above offical doc, you can see only these POS Controls are supported by PosApi:
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fc6df3dd-c2d7-429e-abed-a9f7f623ced0)
+
 ## Video Links:
 
  - [Customer Order In-Store Pickup Notification](https://microsoftapc-my.sharepoint.com/personal/guazha_microsoft_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fguazha%5Fmicrosoft%5Fcom%2FDocuments%2FRecordings%2FCustomer%20Order%20In%2DStore%20Pickup%20Notification%2D20240417%5F225004%2DMeeting%20Recording%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview&ga=1)
