@@ -59,6 +59,12 @@
    - ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ade76e8c-41d3-49ed-b303-0954c50b02ab)
    - If we click the "Button" embeded in the line, it will open another view:
    - ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a55aef19-d5eb-4d53-87b7-fec1da64710a)
+   - If we click the "Quantity Column", it will open the "Templated Dialog" that will have Numpad that only allow input the "Integer" Quantity
+   - ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6cfabcd8-1109-49af-aa3a-5340724234fe)
+   - <img width="1490" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08bee820-ad10-4c27-a000-01f13262d500"><br/>
+      You will notice when the input quantity number value changed,  the Demonination Total and Currency Total will be changing to reflect the entered Quntity
+
+
 
 
 
