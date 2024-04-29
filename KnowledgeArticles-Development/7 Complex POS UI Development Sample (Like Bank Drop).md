@@ -19,7 +19,7 @@
    | Toggle | IToggle | The toggle switch control that is used in POS. |
 
 
-2. **This Sample's Purpose**
+2. **Commerce SDK's technical limitations**
    - The first challenge: <br/>
    <p>The big limitation of the datalist control is its columns only support *string*, the normal data list code is like</p>
    
@@ -51,11 +51,11 @@
      There is another challenge is that in Retail SDK,  developers can user ApplicationContext to get the cached global variables like Store Information,  Store Tender Types, Store Default Customers, some parnters heavily depends on these variables,  but in Commerce SDK,  these unavailable. 
      
 
-4. **Implementation details:**
-   
-   - Add Custom Control on Screen Layout Designer
-     ![Image 1](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/68f80dad-79cd-42a3-8ece-1149f8e7e587)
-     ![Image 2](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8d92e1cd-2c70-48dc-b279-b0e728afe1a1)
+3. **This sample's goal is to make Bank-Drop Like Function totally depends on POS  Api instead of copying the OOB POS Controls since that is not supported:**
+   - Finally the function looks like this
+   - Open the custom "Bank Drop" View,  it looks like:
+   - <img width="1443" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/294d4e36-538b-4423-8c54-eef9c8f52c5e">
+
 
 5. **Install Scale Unit Extension Package**
 
