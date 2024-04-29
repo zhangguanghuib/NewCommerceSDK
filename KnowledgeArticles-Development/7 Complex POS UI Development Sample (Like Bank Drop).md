@@ -150,8 +150,12 @@
    ```
 
 
-8. **How to make a Templated Dialog instead of the simple dialog <br/>**
-   ```TS
+8. **How to make a Templated Dialog instead of the simple dialog <br/>**\
+   - It need extends Dialogs.ExtensionTemplatedDialogBase
+   - Then you can made the dialog as the normal view, like declare Observable variables and bind to the html page filed
+   - It has an open method to open the dialog
+   - The open method should return a promise
+   ```TS 
    import * as Dialogs from "PosApi/Create/Dialogs";
    import * as Views from "PosApi/Create/Views";
    import * as Controls from "PosApi/Consume/Controls";
@@ -259,4 +263,47 @@
        }
    }
    ```
+and it need has a html to show the customized fields as you want:
+<div class="ContosoDenominationNumericDialog col grow maxWidth320">
+    <div id="denominationDialogTemplate">
+        <div class="grow">
+            <div class="h4 secondaryFontColor padTop16">Denomination</div>
+            <div class="row padBottom12 denominationLine">
+                <div class="grow centerY">
+                    <div class="h1" data-bind="text: currency">USD</div>
+                </div>
+                <div class="grow centerY alignRight">
+                    <div class="h1" data-bind="text: denominationLabel">1.00</div>
+                </div>
+            </div>
+            <div class="padTop12">
+                <div class="row padBottom12">
+                    <div class="grow">
+                        <div class="h4 secondaryFontColor">Denomination total</div>
+                    </div>
+                    <div class="grow textRight">
+                        <div class="h4" data-bind="text: denominationValue">0.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="padTop12">
+                <div class="row padBottom12">
+                    <div class="grow">
+                        <div class="h4 secondaryFontColor">Currency total</div>
+                    </div>
+                    <div class="grow textRight">
+                        <div class="h4" data-bind="text: denominationTotalValue">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grow"></div>
+    <div class="pad20 col maxWidth320">
+        <div class="pad8">
+            <div class="minWidth260 maxWidth320" id="NumericNumPad"></div>
+            <div class="h4" data-bind="text: numpadValue"></div>
+        </div>
+    </div>
+</div>
 [Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/Notification-Sample)
