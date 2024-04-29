@@ -21,6 +21,7 @@
 
 2. **This Sample's Purpose**
    <p>The big limitation of the datalist control is its columns only support string, the normal data list code is like</p>
+   
    ```Javascript
    public onReady(element: HTMLElement): void {
        // DataList
