@@ -20,18 +20,61 @@
 
 
 2. **This Sample's Purpose**
+   <p>The big limitation of the datalist control is its columns only support string, the normal data list code is like</p>
+   ```Javascript
+   public onReady(element: HTMLElement): void {
+       // DataList
+       let dataListOptions: IDataListOptions<Entities.ExampleEntity> = {
+           interactionMode: DataListInteractionMode.SingleSelect,
+           data: this.viewModel.loadedData,
+           columns: [
+               {
+                   title: this.context.resources.getString("string_1001"), // Int data
+                   ratio: 40, collapseOrder: 1, minWidth: 100,
+                   computeValue: (data: Entities.ExampleEntity): string => data.IntData.toString()
+               },
+               {
+                   title: this.context.resources.getString("string_1002"), // String data
+                   ratio: 60, collapseOrder: 2, minWidth: 100,
+                   computeValue: (data: Entities.ExampleEntity): string => data.StringData
+               }
+           ]
+       };
+   
+       let dataListRootElem: HTMLDivElement = element.querySelector("#exampleListView") as HTMLDivElement;
+       this.dataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", dataListOptions, dataListRootElem);
+       this.dataList.addEventListener("SelectionChanged", (eventData: { items: Entities.ExampleEntity[] }) => {
+           this.viewModel.seletionChanged(eventData.items);
+   
+           // Update the command states to reflect the current selection state.
+           this.state.commandBar.commands.forEach(
+               command => command.canExecute = (
+                   ["Create", "PingTest"].some(name => name == command.name) ||
+                   this.viewModel.isItemSelected()
+               )
+           );
+       });
+   
+       this.state.isProcessing = true;
+       this.viewModel.load().then((): void => {
+           // Initialize the data list with what the view model loaded
+           this.dataList.data = this.viewModel.loadedData;
+           this.state.isProcessing = false;
+       });
+   }
+   ```
 
-3. **Implementation details:**
+4. **Implementation details:**
    
    - Add Custom Control on Screen Layout Designer
      ![Image 1](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/68f80dad-79cd-42a3-8ece-1149f8e7e587)
      ![Image 2](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8d92e1cd-2c70-48dc-b279-b0e728afe1a1)
 
-4. **Install Scale Unit Extension Package**
+5. **Install Scale Unit Extension Package**
 
-5. **Install Store Commerce Extension Package**
+6. **Install Store Commerce Extension Package**
 
-6. **Technical Point:**
+7. **Technical Point:**
    
    - Periodically check if there are new customer orders that need pickup from the current store.
      ```typescript
@@ -118,5 +161,5 @@
             return pagedOrders;
      }
      ```
-7. **All Source code can be found <br/>**
+8. **All Source code can be found <br/>**
 [Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/Notification-Sample)
