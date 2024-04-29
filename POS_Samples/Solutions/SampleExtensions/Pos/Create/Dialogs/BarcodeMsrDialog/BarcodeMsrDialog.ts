@@ -82,7 +82,4 @@ export default class BarcodeMsrDialog extends Dialogs.ExtensionTemplatedDialogBa
             this.closeDialog();
         }
     }
-
-
-
 }
