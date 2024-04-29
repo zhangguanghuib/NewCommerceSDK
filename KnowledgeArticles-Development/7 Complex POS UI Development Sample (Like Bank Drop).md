@@ -66,8 +66,9 @@
    - When click "Enter" on the Numpad,  yoy will see the demonination line's Quantity/Amount will changed as well<br/>
      <img width="1230" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6432b33d-3190-40e0-8d38-8244b1c5ce0c">
    - When click "Total" column,  you will see the different dialog will open, this time it is a current numpad, so it allow input decimal number:<br/>
-      <img width="1487" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/02cf0f6e-3fe2-417c-aff7-3f112bb4a348">
+      ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0d4bb86e-dfb0-4a77-9d85-268a6fa6c946)
    - Please "Enter" on the numpad, the same thing happened:<br/>
+     <img width="1198" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b2cff769-ee42-4abe-a012-c28e65eb6a45">
 
 
 
