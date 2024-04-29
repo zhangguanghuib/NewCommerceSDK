@@ -20,6 +20,7 @@
 
 
 2. **This Sample's Purpose**
+   - The first challenge: <br/>
    <p>The big limitation of the datalist control is its columns only support *string*, the normal data list code is like</p>
    
    ```Javascript
@@ -40,6 +41,7 @@
         ]
     };
    ```
+   That means that each column of the data list can only be a simple string, if user want to go to different view or open different dialog, from Commerce Product Group,  that is impossible.
 
 4. **Implementation details:**
    
