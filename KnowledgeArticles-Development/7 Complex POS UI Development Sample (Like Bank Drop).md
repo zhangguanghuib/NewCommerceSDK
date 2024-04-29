@@ -79,32 +79,32 @@
    - The solution is to embeded the relative information in javascript code in the data list, take the denomination lines page as sample:<br/>
    
      ```typescript
-     let dataListOptions: IDataListOptions<ProxyEntities.DenominationDetail> = {
-      interactionMode: Controls.DataListInteractionMode.Invoke,
-      data: this.viewModel.denominationDetailLines(),
-      columns: [
-          {
-              title: "DENOMINATION",
-              ratio: 40, collapseOrder: 1, minWidth: 100,
-              computeValue: (data: ProxyEntities.DenominationDetail): string => data.DenominationAmount.toFixed(2)
-          },
-          {
-              title: "QUANTITY",
-              ratio: 30, collapseOrder: 2, minWidth: 100,
-              computeValue: (data: ProxyEntities.DenominationDetail): string => { 
-                  return `<button class='btnDenominationCount' onclick="localStorage.setItem('QuantityDeclared_DenominationDetailView', '')">${data.QuantityDeclared.toFixed(0) }</button>`;                         
-              }
-          }, {
-              title: "TOTAL",
-              ratio: 30, collapseOrder: 3, minWidth: 100,
-              computeValue: (data: ProxyEntities.DenominationDetail): string => {
-                  //return CurrencyFormatter.toCurrency(data.AmountDeclared);
-                  return `<button class='btnDenominationCount' onclick="localStorage.setItem('AmountDeclared_DenominationDetailView', '')">${data.AmountDeclared.toFixed(2)}</button>`;                         
-              }
-          }
-      ]
-   };
-   ````
+        let dataListOptions: IDataListOptions<ProxyEntities.DenominationDetail> = {
+         interactionMode: Controls.DataListInteractionMode.Invoke,
+         data: this.viewModel.denominationDetailLines(),
+         columns: [
+             {
+                 title: "DENOMINATION",
+                 ratio: 40, collapseOrder: 1, minWidth: 100,
+                 computeValue: (data: ProxyEntities.DenominationDetail): string => data.DenominationAmount.toFixed(2)
+             },
+             {
+                 title: "QUANTITY",
+                 ratio: 30, collapseOrder: 2, minWidth: 100,
+                 computeValue: (data: ProxyEntities.DenominationDetail): string => { 
+                     return `<button class='btnDenominationCount' onclick="localStorage.setItem('QuantityDeclared_DenominationDetailView', '')">${data.QuantityDeclared.toFixed(0) }</button>`;                         
+                 }
+             }, {
+                 title: "TOTAL",
+                 ratio: 30, collapseOrder: 3, minWidth: 100,
+                 computeValue: (data: ProxyEntities.DenominationDetail): string => {
+                     //return CurrencyFormatter.toCurrency(data.AmountDeclared);
+                     return `<button class='btnDenominationCount' onclick="localStorage.setItem('AmountDeclared_DenominationDetailView', '')">${data.AmountDeclared.toFixed(2)}</button>`;                         
+                 }
+             }
+         ]
+      };
+   ```
    The idea is to make the column as a button,  and it got clicked,  in the LocalStorage to record this column name,  the code is as  above.
    
 7. **Install Store Commerce Extension Package**
