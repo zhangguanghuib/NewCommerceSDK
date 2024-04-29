@@ -75,7 +75,7 @@
    - <img width="1182" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/5fe3bbd6-cd67-4006-93ca-72054305bdda">
 
 5. **How to make the program know which column/row user clicked?**
-   The solution is to embeded the relative information in javascript code in the data list, take the denomination lines page as sample:<br/>
+   - The solution is to embeded the relative information in javascript code in the data list, take the denomination lines page as sample:<br/>
    
      ```typescript
      let dataListOptions: IDataListOptions<ProxyEntities.DenominationDetail> = {
@@ -104,6 +104,8 @@
       ]
    };
    ````
+   The idea is to make the column as a button,  and it got clicked,  in the LocalStorage to record this column name,  the code is as  above.
+   
 7. **Install Store Commerce Extension Package**
 
 
