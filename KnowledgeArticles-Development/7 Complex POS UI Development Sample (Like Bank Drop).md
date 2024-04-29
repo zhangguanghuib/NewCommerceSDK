@@ -109,7 +109,7 @@
    The idea is to make the column as a button,  and it got clicked,  in the LocalStorage to record this column name,  the code is as  above.
    
 6. **Based on the key(column name) stored in localStorage, it will open different dialog**
-   ```
+    ```
        public listItemSelected(item: ProxyEntities.DenominationDetail): Promise<void> {
 
         let keyQuantityDeclared: string = 'QuantityDeclared_DenominationDetailView';
@@ -147,7 +147,7 @@
 
         return Promise.resolve();
     }
-   ```
+    ```
 
 
 8. **How to make a Templated Dialog instead of the simple dialog <br/>**\
