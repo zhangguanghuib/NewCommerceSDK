@@ -5,7 +5,15 @@
    <p>As you know in the age of Retail SDK, MPOS or Cloud CPOS, the POS extension is totally integrated with the Out-of-Box CPOS or MPOS, so when develop engineers develop  POS View, POS dialog,  they even can just utilize the OOB POS Control in their customization code, it is working fine.</p>
    <p>But moving forward to Commerce SDK,  when develop Store Commerce Extensions, there are a lot of new limitations, the major one is a lot PosUI Control is no longer usable, one typical sampel the Numpad. In Commerce SDK  we have to implement Numpad in a totally different way instead of just putting the Numpad Control on the POS view. More official document can be found  [Use POS controls in extensions](https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/controls-pos-extension)</p>
   <p> From the above offical doc, you can see only these POS Controls are supported by PosApi:</p>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fc6df3dd-c2d7-429e-abed-a9f7f623ced0)
+| Control | Interfaces | Description |
+|---------|------------|-------------|
+| Data list | IDataList, IPaginatedDataList | A responsive list control that is used throughout POS to show rows of information. |
+| Date picker  | IDatePicker | The date picker control that is used in POS. |
+| Menu | IMenu | The menu control that is used in POS to show contextual information. |
+| Number Pad | IAlphanumericNumPad, ICurrencyNumPad, INumericNumPad, ITransactionNumPad | <p>Number pads that are used throughout POS. Different types of number pads have different behaviors and input formatting:</p><ul><li>**Alphanumeric numpad** – This type of number pad accepts alphanumeric input.</li><li>**Currency numpad** – This type of number pad accepts monetary values.</li><li>**Numeric numpad** – This type of number pad accepts only numeric values.</li><li>**Transaction numpad** – This type of number pad accepts item identifiers or quantities. It's typically used in transaction scenarios.</li></ul> |
+| Time Picker | ITimePicker | The time picker control that is used in POS. |
+| Toggle | IToggle | The toggle switch control that is used in POS. |
+
 
 ## Video Links:
 
