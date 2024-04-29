@@ -41,7 +41,15 @@
         ]
     };
    ```
-   That means that each column of the data list can only be a simple string, if user want to go to different view or open different dialog, from Commerce Product Group,  that is impossible.
+   That means that each column of the data list can only be a simple string, if user want to go to different view or open different dialog, from Commerce Product Group,  that is impossible.<br/>
+   - The second challenge: <br/>
+      Currently POS api only supports the simple dialog:<br/>
+     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/41b044f5-9b63-4e60-853e-5d37764b5f63)<br/>
+     If you want to a little bit complex dialog, even including a Numeric Numpad on the dialog,  you may need extend the Templated Dialog to build the dialog like you build a normal POS View, that is also a challenge.<br/>
+     
+   - The 3rd challenge: <br/>
+     There is another challenge is that in Retail SDK,  developers can user ApplicationContext to get the cached global variables like Store Information,  Store Tender Types, Store Default Customers, some parnters heavily depends on these variables,  but in Commerce SDK,  these unavailable. 
+     
 
 4. **Implementation details:**
    
