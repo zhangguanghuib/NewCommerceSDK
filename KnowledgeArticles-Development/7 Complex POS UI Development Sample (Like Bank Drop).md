@@ -1,4 +1,4 @@
-## Customer Order (Call Center Order) In-Store Pickup Notification
+## Complex POS UI Development Sample (Like Bank Drop)
 
 1. **Background:**
 
