@@ -264,6 +264,7 @@
    }
    ```
 and it need has a html to show the customized fields as you want:
+```
 <div class="ContosoDenominationNumericDialog col grow maxWidth320">
     <div id="denominationDialogTemplate">
         <div class="grow">
@@ -306,4 +307,5 @@ and it need has a html to show the customized fields as you want:
         </div>
     </div>
 </div>
+```
 [Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/Notification-Sample)
