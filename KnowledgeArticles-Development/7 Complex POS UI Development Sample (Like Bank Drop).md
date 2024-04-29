@@ -105,14 +105,50 @@
          ]
        };
     ```
-
-
    <br/>
    The idea is to make the column as a button,  and it got clicked,  in the LocalStorage to record this column name,  the code is as  above.
    
-7. **Install Store Commerce Extension Package**
+6. **Based on the key(column name) stored in localStorage, it will open different dialog**
+   ```
+       public listItemSelected(item: ProxyEntities.DenominationDetail): Promise<void> {
+
+        let keyQuantityDeclared: string = 'QuantityDeclared_DenominationDetailView';
+        let keyAmountDeclared: string = 'AmountDeclared_DenominationDetailView';
+
+        if (localStorage.getItem(keyQuantityDeclared) !== null) {
+            // alert(`QUANTITY column cliked, the clicked row ${item.QuantityDeclared}- ${item.DenominationAmount}`);
+            localStorage.removeItem(keyQuantityDeclared);
+            let contosoDenominationInputDialog: ContosoDenominationInputDialog = new ContosoDenominationInputDialog();
+            let inputs: IContosoDenominationInputDialogResult = {
+                item: item,
+                inputType: "Quantity" 
+            }
+            return contosoDenominationInputDialog.open(inputs).then((result: IContosoDenominationInputDialogResult) => {
+                if (!result.canceled) {
+                    item.QuantityDeclared = result.item.QuantityDeclared;
+                    item.AmountDeclared = result.item.AmountDeclared;
+                }
+            });
+        } else if (localStorage.getItem(keyAmountDeclared) !== null) {
+            // alert(`ToTAL column cliked, the clicked row ${item.AmountDeclared}- ${item.DenominationAmount}`);
+            localStorage.removeItem(keyAmountDeclared);
+            let contosoDenominationAmountDialog: ContosoDenominationAmountDialog = new ContosoDenominationAmountDialog();
+            let inputs: IContosoDenominationInputDialogResult = {
+                item: item,
+                inputType: "Amount"
+            }
+            return contosoDenominationAmountDialog.open(inputs).then((result: IContosoDenominationInputDialogResult) => {
+                if (!result.canceled) {
+                    item.QuantityDeclared = result.item.QuantityDeclared;
+                    item.AmountDeclared = result.item.AmountDeclared;
+                }
+            });
+        }
+
+        return Promise.resolve();
+    }
+   ```
 
 
-     ```
 8. **All Source code can be found <br/>**
 [Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/Notification-Sample)
