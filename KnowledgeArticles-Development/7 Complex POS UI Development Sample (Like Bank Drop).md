@@ -23,46 +23,22 @@
    <p>The big limitation of the datalist control is its columns only support string, the normal data list code is like</p>
    
    ```Javascript
-   public onReady(element: HTMLElement): void {
-       // DataList
-       let dataListOptions: IDataListOptions<Entities.ExampleEntity> = {
-           interactionMode: DataListInteractionMode.SingleSelect,
-           data: this.viewModel.loadedData,
-           columns: [
-               {
-                   title: this.context.resources.getString("string_1001"), // Int data
-                   ratio: 40, collapseOrder: 1, minWidth: 100,
-                   computeValue: (data: Entities.ExampleEntity): string => data.IntData.toString()
-               },
-               {
-                   title: this.context.resources.getString("string_1002"), // String data
-                   ratio: 60, collapseOrder: 2, minWidth: 100,
-                   computeValue: (data: Entities.ExampleEntity): string => data.StringData
-               }
-           ]
-       };
-   
-       let dataListRootElem: HTMLDivElement = element.querySelector("#exampleListView") as HTMLDivElement;
-       this.dataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", dataListOptions, dataListRootElem);
-       this.dataList.addEventListener("SelectionChanged", (eventData: { items: Entities.ExampleEntity[] }) => {
-           this.viewModel.seletionChanged(eventData.items);
-   
-           // Update the command states to reflect the current selection state.
-           this.state.commandBar.commands.forEach(
-               command => command.canExecute = (
-                   ["Create", "PingTest"].some(name => name == command.name) ||
-                   this.viewModel.isItemSelected()
-               )
-           );
-       });
-   
-       this.state.isProcessing = true;
-       this.viewModel.load().then((): void => {
-           // Initialize the data list with what the view model loaded
-           this.dataList.data = this.viewModel.loadedData;
-           this.state.isProcessing = false;
-       });
-   }
+    let dataListOptions: IDataListOptions<Entities.ExampleEntity> = {
+        interactionMode: DataListInteractionMode.SingleSelect,
+        data: this.viewModel.loadedData,
+        columns: [
+            {
+                title: this.context.resources.getString("string_1001"), // Int data
+                ratio: 40, collapseOrder: 1, minWidth: 100,
+                computeValue: (data: Entities.ExampleEntity): string => data.IntData.toString()
+            },
+            {
+                title: this.context.resources.getString("string_1002"), // String data
+                ratio: 60, collapseOrder: 2, minWidth: 100,
+                computeValue: (data: Entities.ExampleEntity): string => data.StringData
+            }
+        ]
+    };
    ```
 
 4. **Implementation details:**
