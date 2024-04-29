@@ -1,11 +1,10 @@
 ## Complex POS UI Development Sample (Like Bank Drop)
 
-1. **Background:**
+1. **Overall Background:**
 
-   As you know, D365 Commerce Solution supports Customer order (Call Center Order) In-Store Pick-up. Some Store Managers want to get notifications to show new orders created that need pickup from the current store. The final function is like this:
+   As you know in the age of Retail SDK, MPOS or Cloud CPOS, the POS extension is totally integrated with the Out-of-Box CPOS or MPOS, so when develop engineers develop  POS View, POS dialog,  they even can just utilize the OOB POS Control in their customization code, it is working fine.
+   But moving forward to Commerce SDK,  when develop Store Commerce Extensions, there are a lot of new limitations, the major one is a lot PosUI Control is no longer usable, one typical sampel the Numpad. In Commerce SDK  we have to implement Numpad in a totally different way instead of just putting the Numpad Control on the POS view. More official document can be found:
    
-   ![Customer Order Notification](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4148ff19-0324-4160-9cf6-2846852eb428)<br/>
-
    The video can be found:
 ## Video Links:
 
