@@ -149,8 +149,7 @@
     }
     ```
 
-
-8. **How to make a Templated Dialog instead of the simple dialog <br/>**\
+7. **How to make a Templated Dialog instead of the simple dialog <br/>**
    - It need extends Dialogs.ExtensionTemplatedDialogBase
    - Then you can made the dialog as the normal view, like declare Observable variables and bind to the html page filed
    - It has an open method to open the dialog
@@ -308,4 +307,16 @@ and it need has a html to show the customized fields as you want:
     </div>
 </div>
 ```
-[Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/Notification-Sample)
+7. **How to utilize the ApplicationContext in extension code <br/>**
+   - First of all, declare  "Commerce" variable without initialization
+   ```ts
+   declare var Commerce: any;
+   ```
+   and then you can use it directly
+   ```
+   this._primaryCurrencyCode = Commerce.ApplicationContext.Instance.deviceConfiguration.Currency;
+   ```
+   You will find magically we can get the _primaryCurrencyCode here<br/>
+   More sample can be find [Commerce Usage](https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/POSExtensions/BankDropCreate/src/ScaleUnitSample/POS/Views/ContosoTenderCounting/ContosoTenderCountingViewModel.ts)
+8. **The complete project code is here**
+[Bank Drop Source code](https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/BankDropCreate)
