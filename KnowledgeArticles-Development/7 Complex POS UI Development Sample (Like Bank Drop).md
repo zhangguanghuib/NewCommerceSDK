@@ -39,8 +39,9 @@
                 computeValue: (data: Entities.ExampleEntity): string => data.StringData
             }
         ]
-    };
+   };
    ```
+
    That means that each column of the data list can only be a simple string, if user want to go to different view or open different dialog, from Commerce Product Group,  that is impossible.<br/>
    - The second challenge: <br/>
       Currently POS api only supports the simple dialog:<br/>
@@ -51,7 +52,7 @@
      There is another challenge is that in Retail SDK,  developers can user ApplicationContext to get the cached global variables like Store Information,  Store Tender Types, Store Default Customers, some parnters heavily depends on these variables,  but in Commerce SDK,  these unavailable. 
      
 
-3. **This sample's goal is to make Bank-Drop Like Function totally depends on POS  Api instead of copying the OOB POS Controls since that is not supported:**
+4. **This sample's goal is to make Bank-Drop Like Function totally depends on POS  Api instead of copying the OOB POS Controls since that is not supported:**
    - Finally the function looks like this
    - Open the custom "Bank Drop" View,  it looks like:
    - <img width="1443" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/294d4e36-538b-4423-8c54-eef9c8f52c5e">
