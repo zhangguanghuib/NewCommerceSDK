@@ -55,6 +55,12 @@
    - Finally the function looks like this
    - Open the custom "Bank Drop" View,  it looks like:
    - <img width="1443" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/294d4e36-538b-4423-8c54-eef9c8f52c5e">
+   - If we click the tender type which are not cash, it will pop-up dialog to ask you input the tender amount:
+   - ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ade76e8c-41d3-49ed-b303-0954c50b02ab)
+   - If we click the "Button" embeded in the line, it will open another view:
+   - ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a55aef19-d5eb-4d53-87b7-fec1da64710a)
+
+
 
 
 5. **Install Scale Unit Extension Package**
