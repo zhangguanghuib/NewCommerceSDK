@@ -20,7 +20,7 @@
 
 
 2. **This Sample's Purpose**
-   <p>The big limitation of the datalist control is its columns only support <span style="background-color: yellow;">string</span>, the normal data list code is like</p>
+   <p>The big limitation of the datalist control is its columns only support *string*, the normal data list code is like</p>
    
    ```Javascript
     let dataListOptions: IDataListOptions<Entities.ExampleEntity> = {
