@@ -22,7 +22,18 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
         let config: Views.ICustomViewControllerConfiguration = {
             title: "Bank Drop",
             commandBar: {
-                commands: []
+                commands: [
+                    {
+                        name: "Save",
+                        label: "Save",
+                        icon: Views.Icons.Save,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.viewModel.onSave().then(() => { console.log("Save done") });
+                        }
+                    }
+                ]
             }
         };
 

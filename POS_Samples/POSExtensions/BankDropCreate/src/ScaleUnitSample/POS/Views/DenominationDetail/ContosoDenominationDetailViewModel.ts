@@ -63,16 +63,5 @@ export default class ContosoDenominationDetailViewModel extends KnockoutExtensio
         }
 
         return Promise.resolve();
-
-        //let numericInputDialog: NumericInputDialog = new NumericInputDialog();
-        //return numericInputDialog.show(this.context, this.title)
-        //    .then((result: string) => {
-        //        this.dialogResult(result);
-        //        item.AmountDeclared = parseFloat(result);;
-        //        return Promise.resolve();
-        //    }).catch((reason: any) => {
-        //        this.context.logger.logError("NumericInputDialog: " + JSON.stringify(reason));
-        //        return Promise.reject(reason);
-        //    });
     }
 }

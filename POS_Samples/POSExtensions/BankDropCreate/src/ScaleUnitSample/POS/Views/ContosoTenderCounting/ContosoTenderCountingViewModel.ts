@@ -1,6 +1,6 @@
 ﻿import { GetChannelConfigurationClientResponse, GetChannelConfigurationClientRequest } from "PosApi/Consume/Device";
 import { GetOrgUnitTenderTypesClientRequest, GetOrgUnitTenderTypesClientResponse } from "PosApi/Consume/OrgUnits";
-import { GetCurrenciesServiceRequest, GetCurrenciesServiceResponse, GetTenderDetailsClientRequest, GetTenderDetailsClientResponse } from "PosApi/Consume/StoreOperations";
+import { CreateBankDropTransactionClientRequest, CreateBankDropTransactionClientResponse, GetBankBagNumberClientRequest, GetBankBagNumberClientResponse, GetCurrenciesServiceRequest, GetCurrenciesServiceResponse, GetTenderDetailsClientRequest, GetTenderDetailsClientResponse } from "PosApi/Consume/StoreOperations";
 import { IExtensionViewControllerContext } from "PosApi/Create/Views";
 import {  ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { ArrayExtensions, ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
@@ -283,14 +283,10 @@ export default class ContosoTenderCountingViewModel {
         //let tenderTypesMap: TenderTypeMap = ApplicationContext.Instance.tenderTypesMap;
 
         let correlationId = this._context.logger.getNewCorrelationId();
-
         let accountNumber: string = Commerce.ApplicationContext.Instance.storeInformation.DefaultCustomerAccount;
-
         let storeTenderTypeMap = Commerce.ApplicationContext.Instance.tenderTypesMap;
-
         let tenderTypes: ProxyEntities.TenderType[] = storeTenderTypeMap.getItems();
         console.log(tenderTypes);
-
         let operationIds: ProxyEntities.RetailOperation[] = storeTenderTypeMap.getItems();
 
         console.log(operationIds);
@@ -326,32 +322,90 @@ export default class ContosoTenderCountingViewModel {
                 }
             });
         })
-
-
-
-        //return Promise.all([
-        //    this._context.runtime.executeAsync(new GetOrgUnitTenderTypesClientRequest<GetOrgUnitTenderTypesClientResponse>(correlationId))
-        //        .then((response: ClientEntities.ICancelableDataResult<GetOrgUnitTenderTypesClientResponse>): ProxyEntities.TenderType[] => {
-        //            return response.data.result;
-        //        }),
-
-        //    this._context.runtime.executeAsync(new GetCurrenciesServiceRequest(correlationId))
-        //        .then((response: ClientEntities.ICancelableDataResult<GetCurrenciesServiceResponse>): ProxyEntities.Currency[] => {
-        //            return response.data.currencies;
-        //        }),
-
-        //    this._context.runtime.executeAsync(new GetChannelConfigurationClientRequest<GetChannelConfigurationClientResponse>(correlationId))
-        //        .then((response: ClientEntities.ICancelableDataResult<GetChannelConfigurationClientResponse>): ProxyEntities.ChannelConfiguration => {
-        //            return response.data.result;
-        //        })])
-        //    .then((results: any[]) => {
-        //       // this.TenderTypres = results[0];
-        //        this.ChannelConfig = results[2]
-        //        return this._context.runtime.executeAsync(new Messages.StoreOperations.GetCurrenciesAmounExtRequest<Messages.StoreOperations.GetCurrenciesAmounExtResponse>(this.ChannelConfig.Currency, 1));
-        //    }).then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetCurrenciesAmounExtResponse>) => {
-        //        console.log(response.data.result);
-        //    }).catch((reason: any) => {
-        //        console.log(reason);
-        //    });
     }
+
+    public onSave(): Promise<void> {
+
+        let correlationId: string = this._context.logger.getNewCorrelationId();
+
+        Promise.all([
+            this._context.runtime.executeAsync(new GetCurrentShiftClientRequest<GetCurrentShiftClientResponse>(correlationId))
+                .then((response: ClientEntities.ICancelableDataResult<GetCurrentShiftClientResponse>): ProxyEntities.Shift => {
+                    return response.data.result;
+                }),
+
+            this._context.runtime.executeAsync(new GetBankBagNumberClientRequest<GetBankBagNumberClientResponse>(correlationId))
+                .then((response: ClientEntities.ICancelableDataResult<GetBankBagNumberClientResponse>) => {
+                    return response.data.result.bagNumber;
+                })
+        ]).then((results: any[]) => {
+            let currentShift: ProxyEntities.Shift = results[0];
+            let bagNumber: string = results[1];
+            let tenderDetails: ProxyEntities.TenderDetail[] = this._convertCountLinesToDetailLines(this.tenderCountingLines());
+
+            let createBankDropTransactionClientRequest: CreateBankDropTransactionClientRequest<CreateBankDropTransactionClientResponse> =
+                new CreateBankDropTransactionClientRequest<CreateBankDropTransactionClientResponse>(false, currentShift, tenderDetails, bagNumber, correlationId);
+
+            this._context.runtime.executeAsync(createBankDropTransactionClientRequest).then((response: ClientEntities.ICancelableDataResult<CreateBankDropTransactionClientResponse>): Promise<void> => {
+                if (response.canceled) {
+                    let errorMessage: string = `Bank Drop is cancelled, please retry!`;
+                    return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
+                } else {
+                    return Promise.resolve();
+                }
+            }).catch((reason: any) => {
+                let errorMessage: string = `Bank Drop Failed for the reason ${reason}`;
+                return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
+            });
+        });
+
+        //let getCurrentShiftClientRequest: GetCurrentShiftClientRequest<GetCurrentShiftClientResponse> = new GetCurrentShiftClientRequest(correlationId);
+        //this._context.runtime.executeAsync(getCurrentShiftClientRequest)
+        //    .then((response: ClientEntities.ICancelableDataResult<GetCurrentShiftClientResponse>): Promise<ClientEntities.ICancelableDataResult<ProxyEntities.Shift>> => {
+        //        if (response.canceled) {
+        //            return Promise.resolve({ canceled: true, data: null });
+        //        } else {
+        //            let currentShift: ProxyEntities.Shift = response.data.result;
+        //            return Promise.resolve({ canceled: false, data: currentShift });
+        //        }
+        //    }).then((result: ClientEntities.ICancelableDataResult<ProxyEntities.Shift>): Promise<ClientEntities.ICancelableDataResult<GetBankBagNumberClientResponse>> => {
+        //        if (!result.canceled) {
+        //            return Promise.resolve({ canceled: true, data: null });
+        //        } else {
+        //            let getBankBagNumberClientRequest: GetBankBagNumberClientRequest<GetBankBagNumberClientResponse> = new GetBankBagNumberClientRequest(correlationId);
+        //            return this._context.runtime.executeAsync(getBankBagNumberClientRequest);
+        //        }
+        //    }).then((response: ClientEntities.ICancelableDataResult<GetBankBagNumberClientResponse>) => {
+
+        //    })
+        return Promise.resolve();
+    }
+
+    private _convertCountLinesToDetailLines(contosoTenderCountingLines: ContosoTenderCountingLine[]): ProxyEntities.TenderDetail[] {
+        let tenderDetailLines: ProxyEntities.TenderDetail[] = [];
+        if (ArrayExtensions.hasElements(contosoTenderCountingLines)) {
+            contosoTenderCountingLines.forEach((contosoTenderCountingLine: ContosoTenderCountingLine) => {
+                if (!ObjectExtensions.isNullOrUndefined(contosoTenderCountingLine)) {
+                    let tenderDetailLine: ProxyEntities.TenderDetail = new ProxyEntities.TenderDetailClass();
+                    tenderDetailLine.Amount = contosoTenderCountingLine.totalAmount;
+                    tenderDetailLine.ForeignCurrency = contosoTenderCountingLine.currencyCode;
+                    tenderDetailLine.ForeignCurrencyExchangeRate = contosoTenderCountingLine.exchangeRate;
+                    tenderDetailLine.AmountInForeignCurrency = contosoTenderCountingLine.totalAmountInCurrency;
+                    tenderDetailLine.TenderTypeId = contosoTenderCountingLine.tenderType.TenderTypeId;
+                    tenderDetailLine.TenderRecount = contosoTenderCountingLine.numberOfTenderDeclarationRecount;
+
+                    tenderDetailLine.DenominationDetails = [];
+
+                    contosoTenderCountingLine.denominations.forEach((denominationLine: ProxyEntities.DenominationDetail): void => {
+                        if (denominationLine.QuantityDeclared > 0) {
+                            tenderDetailLine.DenominationDetails.push(denominationLine);
+                        }
+                    });
+                    tenderDetailLines.push(tenderDetailLine);
+                }
+            });
+        }
+        return tenderDetailLines;
+    }
+
 }
