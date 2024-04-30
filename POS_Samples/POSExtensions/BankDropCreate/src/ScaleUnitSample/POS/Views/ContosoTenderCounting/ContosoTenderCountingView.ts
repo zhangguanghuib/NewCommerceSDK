@@ -26,11 +26,25 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                     {
                         name: "Save",
                         label: "Save",
-                        icon: Views.Icons.Save,
+                        icon: Views.Icons.Bank,
                         isVisible: true,
                         canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
-                            this.viewModel.onSave().then(() => { console.log("Save done") });
+                            this.viewModel.onSave().then(() => {
+                                this.context.navigator.navigateToPOSView("HomeView");
+                            });
+                        }
+                    },
+                    {
+                        name: "TenderDeclaration",
+                        label: "Tender Declaration",
+                        icon: Views.Icons.Count,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.viewModel.tenderDeclarationSave().then(() => {
+                                this.context.navigator.navigateToPOSView("HomeView");
+                            });
                         }
                     }
                 ]

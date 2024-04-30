@@ -1,6 +1,6 @@
 ﻿import { GetChannelConfigurationClientResponse, GetChannelConfigurationClientRequest } from "PosApi/Consume/Device";
 import { GetOrgUnitTenderTypesClientRequest, GetOrgUnitTenderTypesClientResponse } from "PosApi/Consume/OrgUnits";
-import { CreateBankDropTransactionClientRequest, CreateBankDropTransactionClientResponse, GetBankBagNumberClientRequest, GetBankBagNumberClientResponse, GetCurrenciesServiceRequest, GetCurrenciesServiceResponse, GetTenderDetailsClientRequest, GetTenderDetailsClientResponse } from "PosApi/Consume/StoreOperations";
+import { CreateBankDropTransactionClientRequest, CreateBankDropTransactionClientResponse, CreateTenderDeclarationTransactionClientRequest, CreateTenderDeclarationTransactionClientResponse, GetBankBagNumberClientRequest, GetBankBagNumberClientResponse, GetCurrenciesServiceRequest, GetCurrenciesServiceResponse, GetTenderDetailsClientRequest, GetTenderDetailsClientResponse } from "PosApi/Consume/StoreOperations";
 import { IExtensionViewControllerContext } from "PosApi/Create/Views";
 import {  ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { ArrayExtensions, ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
@@ -358,26 +358,34 @@ export default class ContosoTenderCountingViewModel {
                 return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
             });
         });
+        return Promise.resolve();
+    }
 
-        //let getCurrentShiftClientRequest: GetCurrentShiftClientRequest<GetCurrentShiftClientResponse> = new GetCurrentShiftClientRequest(correlationId);
-        //this._context.runtime.executeAsync(getCurrentShiftClientRequest)
-        //    .then((response: ClientEntities.ICancelableDataResult<GetCurrentShiftClientResponse>): Promise<ClientEntities.ICancelableDataResult<ProxyEntities.Shift>> => {
-        //        if (response.canceled) {
-        //            return Promise.resolve({ canceled: true, data: null });
-        //        } else {
-        //            let currentShift: ProxyEntities.Shift = response.data.result;
-        //            return Promise.resolve({ canceled: false, data: currentShift });
-        //        }
-        //    }).then((result: ClientEntities.ICancelableDataResult<ProxyEntities.Shift>): Promise<ClientEntities.ICancelableDataResult<GetBankBagNumberClientResponse>> => {
-        //        if (!result.canceled) {
-        //            return Promise.resolve({ canceled: true, data: null });
-        //        } else {
-        //            let getBankBagNumberClientRequest: GetBankBagNumberClientRequest<GetBankBagNumberClientResponse> = new GetBankBagNumberClientRequest(correlationId);
-        //            return this._context.runtime.executeAsync(getBankBagNumberClientRequest);
-        //        }
-        //    }).then((response: ClientEntities.ICancelableDataResult<GetBankBagNumberClientResponse>) => {
 
-        //    })
+    public tenderDeclarationSave(): Promise<void> {
+
+        let correlationId: string = this._context.logger.getNewCorrelationId();
+        this._context.runtime.executeAsync(new GetCurrentShiftClientRequest<GetCurrentShiftClientResponse>(correlationId))
+            .then((response: ClientEntities.ICancelableDataResult<GetCurrentShiftClientResponse>): ProxyEntities.Shift => {
+                return response.data.result;
+            }).then((currentShift: ProxyEntities.Shift) => {
+                let tenderDetails: ProxyEntities.TenderDetail[] = this._convertCountLinesToDetailLines(this.tenderCountingLines());
+                let reasonCodeLines: ProxyEntities.ReasonCodeLine[] = [];
+                let createTenderDeclarationTransactionClientRequest: CreateTenderDeclarationTransactionClientRequest<CreateTenderDeclarationTransactionClientResponse> =
+                    new CreateTenderDeclarationTransactionClientRequest<CreateTenderDeclarationTransactionClientResponse>(correlationId, false, currentShift, tenderDetails, reasonCodeLines);
+
+                this._context.runtime.executeAsync(createTenderDeclarationTransactionClientRequest).then((response: ClientEntities.ICancelableDataResult<CreateTenderDeclarationTransactionClientResponse>): Promise<void> => {
+                if (response.canceled) {
+                    let errorMessage: string = `Tender Declaration is cancelled, please retry!`;
+                    return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
+                } else {
+                    return Promise.resolve();
+                }
+            }).catch((reason: any) => {
+                let errorMessage: string = `Tender Declaration Failed for the reason ${reason}`;
+                return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
+            });
+        });
         return Promise.resolve();
     }
 
