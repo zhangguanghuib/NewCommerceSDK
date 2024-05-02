@@ -1,75 +1,34 @@
 ## How to call CreateTenderDeclarationTransactionClientRequest/Response?
-```typescript
+```CS
+using Azure;
+using Azure.AI.OpenAI;
+using Microsoft.Graph.Models;
+using System;
+using static System.Environment;
 
-import {CreateTenderDeclarationTransactionClientRequest, CreateTenderDeclarationTransactionClientResponse } from "PosApi/Consume/StoreOperations";
+string endpoint = "https://******.openai.azure.com/";
+string key = "******";
 
-commands: [
-      {
-          name: "TenderDeclaration",
-          label: "Tender Declaration",
-          icon: Views.Icons.Count,
-          isVisible: true,
-          canExecute: true,
-          execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
-              this.viewModel.tenderDeclarationSave().then(() => {
-                  this.context.navigator.navigateToPOSView("HomeView");
-              });
-          }
-      }
-  ]
+OpenAIClient client = new(new Uri(endpoint), new AzureKeyCredential(key));
 
-    public tenderDeclarationSave(): Promise<void> {
-        let correlationId: string = this._context.logger.getNewCorrelationId();
-        this._context.runtime.executeAsync(new GetCurrentShiftClientRequest<GetCurrentShiftClientResponse>(correlationId))
-            .then((response: ClientEntities.ICancelableDataResult<GetCurrentShiftClientResponse>): ProxyEntities.Shift => {
-                return response.data.result;
-            }).then((currentShift: ProxyEntities.Shift) => {
-                let tenderDetails: ProxyEntities.TenderDetail[] = this._convertCountLinesToDetailLines(this.tenderCountingLines());
-                let reasonCodeLines: ProxyEntities.ReasonCodeLine[] = [];
-                let createTenderDeclarationTransactionClientRequest: CreateTenderDeclarationTransactionClientRequest<CreateTenderDeclarationTransactionClientResponse> =
-                    new CreateTenderDeclarationTransactionClientRequest<CreateTenderDeclarationTransactionClientResponse>(correlationId, false, currentShift, tenderDetails, reasonCodeLines);
+for (int i = 0; i < 1; i++)
+{
+    var chatCompletionsOptions = new ChatCompletionsOptions()
+    {
+        DeploymentName = "openai10", //This must match the custom deployment name you chose for your model
+        Messages =
+        {  
+            new ChatRequestUserMessage("Can you please generate a json based on the below product description :This product is a T-Shirt with a price of $100. It is categorized as a seasonal item, specifically meant for use in the summer months.The T - Shirt is likely made of a lightweight fabric to ensure breathability and comfort in warmer temperatures.Overall, it appears to be a stylish and practical option for those looking to stay cool and comfortable during the summer"),
+        },
+        MaxTokens = 3000
+    };
 
-                this._context.runtime.executeAsync(createTenderDeclarationTransactionClientRequest).then((response: ClientEntities.ICancelableDataResult<CreateTenderDeclarationTransactionClientResponse>): Promise<void> => {
-                if (response.canceled) {
-                    let errorMessage: string = `Tender Declaration is cancelled, please retry!`;
-                    return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
-                } else {
-                    return Promise.resolve();
-                }
-            }).catch((reason: any) => {
-                let errorMessage: string = `Tender Declaration Failed for the reason ${reason}`;
-                return Promise.reject(new ClientEntities.ExtensionError(errorMessage));
-            });
-        });
-        return Promise.resolve();
-    }
+   Response<ChatCompletions> response = client.GetChatCompletions(chatCompletionsOptions);
+   Console.WriteLine(response.Value.Choices[0].Message.Content);
 
- private _convertCountLinesToDetailLines(contosoTenderCountingLines: ContosoTenderCountingLine[]): ProxyEntities.TenderDetail[] {
-     let tenderDetailLines: ProxyEntities.TenderDetail[] = [];
-     if (ArrayExtensions.hasElements(contosoTenderCountingLines)) {
-         contosoTenderCountingLines.forEach((contosoTenderCountingLine: ContosoTenderCountingLine) => {
-             if (!ObjectExtensions.isNullOrUndefined(contosoTenderCountingLine)) {
-                 let tenderDetailLine: ProxyEntities.TenderDetail = new ProxyEntities.TenderDetailClass();
-                 tenderDetailLine.Amount = contosoTenderCountingLine.totalAmount;
-                 tenderDetailLine.ForeignCurrency = contosoTenderCountingLine.currencyCode;
-                 tenderDetailLine.ForeignCurrencyExchangeRate = contosoTenderCountingLine.exchangeRate;
-                 tenderDetailLine.AmountInForeignCurrency = contosoTenderCountingLine.totalAmountInCurrency;
-                 tenderDetailLine.TenderTypeId = contosoTenderCountingLine.tenderType.TenderTypeId;
-                 tenderDetailLine.TenderRecount = contosoTenderCountingLine.numberOfTenderDeclarationRecount;
+   Console.WriteLine();
+}
 
-                 tenderDetailLine.DenominationDetails = [];
-
-                 contosoTenderCountingLine.denominations.forEach((denominationLine: ProxyEntities.DenominationDetail): void => {
-                     if (denominationLine.QuantityDeclared > 0) {
-                         tenderDetailLine.DenominationDetails.push(denominationLine);
-                     }
-                 });
-                 tenderDetailLines.push(tenderDetailLine);
-             }
-         });
-     }
-     return tenderDetailLines;
- }
 ```
 
 
