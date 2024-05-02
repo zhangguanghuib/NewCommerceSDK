@@ -81,7 +81,7 @@ export default class ContosoTenderCountingView extends Views.CustomViewControlle
                     computeValue: (data: ContosoTenderCountingLine): string => {
                         if (data.tenderName === 'Cash' || data.tenderName === 'Other') {
                             let btnKey = `${data.tenderName}_msPOSKey`;
-                            return `<button class='btnDenominationCount' onclick="localStorage.setItem('${data.tenderName}_myKeyghz', 'msPOSKey')">Click me</button>`;
+                            return `<button class='win-interactive iconCount icon-18x18 denominationsModeButton' onclick="localStorage.setItem('${data.tenderName}_myKeyghz', 'msPOSKey')"></button>`;
                         } else {
                             return "";
                         }
