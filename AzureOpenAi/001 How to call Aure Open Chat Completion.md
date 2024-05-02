@@ -1,4 +1,5 @@
 ## How to call CreateTenderDeclarationTransactionClientRequest/Response?
+- The Microsoft Doc is: https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=programming-language-csharp
 ```CS
 using Azure;
 using Azure.AI.OpenAI;
