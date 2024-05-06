@@ -11,5 +11,5 @@ This sample showcases a sample where the Store Commerce App is extended to show 
  </div>
 ```
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c88c3aeb-4e26-4c58-910c-1fbe4ecea5b0)
-<hr/><br/>
+
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d9e60f5-7d97-4507-a92d-882db8269ba4)
