@@ -280,19 +280,19 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
             console.log(this.imgUrl());
         }, 4000);
 
-        //let getSiteHtmlInterval = setInterval(() => {
-        //    let siteHtml = localStorage.getItem("DualDisPlayWebSiteContent");
-        //    if (!StringExtensions.isNullOrWhitespace(siteHtml)) {
-        //        const iframe = element.querySelector("#webview") as HTMLIFrameElement;
-        //        if (iframe) {
-        //            iframe.srcdoc = siteHtml;
-        //        } else {
-        //            console.error('Error: iframe not found');
-        //        }
-        //        localStorage.removeItem("DualDisPlayWebSiteContent");
-        //        clearInterval(getSiteHtmlInterval);
-        //    }
-        //}, 2000);
+        let getSiteHtmlInterval = setInterval(() => {
+            let siteHtml = localStorage.getItem("DualDisPlayWebSiteContent");
+            if (!StringExtensions.isNullOrWhitespace(siteHtml)) {
+                const iframe = element.querySelector("#webview") as HTMLIFrameElement;
+                if (iframe) {
+                    iframe.srcdoc = siteHtml;
+                } else {
+                    console.error('Error: iframe not found');
+                }
+                localStorage.removeItem("DualDisPlayWebSiteContent");
+                clearInterval(getSiteHtmlInterval);
+            }
+        }, 2000);
     }
 
     /**
