@@ -33,6 +33,10 @@
         {
           "triggerType": "PostVoidTransaction",
           "modulePath": "TriggerHandlers/PostVoidTransactionTrigger"
+        },
+        {
+          "triggerType": "PostLogon",
+          "modulePath": "TriggerHandlers/PostLogonTrigger"
         }
       ],
       "requestHandlers": [
