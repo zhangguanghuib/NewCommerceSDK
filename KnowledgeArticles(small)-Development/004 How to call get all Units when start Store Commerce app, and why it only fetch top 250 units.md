@@ -8,7 +8,7 @@
    <br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/24675af4-4a04-4475-851a-3dca4446bd0b)
    
-4. Finally in the cart line, we run this code to show the POS unit:
+4. Finally in the cart line, we run this code to show the POS unit:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01ba4de5-7905-4594-b142-eb3e5f6af25c)<br/>
 
  5. Here is a problem: why it only fecth the top 250 units:
