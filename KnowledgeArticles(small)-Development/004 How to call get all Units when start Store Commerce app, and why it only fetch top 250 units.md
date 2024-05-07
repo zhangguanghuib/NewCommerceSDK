@@ -7,95 +7,17 @@
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c668bc7a-23ba-4621-998b-27614809e11a)
 
 3. Finally in the cart line, we run this code to show the POS unit:
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01ba4de5-7905-4594-b142-eb3e5f6af25c)
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01ba4de5-7905-4594-b142-eb3e5f6af25c)<br/>
 
-  ```cs
-  private async Task GetSerialInsufficientStockUserAlertsForCart(
-      RequestContext context,
-      IEnumerable<KeyValuePair<int, CartLine>> filteredCartLines,
-      CustomerOrderMode customerOrderMode,
-      PagedResult<SimpleProduct> products,
-      List<CartLineUserAlerts> userAlertsList)
-  {
-      // Skip validation if there is no serial active items.
-      if (!products.Where(p => p.Behavior.IsSerialNumberRequired).Any())
-      {
-          return;
-      }
+     <img width="516" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9b79bc19-bc5b-4ea0-a314-5629deaa76cd">
 
-      ChannelConfiguration channelConfiguration = context.GetChannelConfiguration();
-      IEnumerable<KeyValuePair<int, CartLine>> cartLinesWithSerialNumber = filteredCartLines.Where(p => !string.IsNullOrEmpty(p.Value.SerialNumber));
+ 4. Here is a problem: why it only fecth the top 250 units:
+    <img width="539" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e3b8f279-126d-484c-a464-8f4d7665c9f2">
 
-      List<ItemEstimatedOnHandQuantitySearchCriteria> searchCriteria = cartLinesWithSerialNumber.Select(p => new ItemEstimatedOnHandQuantitySearchCriteria()
-      {
-          ProductId = p.Value.ProductId,
-          ItemId = p.Value.ItemId,
-          UnitOfMeasure = p.Value.UnitOfMeasureSymbol,
-          SerialNumber = p.Value.SerialNumber,
-          Warehouse = string.IsNullOrWhiteSpace(p.Value.WarehouseId) ? channelConfiguration.InventLocation : p.Value.WarehouseId,
-      }).ToList();
+    That is because in product code we have a default value that is only to fetch top 250:
+    <img width="747" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1f113a45-432c-42ae-b061-c0c057046272">
 
-      var getInventoryEstimatedOnHandQuantityRequest = new GetEstimatedOnHandQuantityForInventoryDimensionsDataRequest(searchCriteria, QueryResultSettings.AllRecords);
-      var onHandQuantities = await context.ExecuteAsync<EntityDataServiceResponse<ItemOnHandQuantity>>(getInventoryEstimatedOnHandQuantityRequest).ConfigureAwait(false);
-
-      string carryOutDeliveryModeCode = channelConfiguration.CarryoutDeliveryModeCode;
-
-      foreach (var cartLineWithIndex in cartLinesWithSerialNumber)
-      {
-          CartLine cartLine = cartLineWithIndex.Value;
-          SimpleProduct product = products.Single(p => p.RecordId == cartLine.ProductId);
-          string warehouseId = string.IsNullOrWhiteSpace(cartLine.WarehouseId) ? channelConfiguration.InventLocation : cartLine.WarehouseId;
-
-          // No need to perform stock validation if the product is not serial active.
-          if (!product.Behavior.IsSerialNumberRequired)
-          {
-              continue;
-          }
-
-          decimal onHandQuantity = onHandQuantities
-              .Where(p => p.ProductId == cartLine.ProductId && p.InventorySerialId == cartLine.SerialNumber && string.Equals(p.InventoryLocationId, warehouseId, StringComparison.OrdinalIgnoreCase))
-              .Select(p => p.PhysicalInventory)
-              .Sum();
-
-          if (onHandQuantity < cartLine.Quantity)
-          {
-              bool allowNegativePhysicalInventory = await this.IsNegativePhysicalInventoryAllowed(context, product, warehouseId).ConfigureAwait(false);
-
-              var isDeliveryModePickupServiceRequest = new IsDeliveryModePickupServiceRequest(cartLine.DeliveryMode);
-              var isDeliveryModePickupServiceResponse = await context.ExecuteAsync<IsDeliveryModePickupServiceResponse>(isDeliveryModePickupServiceRequest).ConfigureAwait(false);
-
-              UserAlert alert;
-              if (!allowNegativePhysicalInventory &&
-                  (string.IsNullOrEmpty(cartLine.DeliveryMode) ||
-                  string.Equals(cartLine.DeliveryMode, carryOutDeliveryModeCode, StringComparison.OrdinalIgnoreCase) ||
-                   (isDeliveryModePickupServiceResponse.IsPickupDeliveryMode && customerOrderMode == CustomerOrderMode.Pickup)))
-              {
-                  alert = UserAlertFactory.CreateBlockingUserAlert(UserAlertSourceType.Inventory_SerialNumberInsufficientStock);
-              }
-              else
-              {
-                  alert = UserAlertFactory.CreateNonBlockingUserAlert(UserAlertSourceType.Inventory_SerialNumberInsufficientStock);
-              }
-
-              alert.LocalizedMessageParameters = new string[] { cartLine.ItemId, cartLine.SerialNumber };
-              alert.LocalizedMessage = await UserAlertLocalizer.GetUserAlertLocalizedMessage(
-                  context.LanguageId,
-                  alert.AlertSourceId,
-                  alert.IsBlocking,
-                  this.GetLocalizedMessageKeyword(alert, product),
-                  alert.LocalizedMessageParameters).ConfigureAwait(false);
-
-              var alerts = new CartLineUserAlerts(cartLine.LineNumber, cartLineWithIndex.Key);
-              alerts.UserAlerts.Add(alert);
-
-              userAlertsList.Add(alerts);
-          }
-      }
-}
-```
-![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a45cd859-fa5f-41b7-940a-dbafb0c31135)
-
-
+  5. That will caused a problem, in case the system has over 250 units,  and the unit of the current product is not in the first 250 units,  then it will caused a problem.
 
 
 
