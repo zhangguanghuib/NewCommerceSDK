@@ -4,7 +4,11 @@
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dfda3930-b562-4a05-989f-982850e97a21)
 
 2. In the CSU  API, this one is called:
-   
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c668bc7a-23ba-4621-998b-27614809e11a)
+
+3. Finally in the cart line, we run this code to show the POS unit:
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01ba4de5-7905-4594-b142-eb3e5f6af25c)
+
   ```cs
   private async Task GetSerialInsufficientStockUserAlertsForCart(
       RequestContext context,
