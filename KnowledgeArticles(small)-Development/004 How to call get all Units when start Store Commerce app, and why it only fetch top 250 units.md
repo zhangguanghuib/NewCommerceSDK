@@ -11,10 +11,9 @@
 4. Finally in the cart line, we run this code to show the POS unit:<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/01ba4de5-7905-4594-b142-eb3e5f6af25c)<br/>
 
- 5. Here is a problem: why it only fecth the top 250 units:
-    <img width="539" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e3b8f279-126d-484c-a464-8f4d7665c9f2">
+ 5. Here is a problem: why it only fecth the top 250 units:<br/>
 
-    That is because in product code we have a default value that is only to fetch top 250:
+    That is because in product code we have a default value that is only to fetch top 250:<br/>
     <img width="747" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1f113a45-432c-42ae-b061-c0c057046272">
     
   6. That will caused a problem, in case the system has over 250 units,  and the unit of the current product is not in the first 250 units,  then it will caused a problem.
