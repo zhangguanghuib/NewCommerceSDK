@@ -2,6 +2,7 @@
 
 1. This code comes from UserAlertService.cs
 2. It does not support wmsLocationId,  please notice actually InventLocationId is actually WareHouse
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a45cd859-fa5f-41b7-940a-dbafb0c31135)
 
    ```cs
         private async Task GetSerialInsufficientStockUserAlertsForCart(
@@ -90,6 +91,6 @@
 ```
 
 
-![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a45cd859-fa5f-41b7-940a-dbafb0c31135)
+
 
 
