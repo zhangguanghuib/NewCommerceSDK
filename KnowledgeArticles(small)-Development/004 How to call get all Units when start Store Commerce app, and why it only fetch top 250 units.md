@@ -1,9 +1,10 @@
-## How to call API to check On Hand Quantity for a serial number?
+## How to call get all Units when start Store Commerce app, and why it only fetch top 250 units?
 
-1. This code comes from UserAlertService.cs
-2. It does not support wmsLocationId,  please notice actually InventLocationId is actually WareHouse
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/a45cd859-fa5f-41b7-940a-dbafb0c31135)
+1. From POS clients, this client API  is called:
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dfda3930-b562-4a05-989f-982850e97a21)
 
+2. In the CSU  API, this one is called:
+   
   ```cs
   private async Task GetSerialInsufficientStockUserAlertsForCart(
       RequestContext context,
