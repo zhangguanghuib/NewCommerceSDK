@@ -10,5 +10,9 @@ Customer want to hide the cart if there shopping cart is empty.
    . when checkout the cart,  the cart disappear again,  and only show the website<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e611ed95-aff5-47d7-a293-d5e965576594)
 
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b9b176bc-2014-43b3-8c1d-1c4ccdb23d67)
+
+3.  The source code is :
+   
 
    
