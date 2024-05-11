@@ -22,7 +22,7 @@ Customer want to hide the cart if there shopping cart is empty.
   });
  ```
 
-```
+```html
 <div data-bind="css: {'cartDiv': true,  'width40Percentage': true}, visible: !isCartEmpty()">
 ...
 </div>
