@@ -5,6 +5,8 @@ Customer want to hide the cart if there shopping cart is empty.
 2. How it looks like:
    . when log on POS and nothing in the cart,  then the dual display only showing the embeded website, for me it is Bing for demo the function<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/06941f0c-7574-431e-b004-f9cca9596cf0)
+   . when add a new product into the cart, you can see the shopping cart showing in the left, website in the right:<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9cbf3386-bb5b-4e6a-a3ac-ff97ccbed008)
 
 
    
