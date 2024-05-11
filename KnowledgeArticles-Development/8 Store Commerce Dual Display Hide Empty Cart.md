@@ -15,4 +15,26 @@ Customer want to hide the cart if there shopping cart is empty.
 3.  The source code is :<br/>
    https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/DualDisplayHideEmptyCart
 
-   
+ 4.  The key code is:<br/>
+ ```ts
+  this.isCartEmpty = ko.computed(() => {
+      return !ObjectExtensions.isNullOrUndefined(this._cart()) && (this._cart().CartLines.length > 0) ? false : true;
+  });
+ ```
+
+```
+<div data-bind="css: {'cartDiv': true,  'width40Percentage': true}, visible: !isCartEmpty()">
+...
+</div>
+...
+<div data-bind="css: {'imgContainer': true, 'width60Percentage':true }, visible: !isCartEmpty()">
+    <div style="border:solid">
+        <iframe id="webview" src="https://www.bing.com/"  style="height: 1100px; overflow: scroll;"></iframe>
+    </div>
+</div>
+ <div data-bind="css: {'imgContainer': true, 'width100Percentage':true }, visible: isCartEmpty()">
+    <div style="border:solid">
+        <iframe id="webview" src="https://www.bing.com/"  style="height: 1100px; overflow: scroll;"></iframe>
+    </div>
+</div>
+```
