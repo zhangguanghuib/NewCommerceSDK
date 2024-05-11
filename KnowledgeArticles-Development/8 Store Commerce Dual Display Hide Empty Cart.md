@@ -1,4 +1,4 @@
-## Store Commerce Dual Display Support AutoScrolling.
+## Store Commerce Dual Display to hide empty shopping cart.
 
 1. <ins>Background:</ins><br/>
 Customer want to hide the cart if there shopping cart is empty.
@@ -12,7 +12,7 @@ Customer want to hide the cart if there shopping cart is empty.
 
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b9b176bc-2014-43b3-8c1d-1c4ccdb23d67)
 
-3.  The source code is :
-   
+3.  The source code is :<br/>
+   https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/DualDisplayHideEmptyCart
 
    
