@@ -1,7 +1,6 @@
-﻿import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+﻿import { ProxyEntities } from "PosApi/Entities";
 import * as CartView from "PosApi/Extend/Views/CartView";
 import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
-import * as Messages from "../../DataService/DataServiceRequests.g";
 
 export default class CartViewController extends CartView.CartExtensionViewControllerBase {
     public static selectedCartLineId: string = StringExtensions.EMPTY;
@@ -42,22 +41,5 @@ export default class CartViewController extends CartView.CartExtensionViewContro
         this.cartChangedHandler = (data: CartView.CartChangedData): void => {
             console.log(data);
         }
-    }
-
-    protected init(state): void {
-        console.log("Init is called");
-        setTimeout(() => {
-            let request: Messages.StoreOperations.GetHtmlContentRequest<Messages.StoreOperations.GetHtmlContentResponse>
-                = new Messages.StoreOperations.GetHtmlContentRequest<Messages.StoreOperations.GetHtmlContentResponse>("https://www.lifepharmacy.com/");
-
-            this.context.runtime.executeAsync(request).then((result: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetHtmlContentResponse>): Promise<string> => {
-                if (result.canceled) {
-                    return Promise.reject("Request Cancelled");
-                } else {
-                    localStorage.setItem("DualDisPlayWebSiteContent", result.data.result);
-                    return Promise.resolve(result.data.result);
-                }
-            });
-        }, 5000);
     }
 }

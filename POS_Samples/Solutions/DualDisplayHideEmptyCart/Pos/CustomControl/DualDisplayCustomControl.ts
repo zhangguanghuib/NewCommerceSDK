@@ -36,7 +36,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public readonly customerNameLabel: string;
     public readonly customerAccountNumberLabel: string;
     public readonly employeeNameLabel: string;
-    public readonly webBrowserUrl: ko.Computed<string>;
 
     private static readonly TEMPLATE_ID: string = "Microsot_Pos_Extensibility_Samples_DualDisplay";
 
@@ -59,11 +58,8 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public readonly productCost: ko.Computed<string>;
     public imgUrl: ko.Observable<string>;
     public imgIndex: number;
-    public mediaServerUrl: string = "https://cn-guazha-1112.fareast.corp.microsoft.com:446/DualDisplay/";
-    //public mediaServerUrl: ko.Observable<string>;
     public readonly IMGTOTAL: number = 10;
-
-    private readonly _configuration: ko.Observable<Commerce.Extensibility.DualDisplayExtensionTypes.DualDisplayConfigurationChangedData>;
+    public readonly isCartEmpty: ko.Computed<boolean>;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
         super(id, context);
@@ -81,7 +77,10 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
         //this.mediaServerUrl = ko.observable('');
-        this._configuration = ko.observable(null);
+
+        this.isCartEmpty = ko.computed(() => {
+            return !ObjectExtensions.isNullOrUndefined(this._cart()) && (this._cart().CartLines.length > 0) ? false : true;
+        });
 
         this.imgIndex = 0;
         this.imgUrl = ko.observable('');
@@ -105,10 +104,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
         this.employeeName = ko.computed(() => {
             return ObjectExtensions.isNullOrUndefined(this._employee()) ? StringExtensions.EMPTY : this._employee().Name;
-        });
-
-        this.webBrowserUrl = ko.computed(() => {
-            return ObjectExtensions.isNullOrUndefined(this._configuration()) ? StringExtensions.EMPTY : this._configuration().webBrowserUrl;
         });
 
         this.itemId = ko.computed(() => {
@@ -151,11 +146,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
                 if (isNewLine) {
                     if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
-                        if (data.cart.CartLines.length >= 16) {
+                        if (data.cart.CartLines.length >= 20) {
                             setTimeout(() => {
                                 let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
                                 let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
-                                let shouldScrollTop = totalHeight - rowHeight * 15;
+                                let shouldScrollTop = totalHeight - rowHeight * 19;
                                 // dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
                                 dualDisplayScrollingContainer.scrollTo({
                                     top: shouldScrollTop, // Replace with the position you want to scroll to
@@ -270,29 +265,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
 
         let dualDisplayRootElem: HTMLDivElement = element.querySelector("#dualDisplayDataListSample") as HTMLDivElement;
         this._dataList = this.context.controlFactory.create(this.context.logger.getNewCorrelationId(), "DataList", cartLinesDataListOptions, dualDisplayRootElem);
-
-        setInterval(() => {
-            this.imgIndex++;
-            if (this.imgIndex >= this.IMGTOTAL) {
-                this.imgIndex = 0;
-            }
-            this.imgUrl(this.mediaServerUrl + `desktop_${this.imgIndex}.jpg`);
-            console.log(this.imgUrl());
-        }, 4000);
-
-        let getSiteHtmlInterval = setInterval(() => {
-            let siteHtml = localStorage.getItem("DualDisPlayWebSiteContent");
-            if (!StringExtensions.isNullOrWhitespace(siteHtml)) {
-                const iframe = element.querySelector("#webview") as HTMLIFrameElement;
-                if (iframe) {
-                    iframe.srcdoc = siteHtml;
-                } else {
-                    console.error('Error: iframe not found');
-                }
-                localStorage.removeItem("DualDisPlayWebSiteContent");
-                clearInterval(getSiteHtmlInterval);
-            }
-        }, 2000);
     }
 
     /**
@@ -304,7 +276,6 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer(state.customer);
         this._loggedOn(state.loggedOn);
         this._employee(state.employee);
-        this._configuration(state.configuration);
         //his.imgUrl(state.configuration.imageRotatorPath);
         //this.mediaServerUrl(state.configuration.imageRotatorPath);
         //console.log("imageRotatorPath:" + this.mediaServerUrl());
