@@ -2,11 +2,13 @@
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c70d920d-0892-48e0-a46d-420b483bb7e4)
 
 <br/>
-My usage:
+My usage:<br/>
+
 ```
 npm create vite@latest
 npm install
 npm i @reduxjs/toolkit react-redux
 npm run dev
 ```
+
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/689523fc-931e-4039-9ab8-1c4a4040b715)
