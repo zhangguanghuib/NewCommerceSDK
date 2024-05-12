@@ -10,6 +10,8 @@ npm install
 npm i @reduxjs/toolkit react-redux
 npm run dev
 ```
+Veorify the installed package:<br/>
+<img width="567" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ff94046a-f0c5-43d3-bf21-63e4c1ffe28e"><br/>
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/689523fc-931e-4039-9ab8-1c4a4040b715)
 
