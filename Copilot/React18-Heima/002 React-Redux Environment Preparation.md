@@ -21,4 +21,7 @@ Veorify the installed package:<br/>
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2a3b3324-fb2b-4133-b556-a040d9cdb45a)
 
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/fd483b16-bef3-4574-9f22-86982823d822)
+
+
 
