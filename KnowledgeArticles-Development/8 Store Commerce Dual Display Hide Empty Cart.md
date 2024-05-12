@@ -1,121 +1,40 @@
-## Store Commerce Dual Display Support AutoScrolling.
+## Store Commerce Dual Display to hide empty shopping cart.
 
 1. <ins>Background:</ins><br/>
-As you know the Store Commerce Out-Of-Box did not support Dual Display,  when enable Dual Display in the Funcationality Profile,  the Dual Display only show a simple amount due likee below<br/>
-<img width="1161" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/bf92dfab-68b8-4709-a2b3-431031d04916">
-<br/>
-This article is going to develop a customization to support Dual Display to support auto-scroll when more and more product are putting into cart that overflow the  Dual Display cart space.<br/>
-2. Precoditions of this feature will work
-- Enable Dual Display from Hardware profile:
-  <img width="689" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/08cd5a67-deff-4f30-ac7d-23d6595c30dc"><br/>
-- Run 1070 or 9999 job.
-- Log on POS
+Customer want to hide the cart if there shopping cart is empty.
+2. How it looks like:<br/>
+   . when log on POS and nothing in the cart,  then the dual display only showing the embeded website, for me it is Bing for demo the function<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/06941f0c-7574-431e-b004-f9cca9596cf0)
+   . when add a new product into the cart, you can see the shopping cart showing in the left, website in the right:<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9cbf3386-bb5b-4e6a-a3ac-ff97ccbed008)
+   . when checkout the cart,  the cart disappear again,  and only show the website<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e611ed95-aff5-47d7-a293-d5e965576594)
 
-3. <ins>Below is the recording to show how it is working:</ins><br/>
-[![Alternate Text](http://img.youtube.com/vi/L1SN7kqq9lQ/0.jpg)](https://youtu.be/L1SN7kqq9lQ)
-<br/>
-4. <ins>You can see:</ins><br>
-- When a new product added to the cart, the dual dispaly will show a product:
-   <img width="1679" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b52bb1d8-5739-4ed2-8b49-3fd17c3bee10">
-- When more and more products added to the cart and the cart line space exceed the Dual Display Cart Space,  it will auto-scroll to the last line when it is added:
-   <img width="1677" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ba634e4b-7cf0-41c5-b63e-7e715f4b8081">
-- When the last cart line is showing in the view, and main POS  is editing the first cartline(change its Qty), Dual Display will sroll to the first line:<br/>
-   <img width="803" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/50cbddb5-8f3e-41be-90a8-c3f7a59e33ba">
-   <img width="1676" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d7ebd8ca-29fc-4ec2-b8c9-b94668827c27">
- 
-- When the the first cart line is in Dual Display View,  and main POS is editing the last cart line, it will scroll to the last cart line<br/>
-<img width="1669" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/eb62dfcf-1395-4c13-83b7-d55f0911dea7">
-<img width="1668" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/42e1ec53-2b10-4a99-95bf-8310c5a87246">
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b9b176bc-2014-43b3-8c1d-1c4ccdb23d67)
 
-5. <ins>In the bottom of the Dual Display, there is Swiper to show the Picture of the company or the city:</ins><br/>
-<img width="1891" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ece104ee-e9e5-4805-832a-daf055811cd4">
+3.  The source code is :<br/>
+   https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/DualDisplayHideEmptyCart
 
+ 4.  The key code is:<br/>
+ ```ts
+  this.isCartEmpty = ko.computed(() => {
+      return !ObjectExtensions.isNullOrUndefined(this._cart()) && (this._cart().CartLines.length > 0) ? false : true;
+  });
+ ```
 
-6. Technical point.
-   - Whenever cart changed, like adding a new cart line or update existing cart line, the line id will be recorded and stored in the local storage
-   ```ts
-   import { ProxyEntities } from "PosApi/Entities";
-   import * as CartView from "PosApi/Extend/Views/CartView";
-   import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
-   
-   export default class CartViewController extends CartView.CartExtensionViewControllerBase {
-       public static selectedCartLineId: string = StringExtensions.EMPTY;
-       public static selectedCartLines: ProxyEntities.CartLine[];
-       public _selectedTenderLines: ProxyEntities.TenderLine[];
-       public _isProcessingAddItemOrCustomer: boolean;
-   
-       constructor(context: CartView.IExtensionCartViewControllerContext) {
-           super(context);
-           CartViewController.selectedCartLines = [];
-           CartViewController.selectedCartLineId = null;
-           this.cartLineSelectedHandler = (data: CartView.CartLineSelectedData): void => {
-               CartViewController.selectedCartLines = data.cartLines;
-               if (ArrayExtensions.hasElements(CartViewController.selectedCartLines)) {
-                   CartViewController.selectedCartLineId = CartViewController.selectedCartLines[0].LineId;
-                   localStorage.setItem("currentCartLineId", CartViewController.selectedCartLineId);
-               }
-           }
-   
-           this.cartLineSelectionClearedHandler = (): void => {
-               CartViewController.selectedCartLines = [];
-               CartViewController.selectedCartLineId = null;
-               localStorage.setItem("currentCartLineId", StringExtensions.EMPTY);
-           }
-   
-           this.tenderLineSelectedHandler = (data: CartView.TenderLineSelectedData): void => {
-               this._selectedTenderLines = data.tenderLines;
-           }
-   
-           this.tenderLineSelectionClearedHandler = (): void => {
-               this._selectedTenderLines = [];
-           }
-   
-           this.processingAddItemOrCustomerChangedHandler = (processing: boolean): void => {
-               this._isProcessingAddItemOrCustomer = processing;
-           }
-   
-           this.cartChangedHandler = (data: CartView.CartChangedData): void => {
-               console.log(data);
-           }
-       }
-   }
-   ```
-7. How to scroll? <br/>
-
-   - Calculate the line height of each cart line:
-   ```ts
-    // Find the line height
-    let listLine: HTMLDivElement = document.querySelector(".dataListLine") as HTMLDivElement;
-    let rowHeight = 39;
-    if (listLine?.clientHeight) {
-        rowHeight = listLine?.clientHeight;
-    } 
-   ```
-   - When a new line is added and the cart line is already over 15 lines, calculate the scrolltop,  the formula is the totalHeight of the scroll container  minus the first 15 lines total height, that is<br/>
-     let shouldScrollTop = totalHeight - rowHeight * 15;
-    ```ts
-     if (isNewLine) {
-     if (!StringExtensions.isEmptyOrWhitespace(currentCartLineId)) {
-         if (data.cart.CartLines.length >= 16) {
-             setTimeout(() => {
-                 let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
-                 let totalHeight: number = dualDisplayScrollingContainer.scrollHeight;
-                 let shouldScrollTop = totalHeight - rowHeight * 15;
-                 dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
-             }, 700);
-          }
-      }
-    }
-    ```
-   - When editing the existing line, the scrolltop is line number * line hight, the code is
-   ```ts
-   else {//Update existing line
-    setTimeout(() => {
-        let selectedIndex = ArrayExtensions.findIndex(data.cart.CartLines, (cartline: ProxyEntities.CartLine) => cartline.LineId === currentCartLineId);
-        let dualDisplayScrollingContainer: HTMLDivElement = document.querySelector('[aria-label="Scrolling Container"]') as HTMLDivElement;
-        let shouldScrollTop = rowHeight * selectedIndex;
-        dualDisplayScrollingContainer.scrollTop = shouldScrollTop;
-     }, 700);
-   }
-   ```
-   
+```html
+<div data-bind="css: {'cartDiv': true,  'width40Percentage': true}, visible: !isCartEmpty()">
+...
+</div>
+...
+<div data-bind="css: {'imgContainer': true, 'width60Percentage':true }, visible: !isCartEmpty()">
+    <div style="border:solid">
+        <iframe id="webview" src="https://www.bing.com/"  style="height: 1100px; overflow: scroll;"></iframe>
+    </div>
+</div>
+ <div data-bind="css: {'imgContainer': true, 'width100Percentage':true }, visible: isCartEmpty()">
+    <div style="border:solid">
+        <iframe id="webview" src="https://www.bing.com/"  style="height: 1100px; overflow: scroll;"></iframe>
+    </div>
+</div>
+```

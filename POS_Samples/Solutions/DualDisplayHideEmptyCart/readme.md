@@ -1,25 +1,16 @@
-# Dual Display Sample
-## Overview
-This sample showcases a sample where the Store Commerce App is extended to show more information on dual display.
+## Store Commerce Dual Display to hide empty shopping cart.
 
-## Running the sample
-- Open the Developer Command Prompt for Visual Studio 2022
-- Restore the nuget packages for the solution by running "nuget restore DualDisplaySample.sln"
-- Initialize Store Commerce development for the solution by running "msbuild DualDisplaySample.sln /t:InitDev"
-- Open Visual Studio Code in the solution root directory
-- Build the solution using the "Build & Install Store Commerce Extension" task in VSCode
-- Open PowerShell as Admin in the ScaleUnit.Installer bin directory & run ".\Contoso.DualDisplaySample.ScaleUnit.Installer.exe install"
-- Open the "Run & Debug Tab" in VSCode and use the "Debug Store Commerce" option to launch Store Commerce app with the debugger attached.
-- Sign in to Store Commerce.
-- Navigate to the transaction page and add a product to the cart.
+1. <ins>Background:</ins><br/>
+Customer want to hide the cart if there shopping cart is empty.
+2. How it looks like:<br/>
+   . when log on POS and nothing in the cart,  then the dual display only showing the embeded website, for me it is Bing for demo the function<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/06941f0c-7574-431e-b004-f9cca9596cf0)
+   . when add a new product into the cart, you can see the shopping cart showing in the left, website in the right:<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9cbf3386-bb5b-4e6a-a3ac-ff97ccbed008)
+   . when checkout the cart,  the cart disappear again,  and only show the website<br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e611ed95-aff5-47d7-a293-d5e965576594)
 
-> For dual screen mode to work, two physical displays must be connected to the device.
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b9b176bc-2014-43b3-8c1d-1c4ccdb23d67)
 
-## Debugging the sample
-To find your custom code in the debugger, you should use Developer tools (F12) in the second Store Commerce window. In the main window, the dual display extensions will not be visible.
-![Example of debug window](DebugWindow.png)
-
-## Additional Resources
-- [Using POS Controls](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/controls-pos-extension)
-- [Use knockout.js in POS Extensions](https://docs.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-extension/knockout-pos-extension)
-- [Extend the point of sale (POS) Dual display view](https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/pos-dual-display-extension)
+3.  The source code is :<br/>
+   https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/DualDisplayHideEmptyCart
