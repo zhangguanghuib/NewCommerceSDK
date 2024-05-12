@@ -12,3 +12,6 @@ npm run dev
 ```
 
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/689523fc-931e-4039-9ab8-1c4a4040b715)
+
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b390bc62-4ec7-4cb6-8bad-1e23b13c9e88)
+
