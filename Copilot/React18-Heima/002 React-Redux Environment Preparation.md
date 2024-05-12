@@ -3,9 +3,10 @@
 
 <br/>
 My usage:
-
-. npm create vite@latest
-. npm install
-. npm i @reduxjs/toolkit react-redux
-. npm run dev
+```
+npm create vite@latest
+npm install
+npm i @reduxjs/toolkit react-redux
+npm run dev
+```
 ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/689523fc-931e-4039-9ab8-1c4a4040b715)
