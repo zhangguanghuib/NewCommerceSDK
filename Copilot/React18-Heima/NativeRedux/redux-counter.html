@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="decrement">-</button>
+    <span id="count">0</span>
+    <button id="increment">+</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"></script>
+    <script>
+        function reducer(state ={count:0}, action){
+            switch(action.type){
+                case 'INCREMENT':
+                    return {count: state.count + 1}
+                case 'DECREMENT':
+                    return {count: state.count - 1}
+                default:
+                    return state
+            }
+        }
+
+        const store = Redux.createStore(reducer);
+
+        store.subscribe(() => {
+            console.log("state changed", store.getState());
+            document.getElementById('count').innerText = store.getState().count;
+        });
+
+        const inBtn = document.getElementById('increment');
+        inBtn.addEventListener('click', () => {
+            store.dispatch({type: 'INCREMENT'});
+        });
+
+        const deBtn = document.getElementById('decrement');
+        deBtn.addEventListener('click', () => {
+            store.dispatch({type: 'DECREMENT'});
+        });
+
+    </script>
+</body>
+</html>
