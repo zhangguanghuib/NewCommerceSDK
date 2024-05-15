@@ -16,18 +16,19 @@ The steps:
 1. Navigate to https://lcs.dynamics.com/V2/SharedAssetLibrary select the section *Retail Self-service package files* and then locate there the file ending with *Commerce Scale Unit (SEALED)*. Make sure to select there the version for the release you need, for instance 10.0.22, 10.0.23 and so on. Download the file and place it in the folder [Download](./Download)
 <img width="939" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/98955c0e-017a-4673-a886-266faceea7ea">
 <img width="617" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c3989786-2fe4-4bfb-8644-b50040882e1a"><br/>
-6. Please install node.js from here:https://nodejs.org/en/download/<br/>
+7. Please install node.js from here:https://nodejs.org/en/download/<br/>
   <img width="1211" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/0498cefc-14eb-4638-a700-a32506fee615">
 
-7. You machine should also install the SQL Server(or SQL express), and make sure it is mixed-authentication mode:
+8. You machine should also install the SQL Server(or SQL express), and make sure it is mixed-authentication mode:
    <img width="829" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9f010d1b-7cbb-4da7-92cd-b9634b7863d9"><br/>
-8. Launch Visual Studio Code as Administrator, and then open this folder:<br/>
+9. Launch Visual Studio Code as Administrator, and then open this folder:<br/>
    <img width="517" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/291adf64-1af9-4f54-9eca-c07248d69255"><br/>
    <img width="1100" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dba69245-43be-45db-82a9-9cb865fd43d7"><br/>
    If you installed SQL Express, you may need change this:<br/>
    <img width="1081" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6904244d-f3a1-4a74-a25c-61082b09e9f5"><br/>
 
-9. When you open 
+10. When you open Visual Studio Code, if it prompt you install C# extension, just install it:<br/>
+    <img width="1354" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/39d013a3-1e8f-47f0-8823-4abf30b9eb95"><br/>
 
 
 
