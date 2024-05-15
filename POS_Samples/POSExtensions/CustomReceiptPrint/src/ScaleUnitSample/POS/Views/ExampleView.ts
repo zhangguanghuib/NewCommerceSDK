@@ -33,8 +33,8 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         name: "Edit",
                         label: context.resources.getString("string_2002"),
                         icon: Views.Icons.Edit,
-                        isVisible: false,
-                        canExecute: false,
+                        isVisible: true,
+                        canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
                             this.state.isProcessing = true;
                             this.viewModel.editExampleEntity().then((editsMade) => {
@@ -51,7 +51,7 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         label: context.resources.getString("string_1006"),
                         icon: Views.Icons.Delete,
                         isVisible: true,
-                        canExecute: false,
+                        canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
                             this.state.isProcessing = true;
                             this.viewModel.deleteExampleEntity().then(() => {
