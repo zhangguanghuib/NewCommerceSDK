@@ -15,7 +15,9 @@ The steps:
    <img width="999" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ccdbcc1d-9373-4f47-ad78-c69523d9326d">
 1. Navigate to https://lcs.dynamics.com/V2/SharedAssetLibrary select the section *Retail Self-service package files* and then locate there the file ending with *Commerce Scale Unit (SEALED)*. Make sure to select there the version for the release you need, for instance 10.0.22, 10.0.23 and so on. Download the file and place it in the folder [Download](./Download)
 <img width="939" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/98955c0e-017a-4673-a886-266faceea7ea">
-
+1. You machine you also install the SQL Server(or SQL express), and make sure it is mixed-authentication mode:
+   <img width="829" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9f010d1b-7cbb-4da7-92cd-b9634b7863d9">
+1. Put the downloaded Sealed CSU under this folder:
 
 
 
