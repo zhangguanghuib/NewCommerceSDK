@@ -29,6 +29,14 @@ The steps:
 
 10. When you open Visual Studio Code, if it prompt you install C# extension, just install it:<br/>
     <img width="1354" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/39d013a3-1e8f-47f0-8823-4abf30b9eb95"><br/>
+11. In Visual Studio Code, click and then choose "Run Task"<br/>
+    <img width="1223" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e00196a7-b0fb-4b5d-aed0-1ffe8824081a">
+    And then choose Install(Since I have installed, so the install option is not in the list), then in the Terminal you will see the Self-Host CSU is deploying<br/>
+    <img width="1814" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/be410d73-d7a2-46b3-97d1-84a0c3467bef">
+12. Finally you see the deployment is successfully,  and the self-hosted CSU is in:<br/>
+    <img width="811" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8add5381-8924-4908-9b58-293d5adec1ae">
+
+All thes steps can be done in 30-40 mins.
 
 
 
