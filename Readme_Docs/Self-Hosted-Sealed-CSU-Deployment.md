@@ -4,9 +4,10 @@
 
 The steps:
 1. Clone this code:<br/>
-   git clone https://github.com/microsoft/Dynamics365Commerce.ScaleUnit.git <br>
-   git checkout release/9.50<br/>
-
+   ```
+   git clone https://github.com/microsoft/Dynamics365Commerce.ScaleUnit.git 
+   git checkout release/9.50
+   ```
 
 
 
