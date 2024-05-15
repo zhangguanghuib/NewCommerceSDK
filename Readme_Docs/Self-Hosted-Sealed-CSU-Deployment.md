@@ -17,12 +17,12 @@ The steps:
 <img width="939" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/98955c0e-017a-4673-a886-266faceea7ea">
 <img width="617" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c3989786-2fe4-4bfb-8644-b50040882e1a"><br/>
 7. You machine should also install the SQL Server(or SQL express), and make sure it is mixed-authentication mode:
-   <img width="829" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9f010d1b-7cbb-4da7-92cd-b9634b7863d9">
+   <img width="829" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9f010d1b-7cbb-4da7-92cd-b9634b7863d9"><br/>
 8. Launch Visual Studio Code as Administrator, and then open this folder:<br/>
    <img width="517" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/291adf64-1af9-4f54-9eca-c07248d69255"><br/>
-   <img width="1100" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dba69245-43be-45db-82a9-9cb865fd43d7">
+   <img width="1100" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dba69245-43be-45db-82a9-9cb865fd43d7"><br/>
    If you installed SQL Express, you may need change this:<br/>
-   <img width="1081" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6904244d-f3a1-4a74-a25c-61082b09e9f5">
+   <img width="1081" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6904244d-f3a1-4a74-a25c-61082b09e9f5"><br/>
 
 
 
