@@ -22,7 +22,8 @@ The steps:
    <img width="517" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/291adf64-1af9-4f54-9eca-c07248d69255"><br/>
    <img width="1100" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/dba69245-43be-45db-82a9-9cb865fd43d7">
    If you installed SQL Express, you may need change this:<br/>
-   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/80334ced-935d-431b-a1bd-c9e601b9d98a)
+   <img width="1081" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6904244d-f3a1-4a74-a25c-61082b09e9f5">
+
 
 
 
