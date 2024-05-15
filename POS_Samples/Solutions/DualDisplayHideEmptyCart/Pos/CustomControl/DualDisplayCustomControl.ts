@@ -58,8 +58,11 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
     public readonly productCost: ko.Computed<string>;
     public imgUrl: ko.Observable<string>;
     public imgIndex: number;
-    public readonly IMGTOTAL: number = 10;
+    public readonly IMGTOTAL: number = 10; 
     public readonly isCartEmpty: ko.Computed<boolean>;
+    public readonly cartWidthPercent: ko.Computed<string>;
+    public readonly webWidthPercent: ko.Computed<string>;
+    public cartWidthPercentOrg: number = 0;
 
     constructor(id: string, context: IDualDisplayCustomControlContext) {
         super(id, context);
@@ -77,9 +80,17 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._loggedOn = ko.observable(false);
         this._employee = ko.observable(null);
         //this.mediaServerUrl = ko.observable('');
-
+ 
         this.isCartEmpty = ko.computed(() => {
             return !ObjectExtensions.isNullOrUndefined(this._cart()) && (this._cart().CartLines.length > 0) ? false : true;
+        });
+
+        this.cartWidthPercent = ko.computed(() => {
+            return !this.isCartEmpty() ? this.cartWidthPercentOrg + '%100' : '0';
+        });
+
+        this.webWidthPercent = ko.computed(() => {
+            return !this.isCartEmpty() ? (100 - this.cartWidthPercentOrg) + '%100' : '100%';
         });
 
         this.imgIndex = 0;
@@ -276,6 +287,7 @@ export default class DualDisplayCustomControl extends DualDisplayCustomControlBa
         this._customer(state.customer);
         this._loggedOn(state.loggedOn);
         this._employee(state.employee);
+        this.cartWidthPercentOrg = state.configuration.receiptWidthPercentage;
         //his.imgUrl(state.configuration.imageRotatorPath);
         //this.mediaServerUrl(state.configuration.imageRotatorPath);
         //console.log("imageRotatorPath:" + this.mediaServerUrl());

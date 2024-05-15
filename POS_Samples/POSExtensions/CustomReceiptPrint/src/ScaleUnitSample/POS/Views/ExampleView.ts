@@ -1,24 +1,13 @@
-/**
- * SAMPLE CODE NOTICE
- * 
- * THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
- * OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
- * THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
- * NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
- */
-
 import * as Views from "PosApi/Create/Views";
 import { Entities } from "../DataService/DataServiceEntities.g";
 import ExampleViewModel from "./ExampleViewModel";
 import { IDataList, IDataListOptions, DataListInteractionMode } from "PosApi/Consume/Controls";
 import { ObjectExtensions, ArrayExtensions } from "PosApi/TypeExtensions";
 
-/**
- * The controller for ExampleView.
- */
 export default class StoreHoursView extends Views.CustomViewControllerBase {
     public readonly viewModel: ExampleViewModel;
     public dataList: IDataList<Entities.ExampleEntity>;
+    public itemIndex: number;
 
     constructor(context: Views.ICustomViewControllerContext) {
         let config: Views.ICustomViewControllerConfiguration = {
@@ -110,12 +99,34 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         canExecute: true,
                         execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
                             this.state.isProcessing = true;
-                            if (this.viewModel.loadedData.length > 0) {
-                                let item: Entities.ExampleEntity = this.viewModel.loadedData[0];
-                                if (!ObjectExtensions.isNullOrUndefined(item)) {
-                                    this.dataList.selectItems([item]);
-                                }
-                            }
+                            this.itemIndex = 0;
+                            this.moveFocus();
+                            this.state.isProcessing = false;
+                        }
+                    },
+                    {
+                        name: "Next",
+                        label: "Next",
+                        icon: Views.Icons.Down,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.state.isProcessing = true;
+                            this.itemIndex++;
+                            this.moveFocus();
+                            this.state.isProcessing = false;
+                        }
+                    },
+                    {
+                        name: "Previous",
+                        label: "Previous",
+                        icon: Views.Icons.Up,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.state.isProcessing = true;
+                            this.itemIndex--;
+                            this.moveFocus();
                             this.state.isProcessing = false;
                         }
                     }
@@ -166,21 +177,31 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
 
         this.dataList.addEventListener("SelectionChanged", (eventData: { items: Entities.ExampleEntity[] }) => {
             this.viewModel.seletionChanged(eventData.items);
-
-            // Update the command states to reflect the current selection state.
-            this.state.commandBar.commands.forEach(
-                command => command.canExecute = (
-                    ["Create", "PingTest"].some(name => name == command.name) ||
-                    this.viewModel.isItemSelected()
-                )
-            );
+            let selectedItem: Entities.ExampleEntity = eventData.items[0];
+            this.itemIndex = ArrayExtensions.findIndex(this.viewModel.loadedData, (item) => item.IntData == selectedItem.IntData);
         });
 
         this.state.isProcessing = true;
         this.viewModel.load().then((): void => {
-            // Initialize the data list with what the view model loaded
             this.dataList.data = this.viewModel.loadedData;
             this.state.isProcessing = false;
+        }).then(() => {
+            setTimeout(() => {
+                this.itemIndex = 0;
+                this.moveFocus();
+            }, 300);
         });
+    }
+
+    public moveFocus() {
+        if (this.itemIndex < 0 || this.itemIndex >= this.viewModel.loadedData.length) {
+            return;
+        }
+        if (this.viewModel.loadedData.length > 0) {
+            let item: Entities.ExampleEntity = this.viewModel.loadedData[this.itemIndex];
+            if (!ObjectExtensions.isNullOrUndefined(item)) {
+                this.dataList.selectItems([item]);
+            }
+        }
     }
 }
