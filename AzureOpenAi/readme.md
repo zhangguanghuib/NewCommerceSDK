@@ -8,3 +8,5 @@ D365 FO COpilot:  https://www.linkedin.com/pulse/copilot-sidecar-d365-fo-extendi
 
 
 https://github.com/microsoft/chat-copilot
+
+https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide?tabs=Csharp
