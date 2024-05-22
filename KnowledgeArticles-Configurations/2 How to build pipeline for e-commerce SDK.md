@@ -7,3 +7,11 @@
 ```
 https://github.com/microsoft/Msdyn365.Commerce.Online.git
 ```
+Click button "Import Repository"
+
+3. Once import is done, Click "Pipeline"<br/>
+<img width="924" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d6185368-f5d0-4b8a-b225-49c296e405ee">
+and then "New Pipeline"<br/>
+<img width="1439" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1a0a9957-4cbc-4a59-bf6f-e00e7204d50b">
+
+
