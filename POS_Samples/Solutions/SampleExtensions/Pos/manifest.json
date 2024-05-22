@@ -40,6 +40,9 @@
         }
       ],
       "requestHandlers": [
+        {
+          "modulePath": "Handlers/GetReceiptEmailAddressClientRequestHandlerExt"
+        }
       ],
       "views": {
         "CartView": {
