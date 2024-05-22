@@ -1,0 +1,17 @@
+﻿.ContosoDenominationDetailView .btnDenominationCount {
+    width: auto;
+    height: 25px;
+    min-width: 250px;
+    min-height: 25px;
+    font-size: 18px;
+    line-height: 25px;
+    display: inline-block;
+    border: none;
+    background:none;
+}
+
+.ContosoDenominationDetailView .btnDenominationCount:hover {
+    border: solid 1px;
+    background-color: rgb(0, 120, 215);
+}
+

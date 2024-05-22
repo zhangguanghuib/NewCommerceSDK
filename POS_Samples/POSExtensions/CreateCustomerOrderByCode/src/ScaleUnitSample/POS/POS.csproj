@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChannelDatabase\ChannelDatabase.csproj" />
     <ProjectReference Include="..\CommerceRuntime\CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+    <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" />
   </ItemGroup>
 
   <ItemGroup>

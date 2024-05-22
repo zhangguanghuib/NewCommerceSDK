@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FreeSpire.PDF" Version="8.6.0" />
+    <PackageReference Include="itext7" Version="7.1.14" />
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.HardwareAndPeripherals" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="itext.html2pdf">
+      <HintPath>..\ExternalReferences\itext.html2pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io">
+      <HintPath>..\ExternalReferences\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel">
+      <HintPath>..\ExternalReferences\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\ExternalReferences\itextsharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
