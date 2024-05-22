@@ -18,6 +18,7 @@ and then "New Pipeline"<br/>
     <img width="735" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c19ded99-247c-4bc9-abd6-4bdd7f8d8d39"><br/>
     <img width="492" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b35c46b0-22ab-4a62-ba57-ec81ac6b1815"><br/>
     <img width="1249" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/afaa6ca3-abc0-4918-9cae-dca8fb9ac784"><br/>
+    Click "Continue"<br/>
 
 
 
