@@ -19,6 +19,13 @@ and then "New Pipeline"<br/>
     <img width="492" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b35c46b0-22ab-4a62-ba57-ec81ac6b1815"><br/>
     <img width="1249" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/afaa6ca3-abc0-4918-9cae-dca8fb9ac784"><br/>
     Click "Continue"<br/>
+    <img width="1172" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/6c9646e1-ad41-47e6-93f0-7b2345195764"><br/>
+    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8a554ec1-f5f6-4d04-a0d7-6e1f1de2a4fe)<br/>
+    <img width="1455" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/292479df-ef27-4c80-b2f5-4ca80ff98ba7"><br/>
+5. All the other steps are followed with https://learn.microsoft.com/en-us/dynamics365/commerce/e-commerce-extensibility/set-up-code-sharing-build-pipeline
+
+
+
 
 
 
