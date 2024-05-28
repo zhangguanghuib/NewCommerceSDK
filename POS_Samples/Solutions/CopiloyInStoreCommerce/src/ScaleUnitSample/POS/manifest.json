@@ -1,0 +1,84 @@
+﻿{
+  "$schema": "./devDependencies/schemas/manifestSchema.json",
+  "name": "Contoso.Pos.FullSystemExample.Sample",
+  "publisher": "Contoso",
+  "version": "1.0.0",
+  "minimumPosVersion": "9.29.0.0",
+  "description": "An extension package that makes use of a Retail Server extension. Also works off-line.",
+  "dependencies": [
+    {
+      "alias": "knockout",
+      "format": "amd",
+      "modulePath": "Libraries/knockout"
+    }
+  ],
+  "components": {
+    "resources": {
+      "supportedUICultures": [ "en-US" ],
+      "fallbackUICulture": "en-US",
+      "culturesDirectoryPath": "Resources/Strings",
+      "stringResourcesFileName": "resources.resjson"
+    },
+    "extend": {
+      "views": {
+        "SearchView": {
+          "productAppBarCommands": [
+            {
+              "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/Search/NavigateToContosoTenderCountingViewCommand"
+            }
+          ]
+        }
+      }
+    },
+    "create": {
+      "templatedDialogs": [
+        {
+          "htmlPath": "Controls/Dialogs/Create/ExampleCreateDialog.html",
+          "modulePath": "Controls/Dialogs/Create/ExampleCreateDialogModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Edit/ExampleEditDialog.html",
+          "modulePath": "Controls/Dialogs/Edit/ExampleEditDialogModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Display/PingResultDialog.html",
+          "modulePath": "Controls/Dialogs/Display/PingResultDialogModule"
+        },
+        {
+          "htmlPath": "Views/DenominationDetail/ContosoDenominationNumericDialog.html",
+          "modulePath": "Views/DenominationDetail/ContosoDenominationNumericDialog"
+        },
+        {
+          "htmlPath": "Views/DenominationDetail/ContosoDenominationAmountDialog.html",
+          "modulePath": "Views/DenominationDetail/ContosoDenominationAmountDialog"
+        }
+      ],
+      "views": [
+        {
+          "title": "Sample Extension View",
+          "pageName": "ExampleView",
+          "phonePageName": "ExampleView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/ExampleView"
+        },
+        {
+          "title": "Contoso Tender Counting View",
+          "pageName": "ContosoTenderCountingView",
+          "phonePageName": "ContosoTenderCountingView",
+          "viewDirectory": "Views/ContosoTenderCounting/",
+          "viewControllerPath": "Views/ContosoTenderCounting/ContosoTenderCountingView"
+        },
+        {
+          "title": "Contoso Denomination Detail View",
+          "pageName": "ContosoDenominationDetailView",
+          "phonePageName": "ContosoDenominationDetailView",
+          "viewDirectory": "Views/DenominationDetail/",
+          "viewControllerPath": "Views/DenominationDetail/ContosoDenominationDetailView"
+        }
+      ]
+    }
+  }
+}

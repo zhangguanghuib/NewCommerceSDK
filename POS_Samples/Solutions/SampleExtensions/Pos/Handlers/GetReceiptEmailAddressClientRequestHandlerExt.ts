@@ -21,6 +21,20 @@ export default class GetReceiptEmailAddressClientRequestHandlerExt extends GetRe
             customer.ReceiptEmail = "test1@test1.com";
         }
 
-        return this.defaultExecuteAsync(request);
+        //return this.defaultExecuteAsync(request);
+        let result: Promise<ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>> = this.defaultExecuteAsync(request);
+
+        return result;
+        //let result: Promise<ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>> = this.defaultExecuteAsync(request);
+
+        //return result.then((ret: ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>)
+        //    : Promise<ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>> => {
+        //    if (ret.canceled) {
+        //        return Promise.resolve(<ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>>{ canceled: true, data: null });
+        //    } else {
+        //        ret.data.result.saveEmailOnCustomer = true;
+        //        return Promise.resolve(<ClientEntities.ICancelableDataResult<GetReceiptEmailAddressClientResponse>>{ canceled: false, data: ret.data });
+        //    }
+        //})
     }
 }
