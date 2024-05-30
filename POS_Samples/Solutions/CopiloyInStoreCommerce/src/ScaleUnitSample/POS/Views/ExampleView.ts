@@ -76,6 +76,19 @@ export default class StoreHoursView extends Views.CustomViewControllerBase {
                         }
                     },
                     {
+                        name: "RunChat",
+                        label: "Run Chat",
+                        icon: Views.Icons.Email,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.state.isProcessing = true;
+                            this.viewModel.runChat().then(() => {
+                                this.state.isProcessing = false;
+                            });
+                        }
+                    },
+                    {
                         name: "Last",
                         label: "Last",
                         icon: Views.Icons.Down,

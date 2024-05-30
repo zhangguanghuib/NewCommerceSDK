@@ -46,7 +46,16 @@
       ],
       "views": {
         "CartView": {
-          "viewController": { "modulePath": "Extend/ViewExtensions/Cart/CartViewController" }
+          "viewController": { "modulePath": "Extend/ViewExtensions/Cart/CartViewController" },
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "lineDetails",
+                "htmlPath": "Extend/ViewExtensions/Cart/LineDetailsCustomControl.html",
+                "modulePath": "Extend/ViewExtensions/Cart/LineDetailsCustomControl"
+              }
+            ]
+          }
         },
         "SearchView": {
           "productAppBarCommands": [
@@ -100,6 +109,9 @@
           "appBarCommands": [
             {
               "modulePath": "Extend/ViewExtensions/Payment/PaymentViewCommand"
+            },
+            {
+              "modulePath": "Extend/ViewExtensions/Payment/PaymentViewCommandV2"
             }
           ]
         },

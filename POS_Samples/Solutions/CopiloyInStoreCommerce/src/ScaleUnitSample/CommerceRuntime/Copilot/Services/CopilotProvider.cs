@@ -18,17 +18,13 @@ namespace CommerceRuntime.Copilot.Services
     using Newtonsoft.Json;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
-    using Microsoft.SemanticKernel;
-    using Microsoft.SemanticKernel.Connectors.OpenAI;
-    using Kernel = Microsoft.SemanticKernel.Kernel;
     using CommerceRuntime.Copilot.Messages;
     using CommerceRuntime.Copilot.Entites;
+    using System.Net.Http;
+    using System.Text.Json;
 
     public class CopilotProvider : IRequestHandlerAsync
     {
-        private Kernel kernel;
-        private KernelFunction kernelFunction;
-
         private static Dictionary<string, List<RoleMessage>> ChatMessageStoreByTerminal;
         private static List<RoleMessage> RoleMessages = new List<RoleMessage>();
 
@@ -40,14 +36,6 @@ namespace CommerceRuntime.Copilot.Services
                 {
                     typeof(GetAIAnswerRequest),
                 };
-            }
-        }
-
-        public CopilotProvider()
-        {
-            if (this.kernel == null || this.kernelFunction == null)
-            {
-                (this.kernel, this.kernelFunction) = chatFunction();
             }
         }
 
@@ -76,14 +64,16 @@ namespace CommerceRuntime.Copilot.Services
             string userInput = getAIAnswerRequest.UserInput;
             string currentTerminalId = getAIAnswerRequest.RequestContext.GetTerminalId();
 
-            if (this.kernel == null || this.kernelFunction == null)
-            {
-                (this.kernel, this.kernelFunction) = this.chatFunction();
-            }
-
             StringBuilder sb = new StringBuilder();
 
             List<RoleMessage> roleMessages = CopilotProvider.ChatMessageStoreByTerminal[currentTerminalId];
+
+            if (roleMessages == null)
+            {
+               roleMessages = new List<RoleMessage>();
+               CopilotProvider.ChatMessageStoreByTerminal[currentTerminalId] = roleMessages;
+            }
+
             foreach (RoleMessage roleMessage in roleMessages)
             {
                 sb.Append($"\n{roleMessage.Role}: {roleMessage.Message}");
@@ -91,55 +81,31 @@ namespace CommerceRuntime.Copilot.Services
             sb.Append("\n");
 
             string history = sb.ToString();
-            var arguments = new KernelArguments()
+            using (var client = new HttpClient())
             {
-                ["history"] = history
-            };
+                ChatInputRequest chatInputRequest = new ChatInputRequest { UserInput = userInput, SecondString = "" };
+                using (var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(chatInputRequest), Encoding.UTF8, "application/json"))
+                {
+                    var response = await client.PostAsync("https://****.microsoft.com:80*2/api/Chat", content).ConfigureAwait(false);
 
-            arguments["userInput"] = userInput;
+                    string answer = "";
+                    if (response.IsSuccessStatusCode)
+                    {
+                        answer = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        answer = $"Error: {response.StatusCode}";
+                    }
 
-            // Process the user message and get an answer
-            var answer = await kernelFunction.InvokeAsync(kernel, arguments).ConfigureAwait(false);
+                    // Process the user message and get an answer
+                    roleMessages.Add(new RoleMessage() { Role = "User", Message = userInput });
+                    roleMessages.Add(new RoleMessage() { Role = "AI", Message = answer });
 
-            roleMessages.Add(new RoleMessage() { Role = "User", Message = userInput });
-            roleMessages.Add(new RoleMessage() { Role = "AI", Message = answer.ToString() });
-
-            return new GetAIAnswerResponse(roleMessages.AsPagedResult<RoleMessage>());
+                    return new GetAIAnswerResponse(roleMessages.AsPagedResult<RoleMessage>());
+                }
+            }
         }
-
-        private (Kernel, KernelFunction) chatFunction()
-        {
-            var builder = Kernel.CreateBuilder();
-
-            var (useAzureOpenAI, model, azureEndpoint, apiKey, orgId) =
-                (true, "openai10", "https://openai10.openai.azure.com/", "f433557a3c284cb98a34b8aa0a164f30", "");
-
-            if (useAzureOpenAI)
-                builder.AddAzureOpenAIChatCompletion(model, azureEndpoint, apiKey);
-            else
-                builder.AddOpenAIChatCompletion(model, apiKey, orgId);
-
-            var kernel = builder.Build();
-
-            const string skPrompt = @"
-                ChatBot can have a conversation with you about any topic.
-                It can give explicit instructions or say 'I don't know' if it does not have an answer.
-
-                {{$history}}
-                User: {{$userInput}}
-                ChatBot:";
-
-            var executionSettings = new OpenAIPromptExecutionSettings
-            {
-                MaxTokens = 2000,
-                Temperature = 0.7,
-                TopP = 0.5
-            };
-
-            var chatFunction = kernel.CreateFunctionFromPrompt(skPrompt, executionSettings);
-            return (kernel, chatFunction);
-        }
-
         private void InitializeGasPumps(Request request)
         {
             string currentTerminalId = request.RequestContext.GetTerminalId();

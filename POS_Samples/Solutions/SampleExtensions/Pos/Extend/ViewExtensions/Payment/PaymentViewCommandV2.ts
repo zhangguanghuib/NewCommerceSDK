@@ -14,26 +14,16 @@ import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 
 declare var Commerce: any;
-export default class PaymentViewCommand extends PaymentView.PaymentViewExtensionCommandBase {
+export default class PaymentViewCommandV2 extends PaymentView.PaymentViewExtensionCommandBase {
 
-    public _paymentCard: Commerce.Proxy.Entities.PaymentCard;
-    public _tenderType: Commerce.Proxy.Entities.TenderType;
-    public _fullAmount: number;
-    public _currency: Commerce.Proxy.Entities.Currency;
-    public _paymentAmount: string;
     public disposalDelay: number;
 
-    /**
-     * Creates a new instance of the ButtonCommand class.
-     * @param {IExtensionCommandContext<PaymentView.IPaymentToExtensionCommandMessageTypeMap>} context The command context.
-     * @remarks The command context contains APIs through which a command can communicate with POS.
-     */
     constructor(context: IExtensionCommandContext<PaymentView.IPaymentViewToExtensionCommandMessageTypeMap>) {
         super(context);
 
-        this.label = "Payment Command";
-        this.id = "PaymentCommand";
-        this.extraClass = "iconLightningBolt";
+        this.label = "Detect Payment View";
+        this.id = "DetectPaymentView";
+        this.extraClass = "iconAccept";
     }
 
     /**
@@ -41,10 +31,6 @@ export default class PaymentViewCommand extends PaymentView.PaymentViewExtension
      * @param {PaymentView.IPaymentViewExtensionCommandState} state The state used to initialize the command.
      */
     protected init(state: PaymentView.IPaymentViewExtensionCommandState): void {
-        this._paymentCard = null;
-        this._tenderType = state.tenderType;
-        this._fullAmount = state.fullAmount;
-        this._currency = state.currency;
 
         this.disposalDelay = Commerce.ApplicationSession.instance.posConfiguration.disposalDelay as number;
 
@@ -55,30 +41,12 @@ export default class PaymentViewCommand extends PaymentView.PaymentViewExtension
                 console.log("The current view is: " + viewName);
                 clearInterval(timer);
                 //Withdraw the mpnet from the cash change machine
+                this.execute();
             }
         }, 200);
-
-        let viewName: string = Commerce.ViewModelAdapter.getCurrentViewName();
-        console.log(viewName);
-
-        // Only allow button if it is for credit cards.
-        if (state.tenderType.OperationId === Commerce.Proxy.Entities.RetailOperation.PayCard) {
-            this.isVisible = true;
-            this.canExecute = true;
-
-            this.paymentViewPaymentCardChangedHandler = (data: PaymentView.PaymentViewPaymentCardChanged): void => {
-                this._paymentCard = data.paymentCard;
-                this.context.logger.logInformational("Payment View Command - Payment card changed");
-            };
-
-            this.paymentViewAmountChangedHandler = (data: PaymentView.PaymentViewAmountChanged): void => {
-                this._paymentAmount = data.paymentAmount;
-                this.context.logger.logInformational("Payment View Command - Amount changed");
-            };
-        } else {
-            this.isVisible = false;
-            this.canExecute = false;
-        }
+       
+        this.isVisible = true;
+        this.canExecute = true;
     }
 
     /**
@@ -96,14 +64,11 @@ export default class PaymentViewCommand extends PaymentView.PaymentViewExtension
             });
 
         this.context.runtime.executeAsync(hardwareStatationDeviceActionRequest).then(() => {
-
             this.context.logger.logInformational("Hardware Station request executed successfully");
             let data: UpdatePaymentAmountData = {
                 paymentAmount: 30
             };
-
             this.updatePaymentAmount(data);
-
         }).catch((err) => {
             this.context.logger.logInformational("Failure in executing Hardware Station request");
             throw err;

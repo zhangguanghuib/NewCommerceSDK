@@ -14,7 +14,6 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Diagnostics" Version="10.13.23290.1" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.11.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="RequestHandlers\SearchSuggestions.json">

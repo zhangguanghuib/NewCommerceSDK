@@ -2,6 +2,7 @@
 import * as CartView from "PosApi/Extend/Views/CartView";
 import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
 
+declare var Commerce: any;
 export default class CartViewController extends CartView.CartExtensionViewControllerBase {
     public static selectedCartLineId: string = StringExtensions.EMPTY;
     public static selectedCartLines: ProxyEntities.CartLine[];
@@ -18,6 +19,9 @@ export default class CartViewController extends CartView.CartExtensionViewContro
                 CartViewController.selectedCartLineId = CartViewController.selectedCartLines[0].LineId;
                 localStorage.setItem("currentCartLineId", CartViewController.selectedCartLineId);
             }
+
+            let viewName: string = Commerce.ViewModelAdapter.getCurrentViewName();
+            console.log(viewName);
         }
 
         this.cartLineSelectionClearedHandler = (): void => {

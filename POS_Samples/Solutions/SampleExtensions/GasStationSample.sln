@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.GasStationSample.Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.PaymentDeviceSample", "PaymentDevice\Contoso.PaymentDeviceSample.csproj", "{0B60B786-9367-4D56-AF3D-5DA07019328A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.HardwareStation.CoinDispenserSample", "HardwareStation.CoinDispenserSample\Contoso.HardwareStation.CoinDispenserSample.csproj", "{BC9793E6-22D4-47B7-B33A-E81BF214A2FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{0B60B786-9367-4D56-AF3D-5DA07019328A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B60B786-9367-4D56-AF3D-5DA07019328A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B60B786-9367-4D56-AF3D-5DA07019328A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9793E6-22D4-47B7-B33A-E81BF214A2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9793E6-22D4-47B7-B33A-E81BF214A2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9793E6-22D4-47B7-B33A-E81BF214A2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9793E6-22D4-47B7-B33A-E81BF214A2FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

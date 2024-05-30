@@ -15,6 +15,7 @@ import ExampleCreateDialog from "../Controls/Dialogs/Create/ExampleCreateDialogM
 import ExampleEditDialog from "../Controls/Dialogs/Edit/ExampleEditDialogModule";
 import PingResultDialog from "../Controls/Dialogs/Display/PingResultDialogModule";
 import { ObjectExtensions, ArrayExtensions } from "PosApi/TypeExtensions";
+import { ClientEntities } from "PosApi/Entities";
 
 /**
  * The ViewModel for ExampleView.
@@ -140,6 +141,19 @@ export default class ExampleViewModel {
              let pingResultDialog: PingResultDialog = new PingResultDialog();
              pingResultDialog.open(false, false);
         });
+    }
+
+
+    public runChat(): Promise<void> {
+        return this._context.runtime
+            .executeAsync(new Messages.StoreOperations.GetAIAnswersRequest("Can you please help write a binary search code in javascript?", "HOUSTON-42"))
+            .then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetAIAnswersResponse>) => {
+                console.log(response.data.result);
+            }).catch((error: any): void => {
+                this._context.logger.logError("runPingTest Error");
+                let pingResultDialog: PingResultDialog = new PingResultDialog();
+                pingResultDialog.open(false, false);
+            });
     }
 
 
