@@ -17,9 +17,9 @@ import PingResultDialog from "../Controls/Dialogs/Display/PingResultDialogModule
 import { ObjectExtensions, ArrayExtensions } from "PosApi/TypeExtensions";
 import { ClientEntities } from "PosApi/Entities";
 
-/**
- * The ViewModel for ExampleView.
- */
+import TextInputDialog from "../Controls/Dialogs/Create/TextInputDialog";
+import MessageDialog from "../Controls/Dialogs/Create/MessageDialog";
+
 export default class ExampleViewModel {
     public title: string;
     public loadedData: Entities.ExampleEntity[];
@@ -145,16 +145,24 @@ export default class ExampleViewModel {
 
 
     public runChat(): Promise<void> {
-        return this._context.runtime
-            .executeAsync(new Messages.StoreOperations.GetAIAnswersRequest("Can you please help write a binary search code in javascript?", "HOUSTON-42"))
-            .then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetAIAnswersResponse>) => {
-                console.log(response.data.result);
-            }).catch((error: any): void => {
-                this._context.logger.logError("runPingTest Error");
-                let pingResultDialog: PingResultDialog = new PingResultDialog();
-                pingResultDialog.open(false, false);
+
+        let textInputDialog: TextInputDialog = new TextInputDialog();
+        return textInputDialog.show(this._context, "")
+            .then((userInput: string) => {
+                return this._context.runtime.executeAsync(new Messages.StoreOperations.GetAIAnswersRequest(userInput, "HOUSTON-42"))
+                    .then((response: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetAIAnswersResponse>) => {
+                        let messageFromAI = "Nothing returned from AI";
+                        if (response.data.result.length > 0) {
+                            let roleMessage = response.data.result[response.data.result.length - 1];
+                            messageFromAI = roleMessage.Message;
+                        }
+                        return MessageDialog.show(this._context, messageFromAI)
+                        .then(()=> {
+                            return Promise.resolve();
+                        });
+                })
+            }).catch((reason: any) => {
+                this._context.logger.logError("TextInputDialog: " + JSON.stringify(reason));
             });
     }
-
-
 }

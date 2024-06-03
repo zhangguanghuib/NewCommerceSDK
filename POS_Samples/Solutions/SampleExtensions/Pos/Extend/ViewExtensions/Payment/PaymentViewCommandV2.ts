@@ -1,13 +1,4 @@
-﻿/**
- * SAMPLE CODE NOTICE
- *
- * THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
- * OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
- * THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
- * NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
- */
-
-import * as PaymentView from "PosApi/Extend/Views/PaymentView";
+﻿import * as PaymentView from "PosApi/Extend/Views/PaymentView";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { UpdatePaymentAmountData } from "PosApi/Extend/Views/PaymentView";
 import { HardwareStationDeviceActionRequest, HardwareStationDeviceActionResponse } from "PosApi/Consume/Peripherals";
@@ -32,7 +23,7 @@ export default class PaymentViewCommandV2 extends PaymentView.PaymentViewExtensi
      */
     protected init(state: PaymentView.IPaymentViewExtensionCommandState): void {
 
-        this.disposalDelay = Commerce.ApplicationSession.instance.posConfiguration.disposalDelay as number;
+        //this.disposalDelay = Commerce.ApplicationSession.instance.posConfiguration.disposalDelay as number;
 
         let timer = setInterval(() => {
             let viewName: string = Commerce.ViewModelAdapter.getCurrentViewName();
@@ -49,9 +40,6 @@ export default class PaymentViewCommandV2 extends PaymentView.PaymentViewExtensi
         this.canExecute = true;
     }
 
-    /**
-     * Executes the command.
-     */
     protected execute(): void {
 
         let amount: number = 30;

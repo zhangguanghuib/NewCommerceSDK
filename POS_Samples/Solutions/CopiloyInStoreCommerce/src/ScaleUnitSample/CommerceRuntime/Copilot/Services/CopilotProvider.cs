@@ -86,7 +86,7 @@ namespace CommerceRuntime.Copilot.Services
                 ChatInputRequest chatInputRequest = new ChatInputRequest { UserInput = userInput, SecondString = "" };
                 using (var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(chatInputRequest), Encoding.UTF8, "application/json"))
                 {
-                    var response = await client.PostAsync("https://****.microsoft.com:80*2/api/Chat", content).ConfigureAwait(false);
+                    var response = await client.PostAsync("https://****:8082/api/Chat", content).ConfigureAwait(false);
 
                     string answer = "";
                     if (response.IsSuccessStatusCode)
