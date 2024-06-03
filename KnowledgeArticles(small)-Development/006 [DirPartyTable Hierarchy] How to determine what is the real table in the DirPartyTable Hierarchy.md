@@ -10,7 +10,8 @@
    <img width="1056" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/834d2b4c-ba8e-4650-a45e-8c9601cbafd7">
 
 4. Below is a sample to get all  operating Unit<br/>
-<img width="1118" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c007e64f-be7f-4e53-939a-6d031efd162e">
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/33dad2d7-8648-4915-8ca7-9fcb09bebd6a)
+
 
 
 
