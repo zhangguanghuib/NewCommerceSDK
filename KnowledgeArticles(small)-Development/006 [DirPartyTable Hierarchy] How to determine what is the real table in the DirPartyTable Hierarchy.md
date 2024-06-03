@@ -6,6 +6,10 @@
 2.  Check the DirPartyTable.InstanceRelationType, below sample shows a customer whose type is Person<br/>
   <img width="1054" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/ebb13f58-7cb7-40fa-bcc8-a08e299a425c"><br/>
 
+3. Below show a customer whose type is Organization<br/>
+   <img width="1056" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/834d2b4c-ba8e-4650-a45e-8c9601cbafd7">
+
+
 
 
 
