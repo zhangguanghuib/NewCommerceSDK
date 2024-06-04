@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxTable xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CustomerWithMutiPrimaryAddress</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class CustomerWithMutiPrimaryAddress extends common
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>loadData</Name>
+				<Source><![CDATA[
+    public static CustomerWithMutiPrimaryAddress loadData(CustomerWithMutiPrimaryAddress customerWithMutiPrimaryAddress)
+    {
+        DirPartyLocation dirPartyLocation;
+        LogisticsPostalAddress logisticsPostalAddress;
+        CustTable custTable;
+
+        delete_from customerWithMutiPrimaryAddress;
+
+        while select count(RecId) from logisticsPostalAddress
+            where logisticsPostalAddress.ValidFrom < DateTimeUtil::utcNow() 
+               && logisticsPostalAddress.ValidTo > DateTimeUtil::utcNow()
+            join  dirPartyLocation 
+            where logisticsPostalAddress.Location == dirPartyLocation.Location
+               && dirPartyLocation.IsPrimary == true
+            join custTable
+            group by custTable.AccountNum, custTable.DataAreaId
+            where dirPartyLocation.Party == custTable.Party
+            //&& logisticsPostalAddress.RecId > 1
+        {
+            if (logisticsPostalAddress.RecId > 1)
+            {
+                customerWithMutiPrimaryAddress.clear();
+                customerWithMutiPrimaryAddress.AccountNum = custTable.AccountNum;
+                customerWithMutiPrimaryAddress.PrimaryAddressCnt = logisticsPostalAddress.RecId;
+                customerWithMutiPrimaryAddress.Company = custTable.dataAreaId;
+                customerWithMutiPrimaryAddress.insert();
+            }
+        }
+
+        return customerWithMutiPrimaryAddress;
+
+        // The real SQL as below:
+        //select count(T4.RECID) as PrimaryAdresssCnt, T5.ACCOUNTNUM, T5.DATAAREAID from DIRPARTYLOCATION as T1
+        //    join DIRPARTYTABLE as T2 on T1.PARTY = T2.RECID
+        //    join LOGISTICSLOCATION as T3 on T1.LOCATION = T3.RECID
+        //    join LOGISTICSPOSTALADDRESS as T4 on T4.LOCATION = T1.LOCATION
+        //    join CUSTTABLE as T5 on T1.PARTY = T5.PARTY
+        //    where T1.ISPRIMARY = 1 and T4.VALIDFROM < GETUTCDATE() and T4.VALIDTO > GETUTCDATE()
+        //    group by T5.ACCOUNTNUM, T5.DATAAREAID
+        //    having count(T4.RECID) > 1
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+	<Label>Customers With Muti Primary Address</Label>
+	<SubscriberAccessLevel>
+		<Read>Allow</Read>
+	</SubscriberAccessLevel>
+	<AllowChangeTracking>No</AllowChangeTracking>
+	<SaveDataPerCompany>No</SaveDataPerCompany>
+	<TableType>TempDB</TableType>
+	<DeleteActions />
+	<FieldGroups>
+		<AxTableFieldGroup>
+			<Name>AutoReport</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoLookup</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoIdentification</Name>
+			<AutoPopulate>Yes</AutoPopulate>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoSummary</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoBrowse</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>Overview</Name>
+			<Label>Over View</Label>
+			<Fields>
+				<AxTableFieldGroupField>
+					<DataField>AccountNum</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>PrimaryAddressCnt</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>Company</DataField>
+				</AxTableFieldGroupField>
+			</Fields>
+		</AxTableFieldGroup>
+	</FieldGroups>
+	<Fields>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldString">
+			<Name>AccountNum</Name>
+			<ExtendedDataType>AccountNum</ExtendedDataType>
+			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
+			<Label>Customer Account</Label>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldInt">
+			<Name>PrimaryAddressCnt</Name>
+			<Label>Primary Address Count</Label>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldString">
+			<Name>Company</Name>
+			<ExtendedDataType>DataAreaId</ExtendedDataType>
+			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
+			<Label>DataAreaId</Label>
+		</AxTableField>
+	</Fields>
+	<FullTextIndexes />
+	<Indexes />
+	<Mappings />
+	<Relations />
+	<StateMachines />
+</AxTable>
