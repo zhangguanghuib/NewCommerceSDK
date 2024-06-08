@@ -12,5 +12,11 @@ Customer want to hide the cart if there shopping cart is empty.
 
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b9b176bc-2014-43b3-8c1d-1c4ccdb23d67)
 
-3.  The source code is :<br/>
+3.  It also supports to specify the cart width percentage by hardware profile:
+   <img width="1271" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/d49838a1-ce87-436d-aabb-f028917638a6">
+
+4.  The video can be found from Youtube:
+    https://www.youtube.com/watch?v=SHxpQMTiRPE
+
+5.  The source code is :<br/>
    https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/DualDisplayHideEmptyCart
