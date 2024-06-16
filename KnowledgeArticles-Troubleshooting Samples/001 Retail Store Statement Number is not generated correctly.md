@@ -89,3 +89,53 @@ CLOSE dirparty_cursor;
 DEALLOCATE dirparty_cursor;
 
 ```
+
+```sql
+select * from dbo.TABLEIDTABLE as T where T.NAME ='OMOperatingUnit'
+
+
+SELECT T1.RECID,
+	T1.INSTANCERELATIONTYPE,  T1.NAME, T1.NAMEALIAS, *
+FROM DIRPARTYTABLE T1 
+WHERE ((T1.PARTITION=5637144576) 
+	AND (T1.INSTANCERELATIONTYPE IN (select ID from dbo.TABLEIDTABLE as T where T.NAME ='OMOperatingUnit') ))
+	AND RECID= 22565427447
+	--and T1.NAME ='Boston'
+	order by T1.NAME
+
+
+	select scope.RECID from NumberSequenceScope scope
+        where
+            scope.DataArea = '' and
+            scope.LegalEntity = 0 and
+            scope.OperatingUnit = 22565427447 and
+            scope.FiscalCalendarPeriod = 0 and
+            scope.OperatingUnitType = 0;
+
+SELECT T1.RECID, T1.NUMBERSEQUENCEID,
+    T1.ALLOWSAMEAS,
+	T1.NUMBERSEQUENCEDATATYPE,
+	T1.NUMBERSEQUENCEID,
+	T1.NUMBERSEQUENCESCOPE,
+	T1.RECVERSION,
+	T1.PARTITION,
+	T1.RECID 
+FROM NUMBERSEQUENCEREFERENCE T1 
+WHERE PARTITION=5637144576
+	AND NUMBERSEQUENCEDATATYPE=5637144589
+	AND NUMBERSEQUENCESCOPE=22565423776 
+	AND NUMBERSEQUENCEID<>0
+	AND T1.RECID <> 0
+    AND T1.NUMBERSEQUENCEID <> 0
+
+
+	 SELECT 1
+    FROM NUMBERSEQUENCEREFERENCE T1 
+    WHERE PARTITION = 5637144576
+      AND NUMBERSEQUENCEDATATYPE = 5637144728
+      AND NUMBERSEQUENCESCOPE = 22565422006
+      AND NUMBERSEQUENCEID <> 0
+      --AND T1.RECID <> 0
+      --AND T1.NUMBERSEQUENCEID <> 0
+```
+<img width="813" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f3493154-2fff-4e1c-974f-b7f7f4fc5ecb">
