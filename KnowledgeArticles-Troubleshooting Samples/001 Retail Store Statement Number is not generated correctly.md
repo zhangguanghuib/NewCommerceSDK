@@ -1,7 +1,6 @@
 ## Retail Store Statement Number is not generated correctly?
 
-```
-
+```sql
 DECLARE @numberSequenceDatatype BIGINT = 5637144589;
 --select RECID, * from numberSequenceDatatype 
 --where numberSequenceDatatype.ScopeType = 4
