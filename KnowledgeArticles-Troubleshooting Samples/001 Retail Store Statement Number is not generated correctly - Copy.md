@@ -185,7 +185,39 @@ select T.Id, T.Name, * from dbo.SYSTYPEIDVIEW as T where T.Id = 6722 -- NUMBERSE
 
 6. Simplified version:
    ```sql
-   www
+select T.Recid, T.scopetype, * from dbo.numbersequencedatatype as T where T.ScopeType = 4
+
+select  T.STORENUMBER, T2.OMOPERATINGUNITNUMBER, * from dbo.RETAILCHANNELTABLE as T join dbo.DIRPARTYTABLE as T2 on T.OMOPERATINGUNITID = T2.RECID;
+
+SELECT T1.RECID,
+       T1.NAME,
+       T1.NAMEALIAS,
+	   T1.OMOPERATINGUNITNUMBER
+FROM DIRPARTYTABLE T1
+WHERE T1.PARTITION = 5637144576 and 
+  T1.OMOPERATINGUNITNUMBER = '15524'
+  AND T1.INSTANCERELATIONTYPE IN (SELECT ID 
+                                  FROM dbo.TABLEIDTABLE 
+                                  WHERE NAME = 'OMOperatingUnit')
+
+
+select scope.RECID, * from NumberSequenceScope scope
+        where
+            scope.DataArea = '' and
+            scope.LegalEntity = 0 and
+            scope.OperatingUnit = 5639229646 and
+            scope.FiscalCalendarPeriod = 0 and
+            scope.OperatingUnitType = 0;
+
+
+ SELECT T2.NUMBERSEQUENCE,T1.NUMBERSEQUENCEDATATYPE, * FROM NUMBERSEQUENCEREFERENCE T1 
+			join NUMBERSEQUENCETABLE as T2 on T1.NUMBERSEQUENCEID = T2.RECID
+			WHERE T1.PARTITION = 5637144576
+			  --AND T1.NUMBERSEQUENCEDATATYPE = 5637144589
+			  AND T1.NUMBERSEQUENCESCOPE = 5637153015
+			  AND T1.NUMBERSEQUENCEID <> 0
+			  AND T1.RECID <> 0
+			  AND T1.NUMBERSEQUENCEID <> 0
    ```
 
 
