@@ -1,6 +1,11 @@
 ## How to get the latest shift id when POS activation?
 
 1. In CSU side  GetLatestNumberSequence.sql
+   
+```sql
+exec [crt].GETLATESTNUMBERSEQUENCE @bi_ChannelId=5637144592,@nvc_TerminalId=N'HOUSTON-39'
+```
+
 ```sql
 -- Get max shift id
 WITH SHIFTNUMSEQ(SHIFTID)
