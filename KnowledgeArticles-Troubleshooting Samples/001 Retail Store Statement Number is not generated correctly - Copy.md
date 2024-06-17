@@ -141,7 +141,7 @@ WHERE PARTITION=5637144576
 <img width="813" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f3493154-2fff-4e1c-974f-b7f7f4fc5ecb">
 
 3.  SQL Script from Number Sequence to find the operating unit and Reference<br/>
-```
+```sql
 
 -- From Number Sequence to check its operating unit and confirm if it is retail Store
 
