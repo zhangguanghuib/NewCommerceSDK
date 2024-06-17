@@ -183,8 +183,9 @@ select T.Id, T.Name, * from dbo.SYSTYPEIDVIEW as T where T.Id = 6722 -- NUMBERSE
    <img width="774" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/027ca964-a072-4a49-992f-984e221f4f0b">
    <img width="778" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/471b7420-bbda-4d62-bb6d-2032e9d99ac3">
 
-6. Simplified version:
-   ```sql
+6. Simplified version:<br/>
+
+```sql
 select T.Recid, T.scopetype, * from dbo.numbersequencedatatype as T where T.ScopeType = 4
 
 select  T.STORENUMBER, T2.OMOPERATINGUNITNUMBER, * from dbo.RETAILCHANNELTABLE as T join dbo.DIRPARTYTABLE as T2 on T.OMOPERATINGUNITID = T2.RECID;
@@ -218,6 +219,6 @@ select scope.RECID, * from NumberSequenceScope scope
 			  AND T1.NUMBERSEQUENCEID <> 0
 			  AND T1.RECID <> 0
 			  AND T1.NUMBERSEQUENCEID <> 0
-   ```
+```
 
 
