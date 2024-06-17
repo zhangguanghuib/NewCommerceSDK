@@ -1,5 +1,6 @@
 ## Retail Store Statement Number is not generated correctly?
 
+1. The cursor version to check with store missing number sequence:<br/>
 ```sql
 DECLARE @numberSequenceDatatype BIGINT = 5637144589;
 --select RECID, * from numberSequenceDatatype 
@@ -89,7 +90,7 @@ CLOSE dirparty_cursor;
 DEALLOCATE dirparty_cursor;
 
 ```
-
+2. Find all Operating Unit and check its number sequence<br/>
 ```sql
 select * from dbo.TABLEIDTABLE as T where T.NAME ='OMOperatingUnit'
 
