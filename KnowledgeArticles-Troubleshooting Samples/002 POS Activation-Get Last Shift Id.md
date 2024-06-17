@@ -26,3 +26,7 @@ SELECT TOP 1 MAX(SHIFTID) AS SHIFTID FROM SHIFTNUMSEQ;
 
 <img width="1154" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8b79cba7-2a40-415a-b318-3470d0e85486">
 
+3. Run P-Job, and then go to this form:<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/1b3f8ba6-4623-474f-ba1c-385256385696)
+
+
