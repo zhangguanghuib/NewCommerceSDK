@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>EYSLoyaltyCardPointAdjustmentBatchJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class EYSLoyaltyCardPointAdjustmentBatchJob extends RunBaseBatch  implements BatchRetryable
+{
+    RetailLoyaltyCardNumber loyaltyCardNumber;
+    DialogField             dialogloyaltyCardNumber;   
+    /*
+    // USRT
+    private const RetailAffiliationName      retailAffiliationName = 'Loyalty program';
+    private const RetailLoyaltyRewardPointID retailLoyaltyRewardPointID = "Loyalty rewards";
+    private const DataAreaId                 loyaltyTransDataAReaId = 'USRT';
+    private const RetailAffiliationTierId    cardTransLoyaltyTierCheck = "Silver";
+    private const RetailAffiliationTierId    MBCGTierConst = "MBCG";
+    private const RetailAffiliationTierId    GoldTierConst = "Gold";
+    private readonly date entryDate =  systemDateGet(); // Format: day, month, year
+    RetailAffiliation         retailAffiliation;
+    RetailLoyaltyRewardPoint  retailLoyaltyRewardPoint;
+    RetailLoyaltyTier          mbcgTier, goldTier;
+    // USRT
+    */
+
+    #define.CurrentVersion(1)
+    #localmacro.CurrentList
+    loyaltyCardNumber
+    #endmacro
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmLoyaltyCardNumber</Name>
+				<Source><![CDATA[
+    public RetailLoyaltyCardNumber parmLoyaltyCardNumber(RetailLoyaltyCardNumber _retailLoyaltyCardNumber = loyaltyCardNumber)
+    {
+        this.loyaltyCardNumber = _retailLoyaltyCardNumber;
+        return this.loyaltyCardNumber;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canGoBatchJournal</Name>
+				<Source><![CDATA[
+    public boolean canGoBatchJournal()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>init</Name>
+				<Source><![CDATA[
+    public boolean init()
+    {
+        retailAffiliation = RetailAffiliation::findByName(retailAffiliationName);
+        retailLoyaltyRewardPoint = RetailLoyaltyRewardPoint::findByRewardPointId(retailLoyaltyRewardPointID);
+        mbcgTier =  RetailLoyaltyTier::findByTierId(retailAffiliation.RecId, MBCGTierConst);
+        goldTier =  RetailLoyaltyTier::findByTierId(retailAffiliation.RecId, GoldTierConst);
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    protected void new()
+    {
+        this.init();
+
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>pack</Name>
+				<Source><![CDATA[
+    public container pack()
+    {
+        return [#CurrentVersion,#CurrentList];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>runsImpersonated</Name>
+				<Source><![CDATA[
+    public boolean runsImpersonated()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>unpack</Name>
+				<Source><![CDATA[
+    public boolean unpack(container packedClass)
+    {
+        Version version = RunBase::getVersion(packedClass);
+        ;
+        switch (version)
+        {
+            case #CurrentVersion:
+                [version, #CurrentList] = packedClass;
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>construct</Name>
+				<Source><![CDATA[
+    public static EYSLoyaltyCardPointAdjustmentBatchJob construct()
+    {
+        return new EYSLoyaltyCardPointAdjustmentBatchJob();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>mustGoBatch</Name>
+				<Source><![CDATA[
+    public boolean mustGoBatch()
+    {
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>caption</Name>
+				<Source><![CDATA[
+    public ClassDescription caption()
+    {
+        return "EYS Loyalty Card Adjustment Point Batch Job";
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isRetryable</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public final boolean isRetryable()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canRunInNewSession</Name>
+				<Source><![CDATA[
+    protected boolean canRunInNewSession()
+    {
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dialog</Name>
+				<Source><![CDATA[
+    public Object dialog()
+    {
+        DialogRunbase       dialog = super();
+        #resAppl;
+
+        dialogloyaltyCardNumber = dialog.addFieldValue(extendedTypeStr(RetailLoyaltyCardNumber), loyaltyCardNumber);
+
+        return dialog;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getFromDialog</Name>
+				<Source><![CDATA[
+    public boolean getFromDialog()
+    {
+        loyaltyCardNumber     = dialogloyaltyCardNumber.value();
+
+        return super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run()
+    {       
+        // This code is to check earn card transaction's Tier
+        RetailLoyaltyTier retailLoyaltyTier;
+        select firstonly RecId from retailLoyaltyTier
+            where retailLoyaltyTier.TierId == cardTransLoyaltyTierCheck &&
+                  retailLoyaltyTier.Affiliation == retailAffiliation.RecId;
+
+        NumberSequenceReference numSeqRef = RetailParameters::numRefLoyaltyAdjustmentId();
+        NumberSeq numSeq = NumberSeq::newGetNum(numSeqRef);
+ 
+        #OCCRetryCount
+        try
+        {
+            RetailLoyaltyCardRewardPointTrans retailLoyaltyCardRewardPointTrans;
+
+            while select forupdate CardNumber, EntryDate, loyaltyTransDataAreaId,
+                                   EntryType, RewardPointAmountQty, IsEYSAdjusted
+                from retailLoyaltyCardRewardPointTrans
+                where retailLoyaltyCardRewardPointTrans.loyaltyTransDataAreaId == loyaltyTransDataAReaId &&
+                      retailLoyaltyCardRewardPointTrans.EntryType == RetailLoyaltyRewardPointEntryType::Earn &&
+                      retailLoyaltyCardRewardPointTrans.EntryDate == entryDate &&
+                      (!this.parmLoyaltyCardNumber() || retailLoyaltyCardRewardPointTrans.CardNumber == this.parmLoyaltyCardNumber()) &&
+                      retailLoyaltyCardRewardPointTrans.LoyaltyTier == retailLoyaltyTier.RecId &&
+                      retailLoyaltyCardRewardPointTrans.RewardPoint == retailLoyaltyRewardPoint.RecId &&
+                      retailLoyaltyCardRewardPointTrans.IsEYSAdjusted == NoYesBlank::No 
+                      //&& retailLoyaltyRewardPoint.RewardPointType == RetailLoyaltyRewardPointType::Amount
+            {
+                if (!this.existActiveMBCHOrGoldTierV2(retailLoyaltyCardRewardPointTrans.CardNumber))
+                {
+                    ttsbegin;
+                    
+                    // In EYS environment, we should use this custom field SAGORiGINALREwardpointamountQTY;
+                    real originalAmount =  retailLoyaltyCardRewardPointTrans.SAGORiGINALREwardpointamountQTY;
+
+                    // This code is for USRT.
+                    // real originalAmount = retailLoyaltyCardRewardPointTrans.RewardPointAmountQty;
+
+                    RetailLoyaltyCardRewardPointAdjustment retailLoyaltyCardRewardPointAdjustment;
+                    retailLoyaltyCardRewardPointAdjustment.initValue();
+                    retailLoyaltyCardRewardPointAdjustment.AdjustmentId = numSeq.num();
+                    retailLoyaltyCardRewardPointAdjustment.Affiliation = retailAffiliation.RecId;// EU-Rewards
+                    retailLoyaltyCardRewardPointAdjustment.LoyaltyCard = RetailLoyaltyCard::findByCardNumber(retailLoyaltyCardRewardPointTrans.CardNumber).RecId;
+                    retailLoyaltyCardRewardPointAdjustment.RewardPoint = retailLoyaltyRewardPoint.RecId; // SGMEM-Point
+                    retailLoyaltyCardRewardPointAdjustment.RewardPointAmountQty = this.getAdjustPoints(originalAmount);
+                    retailLoyaltyCardRewardPointAdjustment.Comment = "Adjust for incident on 6/13/2024 wrongly updated to MBCG V3";
+                    retailLoyaltyCardRewardPointAdjustment.insert();
+                    retailLoyaltyCardRewardPointAdjustment.postAdjustment();
+
+                    retailLoyaltyCardRewardPointTrans.reread();
+                    retailLoyaltyCardRewardPointTrans.IsEYSAdjusted = NoYesBlank::Yes;
+                    retailLoyaltyCardRewardPointTrans.doUpdate();
+                    ttscommit;
+                }
+            }
+        }
+        catch (Exception::Deadlock)
+        {
+            retry;
+        }
+        catch (Exception::UpdateConflict)
+        {
+            if (appl.ttsLevel() == 0)
+            {
+                if (xSession::currentRetryCount() >= #RetryNum)
+                {
+                    throw Exception::UpdateConflictNotRecovered;
+                }
+                else
+                {
+                    retry;
+                }
+            }
+            else
+            {
+                throw Exception::UpdateConflict;
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    static void main(Args _args)
+    {
+        EYSLoyaltyCardPointAdjustmentBatchJob EYSLoyaltyCardPointAdjustmentBatchJob = EYSLoyaltyCardPointAdjustmentBatchJob::construct();
+
+        if(EYSLoyaltyCardPointAdjustmentBatchJob.prompt())
+        {
+            EYSLoyaltyCardPointAdjustmentBatchJob.runOperation();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>existActiveMBCHOrGoldTierV1</Name>
+				<Source><![CDATA[
+    public boolean existActiveMBCHOrGoldTierV1(RetailLoyaltyCardNumber loyalCardNumber)
+    {
+        RetailLoyaltyCardTier retailLoyaltyCardTier;
+        RetailLoyaltyCard     retailLoyaltyCard;
+
+        // Need make sure its active tier is not Gold or MBCG, only neither MBCG or GOLD, then need adjustment.
+        select RecId, CardNumber from retailLoyaltyCard where retailLoyaltyCard.CardNumber == loyalCardNumber
+            join * from retailLoyaltyCardTier
+            where retailLoyaltyCardTier.LoyaltyCard == retailLoyaltyCard.RecId &&
+            ((mbcgTier.RecId != 0 && retailLoyaltyCardTier.LoyaltyTier == mbcgTier.RecId && this.isActiveTier(retailLoyaltyCardTier))
+           ||(goldTier.RecId != 0 && retailLoyaltyCardTier.LoyaltyTier == goldTier.RecId && this.isActiveTier(retailLoyaltyCardTier)));
+
+        return retailLoyaltyCard.RecId != 0 ? true : false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>existActiveMBCHOrGoldTierV2</Name>
+				<Source><![CDATA[
+    public boolean existActiveMBCHOrGoldTierV2(RetailLoyaltyCardNumber loyalCardNumber)
+    {
+        RetailLoyaltyCardTier retailLoyaltyCardTier;
+        RetailLoyaltyCard     retailLoyaltyCard;
+        date currDate = DateTimeUtil::date(DateTimeUtil::utcNow());
+
+        // Need make sure its active tier is not Gold or MBCG, only neither MBCG or GOLD, then need adjustment.
+        if (mbcgTier.RecId != 0)
+        {
+            while select RecId, CardNumber from retailLoyaltyCard where retailLoyaltyCard.CardNumber == loyalCardNumber
+                join retailLoyaltyCardTier
+                where retailLoyaltyCardTier.LoyaltyCard == retailLoyaltyCard.RecId &&
+                      retailLoyaltyCardTier.LoyaltyTier == mbcgTier.RecId &&
+                      retailLoyaltyCardTier.ValidFrom <= currDate &&
+                      retailLoyaltyCardTier.ValidTo >= currDate
+            {
+                if (retailLoyaltyCardTier.RecId != 0 && this.isActiveTier(retailLoyaltyCardTier))
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (goldTier.RecId != 0)
+        {
+            while select RecId, CardNumber from retailLoyaltyCard where retailLoyaltyCard.CardNumber == loyalCardNumber
+                join retailLoyaltyCardTier
+                where retailLoyaltyCardTier.LoyaltyCard == retailLoyaltyCard.RecId &&
+                      retailLoyaltyCardTier.LoyaltyTier == goldTier.RecId &&
+                      retailLoyaltyCardTier.ValidFrom <= currDate &&
+                      retailLoyaltyCardTier.ValidTo >= currDate
+            {
+                if (retailLoyaltyCardTier.RecId != 0 && this.isActiveTier(retailLoyaltyCardTier))
+                {
+                    return true;
+                }
+            }
+        }
+    
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>existActiveMBCHOrGoldTierV3</Name>
+				<Source><![CDATA[
+    public boolean existActiveMBCHOrGoldTierV3(RetailLoyaltyCardNumber loyalCardNumber)
+    {
+        RetailLoyaltyCardTier retailLoyaltyCardTier;
+        RetailLoyaltyCard     retailLoyaltyCard;
+        date currDate = DateTimeUtil::date(DateTimeUtil::utcNow());
+        boolean  ret = false;
+      
+        select RecId, CardNumber from retailLoyaltyCard
+             where retailLoyaltyCard.CardNumber == loyalCardNumber;
+
+        if (retailLoyaltyCard.RecId != 0)
+        {
+            while select retailLoyaltyCardTier
+                where retailLoyaltyCardTier.LoyaltyCard == retailLoyaltyCard.RecId &&
+                      retailLoyaltyCardTier.LoyaltyTier == mbcgTier.RecId &&
+                      retailLoyaltyCardTier.Affiliation == retailAffiliation.RecId &&
+                      retailLoyaltyCardTier.ValidFrom <= currDate &&
+                      retailLoyaltyCardTier.ValidTo >= currDate
+            {
+                boolean isActiveMBCGExists = this.isActiveTier(retailLoyaltyCardTier);
+                if (isActiveMBCGExists)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            while select retailLoyaltyCardTier
+                where retailLoyaltyCardTier.LoyaltyCard == retailLoyaltyCard.RecId &&
+                      retailLoyaltyCardTier.LoyaltyTier == goldTier.RecId &&
+                      retailLoyaltyCardTier.Affiliation == retailAffiliation.RecId &&
+                      retailLoyaltyCardTier.ValidFrom <= currDate &&
+                      retailLoyaltyCardTier.ValidTo >= currDate
+            {
+                boolean isActiveGOLDExists = this.isActiveTier(retailLoyaltyCardTier);
+                if (isActiveGOLDExists)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+        }
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getAdjustPoints</Name>
+				<Source><![CDATA[
+    // Calculate Adjustment point.
+    public real getAdjustPoints(RetailLoyaltyRewardPointAmountQty originalAmount)
+    {
+        real radio = 1.2;
+        real adjustPoint = originalAmount * (1 - 1/radio);
+        return decRound(adjustPoint, 0) * (-1);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isActiveTier</Name>
+				<Source><![CDATA[
+    // Check it if it active loyalty tier.
+    public boolean isActiveTier(RetailLoyaltyCardTier record)
+    {
+        date currDate = DateTimeUtil::date(DateTimeUtil::utcNow());
+        boolean isActive = false;
+
+        if (record.ValidFrom <= currDate && record.ValidTo >= currDate)
+        {
+            RetailLoyaltyCardTier rlcTier;
+            RetailLoyaltyTier rlTier;
+
+            select firstonly rlcTier
+                    where rlcTier.LoyaltyCard == record.LoyaltyCard
+                        && rlcTier.Affiliation == record.Affiliation
+                        && rlcTier.ValidFrom <= currDate
+                        && rlcTier.ValidTo >= currDate
+                    outer join rlTier
+                        order by TierLevel desc
+                        where rlcTier.LoyaltyTier == rlTier.RecId;
+
+            if (rlcTier.RecId == record.RecId)
+            {
+                isActive = true;
+            }
+        }
+
+        return isActive;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

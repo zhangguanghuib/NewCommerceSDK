@@ -1,0 +1,26 @@
+select T.RECID, * from dbo.RETAILAFFILIATION as T where T.NAME = '*****' -- RecId = ****
+
+--update tier end date
+update T
+set T.VALIDTO = case
+    when EOMONTH(T.VALIDFROM, 23) <= T.VALIDTO Then EOMONTH(T.VALIDFROM, 23)
+	ELSE T.VALIDTO
+	END
+from dbo.RETAILLOYALTYCARDTIER as T  
+join dbo.RETAILLOYALTYCARD as T1 on T1.RECID = T.LOYALTYCARD
+where T.VALIDTO = '2026-05-31' and T.AFFILIATION =5637155826
+
+--Update card transaction expiration date
+
+UPDATE pt
+SET pt.EXPIRATIONDATE = (    
+    SELECT MAX(T.VALIDTO)    
+    FROM dbo.RETAILLOYALTYCARDTIER AS T    
+    JOIN dbo.RETAILLOYALTYCARD AS T1 ON T1.RECID = T.LOYALTYCARD    
+    WHERE T1.CARDNUMBER = pt.CARDNUMBER AND T.AFFILIATION =5637155826
+    )
+FROM dbo.RetailLoyaltyCardRewardPointTrans pt
+join dbo.RETAILLOYALTYCARD as T1 on pt.CARDNUMBER = T1.CARDNUMBER
+where-- pt.EntryDate = '2024-06-15' AND
+      pt.EXPIRATIONDATE ='2026-05-31' AND 
+	  pt.AFFILIATION = ****
