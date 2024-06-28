@@ -3,7 +3,7 @@
 	<Name>DXC_RetailMarkDownCheck</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public final class DXC_RetailMarkDownCheck
+public final class Contoso_RetailMarkDownCheck
 {
 }
 ]]></Declaration>
@@ -13,7 +13,7 @@ public final class DXC_RetailMarkDownCheck
 				<Source><![CDATA[
     public static void main(Args _args)
     {
-        DXC_RetailMarkDownCheck::run();
+        Contoso_RetailMarkDownCheck::run();
     }
 
 ]]></Source>
@@ -36,7 +36,7 @@ public final class DXC_RetailMarkDownCheck
             //cacheValueMap.insert(cacheKey, hasMarkdown);
             //return hasMarkdown;
 
-            boolean hasMarkdown = DXC_RetailMarkDownPriceCheck::hasMarkdown(_salesTable.RetailChannelTable,
+            boolean hasMarkdown = Contoso_RetailMarkDownPriceCheck::hasMarkdown(_salesTable.RetailChannelTable,
                     salesLine.ItemId,
                     salesLine.RetailVariantId,
                     DateTimeUtil::date(createdDateTime),
