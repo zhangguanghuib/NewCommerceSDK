@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>DXC_RetailMarkDownPricingDataManagerV3</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class DXC_RetailMarkDownPricingDataManagerV3 extends RetailPricingDataManagerV3
+{
+    private boolean dxcPriceAdjustmentsFound;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>dxcHasPriceAdjustments</Name>
+				<Source><![CDATA[
+    public boolean dxcHasPriceAdjustments()
+    {
+        return dxcPriceAdjustmentsFound;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ReadPriceAdjustments</Name>
+				<Source><![CDATA[
+    public System.Object ReadPriceAdjustments(
+            System.Object items,
+            System.Object priceGroups,
+            System.DateTimeOffset minActiveDate,
+            System.DateTimeOffset maxActiveDate,
+            Microsoft.Dynamics.Commerce.Runtime.DataModel.QueryResultSettings settings)
+    {
+        CLRObject adjustmentList;
+        
+        adjustmentList = super(items, priceGroups, minActiveDate, maxActiveDate, settings);
+
+        // Check if adjustmentList has any elements
+        if (adjustmentList && !dxcPriceAdjustmentsFound)
+        {
+            CLRObject adjustmentListEnumerator = adjustmentList.GetEnumerator();
+            dxcPriceAdjustmentsFound = adjustmentListEnumerator.MoveNext();
+        }
+
+        return adjustmentList;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

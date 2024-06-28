@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>DXC_RetailMarkDownPriceCheck</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System;
+using System.Reflection;
+
+public class DXC_RetailMarkDownPriceCheck extends RetailPriceCheck
+{
+
+    public boolean  usedPricingDataManagerV3 = false;
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>initializeDataAcessor</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Initializes the Pricing Data Accessor.
+    /// </summary>
+    /// <remarks>
+    /// Override this method if you need to provide your own implementation of the pricing data accessor.
+    /// </remarks>
+    protected void initializeDataAcessor()
+    {
+        super();
+        
+        if (this.getClassName(pricingManager) == identifierStr(RetailPricingDataManagerV3))
+        {
+            usedPricingDataManagerV3 = true;
+            pricingManager = new DXC_RetailMarkDownPricingDataManagerV3(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
+        }
+        else
+        {
+            usedPricingDataManagerV3 = false;
+            pricingManager = new DXC_RetailMarkDownPricingDataManagerV2(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getClassName</Name>
+				<Source><![CDATA[
+    private str getClassName(System.Object obj)
+    {
+        str typeName = obj.GetType().Name;
+
+        return typeName;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dxcHasPriceAdjustments</Name>
+				<Source><![CDATA[
+    public boolean dxcHasPriceAdjustments()
+    {
+        RetailPricingDataManager pricingManagerTmp = pricingManager;
+
+        if(this.usedPricingDataManagerV3)
+        {
+            DXC_RetailMarkDownPricingDataManagerV3 markDownPricingManagerTmp = pricingManagerTmp;
+
+            return markDownPricingManagerTmp.dxcHasPriceAdjustments();
+        }
+        else
+        {
+            DXC_RetailMarkDownPricingDataManagerV2 markDownPricingManagerTmp = pricingManagerTmp;
+
+            return markDownPricingManagerTmp.dxcHasPriceAdjustments();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>hasMarkdown</Name>
+				<Source><![CDATA[
+    public static boolean hasMarkdown(RetailChannelRecId _channelRecId,
+        ItemId _itemId,
+        RetailVariantId _variantId,
+        TransDate _transDate,
+        RetailTransTime _transTime)
+    {
+        InventDimCombination inventDimCombination;
+        if (_variantId)
+        {
+            inventDimCombination = InventDimCombination::findVariantId(_variantId);
+        }
+        List priceDiscountLines = new List(Types::Class);
+        utcdatetime validDateTime  = DateTimeUtil::newDateTime(_transDate, _transTime);
+        System.DateTimeOffset validDate = new System.DateTimeOffset(validDateTime);
+
+        RetailPriceDiscountLine priceDiscountLine = new RetailPriceDiscountLine();
+      
+        priceDiscountLine.parmChannelRefRecId(_channelRecId);
+        priceDiscountLine.parmItemId(_itemId);
+        priceDiscountLine.parmInventDimId(inventDimCombination.InventDimId);
+        priceDiscountLine.parmRetailVariantId(_variantId);
+        priceDiscountLine.parmQty(1);
+        priceDiscountLine.parmSalesUnit(InventTableModule::find(_itemId, ModuleInventPurchSales::Sales).UnitId);
+        priceDiscountLines.addEnd(priceDiscountLine);
+
+        DXC_RetailMarkDownPriceCheck retailMarkDownPriceCheck = new DXC_RetailMarkDownPriceCheck();
+        retailMarkDownPriceCheck.calculatePrice(_channelRecId, priceDiscountLines, validDate);
+
+        return retailMarkDownPriceCheck.dxcHasPriceAdjustments();
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

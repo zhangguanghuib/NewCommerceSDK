@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>DXC_RetailMarkDownCheck</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public final class DXC_RetailMarkDownCheck
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args _args)
+    {
+        DXC_RetailMarkDownCheck::run();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public static void run()
+    {
+        SalesId salesId = '013326';
+        SalesTable _salesTable = SalesTable::find(salesId);
+        SalesLine salesLine;
+        while select salesLine
+                where salesLine.SalesId == salesId
+        {
+            utcdatetime createdDateTime =  DateTimeUtil::utcNow();
+            createdDateTime = DateTimeUtil::applyTimeZoneOffset(createdDateTime, RetailChannelTable::findByRecId(_salesTable.RetailChannelTable).ChannelTimeZone);
+
+            //DXC_RetailMarkDownPriceCheck::hasMarkdown(_channelRecId, _itemId, _variantId, _transDate, _transTime);
+            //cacheValueMap.insert(cacheKey, hasMarkdown);
+            //return hasMarkdown;
+
+            boolean hasMarkdown = DXC_RetailMarkDownPriceCheck::hasMarkdown(_salesTable.RetailChannelTable,
+                    salesLine.ItemId,
+                    salesLine.RetailVariantId,
+                    DateTimeUtil::date(createdDateTime),
+                    DateTimeUtil::time(createdDateTime));
+
+            if (hasMarkdown) // default = false, only update when hasMarkdown = true
+            {
+                print("the sales line has mark down");
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>DXC_RetailPricingRunBatchJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public final class DXC_RetailPricingRunBatchJob
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args _args)
+    {
+        DXC_RetailPricingSyncBatch batchJob = DXC_RetailPricingSyncBatch::construct();
+
+        if (batchJob.prompt())
+        {
+            batchJob.runOperation();
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
