@@ -6,7 +6,7 @@
 using System;
 using System.Reflection;
 
-public class DXC_RetailMarkDownPriceCheck extends RetailPriceCheck
+public class Contoso_RetailMarkDownPriceCheck extends RetailPriceCheck
 {
 
     public boolean  usedPricingDataManagerV3 = false;
@@ -29,12 +29,12 @@ public class DXC_RetailMarkDownPriceCheck extends RetailPriceCheck
         if (this.getClassName(pricingManager) == identifierStr(RetailPricingDataManagerV3))
         {
             usedPricingDataManagerV3 = true;
-            pricingManager = new DXC_RetailMarkDownPricingDataManagerV3(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
+            pricingManager = new Contoso_RetailMarkDownPricingDataManagerV3(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
         }
         else
         {
             usedPricingDataManagerV3 = false;
-            pricingManager = new DXC_RetailMarkDownPricingDataManagerV2(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
+            pricingManager = new Contoso_RetailMarkDownPricingDataManagerV2(currentChannel.RecId, transactionIdStr, tempOrderItem, true);
         }
     }
 
@@ -103,7 +103,7 @@ public class DXC_RetailMarkDownPriceCheck extends RetailPriceCheck
         priceDiscountLine.parmSalesUnit(InventTableModule::find(_itemId, ModuleInventPurchSales::Sales).UnitId);
         priceDiscountLines.addEnd(priceDiscountLine);
 
-        DXC_RetailMarkDownPriceCheck retailMarkDownPriceCheck = new DXC_RetailMarkDownPriceCheck();
+        Contoso_RetailMarkDownPriceCheck retailMarkDownPriceCheck = new DXC_RetailMarkDownPriceCheck();
         retailMarkDownPriceCheck.calculatePrice(_channelRecId, priceDiscountLines, validDate);
 
         return retailMarkDownPriceCheck.dxcHasPriceAdjustments();
