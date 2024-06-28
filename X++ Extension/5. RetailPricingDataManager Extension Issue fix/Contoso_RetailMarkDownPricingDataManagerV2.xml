@@ -3,7 +3,7 @@
 	<Name>DXC_RetailMarkDownPricingDataManagerV2</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class DXC_RetailMarkDownPricingDataManagerV2 extends RetailPricingDataManagerV2
+public class Contoso__RetailMarkDownPricingDataManagerV2 extends RetailPricingDataManagerV2
 {
     private boolean dxcPriceAdjustmentsFound;
 
@@ -13,7 +13,7 @@ public class DXC_RetailMarkDownPricingDataManagerV2 extends RetailPricingDataMan
 			<Method>
 				<Name>dxcHasPriceAdjustments</Name>
 				<Source><![CDATA[
-    public boolean dxcHasPriceAdjustments()
+    public boolean ContosoHasPriceAdjustments()
     {
         return dxcPriceAdjustmentsFound;
     }
@@ -35,7 +35,7 @@ public class DXC_RetailMarkDownPricingDataManagerV2 extends RetailPricingDataMan
         adjustmentList = super(items, priceGroups, minActiveDate, maxActiveDate, settings);
 
         // Check if adjustmentList has any elements
-        if (adjustmentList && !dxcPriceAdjustmentsFound)
+        if (adjustmentList && !Contoso_PriceAdjustmentsFound)
         {
             CLRObject adjustmentListEnumerator = adjustmentList.GetEnumerator();
             dxcPriceAdjustmentsFound = adjustmentListEnumerator.MoveNext();
