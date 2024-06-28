@@ -13,7 +13,7 @@ public class DXC_RetailMarkDownPricingDataManagerV3 extends RetailPricingDataMan
 			<Method>
 				<Name>dxcHasPriceAdjustments</Name>
 				<Source><![CDATA[
-    public boolean dxcHasPriceAdjustments()
+    public boolean ContosoHasPriceAdjustments()
     {
         return dxcPriceAdjustmentsFound;
     }
