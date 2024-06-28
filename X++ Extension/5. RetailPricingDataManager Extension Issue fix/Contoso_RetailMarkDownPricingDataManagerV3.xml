@@ -3,7 +3,7 @@
 	<Name>DXC_RetailMarkDownPricingDataManagerV3</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class DXC_RetailMarkDownPricingDataManagerV3 extends RetailPricingDataManagerV3
+public class Contoso_RetailMarkDownPricingDataManagerV3 extends RetailPricingDataManagerV3
 {
     private boolean dxcPriceAdjustmentsFound;
 
