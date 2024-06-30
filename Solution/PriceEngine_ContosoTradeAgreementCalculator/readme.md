@@ -30,10 +30,103 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 2.  C# code to create the custom calculator:<br/>
 <img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
 
-3. Finally only the CommerceRuntime.dll will be put into this folder:
+And then register the customer calculator: <br/>
+```cs
+  public class PricingServiceSampleCustomization : IRequestHandlerAsync
+  {
+      /// <summary>
+      /// Gets the collection of supported request types by this handler.
+      /// </summary>
+      public IEnumerable<Type> SupportedRequestTypes
+      {
+          get
+          {
+              return new[]
+              {
+                  typeof(CalculatePricesServiceRequest),
+                  typeof(CalculateDiscountsServiceRequest),
+                  typeof(GetIndependentPriceDiscountServiceRequest),
+              };
+          }
+      }
+
+      /// <summary>
+      /// Implements customized solutions for pricing services.
+      /// </summary>
+      /// <param name="request">The request object.</param>
+      /// <returns>The response object.</returns>
+      public async Task<Response> Execute(Request request)
+      {
+          ThrowIf.Null(request, nameof(request));
+
+          Response response;
+          switch (request)
+          {
+              case CalculatePricesServiceRequest calculatePricesServiceRequest:
+                  response = await this.CalculatePricesAsync(calculatePricesServiceRequest).ConfigureAwait(false);
+                  break;
+              case CalculateDiscountsServiceRequest calculateDiscountsServiceRequest:
+                  response = await this.CalculateDiscountAsync(calculateDiscountsServiceRequest).ConfigureAwait(false);
+                  break;
+              case GetIndependentPriceDiscountServiceRequest getIndependentPriceDiscountServiceRequest:
+                  response = await this.CalculateIndependentPriceAndDiscountAsync(getIndependentPriceDiscountServiceRequest).ConfigureAwait(false);
+                  break;
+              default:
+                  throw new NotSupportedException($"Request '{request.GetType()}' is not supported.");
+          }
+
+          return response;
+      }
+
+      private async Task<GetPriceServiceResponse> CalculatePricesAsync(CalculatePricesServiceRequest request)
+      {
+          ThrowIf.Null(request, nameof(request));
+          ThrowIf.Null(request.RequestContext, "request.RequestContext");
+          ThrowIf.Null(request.Transaction, "request.Transaction");
+
+          PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
+
+          var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
+
+          return response;
+      }
+
+      private async Task<GetPriceServiceResponse> CalculateDiscountAsync(CalculateDiscountsServiceRequest request)
+      {
+          ThrowIf.Null(request, nameof(request));
+          ThrowIf.Null(request.RequestContext, "request.RequestContext");
+          ThrowIf.Null(request.Transaction, "request.Transaction");
+
+          // Uncomment to register amount cap discount.
+          // PE.IDiscountPackage package = new DiscountPackageAmountCap(new ChannelDataAccessorDiscountAmountCap(request.RequestContext));
+          // PE.PricingEngineExtensionRepository.RegisterDiscountPackage(package);
+          PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
+
+          var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
+
+          return response;
+      }
+
+      private async Task<GetPriceServiceResponse> CalculateIndependentPriceAndDiscountAsync(
+          GetIndependentPriceDiscountServiceRequest request)
+      {
+          ThrowIf.Null(request, nameof(request));
+          ThrowIf.Null(request.RequestContext, "request.RequestContext");
+          ThrowIf.Null(request.Transaction, "request.Transaction");
+
+          PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
+
+          var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
+
+          return response;
+      }
+  }
+```
+
+3. Then only the CommerceRuntime.dll will be put into this folder:
   <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
 
-4. Finally, we you debug you can see the custome calculator will be called: <br/>
+4. When we you debug you can see the custome calculator will be called: <br/>
 
 5. Finally,  you will find it works:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
