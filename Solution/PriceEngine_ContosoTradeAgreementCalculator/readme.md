@@ -35,6 +35,13 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 
 4. Finally, we you debug you can see the custome calculator will be called: <br/>
 
+5. Finally,  you will find it works:
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
+
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9328629c-0b41-4b85-a004-b877fa6b62a5)
+
+
+
 
    
    
