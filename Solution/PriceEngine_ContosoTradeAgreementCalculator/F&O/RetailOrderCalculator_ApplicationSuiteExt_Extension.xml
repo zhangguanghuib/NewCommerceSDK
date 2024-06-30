@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>RetailOrderCalculator_ApplicationSuiteExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using CommerceRunTimeDataModel = Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using CrtPriceAndDiscountCalculationParameters = Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.PriceAndDiscountCalculationParameters;
+using PricingEngine.ContosoTradeAgreementCalculator;
+using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
+using System.Collections.Generic;
+using System.Reflection;
+
+[ExtensionOf(classStr(RetailOrderCalculator))]
+final class RetailOrderCalculator_ApplicationSuiteExt_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>calculatePricesForOrder</Name>
+				<Source><![CDATA[
+    protected void calculatePricesForOrder()
+    {
+        //Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.PricingEngineExtensionRepositor::RegisterPriceTradeAgreementCalculator(new ContosoTradeAgreementCalculator());
+        //Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine::RegisterPriceTradeAgreementCalculator(new ContosoTradeAgreementCalculator()); 
+        
+        PricingEngineExtensionRepository::RegisterPriceTradeAgreementCalculator(new ContosoTradeAgreementCalculator());
+        next calculatePricesForOrder();
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

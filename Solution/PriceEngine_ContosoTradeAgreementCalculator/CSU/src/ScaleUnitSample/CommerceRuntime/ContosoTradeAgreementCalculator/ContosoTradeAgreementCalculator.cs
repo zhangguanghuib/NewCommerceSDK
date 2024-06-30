@@ -1,12 +1,10 @@
-﻿
-namespace PricingEngine.ContosoTradeAgreementCalculator
+﻿namespace Contoso.PricingEngine.TradeAgreementCalculator
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Reflection;
-    using Contoso.CommerceRuntime.PricingEngine;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
@@ -14,8 +12,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
     using Microsoft.Dynamics.Retail.Diagnostics.Extensions;
 
     public class ContosoTradeAgreementCalculator : IPricingCalculator, IPriceTradeAgreementCalculator
-    {
-
+    { 
         private const string ItemUnitKeyDelimiter = "|";
         private static readonly DateTime NoDate = new DateTime(1900, 1, 1);
 

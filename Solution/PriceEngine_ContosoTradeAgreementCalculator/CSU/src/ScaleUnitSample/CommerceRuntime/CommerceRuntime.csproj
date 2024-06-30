@@ -8,4 +8,10 @@
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.Contracts" Version="$(CommerceChannelPackagesVersion)" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine">
+      <HintPath>PriceEngineDll\Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
 </Project>
