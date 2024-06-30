@@ -141,7 +141,7 @@ And then register the customer calculator: <br/>
       }
   }
 ```
-3. Then only the CommerceRuntime.dll will be put into this folder and also in
+3. Then put the CommerceRuntime.dll will be put into this folder and also in
 4. K:\AosService\WebRoot\bin
   <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
 
