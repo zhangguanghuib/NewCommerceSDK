@@ -5,6 +5,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Reflection;
     using Contoso.CommerceRuntime.PricingEngine;
     using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
@@ -62,6 +63,30 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             return itemPriceLines;
         }
 
+        internal static (IEnumerable<OrgUnitLocation> allStores, string channelWarehouse)  GetVariablesFromInternalPricetext(PriceContext priceContext)
+        {
+            Type type = priceContext.GetType();
+            IEnumerable<OrgUnitLocation> allStores = null;
+            string channelWarehouseId = string.Empty;
+
+            if (type.Name.Contains("InternalPriceContext"))
+            {
+                PropertyInfo allStoresProperty = type.GetProperty("AllStores", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (allStoresProperty != null)
+                {
+                    allStores = allStoresProperty.GetValue(priceContext) as IEnumerable<OrgUnitLocation>;
+                }
+
+                // Check if the object has the ChannelWarehouseId property
+                PropertyInfo channelWarehouseIdProperty = type.GetProperty("ChannelWarehouseId", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (channelWarehouseIdProperty != null)
+                {
+                    channelWarehouseId = channelWarehouseIdProperty.GetValue(priceContext) as string;
+                }
+            }
+            return (allStores, channelWarehouseId);
+        }
+
         public CalculatedPrices CalculatePrices(
                 IEnumerable<SalesLine> salesLines,
                 PriceContext priceContext,
@@ -73,9 +98,11 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
 
             Tuple<DateTimeOffset, DateTimeOffset> dateRange = PricingEngine.GetMinAndMaxActiveDates(salesLines, priceContext.ActiveDate);
 
-            IEnumerable<OrgUnitLocation> allStores = ((IPricingDataAccessorV5)pricingDataManager).GetAllStores() as IEnumerable<OrgUnitLocation>;
+            var (allStores, channelWarehouseId) = GetVariablesFromInternalPricetext(priceContext);
 
-            ChannelPriceConfiguration channelPriceConfig = pricingDataManager.GetChannelPriceConfiguration();
+            //IEnumerable<OrgUnitLocation> allStores = ((IPricingDataAccessorV5)pricingDataManager).GetAllStores() as IEnumerable<OrgUnitLocation>;
+
+            //ChannelPriceConfiguration channelPriceConfig = pricingDataManager.GetChannelPriceConfiguration();
 
             //bool disableGetPriceTradeAgreementsBySearchCriteriaKillSwitch = priceContext.KillSwitchContext.GetKillSwitchValue(InternalPriceContextHelper.PricingGetPriceTradeAgreementsBySearchCriteriaKillSwitch, defaultValue: false);
             bool disableGetPriceTradeAgreementsBySearchCriteriaKillSwitch = false;
@@ -89,22 +116,21 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
                 // The code that's violating the rule is on this line.
                 HashSet<TradeAgreementSearchCriteria> tradeAgreementSearchCriteria =
                     new HashSet<TradeAgreementSearchCriteria>(
-                        salesLines.Select(sl => new TradeAgreementSearchCriteria(sl.ItemId, GetMatchedChannel(sl, allStores, channelPriceConfig).InventoryLocationId ?? string.Empty, sl.UnitOfMeasureSymbol ?? string.Empty)));
+                        salesLines.Select(sl => new TradeAgreementSearchCriteria(sl.ItemId, GetMatchedChannel(sl, allStores, channelWarehouseId).InventoryLocationId ?? string.Empty, sl.UnitOfMeasureSymbol ?? string.Empty)));
                 #pragma warning restore CA1851
 
 
                 //using (PricingDiagnostics.PricingDatabaseInstrument instrument = new PricingDiagnostics.PricingDatabaseInstrument("ReadPriceTradeAgreementsBySearchCriteria", tradeAgreementSearchCriteria.Count))
                 //{
-                tradeAgreements = pricingDataManager.ReadPriceTradeAgreements(
-                tradeAgreementSearchCriteria,
-                InternalPriceContextHelper.GetAllPriceGroupsForPrice(priceContext),
-                priceContext.CustomerAccount,
-                dateRange.Item1,
-                dateRange.Item2,
-                priceContext.CurrencyCode,
-                QueryResultSettings.AllRecords) as ReadOnlyCollection<TradeAgreement>;
-
-                //    instrument.ResultCount = tradeAgreements.Count;
+                    tradeAgreements = pricingDataManager.ReadPriceTradeAgreements(
+                    tradeAgreementSearchCriteria,
+                    InternalPriceContextHelper.GetAllPriceGroupsForPrice(priceContext),
+                    priceContext.CustomerAccount,
+                    dateRange.Item1,
+                    dateRange.Item2,
+                    priceContext.CurrencyCode,
+                    QueryResultSettings.AllRecords) as ReadOnlyCollection<TradeAgreement>;
+                //  instrument.ResultCount = tradeAgreements.Count;
                 //}
             }
             else
@@ -113,17 +139,16 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
                 #pragma warning disable CA1851
                 HashSet<string> itemIds = new HashSet<string>(salesLines.Select(s => s.ItemId).Distinct(), StringComparer.OrdinalIgnoreCase);
                 #pragma warning disable CA1851
-                //using (PricingDiagnostics.PricingDatabaseInstrument instrument = new PricingDiagnostics.PricingDatabaseInstrument("ReadPriceTradeAgreements", itemIds.Count))
-                //{
-                tradeAgreements = pricingDataManager.ReadPriceTradeAgreements(
-                itemIds,
-                InternalPriceContextHelper.GetAllPriceGroupsForPrice(priceContext),
-                priceContext.CustomerAccount,
-                dateRange.Item1,
-                dateRange.Item2,
-                priceContext.CurrencyCode,
-                QueryResultSettings.AllRecords) as ReadOnlyCollection<TradeAgreement>;
-
+            //using (PricingDiagnostics.PricingDatabaseInstrument instrument = new PricingDiagnostics.PricingDatabaseInstrument("ReadPriceTradeAgreements", itemIds.Count))
+            //{
+                    tradeAgreements = pricingDataManager.ReadPriceTradeAgreements(
+                    itemIds,
+                    InternalPriceContextHelper.GetAllPriceGroupsForPrice(priceContext),
+                    priceContext.CustomerAccount,
+                    dateRange.Item1,
+                    dateRange.Item2,
+                    priceContext.CurrencyCode,
+                    QueryResultSettings.AllRecords) as ReadOnlyCollection<TradeAgreement>;
                 //    instrument.ResultCount = tradeAgreements.Count;
                 //}
             }
@@ -153,7 +178,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
 
             foreach (SalesLine salesLine in salesLines)
             {
-                candidateTradeAgreements = FilterTradeAgreementsByInventoryDimensions(tradeAgreements, salesLine, priceContext);
+                candidateTradeAgreements = FilterTradeAgreementsByInventoryDimensions(tradeAgreements, salesLine, priceContext, allStores, channelWarehouseId);
                 candidateTradeAgreements = FilterTradeAgreementsByTrackingDimensions(candidateTradeAgreements, salesLine);
 
                 TradeAgreementPriceLine price = CalculateAgreementPriceLine(
@@ -197,7 +222,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             return agreementsByItemId;
         }
 
-        private static OrgUnitLocation GetMatchedChannel(SalesLine salesLine, IEnumerable<OrgUnitLocation> allStores, ChannelPriceConfiguration channelPriceConfig)
+        private static OrgUnitLocation GetMatchedChannel(SalesLine salesLine, IEnumerable<OrgUnitLocation> allStores, string channelWarehouse)
         {
             {
                 // If salesLine has site specified, use the site and warehouse on salesLine to match trade agreements.
@@ -229,9 +254,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
                 }
 
                 // Else, fall back to use channel store.
-
-                // Else, fall back to use channel store.
-                string channelWarehouse = channelPriceConfig?.InventLocationId;
+                //string channelWarehouse = channelPriceConfig?.InventLocationId;
 
                 OrgUnitLocation channelStore = allStores?.FirstOrDefault(x => string.Equals(x.InventoryLocationId, channelWarehouse, StringComparison.OrdinalIgnoreCase));
 
@@ -243,7 +266,8 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
                 // Otherwise, at least return current channel store.
                 return new OrgUnitLocation()
                 {
-                    InventoryLocationId = channelPriceConfig.InventLocationId,
+                    // InventoryLocationId = channelPriceConfig.InventLocationId,
+                    InventoryLocationId = channelWarehouse,
                 };
             }
         }
@@ -282,13 +306,13 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
         /// <param name="salesLine">Current sales line.</param>
         /// <param name="priceContext">Current price context instance.</param>
         /// <returns>The trade agreements filtered by inventory dimensions.</returns>
-        internal static List<TradeAgreement> FilterTradeAgreementsByInventoryDimensions(IList<TradeAgreement> agreements, SalesLine salesLine, PriceContext priceContext, IEnumerable<OrgUnitLocation> allStores = null, ChannelPriceConfiguration channelPriceConfig = null)
+        internal static List<TradeAgreement> FilterTradeAgreementsByInventoryDimensions(IList<TradeAgreement> agreements, SalesLine salesLine, PriceContext priceContext, IEnumerable<OrgUnitLocation> allStores, string channelWarehouseId)
         {
             List<TradeAgreement> candidateTradeAgreements = new List<TradeAgreement>();
 
             if (salesLine != null)
             {
-                OrgUnitLocation matchedChannel = GetMatchedChannel(salesLine, allStores, channelPriceConfig);
+                OrgUnitLocation matchedChannel = GetMatchedChannel(salesLine, allStores, channelWarehouseId);
                 candidateTradeAgreements = FilterTradeAgreementsByMatchedChannel(agreements, salesLine, matchedChannel);
             }
 
@@ -484,7 +508,6 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             return result;
         }
 
-
         private static PriceResult FindPriceAgreement(
                IList<TradeAgreement> tradeAgreementRules,
                DiscountParameters priceParameters,
@@ -511,7 +534,7 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
                 }
                 else
                 {
-                    return new PriceResult(0m, 0);
+                    return new PriceResult(result.Price * UnitOfMeasureOperations.GetFactorForQuantity(args.UnitOfMeasureConversion, args.Quantity), result.TradeAgreementRecordId, custPriceGroup: result.CustPriceGroup);
                 }
             }
 
@@ -755,8 +778,6 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             return tradeAgreementsOfMasterOrProduct;
         }
 
-
-
         /// <summary>
         /// Find the line discount trade agreement for given criteria.
         /// For line discount trade agreement, the trade agreements are filtered in such an order:
@@ -796,8 +817,9 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             }
 
             SalesLine currentSalesLine = variants.FirstOrDefault();
+            var (allStores, channelWarehouseId) = GetVariablesFromInternalPricetext(priceContext);
 
-            List<TradeAgreement> candidateTradeAgreements = FilterTradeAgreementsByInventoryDimensions(rulesForItem, currentSalesLine, priceContext);
+            List<TradeAgreement> candidateTradeAgreements = FilterTradeAgreementsByInventoryDimensions(rulesForItem, currentSalesLine, priceContext, allStores, channelWarehouseId);
             candidateTradeAgreements = FilterTradeAgreementsByTrackingDimensions(candidateTradeAgreements, currentSalesLine);
 
             List<TradeAgreement> tradeAgreementsOfVariantUnFilteredByQuantity = new List<TradeAgreement>();
@@ -901,7 +923,6 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
             agreements.Sort(sorter.CompareTradeAgreementOrderForExactMatchConsiderSiteWarehouse);
         }
 
-
         /// <summary>
         /// This function searches a list of trade agreements (assumed to be sorted with lowest prices first).
         ///   It calculates the price for each trade agreement, returning the lowest amount, and optionally stopping
@@ -943,7 +964,6 @@ namespace PricingEngine.ContosoTradeAgreementCalculator
 
             return new PriceResult(price, tradeAgreementRecordId, maxRetailPrice, custPriceGroup);
         }
-
         private static List<TradeAgreement> FilterTradeAgreementsByMatchedChannel(IList<TradeAgreement> agreements, SalesLine salesLine, OrgUnitLocation matchedChannel)
         {
             string itemId = salesLine.ItemId;

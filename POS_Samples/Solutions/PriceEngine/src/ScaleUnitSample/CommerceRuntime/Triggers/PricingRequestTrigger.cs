@@ -28,7 +28,6 @@ namespace Contoso.CommerceRuntime.PricingEngine
         public Task OnExecuting(Request request)
         {
             // Register pricing extensions before calling price-related service requests.
-            PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
             return Task.CompletedTask;
         }
 

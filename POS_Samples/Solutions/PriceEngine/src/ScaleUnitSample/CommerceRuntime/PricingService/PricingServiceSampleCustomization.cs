@@ -66,6 +66,9 @@
                 ThrowIf.Null(request.RequestContext, "request.RequestContext");
                 ThrowIf.Null(request.Transaction, "request.Transaction");
 
+
+                PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
+
                 var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
 
                 // response.Transaction contains the transaction information.
@@ -85,6 +88,7 @@
                 // Uncomment to register amount cap discount.
                 // PE.IDiscountPackage package = new DiscountPackageAmountCap(new ChannelDataAccessorDiscountAmountCap(request.RequestContext));
                 // PE.PricingEngineExtensionRepository.RegisterDiscountPackage(package);
+                PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
 
                 var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
 
@@ -102,6 +106,8 @@
                 ThrowIf.Null(request, nameof(request));
                 ThrowIf.Null(request.RequestContext, "request.RequestContext");
                 ThrowIf.Null(request.Transaction, "request.Transaction");
+
+                PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
 
                 var response = await request.RequestContext.Runtime.ExecuteNextAsync<GetPriceServiceResponse>(this, request, request.RequestContext, skipRequestTriggers: false).ConfigureAwait(false);
 
