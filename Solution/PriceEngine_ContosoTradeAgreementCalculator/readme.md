@@ -31,6 +31,12 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 <img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
 
 3. Finally only the CommerceRuntime.dll will be put into this folder:
+  <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
+
+4. Finally, we you debug you can see the custome calculator will be called: <br/>
+
+
+   
    
 
 
