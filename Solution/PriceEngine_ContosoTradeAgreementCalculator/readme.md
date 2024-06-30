@@ -2,6 +2,8 @@
 1. F&O Side<br/>
   <img width="1082" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9500d27f-1242-4a3e-a195-11ae39afddc9">
 
+The X++ extension is like as below<br/>
+
 ```cs
 using CommerceRunTimeDataModel = Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using CrtPriceAndDiscountCalculationParameters = Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.PriceAndDiscountCalculationParameters;
