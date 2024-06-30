@@ -1,4 +1,5 @@
 # This solution demonstrate how to build a customer trade agreement calculator
+0. The official document is :  https://learn.microsoft.com/en-us/dynamics365/commerce/pricing-extensions#csu-and-store-commerce<br/>
 1. F&O Side<br/>
   <img width="1082" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9500d27f-1242-4a3e-a195-11ae39afddc9">
 
@@ -26,7 +27,6 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 
 }
 ```
-
 2.  C# code to create the custom calculator:<br/>
 <img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
 
@@ -122,7 +122,25 @@ And then register the customer calculator: <br/>
       }
   }
 ```
+```cs
+  using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
+  using Contoso.PricingEngine.TradeAgreementCalculator;
 
+  /// <summary>
+  /// Pricing engine initializer.
+  /// </summary>
+  /// <remarks>The sample code of multiple ways of initializing pricing engine. In production code, you need one only.</remarks>
+  public static class PricingEngineExtensionRegister
+  {
+      /// <summary>
+      /// Initializes pricing engine extensions.
+      /// </summary>
+      public static void RegisterPricingEngineExtensions()
+      {
+          PricingEngineExtensionRepository.RegisterPriceTradeAgreementCalculator(new ContosoTradeAgreementCalculator());
+      }
+  }
+```
 3. Then only the CommerceRuntime.dll will be put into this folder:
   <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
 
