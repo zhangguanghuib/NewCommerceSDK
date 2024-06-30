@@ -26,3 +26,11 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 
 }
 ```
+
+2.  C# code to create the custom calculator:<br/>
+<img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
+
+3. Finally only the CommerceRuntime.dll will be put into this folder:
+   
+
+
