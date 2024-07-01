@@ -27,6 +27,11 @@ final class RetailOrderCalculator_ApplicationSuiteExt_Extension
 
 }
 ```
+
+And the X++ project referenced 3 C# assembly, those Target Framework should be .Net Standard 2.0<br/>
+
+<img width="656" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/896947ea-0b58-47c5-b7e6-c0c7f6d216c3">
+
 2.  C# code to create the custom calculator:<br/>
 <img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
 
