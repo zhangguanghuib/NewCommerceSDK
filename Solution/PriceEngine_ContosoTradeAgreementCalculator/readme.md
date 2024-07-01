@@ -161,6 +161,9 @@ The complete code class is: <br/>
 
 6. When we you debug you can see the custome calculator will be called: <br/>
 
+<img width="836" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/55690e1e-2e75-4436-97a3-90424d8e50b7">
+
+
 7. Finally,  you will find it works:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
 
