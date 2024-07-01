@@ -8,7 +8,7 @@ The X++ extension is like as below<br/>
 ```cs
 using CommerceRunTimeDataModel = Microsoft.Dynamics.Commerce.Runtime.DataModel;
 using CrtPriceAndDiscountCalculationParameters = Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.PriceAndDiscountCalculationParameters;
-using PricingEngine.ContosoTradeAgreementCalculator;
+using Contoso.PricingEngine.TradeAgreementCalculator;
 using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
 using System.Collections.Generic;
 using System.Reflection;
