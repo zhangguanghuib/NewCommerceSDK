@@ -40,6 +40,7 @@ Please notice the below code use this line of C# code to register custom Calcula
 ```cs
           PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
 ```
+The complete code class is: <br/>
 ```cs
   public class PricingServiceSampleCustomization : IRequestHandlerAsync
   {
