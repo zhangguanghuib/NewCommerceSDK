@@ -191,8 +191,7 @@ The below method is to be used to register the custom trade agreement calculator
     When change the unit in the sales line from Case to Ea,   the unit price should be converted accoutingly,  that is the price should be 500/12 = 42.17<br/>
 
 10. The code location is<br/>
-   ## The CSU code is at<br/>
-     https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Solution/PriceEngine_ContosoTradeAgreementCalculator/CSU/src/ScaleUnitSample/CommerceRuntime/ContosoTradeAgreementCalculator/ContosoTradeAgreementCalculator.cs
+   ## The CSU code is at<br/>    https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/Solution/PriceEngine_ContosoTradeAgreementCalculator/CSU/src/ScaleUnitSample/CommerceRuntime/ContosoTradeAgreementCalculator/ContosoTradeAgreementCalculator.cs
 
 ## X ++ code is: <br/>
      
