@@ -1,7 +1,7 @@
 # This solution demonstrate how to build a customer trade agreement calculator
-0. The official document is :  https://learn.microsoft.com/en-us/dynamics365/commerce/pricing-extensions#csu-and-store-commerce<br/>
+0. The official document is :<br/>  https://learn.microsoft.com/en-us/dynamics365/commerce/pricing-extensions#csu-and-store-commerce<br/>
 1. F&O Side<br/>
-  <img width="1082" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9500d27f-1242-4a3e-a195-11ae39afddc9">
+  ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/4cf6c1de-21cb-45a1-b31a-670294fefdf7)
 
 The X++ extension is like as below<br/>
 
