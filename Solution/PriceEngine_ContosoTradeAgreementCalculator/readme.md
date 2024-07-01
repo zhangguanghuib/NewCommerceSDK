@@ -181,8 +181,8 @@ The below method is to be used to register the custom trade agreement calculator
 
 
 8.  The configuration is: <br/>
-     There are two unit:  Ea and Case,  the conversion between these two units are 1 Case = 12 Ea
-     The product's Sales Unit is Case,  and Inventory Unit is Ea.
+     There are two unit:  Ea and Case,  the conversion between these two units are 1 Case = 12 Ea<br/>
+     The product's Sales Unit is Case,  and Inventory Unit is Ea.<br/>
      And there us a price trade agreement is, that is to say the price of 1 case is 500 USD<br/>
     ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/db8f6907-b2c5-4ce3-b2d3-a10ed99a1778)
 
