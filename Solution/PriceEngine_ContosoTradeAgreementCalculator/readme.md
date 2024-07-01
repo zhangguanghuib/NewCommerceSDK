@@ -159,10 +159,13 @@ The complete code class is: <br/>
 5. K:\AosService\WebRoot\bin
   <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
 
-6. When we you debug you can see the custome calculator will be called: <br/>
+6. When we you debug you can see the custome calculator will be called in X++ side: <br/>
 
 <img width="836" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/55690e1e-2e75-4436-97a3-90424d8e50b7">
 
+<img width="863" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3ca589e7-5f82-40e9-bee8-ccc13d5654e1">
+
+8.  In C# side, you will see the custom calculator got called:<br/>
 
 7. Finally,  you will find it works:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
