@@ -151,13 +151,17 @@ The complete code class is: <br/>
       }
   }
 ```
-3. Then put the CommerceRuntime.dll will be put into this folder and also in
-4. K:\AosService\WebRoot\bin
+3. Then put the CommerceRuntime.dll will be put into this folder and also in<br/>
+   K:\AosService\PackagesLocalDirectory\ApplicationSuiteExt\bin <br/>
+   And this folder<Br/>
+   <img width="749" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/c85c921c-a17c-45c4-8f07-dc695decc39b">
+   
+5. K:\AosService\WebRoot\bin
   <img width="804" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/e7ae9b2d-f0d1-4826-bf2b-25d96d3228bf">
 
-5. When we you debug you can see the custome calculator will be called: <br/>
+6. When we you debug you can see the custome calculator will be called: <br/>
 
-6. Finally,  you will find it works:
+7. Finally,  you will find it works:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
 
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/9328629c-0b41-4b85-a004-b877fa6b62a5)
