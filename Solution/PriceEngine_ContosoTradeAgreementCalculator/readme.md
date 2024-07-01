@@ -36,6 +36,10 @@ And the X++ project referenced 3 C# assembly, those Target Framework should be .
 <img width="1227" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/b940c571-1b37-4cd3-8481-6032747dbad1">
 
 And then register the customer calculator: <br/>
+Please notice the below code use this line of C# code to register custom Calculator<br/>
+```cs
+          PricingEngineExtensionRegister.RegisterPricingEngineExtensions();
+```
 ```cs
   public class PricingServiceSampleCustomization : IRequestHandlerAsync
   {
