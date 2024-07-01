@@ -166,6 +166,11 @@ The complete code class is: <br/>
 <img width="863" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/3ca589e7-5f82-40e9-bee8-ccc13d5654e1">
 
 8.  In C# side, you will see the custom calculator got called:<br/>
+   <img width="1228" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8b56056c-e021-4ac6-bd28-f6c1a2b8c948">
+
+   and then you can see the Price conversion happend based on the unit on the sales line:
+
+<img width="1228" alt="image" src="https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/2d0030b4-a003-4e26-973a-9f57d15e37df">
 
 7. Finally,  you will find it works:
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/f9b73705-cc50-4fbc-b6f9-cdec2f765694)
