@@ -132,6 +132,8 @@ The complete code class is: <br/>
       }
   }
 ```
+
+The below method is to be used to register the custom trade agreement calculator:<br/>
 ```cs
   using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
   using Contoso.PricingEngine.TradeAgreementCalculator;
