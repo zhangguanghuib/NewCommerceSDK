@@ -41,6 +41,21 @@
   }
 ```
 
+How it works?<br/>
+1. Click Return Transaction button:<br/>
+![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/71c70491-c675-4f01-99c1-b2d2f3f24d02)<br/>
+
+2. I will jump to the returnable products view?<br/>
+   Choose the first line to return:
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/7ed62d49-7bb9-49c7-a729-0fc30942b91b)
+
+3.  Finally it will go to the cart view like below<br/>
+   ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/8d0a3215-212e-42c7-9cab-24a2432b109f)
+
+
+
+
+
 
 
 
