@@ -31,6 +31,10 @@
       },
       "triggers": [
         {
+          "triggerType": "ApplicationSuspend",
+          "modulePath": "TriggerHandlers/ApplicationSuspendTrigger"
+        },
+        {
           "triggerType": "PostVoidTransaction",
           "modulePath": "TriggerHandlers/PostVoidTransactionTrigger"
         },

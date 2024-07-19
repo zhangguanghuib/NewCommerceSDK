@@ -11,14 +11,28 @@ export default class PostLogOnTrigger extends Triggers.PostLogOnTrigger {
     public execute(options: Triggers.IPostLogOnTriggerOptions): Promise<any> {
         this.context.logger.logInformational("Executing PostLogOnTrigger with options " + JSON.stringify(options) + ".");
 
-        let promise = new Promise((resolve, reject) => {
-            resolve("Done");
-        });
+        //let promise = new Promise((resolve, reject) => {
+        //    resolve("Done");
+        //});
 
-        promise.then((value: any) => {
-            this.context.logger.logInformational("Promise resolved");
-        });
+        //promise.then((value: any) => {
+        //    this.context.logger.logInformational("Promise resolved");
+        //});
 
-        return promise;
+        //window.addEventListener('beforeunload', function (e) {
+        //    e.preventDefault();
+        //    e.returnValue = '';
+        //});
+
+        //setTimeout(() => {
+        //    document.dispatchEvent(new KeyboardEvent('keydown', {
+        //        key: 'Enter',
+        //        altKey: true,
+        //        bubbles: true,
+        //        metaKey: true
+        //    }));
+        //}, 1000);
+        
+        return Promise.resolve();
     }
 }
