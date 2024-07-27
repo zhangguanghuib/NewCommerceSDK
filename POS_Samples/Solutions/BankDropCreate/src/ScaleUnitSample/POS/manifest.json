@@ -77,6 +77,13 @@
           "phonePageName": "ContosoDenominationDetailView",
           "viewDirectory": "Views/DenominationDetail/",
           "viewControllerPath": "Views/DenominationDetail/ContosoDenominationDetailView"
+        },
+        {
+          "title": "AVACartsView",
+          "pageName": "AVACartsView",
+          "phonePageName": "AVACartsView",
+          "viewDirectory": "Views/AVACartsView/",
+          "viewControllerPath": "Views/AVACartsView/AVACartsView"
         }
       ]
     }
