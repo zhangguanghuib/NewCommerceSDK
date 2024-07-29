@@ -49,6 +49,13 @@
         }
       ],
       "views": {
+        "AddressAddEditView": {
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/AddressAddEditView/HiddenAddressFieldsCommand"
+            }
+          ]
+        },
         "CartView": {
           "viewController": { "modulePath": "Extend/ViewExtensions/Cart/CartViewController" },
           "controlsConfig": {
@@ -61,17 +68,6 @@
             ]
           }
         },
-        "SearchView": {
-          "productAppBarCommands": [
-            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" },
-            { "modulePath": "Extend/ViewExtensions/Search/CreateTenderDeclarationCommand" }
-          ]
-        },
-        "CustomerDetailsView": {
-          "appBarCommands": [
-            { "modulePath": "ViewExtensions/CustomerDetails/CustomerCrossLoyaltyCommand" }
-          ]
-        },
         "CustomerAddEditView": {
           "controlsConfig": {
             "customControls": [
@@ -83,12 +79,9 @@
             ]
           }
         },
-        "ShowJournalView": {
-          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],
+        "CustomerDetailsView": {
           "appBarCommands": [
-            {
-              "modulePath": "Extend/ViewExtensions/ShowJournal/DisableEmailReceiptCommand"
-            }
+            { "modulePath": "ViewExtensions/CustomerDetails/CustomerCrossLoyaltyCommand" }
           ]
         },
         "FulfillmentLineView": {
@@ -98,16 +91,12 @@
             }
           ]
         },
-        "SimpleProductDetailsView": {
-          "controlsConfig": {
-            "customControls": [
-              {
-                "controlName": "productAvailabilityPanel",
-                "htmlPath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
-                "modulePath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
-              }
-            ]
-          }
+        "InventoryDocumentListView": {
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/InventoryDocumentListView/DisableCreateNewBtn"
+            }
+          ]
         },
         "PaymentView": {
           "appBarCommands": [
@@ -119,19 +108,31 @@
             }
           ]
         },
-        "AddressAddEditView": {
-          "appBarCommands": [
-            {
-              "modulePath": "Extend/ViewExtensions/AddressAddEditView/HiddenAddressFieldsCommand"
-            }
+        "SearchView": {
+          "productAppBarCommands": [
+            { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" },
+            { "modulePath": "Extend/ViewExtensions/Search/CreateTenderDeclarationCommand" }
           ]
         },
-        "InventoryDocumentListView": {
+        "ShowJournalView": {
           "appBarCommands": [
             {
-              "modulePath": "Extend/ViewExtensions/InventoryDocumentListView/DisableCreateNewBtn"
+              "modulePath": "Extend/ViewExtensions/ShowJournal/DisableEmailReceiptCommand"
             }
-          ]
+          ],
+          "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],
+          "transactionListConfiguration": { "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns" }
+        },
+        "SimpleProductDetailsView": {
+          "controlsConfig": {
+            "customControls": [
+              {
+                "controlName": "productAvailabilityPanel",
+                "htmlPath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel.html",
+                "modulePath": "Extend/ViewExtensions/SimpleProductDetails/ProductAvailabilityPanel"
+              }
+            ]
+          }
         }
       }
     },
