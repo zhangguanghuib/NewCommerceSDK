@@ -1,5 +1,6 @@
 ﻿import * as Views from "PosApi/Create/Views";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import ko from "knockout";
 
 ko.bindingHandlers.qrcode = {
@@ -28,7 +29,7 @@ ko.bindingHandlers.qrcode = {
 
 export default class VoidCartLineView extends Views.CustomViewControllerBase {
     public qrText: ko.Observable<string>;
-
+    public _selectedJournal: ProxyEntities.SalesOrder;
     /**
      * Creates a new instance of the VoidCartLineView class.
      * @param {Views.ICustomViewControllerContext} context The custom view controller context.
@@ -37,8 +38,10 @@ export default class VoidCartLineView extends Views.CustomViewControllerBase {
     constructor(context: Views.ICustomViewControllerContext, options?: any) {
         // Do not save in history
         super(context);
+
+        this._selectedJournal = options;
         this.state.title = "Show Invoice QR Code";
-        this.qrText = ko.observable("https://www.microsoft.com");
+        this.qrText = ko.observable("");
     }
 
     /**
@@ -46,7 +49,8 @@ export default class VoidCartLineView extends Views.CustomViewControllerBase {
      * @param {HTMLElement} element DOM element.
      */
     public onReady(element: HTMLElement): void {
-  
+
+        this.qrText(this.getInvoiceQRCode(this._selectedJournal));
         ko.applyBindings(this, element);
     }
 
@@ -55,5 +59,17 @@ export default class VoidCartLineView extends Views.CustomViewControllerBase {
      */
     public dispose(): void {
         ObjectExtensions.disposeAllProperties(this);
+    }
+
+
+    private getInvoiceQRCode(row: ProxyEntities.SalesOrder): string {
+        let cps: Array<ProxyEntities.CommerceProperty>
+            = row.ExtensionProperties.filter((cp) => cp.Key === "QRCode");
+
+        if (cps.length >= 1) {
+            let cp: ProxyEntities.CommerceProperty = cps[0];
+            return cp.Value.StringValue;
+        }
+        return "";
     }
 }

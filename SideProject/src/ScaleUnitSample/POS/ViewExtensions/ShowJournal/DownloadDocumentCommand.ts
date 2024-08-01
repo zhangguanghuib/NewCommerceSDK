@@ -2,6 +2,7 @@
 import * as ShowJournalView from "PosApi/Extend/Views/ShowJournalView";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
+import { StringExtensions } from "PosApi/TypeExtensions";
 
 export default class DownloadDocumentCommand extends ShowJournalView.ShowJournalExtensionCommandBase {
     public _selectedJournal: ProxyEntities.SalesOrder;
@@ -59,12 +60,11 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
      * Executes the command.
      */
     protected execute(): void {
-        //this.isProcessing = true;
-        //window.setTimeout((): void => {
-        //    this.isProcessing = false;
-        //}, 2000);
-
-        this.context.navigator.navigate("VoidCartLineView");
+        this.isProcessing = true;
+        window.setTimeout((): void => {
+            this.context.navigator.navigate("VoidCartLineView", this._selectedJournal);
+            this.isProcessing = false;
+        }, 0);
     }
 
     /**
@@ -75,6 +75,8 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
         this._selectedJournal = data.salesOrder;
         this._products = data.products;
         this._customer = data.customer;
-        this.canExecute = true;
+        if (!StringExtensions.isEmptyOrWhitespace(this._selectedJournal.ReceiptId)) {
+            this.canExecute = true;
+        }
     }
 }

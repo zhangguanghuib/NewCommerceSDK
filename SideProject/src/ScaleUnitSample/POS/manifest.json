@@ -31,7 +31,8 @@
             {
               "modulePath": "ViewExtensions/ShowJournal/DownloadDocumentCommand"
             }
-          ]
+          ],
+          "transactionListConfiguration": { "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns" }
         }
       }
     },
