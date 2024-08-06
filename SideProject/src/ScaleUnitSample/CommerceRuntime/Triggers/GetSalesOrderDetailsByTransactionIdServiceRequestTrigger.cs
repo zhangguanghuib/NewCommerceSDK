@@ -25,9 +25,12 @@
 
             GetSalesOrderDetailsServiceResponse getSalesOrderDetailsServiceResponse = (GetSalesOrderDetailsServiceResponse)response;
             GetSalesOrderDetailsByTransactionIdServiceRequest getSalesOrderDetailsByTransactionIdServiceRequest = (GetSalesOrderDetailsByTransactionIdServiceRequest)request;
-            getSalesOrderDetailsServiceResponse.SalesOrder.ExtensionProperties.Add(
-                new CommerceProperty("QRCode", 
-                await GetQrCodeByTransactionId(getSalesOrderDetailsByTransactionIdServiceRequest.TransactionId).ConfigureAwait(false)));
+            if (getSalesOrderDetailsServiceResponse.SalesOrder != null)
+            {
+                getSalesOrderDetailsServiceResponse.SalesOrder.ExtensionProperties.Add(
+                    new CommerceProperty("QRCode",
+                    await GetQrCodeByTransactionId(getSalesOrderDetailsByTransactionIdServiceRequest.TransactionId).ConfigureAwait(false)));
+            }
 
             await Task.CompletedTask.ConfigureAwait(false);
         }
