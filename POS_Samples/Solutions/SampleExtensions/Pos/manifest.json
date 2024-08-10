@@ -98,6 +98,20 @@
             }
           ]
         },
+        "InventoryLookupMatrixView": {
+          "cellInteractionMenu": {
+            "customCommands": [
+              {
+                "modulePath": "Extend/ViewExtensions/InventoryLookupMatrix/MoreDetailsMenuCommand"
+              }
+            ]
+          }
+        },
+        "InventoryLookupView": {
+          "inventoryByStoreListConfiguration": {
+            "modulePath": "Extend/ViewExtensions/InventoryLookup/CustomInventoryByStoreListColumns"
+          }
+        },
         "PaymentView": {
           "appBarCommands": [
             {
@@ -118,6 +132,9 @@
           "appBarCommands": [
             {
               "modulePath": "Extend/ViewExtensions/ShowJournal/DisableEmailReceiptCommand"
+            },
+            {
+              "modulePath": "Extend/ViewExtensions/ShowJournal/DownloadDocumentCommand"
             }
           ],
           "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],

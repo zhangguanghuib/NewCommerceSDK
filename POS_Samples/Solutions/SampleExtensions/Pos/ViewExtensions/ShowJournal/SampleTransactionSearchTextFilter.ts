@@ -13,5 +13,7 @@ export default class SampleTransactionSearchTextFilter extends CustomTextSearchF
 
         this.id = "SampleTransactionSearchTextFilter";
         this.labelValue = "Text Search Filter Label";
+
+        
     }
 }
