@@ -74,8 +74,6 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
         let CORRELATION_ID: string = this.context.logger.getNewCorrelationId();
 
         this.isProcessing = true;
-
-        this.
         
         let request: GetSalesOrderDetailsByTransactionIdClientRequest<GetSalesOrderDetailsByTransactionIdClientResponse> =
             new GetSalesOrderDetailsByTransactionIdClientRequest(this._selectedJournal.Id, ProxyEntities.SearchLocation.Local, CORRELATION_ID);

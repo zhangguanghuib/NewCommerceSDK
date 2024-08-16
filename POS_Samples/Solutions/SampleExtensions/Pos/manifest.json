@@ -213,6 +213,11 @@
           "operationId": "5002",
           "operationRequestFactoryPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceFactory",
           "operationRequestHandlerPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceHandler"
+        },
+        {
+          "operationId": "5006",
+          "operationRequestFactoryPath": "Create/Operations/AVACViewPaymTender/AVACViewPaymTenderOperationRequestFactory",
+          "operationRequestHandlerPath": "Create/Operations/AVACViewPaymTender/AVACViewPaymTenderOperationRequestHandler"
         }
       ]
     }
