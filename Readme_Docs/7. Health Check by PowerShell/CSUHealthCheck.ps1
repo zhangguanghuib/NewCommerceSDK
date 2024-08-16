@@ -1,4 +1,4 @@
-﻿$computerName = $env:COMPUTERNAME
+﻿$computerName = $env:COMPUTERNAME #should be the certificate name if computer name different from Certificate name
 $port = "446"
 $baseUrl = "https://$($computerName):$($port)/RetailServer"
 $healthcheckEndpoint = "/healthcheck?testname=ping"
