@@ -37,7 +37,7 @@
 
         private async Task<String> GetQrCodeByTransactionId(string transactionId)
         {
-            return await Task.FromResult("https://www.microsoft.com").ConfigureAwait(false); ;
+            return await Task.FromResult("https://www.bing.com").ConfigureAwait(false); ;
         }
 
         public Task OnExecuting(Request request)

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="DataService\" />
+    <Folder Include="ExternalJSDependencies\" />
   </ItemGroup>
   
   <Target Name="ContentIncludeKnockoutLibrary" BeforeTargets="AssignTargetPaths" DependsOnTargets="RunResolvePackageDependencies">
@@ -30,4 +31,16 @@
       <Content Include="$(KnockoutjsFile)"></Content>
     </ItemGroup>
   </Target>
+
+  <Target Name="ContentIncludeQRCodeLibrary" BeforeTargets="AssignTargetPaths">
+    <PropertyGroup>
+      <QRCodeLibraryFilePath>ExternalJSDependencies/qrcode.min</QRCodeLibraryFilePath>
+      <QRCodeFile>Libraries/qrcode.min.js</QRCodeFile>
+    </PropertyGroup>
+    <Copy SourceFiles="$(QRCodeLibraryFilePath)" DestinationFiles="$(QRCodeFile)" SkipUnchangedFiles="false" />
+    <ItemGroup>
+      <Content Include="$(QRCodeFile)"></Content>
+    </ItemGroup>
+  </Target>
+  
 </Project>

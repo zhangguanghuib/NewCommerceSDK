@@ -85,14 +85,6 @@ namespace CommerceRuntime.Triggers
 
         public async Task GetPaymResponse(SaveTenderLineRequest saveTenderLineRequest)
         {
-            if (saveTenderLineRequest.TenderLine.TenderTypeId == "1")
-            {
-                string errorMessage = "退款失败：找不到原始付款";
-
-                throw new CommerceException("Microsoft_Dynamics_Commerce_CustomId1", ExceptionSeverity.Warning, null, "Custom error")
-                { LocalizedMessage = errorMessage, LocalizedMessageParameters = new object[] { } };
-            }
-
             await Task.CompletedTask.ConfigureAwait(false);
         }
     }

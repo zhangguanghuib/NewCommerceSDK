@@ -10,6 +10,11 @@
       "alias": "knockout",
       "format": "amd",
       "modulePath": "Libraries/knockout"
+    },
+    {
+      "alias": "qrcode",
+      "format": "amd",
+      "modulePath": "Libraries/qrcode.min"
     }
   ],
   "components": {
@@ -30,6 +35,12 @@
           "appBarCommands": [
             {
               "modulePath": "ViewExtensions/ShowJournal/DownloadDocumentCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/ShowJournal/ShowInvoiceQRCode"
+            },
+            {
+              "modulePath": "ViewExtensions/ShowJournal/GetQRInvoiceCode"
             }
           ],
           "transactionListConfiguration": { "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns" }
@@ -72,6 +83,13 @@
           "phonePageName": "VoidCartLineView",
           "viewDirectory": "Create/Views/Samples/",
           "viewControllerPath": "Create/Views/Samples/VoidCartLineView"
+        },
+        {
+          "title": "Get Invoice QRCode View",
+          "pageName": "GetInvoiceQRCodeView",
+          "phonePageName": "GetInvoiceQRCodeView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/GetInvoiceQRCodeView"
         }
       ]
     }

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .GetInvoiceQRCodeView {
+            text-align: center; 
+        }
+
+        #transactionInfo {
+            margin-bottom: 5px;
+            margin-top: 50px;
+            font-size: 1.5rem; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="GetInvoiceQRCodeView">
+        <div class="h4" id="transactionInfo" data-bind="text: qrText"></div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="height500 width500">
+                <img data-bind="attr: { src: imageBase64 }" class="height500 width500" alt="Invoice QR Code" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

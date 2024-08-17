@@ -5,6 +5,9 @@
     "paths": {
       "knockout": [
         "Libraries/knockout"
+      ],
+      "qrcode": [
+        "Libraries/qrcode.min"
       ]
     },
     "noImplicitAny": false,

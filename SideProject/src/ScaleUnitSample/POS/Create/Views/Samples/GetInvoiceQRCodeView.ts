@@ -1,36 +1,14 @@
 ﻿import * as Views from "PosApi/Create/Views";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+import { Entities } from "../../../DataService/DataServiceEntities.g";
 import ko from "knockout";
-//import QRCode from "qrcode";
-
-ko.bindingHandlers.qrcode = {
-    init: function (element, valueAccessor) {
-        // Create the QRCode object
-        const qrCode = new QRCode(element, {
-            text: ko.unwrap(valueAccessor()),
-            width: 512,
-            height: 512,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-
-        // Update the QRCode when the value changes
-        ko.computed(() => {
-            const value = ko.unwrap(valueAccessor());
-            qrCode.clear();  // Clear the current QR code
-            qrCode.makeCode(value);  // Generate a new QR code with the new value
-        });
-
-        // Prevent Knockout from updating the DOM element itself
-        return { controlsDescendantBindings: true };
-    }
-};
+import { StoreOperations } from "../../../DataService/DataServiceRequests.g";
 
 export default class VoidCartLineView extends Views.CustomViewControllerBase {
     public qrText: ko.Observable<string>;
     public _selectedJournal: ProxyEntities.SalesOrder;
+     public imageBase64: ko.Observable<string>;
     /**
      * Creates a new instance of the VoidCartLineView class.
      * @param {Views.ICustomViewControllerContext} context The custom view controller context.
@@ -41,8 +19,9 @@ export default class VoidCartLineView extends Views.CustomViewControllerBase {
         super(context);
 
         this._selectedJournal = options;
-        this.state.title = "Show Invoice QR Code";
+        this.state.title = "Get Invoice QR Code";
         this.qrText = ko.observable("");
+        this.imageBase64 = ko.observable("");
     }
 
     /**
@@ -51,7 +30,22 @@ export default class VoidCartLineView extends Views.CustomViewControllerBase {
      */
     public onReady(element: HTMLElement): void {
 
-        this.qrText(this.getInvoiceQRCode(this._selectedJournal));
+        this.qrText(`Scan the below QR Code to get the invoice Receipt ${this._selectedJournal.ReceiptId}`);
+
+        let qrCodeUrl: string = this.getInvoiceQRCode(this._selectedJournal);
+
+        let GetQRCodeRequest: StoreOperations.GetQRCodeBase64StringRequest<StoreOperations.GetQRCodeBase64StringResponse>
+            = new StoreOperations.GetQRCodeBase64StringRequest(qrCodeUrl);
+
+        this.context.runtime.executeAsync(GetQRCodeRequest)
+            .then((result: ClientEntities.ICancelableDataResult<StoreOperations.GetQRCodeBase64StringResponse>): Promise<void> => {
+                if (!result.canceled) {
+                    this.imageBase64("data:image/png;base64," + result.data.result);
+                }
+                return Promise.resolve();
+            });
+
+        //this.qrText(this.getInvoiceQRCode(this._selectedJournal));
         ko.applyBindings(this, element);
     }
 
