@@ -5,7 +5,7 @@ $deployScript = ".\deployCSU.ps1"
 $healthCheckScript = ".\CSUHealthCheck.ps1"
 
 # Execute the first script
-#& $deployScript
+& $deployScript
 
 # Execute the second script after the first one completes
 & $healthCheckScript
