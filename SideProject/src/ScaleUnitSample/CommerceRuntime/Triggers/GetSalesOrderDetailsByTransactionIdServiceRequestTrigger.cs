@@ -37,7 +37,7 @@
 
         private async Task<String> GetQrCodeByTransactionId(string transactionId)
         {
-            return await Task.FromResult("https://www.bing.com").ConfigureAwait(false); ;
+            return await Task.FromResult("https://test-api-open.chinaums.com/fapiao-portal/view/index.html#/invoicedetail?qrCodeId=20240816af3dbb9374fa4fa5babecf7c944089ca").ConfigureAwait(false); ;
         }
 
         public Task OnExecuting(Request request)

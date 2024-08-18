@@ -25,7 +25,7 @@
             EntityDataServiceResponse<Transaction> searchJournalTransactions = (EntityDataServiceResponse<Transaction>)response;
             foreach (Transaction transaction in searchJournalTransactions.PagedEntityCollection.Results)
             {
-                transaction.ExtensionProperties.Add(new CommerceProperty("QRCode", "https://www.bing.com"));
+                transaction.ExtensionProperties.Add(new CommerceProperty("QRCode", "https://test-api-open.chinaums.com/fapiao-portal/view/index.html#/invoicedetail?qrCodeId=20240816af3dbb9374fa4fa5babecf7c944089ca"));
                 transaction.ExtensionProperties.Add(new CommerceProperty("QRCodeId", "Inv0001"));
             }
 
