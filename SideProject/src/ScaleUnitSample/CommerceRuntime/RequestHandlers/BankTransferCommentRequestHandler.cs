@@ -50,6 +50,10 @@
             string cartId = setBankTransferCommentToTenderLineRequest.SaveTenderLineRequest.CartId;
             decimal lineNum = setBankTransferCommentToTenderLineRequest.SaveTenderLineRequest.TenderLine.LineNumber;
             string bankTransferComment = setBankTransferCommentToTenderLineRequest.BankTransferComment;
+            long channel = setBankTransferCommentToTenderLineRequest.RequestContext.GetPrincipal().ChannelId;
+            string terminal = setBankTransferCommentToTenderLineRequest.RequestContext.GetTerminal().TerminalId;
+            string store = setBankTransferCommentToTenderLineRequest.RequestContext.GetOrgUnit().OrgUnitNumber;
+            string dataAreaId = setBankTransferCommentToTenderLineRequest.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
 
             bool updateSuccess = false;
             using (var databaseContext = new SqlServerDatabaseContext(setBankTransferCommentToTenderLineRequest.RequestContext))
