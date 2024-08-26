@@ -41,7 +41,7 @@ export default class GasPumpStatusPackingItem extends CustomPackingItem {
     }
 
     protected init(state: Commerce.Extensibility.ICustomHeaderPackingItemState): void {
-        this.visible = true;
+        this.visible = false;
     }
 
     public dispose(): void {

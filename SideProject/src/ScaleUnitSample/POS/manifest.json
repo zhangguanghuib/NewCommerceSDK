@@ -25,7 +25,14 @@
       "stringResourcesFileName": "resources.resjson"
     },
     "extend": {
-      "views": {
+      "triggers": [
+        {
+          "triggerType": "PrePayment",
+          "modulePath": "TriggerHandlers/PrePaymentTrigger"
+        }
+      ],
+      "views":
+      {
         "SearchView": {
           "productAppBarCommands": [
             { "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand" }

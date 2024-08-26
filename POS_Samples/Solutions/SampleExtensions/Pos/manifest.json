@@ -13,7 +13,7 @@
   ],
   "components": {
     "resources": {
-      "supportedUICultures": [ "de", "de-CH", "en-US", "fr", "fr-CH" ],
+      "supportedUICultures": [ "de", "de-CH", "en-US", "fr", "fr-CH", "zh-Hans" ],
       "fallbackUICulture": "en-US",
       "culturesDirectoryPath": "Resources/Strings",
       "stringResourcesFileName": "resources.resjson"

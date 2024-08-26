@@ -30,8 +30,9 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
         super(context);
 
         this.id = "downloadDocumentCommand";
-        this.label = "Download document";
+        this.label = context.resources.getString("string_0");;
         this.extraClass = "iconInvoice";
+        this.isVisible = true;
 
         this.journalSelectionHandler = (data: ShowJournalView.ShowJournalJournalSelectedData): void => {
             this._journalChanged(data);
@@ -45,17 +46,17 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
         };
 
         this.receiptSelectionHandler = (data: ShowJournalView.ShowJournalReceiptSelectedData): void => {
-            this.isVisible = false;
+         /*   this.isVisible = false;*/
         };
 
         this.receiptSelectionClearedHandler = (): void => {
-            this.isVisible = true;
+            //this.isVisible = true;
         };
 
         this.journalTransactionsLoadedHandler = (data: ShowJournalView.ShowJournalJournalTransactionsLoadedData): void => {
-            this.isVisible = this._mode === ClientEntities.ShowJournalMode.ShowJournal;
-            this.context.logger.logInformational("Executing journalTransactionsLoadedHandler for DownloadDocumentCommand: "
-                + JSON.stringify(data) + ".");
+            //this.isVisible = this._mode === ClientEntities.ShowJournalMode.ShowJournal;
+            //this.context.logger.logInformational("Executing journalTransactionsLoadedHandler for DownloadDocumentCommand: "
+            //    + JSON.stringify(data) + ".");
         };
     }
 
@@ -65,6 +66,7 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
      */
     protected init(state: ShowJournalView.IShowJournalExtensionCommandState): void {
         this._mode = state.mode;
+       
     }
 
     /**

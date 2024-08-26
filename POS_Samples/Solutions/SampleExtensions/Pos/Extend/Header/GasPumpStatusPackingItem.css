@@ -8,6 +8,7 @@
     display: none;
 }
 
-##districtTabRead + #parent + #parent + #parent {
+#districtTabRead + #parent + #parent + #parent {
     display: none;
-} 
+}
+

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommerceRuntime.Triggers
 {
+    using Contoso.CommerceRuntime.Messages;
     //using Bucherer.StoreCommerce.CommerceRuntime.Entities.DataModel;
     //using Bucherer.StoreCommerce.CommerceRuntime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime;
@@ -28,6 +29,10 @@ namespace CommerceRuntime.Triggers
     using Response = Microsoft.Dynamics.Commerce.Runtime.Messages.Response;
     public class SaveTenderLineRequestTrigger : IRequestTriggerAsync
     {
+
+        private const string BankTransferTenderTypeId = "13";
+        private const string BankTransfer = "BankTransfer";
+
         /// <summary>
         /// Gets the supported requests for this trigger.
         /// </summary>
@@ -52,23 +57,8 @@ namespace CommerceRuntime.Triggers
 
             SaveTenderLineRequest saveTenderLineRequest = request as SaveTenderLineRequest;
 
-            if (saveTenderLineRequest != null
-                && saveTenderLineRequest.TenderLine != null
-                && saveTenderLineRequest.TenderLine.TenderTypeId == "1")
-            {
-                await GetPaymResponse(saveTenderLineRequest).ConfigureAwait(false);       
-            }
-            else
-            {
-                string errorMessage = "银联：付款失败";
-
-                throw new CommerceException("Microsoft_Dynamics_Commerce_CustomId1", ExceptionSeverity.Warning, null, "Custom error")
-                { LocalizedMessage = errorMessage, LocalizedMessageParameters = new object[] { } };
-            }
-
             await Task.CompletedTask.ConfigureAwait(false);
         }
-
 
         /// <summary>
         /// Post trigger code to retrieve extension properties.
@@ -80,12 +70,28 @@ namespace CommerceRuntime.Triggers
             ThrowIf.Null(request, "request");
             ThrowIf.Null(response, "response");
 
+            SaveTenderLineResponse saveTenderLineResponse = response as SaveTenderLineResponse;
+            SaveTenderLineRequest saveTenderLineRequest = request as SaveTenderLineRequest;
+
+            if (saveTenderLineRequest.TenderLine != null && saveTenderLineRequest.TenderLine.TenderTypeId.Equals(BankTransferTenderTypeId))
+            {
+                Cart cart = saveTenderLineResponse.Cart;
+                if (cart != null && cart.ExtensionProperties != null )
+                {
+                     CommerceProperty commerceProperty =  
+                        cart.ExtensionProperties.FirstOrDefault<CommerceProperty>(p => p.Key.Equals(BankTransfer));
+
+                    if(commerceProperty != null && !String.IsNullOrEmpty(commerceProperty.Value.StringValue))
+                    {
+                        string bankTransferComment = commerceProperty.Value.StringValue;
+                        SetBankTransferCommentToTenderLineRequest setBankTransferCommentToTenderLineRequest = new SetBankTransferCommentToTenderLineRequest(saveTenderLineRequest, bankTransferComment);
+                        SetBankTransferCommentToTenderLineResponse setBankTransferCommentToTenderLineResponse = await request.RequestContext.ExecuteAsync<SetBankTransferCommentToTenderLineResponse>(setBankTransferCommentToTenderLineRequest).ConfigureAwait(false);
+                    }
+                }
+            }
+
             await Task.CompletedTask.ConfigureAwait(false);
         }
 
-        public async Task GetPaymResponse(SaveTenderLineRequest saveTenderLineRequest)
-        {
-            await Task.CompletedTask.ConfigureAwait(false);
-        }
     }
 }

@@ -15,12 +15,15 @@ export default class DisableEmailReceiptCommand extends JournalView.ShowJournalE
     }
 
     protected init(state: JournalView.IShowJournalExtensionCommandState): void {
-        const buttons = document.querySelectorAll('#HomeView_showEmailReceiptsMenuCommand');
+        //const buttons = document.querySelectorAll('#HomeView_showEmailReceiptsMenuCommand');
 
-        buttons.forEach((button: Element) => {
-            let btnHtml: HTMLButtonElement = button as HTMLButtonElement;
-            btnHtml.style.display = 'none';
-        });
+        //buttons.forEach((button: Element) => {
+        //    let btnHtml: HTMLButtonElement = button as HTMLButtonElement;
+        //    btnHtml.style.display = 'none';
+        //});
+
+        const emailReceiptsMenu: HTMLButtonElement = document.querySelector('#HomeView_showEmailReceiptsMenuCommand') as HTMLButtonElement;
+        emailReceiptsMenu.style.display = 'none';
     }
 
     protected execute(): void {
