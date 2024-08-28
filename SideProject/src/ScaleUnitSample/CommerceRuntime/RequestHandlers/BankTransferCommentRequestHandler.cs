@@ -13,6 +13,7 @@
     using Contoso.CommerceRuntime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+    using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
 
     public class BankTransferCommentRequestHandler : IRequestHandlerAsync
     {
@@ -50,7 +51,7 @@
             string cartId = setBankTransferCommentToTenderLineRequest.SaveTenderLineRequest.CartId;
             decimal lineNum = setBankTransferCommentToTenderLineRequest.SaveTenderLineRequest.TenderLine.LineNumber;
             string bankTransferComment = setBankTransferCommentToTenderLineRequest.BankTransferComment;
-            long channel = setBankTransferCommentToTenderLineRequest.RequestContext.GetPrincipal().ChannelId;
+            long channelId = setBankTransferCommentToTenderLineRequest.RequestContext.GetPrincipal().ChannelId;
             string terminal = setBankTransferCommentToTenderLineRequest.RequestContext.GetTerminal().TerminalId;
             string store = setBankTransferCommentToTenderLineRequest.RequestContext.GetOrgUnit().OrgUnitNumber;
             string dataAreaId = setBankTransferCommentToTenderLineRequest.RequestContext.GetChannelConfiguration().InventLocationDataAreaId;
@@ -59,10 +60,13 @@
             using (var databaseContext = new SqlServerDatabaseContext(setBankTransferCommentToTenderLineRequest.RequestContext))
             {
                 ParameterSet parameters = new ParameterSet();
-                parameters["@s_cartId"] = cartId;
-                parameters["@d_lineNum"] = lineNum;
-                parameters["@s_bankTransferComment"] = bankTransferComment;
-                
+                parameters["@b_CHANNEL"] = channelId;
+                parameters["@s_STORE"] = store;
+                parameters["@s_TERMINAL"] = terminal;
+                parameters["@s_DATAAREAID"] = dataAreaId;
+                parameters["@s_TRANSACTIONID"] = cartId;
+                parameters["@n_LINENUM"] = lineNum;
+                parameters["@s_BANKTRANSFERCOMMENT"] = bankTransferComment;              
                 int sprocErrorCode =
                     await databaseContext
                     .ExecuteStoredProcedureNonQueryAsync("[ext].[INSERTCONTOSORETAILTRANSACTIONPAYMENTTRANS]", parameters, setBankTransferCommentToTenderLineRequest.QueryResultSettings)
@@ -72,10 +76,12 @@
             }
 
 
-            Cart cart = null;
+            CartSearchCriteria cartSearchCriteria = new CartSearchCriteria(cartId);
+            GetCartServiceRequest getCartServiceRequest = new GetCartServiceRequest(cartSearchCriteria, QueryResultSettings.SingleRecord);
+            GetCartServiceResponse getCartServiceResponse = await setBankTransferCommentToTenderLineRequest.RequestContext.ExecuteAsync<GetCartServiceResponse>(getCartServiceRequest).ConfigureAwait(false);
+            var cart = getCartServiceResponse.Carts.SingleOrDefault<Cart>();
 
             return new SetBankTransferCommentToTenderLineResponse(cart);
-
         }
     }
 }

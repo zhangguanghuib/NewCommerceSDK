@@ -29,6 +29,14 @@
         {
           "triggerType": "PrePayment",
           "modulePath": "TriggerHandlers/PrePaymentTrigger"
+        },
+        {
+          "triggerType": "PostPayment",
+          "modulePath": "TriggerHandlers/PostPaymentTrigger"
+        },
+        {
+          "triggerType": "PostVoidPayment",
+          "modulePath": "TriggerHandlers/PostVoidPaymentTrigger"
         }
       ],
       "views":

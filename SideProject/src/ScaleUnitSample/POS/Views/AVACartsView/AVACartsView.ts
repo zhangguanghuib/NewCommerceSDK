@@ -7,6 +7,9 @@ import { ObjectExtensions } from "PosApi/TypeExtensions";
 /**
  * The controller for AVACartsView.
  */
+
+
+declare var Commerce: any;
 export default class AVACartsView extends Views.CustomViewControllerBase {
     public readonly viewModel: AVACartsViewModel;
    // public dataList: IDataList<Entities.AVACartsEntity>;
@@ -59,6 +62,8 @@ export default class AVACartsView extends Views.CustomViewControllerBase {
     }
 
     public onReady(element: HTMLElement): void {
+
+        Commerce.ApplicationContext.Instance.hardwareProfile;
         // DataList
         //let dataListOptions: IDataListOptions<Entities.AVACartsEntity> = {
         //    interactionMode: DataListInteractionMode.SingleSelect,

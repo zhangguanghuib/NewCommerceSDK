@@ -21,10 +21,13 @@
         {
             ThrowIf.Null(request, "request");
             ThrowIf.Null(response, "response");
+            List<string> transIds = new List<string>();
 
             EntityDataServiceResponse<Transaction> searchJournalTransactions = (EntityDataServiceResponse<Transaction>)response;
             foreach (Transaction transaction in searchJournalTransactions.PagedEntityCollection.Results)
             {
+                transIds.Add(transaction.Id);
+
                 transaction.ExtensionProperties.Add(new CommerceProperty("QRCode", "https://test-api-open.chinaums.com/fapiao-portal/view/index.html#/invoicedetail?qrCodeId=20240816af3dbb9374fa4fa5babecf7c944089ca"));
                 transaction.ExtensionProperties.Add(new CommerceProperty("QRCodeId", "Inv0001"));
             }
