@@ -66,6 +66,14 @@
                 "modulePath": "Extend/ViewExtensions/Cart/LineDetailsCustomControl"
               }
             ]
+          },
+          "totalsPanel": {
+            "customFields": [
+              {
+                "fieldName": "Sample",
+                "modulePath": "CustomFieldExtensions/Cart/SampleCustomField"
+              }
+            ]
           }
         },
         "CustomerAddEditView": {

@@ -10,10 +10,7 @@ export default class SampleTransactionSearchTextFilter extends CustomTextSearchF
      */
     constructor(context: ISearchFilterDefinitionContext) {
         super(context);
-
         this.id = "SampleTransactionSearchTextFilter";
-        this.labelValue = "Text Search Filter Label";
-
-        
+        this.labelValue = "Text Search Filter Label";    
     }
 }
