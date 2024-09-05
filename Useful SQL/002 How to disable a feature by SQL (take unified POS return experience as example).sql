@@ -1,6 +1,20 @@
-SELECT SUM(p.rows) FROM sys.partitions AS p
-  INNER JOIN sys.tables AS t
-  ON p.[object_id] = t.[object_id]
-  INNER JOIN sys.schemas AS s
-  ON s.[schema_id] = t.[schema_id]
-  WHERE t.name = N'SALESTRANSACTION' AND s.name = N'crt' AND p.index_id IN (0,1);
+DECLARE @featureClassNamePattern NVARCHAR(100) = '%Dynamics.AX.Application.RetailDeliveryModeConsistencyFeature%';
+DECLARE @featureStateRecId BIGINT;
+
+SELECT @featureStateRecId = recid FROM dbo.featuremanagementstate WHERE NAME LIKE @featureClassNamePattern
+
+SELECT * FROM dbo.featuremanagementstate WHERE recid = @featureStateRecId
+SELECT enabledate, modifieddatetime, modifiedby, * FROM dbo.featuremanagementmetadata WHERE  featurestate = @featureStateRecId
+
+UPDATE [dbo].[featuremanagementmetadata]
+SET    enabledate = '1900-01-01 00:00:00.000',
+       modifieddatetime = Getdate(),
+       modifiedby = <alias\_incidentnumber>
+WHERE  featurestate = @featureStateRecId
+
+UPDATE [dbo].featuremanagementstate
+SET    isenabled = 0
+WHERE  recid = @featureStateRecId
+
+SELECT * FROM dbo.featuremanagementstate WHERE recid = @featureStateRecId
+SELECT enabledate, modifieddatetime, modifiedby, * FROM dbo.featuremanagementmetadata WHERE  featurestate = @featureStateRecId
