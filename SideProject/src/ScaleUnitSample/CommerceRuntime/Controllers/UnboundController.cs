@@ -12,6 +12,10 @@ namespace Contoso.CommerceRuntime.Controllers
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.Formats.Bmp;
     using CommerceRuntime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
+    using System.Collections.Generic;
+    using global::CommerceRuntime.Messages;
+
     //using static System.Net.Mime.MediaTypeNames;
 
     /// <summary>
@@ -45,6 +49,10 @@ namespace Contoso.CommerceRuntime.Controllers
         [Authorization(CommerceRoles.Anonymous, CommerceRoles.Application, CommerceRoles.Customer, CommerceRoles.Device, CommerceRoles.Employee, CommerceRoles.Storefront)]
         public async Task<string> GetQRCodeBase64String(IEndpointContext context, string qrcodeurl)
         {
+            ContosoGetStoreLocationsDataRequest contosoGetStoreLocationsDataRequest = new ContosoGetStoreLocationsDataRequest(QueryResultSettings.AllRecords);
+            IEnumerable<OrgUnitLocation> storeDetails = (await context.ExecuteAsync<EntityDataServiceResponse<OrgUnitLocation>>(contosoGetStoreLocationsDataRequest)
+                .ConfigureAwait(false)).PagedEntityCollection.Results;
+
             var getQRCodeImageRequest = new GetQRCodeImageRequest(qrcodeurl);
             GetQRCodeImageResponse response = await context.ExecuteAsync<GetQRCodeImageResponse>(getQRCodeImageRequest).ConfigureAwait(false);
             return response.EncodedQrCode;

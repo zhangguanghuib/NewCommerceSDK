@@ -20,6 +20,7 @@ namespace Contoso.CommerceRuntime.RequestHandlers
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
     using Contoso.CommerceRuntime.Entities.DataModel;
     using Contoso.CommerceRuntime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 
     /// <summary>
     /// Sample service to demonstrate managing a collection of entities.
@@ -93,12 +94,13 @@ namespace Contoso.CommerceRuntime.RequestHandlers
 
             using (DatabaseContext databaseContext = new DatabaseContext(request.RequestContext))
             {
-                var query = new SqlPagedQuery(request.QueryResultSettings)
+                SortingInfo orderBy = new SortingInfo("EXAMPLEID", isDescending: false);
+                var query = new SqlPagedQuery(request.QueryResultSettings, orderBy)
                 {
                     DatabaseSchema = "ext",
                     Select = new ColumnSet("EXAMPLEINT", "EXAMPLESTRING", "EXAMPLEID"),
-                    From = "CONTOSO_EXAMPLEVIEW",
-                    OrderBy = "EXAMPLEID",
+                    From = "CONTOSO_EXAMPLEVIEW"//,
+                   // OrderBy = "EXAMPLEID",
                 };
 
                 var queryResults =

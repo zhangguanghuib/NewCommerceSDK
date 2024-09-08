@@ -2,8 +2,6 @@
     CustomPackingItem,  CustomPackingItemPosition, ICustomPackingItemContext
 } from "PosApi/Extend/Header";
 import ko from "knockout";
-
-
 export default class GasPumpStatusPackingItem extends CustomPackingItem {
 
     public readonly position: CustomPackingItemPosition = CustomPackingItemPosition.After;
