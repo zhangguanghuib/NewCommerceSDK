@@ -40,6 +40,18 @@ export default class GasPumpStatusPackingItem extends CustomPackingItem {
 
     protected init(state: Commerce.Extensibility.ICustomHeaderPackingItemState): void {
         this.visible = false;
+
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey && e.key === '+') || (e.ctrlKey && e.key === '-') || (e.ctrlKey && e.key === '0')) {
+                e.preventDefault();
+            }
+        });
     }
 
     public dispose(): void {

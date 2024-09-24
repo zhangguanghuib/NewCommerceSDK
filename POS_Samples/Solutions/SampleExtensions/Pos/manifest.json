@@ -221,6 +221,16 @@
           "operationId": "5002",
           "operationRequestFactoryPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceFactory",
           "operationRequestHandlerPath": "Create/Operations/CheckGiftCardBalance/CheckGiftCardBalanceHandler"
+        },
+        {
+          "operationId": "6009",
+          "operationRequestFactoryPath": "Create/Operations/AddTerminalTenderLineToCart/AddTerminalTenderLineToCartFactory",
+          "operationRequestHandlerPath": "Create/Operations/AddTerminalTenderLineToCart/AddTerminalTenderLineToCartHandler"
+        },
+        {
+          "operationId": "6010",
+          "operationRequestFactoryPath": "Create/Operations/RefundTerminalTenderLineToCart/RefundTerminalTenderLineToCartFactory",
+          "operationRequestHandlerPath": "Create/Operations/RefundTerminalTenderLineToCart/RefundTerminalTenderLineToCartHandler"
         }
       ]
     }
