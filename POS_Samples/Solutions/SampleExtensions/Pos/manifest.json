@@ -70,7 +70,7 @@
           "totalsPanel": {
             "customFields": [
               {
-                "fieldName": "Sample",
+                "fieldName": "SampleV3",
                 "modulePath": "CustomFieldExtensions/Cart/SampleCustomField"
               }
             ]
@@ -158,6 +158,13 @@
               }
             ]
           }
+        },
+        "InventoryAdjustmentDocumentWorkingView": {
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/InventoryAdjustmentDocumentWorkingView/EccoInventoryAdjustmentShowTotalCommand"
+            }
+          ]
         }
       }
     },

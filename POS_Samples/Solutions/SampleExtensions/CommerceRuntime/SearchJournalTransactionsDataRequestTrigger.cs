@@ -29,6 +29,8 @@
                 transaction.ExtensionProperties.Add(new CommerceProperty("CONTOSORETAILSERVERSTAFFID", "000130"));
             }
 
+            DateTimeOffset dateTimeOffset = request.RequestContext.ConvertDateTimeToChannelDate(DateTimeOffset.UtcNow);
+
             return Task.CompletedTask;
         }
 
