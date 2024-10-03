@@ -1,7 +1,7 @@
 ## How to highlight some certain POS Cart Control?
 1.  The effect is like this:
 <img width="1038" alt="image" src="https://github.com/user-attachments/assets/ccf30900-428f-4cdd-98df-33e1bdd3f538">
-2. Code as below:
+2. Code as below:<br/>
 ```ts
 import { ProxyEntities } from "PosApi/Entities";
 import * as CartView from "PosApi/Extend/Views/CartView";
