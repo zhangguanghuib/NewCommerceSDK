@@ -72,6 +72,10 @@
               {
                 "fieldName": "SampleV3",
                 "modulePath": "CustomFieldExtensions/Cart/SampleCustomField"
+              },
+              {
+                "fieldName": "SampleV1",
+                "modulePath": "CustomFieldExtensions/Cart/SampleCustomField"
               }
             ]
           }

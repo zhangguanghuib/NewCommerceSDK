@@ -1,6 +1,7 @@
 ﻿import { ProxyEntities } from "PosApi/Entities";
 import * as CartView from "PosApi/Extend/Views/CartView";
 import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
+import CartViewUtils from "./CartViewUtils";
 
 declare var Commerce: any;
 export default class CartViewController extends CartView.CartExtensionViewControllerBase {
@@ -43,7 +44,57 @@ export default class CartViewController extends CartView.CartExtensionViewContro
         }
 
         this.cartChangedHandler = (data: CartView.CartChangedData): void => {
-            console.log(data);
+            // Total Items Div
+            let totalItems: HTMLDivElement = document.querySelector('#TotalItemsField') as HTMLDivElement;
+            if (totalItems) {
+                CartViewUtils.setStyle(totalItems, {
+                    'backgroundColor': 'lightblue',
+                    'padding': '5px',
+                    'color': 'black'
+                });
+                // Total Items Text
+                let totalItemsTextDiv: HTMLDivElement = totalItems.firstElementChild.firstElementChild.firstElementChild as HTMLDivElement;
+                CartViewUtils.setStyle(totalItemsTextDiv, {
+                    'fontFamily': 'Arial, sans-serif',
+                    'fontSize': '16px',
+                    'fontWeight': 'bold'
+                });
+
+                // Total Items Value
+                let totalItemsValueDiv: HTMLDivElement = totalItems.firstElementChild.children[1].firstElementChild as HTMLDivElement;
+                CartViewUtils.setStyle(totalItemsValueDiv, {    
+                    'fontFamily': 'Arial, sans-serif',
+                    'fontSize': '16px',
+                    'fontWeight': 'bold'
+                });
+            }
+
+            if (totalItems) {
+                // Lines Div
+                let linesDiv: HTMLDivElement = totalItems.previousElementSibling as HTMLDivElement;
+                if (linesDiv) {
+                    CartViewUtils.setStyle(linesDiv, {
+                        'backgroundColor': 'lightyellow',
+                        'padding': '5px',
+                        'color': 'black'
+                    });
+
+                    // Lines Text
+                    let linesTextDiv: HTMLDivElement = linesDiv.firstElementChild.firstElementChild.firstElementChild as HTMLDivElement;
+                    CartViewUtils.setStyle(linesTextDiv, {
+                        'fontFamily': 'Arial, sans-serif',
+                        'fontSize': '16px',
+                        'fontWeight': 'bold'
+                    });
+                    // Lines Value
+                    let linesValueDiv: HTMLDivElement = linesDiv.firstElementChild.children[1].firstElementChild as HTMLDivElement;
+                    CartViewUtils.setStyle(linesValueDiv, {
+                        'fontFamily': 'Arial, sans-serif',
+                        'fontSize': '16px',
+                        'fontWeight': 'bold'
+                    });
+                }
+            }
         }
     }
 }
