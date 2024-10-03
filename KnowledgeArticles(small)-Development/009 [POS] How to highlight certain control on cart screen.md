@@ -115,7 +115,8 @@ export default class CartViewUtils {
 
 3. Code link:
 
-
+https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/Solutions/SampleExtensions/Pos/Extend/ViewExtensions/Cart/CartViewController.ts
+https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/Solutions/SampleExtensions/Pos/Extend/ViewExtensions/Cart/CartViewUtils.ts
 
 
 
