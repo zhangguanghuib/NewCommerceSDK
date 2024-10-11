@@ -185,6 +185,12 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      + For ContosoRetailSeatingData:<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
      ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
+     ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
+     ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
+
+     + RetailChannelTable
+
+
 
 
 
