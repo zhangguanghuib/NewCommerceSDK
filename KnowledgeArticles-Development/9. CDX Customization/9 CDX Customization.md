@@ -14,7 +14,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
     ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
     ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
 4.  The below knowledge all comes from the above two documents<br/>
-- Step 1:  let us review the XML for Custom Job and Subjobs creation including the table field mapping between HQ table and Channel Table:<br/>
++ Step 1:  let us review the XML for Custom Job and Subjobs creation including the table field mapping between HQ table and Channel Table:<br/>
 ```xml
 <RetailCdxSeedData Name="AX7" ChannelDBSchema="ext" ChannelDBMajorVersion="7">
   <Jobs>
@@ -108,6 +108,17 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
 
   </Subjobs>
   </RetailCdxSeedData>
-```   
+```
++ Step 2: Check the Distribution Scheduler and Job and Subjobs:
+  - Table DirPartyTable
+    <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
+  - RetailTransactionTable
+    <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02">
+    and from this table we can find the Channel Table Name and its fields:
+    <img width="679" alt="image" src="https://github.com/user-attachments/assets/745723f0-2e72-400e-b320-7e06e49266f5">
+
+
+
+   
 
 
