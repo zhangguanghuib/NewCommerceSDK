@@ -116,6 +116,15 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
     and from this table we can find the Channel Table Name and its fields:<br/>
     <img width="679" alt="image" src="https://github.com/user-attachments/assets/745723f0-2e72-400e-b320-7e06e49266f5">
+  - RetailTransactionPaymentTrans<br/>
+  <img width="1175" alt="image" src="https://github.com/user-attachments/assets/9c032705-7e4b-4b94-a06f-a061c97a80c4"><br/>
+  <img width="715" alt="image" src="https://github.com/user-attachments/assets/24582c54-1d08-4ec2-b631-e65942d404a6"><br/>
+  - ContosoRetailStaffSuggestions <br/>
+    ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
+    In Channel Database:<br/>
+    ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
+
+
 
 
 
