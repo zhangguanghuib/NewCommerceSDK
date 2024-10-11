@@ -31,11 +31,10 @@ During the D365 Commerce Project Implementation, create custom table and push an
       <!--Notice that there is no mention of the <AxFields></AxFields> because the subjob is already mapped in the main RetailCdxSeedData resource file an we are not adding any new or previously unmapped field. -->
     </Subjob>
 
-    <!--
-				Adding additional columns to (existing) RetailTransactionTable so they are pulled back to AX.
-				For upload subjobs, set the OverrideTarget property to  "false", as ilustrate below. This will tell CDX to use the table defined by TargetTableName and TargetTableSchema as extension table on this subjob.
+    <!--Adding additional columns to (existing) RetailTransactionTable so they are pulled back to AX.
+For upload subjobs, set the OverrideTarget property to  "false", as ilustrate below. This will tell CDX to use the table defined by TargetTableName and TargetTableSchema as extension table on this subjob.
         This table must be created on the channel DB with the same primary key as the extended table (in this example, RetailTransactionTable).
-		-->
+    -->
     <Subjob Id="RetailTransactionTable" TargetTableName="CONTOSORETAILTRANSACTIONTABLE" TargetTableSchema="ext" OverrideTarget="false">
       <!--Notice that there is no mention of the <ScheduledByJobs></ScheduledByJobs> because the subjob is already part of an upload job. -->
       <AxFields>
