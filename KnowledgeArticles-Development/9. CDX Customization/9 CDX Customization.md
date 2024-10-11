@@ -13,4 +13,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
 3. The most knowledge of the CDX customization comes from these two official document: <br/>
     ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
     ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
+4.  The below knowledge all comes from the above two documents:<br/>
+    
+
 
