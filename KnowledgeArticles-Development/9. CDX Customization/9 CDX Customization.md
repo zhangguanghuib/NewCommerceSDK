@@ -143,9 +143,9 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       Scheduler Subjob<br/>
       <img width="1171" alt="image" src="https://github.com/user-attachments/assets/e294eabc-ed1c-43a3-8e7d-eca7fa34c31a"><br/>
    - RetailCustTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
-       <mark>Table in Channel Database</>
+       <mark>Table in Channel Database</><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
-      <mark>Table in AOT</mark>
+      <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
       <mark>Table in Scheduler Subjob<br/>
       
