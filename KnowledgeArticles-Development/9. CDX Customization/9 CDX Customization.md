@@ -11,6 +11,6 @@ During the D365 Commerce Project Implementation, create custom table and push an
    The same sql script will not be deployed two times, so in order to make some change on the original script,  you have to make a new script and named it in the aphebetic order, like ExtensionTableScriptV1.sql, ExtensionTableScriptV2.sql, ExtensionTableScriptV3.sql... ect.<br/>
 
 3. The most knowledge of the CDX customization comes from these two official document: <br/>
-    ## https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
-    ## https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
+    ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
+    ### https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
 
