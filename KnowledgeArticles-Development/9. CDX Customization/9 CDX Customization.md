@@ -125,7 +125,19 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
     In AOT: <br/>
     <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
-+ Step 3: Check the Distribution Scheduler and Job and Subjobs<mark>For Push Data from FO DB to CHannel DB(download sessions)</mark
++ Step 3: Check the Distribution Scheduler and Job and Subjobs<mark>For Push Data from FO DB to CHannel DB(download sessions)</mark>
+    - ContosoRetailSeatingData：a new table to push the data from HQ to Channel:<br/>
+       Table in FO AOT <br/>
+       <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
+       Table in Channel DB <br/>
+       ![image](https://github.com/user-attachments/assets/f2abf0a4-52b0-43d8-bcc8-38dcefdc19f1)
+       Commerce Scheduler SubJobs:<br/>
+       ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
+       ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
+
+
+
+
 
 
 
