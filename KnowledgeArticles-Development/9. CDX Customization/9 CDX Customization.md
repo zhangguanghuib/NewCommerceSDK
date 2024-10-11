@@ -150,6 +150,16 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
       <mark>Table in Scheduler Subjob<br/>
       ![image](https://github.com/user-attachments/assets/ff21d2fe-68fb-42ac-88de-133b6d23f754)<br/>
+  5. How to verify the custome CDX is working or not? <br/>
+      + For RetailTrasactionTable and RetailTransactionPaymentTrans, create a new record and provide value to the custom field:
+     ```sql
+      insert into ext.CONTOSORETAILTRANSACTIONTABLE
+      (TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, CONTOSORETAILSEATNUMBER, CONTOSORETAILSERVERSTAFFID) 
+      select TRANSACTIONID TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, 10, '000160' from ax.retailTransactionTable as T
+      where T.RECEIPTID =  'STONN-42100236'
+      
+      select * from ext.CONTOSORETAILTRANSACTIONTABLE
+     ```
 
 
 
