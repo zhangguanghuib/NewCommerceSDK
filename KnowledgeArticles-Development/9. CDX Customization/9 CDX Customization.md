@@ -110,11 +110,11 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
   </RetailCdxSeedData>
 ```
 + Step 2: Check the Distribution Scheduler and Job and Subjobs:
-  - Table DirPartyTable
+  - Table DirPartyTable <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
-  - RetailTransactionTable
-    <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02">
-    and from this table we can find the Channel Table Name and its fields:
+  - RetailTransactionTable<br/>
+    <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
+    and from this table we can find the Channel Table Name and its fields:<br/>
     <img width="679" alt="image" src="https://github.com/user-attachments/assets/745723f0-2e72-400e-b320-7e06e49266f5">
 
 
