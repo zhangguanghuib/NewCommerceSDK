@@ -109,7 +109,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
   </Subjobs>
   </RetailCdxSeedData>
 ```
-+ Step 2: Check the Distribution Scheduler and Job and Subjobs:
++ Step 2: Check the Distribution Scheduler and Job and Subjobs<mark>For Upload Data from Channel DB to FO DB</mark>:
   - Table DirPartyTable <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
   - RetailTransactionTable<br/>
@@ -124,7 +124,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     In Channel Database:<br/>
     ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
     In AOT: <br/>
-    <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e">
+    <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
++ Step 3: Check the Distribution Scheduler and Job and Subjobs<mark>For Push Data from FO DB to CHannel DB(download sessions)</mark
 
 
 
