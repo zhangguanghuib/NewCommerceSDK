@@ -1,7 +1,7 @@
-## Store Commerce Dual Display to hide empty shopping cart.
+## D365 Commerce CDX Customization.
 
 1. <ins>Background:</ins><br/>
-Customer want to hide the cart if there shopping cart is empty.
+During the D365 Commerce Project Implementation, create custom table and push and pull data between HQ and CSU database is very important, this article will show cases how to make CDX customization based on the official samples.
 2. How it looks like:<br/>
    . when log on POS and nothing in the cart,  then the dual display only showing the embeded website, for me it is Bing for demo the function<br/>
    ![image](https://github.com/zhangguanghuib/NewCommerceSDK/assets/14832260/06941f0c-7574-431e-b004-f9cca9596cf0)
