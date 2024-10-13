@@ -205,6 +205,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
 
+     + ContosoRetailStaffSuggestions => Upload Sessions<br/>
+
 
 
     
