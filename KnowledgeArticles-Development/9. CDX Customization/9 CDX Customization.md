@@ -195,6 +195,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
       where T1.STORENUMBER = 'HOUSTON'
      ```
+     <hr/>
      ![image](https://github.com/user-attachments/assets/a6ead08b-bbc8-4011-b77b-5812efa493d2)
 
 
