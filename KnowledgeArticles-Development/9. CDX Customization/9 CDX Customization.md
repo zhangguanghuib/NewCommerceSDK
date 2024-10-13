@@ -189,13 +189,14 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
 
      + RetailChannelTable<br/>
-     <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf">
+     <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
+
      ```sql
      select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage from ext.ContosoRETAILCHANNELTABLE as T
       join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
       where T1.STORENUMBER = 'HOUSTON'
      ```
-     <hr/>
+     <br/>
      ![image](https://github.com/user-attachments/assets/a6ead08b-bbc8-4011-b77b-5812efa493d2)
 
 
