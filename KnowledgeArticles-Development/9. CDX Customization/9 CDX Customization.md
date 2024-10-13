@@ -200,7 +200,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      <br/>
      + RetailCustTable:<br/>
      <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
-     <img width="1192" alt="image" src="https://github.com/user-attachments/assets/2b6cb36e-0bfc-4584-ad70-037566229dff"><br/>
+     ![image](https://github.com/user-attachments/assets/0275e7dd-bace-440c-9825-f5c6d7978e7c)<br/>
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
 
 
