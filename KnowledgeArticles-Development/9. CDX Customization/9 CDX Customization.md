@@ -206,6 +206,33 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
 
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
+     ```
+     USE [RetailChannelDatabase]
+      GO
+      
+      INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+                 ([SUGGESTIONID]
+                 ,[STOREID]
+                 ,[STAFF]
+                 ,[TERMINALID]
+                 ,[SUGGETION]
+                 ,[DATAAREAID]
+                 ,[DATELOGGED])
+           VALUES
+                 (1
+                 ,'HOUSTON'
+                 ,'000160'
+                 ,'HOUSTON-42'
+                 ,'Good Service'
+                 ,'USRT'
+                 ,GetDate())
+      GO
+      SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+     ```
+     ![image](https://github.com/user-attachments/assets/20f37060-4fbe-4066-8fc4-389a97bb2bd8)<br/>
+
+     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
+
 
 
 
