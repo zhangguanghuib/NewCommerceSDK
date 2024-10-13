@@ -151,7 +151,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       <mark>Table in Scheduler Subjob<br/>
       ![image](https://github.com/user-attachments/assets/ff21d2fe-68fb-42ac-88de-133b6d23f754)<br/>
   5. How to verify the custome CDX is working or not? <br/>
-      + For RetailTrasactionTable and RetailTransactionPaymentTrans, create a new record and provide value to the custom field:
+      + For RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions:
+      + Create a new record and provide value to the custom field:
      ```sql
       select  T.TRANSACTIONID, * from ax.retailTransactionTable as T where T.RECEIPTID =  'STONN-42100236'
       
@@ -182,13 +183,13 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ```
      ![image](https://github.com/user-attachments/assets/1d65b76f-1a39-4cf8-82cd-0850700c4064)
 
-     + For ContosoRetailSeatingData:<br/>
+     + For ContosoRetailSeatingData=>Download Sessions:<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
      ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
      ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
      ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
 
-     + RetailChannelTable<br/>
+     + RetailChannelTable=>Dowload Sessions:<br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
      ![image](https://github.com/user-attachments/assets/b0ee47aa-fae9-42f5-af16-833b7e5cb366)<br/>
 
@@ -198,7 +199,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       where T1.STORENUMBER = 'HOUSTON'
      ```
      <br/>
-     + RetailCustTable:<br/>
+     + RetailCustTable=>Dowload Sessions:<br/>
      <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
      <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
      
