@@ -190,6 +190,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
 
      + RetailChannelTable<br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
+     <img width="1176" alt="image" src="https://github.com/user-attachments/assets/bb0fe7d4-bfdf-4d34-a7bf-6436bb9472c1"><br/>
 
      ```sql
      select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage from ext.ContosoRETAILCHANNELTABLE as T
@@ -197,7 +198,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       where T1.STORENUMBER = 'HOUSTON'
      ```
      <br/>
-     ![image](https://github.com/user-attachments/assets/a6ead08b-bbc8-4011-b77b-5812efa493d2)
+    
 
 
 
