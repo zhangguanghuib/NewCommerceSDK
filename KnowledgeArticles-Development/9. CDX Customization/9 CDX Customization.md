@@ -113,7 +113,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
   - Table DirPartyTable <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
     <hr/>
-    <mark>For Upload Data from Channel DB to FO DB</mark><br/>:
+    <mark>For Upload Data from Channel DB to FO DB</mark>:<br/>
   - RetailTransactionTable<br/>
     <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
     and from this table we can find the Channel Table Name and its fields:<br/>
@@ -137,7 +137,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        Commerce Scheduler SubJobs:<br/>
        ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
        ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
-
+  <hr/>
    -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
       Table in Channel Table<br/>
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
@@ -145,7 +145,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
       Scheduler Subjob<br/>
       <img width="1171" alt="image" src="https://github.com/user-attachments/assets/e294eabc-ed1c-43a3-8e7d-eca7fa34c31a"><br/>
-   
+    <hr/>
    - RetailCustTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
        <mark>Table in Channel Database</><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
@@ -188,13 +188,13 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
      <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
      <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
-
+     <hr/>
      + For ContosoRetailSeatingData=>Download Sessions:<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
      ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
      ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
      ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
-
+     <hr/>
      + RetailChannelTable=>Dowload Sessions:<br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
      ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
@@ -210,7 +210,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
      
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
- 
+      <hr/>
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
      <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
      ```
