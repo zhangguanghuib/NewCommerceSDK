@@ -54,7 +54,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     <Subjob Id="ContosoRetailStaffSuggestions" AxTableName ="ContosoRetailStaffSuggestions" ReplicationCounterFieldName="ReplicationCounterFromOrigin" IsUpload="true" TargetTableSchema="ext">
       <ScheduledByJobs>
         <!--Here we specify what Job is used to run this subjob. This is because the subjob is new and we need to specify which jobs its part of.-->
-        <ScheduledByJob>P-1000</ScheduledByJob>
+        <ScheduledByJob>P-0001</ScheduledByJob>
       </ScheduledByJobs>
       <AxFields>
         <Field Name="SuggestionId" />
