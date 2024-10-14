@@ -109,9 +109,11 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
   </Subjobs>
   </RetailCdxSeedData>
 ```
-+ Step 2: Check the Distribution Scheduler and Job and Subjobs<br/><mark>For Upload Data from Channel DB to FO DB</mark><br/>:
++ Step 2: Check the Distribution Scheduler and Job and Subjobs<br/>
   - Table DirPartyTable <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
+    <hr/>
+    <mark>For Upload Data from Channel DB to FO DB</mark><br/>:
   - RetailTransactionTable<br/>
     <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
     and from this table we can find the Channel Table Name and its fields:<br/>
@@ -125,6 +127,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
     In AOT: <br/>
     <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
+     <hr/>
 + Step 3: Check the Distribution Scheduler and Job and Subjobs<mark>For Push Data from FO DB to CHannel DB(download sessions)</mark>
     - ContosoRetailSeatingData：a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
