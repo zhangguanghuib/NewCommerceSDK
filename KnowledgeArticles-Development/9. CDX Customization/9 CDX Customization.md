@@ -204,6 +204,11 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
      
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
+ 
+     <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
+ 
+     <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
+     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
 
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
      ```
@@ -231,7 +236,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ```
      ![image](https://github.com/user-attachments/assets/20f37060-4fbe-4066-8fc4-389a97bb2bd8)<br/>
 
-     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
 
 
 
