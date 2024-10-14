@@ -127,7 +127,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
     ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
     In AOT: <br/>
     <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
-     <hr/>
 + Step 3: Check the Distribution Scheduler and Job and Subjobs<mark>For Push Data from FO DB to CHannel DB(download sessions)</mark>
     - ContosoRetailSeatingData：a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
@@ -137,7 +136,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        Commerce Scheduler SubJobs:<br/>
        ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
        ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
-  <hr/>
    -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
       Table in Channel Table<br/>
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
@@ -145,7 +143,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
       Scheduler Subjob<br/>
       <img width="1171" alt="image" src="https://github.com/user-attachments/assets/e294eabc-ed1c-43a3-8e7d-eca7fa34c31a"><br/>
-    <hr/>
    - RetailCustTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
        <mark>Table in Channel Database</><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
@@ -188,7 +185,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
      <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
      <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
-     <hr/>
      + For ContosoRetailSeatingData=>Download Sessions:<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
      ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
@@ -210,7 +206,6 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
      
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
-      <hr/>
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
      <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
      ```
