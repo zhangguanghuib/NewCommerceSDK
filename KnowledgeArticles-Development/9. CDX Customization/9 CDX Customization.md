@@ -181,7 +181,10 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       select * from ext.CONTOSORETAILTRANSACTIONTABLE where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
       select * from ext.ContosoRetailTransactionPaymentTrans where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
      ```
-     ![image](https://github.com/user-attachments/assets/1d65b76f-1a39-4cf8-82cd-0850700c4064)
+     ![image](https://github.com/user-attachments/assets/1d65b76f-1a39-4cf8-82cd-0850700c4064)<br/>
+     You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
+     <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
+     <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
 
      + For ContosoRetailSeatingData=>Download Sessions:<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
@@ -205,12 +208,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      
      ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
  
-     <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
- 
-     <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
-     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
-
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
+     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
      ```
      USE [RetailChannelDatabase]
       GO
