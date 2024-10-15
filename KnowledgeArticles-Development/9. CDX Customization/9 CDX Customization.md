@@ -209,31 +209,19 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      + ContosoRetailStaffSuggestions => Upload Sessions<br/>
      <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
      ```
-     USE [RetailChannelDatabase]
-      GO
+        USE [RetailChannelDatabase]
+         GO
+         
+       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+            VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
       
-      INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-                 ([SUGGESTIONID]
-                 ,[STOREID]
-                 ,[STAFF]
-                 ,[TERMINALID]
-                 ,[SUGGETION]
-                 ,[DATAAREAID]
-                 ,[DATELOGGED])
-           VALUES
-                 (1
-                 ,'HOUSTON'
-                 ,'000160'
-                 ,'HOUSTON-42'
-                 ,'Good Service'
-                 ,'USRT'
-                 ,GetDate())
-      GO
-      SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-     ```
-     ![image](https://github.com/user-attachments/assets/20f37060-4fbe-4066-8fc4-389a97bb2bd8)<br/>
+       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+            VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
+       GO
+       SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+      ```
+     ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
      ![image](https://github.com/user-attachments/assets/2a7cdfb8-9cb1-4690-9e36-797fea9015f6)
-
      <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
 
 
