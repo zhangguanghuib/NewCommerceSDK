@@ -124,8 +124,10 @@ During the D365 Commerce Project Implementation, create custom table and push an
      and from this table we can find the Channel Table Name and its fields:<br/>
      <img width="715" alt="image" src="https://github.com/user-attachments/assets/24582c54-1d08-4ec2-b631-e65942d404a6"><br/>
   4. ContosoRetailStaffSuggestions <br/>
+  
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
     In Channel Database:<br/>
+    
     ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
     In AOT: <br/>
     <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
