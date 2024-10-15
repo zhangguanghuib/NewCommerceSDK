@@ -173,7 +173,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
      <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
      <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
-     + For ContosoRetailSeatingData=>Download Sessions:<br/>
+     + For <mark>ContosoRetailSeatingData=>Download Sessions:</mark><br/>
      1. On FO UI, create a new record<br/>
      ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
      2. Run this distribution scheduler job<br/>
