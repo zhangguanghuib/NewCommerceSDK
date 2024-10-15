@@ -152,79 +152,79 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       - <mark>Table in Scheduler Subjob<br/>
       ![image](https://github.com/user-attachments/assets/ff21d2fe-68fb-42ac-88de-133b6d23f754)<br/>
   5. How to verify the custome CDX is working or not? <br/>
-      + For RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions:
-      + Create a new record and provide value to the custom field:
-     ```sql
-      select  T.TRANSACTIONID, * from ax.retailTransactionTable as T where T.RECEIPTID =  'STONN-42100236'
-      
-      insert into ext.CONTOSORETAILTRANSACTIONTABLE
-      (TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, CONTOSORETAILSEATNUMBER, CONTOSORETAILSERVERSTAFFID) 
-      select TRANSACTIONID TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, 10, '000160' from ax.retailTransactionTable as T
-      where T.RECEIPTID =  'STONN-42100236'
-      
-      INSERT INTO [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] ([CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],[BANKTRANSFERCOMMENT])
-      SELECT [CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],'BankTransfer'
-      from ax.RETAILTRANSACTIONPAYMENTTRANS where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
-      
-      select * from ext.CONTOSORETAILTRANSACTIONTABLE where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
-      select * from ext.ContosoRetailTransactionPaymentTrans where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
-     ```
-     ![image](https://github.com/user-attachments/assets/1d65b76f-1a39-4cf8-82cd-0850700c4064)<br/>
-     You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
-     <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
-     <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
-     + For <mark>ContosoRetailSeatingData=>Download Sessions:</mark><br/>
-     1. On FO UI, create a new record<br/>
-     ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
-     2. Run this distribution scheduler job<br/>
-     ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
-     3. Make sure download session applied<br/>
-     ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
-     4. Check channel database and confirm the data got pushed to channel database.<br/>
-     ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
-     
-     + <mark>RetailChannelTable=>Dowload Sessions:</mark><br/>
-     1. On FO Store form, set the value for the 3 new fields, one is custom field, the other two are existing field to push<br/>
-     <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
-     2. Run 1070 Job, then check Channel Database<br/>
-     ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
-     3. The SQL script to run<br/>
-     ```sql
-      select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
-       join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
-       where T1.STORENUMBER = 'HOUSTON'
-     ```
-     <br/>
-
-     + <mark>RetailCustTable</mark>=>Dowload Sessions:<br/>
-     1. On UI (Customer forms), set values to the custom fields<br/>
-     <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
-     2. Check the FO table browser to confirm the custom fields have values<br/>
-     <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
-     3. Run download session and check the channel database<br/>
-     
-     ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
-     + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions</u></mark><br/>
-     1. Insert records into channel database:<br/>
-     ```
-        USE [RetailChannelDatabase]
-         GO
+      + <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
+         1. Create a new record and provide value to the custom field:
+        ```sql
+         select  T.TRANSACTIONID, * from ax.retailTransactionTable as T where T.RECEIPTID =  'STONN-42100236'
          
-       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-            VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
-      
-       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-            VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
-       GO
-       SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-      ```
-     ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
-     2. Check the Upload Sessions<br/>
-     <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
-     3. Find the menu items<br/>
-     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
-     4. Open the form and verify the data got uploaded<br/>
-     ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)
+         insert into ext.CONTOSORETAILTRANSACTIONTABLE
+         (TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, CONTOSORETAILSEATNUMBER, CONTOSORETAILSERVERSTAFFID) 
+         select TRANSACTIONID TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, 10, '000160' from ax.retailTransactionTable as T
+         where T.RECEIPTID =  'STONN-42100236'
+         
+         INSERT INTO [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] ([CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],[BANKTRANSFERCOMMENT])
+         SELECT [CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],'BankTransfer'
+         from ax.RETAILTRANSACTIONPAYMENTTRANS where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
+         
+         select * from ext.CONTOSORETAILTRANSACTIONTABLE where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
+         select * from ext.ContosoRetailTransactionPaymentTrans where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
+        ```
+        ![image](https://github.com/user-attachments/assets/1d65b76f-1a39-4cf8-82cd-0850700c4064)<br/>
+        2. You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
+        <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
+        <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
+     + For <mark>ContosoRetailSeatingData=>Download Sessions=>Totally New Table</mark><br/>
+        1. On FO UI, create a new record<br/>
+        ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
+        2. Run this distribution scheduler job<br/>
+        ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
+        3. Make sure download session applied<br/>
+        ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
+        4. Check channel database and confirm the data got pushed to channel database.<br/>
+        ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
+     
+     + <mark>RetailChannelTable=>Dowload Sessions=> Existing Table with new custom fields and existing fields</mark><br/>
+        1. On FO Store form, set the value for the 3 new fields, one is custom field, the other two are existing field to push<br/>
+        <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
+        2. Run 1070 Job, then check Channel Database<br/>
+        ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
+        3. The SQL script to run<br/>
+        ```sql
+         select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
+          join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
+          where T1.STORENUMBER = 'HOUSTON'
+        ```
+        <br/>
+
+     + <mark>RetailCustTable</mark>=>Dowload Sessions=>New fields on existint table<br/>
+        1. On UI (Customer forms), set values to the custom fields<br/>
+        <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
+        2. Check the FO table browser to confirm the custom fields have values<br/>
+        <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
+        3. Run download session and check the channel database<br/>
+        
+        ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
+     + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</u></mark><br/>
+        1. Insert records into channel database:<br/>
+        ```
+           USE [RetailChannelDatabase]
+            GO
+            
+          INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+               VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
+         
+          INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+               VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
+          GO
+          SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+         ```
+        ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
+        2. Check the Upload Sessions<br/>
+        <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
+        3. Find the menu items<br/>
+        <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
+        4. Open the form and verify the data got uploaded<br/>
+        ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)
 
 
 
