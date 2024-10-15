@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ChannelDatabase\Contoso.GasStationSample.ChannelDatabase.csproj" />
     <ProjectReference Include="..\CommerceRuntime\Contoso.GasStationSample.CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="..\HardwareStation.CoinDispenserSample\Contoso.HardwareStation.CoinDispenserSample.csproj" />
     <ProjectReference Include="..\PaymentDevice\Contoso.PaymentDeviceSample.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
     <ProjectReference Include="..\Pos\Contoso.GasStationSample.Pos.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
