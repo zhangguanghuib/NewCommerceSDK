@@ -232,7 +232,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
      ```
      ![image](https://github.com/user-attachments/assets/20f37060-4fbe-4066-8fc4-389a97bb2bd8)<br/>
-     <img width="963" alt="image" src="https://github.com/user-attachments/assets/9709e8f6-aa6c-4283-a344-11590aa25784"><br/>
+     ![image](https://github.com/user-attachments/assets/2a7cdfb8-9cb1-4690-9e36-797fea9015f6)
+
      <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
 
 
