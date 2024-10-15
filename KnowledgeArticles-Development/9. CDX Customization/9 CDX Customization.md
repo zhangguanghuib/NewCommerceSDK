@@ -251,6 +251,12 @@ https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Dev
    | extend exception_ = tostring(customDimensions.exception)
    | project timestamp, exception_, customDimensions
    ```
+3. Again, please keep in mind the below things:<br/>
+   <img width="672" alt="image" src="https://github.com/user-attachments/assets/3ac06a86-97f0-4849-8c1e-05f49a54c10f"><br/>
+4. Another two kind of frequent issues we faced about CDX customization are:
+   + Partner extend one EDT in HQ to extend the string-size(like from 20 to 30), but in Channel Databse Table Column with length is still the original size(length = 20)
+   + Customer HQ is on newer version but CSU kept on old version,  this situation normally happened in local CSU,  and it happend Microsoft extend the column size both in HQ  and Channel Database. 
+
     
 
 
