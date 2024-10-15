@@ -178,8 +178,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ![image](https://github.com/user-attachments/assets/bdf0a360-e45e-4b2c-9782-21654cd1cbd7)<br/>
      ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
      ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
-     <hr/>
-     + RetailChannelTable=>Dowload Sessions:<br/>
+     
+     + <mark>RetailChannelTable=>Dowload Sessions:</mark><br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
      
      ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
@@ -189,6 +189,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        where T1.STORENUMBER = 'HOUSTON'
      ```
      <br/>
+
      + <mark>RetailCustTable</mark>=>Dowload Sessions:<br/>
      1. On UI (Customer forms), set values to the custom fields<br/>
      <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
