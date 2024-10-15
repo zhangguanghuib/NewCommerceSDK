@@ -231,12 +231,12 @@ During the D365 Commerce Project Implementation, create custom table and push an
 
 # Code link:
 1. Channel Database Script:<br/>
-https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/CDXCustomization/ChannelDatabase
+https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/CDXCustomization/ChannelDatabase<br/>
 2. HQ all object:<br/>
+https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Development/9.%20CDX%20Customization<br/>
 
-
-
-
+#Key points of CDX customization:
+1. 
 
     
 
