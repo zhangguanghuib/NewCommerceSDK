@@ -235,9 +235,22 @@ https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions
 2. HQ all object:<br/>
 https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Development/9.%20CDX%20Customization<br/>
 
-#Key points of CDX customization:
-1. 
-
+# Key points of CDX customization:
+1. If you want to push a totally new table from channel database to D365 FO HQ  database, please follow this rules:<br/>
+   ![image](https://github.com/user-attachments/assets/8d8e1919-cee1-44e9-9ef8-7dfd746e289a)<br/>
+   Otherwise, you will see this error:<br/>
+   <img width="1018" alt="image" src="https://github.com/user-attachments/assets/21951051-c61e-44dc-9c79-b9c10b12cd1c"><br/>
+2. For offline database transactions that can not be uploaded online channel database,  checking this API is a good point:<br/>
+   ```
+   union *
+   | where customDimensions.TenantId == "<EnvironmentID>"
+   | where customDimensions.ScaleUnitId == "<CSUID>"
+   | where timestamp between(todatetime('2022-03-09T08:56:57.484Z')..todatetime('2022-03-09T08:56:58.14Z'))
+   | where customDimensions.requestUri has "/PostOfflineTransactions?api-version=7.3"
+   | order by timestamp asc
+   | extend exception_ = tostring(customDimensions.exception)
+   | project timestamp, exception_, customDimensions
+   ```
     
 
 
