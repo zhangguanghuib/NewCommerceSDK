@@ -189,7 +189,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        where T1.STORENUMBER = 'HOUSTON'
      ```
      <br/>
-     + RetailCustTable=>Dowload Sessions:<br/>
+     + <mark>RetailCustTable</mark>=>Dowload Sessions:<br/>
      1. On UI (Customer forms), set values to the custom fields<br/>
      <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
      2. Check the FO table browser to confirm the custom fields have values<br/>
