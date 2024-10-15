@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>CustTable.ContosoRetailExtension</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlryf5y54l1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>SSN</Name>
+				<Type>Group</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>RetailCustTable_ContosoRetailSSNNumber</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>ContosoRetailSSNNumber</DataField>
+						<DataSource>RetailCustTable</DataSource>
+					</AxFormControl>
+				</Controls>
+			</FormControl>
+			<Parent>TabGeneral</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControljwea5qb41</Name>
+			<FormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>FormGroupControl2</Name>
+				<Type>Group</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>RetailCustTable_ReturnTaxGroup_W</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>ReturnTaxGroup_W</DataField>
+						<DataSource>RetailCustTable</DataSource>
+					</AxFormControl>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>RetailCustTable_accountNum</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>accountNum</DataField>
+						<DataSource>RetailCustTable</DataSource>
+					</AxFormControl>
+				</Controls>
+				<HideIfEmpty>No</HideIfEmpty>
+				<Caption>Custom Fields</Caption>
+				<DataSource>RetailCustTable</DataSource>
+			</FormControl>
+			<Parent>TabPageSales</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>

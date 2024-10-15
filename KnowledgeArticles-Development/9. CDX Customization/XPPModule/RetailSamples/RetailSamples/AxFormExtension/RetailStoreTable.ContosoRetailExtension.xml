@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>RetailStoreTable.ContosoRetailExtension</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlyiv5aorr1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormStringControl">
+				<Name>RetailStoreTable_contosoRetailWallPostMessage</Name>
+				<Type>String</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>contosoRetailWallPostMessage</DataField>
+				<DataSource>RetailStoreTable</DataSource>
+			</FormControl>
+			<Parent>Identification</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControllb4j1aqc1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormStringControl">
+				<Name>RetailStoreTable_Payment</Name>
+				<Type>String</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>Payment</DataField>
+				<DataSource>RetailStoreTable</DataSource>
+			</FormControl>
+			<Parent>Identification</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControla3hs1vm11</Name>
+			<FormControl xmlns=""
+				i:type="AxFormStringControl">
+				<Name>RetailStoreTable_PaymMode</Name>
+				<Type>String</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>PaymMode</DataField>
+				<DataSource>RetailStoreTable</DataSource>
+			</FormControl>
+			<Parent>Identification</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>

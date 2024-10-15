@@ -1,0 +1,93 @@
+﻿<RetailCdxSeedData Name="AX7" ChannelDBSchema="ext" ChannelDBMajorVersion="7">
+  <Jobs>
+    <!--Adding a new download job to push the records in ContosoRetailSeatingData. It is not a must to create a new Job. Note that the subjob can be configured to run under existing jobs-->
+    <Job Id="ContosoRetial7000" Description="Seating data Job" DescriptionLabelId="@ContosoRetailLabel:SeattingDataCDXJob" />
+  </Jobs>
+  
+  <Subjobs>
+    <!--Adding existing subjob to another job. -->
+    <Subjob Id="DirPartyTable">
+      <ScheduledByJobs>
+        <ScheduledByJob>1000</ScheduledByJob> <!--add existing subjob to another job-->
+      </ScheduledByJobs>
+      <!--Notice that there is no mention of the <AxFields></AxFields> because the subjob is already mapped in the main RetailCdxSeedData resource file an we are not adding any new or previously unmapped field. -->
+    </Subjob>
+
+    <!--
+				Adding additional columns to (existing) RetailTransactionTable so they are pulled back to AX.
+				For upload subjobs, set the OverrideTarget property to  "false", as ilustrate below. This will tell CDX to use the table defined by TargetTableName and TargetTableSchema as extension table on this subjob.
+        This table must be created on the channel DB with the same primary key as the extended table (in this example, RetailTransactionTable).
+		-->
+    <Subjob Id="RetailTransactionTable" TargetTableName="CONTOSORETAILTRANSACTIONTABLE" TargetTableSchema="ext" OverrideTarget="false">
+      <!--Notice that there is no mention of the <ScheduledByJobs></ScheduledByJobs> because the subjob is already part of an upload job. -->
+      <AxFields>
+        <!--If you notice the existing columns are not listed here in the <Field> tag, this is because the eisting fields are already mapped mapped in the main RetailCdxSeedData resource file we only add the delta here. -->
+        <Field Name="ContosoRetailSeatNumber" />
+        <Field Name="ContosoRetailServerStaffId" />
+      </AxFields>
+    </Subjob>
+    
+    <Subjob Id="RetailTransactionPaymentTrans" TargetTableName="CONTOSORETAILTRANSACTIONPAYMENTTRANS" TargetTableSchema="ext" OverrideTarget="false">
+      <AxFields>
+        <Field Name="BankTransferComment" />
+      </AxFields>
+    </Subjob>
+
+    <!-- Adding new subjob to existing upload/pull job to pull the records from ContosoRetailStaffSuggestions -->
+    <Subjob Id="ContosoRetailStaffSuggestions" AxTableName ="ContosoRetailStaffSuggestions" ReplicationCounterFieldName="ReplicationCounterFromOrigin" IsUpload="true" TargetTableSchema="ext">
+      <ScheduledByJobs>
+        <!--Here we specify what Job is used to run this subjob. This is because the subjob is new and we need to specify which jobs its part of.-->
+        <ScheduledByJob>P-0001</ScheduledByJob>
+      </ScheduledByJobs>
+      <AxFields>
+        <Field Name="SuggestionId" />
+        <Field Name="StoreId" />        
+        <Field Name="TerminalId" />
+        <Field Name="Staff" />
+        <!--If the partner has named this column differently on the channel side this is how to map the ax side column to the channel side column which has a different name  -->
+        <Field Name="SuggestionOrRequest" ToName="Suggetion" /> <!-- the column is named suggestion on channel side but on AX its SuggestionOrRequest-->
+        <Field Name="DateLogged" />
+        <Field Name="ReplicationCounterFromOrigin" />
+      </AxFields>
+    </Subjob>
+
+    <!--Adding new subjob to existing download job-->
+    <!--Note the TargetTableName attribute is used if the AX side table and its corresponding channelTable names are different. 
+    If the AX and channel side table are the same there is no need to specify the TargetTableName only specifying the AXTableName is enough.-->
+    <Subjob Id="ContosoRetailSeatingData" AxTableName ="ContosoRetailSeatingData" TargetTableName="ContosoRetailTableData" TargetTableSchema="ext">
+      <ScheduledByJobs>
+        <ScheduledByJob>ContosoRetial7000</ScheduledByJob>
+      </ScheduledByJobs>
+      <AxFields>
+        <Field Name="SeatNumber" />
+        <!--Not a best practice but if you want the column names to be different on the ax and channel side u can do it using the toName attribute of <Field>-->
+        <Field Name="Capacity" ToName="NumberOfChairs" />
+        <Field Name="StoreNumber" />
+        <Field Name="RecId" />
+      </AxFields>
+    </Subjob>
+    
+    <!--How to update subjob to include previously not pushed columns or new columns added as extensions on the existing table-->
+    <!--Notice that the AXTableName is not specified in the <subjob .... > because we are modifying an existing subjob and
+    the AXTableName is already specified in the original CDXSeedData resource file. 
+    Notice that the name of the table on the target/channel side is set using the  TargetTableName="ContosoRetailChannelTable" change the targetTableName 
+    is a recommended practice if you are modifying an existing table.  This will help to avoid naming conflict if the same table is customized by different partners.-->
+    <Subjob Id="RetailChannelTable" TargetTableName="ContosoRetailChannelTable" TargetTableSchema="ext">
+      <AxFields>
+        <Field Name="Payment" /> <!-- Existing column which was not pushed to channel db-->
+        <Field Name="PaymMode" /> <!-- Existing column which was not pushed to channel db-->
+        <Field Name="ContosoRetailWallPostMessage" /> <!-- New column from the extended table -->
+      </AxFields>
+    </Subjob>
+    
+    <!--Updating subjob to include previously not pushed columns or new extension columns-->
+    <!--table with non RECID primary key-->
+    <!--Notice that the target table name is changed to avoid naming conflict in case the same table is customized by several partners. This is a best practice eventhough using the same name will also work.-->
+    <Subjob Id="RetailCustTable" TargetTableName="ContosoRetailCustTable" TargetTableSchema="ext"> <!--The AXTableName attribute is not used here because this is an already existing subjob and we are only changing the mapping. So no need to specify values of the attributes that we dont need to change -->
+      <AxFields>
+        <Field Name="ReturnTaxGroup_W" /> <!-- Existing column which was not pushed to channel db-->
+        <Field Name="ContosoRetailSSNNumber" /> <!-- New column from the extended table-->
+      </AxFields>
+    </Subjob>
+  </Subjobs>
+</RetailCdxSeedData>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxTableExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>RetailTransactionTable.ContosoRetailExtension</Name>
+	<FieldGroupExtensions />
+	<FieldGroups />
+	<FieldModifications />
+	<Fields>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldInt">
+			<Name>ContosoRetailSeatNumber</Name>
+			<ExtendedDataType>ContosoRetailSeatNumber</ExtendedDataType>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldString">
+			<Name>ContosoRetailServerStaffId</Name>
+			<ExtendedDataType>RetailStaffId</ExtendedDataType>
+			<Label>@ContosoRetailLabel:ContosoRetailServerStaffId</Label>
+		</AxTableField>
+	</Fields>
+	<FullTextIndexes />
+	<Indexes />
+	<Mappings />
+	<PropertyModifications />
+	<RelationExtensions />
+	<RelationModifications />
+	<Relations />
+</AxTableExtension>

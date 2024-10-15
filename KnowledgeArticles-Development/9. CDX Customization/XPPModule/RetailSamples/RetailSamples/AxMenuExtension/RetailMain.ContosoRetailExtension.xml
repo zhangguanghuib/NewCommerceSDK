@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxMenuExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V1">
+	<Name>RetailMain.ContosoRetailExtension</Name>
+	<Customizations />
+	<Elements>
+		<AxMenuExtensionElement xmlns="">
+			<MenuElement xmlns=""
+				i:type="AxMenuElementSubMenu">
+				<Name>ContosoRetailTableExtensionAndCDXSampleLinks</Name>
+				<Label>@ContosoRetailLabel:ContosoTableAndCDXExtensionSampleLinks</Label>
+				<Elements>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>ContosoRetailSeatingDataMenuItem</Name>
+						<MenuItemName>ContosoRetailSeatingDataMenuItem</MenuItemName>
+					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>ContosoRetailStaffSugesstionsMenuItem</Name>
+						<MenuItemName>ContosoRetailStaffSuggestionsMenuItem</MenuItemName>
+					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>RetailCustTable</Name>
+						<MenuItemName>CustTable</MenuItemName>
+					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>RetailTransactionTable</Name>
+						<MenuItemName>RetailTransactionTable</MenuItemName>
+					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>RetailChannelTable</Name>
+						<MenuItemName>RetailStoreTable</MenuItemName>
+					</AxMenuElement>
+				</Elements>
+			</MenuElement>
+		</AxMenuExtensionElement>
+	</Elements>
+	<MenuElementModifications />
+	<PropertyModifications />
+</AxMenuExtension>

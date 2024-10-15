@@ -1,0 +1,28 @@
+ContosoSeatingData=Contoso seating data
+ ;Form title for ContosoRetailSeatingData form
+ContosoSamples=Contoso sample links
+ ;Label for the menu group which contains the links that open the forms used in this sample.
+ContosoStaffSuggestionForm=Contoso staff suggestion details
+ ;ContosoRetailStaffSuggestionForm title 
+ContosoSeatNumber=Seat number
+ ;Label id for ContosoRetailSeatNumber EDT
+SeatCapacity=Capacity
+ ;Column label for the SeatCapacity column in ContosoRetailSeatingData table.
+ContosoTableAndCDXExtensionSampleLinks=Contoso table and CDX extension sample
+ ;Menu group label
+ContosoRetailServerStaffId=Server staff Id
+ ;Column label for the ContosoRetailServerStaffId column in RetailTransactionTable.ContosoRetailExtension table
+SuggestionId=Suggestion Id
+ ;Column label for theSuggestionId column in ContosoRetailStaffSuggestion table
+StaffSuggestionFormCaption=Staff suggestion detail form
+ ;Form title for ContosoRetailStaffSuggestion form
+DateLogged=Date logged
+ ;Column label for the DatteLogged column in ContosoRetailStaffSuggestion table
+SuggestionDetail=Suggestion detail
+ ;Column label for the SuggestionOrRequest column in ContosoRetailStaffSuggestion table
+ContosoRetailSeatingDataTableDoc=Table for storing seating data.
+ ;Table documentation for ContosoRetailSeatingData table
+ContosoRetailStaffSuggestionTableDoc=contoso retail staff suggestion table.
+ ;Table documentation for ContosoRetailStaffSuggestiontable
+SeattingDataCDXJob=Seating data job
+ ;CDX job description for job ContosoRetail7000

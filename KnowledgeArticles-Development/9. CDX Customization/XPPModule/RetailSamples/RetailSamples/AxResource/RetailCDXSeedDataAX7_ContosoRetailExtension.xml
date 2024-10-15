@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxResource xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>RetailCDXSeedDataAX7_ContosoRetailExtension</Name>
+	<FileName>RetailCDXSeedDataAX7_ContosoRetailExtension.xml</FileName>
+	<RelativeUriInModelStore>RetailSamples\RetailSamples\AxResource\ResourceContent\XmlDoc\RetailCDXSeedDataAX7_ContosoRetailExtension.xml</RelativeUriInModelStore>
+	<TypeOfResource>XmlDoc</TypeOfResource>
+</AxResource>

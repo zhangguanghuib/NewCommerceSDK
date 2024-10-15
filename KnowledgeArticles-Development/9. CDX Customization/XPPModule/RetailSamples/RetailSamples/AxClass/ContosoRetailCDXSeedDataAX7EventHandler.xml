@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ContosoRetailCDXSeedDataAX7EventHandler</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class that contains the implementation of the registerCDXSeedDataExtension delegate for registering the ContosoRetial CDX seed data customization.
+/// </summary>
+class ContosoRetailCDXSeedDataAX7EventHandler
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>RetailCDXSeedDataBase_registerCDXSeedDataExtension</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Registers the extension CDX seed data resource to be used during CDX seed data generation..
+    /// </summary>
+    /// <param name="result">The result object which is used to return the resource name.</param>
+    [SubscribesTo(classStr(RetailCDXSeedDataBase), delegateStr(RetailCDXSeedDataBase, registerCDXSeedDataExtension))]
+    public static void RetailCDXSeedDataBase_registerCDXSeedDataExtension(str originalCDXSeedDataResource, List resources)
+    {
+        if (originalCDXSeedDataResource == resourceStr(RetailCDXSeedDataAX7))
+        {
+            resources.addEnd(resourceStr(RetailCDXSeedDataAX7_ContosoRetailExtension));
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

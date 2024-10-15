@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>RetailTransactionTable.ContosoRetailExtension</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControluhjmwm3e1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormStringControl">
+				<Name>transactionTable_ContosoRetailServerStaffId</Name>
+				<Type>String</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>contosoRetailServerStaffId</DataField>
+				<DataSource>transactionTable</DataSource>
+			</FormControl>
+			<Parent>Group_Group</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControls2qcqt4k1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormIntegerControl">
+				<Name>transactionTable_ContosoRetailSeatNumber</Name>
+				<Type>Integer</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>ContosoRetailSeatNumber</DataField>
+				<DataSource>transactionTable</DataSource>
+			</FormControl>
+			<Parent>Group_Group</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlote5ttcg1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormIntegerControl">
+				<Name>transactionTable_ContosoRetailSeatNumber1</Name>
+				<Type>Integer</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>ContosoRetailSeatNumber</DataField>
+				<DataSource>transactionTable</DataSource>
+			</FormControl>
+			<Parent>Grid</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlixjbbml51</Name>
+			<FormControl xmlns=""
+				i:type="AxFormStringControl">
+				<Name>transactionTable_ContosoRetailServerStaffId1</Name>
+				<Type>String</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<DataField>ContosoRetailServerStaffId</DataField>
+				<DataSource>transactionTable</DataSource>
+			</FormControl>
+			<Parent>Grid</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>
