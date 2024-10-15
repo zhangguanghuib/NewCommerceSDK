@@ -206,8 +206,8 @@ During the D365 Commerce Project Implementation, create custom table and push an
         2. Check the FO table browser to confirm the custom fields have values<br/>
         <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
         3. Run download session and check the channel database<br/>
-        
-        ![image](https://github.com/user-attachments/assets/7eddcc7e-517f-45cf-84e7-e4627c23f79a)<br/>
+           ![image](https://github.com/user-attachments/assets/e4f793ec-ad7b-4586-8dba-3a6bf2d281c4)
+
      + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</u></mark><br/>
         1. Insert records into channel database:<br/>
         ```
