@@ -153,7 +153,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
       - <mark>Table in Scheduler Subjob<br/>
       ![image](https://github.com/user-attachments/assets/ff21d2fe-68fb-42ac-88de-133b6d23f754)<br/>
-  5. How to verify the custome CDX is working or not? <br/>
+  + Step 4: How to verify the custome CDX is working or not? <br/>
       + <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
          1. Create a new record and provide value to the custom field:
         ```sql
@@ -226,10 +226,13 @@ During the D365 Commerce Project Implementation, create custom table and push an
         3. Find the menu items<br/>
         <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
         4. Open the form and verify the data got uploaded<br/>
-        ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)
+        ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)<br/>
 
 
-
+# Code link:
+1. Channel Database Script:<br/>
+https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/CDXCustomization/ChannelDatabase
+2. HQ all object:<br/>
 
 
 
