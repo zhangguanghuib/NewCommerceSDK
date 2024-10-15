@@ -138,11 +138,11 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
        ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
    -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
-      - Table in Channel Table<br/>
+      - <mark>Table in Channel Table</mark><br/>
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
-      - Table in AOT<br/>
+      - <mark>Table in AOT</mark><br/>
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
-      - Scheduler Subjob<br/>
+      - <mark>Scheduler Subjob</mark><br/>
       <img width="1171" alt="image" src="https://github.com/user-attachments/assets/e294eabc-ed1c-43a3-8e7d-eca7fa34c31a"><br/>
    - <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
       - <mark>Table in Channel Database<mark/><br/>
@@ -162,21 +162,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
       select TRANSACTIONID TRANSACTIONID, STORE, CHANNEL, TERMINAL, DATAAREAID, 10, '000160' from ax.retailTransactionTable as T
       where T.RECEIPTID =  'STONN-42100236'
       
-      INSERT INTO [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]
-                 ([CHANNEL]
-                 ,[STORE]
-                 ,[TERMINAL]
-                 ,[DATAAREAID]
-                 ,[TRANSACTIONID]
-                 ,[LINENUM]
-                 ,[BANKTRANSFERCOMMENT])
-      SELECT [CHANNEL]
-      		,[STORE]
-      		,[TERMINAL]
-      		,[DATAAREAID]
-      		,[TRANSACTIONID]
-      		,[LINENUM],
-      		'BankTransfer'
+      INSERT INTO [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] ([CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],[BANKTRANSFERCOMMENT])
+      SELECT [CHANNEL],[STORE],[TERMINAL],[DATAAREAID],[TRANSACTIONID],[LINENUM],'BankTransfer'
       from ax.RETAILTRANSACTIONPAYMENTTRANS where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
       
       select * from ext.CONTOSORETAILTRANSACTIONTABLE where TransactionId = 'HOUSTON-HOUSTON-42-1728640504337'
@@ -193,8 +180,7 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
      <hr/>
      + RetailChannelTable=>Dowload Sessions:<br/>
-     <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
-     
+     <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>     
      ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
      ```sql
       select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
