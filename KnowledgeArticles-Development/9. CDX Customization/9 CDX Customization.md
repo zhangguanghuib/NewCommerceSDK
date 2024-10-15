@@ -193,8 +193,8 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
      <hr/>
      + RetailChannelTable=>Dowload Sessions:<br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
+     
      ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
-
      ```sql
       select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
        join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
