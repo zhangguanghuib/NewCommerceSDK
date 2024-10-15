@@ -209,8 +209,11 @@ For upload subjobs, set the OverrideTarget property to  "false", as ilustrate be
        SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
       ```
      ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
+     2. Check the Upload Sessions<br/>
      <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
+     3. Find the menu items<br/>
      <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
+     4. Open the form and verify the data got uploaded<br/>
      ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)
 
 
