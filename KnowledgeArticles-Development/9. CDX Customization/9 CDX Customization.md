@@ -150,11 +150,11 @@
 
 - Step 3: Table Structure in HQ and Channel Database<br/>
   1 <mark>Table Name: ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
-  Table in FO AOT <br/>
+  - Table in FO AOT <br/>
   <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
-  Table in Channel DB <br/>
+  - Table in Channel DB <br/>
   ![image](https://github.com/user-attachments/assets/f2abf0a4-52b0-43d8-bcc8-38dcefdc19f1)<br/>
-
+  - SQL Script <br/>
 ```sql
 IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTABLEDATA]')) IS NOT NULL
 BEGIN
