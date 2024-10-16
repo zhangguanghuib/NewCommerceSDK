@@ -282,42 +282,42 @@ GO
          ![image](https://github.com/user-attachments/assets/1aac8f3d-8bc8-4dda-a0c2-f62320437c22)<br/>
 
 - Sql Script <br/>
-       ```sql
-        IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]')) IS NOT NULL
-         BEGIN
-            DROP TABLE [EXT].CONTOSORETAILTRANSACTIONPAYMENTTRANS
-         END
-         GO
+ ```sql
+  IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]')) IS NOT NULL
+   BEGIN
+      DROP TABLE [EXT].CONTOSORETAILTRANSACTIONPAYMENTTRANS
+   END
+   GO
 
-         CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS](
-         	[CHANNEL]             [bigint] NOT NULL,
-             [STORE]               [nvarchar](10) NOT NULL,
-         	[TERMINAL]            [nvarchar](10) NOT NULL,
-         	[DATAAREAID]          [nvarchar](4) NOT NULL,
-             [TRANSACTIONID]       [nvarchar](44) NOT NULL,
-             [LINENUM]             [numeric](32, 16) NOT NULL,
-             [BANKTRANSFERCOMMENT] [nvarchar](100) NOT NULL DEFAULT('')
-          CONSTRAINT [P_EXT_CONTOSORETAILTRANSACTIONPAYMENTTRANS] PRIMARY KEY CLUSTERED
-         (
-         	[CHANNEL] ASC,
-         	[STORE] ASC,
-         	[TERMINAL] ASC,
-         	[TRANSACTIONID] ASC,
-         	[LINENUM] ASC,
-         	[DATAAREAID] ASC
-         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-         ) ON [PRIMARY]
-         GO
+   CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS](
+      [CHANNEL]             [bigint] NOT NULL,
+       [STORE]               [nvarchar](10) NOT NULL,
+      [TERMINAL]            [nvarchar](10) NOT NULL,
+      [DATAAREAID]          [nvarchar](4) NOT NULL,
+       [TRANSACTIONID]       [nvarchar](44) NOT NULL,
+       [LINENUM]             [numeric](32, 16) NOT NULL,
+       [BANKTRANSFERCOMMENT] [nvarchar](100) NOT NULL DEFAULT('')
+    CONSTRAINT [P_EXT_CONTOSORETAILTRANSACTIONPAYMENTTRANS] PRIMARY KEY CLUSTERED
+   (
+      [CHANNEL] ASC,
+      [STORE] ASC,
+      [TERMINAL] ASC,
+      [TRANSACTIONID] ASC,
+      [LINENUM] ASC,
+      [DATAAREAID] ASC
+   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+   ) ON [PRIMARY]
+   GO
 
-         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DataSyncUsersRole];
-         GO
+   GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DataSyncUsersRole];
+   GO
 
-         GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [UsersRole]
-         GO
+   GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [UsersRole]
+   GO
 
-         GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DeployExtensibilityRole]
-         GO
-       ```
+   GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DeployExtensibilityRole]
+   GO
+ ```
      6. <mark>Table Name:ContosoRetailStaffSuggestions </mark><br/>
      - AOT<br/>
         <img width="1096" alt="image" src="https://github.com/user-attachments/assets/6fada673-cc06-42f0-885f-26de4f67fb76"><br/>
