@@ -111,7 +111,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
    </RetailCdxSeedData>
 ```
 + Step 2: Check the Distribution Scheduler and Job and Subjobs<br/>
-  1. Table DirPartyTable <br/>
+  1  Table DirPartyTable <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
     <hr/>
     <mark>For Upload Data from Channel DB to FO DB</mark>:<br/>
