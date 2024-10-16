@@ -114,7 +114,6 @@ During the D365 Commerce Project Implementation, create custom table and push an
   1  <mark>Table DirPartyTable=>Adding existing subjob to another job.</mark>  <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
     <hr/>
-    <mark>For Upload Data from Channel DB to FO DB</mark>:<br/>
   2. <mark>RetailTransactionTable=>Upload Session=>Add new custom columns to existing table</mark>:<br/>
     <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
     and from this table we can find the Channel Table Name and its fields:<br/>
