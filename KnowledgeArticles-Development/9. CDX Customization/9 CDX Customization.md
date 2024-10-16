@@ -126,7 +126,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
   
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
     mi=RetailConnLocationDesignTable:<br/>   
-    <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99">
+    <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99"><br/>
   5. <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
       Commerce Scheduler SubJobs:<br/>
        ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
