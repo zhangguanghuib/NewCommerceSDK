@@ -423,6 +423,8 @@ During the D365 Commerce Project Implementation, create custom table and push an
 https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/CDXCustomization/ChannelDatabase<br/>
 2. HQ all object:<br/>
 https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Development/9.%20CDX%20Customization<br/>
+<img width="286" alt="image" src="https://github.com/user-attachments/assets/18e641f7-152a-4a8f-920f-61eaa25f7a4c"><br/>
+
 
 # Key points of CDX customization:
 1. If you want to push a totally new table from channel database to D365 FO HQ  database, please follow this rules:<br/>
