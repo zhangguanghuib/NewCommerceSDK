@@ -239,11 +239,11 @@ GO
 ```
 
 4.<mark>Table Name: RetailTransactionTable</mark><br/>
-     1. AOT<br/>
+- AOT<br/>
        <img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
-     2. Channel<br/>
+- Channel<br/>
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
-     3. Sql Script<br/>
+- Sql Script<br/>
 ```sql
 IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL
 BEGIN
@@ -275,13 +275,13 @@ GO
 ```
 
 5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
-   + AOT<br/>
+- AOT<br/>
        <img width="1030" alt="image" src="https://github.com/user-attachments/assets/d1b116d0-b4e2-4bc8-86ab-5b84abfa14e7"><br/>
 
-   + Channel<br/>
+- Channel<br/>
          ![image](https://github.com/user-attachments/assets/1aac8f3d-8bc8-4dda-a0c2-f62320437c22)<br/>
 
-   + Sql Script <br/>
+- Sql Script <br/>
        ```sql
         IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]')) IS NOT NULL
          BEGIN
@@ -319,13 +319,13 @@ GO
          GO
        ```
      6. <mark>Table Name:ContosoRetailStaffSuggestions </mark><br/>
-        + AOT<br/>
+     - AOT<br/>
         <img width="1096" alt="image" src="https://github.com/user-attachments/assets/6fada673-cc06-42f0-885f-26de4f67fb76"><br/>
 
-        + Channel<br/>
+     - Channel<br/>
         ![image](https://github.com/user-attachments/assets/90974125-6255-4f32-9de5-168cdfe36cb6)<br/>
 
-        + SQL Script<br/>
+     - SQL Script<br/>
         ```sql
          IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILSTAFFSUGGESTIONS]')) IS NOT NULL
          BEGIN
