@@ -202,7 +202,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       - <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
 
-      ```sql
+```sql
       IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL  
       BEGIN
         DROP TABLE [EXT].CONTOSORETAILCUSTTABLE
@@ -223,7 +223,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       
       GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] TO [DataSyncUsersRole];
       GO
-      ```
+```
   4. RetailTransactionTable<br/>
       1. AOT<br/>
         
