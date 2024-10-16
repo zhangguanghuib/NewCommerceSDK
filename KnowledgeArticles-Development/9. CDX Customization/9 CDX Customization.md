@@ -1,6 +1,6 @@
 ## D365 Commerce CDX Customization.
 
-0. How to read this document<br/>
+0. How to read this document?<br/>
    - Go through the XML content
    - Check the Scheduler job & Scheduler Subjobs & Fields Mappings
    - Check the table structure in AOT & Channel & SQL Script to create table
