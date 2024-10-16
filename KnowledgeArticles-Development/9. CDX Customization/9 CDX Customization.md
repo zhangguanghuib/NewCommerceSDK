@@ -425,33 +425,33 @@ select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STOR
         3. Run download session and check the channel database<br/>
            ![image](https://github.com/user-attachments/assets/e4f793ec-ad7b-4586-8dba-3a6bf2d281c4)<br/>
 
-         ```sql
-         USE [RetailChannelDatabase]
-         GO
+```sql
+USE [RetailChannelDatabase]
+GO
 
-         SELECT [ACCOUNTNUM]
-               ,[DATAAREAID]
-               ,[RETURNTAXGROUP_W]
-               ,[CONTOSORETAILSSNNUMBER]
-           FROM [ext].[CONTOSORETAILCUSTTABLE]
+SELECT [ACCOUNTNUM]
+      ,[DATAAREAID]
+      ,[RETURNTAXGROUP_W]
+      ,[CONTOSORETAILSSNNUMBER]
+  FROM [ext].[CONTOSORETAILCUSTTABLE]
 
-         GO
-         ```
+GO
+```
 
   - <mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</mark><br/>
      1. Insert records into channel database:<br/>
-     ```
-        USE [RetailChannelDatabase]
-         GO
+```sql
+  USE [RetailChannelDatabase]
+   GO
 
-       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-            VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
+ INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+      VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
 
-       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-            VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
-       GO
-       SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-      ```
+ INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+      VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
+ GO
+ SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+```
      ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
      2. Check the Upload Sessions<br/>
      <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
