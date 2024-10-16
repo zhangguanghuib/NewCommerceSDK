@@ -110,20 +110,20 @@ During the D365 Commerce Project Implementation, create custom table and push an
      </Subjobs>
    </RetailCdxSeedData>
 ```
-+ Step 2: Check the Distribution Scheduler and Jobs and Subjobs created by above XML<br/>
++ Step 2: Check the Distribution Scheduler and Jobs and Subjobs created by above XML.<br/>
   1  <mark>Table DirPartyTable=>Adding existing subjob to another job.</mark>  <br/>
     <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
     <hr/>
     <mark>For Upload Data from Channel DB to FO DB</mark>:<br/>
-  2. RetailTransactionTable<br/>
+  2. <mark>RetailTransactionTable=>Upload Session=>Add new custom columns to existing table</mark>:<br/>
     <img width="1148" alt="image" src="https://github.com/user-attachments/assets/139ee594-de62-4463-9561-cf9e185d4f02"><br/>
     and from this table we can find the Channel Table Name and its fields:<br/>
     <img width="679" alt="image" src="https://github.com/user-attachments/assets/745723f0-2e72-400e-b320-7e06e49266f5"><br/>
-  3. RetailTransactionPaymentTrans<br/>
+  3. <mark>RetailTransactionPaymentTrans=>Upload Session=>Add new custom columns to existing table</mark>:<br/>
      <img width="1175" alt="image" src="https://github.com/user-attachments/assets/9c032705-7e4b-4b94-a06f-a061c97a80c4"><br/>
      and from this table we can find the Channel Table Name and its fields:<br/>
      <img width="715" alt="image" src="https://github.com/user-attachments/assets/24582c54-1d08-4ec2-b631-e65942d404a6"><br/>
-  4. ContosoRetailStaffSuggestions <br/>
+  4. <mark>ContosoRetailStaffSuggestions =>Upload Session=>Totally new table in HQ and Channel Database</mark>:<br/>
   
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
     In Channel Database:<br/>
