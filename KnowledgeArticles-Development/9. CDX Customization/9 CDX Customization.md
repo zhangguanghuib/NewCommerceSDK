@@ -144,6 +144,31 @@ During the D365 Commerce Project Implementation, create custom table and push an
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
        ![image](https://github.com/user-attachments/assets/f2abf0a4-52b0-43d8-bcc8-38dcefdc19f1)
+
+      ```sql
+         IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTABLEDATA]')) IS NOT NULL 
+         BEGIN
+            DROP TABLE [EXT].[CONTOSORETAILTABLEDATA]
+         END
+         
+         CREATE TABLE [ext].[CONTOSORETAILTABLEDATA](
+         	[SEATNUMBER] [int] NOT NULL,
+         	[NUMBEROFCHAIRS] [int] NOT NULL,
+         	[STORENUMBER] [nvarchar](10) NOT NULL,
+         	[RECID] [bigint] NOT NULL,
+             CONSTRAINT [PK_EXT_CONTOSORETAILTABLEDATA_RECID] PRIMARY KEY CLUSTERED (
+         	[RECID] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+            CONSTRAINT [PK_EXT_CONTOSORETAILTABLEDATA]  UNIQUE NONCLUSTERED (
+         	[SEATNUMBER] ASC,
+         	[STORENUMBER] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+         ) ON [PRIMARY]
+         GO
+         
+         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTABLEDATA] TO [DataSyncUsersRole];
+         GO
+      ```
       
    -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
       - <mark>Table in Channel Table</mark><br/>
