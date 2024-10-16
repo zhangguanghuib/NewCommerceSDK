@@ -1,4 +1,4 @@
-## D365 Commerce CDX Customization.
+![image](https://github.com/user-attachments/assets/49ed2dae-8c24-4f02-ae82-fdb790d4f30b)## D365 Commerce CDX Customization.
 
 1. <ins>Background:</ins><br/>
 During the D365 Commerce Project Implementation, create custom table and push and pull data between HQ and CSU database is very important, this article will show cases how to make CDX customization based on the official samples.
@@ -225,40 +225,118 @@ During the D365 Commerce Project Implementation, create custom table and push an
       GO
       ```
   4. RetailTransactionTable<br/>
-     1) AOT
+      1. AOT<br/>
         
-     3) Channel
+     2. Channel<br/>
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
-     5) Sql Script
+     3. Sql Script<br/>
      ```sql
-     IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
-      BEGIN
-         DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
-      END
-      GO
-      
-      CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
-          [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
-      	[CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
-      	[TRANSACTIONID] [nvarchar](44) NOT NULL,
-      	[STORE] [nvarchar](10) NOT NULL,
-      	[CHANNEL] [bigint] NOT NULL,
-      	[TERMINAL] [nvarchar](10) NOT NULL,
-      	[DATAAREAID] [nvarchar](4) NOT NULL,
-       CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
-      (
-      	[TRANSACTIONID] ASC,
-      	[STORE] ASC,
-      	[CHANNEL] ASC,
-      	[TERMINAL] ASC,
-      	[DATAAREAID] ASC
-      )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-      ) ON [PRIMARY]
-      GO
-      
-      GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
-      GO
+        IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
+         BEGIN
+            DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
+         END
+         GO
+         
+         CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
+             [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
+         	[CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
+         	[TRANSACTIONID] [nvarchar](44) NOT NULL,
+         	[STORE] [nvarchar](10) NOT NULL,
+         	[CHANNEL] [bigint] NOT NULL,
+         	[TERMINAL] [nvarchar](10) NOT NULL,
+         	[DATAAREAID] [nvarchar](4) NOT NULL,
+          CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
+         (
+         	[TRANSACTIONID] ASC,
+         	[STORE] ASC,
+         	[CHANNEL] ASC,
+         	[TERMINAL] ASC,
+         	[DATAAREAID] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+         ) ON [PRIMARY]
+         GO
+         
+         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
+         GO
      ```
+
+     5. RetailTransactionPaymentTrans:<br/>
+       + AOT<br/>
+       + Channel<br/>
+         ![image](https://github.com/user-attachments/assets/1aac8f3d-8bc8-4dda-a0c2-f62320437c22)
+
+       + Sql Script <br/>
+       ```sql
+        IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]')) IS NOT NULL 
+         BEGIN
+            DROP TABLE [EXT].CONTOSORETAILTRANSACTIONPAYMENTTRANS
+         END
+         GO
+         
+         CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS](
+         	[CHANNEL]             [bigint] NOT NULL,
+             [STORE]               [nvarchar](10) NOT NULL,
+         	[TERMINAL]            [nvarchar](10) NOT NULL,
+         	[DATAAREAID]          [nvarchar](4) NOT NULL,
+             [TRANSACTIONID]       [nvarchar](44) NOT NULL,	
+             [LINENUM]             [numeric](32, 16) NOT NULL,
+             [BANKTRANSFERCOMMENT] [nvarchar](100) NOT NULL DEFAULT('')
+          CONSTRAINT [P_EXT_CONTOSORETAILTRANSACTIONPAYMENTTRANS] PRIMARY KEY CLUSTERED 
+         (
+         	[CHANNEL] ASC,
+         	[STORE] ASC,
+         	[TERMINAL] ASC,
+         	[TRANSACTIONID] ASC,
+         	[LINENUM] ASC,
+         	[DATAAREAID] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+         ) ON [PRIMARY]
+         GO
+         
+         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DataSyncUsersRole];
+         GO
+         
+         GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [UsersRole]
+         GO
+         
+         GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DeployExtensibilityRole]
+         GO
+       ```
+     6. ContosoRetailStaffSuggestions <br/>
+        + AOT<br/>
+        + Channel<br/>
+        ![image](https://github.com/user-attachments/assets/90974125-6255-4f32-9de5-168cdfe36cb6)
+
+        + SQL Script<br/>
+        ```sql
+         IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILSTAFFSUGGESTIONS]')) IS NOT NULL  
+         BEGIN
+             DROP TABLE [EXT].[CONTOSORETAILSTAFFSUGGESTIONS]
+         END
+         
+         CREATE TABLE [ext].CONTOSORETAILSTAFFSUGGESTIONS(
+         	[SUGGESTIONID] [int] NOT NULL,
+         	[STOREID] [nvarchar](10) NOT NULL,
+         	[STAFF] [nvarchar](25) NOT NULL,
+         	[TERMINALID] [nvarchar](10) NOT NULL,
+         	[SUGGETION] [nvarchar](255) NOT NULL,
+         	[DATAAREAID] [nvarchar](4) NOT NULL,
+         	[DATELOGGED] [date] NOT NULL,
+         	[ROWVERSION] [timestamp] NOT NULL,
+         	[REPLICATIONCOUNTERFROMORIGIN] [int] IDENTITY(1,1) NOT NULL,
+         	 CONSTRAINT [PK_EXT_CONTOSORETAILSTAFFSUGGESTIONS] PRIMARY KEY CLUSTERED 
+         (
+         	[SUGGESTIONID] ASC,
+         	[STOREID] ASC,
+         	[TERMINALID] ASC,
+         	[DATAAREAID] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+         ) ON [PRIMARY]
+         GO
+         
+         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILSTAFFSUGGESTIONS] TO [DataSyncUsersRole];
+         GO
+        ```
   + Step 4: How to verify the custome CDX is working or not? <br/>
       + <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
          1. Create a new record and provide value to the custom field:
