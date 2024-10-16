@@ -1,5 +1,11 @@
 ## D365 Commerce CDX Customization.
-
+0. How to read this document<br/>
+   + Go through the XML content
+   + Check the Scheduler job & Scheduler Subjobs & Fields Mappings
+   + Check the table structure in AOT & Channel & SQL Script to create table
+   + How to verify the upload and download sessions worked
+   + Source code link
+   + Trouble shooting key points
 1. <ins>Background:</ins><br/>
 During the D365 Commerce Project Implementation, create custom table and push and pull data between HQ and CSU database is very important, this article will show cases how to make CDX customization based on the official samples.
 2. First of all, every time when a new extension sql script is deployed to CSU, it will be recorded into the below table:<br/>
