@@ -125,9 +125,8 @@ During the D365 Commerce Project Implementation, create custom table and push an
   4. <mark>ContosoRetailStaffSuggestions =>Upload Session=>Totally new table in HQ and Channel Database</mark>:<br/>
   
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
-    In Channel Database:<br/>
-    
-    ![image](https://github.com/user-attachments/assets/278cb01d-4b84-437d-b368-6d0c34120d64)
+    mi=RetailConnLocationDesignTable:<br/>   
+    <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99">
     In AOT: <br/>
     <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
 + Step 3: Check the Distribution Scheduler and Job and Subjobs<br/>
