@@ -380,6 +380,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
         ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
         4. Check channel database and confirm the data got pushed to channel database.<br/>
         ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
+        
 ```sql
 USE [RetailChannelDatabase]
 GO
@@ -399,11 +400,11 @@ GO
         2. Run 1070 Job, then check Channel Database<br/>
         ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
         3. The SQL script to run<br/>
-        ```sql
-         select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
-          join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
-          where T1.STORENUMBER = 'HOUSTON'
-        ```
+```sql
+select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
+ join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
+ where T1.STORENUMBER = 'HOUSTON'
+```
         <br/>
 
      + <mark>RetailCustTable=>Dowload Sessions=>New fields on existint table</mark><br/>
@@ -413,18 +414,19 @@ GO
         <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
         3. Run download session and check the channel database<br/>
            ![image](https://github.com/user-attachments/assets/e4f793ec-ad7b-4586-8dba-3a6bf2d281c4)<br/>
-```sql
-USE [RetailChannelDatabase]
-GO
-
-SELECT [ACCOUNTNUM]
-      ,[DATAAREAID]
-      ,[RETURNTAXGROUP_W]
-      ,[CONTOSORETAILSSNNUMBER]
-  FROM [ext].[CONTOSORETAILCUSTTABLE]
-
-GO
-```
+           
+         ```sql
+         USE [RetailChannelDatabase]
+         GO
+         
+         SELECT [ACCOUNTNUM]
+               ,[DATAAREAID]
+               ,[RETURNTAXGROUP_W]
+               ,[CONTOSORETAILSSNNUMBER]
+           FROM [ext].[CONTOSORETAILCUSTTABLE]
+         
+         GO
+         ```
 
      + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</u></mark><br/>
         1. Insert records into channel database:<br/>
