@@ -206,12 +206,13 @@ GO
          GO
 ```
 
-3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/> - <mark>Table in Channel Database<mark/><br/>
+3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/> 
+- <mark>Table in Channel Database<mark/><br/>
 ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
 
 - <mark>Table in AOT</mark><br/>
   <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
-
+- SQL Script<br/>
 ```sql
 IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL
 BEGIN
@@ -235,14 +236,12 @@ GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] T
 GO
 ```
 
-4.<mark>Table Name: RetailTransactionTable</mark><br/> 1. AOT<br/>
-<img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
-
+4.<mark>Table Name: RetailTransactionTable</mark><br/>
+     1. AOT<br/>
+       <img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
      2. Channel<br/>
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
-
      3. Sql Script<br/>
-
 ```sql
 IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL
 BEGIN
@@ -273,14 +272,14 @@ GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONT
 GO
 ```
 
-     5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
-       + AOT<br/>
-       <img width="1030" alt="image" src="https://github.com/user-attachments/assets/d1b116d0-b4e2-4bc8-86ab-5b84abfa14e7">
+5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
+   + AOT<br/>
+       <img width="1030" alt="image" src="https://github.com/user-attachments/assets/d1b116d0-b4e2-4bc8-86ab-5b84abfa14e7"><br/>
 
-       + Channel<br/>
-         ![image](https://github.com/user-attachments/assets/1aac8f3d-8bc8-4dda-a0c2-f62320437c22)
+   + Channel<br/>
+         ![image](https://github.com/user-attachments/assets/1aac8f3d-8bc8-4dda-a0c2-f62320437c22)<br/>
 
-       + Sql Script <br/>
+   + Sql Script <br/>
        ```sql
         IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS]')) IS NOT NULL
          BEGIN
@@ -359,7 +358,7 @@ GO
 
   - <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
 
-    1.  Create a new record and provide value to the custom field:
+    1.  Create a new record and provide value to the custom field:<br/>
 
     ```sql
      select  T.TRANSACTIONID, * from ax.retailTransactionTable as T where T.RECEIPTID =  'STONN-42100236'
