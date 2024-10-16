@@ -127,16 +127,18 @@ During the D365 Commerce Project Implementation, create custom table and push an
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
     mi=RetailConnLocationDesignTable:<br/>   
     <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99">
-+ Step 3: Check the Distribution Scheduler and Job and Subjobs<br/>
+  5. <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
+      Commerce Scheduler SubJobs:<br/>
+       ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
+       ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
++ Step 3: Table Structure in HQ and Channel Database<br/>
   <mark>Push Data from FO DB to Channel DB(download sessions)</mark><br/>
     - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
        ![image](https://github.com/user-attachments/assets/f2abf0a4-52b0-43d8-bcc8-38dcefdc19f1)
-       Commerce Scheduler SubJobs:<br/>
-       ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
-       ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)
+      
    -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
       - <mark>Table in Channel Table</mark><br/>
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
