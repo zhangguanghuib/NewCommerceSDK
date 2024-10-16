@@ -139,7 +139,7 @@
   ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
   mi=RetailConnLocationDesignTable:<br/>  
    <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99"><br/> 5. <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
-  (HQ table name: ContosoRetailSeatingData/ Channel Table Name: ext.ContosoRetailTableData):<br/>
+  (HQ table name: ContosoRetailSeatingData/ Channel Table Name: ext.ContosoRetailTableData, please notice they both are <mark>different</mark>):<br/>
   ![image](https://github.com/user-attachments/assets/661592ec-197a-4451-a5c1-96d40c6d4742)<br/>
   ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
   ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)<br/> 6. <mark>RetailChannelTable => Download Session=>Existing table with existing columns and new columns<br/>
