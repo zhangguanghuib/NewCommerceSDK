@@ -236,36 +236,37 @@ During the D365 Commerce Project Implementation, create custom table and push an
 
      2. Channel<br/>
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
+        
      3. Sql Script<br/>
-     ```sql
-        IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
-         BEGIN
-            DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
-         END
-         GO
-         
-         CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
-             [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
-         	[CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
-         	[TRANSACTIONID] [nvarchar](44) NOT NULL,
-         	[STORE] [nvarchar](10) NOT NULL,
-         	[CHANNEL] [bigint] NOT NULL,
-         	[TERMINAL] [nvarchar](10) NOT NULL,
-         	[DATAAREAID] [nvarchar](4) NOT NULL,
-          CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
-         (
-         	[TRANSACTIONID] ASC,
-         	[STORE] ASC,
-         	[CHANNEL] ASC,
-         	[TERMINAL] ASC,
-         	[DATAAREAID] ASC
-         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-         ) ON [PRIMARY]
-         GO
-         
-         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
-         GO
-     ```
+```sql
+   IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
+   BEGIN
+      DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
+   END
+   GO
+   
+   CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
+       [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
+      [CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
+      [TRANSACTIONID] [nvarchar](44) NOT NULL,
+      [STORE] [nvarchar](10) NOT NULL,
+      [CHANNEL] [bigint] NOT NULL,
+      [TERMINAL] [nvarchar](10) NOT NULL,
+      [DATAAREAID] [nvarchar](4) NOT NULL,
+    CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
+   (
+      [TRANSACTIONID] ASC,
+      [STORE] ASC,
+      [CHANNEL] ASC,
+      [TERMINAL] ASC,
+      [DATAAREAID] ASC
+   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+   ) ON [PRIMARY]
+   GO
+   
+   GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
+   GO
+```
 
      5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
        + AOT<br/>
