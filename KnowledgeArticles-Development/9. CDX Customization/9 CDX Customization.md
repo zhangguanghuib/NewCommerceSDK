@@ -437,6 +437,8 @@ https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Dev
    ![image](https://github.com/user-attachments/assets/8d8e1919-cee1-44e9-9ef8-7dfd746e289a)<br/>
    Otherwise, you will see this error:<br/>
    <img width="1018" alt="image" src="https://github.com/user-attachments/assets/21951051-c61e-44dc-9c79-b9c10b12cd1c"><br/>
+   <img width="366" alt="image" src="https://github.com/user-attachments/assets/7a8ca3bf-2c9a-49a0-a42a-8a3938bb8265"><br/>
+
 2. For offline database transactions that can not be uploaded online channel database,  checking this API is a good point:<br/>
    ```
    union *
