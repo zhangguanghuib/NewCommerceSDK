@@ -205,6 +205,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
    3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
       - <mark>Table in Channel Database<mark/><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
+      
       - <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
 
@@ -231,41 +232,41 @@ During the D365 Commerce Project Implementation, create custom table and push an
       GO
 ```
   4.<mark>Table Name: RetailTransactionTable</mark><br/>
-      1. AOT<br/>
+      1. AOT
         <img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
 
-     2. Channel<br/>
+     2. Channel
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
         
-     3. Sql Script<br/>
+     3. Sql Script
 ```sql
-   IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
-   BEGIN
-      DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
-   END
-   GO
-   
-   CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
-       [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
-      [CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
-      [TRANSACTIONID] [nvarchar](44) NOT NULL,
-      [STORE] [nvarchar](10) NOT NULL,
-      [CHANNEL] [bigint] NOT NULL,
-      [TERMINAL] [nvarchar](10) NOT NULL,
-      [DATAAREAID] [nvarchar](4) NOT NULL,
-    CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
-   (
-      [TRANSACTIONID] ASC,
-      [STORE] ASC,
-      [CHANNEL] ASC,
-      [TERMINAL] ASC,
-      [DATAAREAID] ASC
-   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-   ) ON [PRIMARY]
-   GO
-   
-   GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
-   GO
+IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
+BEGIN
+   DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
+END
+GO
+
+CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
+    [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
+   [CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
+   [TRANSACTIONID] [nvarchar](44) NOT NULL,
+   [STORE] [nvarchar](10) NOT NULL,
+   [CHANNEL] [bigint] NOT NULL,
+   [TERMINAL] [nvarchar](10) NOT NULL,
+   [DATAAREAID] [nvarchar](4) NOT NULL,
+ CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
+(
+   [TRANSACTIONID] ASC,
+   [STORE] ASC,
+   [CHANNEL] ASC,
+   [TERMINAL] ASC,
+   [DATAAREAID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
+GO
 ```
 
      5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
