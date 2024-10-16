@@ -20,8 +20,8 @@
    The same sql script will not be deployed two times, so in order to make some change on the original script, you have to make a new script and named it in the aphebetic order, like ExtensionTableScriptV1.sql, ExtensionTableScriptV2.sql, ExtensionTableScriptV3.sql... ect.<br/>
 
 3. The most knowledge of the CDX customization comes from these two official documents: <br/>
-   ###1. https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
-   ###2. https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
+   ### 1. https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/cdx-extensibility
+   ### 2. https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/channel-db-extensions#adding-a-new-table
 4. The below knowledge all comes from the above two documents<br/>
 
 - Step 1: let us review the XML for Custom Job and Subjobs creation including the table field mapping between HQ table and Channel Table:<br/>
