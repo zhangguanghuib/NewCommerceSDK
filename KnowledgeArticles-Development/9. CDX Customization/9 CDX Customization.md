@@ -139,7 +139,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
      <img width="1278" alt="image" src="https://github.com/user-attachments/assets/cbe31e7e-99be-4022-bb97-c3b377719b59"><br/>
      <img width="611" alt="image" src="https://github.com/user-attachments/assets/0db393c4-bd13-453d-a5c3-75f0ed9765df"><br/>
 + Step 3: Table Structure in HQ and Channel Database<br/>
-    - <mark>ContosoRetailSeatingData：a new table to push the data from HQ to Channel:</mark><br/>
+    - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
