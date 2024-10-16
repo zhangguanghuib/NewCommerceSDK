@@ -231,13 +231,13 @@ GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] T
 GO
 ```
   4.<mark>Table Name: RetailTransactionTable</mark><br/>
-      1. AOT
+      1. AOT<br/>
         <img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
 
-     2. Channel
+     2. Channel<br/>
         ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
         
-     3. Sql Script
+     3. Sql Script<br/>
 ```sql
 IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
 BEGIN
