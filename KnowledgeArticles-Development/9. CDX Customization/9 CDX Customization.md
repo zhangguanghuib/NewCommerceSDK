@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/49ed2dae-8c24-4f02-ae82-fdb790d4f30b)## D365 Commerce CDX Customization.
+## D365 Commerce CDX Customization.
 
 1. <ins>Background:</ins><br/>
 During the D365 Commerce Project Implementation, create custom table and push and pull data between HQ and CSU database is very important, this article will show cases how to make CDX customization based on the official samples.
