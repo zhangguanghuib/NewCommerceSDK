@@ -204,33 +204,31 @@ GO
          GO
 ```
    3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
-      + <mark>Table in Channel Database<mark/><br/>
-      ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
-      
+      - <mark>Table in Channel Database<mark/><br/>
+      ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>   
       + <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
-
 ```sql
-      IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL  
-      BEGIN
-        DROP TABLE [EXT].CONTOSORETAILCUSTTABLE
-      END
-      
-      CREATE TABLE [ext].[CONTOSORETAILCUSTTABLE](
-          [ACCOUNTNUM] [nvarchar](20) NOT NULL,
-      	[DATAAREAID] [nvarchar](4) NOT NULL,
-      	[RETURNTAXGROUP_W] [nvarchar](10) NOT NULL,
-      	[CONTOSORETAILSSNNUMBER] [nvarchar](11) NOT NULL,
-       CONSTRAINT [PK_EXT_CONTOSORETAILCUSTTABLE] PRIMARY KEY CLUSTERED 
-      (
-      	[ACCOUNTNUM] ASC,
-      	[DATAAREAID] ASC
-      )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-      ) ON [PRIMARY]
-      GO
-      
-      GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] TO [DataSyncUsersRole];
-      GO
+IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL  
+BEGIN
+  DROP TABLE [EXT].CONTOSORETAILCUSTTABLE
+END
+
+CREATE TABLE [ext].[CONTOSORETAILCUSTTABLE](
+    [ACCOUNTNUM] [nvarchar](20) NOT NULL,
+   [DATAAREAID] [nvarchar](4) NOT NULL,
+   [RETURNTAXGROUP_W] [nvarchar](10) NOT NULL,
+   [CONTOSORETAILSSNNUMBER] [nvarchar](11) NOT NULL,
+ CONSTRAINT [PK_EXT_CONTOSORETAILCUSTTABLE] PRIMARY KEY CLUSTERED 
+(
+   [ACCOUNTNUM] ASC,
+   [DATAAREAID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] TO [DataSyncUsersRole];
+GO
 ```
   4.<mark>Table Name: RetailTransactionTable</mark><br/>
       1. AOT
