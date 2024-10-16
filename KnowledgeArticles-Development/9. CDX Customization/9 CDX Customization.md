@@ -139,7 +139,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
      <img width="1278" alt="image" src="https://github.com/user-attachments/assets/cbe31e7e-99be-4022-bb97-c3b377719b59"><br/>
      <img width="611" alt="image" src="https://github.com/user-attachments/assets/0db393c4-bd13-453d-a5c3-75f0ed9765df"><br/>
 + Step 3: Table Structure in HQ and Channel Database<br/>
-    - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
+    1 <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
@@ -168,20 +168,95 @@ During the D365 Commerce Project Implementation, create custom table and push an
          
          GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTABLEDATA] TO [DataSyncUsersRole];
          GO
-      ```
-      
-   -  RetailChannelTable: push existing table columns and new columns to Channel Table from FO HQ Table to Channel Table<br/>
+      ```     
+   2  <mark>RetailChannelTable => Download Session=>Existing table with existing columns and new columns<br/>
       - <mark>Table in Channel Table</mark><br/>
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
       - <mark>Table in AOT</mark><br/>
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
-      - <mark>Scheduler Subjob</mark><br/>
-      <img width="1171" alt="image" src="https://github.com/user-attachments/assets/e294eabc-ed1c-43a3-8e7d-eca7fa34c31a"><br/>
-   - <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
+       ```sql
+         IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCHANNELTABLE]')) IS NOT NULL  
+         BEGIN
+            DROP TABLE [EXT].[CONTOSORETAILCHANNELTABLE]
+         END
+         
+         CREATE TABLE [ext].[CONTOSORETAILCHANNELTABLE](
+         	[PAYMENT] [nvarchar](10) NOT NULL,
+         	[PAYMMODE] [nvarchar](10) NOT NULL,
+         	[CONTOSORETAILWALLPOSTMESSAGE] [nvarchar](255) NOT NULL,
+         	[RECID] [bigint] NOT NULL,
+         	 CONSTRAINT [PK_EXT_CONTOSORETAILCHANNELTABLE_RECID] PRIMARY KEY CLUSTERED 
+         (
+         	[RECID] ASC
+         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+         ) ON [PRIMARY]
+         GO
+         
+         GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCHANNELTABLE] TO [DataSyncUsersRole];
+         GO
+       ```
+   3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
       - <mark>Table in Channel Database<mark/><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
       - <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
+      ```sql
+      IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL  
+      BEGIN
+        DROP TABLE [EXT].CONTOSORETAILCUSTTABLE
+      END
+      
+      CREATE TABLE [ext].[CONTOSORETAILCUSTTABLE](
+          [ACCOUNTNUM] [nvarchar](20) NOT NULL,
+      	[DATAAREAID] [nvarchar](4) NOT NULL,
+      	[RETURNTAXGROUP_W] [nvarchar](10) NOT NULL,
+      	[CONTOSORETAILSSNNUMBER] [nvarchar](11) NOT NULL,
+       CONSTRAINT [PK_EXT_CONTOSORETAILCUSTTABLE] PRIMARY KEY CLUSTERED 
+      (
+      	[ACCOUNTNUM] ASC,
+      	[DATAAREAID] ASC
+      )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+      ) ON [PRIMARY]
+      GO
+      
+      GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] TO [DataSyncUsersRole];
+      GO
+      ```
+  4. RetailTransactionTable<br/>
+     1) AOT
+        
+     3) Channel
+        ![image](https://github.com/user-attachments/assets/5b9a1294-b1c3-4fb9-aec6-f07b870305b6)<br/>
+     5) Sql Script
+     ```sql
+     IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILTRANSACTIONTABLE]')) IS NOT NULL 
+      BEGIN
+         DROP TABLE [EXT].CONTOSORETAILTRANSACTIONTABLE
+      END
+      GO
+      
+      CREATE TABLE [ext].[CONTOSORETAILTRANSACTIONTABLE](
+          [CONTOSORETAILSEATNUMBER] [int] NOT NULL,
+      	[CONTOSORETAILSERVERSTAFFID] [nvarchar](25) NOT NULL,
+      	[TRANSACTIONID] [nvarchar](44) NOT NULL,
+      	[STORE] [nvarchar](10) NOT NULL,
+      	[CHANNEL] [bigint] NOT NULL,
+      	[TERMINAL] [nvarchar](10) NOT NULL,
+      	[DATAAREAID] [nvarchar](4) NOT NULL,
+       CONSTRAINT [PK_EXT_CONTOSORETAILTRANSACTIONTABLE] PRIMARY KEY CLUSTERED 
+      (
+      	[TRANSACTIONID] ASC,
+      	[STORE] ASC,
+      	[CHANNEL] ASC,
+      	[TERMINAL] ASC,
+      	[DATAAREAID] ASC
+      )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+      ) ON [PRIMARY]
+      GO
+      
+      GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONTABLE] TO [DataSyncUsersRole];
+      GO
+     ```
   + Step 4: How to verify the custome CDX is working or not? <br/>
       + <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
          1. Create a new record and provide value to the custom field:
