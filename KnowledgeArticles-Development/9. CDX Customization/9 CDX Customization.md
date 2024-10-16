@@ -139,8 +139,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
      <img width="1278" alt="image" src="https://github.com/user-attachments/assets/cbe31e7e-99be-4022-bb97-c3b377719b59"><br/>
      <img width="611" alt="image" src="https://github.com/user-attachments/assets/0db393c4-bd13-453d-a5c3-75f0ed9765df"><br/>
 + Step 3: Table Structure in HQ and Channel Database<br/>
-  <mark>Push Data from FO DB to Channel DB(download sessions)</mark><br/>
-    - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
+    - <mark>ContosoRetailSeatingData：a new table to push the data from HQ to Channel:</mark><br/>
        Table in FO AOT <br/>
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
@@ -158,8 +157,6 @@ During the D365 Commerce Project Implementation, create custom table and push an
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
       - <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
-      - <mark>Table in Scheduler Subjob<br/>
-      ![image](https://github.com/user-attachments/assets/ff21d2fe-68fb-42ac-88de-133b6d23f754)<br/>
   + Step 4: How to verify the custome CDX is working or not? <br/>
       + <mark>RetailTrasactionTable and RetailTransactionPaymentTrans=>Upload Sessions=>Exend Existing Table to add new fields</mark><br/>
          1. Create a new record and provide value to the custom field:
