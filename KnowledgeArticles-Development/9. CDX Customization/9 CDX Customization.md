@@ -471,6 +471,8 @@ SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
 2. HQ all object:<br/>
    https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/KnowledgeArticles-Development/9.%20CDX%20Customization<br/>
    <img width="286" alt="image" src="https://github.com/user-attachments/assets/18e641f7-152a-4a8f-920f-61eaa25f7a4c"><br/>
+   <img width="366" alt="image" src="https://github.com/user-attachments/assets/82b76de3-c091-45fb-884c-ef1f6367f3b8"><br/>
+
 
 # Key points of CDX customization:
 
