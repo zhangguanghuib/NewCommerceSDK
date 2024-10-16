@@ -174,7 +174,8 @@ During the D365 Commerce Project Implementation, create custom table and push an
       ![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/>
       - <mark>Table in AOT</mark><br/>
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
-       ```sql
+
+      ```sql
          IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCHANNELTABLE]')) IS NOT NULL  
          BEGIN
             DROP TABLE [EXT].[CONTOSORETAILCHANNELTABLE]
@@ -200,6 +201,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
       - <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
+
       ```sql
       IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCUSTTABLE]')) IS NOT NULL  
       BEGIN
