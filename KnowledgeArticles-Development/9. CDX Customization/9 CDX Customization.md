@@ -132,6 +132,12 @@ During the D365 Commerce Project Implementation, create custom table and push an
        ![image](https://github.com/user-attachments/assets/661592ec-197a-4451-a5c1-96d40c6d4742)<br/>
        ![image](https://github.com/user-attachments/assets/8b0bc3e6-97ca-4c39-bb6d-18bc7b82bef0)<br/>
        ![image](https://github.com/user-attachments/assets/68682463-f85e-4746-a9cf-ad34efa92a2a)<br/>
+  6. <mark>RetailChannelTable => Download Session=>Existing table with existing columns and new columns<br/>
+     <img width="1277" alt="image" src="https://github.com/user-attachments/assets/5850440e-a8c2-4716-b2a1-c58cc0bc5aa9"><br/>
+     <img width="708" alt="image" src="https://github.com/user-attachments/assets/675e630a-46dc-4974-8ae5-00abe7094282"><br/>
+  7. <mark>RetailCustTable=> Download Session=>Existing table with existing columns and new columns</mark><br/>
+     <img width="1278" alt="image" src="https://github.com/user-attachments/assets/cbe31e7e-99be-4022-bb97-c3b377719b59"><br/>
+     <img width="611" alt="image" src="https://github.com/user-attachments/assets/0db393c4-bd13-453d-a5c3-75f0ed9765df"><br/>
 + Step 3: Table Structure in HQ and Channel Database<br/>
   <mark>Push Data from FO DB to Channel DB(download sessions)</mark><br/>
     - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
