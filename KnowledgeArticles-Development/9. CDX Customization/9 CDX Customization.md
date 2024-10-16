@@ -127,8 +127,6 @@ During the D365 Commerce Project Implementation, create custom table and push an
     ![image](https://github.com/user-attachments/assets/48c370d0-4c8d-4a96-baf9-8671094241d1)<br/>
     mi=RetailConnLocationDesignTable:<br/>   
     <img width="677" alt="image" src="https://github.com/user-attachments/assets/16cafa67-f607-481c-a39c-5ffcbf9a5b99">
-    In AOT: <br/>
-    <img width="702" alt="image" src="https://github.com/user-attachments/assets/68be75f4-f456-4e3d-8f9f-98dca320554e"><br/>
 + Step 3: Check the Distribution Scheduler and Job and Subjobs<br/>
   <mark>Push Data from FO DB to Channel DB(download sessions)</mark><br/>
     - <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
