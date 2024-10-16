@@ -180,10 +180,12 @@ GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILTABLEDATA] T
 GO
 ```
 
-2 <mark>RetailChannelTable => Download Session=>Existing table with existing columns and new columns<br/> - <mark>Table in Channel Table</mark><br/>
-![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/> - <mark>Table in AOT</mark><br/>
+2 <mark>RetailChannelTable => Download Session=>Existing table with existing columns and new columns<br/> 
+- <mark>Table in Channel Table</mark><br/>
+![image](https://github.com/user-attachments/assets/a02706a7-913d-4d46-b530-3372bfd53298)<br/> 
+- <mark>Table in AOT</mark><br/>
 <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
-
+- SQL Script <br/>
 ```sql
          IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCHANNELTABLE]')) IS NOT NULL
          BEGIN
