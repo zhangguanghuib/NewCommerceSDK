@@ -370,6 +370,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
         2. You can see after run P-Job,  the custom fields column values are uploaded to D365 F&O Head Quarter:<br/>
         <img width="1365" alt="image" src="https://github.com/user-attachments/assets/4b5bf620-0a43-4393-b6e8-ca2048ee71cc"><br/>
         <img width="1290" alt="image" src="https://github.com/user-attachments/assets/e1eadaa5-24dc-490b-ac45-42d665b87488"><br/>
+
      + For <mark>ContosoRetailSeatingData=>Download Sessions=>Totally New Table</mark><br/>
         1. On FO UI, create a new record<br/>
         ![image](https://github.com/user-attachments/assets/dbb663bb-9a12-441a-bafc-f2e71cb293b7)<br/>
@@ -379,6 +380,18 @@ During the D365 Commerce Project Implementation, create custom table and push an
         ![image](https://github.com/user-attachments/assets/21b783ef-b838-4032-ab82-658e9d012ec9)<br/>
         4. Check channel database and confirm the data got pushed to channel database.<br/>
         ![image](https://github.com/user-attachments/assets/4fad267e-132a-490c-9b88-6a28a0c4d049)<br/>
+```sql
+USE [RetailChannelDatabase]
+GO
+
+SELECT [SEATNUMBER]
+      ,[NUMBEROFCHAIRS]
+      ,[STORENUMBER]
+      ,[RECID]
+  FROM [ext].[CONTOSORETAILTABLEDATA]
+
+GO
+```
      
      + <mark>RetailChannelTable=>Dowload Sessions=> Existing Table with new custom fields and existing fields</mark><br/>
         1. On FO Store form, set the value for the 3 new fields, one is custom field, the other two are existing field to push<br/>
@@ -400,6 +413,18 @@ During the D365 Commerce Project Implementation, create custom table and push an
         <img width="1192" alt="image" src="https://github.com/user-attachments/assets/a5c58287-7a51-413b-96bd-5a64e708ba93"><br/>
         3. Run download session and check the channel database<br/>
            ![image](https://github.com/user-attachments/assets/e4f793ec-ad7b-4586-8dba-3a6bf2d281c4)
+```sql
+USE [RetailChannelDatabase]
+GO
+
+SELECT [ACCOUNTNUM]
+      ,[DATAAREAID]
+      ,[RETURNTAXGROUP_W]
+      ,[CONTOSORETAILSSNNUMBER]
+  FROM [ext].[CONTOSORETAILCUSTTABLE]
+
+GO
+```
 
      + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</u></mark><br/>
         1. Insert records into channel database:<br/>
