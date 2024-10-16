@@ -139,7 +139,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
      <img width="1278" alt="image" src="https://github.com/user-attachments/assets/cbe31e7e-99be-4022-bb97-c3b377719b59"><br/>
      <img width="611" alt="image" src="https://github.com/user-attachments/assets/0db393c4-bd13-453d-a5c3-75f0ed9765df"><br/>
 + Step 3: Table Structure in HQ and Channel Database<br/>
-    1 <mark>ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
+    1 <mark>Table Name: ContosoRetailSeatingData：</mark>a new table to push the data from HQ to Channel:<br/>
        Table in FO AOT <br/>
        <img width="704" alt="image" src="https://github.com/user-attachments/assets/74d3753f-ce31-4f8f-8438-9d6d63708ad9"><br/>
        Table in Channel DB <br/>
@@ -224,7 +224,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCUSTTABLE] TO [DataSyncUsersRole];
       GO
 ```
-  4. RetailTransactionTable<br/>
+  4.<mark>Table Name: RetailTransactionTable</mark><br/>
       1. AOT<br/>
         <img width="1031" alt="image" src="https://github.com/user-attachments/assets/85e3c868-5c1f-44f3-a048-062a00c1bda7"><br/>
 
@@ -261,7 +261,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
          GO
      ```
 
-     5. RetailTransactionPaymentTrans:<br/>
+     5. <mark>Table Name:RetailTransactionPaymentTrans:</mark><br/>
        + AOT<br/>
        <img width="1030" alt="image" src="https://github.com/user-attachments/assets/d1b116d0-b4e2-4bc8-86ab-5b84abfa14e7">
 
@@ -305,7 +305,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
          GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[ext].[CONTOSORETAILTRANSACTIONPAYMENTTRANS] TO [DeployExtensibilityRole]
          GO
        ```
-     6. ContosoRetailStaffSuggestions <br/>
+     6. <mark>Table Name:ContosoRetailStaffSuggestions </mark><br/>
         + AOT<br/>
         <img width="1096" alt="image" src="https://github.com/user-attachments/assets/6fada673-cc06-42f0-885f-26de4f67fb76"><br/>
 
