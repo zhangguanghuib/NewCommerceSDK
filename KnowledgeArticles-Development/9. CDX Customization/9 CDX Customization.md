@@ -403,22 +403,21 @@ SELECT [SEATNUMBER]
 GO
 ```
 
-     + <mark>RetailChannelTable=>Dowload Sessions=> Existing Table with new custom fields and existing fields</mark><br/>
-        1. On FO Store form, set the value for the 3 new fields, one is custom field, the other two are existing field to push<br/>
+  - <mark>RetailChannelTable=>Dowload Sessions=> Existing Table with new custom fields and existing fields</mark><br/>
+      1. On FO Store form, set the value for the 3 new fields, one is custom field, the other two are existing field to push<br/>
         <img width="1175" alt="image" src="https://github.com/user-attachments/assets/e7bdbb28-aa07-40a8-a2f6-db774975febf"><br/>
-        2. Run 1070 Job, then check Channel Database<br/>
+      2. Run 1070 Job, then check Channel Database<br/>
         ![image](https://github.com/user-attachments/assets/7b0e1d29-0af3-4d57-9a8a-af8992014166)<br/>
-        3. The SQL script to run<br/>
+      3. The SQL script to run<br/>
 
 ```sql
 select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
  join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
  where T1.STORENUMBER = 'HOUSTON'
 ```
+<br/>
 
-        <br/>
-
-     + <mark>RetailCustTable=>Dowload Sessions=>New fields on existint table</mark><br/>
+  - <mark>RetailCustTable=>Dowload Sessions=>New fields on existint table</mark><br/>
         1. On UI (Customer forms), set values to the custom fields<br/>
         <img width="1153" alt="image" src="https://github.com/user-attachments/assets/151b5b8f-8653-49fd-9fb7-2cdf2e6b9f89"><br/>
         2. Check the FO table browser to confirm the custom fields have values<br/>
@@ -439,27 +438,27 @@ select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STOR
          GO
          ```
 
-     + <u><mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</u></mark><br/>
-        1. Insert records into channel database:<br/>
-        ```
-           USE [RetailChannelDatabase]
-            GO
+  - <mark>ContosoRetailStaffSuggestions => Upload Sessions => Totally New Table</mark><br/>
+     1. Insert records into channel database:<br/>
+     ```
+        USE [RetailChannelDatabase]
+         GO
 
-          INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-               VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
+       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+            VALUES(1 ,'HOUSTON', '000160', 'HOUSTON-42', 'Good Service', 'USRT', GetDate())
 
-          INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
-               VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
-          GO
-          SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-         ```
-        ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
-        2. Check the Upload Sessions<br/>
-        <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
-        3. Find the menu items<br/>
-        <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
-        4. Open the form and verify the data got uploaded<br/>
-        ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)<br/>
+       INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [STAFF], [TERMINALID], [SUGGETION], [DATAAREAID], [DATELOGGED])
+            VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
+       GO
+       SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
+      ```
+     ![image](https://github.com/user-attachments/assets/eb50c78c-837a-4ef9-8f90-28b598e1f809)<br/>
+     2. Check the Upload Sessions<br/>
+     <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
+     3. Find the menu items<br/>
+     <img width="186" alt="image" src="https://github.com/user-attachments/assets/95e81a6d-ec94-4b3d-be37-fe2f8bf34512"><br/>
+     4. Open the form and verify the data got uploaded<br/>
+     ![image](https://github.com/user-attachments/assets/341d1468-db2b-46bd-a987-dc13fc781ea9)<br/>
 
 # Code link:
 
