@@ -452,7 +452,8 @@ INSERT INTO [ext].[CONTOSORETAILSTAFFSUGGESTIONS]([SUGGESTIONID], [STOREID], [ST
    VALUES(2 ,'HOUSTON', '000137', 'HOUSTON-42', 'Best Service', 'USRT', GetDate())
 GO
 SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
-```    
+```
+<br/>   
      2. Check the Upload Sessions<br/>
      <img width="1369" alt="image" src="https://github.com/user-attachments/assets/c02e5209-79f8-4e80-b580-f7e94c42940e"><br/>
      3. Find the menu items<br/>
