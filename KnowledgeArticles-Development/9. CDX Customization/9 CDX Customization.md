@@ -204,10 +204,10 @@ GO
          GO
 ```
    3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
-      - <mark>Table in Channel Database<mark/><br/>
+      + <mark>Table in Channel Database<mark/><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
       
-      - <mark>Table in AOT</mark><br/>
+      + <mark>Table in AOT</mark><br/>
       <img width="729" alt="image" src="https://github.com/user-attachments/assets/583dd6aa-2b39-403f-867e-a3b2ad24d5b3"><br/>
 
 ```sql
