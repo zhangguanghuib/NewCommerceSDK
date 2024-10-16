@@ -2,7 +2,7 @@
 
 1. <ins>Background:</ins><br/>
 During the D365 Commerce Project Implementation, create custom table and push and pull data between HQ and CSU database is very important, this article will show cases how to make CDX customization based on the official samples.
-2. First of all, every time when a new extension sql script is deployed to CSU, it will recorded into the below table:<br/>
+2. First of all, every time when a new extension sql script is deployed to CSU, it will be recorded into the below table:<br/>
    ```sql
    SELECT *
    FROM [crt].[RETAILUPGRADEHISTORY]
