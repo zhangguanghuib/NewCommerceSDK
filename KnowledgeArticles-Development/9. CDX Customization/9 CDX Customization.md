@@ -175,7 +175,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
       - <mark>Table in AOT</mark><br/>
       <img width="711" alt="image" src="https://github.com/user-attachments/assets/500218c1-6e31-4f1e-a780-d40fe637c9c2"><br/>
 
-      ```sql
+```sql
          IF (SELECT OBJECT_ID('[ext].[CONTOSORETAILCHANNELTABLE]')) IS NOT NULL  
          BEGIN
             DROP TABLE [EXT].[CONTOSORETAILCHANNELTABLE]
@@ -195,7 +195,7 @@ During the D365 Commerce Project Implementation, create custom table and push an
          
          GRANT INSERT, DELETE, UPDATE, SELECT ON OBJECT::[ext].[CONTOSORETAILCHANNELTABLE] TO [DataSyncUsersRole];
          GO
-       ```
+```
    3 <mark>RetailCustTable:</mark> push existing table columns and new columns to Channel Table from FO HQ Table<br/>
       - <mark>Table in Channel Database<mark/><br/>
       ![image](https://github.com/user-attachments/assets/98659cd9-68c0-4770-b5b0-d6c936b8c7e8)<br/>
