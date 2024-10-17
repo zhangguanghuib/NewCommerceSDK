@@ -425,7 +425,10 @@ GO
 ```sql
 select  T.Payment, T.PaymMode, T.ContosoRetailWallPostMessage, T.RECID,  T1.STORENUMBER from ext.ContosoRETAILCHANNELTABLE as T
  join ax.RETAILSTORETABLE as T1 on T.RECID = T1.RECID
- where T1.STORENUMBER = 'HOUSTON'
+ where T1.STORENUMBER in( 'HOUSTON', 'ANNAPOL')
+
+ select * from ax.RETAILCHANNELTABLE
+ select STORENUMBER, * from ax.RETAILSTORETABLE
 ```
 <br/>
 
