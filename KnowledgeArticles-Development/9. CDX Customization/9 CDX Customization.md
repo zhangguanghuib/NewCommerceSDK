@@ -129,6 +129,9 @@
    </RetailCdxSeedData>
 ```
 
+We need open "Initialize Commerce Scheduler Dialog" to load the scheduler job/Scheduler Subjobs/Table fields mapping/Channel Database Table field Design(see from this menu item RetailConnLocationDesignTable)<br/>
+![image](https://github.com/user-attachments/assets/7479a8a3-0c8f-4cee-8b10-4c6b94327694)
+
 - Step 2: Check the Distribution Scheduler and Jobs and Subjobs created by above XML.<br/>
   1 <mark>Table DirPartyTable=>Adding existing subjob to another job.</mark> <br/>
   <img width="721" alt="image" src="https://github.com/user-attachments/assets/ada946d6-b4fa-4eee-9063-ae0f402a4e40">
