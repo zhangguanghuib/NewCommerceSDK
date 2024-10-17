@@ -508,3 +508,6 @@ SELECT * from [ext].[CONTOSORETAILSTAFFSUGGESTIONS]
 4. Another two kind of frequent issues we faced about CDX customization are:
    - Partner extend one EDT in HQ to extend the string-size(like from 20 to 30), but in Channel Databse Table Column with length is still the original size(length = 20)
    - Customer HQ is on newer version but CSU kept on old version, this situation normally happened in local CSU, and it happend Microsoft extend the column size both in HQ and Channel Database.
+5.  In case you see error when load errors from xml file when run "Initialize Commerce Scheduler", in most cases you can rebuild the project or do database synchronization to fix that<br/>
+<img width="1476" alt="image" src="https://github.com/user-attachments/assets/16006a95-bd75-4db1-b520-ae47861eb227">
+
