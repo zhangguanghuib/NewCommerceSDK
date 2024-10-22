@@ -138,6 +138,9 @@
           "productAppBarCommands": [
             { "modulePath": "Extend/ViewExtensions/Search/NavigateToSamplesViewCommand" },
             { "modulePath": "Extend/ViewExtensions/Search/CreateTenderDeclarationCommand" }
+          ],
+          "customerAppBarCommands": [
+            { "modulePath": "Extend/ViewExtensions/Search/ViewCustomerSummaryCommand" }
           ]
         },
         "ShowJournalView": {

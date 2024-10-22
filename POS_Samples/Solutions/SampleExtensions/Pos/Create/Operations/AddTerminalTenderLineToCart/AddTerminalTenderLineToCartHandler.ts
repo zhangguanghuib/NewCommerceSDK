@@ -67,7 +67,8 @@ export default class AddTerminalTenderLineToCartHandler<TResponse extends AddTer
                     data: null
                 });
             }).then((result: ClientEntities.ICancelableDataResult<GetDeviceConfigurationClientResponse>) => {
-                return this.beginProcessingManualCardPayment("3", deviceConfiguration.Currency, cart.AmountDue, "VISA", cart.CustomerId);
+                let toBePaid: number = cart.AmountDue > 10 ? 10 : cart.AmountDue;
+                return this.beginProcessingManualCardPayment("3", deviceConfiguration.Currency, toBePaid, "VISA", cart.CustomerId);
             }).then((result: ClientEntities.ICancelableDataResult<AddPreprocessedTenderLineToCartClientResponse>) => {
                 let currentCart: ProxyEntities.Cart = result.data.result;
                 if (currentCart.AmountDue === 0) {
