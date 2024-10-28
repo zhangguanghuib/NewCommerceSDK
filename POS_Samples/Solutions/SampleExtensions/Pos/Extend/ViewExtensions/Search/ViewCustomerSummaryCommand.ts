@@ -30,13 +30,21 @@ export default class ViewCustomerSummaryCommand extends SearchView.CustomerSearc
     protected init(state: SearchView.ICustomerSearchExtensionCommandState): void {
         this.isVisible = false;
 
-        let timer = setInterval(() => {
+
+        document.addEventListener('DOMContentLoaded', function () {
             let createNewCustAnchor = document.querySelector('[data-ax-bubble="searchView_displayZeroCustomersText_createCustomer"]') as HTMLAnchorElement;
             if (!ObjectExtensions.isNullOrUndefined(createNewCustAnchor)) {
                 createNewCustAnchor.style.display = "none";
-                clearInterval(timer);
             }
-        }, 100);   
+        });
+
+        //let timer = setInterval(() => {
+        //    let createNewCustAnchor = document.querySelector('[data-ax-bubble="searchView_displayZeroCustomersText_createCustomer"]') as HTMLAnchorElement;
+        //    if (!ObjectExtensions.isNullOrUndefined(createNewCustAnchor)) {
+        //        createNewCustAnchor.style.display = "none";
+        //        clearInterval(timer);
+        //    }
+        //}, 100);   
     }
 
     /**

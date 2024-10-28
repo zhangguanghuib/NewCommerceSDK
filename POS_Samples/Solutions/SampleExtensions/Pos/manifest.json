@@ -93,7 +93,12 @@
         },
         "CustomerDetailsView": {
           "appBarCommands": [
-            { "modulePath": "ViewExtensions/CustomerDetails/CustomerCrossLoyaltyCommand" }
+            {
+              "modulePath": "ViewExtensions/CustomerDetails/CustomerCrossLoyaltyCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/CustomerDetails/DisplayCustomerSummaryCommand"
+            }
           ]
         },
         "FulfillmentLineView": {
@@ -150,6 +155,9 @@
             },
             {
               "modulePath": "Extend/ViewExtensions/ShowJournal/DownloadDocumentCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/ShowJournal/GetReceiptBarCode"
             }
           ],
           "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],
@@ -218,6 +226,20 @@
           "phonePageName": "CurrencyNumPadView",
           "viewDirectory": "Create/Views/Samples/",
           "viewControllerPath": "Create/Views/Samples/CurrencyNumPadView"
+        },
+        {
+          "title": "VoidCartLineView",
+          "pageName": "VoidCartLineView",
+          "phonePageName": "VoidCartLineView",
+          "viewDirectory": "Create/Views/Samples/",
+          "viewControllerPath": "Create/Views/Samples/VoidCartLineView"
+        },
+        {
+          "title": "Get Receipt BarCode View",
+          "pageName": "GetReceiptBarCodeView",
+          "phonePageName": "GetReceiptBarCodeView",
+          "viewDirectory": "Create/Views/",
+          "viewControllerPath": "Create/Views/GetReceiptBarCodeView"
         }
       ],
       "templatedDialogs": [

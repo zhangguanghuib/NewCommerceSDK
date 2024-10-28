@@ -16,7 +16,7 @@
         public class OposCoinDispenser : INamedRequestHandlerAsync, IDisposable
         {
             private int coinAmount = 1000;
-            private bool isOpen = false;
+            public bool isOpen = false;
 
             public string HandlerName
             {
