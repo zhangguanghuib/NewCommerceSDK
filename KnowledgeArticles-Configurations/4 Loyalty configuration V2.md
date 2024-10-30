@@ -9,3 +9,7 @@
 
 4. Process Loyalty Schemes<br/>
    ![image](https://github.com/user-attachments/assets/0eeb93ac-795f-421b-9fcf-75240d358a20)<br/>
+
+5.  Run job 1050<br/>
+   ![image](https://github.com/user-attachments/assets/38c75ea0-3dad-4750-8fb0-e98d00bdb603)<br/>
+
