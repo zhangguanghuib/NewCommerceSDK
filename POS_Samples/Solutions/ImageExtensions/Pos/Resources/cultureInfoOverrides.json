@@ -1,0 +1,75 @@
+﻿{
+  "$schema": "../../cultureInfoSchema.json",
+  "overrides": [
+    {
+      "culture": "de",
+      "cultureInfo": {
+        "numberFormat": {
+          ",": "'",
+          ".": "*",
+          "percent": {
+            ",": "!",
+            ".": "@"
+          },
+          "currency": {
+            "pattern": [ "-n :$", "n~$" ],
+            ",": "#",
+            ".": "^"
+          }
+        },
+        "calendars": {
+          "standard": {
+            "/": "~",
+            "patterns": {
+              "d": "MM::dd::yyyy",
+              "t": "mm<HH",
+              "T": "mm>ss>HH"
+            }
+          }
+        }
+      }
+    },
+    {
+      "culture": "fr",
+      "cultureInfo": {
+        "numberFormat": {
+          ",": "!",
+          ".": "@",
+          "percent": {
+            ",": "'",
+            ".": "*"
+          },
+          "currency": {
+            "pattern": [ "$::-n ", "$''n" ],
+            ",": "~",
+            ".": "&"
+          }
+        },
+        "calendars": {
+          "standard": {
+            "/": "@",
+            "patterns": {
+              "d": "dd-MM+yyyy",
+              "t": "HH-mm",
+              "T": "HH-mm+ss"
+            }
+          }
+        }
+      }
+    },
+    {
+      "culture": "pt-BR",
+      "cultureInfo": {
+        "numberFormat": {
+          ",": ".",
+          ".": ",",
+          "currency": {
+            "pattern": [ "$-n ", "$n" ],
+            ",": ".",
+            ".": ","
+          }
+        }
+      }
+    }
+  ]
+}

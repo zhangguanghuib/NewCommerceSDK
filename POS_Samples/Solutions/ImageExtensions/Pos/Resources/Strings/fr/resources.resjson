@@ -1,0 +1,118 @@
+﻿//======================================================================================================
+//======================================= Sample comment. ==============================================
+//======================================================================================================
+{
+    //======================== Sample View extensions strings. ========================
+    "string_0"                                      : "Comparaison rapide des produits",
+    "_string_0.comment"                             : "Product search page app bar command label.",
+
+    "string_1"                                      : "Afficher le sommaire du client",
+    "_string_1.comment"                             : "Customer search page app bar command label.",
+
+    //======================== Column names.  ========================
+    "string_2"                                      : "NUMÉRO DE COMPTE_CUSTOMISÉ",
+    "_string_2.comment"                             : "Customer search column name.",
+
+    "string_3"                                      : "PRÉNOM",
+    "_string_3.comment"                             : "Customer search column name.",
+
+    "string_4"                                      : "ADRESSE",
+    "_string_4.comment"                             : "Customer search column name.",
+
+    "string_5"                                      : "EMAIL DU CONTACT",
+    "_string_5.comment"                             : "Customer search column name.",
+
+    "string_7"                                      : "NUMÉRO DE TÉLÉPHONE",
+    "_string_7.comment"                             : "Customer search column name.",
+
+    //======================== Simple Next View Resources.  ========================
+
+    "string_8"                                      : "Message",
+    "_string_8.comment"                             : "The label for the first tab.",
+
+    "string_9"                                      : "Demandes",
+    "_string_9.comment"                             : "The label for the second tab.",
+
+    "string_10"                                     : "Vue suivante simple",
+    "_string_10.comment"                            : "The title for the simple next view.",
+
+    "string_11"                                     : "Message de mise à jour",
+    "_string_11.comment"                            : "The label for the update message appbar button.",
+
+    "string_12"                                     : "Date de la demande Heure",
+    "_string_12.comment"                            : "The request date time column label.",
+
+    "string_13"                                     : "Nom du travailur demandé",
+    "_string_13.comment"                            : "The requested worker name column label.",
+
+    "string_14"                                     : "Type de demande",
+    "_string_14.comment"                            : "The request type column label.",
+
+    "string_15"                                     : "Statut de la demande",
+    "_string_15.comment"                            : "The request status column label.",
+
+    "string_16"                                     : "Demande de congé",
+    "_string_16.comment"                            : "The leave request type.",
+
+    "string_17"                                     : "Swap de quart",
+    "_string_17.comment"                            : "The shift swap request type.",
+
+    "string_18"                                     : "Offre de quart",
+    "_string_18.comment"                            : "The shift offer request type.",
+
+    "string_19"                                     : "Approuvé",
+    "_string_19.comment"                            : "The approved shift status.",
+
+    "string_20"                                     : "En attente",
+    "_string_20.comment"                            : "The pending shift status.",
+
+    "string_21"                                     : "Rejeté",
+    "_string_21.comment"                            : "The rejected shift status.",
+
+    "string_22"                                     : "Bouton cliqué",
+    "_string_22.comment"                            : "The button clicked message.",
+
+    "string_23"                                     : "Charger de la simple vue suivante",
+    "_string_23.comment"                            : "The page load message.",
+
+    //======================== Simple Extension View Resources.  ========================
+
+    "string_50"                                     : "Vue d'extension simple",
+    "_string_50.comment"                            : "The simple extension view title.",
+
+    "string_51"                                     : "La vue d'extension simple est chargée",
+    "_string_51.comment"                            : "The default message after the page is loaded.",
+
+    "string_52"                                     : "Cliquez sur le bouton Message de mise à jour",
+    "_string_52.comment"                            : "The update message button message.",
+
+    "string_53"                                     : "Entrez votre nom",
+    "_string_53.comment"                            : "The templated dialog prompt.",
+
+    "string_54"                                     : "Résultat de la boîte de dialogue: {0}",
+    "_string_54.comment"                            : "The dialog result format string.",
+
+    "string_55"                                     : "Bonjour le monde",
+    "_string_55.comment"                            : "The message dialog message.",
+
+    "string_56"                                     : "Annuler la valeur du message",
+    "_string_56.comment"                            : "The message provided to simple next view.",
+
+    "string_57"                                     : "Toggle modifié: {0}",
+    "_string_57.comment"                            : "The toggle changed format string.",
+
+    "string_58"                                     : "Accédez à la page suivante",
+    "_string_58.comment"                            : "The label for the navigate to next page app bar command.",
+
+    "string_59"                                     : "Le commutateur est activé",
+    "_string_59.comment"                            : "The toggle switch label when the switch is 'on'.",
+
+    "string_60"                                     : "L'interrupteur est éteint",
+    "_string_60.comment"                            : "The toggle switch label when the switch is 'off'.",
+
+    "string_61"                                     : "Commande de menu un",
+    "_string_61.comment"                            : "The first menu command label.",
+
+    "string_62"                                     : "Commande de menu deux",
+    "_string_62.comment"                            : "The second menu command label."
+}

@@ -1,0 +1,26 @@
+﻿<!--
+    HTMLLint is an internal tool that fails on this file due to non-localized example labels,
+    there is no need for this comment and the one below in real-world extensions.
+-->
+<!-- HTMLLint Disable LabelExistsValidator -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Camera Capture View</title>
+</head>
+<body>
+    <div class="CameraCaptureView">
+        <div class="grow marginBottom48 scrollY">
+            <div class="pad20 col width680">
+                <h4>Capture Image</h4>
+                <input type="file" accept="image/*" capture="environment" id="cameraInput" data-bind="event: { change: uploadImage }">
+                <button data-bind="click: captureAndSave">Capture and Save</button>
+                <div class="height240 width240">
+                    <img id="capturedImage" data-bind="attr: { src: capturedImageBase64 }" style="display:block; margin-top:20px;" alt="Captured Image" />
+                </div>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
