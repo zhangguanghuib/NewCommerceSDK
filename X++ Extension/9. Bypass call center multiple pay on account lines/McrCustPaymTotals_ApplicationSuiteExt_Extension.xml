@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>McrCustPaymTotals_ApplicationSuiteExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(classstr(McrCustPaymTotals))]
+public final class McrCustPaymTotals_ApplicationSuiteExt_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>validateAuthorize</Name>
+				<Source><![CDATA[
+    public boolean validateAuthorize(boolean _showErrors)
+    {
+        boolean ret = true;
+        MCRCustPaymTable    custPaymTable;
+        boolean             isValid = true;
+
+        ret = next validateAuthorize(_showErrors);
+       
+        if (!ret) 
+        {
+            select count(RecId) from custPaymTable
+            where custPaymTable.RefTableId == refTableID
+                && custPaymTable.RefRecId == refRecID
+                && custPaymTable.CustPaymType == MCRCustPaymType::OnAccount;
+
+            if (custPaymTable.RecId > 1)
+            {
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
