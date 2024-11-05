@@ -43,6 +43,11 @@
             }
           ]
         },
+        "InventoryLookupView": {
+          "inventoryByStoreListConfiguration": {
+            "modulePath": "Extend/ViewExtensions/InventoryLookup/CustomInventoryByStoreListColumns"
+          }
+        },
         "ShowJournalView": {
           "appBarCommands": [
             {

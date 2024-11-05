@@ -12,4 +12,10 @@
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.Dynamics.Commerce.Runtime.TransactionService">
+      <HintPath>References\Microsoft.Dynamics.Commerce.Runtime.TransactionService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
