@@ -4,7 +4,8 @@ import {
     CartViewCustomControlBase,
     ICartViewCustomControlState,
     ICartViewCustomControlContext,
-    CartLineSelectedData
+    CartLineSelectedData,
+    CartChangedData
 } from "PosApi/Extend/Views/CartView"
 
 import {
@@ -30,6 +31,7 @@ export default class QtyInlineUpdateCustomControl extends CartViewCustomControlB
     public currentPrice: ko.Observable<number>;
     public newQty: ko.Observable<number>;
     public newPrice: ko.Observable<number>;
+    public numofItems: ko.Observable<number>;
 
     private _state: ICartViewCustomControlState;
 
@@ -56,6 +58,10 @@ export default class QtyInlineUpdateCustomControl extends CartViewCustomControlB
             }
         };
 
+        this.cartChangedHandler = (data: CartChangedData) => {
+            this.numofItems(data.cart.CartLines.length);
+        }
+
         this.cartLineSelectionClearedHandler = () => {
             this._cartLine(null);
             this.currentQty(0);
@@ -64,6 +70,8 @@ export default class QtyInlineUpdateCustomControl extends CartViewCustomControlB
             this.newQty(0);
             this.newPrice(0);
         };
+
+
 
         this.newQty.subscribe((newQty2: number) => {
             if (this._cartLine().Quantity != newQty2) {

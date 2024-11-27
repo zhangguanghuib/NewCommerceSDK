@@ -8,7 +8,6 @@ import StoreHourConverter from "../../Converter/StoreHourConverter";
 type StoreHoursDialogResolve = (value: IStoreHoursDialogResult) => void;
 type StoreHoursDialogReject = (reason: any) => void;
 
-
 export default class DialogSampleModule extends Dialogs.ExtensionTemplatedDialogBase {
     public messagePassedToDialog: ko.Observable<string>;
 

@@ -33,6 +33,11 @@
                 "controlName": "qtyInlineUpdate",
                 "htmlPath": "ViewExtensions/Cart/QtyInlineUpdateCustomControl.html",
                 "modulePath": "ViewExtensions/Cart/QtyInlineUpdateCustomControl"
+              },
+              {
+                "controlName": "TotalPanelHighlightControl",
+                "htmlPath": "ViewExtensions/Cart/TotalPanelHighlightControl.html",
+                "modulePath": "ViewExtensions/Cart/TotalPanelHighlightControl"
               }
             ]
           }

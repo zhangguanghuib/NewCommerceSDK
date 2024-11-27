@@ -4,6 +4,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Triggers\SearchJournalTransactionsDataRequestTrigger.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Dynamics.Commerce.Runtime.Localization.Services.Messages" Version="$(CommerceChannelPackagesVersion)" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />

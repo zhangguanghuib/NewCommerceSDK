@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .miniFlex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: lightyellow; /* Set background color */
+            padding: 5px; /* Optional: Add padding for better spacing */
+            width: 300px; /* Optional: Set width to 100% */
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .align-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <script id="Microsot_Pos_Extensibility_Samples_TotalPanelHighlightControl" type="text/html">
+        <div style="border:thin">
+            <div class="row">
+                    <div class="marginBottom10">
+                        <div class="miniFlex">
+                            <label class="align-left" style="font:large, bold" data-bind="text: numOfCartLinesLabel"></label>
+                            <label class="align-right" style="font:large, bold" data-bind="text: numOfCartLines"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </script>
+</body>
+</html>
