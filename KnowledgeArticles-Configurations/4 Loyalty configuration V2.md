@@ -21,9 +21,9 @@
    ![image](https://github.com/user-attachments/assets/9bc2dd2a-a3f6-466f-981b-f4727b0db228)<br/>
 
    Please make sure no item sales tax group for these 3 products:<br/>
-   EYSLoyaltyProd1:   $124.5<br/>
-   EYSLoyaltyProd2:   $59.9<br/>
-   EYSLoyaltyProd3:   $2.37<br/>
+   <mark>EYSLoyaltyProd1:   $124.5</mark><br/>
+   <mark>EYSLoyaltyProd2:   $59.9</mark><br/>
+   <mark>EYSLoyaltyProd3:   $2.37</mark><br/>
 
    Then run the traditional like jobs like "process assortment, process delivery mode,  process loyalty schemes" ect.<>br/
 
