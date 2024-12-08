@@ -42,6 +42,11 @@
 9.  Check the final loyalty points:<br/>
    <img width="1190" alt="image" src="https://github.com/user-attachments/assets/60182424-c4c0-47b1-8f0d-4afdb5409855"><br/>
 
+   For the exchange and return, we can see:<br/>
+   <mark>124.5 * (-1 qty)* 1.2 = -149.4</mark><br/>
+   <mark> 59.9 * 2 (qty) * 1.2 = 143.76</mark><br/>
+   <mark> 2.37 * 1 * 1.2 = 2.844</mark><br/>
+
 
 
 
