@@ -27,6 +27,16 @@
 
    Then run the traditional like jobs like "process assortment, process delivery mode,  process loyalty schemes" ect.<>br/
 
+6.  Create a new customer from POS and issue loyalty card for the new customer,  the loyalty card number is 5500305<br/>
+
+7. on POS,  Sell the product : EYSLoyaltyProd1<br/>
+   <img width="1214" alt="image" src="https://github.com/user-attachments/assets/764adeb9-4ca5-4caa-865c-9df81b26ff95"><br/>
+   And earn these loyalty point:<br>
+   <mark> That is 124.5 * 1.2 = 149.4</mark>
+   <img width="1200" alt="image" src="https://github.com/user-attachments/assets/c4def8be-117d-4177-a7f2-8628e7390df1"><br/>
+
+
+
 
 
 
