@@ -39,6 +39,10 @@
    The journal:<br/>
    ![image](https://github.com/user-attachments/assets/0112108a-ac22-4995-bdbe-2988c063c7c2)<br/>
 
+9.  Check the final loyalty points:<br/>
+   <img width="1190" alt="image" src="https://github.com/user-attachments/assets/60182424-c4c0-47b1-8f0d-4afdb5409855"><br/>
+
+
 
 
 
