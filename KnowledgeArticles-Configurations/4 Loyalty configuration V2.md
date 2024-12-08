@@ -34,6 +34,11 @@
    And earn these loyalty point:<br>
    <mark> That is 124.5 * 1.2 = 149.4</mark>
    <img width="1200" alt="image" src="https://github.com/user-attachments/assets/c4def8be-117d-4177-a7f2-8628e7390df1"><br/>
+8. Return the above product and exchange it with another two products,  the transaction is like:<br/>
+   <img width="1145" alt="image" src="https://github.com/user-attachments/assets/7cc3e2ad-72cc-407e-98a1-9d5a4e4e6b5e"><br/>
+   The journal:<br/>
+   ![image](https://github.com/user-attachments/assets/0112108a-ac22-4995-bdbe-2988c063c7c2)<br/>
+
 
 
 
