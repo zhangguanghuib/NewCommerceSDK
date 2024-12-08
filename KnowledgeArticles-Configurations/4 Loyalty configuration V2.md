@@ -17,5 +17,18 @@
 6.  Run job 1050<br/>
    ![image](https://github.com/user-attachments/assets/38c75ea0-3dad-4750-8fb0-e98d00bdb603)<br/>
 
+7. Create 3 products for testing:<br/>
+   ![image](https://github.com/user-attachments/assets/9bc2dd2a-a3f6-466f-981b-f4727b0db228)<br/>
+
+   Please make sure no item sales tax group for these 3 products:<br/>
+   EYSLoyaltyProd1:   $124.5<br/>
+   EYSLoyaltyProd2:   $59.9<br/>
+   EYSLoyaltyProd3:   $2.37<br/>
+
+   Then run the traditional like jobs like "process assortment, process delivery mode,  process loyalty schemes" ect.<>br/
+
+
+
+
 
 
