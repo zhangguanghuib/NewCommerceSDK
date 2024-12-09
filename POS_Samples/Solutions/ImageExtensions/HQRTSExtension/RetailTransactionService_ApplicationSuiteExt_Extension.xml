@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>RetailTransactionService_ApplicationSuiteExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+//using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Collections;
+using System.IO;
+using System.Text;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+using TS = Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+using DM = Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using ContosoCRT = Contoso.GasStationSample.CommerceRuntime;
+using ContosoDM  = Contoso.GasStationSample.CommerceRuntime.Entities;
+
+[ExtensionOf(classstr(RetailTransactionService))]
+public final class RetailTransactionService_ApplicationSuiteExt_Extension
+{
+    private const str ContosoTransactionServiceAssemblyName = 'Contoso.GasStationSample.CommerceRuntime';
+    private const str TransactionServiceDlvModeBookSlotSearchCriteriaTypeName 
+        = 'Contoso.GasStationSample.CommerceRuntime.TransactionService.DlvModeBookSlotSearchCriteria';
+    
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>contosoGetDlvModeBookSlot</Name>
+				<Source><![CDATA[
+    public static container contosoGetDlvModeBookSlot(str _searchCriteriaJson)
+    {
+        int fromLine;
+        Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+        System.Collections.ArrayList resultList = new System.Collections.ArrayList();
+
+        try
+        {
+            fromLine = Global::infologLine();
+
+            ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria =
+                RetailTransactionService::getDlvModeBookSlotSearchCriteriaFromJson(_searchCriteriaJson);
+            if (!searchCriteria)
+            {
+                return [false, "searchCriteria is null", ''];
+            }
+
+        }
+        catch
+        {
+            str errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+            str axCallStack = con2Str(xSession::xppCallStack());
+            return [false, errorMessage, ''];
+        }
+
+        // Serialize the data-contract list using the specified type list.
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(dlvModeBookSlot.GetType(), 0);
+        return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>SerializeToJson</Name>
+				<Source><![CDATA[
+    public static str SerializeToJson(System.Object _objectToSerialize, System.Type[] _typeArray)
+    {
+        System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(
+            _objectToSerialize.GetType(),
+            _typeArray);
+
+        System.String result;
+        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+        {
+            serializer.WriteObject(ms, _objectToSerialize);
+            result = System.Text.Encoding::UTF8.GetString(ms.ToArray());
+        }
+        return result;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>SerialCheck</Name>
+				<Source><![CDATA[
+    public static container SerialCheck(str _serialNum)
+    {
+        boolean success = false;
+        str errorMessage;
+        int fromLine;
+
+        try
+        {
+            if (_serialNum)
+            {
+                ttsbegin;
+
+                errorMessage = "Serial number found";
+                ttscommit;
+            }
+            else
+            {
+                success = false;
+                errorMessage = "Serial number not found";
+            }
+        }
+        catch (Exception::Error)
+        {
+            ttsAbort;
+            errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+        }
+
+        // Return sanitized error code.
+        errorMessage = RetailTransactionServiceUtilities::getErrorCode(errorMessage);
+
+        return [success, errorMessage, "Custom values"];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getDlvModeBookSlotSearchCriteriaFromJson</Name>
+				<Source><![CDATA[
+    private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJson(str _searchCriteriaJson)
+    {
+        try
+        {
+            System.Reflection.Assembly transactionServiceAssembly = System.Reflection.Assembly::Load(ContosoTransactionServiceAssemblyName);
+            System.Type searchCriteriaType = transactionServiceAssembly == null? null: transactionServiceAssembly.GetType(TransactionServiceDlvModeBookSlotSearchCriteriaTypeName);
+
+            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            // Below two properties are needed for the scenario where HQ version of Retail binaries is ahead of RCSU version.
+            settings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling::Auto;
+            settings.NullValueHandling = Newtonsoft.Json.NullValueHandling::Ignore;
+
+            // Use parameterless private constructor.
+            settings.ConstructorHandling = Newtonsoft.Json.ConstructorHandling::AllowNonPublicDefaultConstructor;
+
+            ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = Newtonsoft.Json.JsonConvert::DeserializeObject(_searchCriteriaJson, searchCriteriaType, settings);
+
+            return searchCriteria;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>inventoryLookupByStoreV3</Name>
+				<Source><![CDATA[
+    public static container inventoryLookupByStoreV3(str _searchCriteriaJson)
+    {
+        container result = next inventoryLookupByStoreV3(_searchCriteriaJson);
+
+        str jsonStr = conPeek(result, 3);
+
+        ArrayList inventoryInfoList = RetailTransactionService::DeserializeInventoryInfoListFromJSON(jsonStr);
+        System.Random myRand = new System.Random();
+
+        TS.InventoryInfo inventoryInfo;
+
+        for(int i = 0; i < inventoryInfoList.Count; i++)
+        {
+            inventoryInfo = inventoryInfoList.get_Item(i) as TS.InventoryInfo;
+
+            ItemId itemId = inventoryInfo.ItemId;
+            InventLocationId inventLocationId = inventoryInfo.InventoryLocationId;
+
+            InventDim inventDim;
+            inventDim.InventLocationId = inventLocationId;
+            inventDim = InventDim::findDim(inventDim);   
+            InventSum inventSum = InventSum::find(itemId, inventDim.inventDimId);
+            inventoryInfo.set_Item("customCol1", inventSum.Received + myRand.Next(10));
+            inventoryInfo.set_Item("customCol2", inventSum.PhysicalValue + myRand.Next(20));
+        }
+
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(inventoryInfo.GetType(), 0);
+
+        return [true, '', RetailTransactionService::SerializeToJson(inventoryInfoList, typeArray)];
+        // return result;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>DeserializeInventoryInfoListFromJSON</Name>
+				<Source><![CDATA[
+    public static ArrayList DeserializeInventoryInfoListFromJSON(System.String jsonObject)
+    {
+        TS.InventoryInfo inventoryInfo = new TS.InventoryInfo();
+        ArrayList inventoryInfoList = new ArrayList();
+        using (MemoryStream ms = new MemoryStream(Encoding::UTF8.GetBytes(jsonObject)))
+        {
+
+            System.Type[] typeArray = new System.Type[1]();
+            typeArray.SetValue(inventoryInfo.GetType(), 0);
+            inventoryInfoList.Add(InventoryInfo);
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(inventoryInfoList.GetType(), typeArray);
+            inventoryInfoList = serializer.ReadObject(ms) as ArrayList;
+        }
+
+        return inventoryInfoList;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

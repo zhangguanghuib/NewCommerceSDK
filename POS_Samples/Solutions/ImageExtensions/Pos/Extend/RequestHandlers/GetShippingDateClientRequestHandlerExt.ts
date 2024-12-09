@@ -1,7 +1,9 @@
-﻿import { GetShippingDateClientRequestHandler } from "PosApi/Extend/RequestHandlers/CartRequestHandlers";
+﻿import { ClientEntities } from "PosApi/Entities";
+import { GetShippingDateClientRequestHandler } from "PosApi/Extend/RequestHandlers/CartRequestHandlers";
 import { GetShippingDateClientRequest, GetShippingDateClientResponse } from "PosApi/Consume/Cart";
-import { ClientEntities } from "PosApi/Entities";
 import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { Entities } from "../../DataService/DataServiceEntities.g";
+import { DlvModeBookSlot } from "../../DataService/DataServiceRequests.g";
 
 export default class GetShippingDateClientRequestHandlerExt extends GetShippingDateClientRequestHandler {
 
@@ -19,11 +21,19 @@ export default class GetShippingDateClientRequestHandlerExt extends GetShippingD
         let shippingMethodsSection: HTMLDivElement = shippingMethodDiv.querySelector(`div:nth-child(2)`) as HTMLDivElement;
         console.log(shippingMethodsSection);
 
-        let testTable = this.createTable();
-        let shippingMethodsList = shippingMethodsSection.querySelector(`div:nth-child(2)`) as HTMLDivElement;;
-        shippingMethodsList.appendChild(testTable);
-
-        return this.defaultExecuteAsync(request);
+        return this.context.runtime.executeAsync(new DlvModeBookSlot.GetDlvModeBookSlotsRequest<DlvModeBookSlot.GetDlvModeBookSlotsResponse>(request.deliveryMethod.Code))
+            .then((result: ClientEntities.ICancelableDataResult<DlvModeBookSlot.GetDlvModeBookSlotsResponse>): Promise<void> => {
+                let bookSLots: Entities.DlvModeBookSlot[] = result.data.result;
+                console.log(bookSLots);
+                return Promise.resolve();
+            }).catch((reason: any) => {
+                this.context.logger.logError("ShippingMethods: " + JSON.stringify(reason));
+            }).then(() => {
+                let testTable = this.createTable();
+                let shippingMethodsList = shippingMethodsSection.querySelector(`div:nth-child(2)`) as HTMLDivElement;;
+                shippingMethodsList.appendChild(testTable);
+                return this.defaultExecuteAsync(request);
+            });
     }
 
     private createTable(): HTMLDivElement {
