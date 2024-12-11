@@ -8,7 +8,9 @@
   <ItemGroup>
     <PackageReference Include="FreeSpire.Barcode" Version="6.6.0" />
     <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.Runtime" Version="$(CommerceSdkPackagesVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>

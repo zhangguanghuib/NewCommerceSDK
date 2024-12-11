@@ -16,6 +16,10 @@ namespace Contoso.GasStationSample.CommerceRuntime.RequestHandlers
     using System.Collections.ObjectModel;
     using Contoso.GasStationSample.CommerceRuntime.TransactionService;
     using Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+    using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel.DataContractSurrogates;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+    using Contoso.GasStationSample.CommerceRuntime.Entities;
 
     public class DeliveryModeBookSlotDataService : IRequestHandlerAsync
     {
@@ -47,27 +51,67 @@ namespace Contoso.GasStationSample.CommerceRuntime.RequestHandlers
             ThrowIf.Null(request, "request");
             ThrowIf.Null(request.DlvModeCode, "request.DlvModeCode");
 
-            DlvModeBookSlotSearchCriteria searchCriteria = new DlvModeBookSlotSearchCriteria(
-                request.DlvModeCode,
-                request.QueryResultSettings.Paging,
-                request.QueryResultSettings.Sorting);
+            ReadOnlyCollection<object> results;
+
+            //DlvModeBookSlotSearchCriteria searchCriteria = new DlvModeBookSlotSearchCriteria();
+            //searchCriteria.DlvModeCode = request.DlvModeCode;
+            //searchCriteria.PagingInfo = request.QueryResultSettings.Paging;
+            //searchCriteria.Sorting = request.QueryResultSettings.Sorting;
+
+
+            var searchCriteria = new AxTransactionSearchCriteria();
+            searchCriteria.ItemId = request.DlvModeCode;
 
             //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
             //    "contosoGetDlvModeBookSlot",
             //    SerializationHelper.SerializeObjectToJson(searchCriteria)
             //);
 
-            //InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+            try
+            {
+                bool useJson = true; // Use JSON by deafult
+                searchCriteria.SerializationFormat = useJson ? 1 /*Json*/ : 0 /*Xml*/;
 
-            //ReadOnlyCollection<object> results = response.Result;
+                string serializedSearchCriteria = SerializationHelper.SerializeObjectToXml(searchCriteria);
 
-            InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("SerialCheck", "123");
-            InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
-            ReadOnlyCollection<object> results = response.Result;
+                InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+                    "contosoGetDlvModeBookSlotXml",
+                    SerializationHelper.SerializeObjectToXml(searchCriteria)
+                );
 
-            string resValue = (string)results[0];
+                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+                //    "contosoGetDlvModeBookSlot",
+                //     Newtonsoft.Json.JsonConvert.SerializeObject(searchCriteria)
+                //);
 
-            return new GetDlvModeBookSlotsResponse(null);
+                InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+
+                results = response.Result;
+
+                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("SerialCheck", "123");
+                //InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+                //ReadOnlyCollection<object> results = response.Result;
+
+                string resXmlValue = (string)results[0];
+             
+                IEnumerable<DlvModeBookSlot> dlvModeBookSlots;
+                if (useJson)
+                {
+                    // Deserialize via JSON Surrogate and convert all of the SalesOrderSurrogates => SalesTransaction
+                    dlvModeBookSlots = SerializationHelper.DeserializeObjectDataContractFromJson<DlvModeBookSlot[]>(resXmlValue);                 
+                }
+                else
+                {
+                    dlvModeBookSlots =
+                        SerializationHelper.DeserializeObjectDataContractFromXml<DlvModeBookSlot[]>(resXmlValue);
+                }
+                return new GetDlvModeBookSlotsResponse(dlvModeBookSlots.AsPagedResult());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+               
+            }     
         }
     }
 }
