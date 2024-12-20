@@ -1,0 +1,42 @@
+﻿﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="SearchTransactionsDialog col grow">
+        <!-- HTMLLint Disable LabelExistsValidator -->
+        <!-- dialog content -->
+        <div>
+            <div class="h4">Start Date:</div>
+            <div class="col stretch">
+                <div id="isStartDateOn" />
+            </div>
+            <div class="pad8">
+                <div id="datePickerStart" data-bind="disabled: isStartDateDisabled">
+                </div>
+            </div>
+            <br />
+            <div class="h4">End Date:</div>
+            <div class="col stretch">
+                <div id="isEndDateOn" />
+            </div>
+            <div class="pad8">
+                <div id="datePickerEnd">
+                </div>
+            </div>
+            <div class="h4">Transaction number</div>
+            <div class="pad8">
+                <textarea class="height220" data-bind="value: transactionIds"></textarea>
+            </div>
+            <br />
+        </div>
+        <!-- HTMLLint Enable LabelExistsValidator -->
+        <div class="grow"></div>
+        <div class="row"></div>
+    </div>
+</body>
+</html>

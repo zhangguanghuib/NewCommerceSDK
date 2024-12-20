@@ -25,6 +25,7 @@ export default class GetShippingDateClientRequestHandlerExt extends GetShippingD
             .then((result: ClientEntities.ICancelableDataResult<DlvModeBookSlot.GetDlvModeBookSlotsResponse>): Promise<void> => {
                 let bookSLots: Entities.DlvModeBookSlot[] = result.data.result;
                 console.log(bookSLots);
+                // Build your table here
                 return Promise.resolve();
             }).catch((reason: any) => {
                 this.context.logger.logError("ShippingMethods: " + JSON.stringify(reason));

@@ -60,6 +60,16 @@
               "modulePath": "Extend/ViewExtensions/ShowJournal/CameraCaptureCommand"
             }
           ]
+        },
+        "CartView": {
+          "viewController": {
+            "modulePath": "Extend/ViewExtensions/Cart/CartViewController"
+          },
+          "deliveryGrid": {
+            "customColumn1": {
+              "modulePath": "Extend/ViewExtensions/Cart/DeliveryGrid/CustomColumn1Configuration"
+            }
+          }
         }
       }
     },
@@ -81,9 +91,17 @@
         }
       ],
       "templatedDialogs": [
-
+        {
+          "htmlPath": "Create/Dialogs/SearchTransactionsDialog.html",
+          "modulePath": "Create/Dialogs/SearchTransactionsDialog"
+        }
       ],
       "operations": [
+        {
+          "operationId": "60004",
+          "operationRequestFactoryPath": "Create/Operations/SaveDataToSelectedCartLine/SaveDataToSelectedCartLineFactory",
+          "operationRequestHandlerPath": "Create/Operations/SaveDataToSelectedCartLine/SaveDataToSelectedCartLineHandler"
+        }
       ]
     }
   }

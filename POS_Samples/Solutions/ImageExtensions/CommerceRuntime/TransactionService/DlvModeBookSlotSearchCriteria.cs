@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
 
 
@@ -16,7 +17,7 @@
         private void Initialize()
         {
             this.PagingInfo = PagingInfo.AllRecords;
-            this.Sorting = new SortingInfo();
+           // this.Sorting = new SortingInfo();
         }
 
         [DataMember]
@@ -25,8 +26,8 @@
         [DataMember]
         public PagingInfo PagingInfo { get; set; }
 
-        [DataMember]
-        public SortingInfo Sorting { get; set; }
+        //[DataMember]
+        //public SortingInfo Sorting { get; set; }
 
         /// <summary>
         /// Gets or sets the start serialization format for the results.
@@ -45,11 +46,11 @@
             this.Initialize();
         }
 
-        public DlvModeBookSlotSearchCriteria(string dlvModeCode, PagingInfo paging, SortingInfo sorting)
+        public DlvModeBookSlotSearchCriteria(string dlvModeCode, PagingInfo paging/*, SortingInfo sorting*/)
         {
             this.DlvModeCode = dlvModeCode;
             this.PagingInfo = paging;
-            this.Sorting = sorting;
+            // this.Sorting = sorting;
         }
 
         public DlvModeBookSlotSearchCriteria(string dlvModeCode)

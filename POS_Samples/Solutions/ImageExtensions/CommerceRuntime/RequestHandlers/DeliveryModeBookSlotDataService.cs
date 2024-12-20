@@ -53,51 +53,39 @@ namespace Contoso.GasStationSample.CommerceRuntime.RequestHandlers
 
             ReadOnlyCollection<object> results;
 
-            //DlvModeBookSlotSearchCriteria searchCriteria = new DlvModeBookSlotSearchCriteria();
-            //searchCriteria.DlvModeCode = request.DlvModeCode;
-            //searchCriteria.PagingInfo = request.QueryResultSettings.Paging;
+            DlvModeBookSlotSearchCriteria searchCriteria = new DlvModeBookSlotSearchCriteria();
+            searchCriteria.DlvModeCode = request.DlvModeCode;
+            searchCriteria.PagingInfo = request.QueryResultSettings.Paging;
             //searchCriteria.Sorting = request.QueryResultSettings.Sorting;
-
-
-            var searchCriteria = new AxTransactionSearchCriteria();
-            searchCriteria.ItemId = request.DlvModeCode;
-
-            //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
-            //    "contosoGetDlvModeBookSlot",
-            //    SerializationHelper.SerializeObjectToJson(searchCriteria)
-            //);
-
             try
             {
                 bool useJson = true; // Use JSON by deafult
                 searchCriteria.SerializationFormat = useJson ? 1 /*Json*/ : 0 /*Xml*/;
 
-                string serializedSearchCriteria = SerializationHelper.SerializeObjectToXml(searchCriteria);
-
-                InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
-                    "contosoGetDlvModeBookSlotXml",
-                    SerializationHelper.SerializeObjectToXml(searchCriteria)
-                );
+                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+                //    "contosoGetDlvModeBookSlotXml",
+                //    SerializationHelper.SerializeObjectToXml(searchCriteria)
+                //);
 
                 //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
-                //    "contosoGetDlvModeBookSlot",
+                //    "contosoGetDlvModeBookSlotJson",
                 //     Newtonsoft.Json.JsonConvert.SerializeObject(searchCriteria)
                 //);
+
+                InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+                    "contosoGetDlvModeBookSlotJson",
+                    SerializationHelper.SerializeObjectToJson(searchCriteria)
+                );
 
                 InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
 
                 results = response.Result;
-
-                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("SerialCheck", "123");
-                //InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
-                //ReadOnlyCollection<object> results = response.Result;
 
                 string resXmlValue = (string)results[0];
              
                 IEnumerable<DlvModeBookSlot> dlvModeBookSlots;
                 if (useJson)
                 {
-                    // Deserialize via JSON Surrogate and convert all of the SalesOrderSurrogates => SalesTransaction
                     dlvModeBookSlots = SerializationHelper.DeserializeObjectDataContractFromJson<DlvModeBookSlot[]>(resXmlValue);                 
                 }
                 else

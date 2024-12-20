@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Create\Dialogs\" />
-    <Folder Include="Create\Operations\" />
     <Folder Include="Handlers\" />
     <Folder Include="TriggerHandlers\" />
   </ItemGroup>
