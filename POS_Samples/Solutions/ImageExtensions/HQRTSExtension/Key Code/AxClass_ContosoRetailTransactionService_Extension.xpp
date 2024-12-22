@@ -1,0 +1,245 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Collections;
+using System.IO;
+using System.Text;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+using TS = Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+using DM = Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using ContosoCRT = Contoso.GasStationSample.CommerceRuntime;
+using ContosoDM  = Contoso.GasStationSample.CommerceRuntime.Entities;
+
+
+[ExtensionOf(classStr(RetailTransactionServiceEx))]
+public final class ContosoRetailTransactionService_Extension
+{
+    private const str ContosoTransactionServiceAssemblyName = 'Contoso.GasStationSample.CommerceRuntime';
+    private const str TransactionServiceDlvModeBookSlotSearchCriteriaTypeName
+        = 'Contoso.GasStationSample.CommerceRuntime.TransactionService.DlvModeBookSlotSearchCriteria';
+
+    public static container contosoGetDlvModeBookSlotJson(str _searchCriteriaJson)
+    {
+        int fromLine;
+        Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+        System.Collections.ArrayList resultList = new System.Collections.ArrayList();
+
+        try
+        {
+            fromLine = Global::infologLine();
+
+            //ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = RetailTransactionServiceEx::getDlvModeBookSlotSearchCriteriaFromJson(_searchCriteriaJson);
+           DlvModeBookSlotSearchCriteria searchCriteria = RetailTransactionServiceEx::getDlvModeBookSlotSearchCriteriaFromJsonXpp(_searchCriteriaJson);
+
+           if (!searchCriteria)
+           {
+               return [false, "searchCriteria is null", ''];
+           }
+
+            if (searchCriteria.parmDlvModeCode())
+            {
+                RetailChannelDlvModeBookingSlot retailChannelDlvModeBookingSlot;
+                DlvMode  dlvMode;
+                while select retailChannelDlvModeBookingSlot
+                    where retailChannelDlvModeBookingSlot.DlvModeCode == searchCriteria.parmDlvModeCode()
+                    join Txt from dlvMode 
+                    where dlvMode.Code == retailChannelDlvModeBookingSlot.DlvModeCode
+
+                {
+                    dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+                    dlvModeBookSlot.DlvModeCode = searchCriteria.parmDlvModeCode();
+                    dlvModeBookSlot.DlvModeTxt = dlvMode.Txt;
+                    dlvModeBookSlot.ShippingDate =new System.DateTimeOffset(retailChannelDlvModeBookingSlot.ShippingDate);
+                    dlvModeBookSlot.MaxSlot = retailChannelDlvModeBookingSlot.MaxSlots;
+                    dlvModeBookSlot.FreeSlot = retailChannelDlvModeBookingSlot.FreeSlots;
+                    resultList.Add(dlvModeBookSlot);
+                }
+            }
+        }
+        catch
+        {
+            str errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+            str axCallStack = con2Str(xSession::xppCallStack());
+            return [false, errorMessage, ''];
+        }
+
+        // Serialize the data-contract list using the specified type list.
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(dlvModeBookSlot.GetType(), 0);
+        return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
+    }
+
+    public static container contosoGetDlvModeBookSlotXml(str _searchCriteriaJson)
+    {
+        int fromLine;
+        Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+        System.Collections.ArrayList resultList = new System.Collections.ArrayList();
+
+        try
+        {
+            fromLine = Global::infologLine();
+
+            ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria =
+                RetailTransactionServiceEx::getDlvModeBookSlotSearchCriteriaFromXml(_searchCriteriaJson);
+            if (!searchCriteria)
+            {
+                return [false, "searchCriteria is null", ''];
+            }
+           
+            if (searchCriteria.DlvModeCode)
+            {
+                RetailChannelDlvModeBookingSlot retailChannelDlvModeBookingSlot;
+                DlvMode  dlvMode;
+                while select retailChannelDlvModeBookingSlot
+                    where retailChannelDlvModeBookingSlot.DlvModeCode == searchCriteria.DlvModeCode
+                    join Txt from dlvMode
+                    where dlvMode.Code == retailChannelDlvModeBookingSlot.DlvModeCode
+                {
+                    dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+                    dlvModeBookSlot.DlvModeCode = searchCriteria.DlvModeCode;
+                    dlvModeBookSlot.DlvModeTxt = dlvMode.Txt;
+                    dlvModeBookSlot.ShippingDate =new System.DateTimeOffset(retailChannelDlvModeBookingSlot.ShippingDate);
+                    dlvModeBookSlot.MaxSlot = retailChannelDlvModeBookingSlot.MaxSlots;
+                    dlvModeBookSlot.FreeSlot = retailChannelDlvModeBookingSlot.FreeSlots;
+                    resultList.Add(dlvModeBookSlot);
+                }
+            }
+        }
+        catch
+        {
+            str errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+            str axCallStack = con2Str(xSession::xppCallStack());
+            return [false, errorMessage, ''];
+        }
+
+        // Serialize the data-contract list using the specified type list.
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(dlvModeBookSlot.GetType(), 0);
+        return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
+    }
+
+    private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromXml(str _xmlArgumentString)
+    {
+        XmlDocument         argsXml;
+        XmlElement          argsRoot;
+
+        // Get the string value of an XML element argument.
+        str getArg(str argName)
+        {
+            XmlElement xmlRoot = argsRoot.getNamedElement(argName);
+            if (xmlRoot != null)
+            {
+                return xmlRoot.text();
+            }
+            return '';
+        }
+
+        System.Exception ex;
+        try
+        {
+            argsXml   = new XmlDocument();
+            argsXml.loadXml(_xmlArgumentString);
+            argsRoot = argsXml.documentElement();
+
+            str argDlvModeCode = getArg('DlvModeCode');
+            ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = new ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria(argDlvModeCode);
+            return searchCriteria;
+        }
+        catch(ex)
+        {
+            return null;
+        }
+    }
+
+    private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJson(str _searchCriteriaJson)
+    {
+        System.Exception ex;
+        try
+        {
+            System.Reflection.Assembly transactionServiceAssembly = System.Reflection.Assembly::Load(ContosoTransactionServiceAssemblyName);
+            System.Type searchCriteriaType = transactionServiceAssembly == null? null: transactionServiceAssembly.GetType(TransactionServiceDlvModeBookSlotSearchCriteriaTypeName);
+
+            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            // Below two properties are needed for the scenario where HQ version of Retail binaries is ahead of RCSU version.
+            settings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling::Auto;
+            settings.NullValueHandling = Newtonsoft.Json.NullValueHandling::Ignore;
+
+            // Use parameterless private constructor.
+            settings.ConstructorHandling = Newtonsoft.Json.ConstructorHandling::AllowNonPublicDefaultConstructor;
+
+            // ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = Newtonsoft.Json.JsonConvert::DeserializeObject(_searchCriteriaJson, searchCriteriaType, settings);
+            
+           ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = RetailTransactionServiceEx::DeserializeDlvModeBookSlotSearchCriteriaFromJSON(_searchCriteriaJson);
+
+            return searchCriteria;
+        }
+        catch(ex)
+        {
+            return null;
+        }
+    }
+
+    private static DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJsonXpp(str _searchCriteriaJson)
+    {
+        System.Exception ex;
+        try
+        {
+            DlvModeBookSlotSearchCriteria searchCriteria = FormJsonSerializer::deserializeObject(classNum(DlvModeBookSlotSearchCriteria), _searchCriteriaJson);
+            return searchCriteria;
+        }
+        catch(ex)
+        {
+            return null;
+        }
+    }
+
+    private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria DeserializeDlvModeBookSlotSearchCriteriaFromJSON(System.String jsonObject)
+    {
+        ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria item = new ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria();
+        using (MemoryStream ms = new MemoryStream(Encoding::UTF8.GetBytes(jsonObject)))
+        {
+            System.Type[] typeArray = new System.Type[1]();
+            typeArray.SetValue(item.GetType(), 0);
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(item.GetType(), typeArray);
+            item = serializer.ReadObject(ms) as ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria;
+        }
+
+        return item;
+    }
+
+    public static container SerialCheck(str _serialNum)
+    {
+        boolean success = true;
+        str errorMessage;
+        int fromLine;
+
+        try
+        {
+            if (_serialNum)
+            {
+                ttsbegin;
+                errorMessage = "Serial number found";
+                ttscommit;
+            }
+            else
+            {
+                success = false;
+                errorMessage = "Serial number not found";
+            }
+        }
+        catch (Exception::Error)
+        {
+            ttsAbort;
+            errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+        }
+
+        // Return sanitized error code.
+        errorMessage = RetailTransactionServiceUtilities::getErrorCode(errorMessage);
+
+        return [success, "", "Custom values"];
+    }
+
+}

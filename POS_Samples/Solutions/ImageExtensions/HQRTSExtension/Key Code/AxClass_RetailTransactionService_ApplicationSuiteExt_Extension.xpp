@@ -1,0 +1,86 @@
+﻿//using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Collections;
+using System.IO;
+using System.Text;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+using TS = Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+using DM = Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using ContosoCRT = Contoso.GasStationSample.CommerceRuntime;
+using ContosoDM  = Contoso.GasStationSample.CommerceRuntime.Entities;
+
+[ExtensionOf(classstr(RetailTransactionService))]
+public final class RetailTransactionService_ApplicationSuiteExt_Extension
+{
+
+
+    public static container inventoryLookupByStoreV3(str _searchCriteriaJson)
+    {
+        container result = next inventoryLookupByStoreV3(_searchCriteriaJson);
+
+        str jsonStr = conPeek(result, 3);
+
+        ArrayList inventoryInfoList = RetailTransactionService::DeserializeInventoryInfoListFromJSON(jsonStr);
+        System.Random myRand = new System.Random();
+
+        TS.InventoryInfo inventoryInfo;
+
+        for(int i = 0; i < inventoryInfoList.Count; i++)
+        {
+            inventoryInfo = inventoryInfoList.get_Item(i) as TS.InventoryInfo;
+
+            ItemId itemId = inventoryInfo.ItemId;
+            InventLocationId inventLocationId = inventoryInfo.InventoryLocationId;
+
+            InventDim inventDim;
+            inventDim.InventLocationId = inventLocationId;
+            inventDim = InventDim::findDim(inventDim);   
+            InventSum inventSum = InventSum::find(itemId, inventDim.inventDimId);
+            inventoryInfo.set_Item("customCol1", inventSum.Received + myRand.Next(10));
+            inventoryInfo.set_Item("customCol2", inventSum.PhysicalValue + myRand.Next(20));
+        }
+
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(inventoryInfo.GetType(), 0);
+
+        return [true, '', RetailTransactionService::SerializeToJson(inventoryInfoList, typeArray)];
+    }
+
+    public static str SerializeToJson(System.Object _objectToSerialize, System.Type[] _typeArray)
+    {
+        System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(
+            _objectToSerialize.GetType(),
+            _typeArray);
+
+        System.String result;
+        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+        {
+            serializer.WriteObject(ms, _objectToSerialize);
+            result = System.Text.Encoding::UTF8.GetString(ms.ToArray());
+        }
+        return result;
+    }
+
+    public static ArrayList DeserializeInventoryInfoListFromJSON(System.String jsonObject)
+    {
+        TS.InventoryInfo inventoryInfo = new TS.InventoryInfo();
+        ArrayList inventoryInfoList = new ArrayList();
+        using (MemoryStream ms = new MemoryStream(Encoding::UTF8.GetBytes(jsonObject)))
+        {
+
+            System.Type[] typeArray = new System.Type[1]();
+            typeArray.SetValue(inventoryInfo.GetType(), 0);
+            inventoryInfoList.Add(InventoryInfo);
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(inventoryInfoList.GetType(), typeArray);
+            inventoryInfoList = serializer.ReadObject(ms) as ArrayList;
+        }
+
+        return inventoryInfoList;
+    }
+
+}

@@ -1,0 +1,21 @@
+﻿[DataContract]
+internal final class DlvModeBookSlotSearchCriteria
+{
+    DlvModeId dlvModeCode;
+    int serializationFormat;
+
+    [DataMember('DlvModeCode')]
+    public DlvModeId parmDlvModeCode(DlvModeId _dlvModeCode = this.dlvModeCode)
+    {
+        this.dlvModeCode = _dlvModeCode;
+        return this.dlvModeCode;
+    }
+
+    [DataMember('SerializationFormat')]
+    public int parmSerializationFormat(int _serializationFormat = this.serializationFormat)
+    {
+        this.serializationFormat = _serializationFormat;
+        return this.serializationFormat;
+    }
+
+}

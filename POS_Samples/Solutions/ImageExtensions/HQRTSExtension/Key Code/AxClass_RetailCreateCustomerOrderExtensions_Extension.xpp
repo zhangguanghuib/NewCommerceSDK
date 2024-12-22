@@ -1,0 +1,50 @@
+﻿using System.Collections.Specialized;
+using System.Reflection;
+using Microsoft.Dynamics.Commerce.Runtime.Services.CustomerOrder;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+
+[ExtensionOf(classstr(RetailCreateCustomerOrderExtensions))]
+final class RetailCreateCustomerOrderExtensions_Extension
+{
+    public static void preSalesLineCreate(RetailCustomerOrderLineParameters retailCustomerOrderLineParameters, SalesLineCreateLineParameters salesLineCreateLineParameters)
+    {
+        SalesTable salesTable;
+        OrderLineInstallation orderLineInstallation;
+
+        if (retailCustomerOrderLineParameters.orderHeader.TableId == tableNum(SalesTable))
+        {
+            salesTable = retailCustomerOrderLineParameters.orderHeader;
+        }
+
+        ItemId itemId = retailCustomerOrderLineParameters.itemInfo.ItemId;
+        var extensionProps = retailCustomerOrderLineParameters.itemInfo.ExtensionProperties;
+        LineNum lineNum = retailCustomerOrderLineParameters.itemInfo.LineNumber;
+        str installationDate = '';
+
+        for (int i = 0; i < extensionProps.get_Count(); i++)
+        {
+            var commerceProperty = extensionProps.get_Item(i);
+            
+            if (commerceProperty.get_Key() == 'installationDate')
+            {
+                installationDate = commerceProperty.get_Value().get_StringValue();
+                break;
+            }
+        }
+
+        OrderLineInstallation.SalesId = salesTable.SalesId;
+        OrderLineInstallation.LineNum = lineNum;
+        OrderLineInstallation.InstallationDate = installationDate;
+        OrderLineInstallation.ItemId = itemId;
+       
+        if(OrderLineInstallation.validateWrite())
+        {
+            OrderLineInstallation.insert();
+        } 
+        else
+        {
+            Global::info("OrderLineInstallation insersion failed.");
+        }
+    }
+
+}

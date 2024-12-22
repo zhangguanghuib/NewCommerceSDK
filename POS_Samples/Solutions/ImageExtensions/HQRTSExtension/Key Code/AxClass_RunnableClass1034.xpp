@@ -1,0 +1,16 @@
+﻿using TS = Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+
+internal final class RunnableClass1034
+{
+    /// <summary>
+    /// Class entry point. The system will call this method when a designated menu 
+    /// is selected or when execution starts and this class is set as the startup class.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {
+        TS.InventoryInfo inventInfo = new TS.InventoryInfo();
+        inventInfo.set_Item('A', 'B');
+    }
+
+}
