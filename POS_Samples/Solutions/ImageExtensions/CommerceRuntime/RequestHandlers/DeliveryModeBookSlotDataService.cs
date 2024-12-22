@@ -72,6 +72,12 @@ namespace Contoso.GasStationSample.CommerceRuntime.RequestHandlers
                 //     Newtonsoft.Json.JsonConvert.SerializeObject(searchCriteria)
                 //);
 
+                //InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("SerialCheck", "123");
+                //InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+                //ReadOnlyCollection<object> results = response.Result;
+
+                //string resValue = (string)results[0];
+
                 InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
                     "contosoGetDlvModeBookSlotJson",
                     SerializationHelper.SerializeObjectToJson(searchCriteria)

@@ -8,6 +8,7 @@ import { DlvModeBookSlot } from "../../DataService/DataServiceRequests.g";
 export default class GetShippingDateClientRequestHandlerExt extends GetShippingDateClientRequestHandler {
 
     private shippingMethodBookingSlotId: string = 'shippingMethodBookingSlot___';
+    private bookSLots: Entities.DlvModeBookSlot[];
     /**
      * Executes the request handler asynchronously.
      * @param {GetShippingDateClientRequest<GetShippingDateClientResponse>} The request containing the response.
@@ -23,42 +24,73 @@ export default class GetShippingDateClientRequestHandlerExt extends GetShippingD
 
         return this.context.runtime.executeAsync(new DlvModeBookSlot.GetDlvModeBookSlotsRequest<DlvModeBookSlot.GetDlvModeBookSlotsResponse>(request.deliveryMethod.Code))
             .then((result: ClientEntities.ICancelableDataResult<DlvModeBookSlot.GetDlvModeBookSlotsResponse>): Promise<void> => {
-                let bookSLots: Entities.DlvModeBookSlot[] = result.data.result;
-                console.log(bookSLots);
+                this.bookSLots = result.data.result;
+                console.log(this.bookSLots);
                 // Build your table here
                 return Promise.resolve();
             }).catch((reason: any) => {
                 this.context.logger.logError("ShippingMethods: " + JSON.stringify(reason));
             }).then(() => {
-                let testTable = this.createTable();
+                let testTable = this.generateTable(this.bookSLots);
                 let shippingMethodsList = shippingMethodsSection.querySelector(`div:nth-child(2)`) as HTMLDivElement;;
                 shippingMethodsList.appendChild(testTable);
                 return this.defaultExecuteAsync(request);
             });
     }
 
-    private createTable(): HTMLDivElement {
-
+    public generateTable(data: Entities.DlvModeBookSlot[]): HTMLDivElement {
         let shippingMethodBookingSlot: HTMLDivElement = document.getElementById(this.shippingMethodBookingSlotId) as HTMLDivElement;
         if (!ObjectExtensions.isNullOrUndefined(shippingMethodBookingSlot)) {
             shippingMethodBookingSlot.remove();
         }
         shippingMethodBookingSlot = document.createElement('div') as HTMLDivElement;
         shippingMethodBookingSlot.id = this.shippingMethodBookingSlotId;
-        // shippingMethodBookingSlot.textContent = 'testAAAAAAA####';
 
-        let table: HTMLTableElement = document.createElement('table') as HTMLTableElement;
+        const table: HTMLTableElement = document.createElement('table') as HTMLTableElement;
 
-        // Add some rows and cells
-        for (let i = 0; i < 3; i++) {
-            let tr: HTMLTableRowElement = document.createElement('tr') as HTMLTableRowElement;
-            for (let j = 0; j < 3; j++) {
-                let td: HTMLTableCellElement = document.createElement('td') as HTMLTableCellElement;
-                td.textContent = `Row${i + 1}-Col${j + 1}`;
-                tr.appendChild(td);
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        headerRow.style.background = "blue";
+
+        const headers = ['DlvModeCode', 'DlvModeTxt', 'ShippingDate', 'MaxSlot', 'FreeSlot'];
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        data.forEach((slot, index) => {
+            const row = document.createElement('tr');
+
+            const cells = [
+                slot.DlvModeCode,
+                slot.DlvModeTxt,
+                slot.ShippingDate.toDateString(),
+                slot.MaxSlot.toString(),
+                slot.FreeSlot.toString()
+            ];
+
+            cells.forEach(cellText => {
+                const td = document.createElement('td');
+                td.textContent = cellText;
+                row.appendChild(td);
+            });
+
+            // Apply background color for odd and even rows
+            if (index % 2 === 0) {
+                row.style.backgroundColor = 'green';
+            } else {
+                row.style.backgroundColor = '#501669';
             }
-            table.appendChild(tr);
-        }
+
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
 
         // Style the table
         table.style.width = '100%';
@@ -66,9 +98,16 @@ export default class GetShippingDateClientRequestHandlerExt extends GetShippingD
         table.style.fontFamily = 'Arial, sans-serif';
         table.style.fontSize = '14px';
         table.style.color = 'white';
-        table.style.border = '1px solid #dddddd';
+        table.style.border = '2px solid #dddddd';
         table.style.textAlign = 'left';
-        table.style.backgroundColor = 'blue';
+        table.style.marginTop = '5px';
+
+        // Style the table header
+        var headersCells = table.getElementsByTagName('th');
+        for (let i = 0; i < headersCells.length; i++) {
+            headersCells[i].style.border = '2px solid yellow';
+            headersCells[i].style.padding = '8px';
+        }
 
         // Style the table cells
         var cells = table.getElementsByTagName('td');
@@ -79,7 +118,6 @@ export default class GetShippingDateClientRequestHandlerExt extends GetShippingD
 
         shippingMethodBookingSlot.appendChild(table);
 
-        return shippingMethodBookingSlot;  
+        return shippingMethodBookingSlot;
     }
-
 }
