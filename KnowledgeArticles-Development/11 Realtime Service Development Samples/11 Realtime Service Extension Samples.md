@@ -84,7 +84,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
     }
   ```
   and the helper method to get the search Criteria:
-  ```
+  ```CS
     private static DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJsonXpp(str _searchCriteriaJson)
     {
         System.Exception ex;
