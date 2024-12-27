@@ -32,7 +32,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
 . Step 2
   Fetch the booking slot data based on delivery mode passed from retail server to fill an array object, and then serialize it into a string<br/>
 
-  ####Way 1:  JSON format<br/>
+  #### Way 1:  JSON format<br/>
   ```CS
     public static container contosoGetDlvModeBookSlotJson(str _searchCriteriaJson)
     {
@@ -123,7 +123,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
    
    }
  ```
- ####Way 2:  XML format<br/>
+ #### Way 2:  XML format<br/>
 ```
  public static container contosoGetDlvModeBookSlotXml(str _searchCriteriaJson)
  {
