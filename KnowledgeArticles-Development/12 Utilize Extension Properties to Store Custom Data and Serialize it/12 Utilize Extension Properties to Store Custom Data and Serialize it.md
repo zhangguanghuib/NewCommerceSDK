@@ -230,6 +230,380 @@ export default class SearchTransactionsDialog extends Dialogs.ExtensionTemplated
 }
 ```
 
+### POS Operation to set the the "Installation Date" to Cartline's extension properties:<br/>
+SaveDataToSelectedCartLineFactory.ts<br/>
+```TS
+import { ExtensionOperationRequestFactoryFunctionType } from "PosApi/Create/Operations";
+import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
+import { DateExtensions, ObjectExtensions } from "PosApi/TypeExtensions";
+import SaveDataToSelectedCartLineRequest from "./SaveDataToSelectedCartLineRequest";
+import SaveDataToSelectedCartLineResponse from "./SaveDataToSelectedCartLineResponse";
+import SearchTransactionsDialog from "./../../Dialogs/SearchTransactionsDialog";
+
+let getOperationRequest: ExtensionOperationRequestFactoryFunctionType<SaveDataToSelectedCartLineResponse> =
+    function (
+        context: IExtensionContext,
+        operationId: number,
+        actionParameters: string[],
+        correlationId: string
+    ): Promise<ClientEntities.ICancelableDataResult<SaveDataToSelectedCartLineRequest<SaveDataToSelectedCartLineResponse>>> {
+
+        let installationDate: string = DateExtensions.getDate().toDateString();
+
+        let dialog: SearchTransactionsDialog = new SearchTransactionsDialog();
+        return dialog.open().then((criteria: ProxyEntities.TransactionSearchCriteria) => {
+            if (!ObjectExtensions.isNullOrUndefined(criteria)) {
+                installationDate = criteria.StartDateTime.toDateString();
+            }
+        }).then(() => {
+            let operationRequest: SaveDataToSelectedCartLineRequest<SaveDataToSelectedCartLineResponse> =
+                new SaveDataToSelectedCartLineRequest(correlationId, installationDate);
+
+            return Promise.resolve(<ClientEntities.ICancelableDataResult<SaveDataToSelectedCartLineRequest<SaveDataToSelectedCartLineResponse>>>{
+                canceled: false,
+                data: operationRequest
+            });
+        });
+    };
+
+export default getOperationRequest;
+```
+
+SaveDataToSelectedCartLineHandler<br/>
+```TS
+import { GetCurrentCartClientRequest, GetCurrentCartClientResponse, SaveExtensionPropertiesOnCartLinesClientRequest, SaveExtensionPropertiesOnCartLinesClientResponse } from "PosApi/Consume/Cart";
+import { IListInputDialogItem, IListInputDialogOptions, ShowListInputDialogClientRequest, ShowListInputDialogClientResponse } from "PosApi/Consume/Dialogs";
+import { ExtensionOperationRequestHandlerBase, ExtensionOperationRequestType } from "PosApi/Create/Operations";
+import { ClientEntities, ProxyEntities } from "PosApi/Entities";
+import { IExtensionContext } from "PosApi/Framework/ExtensionContext";
+import { StringExtensions } from "PosApi/TypeExtensions";
+import CartViewController from "../../../Extend/ViewExtensions/Cart/CartViewController";
+import SaveDataToSelectedCartLineRequest from "./SaveDataToSelectedCartLineRequest";
+import SaveDataToSelectedCartLineResponse from "./SaveDataToSelectedCartLineResponse";
+
+export default class SaveDataToSelectedCartLineHandler<TResponse extends SaveDataToSelectedCartLineResponse>
+    extends ExtensionOperationRequestHandlerBase<TResponse>{
+
+    public supportedRequestType(): ExtensionOperationRequestType<TResponse> {
+        return SaveDataToSelectedCartLineRequest;
+    }
+
+    public executeAsync(request: SaveDataToSelectedCartLineRequest<TResponse>): Promise<ClientEntities.ICancelableDataResult<TResponse>> {
+        this.context.logger.logInformational("Log message from SaveDataToSelectedCartLineHandler executeAsync().", request.correlationId);
+        let getCurrentCartRequest: GetCurrentCartClientRequest<GetCurrentCartClientResponse> = new GetCurrentCartClientRequest(request.correlationId);
+
+        return this.context.runtime.executeAsync(getCurrentCartRequest)
+            .then((getCurrentCartClientResponse: ClientEntities.ICancelableDataResult<GetCurrentCartClientResponse>) => {
+                if (getCurrentCartClientResponse.canceled) {
+                    return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{
+                        canceled: true,
+                        data: null
+                    });
+                }
+
+                let selectedCartLineId: string = CartViewController.selectedCartLineId;
+                if (StringExtensions.isNullOrWhitespace(selectedCartLineId)) {
+                    return this._showDialog(this.context, getCurrentCartClientResponse.data.result)
+                        .then((dialogResult: ClientEntities.ICancelableDataResult<string>) => {
+                            if (dialogResult.canceled) {
+                                return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{ canceled: true, data: null });
+                            }
+
+                            return this._saveDataToCartLineByCartLineId(
+                                dialogResult.data,
+                                request.installationDate,
+                                request.correlationId,
+                                getCurrentCartClientResponse.data.result
+                            );
+                        });
+                } else {
+                    return this._saveDataToCartLineByCartLineId(
+                        selectedCartLineId,
+                        request.installationDate,
+                        request.correlationId,
+                        getCurrentCartClientResponse.data.result
+                    );
+                }
+            });
+    }
+
+    private _saveDataToCartLineByCartLineId(cartLineId: string, value: string, correlationId: string, cart: ProxyEntities.Cart):
+        Promise<ClientEntities.ICancelableDataResult<TResponse>> {
+
+        let cartLineExtensionProperty: ProxyEntities.CommerceProperty = new ProxyEntities.CommercePropertyClass();
+        cartLineExtensionProperty.Key = "installationDate";
+        cartLineExtensionProperty.Value = new ProxyEntities.CommercePropertyValueClass();
+        cartLineExtensionProperty.Value.StringValue = value;
+
+        let extensionPropertiesOnCartLine: ClientEntities.IExtensionPropertiesOnCartLine = {
+            cartLineId: cartLineId,
+            extensionProperties: [cartLineExtensionProperty]
+        };
+
+        let saveExtensionPropertiesOnCartLineRequest: SaveExtensionPropertiesOnCartLinesClientRequest<SaveExtensionPropertiesOnCartLinesClientResponse> =
+            new SaveExtensionPropertiesOnCartLinesClientRequest([extensionPropertiesOnCartLine], correlationId);
+
+        return this.context.runtime.executeAsync(saveExtensionPropertiesOnCartLineRequest)
+            .then((saveExtensionPropertiesOnCartLinesClientResponse: ClientEntities.ICancelableDataResult<SaveExtensionPropertiesOnCartLinesClientResponse>) => {
+                if (saveExtensionPropertiesOnCartLinesClientResponse.canceled) {
+                    return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{
+                        canceled: true,
+                        data: null
+                    });
+                }
+                return Promise.resolve(<ClientEntities.ICancelableDataResult<TResponse>>{
+                    canceled: false,
+                    data: new SaveDataToSelectedCartLineResponse(cart)
+                });
+            });
+    }
+
+    private _showDialog(context: IExtensionContext, cart: ProxyEntities.Cart): Promise<ClientEntities.ICancelableDataResult<string>> {
+        let convertedListItems: IListInputDialogItem[] = cart.CartLines.map((cartline: ProxyEntities.CartLine): IListInputDialogItem => {
+            return {
+                label: cartline.Description,
+                value: cartline.LineId
+            };
+        });
+
+        let listInputDialogOptions: IListInputDialogOptions = {
+            title: "Select a cart line",
+            subTitle: "Cart lines",
+            items: convertedListItems
+        };
+
+        let dialogRequest: ShowListInputDialogClientRequest<ShowListInputDialogClientResponse> =
+            new ShowListInputDialogClientRequest<ShowListInputDialogClientResponse>(listInputDialogOptions);
+
+        return context.runtime.executeAsync(dialogRequest)
+            .then((result: ClientEntities.ICancelableDataResult<ShowListInputDialogClientResponse>) => {
+                if (result.canceled) {
+                    return Promise.resolve(<ClientEntities.ICancelableDataResult<string>>{
+                        canceled: true,
+                        data: null
+                    });
+                }
+
+                return Promise.resolve(<ClientEntities.ICancelableDataResult<string>>{
+                    canceled: false,
+                    data: result.data.result.value.value
+                });
+            });
+    }
+}
+```
+
+The response and request as below:
+```TS
+import { Response } from "PosApi/Create/RequestHandlers";
+import { ProxyEntities } from "PosApi/Entities";
+
+export default class SaveDataToSelectedCartLineResponse extends Response {
+    public cart: ProxyEntities.Cart;
+    constructor(cart: ProxyEntities.Cart) {
+        super();
+        this.cart = cart;
+    }
+}
+```
+
+```TS
+import { ExtensionOperationRequestBase } from "PosApi/Create/Operations";
+import SaveDataToSelectedCartLineResponse from "./SaveDataToSelectedCartLineResponse";
+
+export default class SaveDataToSelectedCartLineRequest<TResponse extends SaveDataToSelectedCartLineResponse> extends ExtensionOperationRequestBase<TResponse> {
+    public readonly installationDate: string;
+    constructor(correlationId: string, installationDate: string) {
+        super(60004, correlationId);
+        this.installationDate = installationDate;
+    }
+}
+```
+
+###  The API via CartViewController to get which cartline are selected:
+```TS
+import * as CartView from "PosApi/Extend/Views/CartView";
+import { ProxyEntities } from "PosApi/Entities";
+import { IExtensionCartViewControllerContext } from "PosApi/Extend/Views/CartView";
+import { ArrayExtensions, StringExtensions } from "PosApi/TypeExtensions";
+
+export default class CartViewController extends CartView.CartExtensionViewControllerBase {
+
+    public static selectedCartLineId: string = StringExtensions.EMPTY;
+    private _selectedCartLines: ProxyEntities.CartLine[];
+    public _selectedTenderLines: ProxyEntities.TenderLine[];
+    public _isProcessingAddItemOrCustomer: boolean;
+
+    /**
+     * Creates a new instance of the CartViewController class.
+     * @param {IExtensionCartViewControllerContext} context The events Handler context.
+     * @remarks The events handler context contains APIs through which a handler can communicate with POS.
+     */
+    constructor(context: IExtensionCartViewControllerContext) {
+        super(context);
+
+        this.cartLineSelectedHandler = (data: CartView.CartLineSelectedData): void => {
+            this._selectedCartLines = data.cartLines;
+
+            if (ArrayExtensions.hasElements(this._selectedCartLines)) {
+                CartViewController.selectedCartLineId = this._selectedCartLines[0].LineId;
+            }
+        };
+
+        this.cartLineSelectionClearedHandler = (): void => {
+            this._selectedCartLines = undefined;
+            CartViewController.selectedCartLineId = null;
+        };
+
+        this.tenderLineSelectedHandler = (data: CartView.TenderLineSelectedData): void => {
+            this._selectedTenderLines = data.tenderLines;
+        };
+
+        this.tenderLineSelectionClearedHandler = (): void => {
+            this._selectedCartLines = undefined;
+        };
+
+        this.processingAddItemOrCustomerChangedHandler = (processing: boolean): void => {
+            this._isProcessingAddItemOrCustomer = processing;
+        };
+    }
+}
+```
+
+### The new column of "Installation Date" on the Cart Line, Delivery Grid<br/>
+```TS
+import {
+    ICustomDeliveryGridColumnContext,
+    CustomDeliveryGridColumnBase
+} from "PosApi/Extend/Views/CartView";
+import { CustomGridColumnAlignment } from "PosApi/Extend/Views/CustomGridColumns";
+import { ProxyEntities } from "PosApi/Entities";
+
+<mark>/**
+ * HOW TO ENABLE THIS SAMPLE
+ *
+ * 1) In HQ, go to Retail > Channel setup > POS > Screen layouts
+ * 2) Filter results to "Fabrikam Manager"
+ * 3) Under Layout sizes, select the resolution of your MPOS, and click on Layout designer
+ * 4) Download, run and sign in to the designer.
+ * 5) Right click on Delivery, and click on customize.
+ * 6) Find CUSTOM COLUMN 1 in Available columns and move it to Selected columns.
+ * 7) Click OK and close the designer.
+ * 8) Back in HQ, Go to Retail > Retail IT > Distribution schedule.
+ * 9) Select job "9999" and click on Run now.
+ */</mark>
+
+export default class DeliveryCustomGridColumn1 extends CustomDeliveryGridColumnBase {
+
+    /**
+     * Creates a new instance of the DeliveryCustomGridColumn1 class.
+     * @param {ICustomDeliveryGridColumnContext} context The extension context.
+     */
+    constructor(context: ICustomDeliveryGridColumnContext) {
+        super(context);
+    }
+
+    /**
+     * Gets the custom column title.
+     * @return {string} The column title.
+     */
+    public title(): string {
+        return "Installation Date"; 
+    }
+
+    /**
+     * The custom column cell compute value.
+     * @param {ProxyEntities.CartLine} tenderLine The tender line.
+     * @return {string} The cell value.
+     */
+    public computeValue(cartLine: ProxyEntities.CartLine): string {
+
+        let installationDate: string = "";
+
+        cartLine.ExtensionProperties.forEach((extensionProperty: ProxyEntities.CommerceProperty) => {
+            if (extensionProperty.Key === "installationDate") {
+                installationDate = extensionProperty.Value.StringValue;
+            }
+        });
+
+        return installationDate;
+    }
+
+    /**
+     * Gets the custom column alignment.
+     * @return {CustomGridColumnAlignment} The alignment.
+     */
+    public alignment(): CustomGridColumnAlignment {
+        return CustomGridColumnAlignment.Right;
+    }
+}
+```
+
+### Finally in F&O,  we fine a right place to insert our custom data that is on extension property to FO System: <br/>
+```CS
+using System.Collections.Specialized;
+using System.Reflection;
+using Microsoft.Dynamics.Commerce.Runtime.Services.CustomerOrder;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+
+[ExtensionOf(classstr(RetailCreateCustomerOrderExtensions))]
+final class RetailCreateCustomerOrderExtensions_Extension
+{
+    public static void preSalesLineCreate(RetailCustomerOrderLineParameters retailCustomerOrderLineParameters, SalesLineCreateLineParameters salesLineCreateLineParameters)
+    {
+        SalesTable salesTable;
+        OrderLineInstallation orderLineInstallation;
+
+        if (retailCustomerOrderLineParameters.orderHeader.TableId == tableNum(SalesTable))
+        {
+            salesTable = retailCustomerOrderLineParameters.orderHeader;
+        }
+
+        ItemId itemId = retailCustomerOrderLineParameters.itemInfo.ItemId;
+        var extensionProps = retailCustomerOrderLineParameters.itemInfo.ExtensionProperties;
+        LineNum lineNum = retailCustomerOrderLineParameters.itemInfo.LineNumber;
+        str installationDate = '';
+
+        for (int i = 0; i < extensionProps.get_Count(); i++)
+        {
+            var commerceProperty = extensionProps.get_Item(i);
+            
+            if (commerceProperty.get_Key() == 'installationDate')
+            {
+                installationDate = commerceProperty.get_Value().get_StringValue();
+                break;
+            }
+        }
+
+        OrderLineInstallation.SalesId = salesTable.SalesId;
+        OrderLineInstallation.LineNum = lineNum;
+        OrderLineInstallation.InstallationDate = installationDate;
+        OrderLineInstallation.ItemId = itemId;
+       
+        if(OrderLineInstallation.validateWrite())
+        {
+            OrderLineInstallation.insert();
+        } 
+        else
+        {
+            Global::info("OrderLineInstallation insersion failed.");
+        }
+    }
+
+}
+```
+
+The inspiration is from :<br/>
+
+<img width="913" alt="image" src="https://github.com/user-attachments/assets/2ac27f00-178c-45e7-b8df-d13a9e1ae9c6" />
+
+<br/>
+
+The doc is here:
+
+https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-attributes
+
 
 
 
