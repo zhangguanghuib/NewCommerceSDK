@@ -100,7 +100,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
     }
   ```
  In order to use FormJsonSerializer::deserializeObject, we need define <br/>
- ```
+ ```CS
    [DataContract]
    internal final class DlvModeBookSlotSearchCriteria
    {
@@ -124,7 +124,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
    }
  ```
  #### Way 2:  XML format<br/>
-```
+```CS
  public static container contosoGetDlvModeBookSlotXml(str _searchCriteriaJson)
  {
      int fromLine;
@@ -175,7 +175,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
  }
 ```
 and the helper method to get the search creteria is:<br/>
-```
+```CS
  private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromXml(str _xmlArgumentString)
  {
      XmlDocument         argsXml;
