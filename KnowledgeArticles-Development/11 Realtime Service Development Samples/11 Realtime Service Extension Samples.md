@@ -32,7 +32,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
 . Step 2
   Fetch the booking slot data based on delivery mode passed from retail server to fill an array object, and then serialize it into a string<br/>
 
-  Way 1:<br/>
+  ####Way 1:  JSON format<br/>
   ```CS
     public static container contosoGetDlvModeBookSlotJson(str _searchCriteriaJson)
     {
@@ -83,7 +83,7 @@ The data will be showing on the POS  Shipping View for different Shipping Method
         return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
     }
   ```
-  and
+  and the helper method to get the search Criteria:
   ```
     private static DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJsonXpp(str _searchCriteriaJson)
     {
@@ -123,3 +123,133 @@ The data will be showing on the POS  Shipping View for different Shipping Method
    
    }
  ```
+ ####Way 2:  XML format<br/>
+```
+ public static container contosoGetDlvModeBookSlotXml(str _searchCriteriaJson)
+ {
+     int fromLine;
+     Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+     System.Collections.ArrayList resultList = new System.Collections.ArrayList();
+
+     try
+     {
+         fromLine = Global::infologLine();
+
+         ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria =
+             RetailTransactionServiceEx::getDlvModeBookSlotSearchCriteriaFromXml(_searchCriteriaJson);
+         if (!searchCriteria)
+         {
+             return [false, "searchCriteria is null", ''];
+         }
+        
+         if (searchCriteria.DlvModeCode)
+         {
+             RetailChannelDlvModeBookingSlot retailChannelDlvModeBookingSlot;
+             DlvMode  dlvMode;
+             while select retailChannelDlvModeBookingSlot
+                 where retailChannelDlvModeBookingSlot.DlvModeCode == searchCriteria.DlvModeCode
+                 join Txt from dlvMode
+                 where dlvMode.Code == retailChannelDlvModeBookingSlot.DlvModeCode
+             {
+                 dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+                 dlvModeBookSlot.DlvModeCode = searchCriteria.DlvModeCode;
+                 dlvModeBookSlot.DlvModeTxt = dlvMode.Txt;
+                 dlvModeBookSlot.ShippingDate =new System.DateTimeOffset(retailChannelDlvModeBookingSlot.ShippingDate);
+                 dlvModeBookSlot.MaxSlot = retailChannelDlvModeBookingSlot.MaxSlots;
+                 dlvModeBookSlot.FreeSlot = retailChannelDlvModeBookingSlot.FreeSlots;
+                 resultList.Add(dlvModeBookSlot);
+             }
+         }
+     }
+     catch
+     {
+         str errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+         str axCallStack = con2Str(xSession::xppCallStack());
+         return [false, errorMessage, ''];
+     }
+
+     // Serialize the data-contract list using the specified type list.
+     System.Type[] typeArray = new System.Type[1]();
+     typeArray.SetValue(dlvModeBookSlot.GetType(), 0);
+     return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
+ }
+```
+and the helper method to get the search creteria is:<br/>
+```
+ private static ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromXml(str _xmlArgumentString)
+ {
+     XmlDocument         argsXml;
+     XmlElement          argsRoot;
+
+     // Get the string value of an XML element argument.
+     str getArg(str argName)
+     {
+         XmlElement xmlRoot = argsRoot.getNamedElement(argName);
+         if (xmlRoot != null)
+         {
+             return xmlRoot.text();
+         }
+         return '';
+     }
+
+     System.Exception ex;
+     try
+     {
+         argsXml   = new XmlDocument();
+         argsXml.loadXml(_xmlArgumentString);
+         argsRoot = argsXml.documentElement();
+
+         str argDlvModeCode = getArg('DlvModeCode');
+         ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria searchCriteria = new ContosoCRT.TransactionService.DlvModeBookSlotSearchCriteria(argDlvModeCode);
+         return searchCriteria;
+     }
+     catch(ex)
+     {
+         return null;
+     }
+ }
+```
+. Step 3,  In retail Server, we can call the Realtime-Service Extension to get the data in F&O and show on POS view:<br/>
+  Firstly, we build a Search Creteria Object:
+  ```CS
+  ReadOnlyCollection<object> results;
+
+  DlvModeBookSlotSearchCriteria searchCriteria = new DlvModeBookSlotSearchCriteria();
+  searchCriteria.DlvModeCode = request.DlvModeCode;
+  searchCriteria.PagingInfo = request.QueryResultSettings.Paging;
+  ```
+  And then call the the realtime service extesion API to get the data,  here the returned value is a string, we need deserialize it into an array:
+  ```CS
+    InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+     "contosoGetDlvModeBookSlotJson",
+     SerializationHelper.SerializeObjectToJson(searchCriteria)
+   );
+   
+   InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
+   
+   results = response.Result;
+   
+   string resXmlValue = (string)results[0];
+   
+   IEnumerable<DlvModeBookSlot> dlvModeBookSlots;
+   if (useJson)
+   {
+     dlvModeBookSlots = SerializationHelper.DeserializeObjectDataContractFromJson<DlvModeBookSlot[]>(resXmlValue);                 
+   }
+   else
+   {
+     dlvModeBookSlots =
+         SerializationHelper.DeserializeObjectDataContractFromXml<DlvModeBookSlot[]>(resXmlValue);
+   }
+   return new GetDlvModeBookSlotsResponse(dlvModeBookSlots.AsPagedResult());
+  ```
+  For xml Search Creteria, we can use this code:
+  ```CS
+   InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest(
+     "contosoGetDlvModeBookSlotXml",
+     SerializationHelper.SerializeObjectToXml(searchCriteria)
+   );
+  ```
+
+
+
