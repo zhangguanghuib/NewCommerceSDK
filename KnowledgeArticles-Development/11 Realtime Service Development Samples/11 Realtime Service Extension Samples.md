@@ -16,5 +16,7 @@ Scenario #1：RetailServer read the data from F&O Database table and render the 
 Scenario #2: Create a new record in F&O database table,  and show the record in FO form, grid view.<br/>
 
 ## RetailServer read the data from F&O Database table and render the data on POS view 
-
+### Let us see the final effect
+In F&O,  there is a form to show for each shipping method,  each day's max shipping slot and free slot:<Br/>
+![image](https://github.com/user-attachments/assets/0556ccab-e899-41dd-944e-28e93a5f02b1)
 
