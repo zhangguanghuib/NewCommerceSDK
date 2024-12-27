@@ -13,6 +13,6 @@ Real-time Service enables clients to interact with Commerce functionality in rea
 
 But it is unfortunately, the samples provided in the official document is too simple,  it only demonstrates one single string value communicatation scenario, actually in real world,  the scenario is much more complex, Object Array is a very Commmon Scenario.
 
-In this article,  I will demonstration two Realtime Service Scenario:
-Scenario #1：RetailServer read the data from F&O Database table and render the date on POS view.
-Scenario #2: Create a new record in F&O database table,  and show the record in FO form, grid view.
+In this article,  I will demonstration two Realtime Service Scenario:<br/>
+Scenario #1：RetailServer read the data from F&O Database table and render the date on POS view.<br/>
+Scenario #2: Create a new record in F&O database table,  and show the record in FO form, grid view.<br/>
