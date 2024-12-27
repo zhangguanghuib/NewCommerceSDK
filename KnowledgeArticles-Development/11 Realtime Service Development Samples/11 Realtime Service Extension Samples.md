@@ -19,4 +19,6 @@ Scenario #2: Create a new record in F&O database table,  and show the record in 
 ### Let us see the final effect
 In F&O,  there is a form to show for each shipping method,  each day's max shipping slot and free slot:<Br/>
 ![image](https://github.com/user-attachments/assets/0556ccab-e899-41dd-944e-28e93a5f02b1)
+<br/>
+The data will be showing on the POS  Shipping View for different Shipping Method, then user can choose a proper data to ship.
 
