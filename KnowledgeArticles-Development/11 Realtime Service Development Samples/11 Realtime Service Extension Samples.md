@@ -23,6 +23,103 @@ In F&O,  there is a form to show for each shipping method,  each day's max shipp
 The data will be showing on the POS  Shipping View for different Shipping Method, then user can choose a proper data to ship.
 ![image](https://github.com/user-attachments/assets/3bf7af9a-cd89-474d-99c0-d28713ea471d)
 ### How to implement it?
-. Step 1, in F&O we should have a table and form for user to input the delivery mode booking slot:
+. Step 1
+   In F&O we should have a table and form for user to input the delivery mode booking slot:<br/>
+   table:<br/>
    <img width="275" alt="image" src="https://github.com/user-attachments/assets/ee7579b4-bdaa-4498-a3b4-9d81ec64f7fa" /><br/>
+   form(as before) <br/>
    ![image](https://github.com/user-attachments/assets/c89922d1-df75-4118-9d5a-f3b7238cf352)<br/>
+. Step 2
+  Fetch the booking slot data based on delivery mode passed from retail server to fill an array object, and then serialize it into a string<br/>
+
+  Way 1:<br/>
+  ```CS
+    public static container contosoGetDlvModeBookSlotJson(str _searchCriteriaJson)
+    {
+        int fromLine;
+        Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+        System.Collections.ArrayList resultList = new System.Collections.ArrayList();
+
+        try
+        {
+           fromLine = Global::infologLine();
+           DlvModeBookSlotSearchCriteria searchCriteria = RetailTransactionServiceEx::getDlvModeBookSlotSearchCriteriaFromJsonXpp(_searchCriteriaJson);
+
+           if (!searchCriteria)
+           {
+               return [false, "searchCriteria is null", ''];
+           }
+
+            if (searchCriteria.parmDlvModeCode())
+            {
+                RetailChannelDlvModeBookingSlot retailChannelDlvModeBookingSlot;
+                DlvMode  dlvMode;
+                while select retailChannelDlvModeBookingSlot
+                    where retailChannelDlvModeBookingSlot.DlvModeCode == searchCriteria.parmDlvModeCode()
+                    join Txt from dlvMode 
+                    where dlvMode.Code == retailChannelDlvModeBookingSlot.DlvModeCode
+
+                {
+                    dlvModeBookSlot = new Contoso.GasStationSample.CommerceRuntime.Entities.DlvModeBookSlot();
+                    dlvModeBookSlot.DlvModeCode = searchCriteria.parmDlvModeCode();
+                    dlvModeBookSlot.DlvModeTxt = dlvMode.Txt;
+                    dlvModeBookSlot.ShippingDate =new System.DateTimeOffset(retailChannelDlvModeBookingSlot.ShippingDate);
+                    dlvModeBookSlot.MaxSlot = retailChannelDlvModeBookingSlot.MaxSlots;
+                    dlvModeBookSlot.FreeSlot = retailChannelDlvModeBookingSlot.FreeSlots;
+                    resultList.Add(dlvModeBookSlot);
+                }
+            }
+        }
+        catch
+        {
+            str errorMessage = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+            str axCallStack = con2Str(xSession::xppCallStack());
+            return [false, errorMessage, ''];
+        }
+
+        // Serialize the data-contract list using the specified type list.
+        System.Type[] typeArray = new System.Type[1]();
+        typeArray.SetValue(dlvModeBookSlot.GetType(), 0);
+        return [true, '', RetailTransactionService::SerializeToJson(resultList, typeArray)];
+    }
+  ```
+  and
+  ```
+    private static DlvModeBookSlotSearchCriteria getDlvModeBookSlotSearchCriteriaFromJsonXpp(str _searchCriteriaJson)
+    {
+        System.Exception ex;
+        try
+        {
+            DlvModeBookSlotSearchCriteria searchCriteria = FormJsonSerializer::deserializeObject(classNum(DlvModeBookSlotSearchCriteria), _searchCriteriaJson);
+            return searchCriteria;
+        }
+        catch(ex)
+        {
+            return null;
+        }
+    }
+  ```
+ In order to use FormJsonSerializer::deserializeObject, we need define <br/>
+ ```
+   [DataContract]
+   internal final class DlvModeBookSlotSearchCriteria
+   {
+       DlvModeId dlvModeCode;
+       int serializationFormat;
+   
+       [DataMember('DlvModeCode')]
+       public DlvModeId parmDlvModeCode(DlvModeId _dlvModeCode = this.dlvModeCode)
+       {
+           this.dlvModeCode = _dlvModeCode;
+           return this.dlvModeCode;
+       }
+   
+       [DataMember('SerializationFormat')]
+       public int parmSerializationFormat(int _serializationFormat = this.serializationFormat)
+       {
+           this.serializationFormat = _serializationFormat;
+           return this.serializationFormat;
+       }
+   
+   }
+ ```
