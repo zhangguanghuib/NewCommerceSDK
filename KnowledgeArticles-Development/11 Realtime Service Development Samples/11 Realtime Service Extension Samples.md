@@ -1,7 +1,7 @@
 ## Table of Contents
 - [Topic](#topic)
 - [Background](#Background)
-- [RetailServer read the data from F&O Database table and render the date on POS view ](#RetailServer read the data from F&O Database table and render the date on POS view )
+- [RetailServer read the data from F&O Database table and render the date on POS view ](#RetailServer read the data from F&O Database table and render the data on POS view )
 
 ## Topic
 Deep Dive D365 Commerce Realtime Service:  from single value communication to array communication.
@@ -15,6 +15,6 @@ In this article,  I will demonstration two Realtime Service Scenario:<br/>
 Scenario #1：RetailServer read the data from F&O Database table and render the date on POS view.<br/>
 Scenario #2: Create a new record in F&O database table,  and show the record in FO form, grid view.<br/>
 
-## RetailServer read the data from F&O Database table and render the date on POS view 
+## RetailServer read the data from F&O Database table and render the data on POS view 
 
 
