@@ -58,7 +58,7 @@ export default class SaveDataToSelectedCartLineHandler<TResponse extends SaveDat
         Promise<ClientEntities.ICancelableDataResult<TResponse>> {
 
         let cartLineExtensionProperty: ProxyEntities.CommerceProperty = new ProxyEntities.CommercePropertyClass();
-        cartLineExtensionProperty.Key = "installationDate";
+        cartLineExtensionProperty.Key = "InstallationDate";
         cartLineExtensionProperty.Value = new ProxyEntities.CommercePropertyValueClass();
         cartLineExtensionProperty.Value.StringValue = value;
 

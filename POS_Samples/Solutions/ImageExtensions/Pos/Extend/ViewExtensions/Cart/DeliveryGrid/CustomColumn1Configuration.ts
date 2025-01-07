@@ -47,7 +47,7 @@ export default class DeliveryCustomGridColumn1 extends CustomDeliveryGridColumnB
         let installationDate: string = "";
 
         cartLine.ExtensionProperties.forEach((extensionProperty: ProxyEntities.CommerceProperty) => {
-            if (extensionProperty.Key === "installationDate") {
+            if (extensionProperty.Key === "InstallationDate") {
                 installationDate = extensionProperty.Value.StringValue;
             }
         });
