@@ -732,6 +732,9 @@ The doc is here:
 
 https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-attributes
 
+The whole project is here:<br/>
+
+https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/ImageExtensions
 
 
 
