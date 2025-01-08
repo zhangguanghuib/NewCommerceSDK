@@ -600,6 +600,134 @@ The inspiration is from :<br/>
 
 <br/>
 
+## Recall Order Customer Scenario
+# Scenario
+1. Click "Recall Order" -> "Order to Ship": <br/>
+<img width="390" alt="image" src="https://github.com/user-attachments/assets/fa64d3d7-af46-437d-8014-70dd9b59640b" /><br/>
+2.  Highlight the order to be shipped, and click "Edit": <br/>
+<img width="917" alt="image" src="https://github.com/user-attachments/assets/c0494ac5-e365-481c-bedc-e846ded0495f" /><br/>
+3. Go to "Cart" Screen, you wil the "Installation Date" from "Extension Properties" is still there<br/>
+   <img width="830" alt="image" src="https://github.com/user-attachments/assets/57114d22-03c3-4b84-806e-7284384ec612" />
+# Implementation Details:
+1. When recall order, this RTS API will be called
+   ```
+   /Classes/RetailTransactionServiceOrders/Methods/getCustomerOrder - (7892, 52)
+   ```
+   From this method we can find this extension point:<br/>
+   <img width="1298" alt="image" src="https://github.com/user-attachments/assets/88077ce2-9b6c-42bd-bed7-5bb39ea397b9" /><br/>
+
+   Hence we implement this extension point:<br/>
+   ```cs
+    [ExtensionOf(classstr(RetailCustomerOrderExtensions))]
+    final class RetailCustomerOrderExtensions_Extension
+    {
+        [Replaceable]
+        public static void getCustomerOrderPreAppendLine(RetailGetCustomerOrderLineParameters lineParameters)
+        {
+            SalesLine salesLine = lineParameters.salesLine;
+            OrderLineInstallation orderLineInstallation = OrderLineInstallation::find(salesLine);
+    
+            if (orderLineInstallation.RecId)
+            {
+                XmlDocument _xmlDoc = lineParameters.xmlDoc;
+                XmlElement xmlRecord = lineParameters.xmlRecord;
+                XmlElement xmlExtensionProperties = _xmlDoc.createElement('ExtensionProperties');
+                XmlElement xmlInstallationDateEntry = _xmlDoc.createElement('InstallationDate');
+                xmlInstallationDateEntry.innerText(orderLineInstallation.InstallationDate);
+                xmlExtensionProperties.appendChild(xmlInstallationDateEntry);
+                xmlRecord.appendChild(xmlExtensionProperties);
+            }
+        }
+    
+    }
+   ```
+   This code we read the installation date and then build a XmlNode and put the ExtensionProperties XmlNode and Installation Xml into the Xml Document.<br/>
+
+2. In the CSU  C# code side, we read the "Installation Date" and build a CommerceProperty and put it into the salesline's ExtensionProperties.<br/>
+```cs
+namespace Contoso.GasStationSample.CommerceRuntime.RequestHandlers
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.Dynamics.Commerce.Runtime;
+    using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
+    using System.Collections.Concurrent;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages.ProductAvailability;
+    using System.Collections.ObjectModel;
+    using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages.Inventory;
+    using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+    using Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+    using Microsoft.Dynamics.Retail.Diagnostics;
+    using Microsoft.Dynamics.Retail.Diagnostics.Extensions;
+    using System.Linq;
+    using System.Globalization;
+    using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
+    using System.Xml;
+
+    public class RecallCustomerOrderRealtimeRequestHandler : SingleAsyncRequestHandler<RecallCustomerOrderRealtimeRequest>
+    {
+        protected async override Task<Response> Process(RecallCustomerOrderRealtimeRequest request)
+        {
+            var transactionServiceClient  = new TransactionServiceClient(request.RequestContext);
+            ReadOnlyCollection<object> transactionResponse = null;
+
+            if (request.IsQuote)
+            {
+                transactionResponse = await transactionServiceClient.GetCustomerQuote(request.Id).ConfigureAwait(false);
+            }
+            else
+            {
+                transactionResponse = await transactionServiceClient.GetCustomerOrder(request.Id, includeOnlineOrders: true).ConfigureAwait(false);
+            }
+
+            string orderXml = transactionResponse[0].ToString();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(orderXml);
+
+            XmlNodeList itemNodes = xmlDoc.SelectNodes("//CustomerOrder/Items/Item");
+
+            Dictionary<Decimal, string> dict = new Dictionary<Decimal, string>();
+
+            foreach (XmlNode itemNode in itemNodes)
+            {
+                decimal lineNumber = Convert.ToDecimal(itemNode.Attributes["LineNumber"]?.Value);
+                XmlNode installationDateNode = itemNode.SelectSingleNode("ExtensionProperties/InstallationDate");
+
+                if (installationDateNode != null)
+                {
+                    dict.Add(lineNumber, installationDateNode.InnerText);
+                }
+            }
+
+            var response = await this.ExecuteNextAsync<RecallCustomerOrderRealtimeResponse>(request).ConfigureAwait(false);
+
+            foreach (var line in response.SalesOrder.SalesLines)
+            {
+                if (dict.TryGetValue(line.LineNumber, out string value))
+                {
+                    SalesLine salesline = response.SalesOrder.SalesLines.Where(x => x.LineNumber == line.LineNumber).FirstOrDefault();
+                    if(salesline != null)
+                    {
+                        CommerceProperty commerceProperty = new CommerceProperty("InstallationDate", value);
+                        salesline.ExtensionProperties.Add(commerceProperty);
+                    }
+                }
+            }
+
+            return response;
+        }
+    }
+}
+```
+
+
 The doc is here:
 
 https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-attributes
