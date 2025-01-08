@@ -1,4 +1,4 @@
-## Utilize Extension Properties to Store Custom Data and Serialize it
+## How to utilize Extension Properties to Store Custom Data and Serialize it and deserialize it and show it on the extended column on Cart Screebm?
 
 ## Background 
 In Some Scenarios, we may need store custom data into the standard data entity,  then we can utilize the ExtensionProperties. All data entities that extends CommerceEntity has this propertity, it is an array of CommereProperty which has a key and Value, we can do a lot of things through ExtensionProperties.
