@@ -1,3 +1,5 @@
+0. Official document:
+     https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/omnichannel-media-management-overview
 1:  Setup:<br/>
      ![image](https://github.com/user-attachments/assets/02ce4ebe-aaac-4054-9984-4ee62a16ee76)<br/>
      ![image](https://github.com/user-attachments/assets/9083f6f3-46b7-48d7-8aa4-e165afcecb6b)<br/>
