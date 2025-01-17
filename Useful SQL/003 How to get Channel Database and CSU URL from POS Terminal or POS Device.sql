@@ -1,26 +1,15 @@
---DECLARE @featureClassNamePattern NVARCHAR(100) = '%Dynamics.AX.Application.RetailDeliveryModeConsistencyFeature%';
---Dynamics.AX.Application.RetailUnifiedReturnUXImprovementFeature
-DECLARE @featureClassNamePattern NVARCHAR(100) = 'Dynamics.AX.Application.RetailUnifiedReturnsFeature';
-DECLARE @featureStateRecId BIGINT;
-
-SELECT @featureStateRecId = recid FROM dbo.featuremanagementstate WHERE NAME LIKE @featureClassNamePattern
-
-SELECT * FROM dbo.featuremanagementstate WHERE recid = @featureStateRecId
-SELECT enabledate, modifieddatetime, modifiedby, * FROM dbo.featuremanagementmetadata WHERE  featurestate = @featureStateRecId
-
-UPDATE [dbo].[featuremanagementmetadata]
-SET    enabledate = '1900-01-01 00:00:00.000',
-       modifieddatetime = Getdate(),
-       modifiedby = 'Testing'
-WHERE  featurestate = @featureStateRecId
-
-UPDATE [dbo].featuremanagementstate
-SET    isenabled = 0
-WHERE  recid = @featureStateRecId
-
-SELECT * FROM dbo.featuremanagementstate WHERE recid = @featureStateRecId
-SELECT enabledate, modifieddatetime, modifiedby, * FROM dbo.featuremanagementmetadata WHERE  featurestate = @featureStateRecId
-
-
-
-SELECT * FROM dbo.featuremanagementstate WHERE NAME LIKE 'Dynamics.AX.Application.RetailUnifiedReturnsFeature'
+```sql
+select * from dbo.RETAILDEVICE as T where T.DeviceId ='300801' --RetailDevice
+ 
+select T.STORERECID, * from dbo.RetailTerminalTable as T where T.terminalId = '300801' -- From RetailDevice to RetailTerminal
+ 
+select * from dbo.RETAILCHANNELTABLE as T where T.RecId = 5637146251 --from Terminal to RetailChannelTable
+ 
+select T.CHANNEL, T.CHANNELPROFILE, T.LIVECHANNELDATABASE, * from dbo.RetailChannelTableExt as T where T.Channel   = 5637146251 -- RetailChannelTableExt
+ 
+select T.Name, * from dbo.RetailConnDatabaseProfile as T where T.RecId = 5637144576 -- from Channale to Channel database
+ 
+select * from dbo.RetailChannelProfile as T where T.RecId = 5637144576 -- Get Channel Profile
+ 
+select T.KEY_, T.VALUE, * from dbo.RetailChannelProfileProperty as T where T.ChannelProfile = 5637144576 -- Get Channel profile line       
+```
