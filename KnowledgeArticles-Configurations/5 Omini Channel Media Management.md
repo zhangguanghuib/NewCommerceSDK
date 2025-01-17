@@ -1,51 +1,53 @@
-1:  Config the Loyalty reward points<br/>
-![image](https://github.com/user-attachments/assets/901bfad8-877d-4319-9b6e-9426ea81daf1)<br/>
+1:  Setup:<br/>
+     ![image](https://github.com/user-attachments/assets/02ce4ebe-aaac-4054-9984-4ee62a16ee76)<br/>
+     ![image](https://github.com/user-attachments/assets/9083f6f3-46b7-48d7-8aa4-e165afcecb6b)<br/>
+     ![image](https://github.com/user-attachments/assets/322e6567-d758-471d-a9b1-ff702873f1b6)<br/>
 
-2. Create Loyalty Program<br/>
-![image](https://github.com/user-attachments/assets/2b1142a6-8983-4558-9d78-251fc9689ac1) <br/>
+2： Demo:
+    Site builder:<br/>
+    ![image](https://github.com/user-attachments/assets/f5aee725-9ccf-4d7e-9dec-9ef21fe2b7ee)<br/>
+    <img width="846" alt="image" src="https://github.com/user-attachments/assets/e555eeaf-091e-4ae6-b8ba-faf4b1df3155" /><br/>
+    ![image](https://github.com/user-attachments/assets/38490ab7-1aa0-4572-9331-5365310eb320)<br/>
 
-3. Create loyalty Scheme, it will build loyalty program/Reward Loyalty Point/Channel <br/>
-   This setting means:<br/>
-   Earning Rules:  1 $ will earn 1.2 loyalty points<br/>
-   Redemption Rules:  100 $ can redemed 1 $ discount <br/>
-   And these rules will be applied to the products under category "EYSLoyalty"
-   <img width="1185" alt="image" src="https://github.com/user-attachments/assets/8946e26f-1b24-4cde-870b-b7712e2cbf2d"><br/>
-   
-5. Process Loyalty Schemes<br/>
-   ![image](https://github.com/user-attachments/assets/0eeb93ac-795f-421b-9fcf-75240d358a20)<br/>
+    Go to each commerce site, and enable<br/>
+    ![image](https://github.com/user-attachments/assets/b30d8008-c59b-4aff-a516-7c420e7a89a3)<br/>
+    ![image](https://github.com/user-attachments/assets/d81c8a5b-0517-49de-8a70-959ce9496c6f)<br/>
+    ![image](https://github.com/user-attachments/assets/d984994f-faa2-47d9-816d-be1ebf3aad80)<br/>
+    ![image](https://github.com/user-attachments/assets/27e1e8a9-3d03-480c-a4e0-91432bd2288d)<br/>
 
-6.  Run job 1050<br/>
-   ![image](https://github.com/user-attachments/assets/38c75ea0-3dad-4750-8fb0-e98d00bdb603)<br/>
+3.Omni-Channel Content and product image assignment<br/>
+  <img width="681" alt="image" src="https://github.com/user-attachments/assets/5ed5270d-2c82-4b9b-9ade-cf517591f225" /><br/>
+  ![image](https://github.com/user-attachments/assets/9ff1da04-d011-4719-a86d-3df871f41ef4)<br/>
+  ![image](https://github.com/user-attachments/assets/ff7c8c93-6a83-41c9-805e-26ae160f38bf)<br/>
 
-7. Create 3 products for testing:<br/>
-   ![image](https://github.com/user-attachments/assets/9bc2dd2a-a3f6-466f-981b-f4727b0db228)<br/>
+4.  In Sitebuilder, we assign an image to a product:
+    ![image](https://github.com/user-attachments/assets/31826628-59d3-4878-901b-f44bc3e4ff82)<br/>
+    in HQ, run this batch job:<br/>
+    ![image](https://github.com/user-attachments/assets/bd31fdf8-e189-4e71-a931-e98bb0363690)<br/>
 
-   Please make sure no item sales tax group for these 3 products:<br/>
-   <mark>EYSLoyaltyProd1:   $124.5</mark><br/>
-   <mark>EYSLoyaltyProd2:   $59.9</mark><br/>
-   <mark>EYSLoyaltyProd3:   $2.37</mark><br/>
+     Then run 1040, see this table got changed:<br/>
 
-   Then run the traditional like jobs like "process assortment, process delivery mode,  process loyalty schemes" ect.<>br/
+    ![image](https://github.com/user-attachments/assets/be889949-ffb4-4d34-a7bc-1b94e581fd83)<br/>
+    ax.RETAILMEDIAPRODUCTRELATION<br/>
+    ax.RETAILMEDIARESOURCE<br/>
+    ax.RETAILMEDIARESOURCETRANSLATION<br/>
 
-6.  Create a new customer from POS and issue loyalty card for the new customer,  the loyalty card number is 5500305<br/>
+5. Wait the cache to refresh.
+   Each image has a public url for 3rd-Party system
+   <img width="681" alt="image" src="https://github.com/user-attachments/assets/eddf07c3-cd13-46e7-bb9f-796f8cb486f5" /><br/>
+   ![image](https://github.com/user-attachments/assets/d5d2bbe4-b2ef-4f95-a3e1-39481de3d77c)<br/>
 
-7. on POS,  Sell the product : EYSLoyaltyProd1<br/>
-   <img width="1214" alt="image" src="https://github.com/user-attachments/assets/764adeb9-4ca5-4caa-865c-9df81b26ff95"><br/>
-   And earn these loyalty point:<br>
-   <mark> That is 124.5 * 1.2 = 149.4</mark>
-   <img width="1200" alt="image" src="https://github.com/user-attachments/assets/c4def8be-117d-4177-a7f2-8628e7390df1"><br/>
-8. Return the above product and exchange it with another two products,  the transaction is like:<br/>
-   <img width="1145" alt="image" src="https://github.com/user-attachments/assets/7cc3e2ad-72cc-407e-98a1-9d5a4e4e6b5e"><br/>
-   The journal:<br/>
-   ![image](https://github.com/user-attachments/assets/0112108a-ac22-4995-bdbe-2988c063c7c2)<br/>
 
-9.  Check the final loyalty points:<br/>
-   <img width="1190" alt="image" src="https://github.com/user-attachments/assets/60182424-c4c0-47b1-8f0d-4afdb5409855"><br/>
 
-   For the exchange and return, we can see:<br/>
-   <mark>124.5 * (-1 qty)* 1.2 = -149.4</mark><br/>
-   <mark> 59.9 * 2 (qty) * 1.2 = 143.76</mark><br/>
-   <mark> 2.37 * 1 * 1.2 = 2.844</mark><br/>
+
+
+
+
+
+
+
+
+
 
 
 
