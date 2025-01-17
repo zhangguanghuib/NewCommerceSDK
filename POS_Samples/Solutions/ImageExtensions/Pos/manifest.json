@@ -30,6 +30,14 @@
         ]
       },
       "triggers": [
+        {
+          "triggerType": "PreCreateInventoryDocument",
+          "modulePath": "Extend/Triggers/ContosoPreCreateInventoryDocumentTrigger"
+        },
+        {
+          "triggerType": "PreUpdateInventoryDocument",
+          "modulePath": "Extend/Triggers/ContosoPreUpdateInventoryDocumentTrigger"
+        }
 
       ],
       "requestHandlers": [
@@ -39,6 +47,16 @@
 
       ],
       "views": {
+        "InventoryAdjustmentDocumentWorkingView": {
+          "appBarCommands": [
+            {
+              "modulePath": "Extend/ViewExtensions/InventoryAdjustmentDocumentWorkingView/InventoryAdjustmentCommandTest01"
+            }
+          ],
+          "adjustmentDocumentLinesListConfiguration": {
+            "modulePath": "Extend/ViewExtensions/InventoryAdjustmentDocumentWorkingView/InventoryAdjustmentCustomListColumn"
+          }
+        },
         "CustomerDetailsView": {
           "appBarCommands": [
             {
