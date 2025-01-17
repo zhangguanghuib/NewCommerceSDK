@@ -1,4 +1,4 @@
-```sql
+```
  
   select * from dbo.RETAILDEVICE as T where T.DeviceId ='300801' --RetailDevice
    
