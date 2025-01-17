@@ -1,4 +1,4 @@
-```sql
+
  select * from dbo.RETAILDEVICE as T where T.DeviceId ='300801' --RetailDevice
  
  select T.STORERECID, * from dbo.RetailTerminalTable as T where T.terminalId = '300801' -- From RetailDevice to RetailTerminal
@@ -12,4 +12,4 @@
  select * from dbo.RetailChannelProfile as T where T.RecId = 5637144576 -- Get Channel Profile
  
  select T.KEY_, T.VALUE, * from dbo.RetailChannelProfileProperty as T where T.ChannelProfile = 5637144576 -- Get Channel profile line
-```
+
