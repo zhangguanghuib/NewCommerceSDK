@@ -11,6 +11,8 @@
     <img width="846" alt="image" src="https://github.com/user-attachments/assets/e555eeaf-091e-4ae6-b8ba-faf4b1df3155" /><br/>
     ![image](https://github.com/user-attachments/assets/38490ab7-1aa0-4572-9331-5365310eb320)<br/>
 
+2.5:  Go to Commerce Site builder:
+
     Go to each commerce site, and enable<br/>
     ![image](https://github.com/user-attachments/assets/b30d8008-c59b-4aff-a516-7c420e7a89a3)<br/>
     ![image](https://github.com/user-attachments/assets/d81c8a5b-0517-49de-8a70-959ce9496c6f)<br/>
