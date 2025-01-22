@@ -12,9 +12,9 @@
     ![image](https://github.com/user-attachments/assets/38490ab7-1aa0-4572-9331-5365310eb320)<br/>
 
 2.5:  Go to Commerce Site builder:
-
+ ![image](https://github.com/user-attachments/assets/b30d8008-c59b-4aff-a516-7c420e7a89a3)<br/>
     Go to each commerce site, and enable<br/>
-    ![image](https://github.com/user-attachments/assets/b30d8008-c59b-4aff-a516-7c420e7a89a3)<br/>
+   
     ![image](https://github.com/user-attachments/assets/d81c8a5b-0517-49de-8a70-959ce9496c6f)<br/>
     ![image](https://github.com/user-attachments/assets/d984994f-faa2-47d9-816d-be1ebf3aad80)<br/>
     ![image](https://github.com/user-attachments/assets/27e1e8a9-3d03-480c-a4e0-91432bd2288d)<br/>
