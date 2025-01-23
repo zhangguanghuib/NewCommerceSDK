@@ -1,4 +1,5 @@
 ## New Commerce SDK benifit
+   0.  Public trouble shooting site:  https://learn.microsoft.com/en-us/troubleshoot/dynamics-365/commerce/development-sdks/ecommerce-clone-module-issues
    1.   Don't need LCS VM  + Retail SDK,  normal DEV Box(Visual stuido 2017(2019)/Visual Studio code + .Net Core/.Net Frameork) is OK  to develop commerce extension (POS, CRT，Retail Server).
    2.   Any changes in custom logic,  you can nonly build the corresponding extension installer, un-install and re-install the extension installer, not need build the whole retail SDK  and create a Deployable package.   MPOS->MPOS Installer,   RSSU ->RSSU Installer
    3.   The process is simplified.
