@@ -9,3 +9,6 @@ https://anithasantosh.wordpress.com/2025/01/03/debugging-test-uat-data-from-deve
 
 
 https://www.linkedin.com/pulse/adding-new-parameter-field-event-handling-existing-runbasebatch-k-knhjc/?trackingId=6qW6SDbaUcNfjBaXefKbBQ%3D%3D
+
+
+https://alexdmeyer.com/2025/01/21/d365fo-security-myth-applying-company-restrictions-to-just-the-system-user-role/
