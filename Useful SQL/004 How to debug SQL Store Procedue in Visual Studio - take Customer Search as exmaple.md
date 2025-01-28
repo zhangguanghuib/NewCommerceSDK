@@ -1,6 +1,6 @@
 # How to debug SQL Server Store Procedure by Visual Studio 2022 : take "Customer Search on POS" as example
 ## Bakground,  debug SQL Script in SQL Server Management Studio is not availble 
-   See in SSMS, there are only "Execute" button but no "Debug" button:<br/>
+   See in SSMS, there are only <mark>"Execute"</mark> button but no "Debug" button:<br/>
    ![image](https://github.com/user-attachments/assets/a7d35d5a-057e-4b9b-843f-f02a476b3b9e)
 
 ## Steps to configure to debug SQL Server Store Procedure by Visual Studio 2022
