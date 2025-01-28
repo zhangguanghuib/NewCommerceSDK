@@ -39,7 +39,8 @@ exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@
     ![image](https://github.com/user-attachments/assets/3e0dd6bf-47fb-4bc0-9ec0-0e79a7a8257e)<br/>
 
 7. Some useful SQL to POS customer search(SQL-Based)<br/>
-```
+SQL 1:<br/>
+```sql
 DECLARE @tvp_CustomerSearchResults1 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
 DECLARE @tvp_CustomerSearchResults2 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
 
