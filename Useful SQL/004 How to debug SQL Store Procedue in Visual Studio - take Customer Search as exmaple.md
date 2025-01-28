@@ -16,6 +16,7 @@
       4.You can write a simple SQL query to verify if it works<br/>
          ![image](https://github.com/user-attachments/assets/3de1abac-3615-41af-a097-4fe18d9835db)<br/>
       5. How to debug a SQL Store Procedure in Visual Studio?<br/>
+      Prepare a SQL for debugging<br/>
  ```sql
 declare @p1 crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE
 insert into @p1 values(N'Default',N'"Contoso*"',0)
