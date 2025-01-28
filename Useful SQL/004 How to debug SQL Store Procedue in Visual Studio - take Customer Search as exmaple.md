@@ -16,17 +16,11 @@
       4.You can write a simple SQL query to verify if it works<br/>
          ![image](https://github.com/user-attachments/assets/3de1abac-3615-41af-a097-4fe18d9835db)<br/>
       5. How to debug a SQL Store Procedure in Visual Studio?<br/>
-         ```sql
-          declare @p1 crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE
-          insert into @p1 values(N'Default',N'"Contoso*"',0)
+ ```sql
 
-         declare @p6 crt.QUERYRESULTSETTINGSTABLETYPE
-         insert into @p6 values(0,81,0,N'RANKING',0)
-         
-         exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS 
-@tvp_CustomerSearchByFieldCriteria=@p1,@bi_ChannelId=5637144592,@nvc_DataAreaId=N'usrt',@i_MaxTop=2147483647,@i_MinCharsForWildcardEmailSearch=7,@TVP_QUERYRESULTSETTINGS=@p6
+exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@p1,@bi_ChannelId=5637144592,@nvc_DataAreaId=N'usrt',@i_MaxTop=2147483647,@i_MinCharsForWildcardEmailSearch=7,@TVP_QUERYRESULTSETTINGS=@p6          
 
-         ```
+```
 
  
 
