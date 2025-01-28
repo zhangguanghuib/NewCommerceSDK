@@ -27,6 +27,17 @@ exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@
 
 ```
 
- 
+ Add break point, and choose "Execute with debugger"<br/>
+ ![image](https://github.com/user-attachments/assets/9185934f-41d7-445a-83eb-7c6d07d36dac)<br/>
+
+ 6. Then you can click F5/F10/F11 to debug the SQL as you debug C#/C++ in Visual Studio?<br/>
+    ![image](https://github.com/user-attachments/assets/ad22fc84-3b1a-4d84-a7cd-b000e9f81756)<br/>
+     Press F11<br/>
+     ![image](https://github.com/user-attachments/assets/cb777199-bd2e-4021-a365-697e9883c222)<br/>
+    Press F11<br/>
+    ![image](https://github.com/user-attachments/assets/3e0dd6bf-47fb-4bc0-9ec0-0e79a7a8257e)<br/>
+
+
+
 
 
