@@ -38,7 +38,52 @@ exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@
     Press F11<br/>
     ![image](https://github.com/user-attachments/assets/3e0dd6bf-47fb-4bc0-9ec0-0e79a7a8257e)<br/>
 
+7. Some useful SQL to POS customer search(SQL-Based)<br/>
+```
+DECLARE @tvp_CustomerSearchResults1 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
+DECLARE @tvp_CustomerSearchResults2 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
 
+DECLARE @b_FilterResults BIT;
+SET @b_FilterResults = 0;
+
+DECLARE @searchTerm NVARCHAR(255) = 'Contoso*';
+DECLARE @bi_ChannelId BIGINT = 5637144592;
+DECLARE @i_MaxTop INT;
+DECLARE @exactMatch BIT = 0;
+
+DECLARE @tvp_CustomerSearchByFieldCriteria crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE;
+INSERT INTO @tvp_CustomerSearchByFieldCriteria VALUES (N'Name', N'"Whitehead*"', 0);
+
+DECLARE @tvp_QueryResultSettings crt.QUERYRESULTSETTINGSTABLETYPE;
+INSERT INTO @tvp_QueryResultSettings VALUES (0, 81, 0, N'', 1);
+
+IF (1 = (SELECT COUNT(*) FROM @tvp_CustomerSearchByFieldCriteria))
+BEGIN
+    SET @i_MaxTop = (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) + 
+                    (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings); -- Top + Skip
+END
+
+INSERT INTO @tvp_CustomerSearchResults2
+EXEC [crt].GETCUSTOMERSEARCHRESULTSBYNAMECONTAINSSEARCH @searchTerm, @bi_ChannelId, @tvp_CustomerSearchResults1, @b_FilterResults, @i_MaxTop;
+
+IF @exactMatch = 0
+BEGIN
+    INSERT INTO @tvp_CustomerSearchResults2
+    EXEC [crt].GETCUSTOMERSEARCHRESULTSBYNAMEFREETEXTSEARCH @searchTerm, @bi_ChannelId, @tvp_CustomerSearchResults1, @b_FilterResults, @i_MaxTop;
+END
+
+SELECT PARTYID, SUM(RANKING) AS RANKING 
+FROM (
+    SELECT
+        customerSearchResults.PARTYID,
+        customerSearchResults.RANKING
+    FROM @tvp_CustomerSearchResults2 customerSearchResults
+) pagedResults
+GROUP BY pagedResults.PARTYID
+ORDER BY RANKING DESC
+OFFSET (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) ROWS
+FETCH NEXT (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings) ROWS ONLY;
+```
 
 
 
