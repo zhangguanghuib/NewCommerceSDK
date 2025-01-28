@@ -189,4 +189,26 @@ ORDER BY RANKING DESC
 OFFSET (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) ROWS
 FETCH NEXT (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings) ROWS ONLY;
 ```
-
+03-SQL <br/>
+```sql
+DECLARE @i_MaxTop INT = 1000
+DECLARE @nvc_SearchTerm VARCHAR(20) = '"Contoso"'
+ 
+SELECT *
+FROM
+(
+    -- search by customer name with CONTAINS to match partial names
+    SELECT
+       [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+        COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+    FROM CONTAINSTABLE([ax].DIRPARTYTABLE, [NAME], @nvc_SearchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+    UNION ALL
+     --search by customer search name/alias with CONTAINS to match partial names
+    SELECT
+        [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+      COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+    FROM CONTAINSTABLE([ax].DIRPARTYTABLE, [NAMEALIAS], @nvc_SearchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+) results
+INNER JOIN [ax].DIRADDRESSBOOKPARTY dabp ON [dabp].PARTY = results.[KEY]
+INNER JOIN [ax].DIRPARTYTABLE dpt ON [dpt].RECID = results.[KEY]
+```
