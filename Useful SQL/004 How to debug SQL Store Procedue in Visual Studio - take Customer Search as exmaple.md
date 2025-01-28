@@ -39,7 +39,7 @@ exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@
     ![image](https://github.com/user-attachments/assets/3e0dd6bf-47fb-4bc0-9ec0-0e79a7a8257e)<br/>
 
 7. Some useful SQL to POS customer search(SQL-Based)<br/>
-SQL 1:<br/>
+01-SQL 1:<br/>
 ```sql
 DECLARE @tvp_CustomerSearchResults1 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
 DECLARE @tvp_CustomerSearchResults2 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
@@ -86,5 +86,107 @@ OFFSET (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) ROWS
 FETCH NEXT (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings) ROWS ONLY;
 ```
 
+02-SQL
+```sql
+DECLARE @tvp_CustomerSearchResults1 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
+DECLARE @tvp_CustomerSearchResults2 [crt].[CUSTOMERSEARCHRESULTTABLETYPE];
 
+DECLARE @b_FilterResults BIT;
+SET @b_FilterResults = 0;
+
+DECLARE @searchTerm NVARCHAR(255) = 'Contoso*';
+DECLARE @bi_ChannelId BIGINT = 5637144592;
+DECLARE @i_MaxTop INT= 80;
+DECLARE @exactMatch BIT = 0;
+
+DECLARE @tvp_CustomerSearchByFieldCriteria crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE;
+INSERT INTO @tvp_CustomerSearchByFieldCriteria VALUES (N'Name', N'"Whitehead*"', 0);
+
+DECLARE @tvp_QueryResultSettings crt.QUERYRESULTSETTINGSTABLETYPE;
+INSERT INTO @tvp_QueryResultSettings VALUES (0, 81, 0, N'', 1);
+
+--IF (1 = (SELECT COUNT(*) FROM @tvp_CustomerSearchByFieldCriteria))
+--BEGIN
+--    SET @i_MaxTop = (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) + 
+--                    (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings); -- Top + Skip
+--END
+
+INSERT INTO @tvp_CustomerSearchResults2
+SELECT TOP (@i_MaxTop)
+            [dpt].RECID AS PARTYID,
+            results.[RANKING]
+        FROM
+        (
+            -- search by customer name with CONTAINS to match partial names
+            SELECT
+                [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+                COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+            FROM CONTAINSTABLE([ax].DIRPARTYTABLE, [NAME], @searchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+
+ UNION ALL
+
+            -- search by customer search name/alias with CONTAINS to match partial names
+            SELECT
+                [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+                COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+            FROM CONTAINSTABLE([ax].DIRPARTYTABLE, [NAMEALIAS], @searchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+        ) results
+        INNER JOIN [ax].DIRADDRESSBOOKPARTY dabp ON [dabp].PARTY = results.[KEY]
+        INNER JOIN [ax].DIRPARTYTABLE dpt ON [dpt].RECID = results.[KEY]
+        INNER JOIN [ax].RETAILSTOREADDRESSBOOK rsab ON [dabp].ADDRESSBOOK = [rsab].ADDRESSBOOK AND [rsab].STORERECID = @bi_ChannelId AND [rsab].ADDRESSBOOKTYPE = 0  -- The customer address book type
+        LEFT JOIN [ax].OMINTERNALORGANIZATION oio ON oio.RECID = results.[KEY]
+        WHERE oio.RECID IS NULL
+
+        UNION ALL
+
+        -- search async customers by customer name
+        SELECT
+           [CustomerNameFullTextKey_Key].[KEY] AS PARTYID, COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+        FROM CONTAINSTABLE([ax].RETAILASYNCCUSTOMER, [CUSTNAME], @searchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+        INNER JOIN [ax].RETAILASYNCCUSTOMER rac ON [rac].REPLICATIONCOUNTERFROMORIGIN = [CustomerNameFullTextKey_Key].[KEY]
+        AND NOT EXISTS (SELECT 1 FROM [ax].RETAILCUSTTABLE rct WHERE rct.CUSTACCOUNTASYNC = rac.CUSTACCOUNTASYNC) AND rac.STORERECID = @bi_ChannelId
+
+IF @exactMatch = 0
+BEGIN
+    INSERT INTO @tvp_CustomerSearchResults2
+    SELECT Result.PARTYID, Result.RANKING from
+       (SELECT
+            [dpt].RECID AS PARTYID, COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+        FROM FREETEXTTABLE([ax].DIRPARTYTABLE, [NAME], @searchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+        INNER JOIN [ax].DIRPARTYTABLE dpt ON [dpt].RECID = [CustomerNameFullTextKey_Key].[KEY]
+        INNER JOIN (SELECT PARTY, ADDRESSBOOK FROM [ax].DIRADDRESSBOOKPARTY WHERE PARTY NOT IN (SELECT RECID FROM [ax].OMINTERNALORGANIZATION)) dap on [dpt].RECID = [dap].PARTY
+        INNER JOIN [ax].RETAILSTOREADDRESSBOOK rsab on [dap].ADDRESSBOOK = [rsab].ADDRESSBOOK AND [rsab].STORERECID = @bi_ChannelId AND [rsab].ADDRESSBOOKTYPE = 0  -- The customer address book type
+
+        UNION ALL
+
+        -- search by customer search name/alias with FREETEXT to match inflections of names
+        SELECT
+            [dpt].RECID AS PARTYID, COALESCE([CustomerSearchNameFullTextKey_Key].[RANK], 0) AS RANKING
+        FROM FREETEXTTABLE([ax].DIRPARTYTABLE, [NAMEALIAS], @searchTerm, @i_MaxTop) CustomerSearchNameFullTextKey_Key
+        INNER JOIN [ax].DIRPARTYTABLE dpt ON [dpt].RECID = [CustomerSearchNameFullTextKey_Key].[KEY]
+        INNER JOIN (SELECT PARTY, ADDRESSBOOK FROM [ax].DIRADDRESSBOOKPARTY WHERE PARTY NOT IN (SELECT RECID FROM [ax].OMINTERNALORGANIZATION)) dap on [dpt].RECID = [dap].PARTY
+        INNER JOIN [ax].RETAILSTOREADDRESSBOOK rsab on [dap].ADDRESSBOOK = [rsab].ADDRESSBOOK AND [rsab].STORERECID = @bi_ChannelId AND [rsab].ADDRESSBOOKTYPE = 0  -- The customer address book type
+
+        UNION ALL
+
+        -- search async customers by customer name with FREETEXT to match inflections of names
+        SELECT
+           [CustomerNameFullTextKey_Key].[KEY] AS PARTYID, COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+        FROM FREETEXTTABLE([ax].RETAILASYNCCUSTOMER, [CUSTNAME], @searchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+        INNER JOIN [ax].RETAILASYNCCUSTOMER rac ON [rac].REPLICATIONCOUNTERFROMORIGIN = [CustomerNameFullTextKey_Key].[KEY]
+        AND NOT EXISTS (SELECT 1 FROM [ax].RETAILCUSTTABLE rct WHERE rct.CUSTACCOUNTASYNC = rac.CUSTACCOUNTASYNC) AND rac.STORERECID = @bi_ChannelId) as Result
+END
+
+SELECT PARTYID, SUM(RANKING) AS RANKING 
+FROM (
+    SELECT
+        customerSearchResults.PARTYID,
+        customerSearchResults.RANKING
+    FROM @tvp_CustomerSearchResults2 customerSearchResults
+) pagedResults
+GROUP BY pagedResults.PARTYID
+ORDER BY RANKING DESC
+OFFSET (SELECT TOP 1 [SKIP] FROM @tvp_QueryResultSettings) ROWS
+FETCH NEXT (SELECT TOP 1 [TOP] FROM @tvp_QueryResultSettings) ROWS ONLY;
+```
 
