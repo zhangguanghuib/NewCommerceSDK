@@ -87,6 +87,24 @@ namespace Contoso.GasStationSample.CommerceRuntime.Triggers
     }
 }
 ```
+### Store Commerce App Side:<br/>
+In POS side, we find the product image node, and try to load the product variant image, if image load failed, then fallback to load the product master image, if still failed, then set the image's Altext as the product name.<br/>
+
+The key code are listed as below:<br/>
+1. Find the image node:<br/>
+```ts
+ private findProductImageNode(): HTMLImageElement {
+     const inventoryLookupDiv = document.querySelector<HTMLDivElement>('div[action="InventoryLookupView"]') as HTMLDivElement;
+     let imgNode: HTMLImageElement = null;
+     if (inventoryLookupDiv) {
+         imgNode = inventoryLookupDiv.querySelector<HTMLImageElement>('img') as HTMLImageElement;
+         if (imgNode) {
+             console.log('Image node found:', imgNode);
+         }
+     }
+     return imgNode
+ }
+```
 
 
 
