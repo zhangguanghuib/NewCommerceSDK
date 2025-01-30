@@ -149,6 +149,12 @@ private _productChanged(data: InventoryLookupView.InventoryLookupProductChangedD
 }
 ```
 4.  The complete code is like : <br/>
+Some key code  that can be reused to get MediaServer base URL is:<br/>
+```ts
+declare var Commerce: any;
+public mediaBaseUrl: string = Commerce.Utilities.ImageHelper.getFormattedChannelRichMediaBaseUrl(Commerce.ApplicationContext.Instance.channelConfiguration);
+```
+The complete command bar button code is:<br/>
 ```ts
 import * as InventoryLookupView from "PosApi/Extend/Views/InventoryLookupView";
 import { ProxyEntities } from "PosApi/Entities";
