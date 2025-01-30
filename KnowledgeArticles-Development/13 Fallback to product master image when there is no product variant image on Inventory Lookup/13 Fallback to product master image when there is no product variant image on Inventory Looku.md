@@ -260,6 +260,20 @@ export default class DownloadDocCommand extends InventoryLookupView.InventoryLoo
     }
 }
 ```
+5.  The inventory lookup view in the POS manifest is like:<br/>
+```xml
+"InventoryLookupView": {
+  "inventoryByStoreListConfiguration": {
+    "modulePath": "Extend/ViewExtensions/InventoryLookup/CustomInventoryByStoreListColumns"
+  },
+  "appBarCommands": [
+    {
+      "modulePath": "Extend/ViewExtensions/InventoryLookup/DownloadDocCommand"
+    }
+  ]
+
+},
+```
 
 The doc is here:
 
