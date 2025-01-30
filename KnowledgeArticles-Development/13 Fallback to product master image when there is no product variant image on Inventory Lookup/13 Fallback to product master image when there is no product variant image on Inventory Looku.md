@@ -14,9 +14,13 @@ Below is an idea and sample code that help implement this requirement as a partn
   ![image](https://github.com/user-attachments/assets/919dc747-31ac-490c-bd13-e3f5e26a1fb2)<br/>
 . Choose the product dimension values, like Size, Style and Color <br/>
   ![image](https://github.com/user-attachments/assets/8fdf40d1-512f-42d6-99cb-90c743943037)<br/>
-  ![image](https://github.com/user-attachments/assets/9b94120b-bd41-4d60-b07d-628500642202)
+  ![image](https://github.com/user-attachments/assets/9b94120b-bd41-4d60-b07d-628500642202)<br/>
+  ![image](https://github.com/user-attachments/assets/5703d7bb-8690-4326-9185-6103d501e29a)
 
-
+. If finally the image for product variant image does exist,  then it will show the product variant image:<br/>
+  ![image](https://github.com/user-attachments/assets/9cf8f15b-4cf0-4afa-80f0-ca58f7dcfc60)<br/>
+. If finally the image for product variant image does not exist,  then it will fallback to show the product master image:<br/>
+  ![image](https://github.com/user-attachments/assets/b1b1437f-b8f7-4bea-a32c-2a08158d58e7)
 ## Implementation details:
 ### Date Pick Dialog:
 
