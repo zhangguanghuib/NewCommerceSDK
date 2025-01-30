@@ -281,13 +281,13 @@ export default class DownloadDocCommand extends InventoryLookupView.InventoryLoo
 },
 ```
 
-The doc is here:
-
-https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-attributes
-
 The whole project is here:<br/>
 
 https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/Solutions/ImageExtensions
+
+The two files for this sample are:<br/>
+https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/Solutions/ImageExtensions/CommerceRuntime/Triggers/GetVariantProductsServiceRequestTrigger.cs <br/>
+https://github.com/zhangguanghuib/NewCommerceSDK/blob/main/POS_Samples/Solutions/ImageExtensions/Pos/Extend/ViewExtensions/InventoryLookup/DownloadDocCommand.ts
 
 
 
