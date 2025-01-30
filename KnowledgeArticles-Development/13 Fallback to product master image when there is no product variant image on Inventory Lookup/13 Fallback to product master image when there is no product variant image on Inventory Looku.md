@@ -22,7 +22,8 @@ Below is an idea and sample code that help implement this requirement as a partn
 . If finally the image for product variant image does not exist,  then it will fallback to show the product master image:<br/>
   ![image](https://github.com/user-attachments/assets/b1b1437f-b8f7-4bea-a32c-2a08158d58e7)
 ## Implementation details:
-### Retail Server Side, we need implement the Post Trigger for the GetVariantProductsServiceRequest to change the SimpleProduct.PrimaryImageUrl to let it be the Product Master's image url, or store it into SimpleProduct.ExtensionProperties.
+### Retail Server Side:<br/>
+We need implement the Post Trigger for the GetVariantProductsServiceRequest to change the SimpleProduct.PrimaryImageUrl to let it be the Product Master's image url, or store it into SimpleProduct.ExtensionProperties.
 
 ```csharp
 namespace Contoso.GasStationSample.CommerceRuntime.Triggers
