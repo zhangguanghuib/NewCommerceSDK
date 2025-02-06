@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/4c8abd36-7b64-4f3f-b359-3c81c3d0402e)# How to debug SQL Server Store Procedure by Visual Studio 2022 : take "Customer Search on POS" as example
+# How to debug SQL Server Store Procedure by Visual Studio 2022 : take "Customer Search on POS" as example
 ## Bakground,  debug SQL Script in SQL Server Management Studio is not availble 
    See in SSMS, there are only <mark>"Execute"</mark> button but no <mark>"Debug"</mark> button:<br/>
    ![image](https://github.com/user-attachments/assets/a7d35d5a-057e-4b9b-843f-f02a476b3b9e)
@@ -39,6 +39,28 @@ declare @p6 crt.QUERYRESULTSETTINGSTABLETYPE
 insert into @p6 values(0,81,0,N'',1)
 
 exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@p1,@bi_ChannelId=5637144592,@nvc_DataAreaId=N'usrt',@i_MaxTop=2147483647,@i_MinCharsForWildcardEmailSearch=7,@TVP_QUERYRESULTSETTINGS=@p6
+```
+
+8.  Some other SQL to be used in the debugging<br/>
+```
+-- Search by customer name with CONTAINS to match partial names
+DECLARE @nvc_SearchTerm NVARCHAR(255) = 'Contoso*';
+DECLARE @i_MaxTop INT = 100;
+
+SELECT
+    [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+    COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+FROM 
+    CONTAINSTABLE([ax].DIRPARTYTABLE, [NAME], @nvc_SearchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
+
+UNION ALL
+
+-- Search by customer search name/alias with CONTAINS to match partial names
+SELECT
+    [CustomerNameFullTextKey_Key].[KEY] AS [KEY],
+    COALESCE([CustomerNameFullTextKey_Key].[RANK], 0) AS RANKING
+FROM 
+    CONTAINSTABLE([ax].DIRPARTYTABLE, [NAMEALIAS], @nvc_SearchTerm, @i_MaxTop) CustomerNameFullTextKey_Key
 ```
            
 
