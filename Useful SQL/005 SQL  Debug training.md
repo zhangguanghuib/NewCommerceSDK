@@ -24,12 +24,13 @@
 
           Open Store Commerce, input the Customer Search Key words:<br/>
          ![image](https://github.com/user-attachments/assets/878c11b5-c4b4-4c9e-a542-a762ddf8be31)
-      6. When POS Customer Search is done, In Sql Profiler:<br/>
+      6. When POS Customer Search is done<br/>
          ![image](https://github.com/user-attachments/assets/3f7997f9-6225-4e9c-9161-636d21e56c86)<br/>
 
-      7.  Stop Trace and then Search "GETCUSTOMERSEARCHRESULTSBYFIELDS": <br/>
+      7. In Sql Profiler, stop Trace and then Search "GETCUSTOMERSEARCHRESULTSBYFIELDS": <br/>
            ![image](https://github.com/user-attachments/assets/8005bfcc-b56e-4d25-b7d6-b43f30f222da)<br/>
           That is the SQL we debug as the starting point<br/>
+          
 ```
 declare @p1 crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE
 insert into @p1 values(N'Name',N'"Contoso*"',0)
