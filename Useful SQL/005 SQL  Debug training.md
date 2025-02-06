@@ -15,5 +15,14 @@
         Click "Connect"<br/>
       4.You can write a simple SQL query to verify if it works<br/>
          ![image](https://github.com/user-attachments/assets/3de1abac-3615-41af-a097-4fe18d9835db)<br/>
-      5. How to debug a SQL Store Procedure in Visual Studio?<br/>
+      5. Capture the SQL from SQL Profiler<br/>
+          Open SQL profiler<br/>
+          ![image](https://github.com/user-attachments/assets/a4676add-4836-4911-b38b-3f0f23a279c9)<br/>
+          Then choose "Commerce Profiler":<br/>
+          ![image](https://github.com/user-attachments/assets/351f04b4-3e35-449d-9d71-e00a819b6c42)<br/>
+          Click OK
+
+          Open Store Commerce, input the Customer Search Key words:<br/>
+         ![image](https://github.com/user-attachments/assets/878c11b5-c4b4-4c9e-a542-a762ddf8be31)
+
   
