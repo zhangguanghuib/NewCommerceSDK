@@ -1,4 +1,4 @@
-# How to debug SQL Server Store Procedure by Visual Studio 2022 : take "Customer Search on POS" as example
+![image](https://github.com/user-attachments/assets/4c8abd36-7b64-4f3f-b359-3c81c3d0402e)# How to debug SQL Server Store Procedure by Visual Studio 2022 : take "Customer Search on POS" as example
 ## Bakground,  debug SQL Script in SQL Server Management Studio is not availble 
    See in SSMS, there are only <mark>"Execute"</mark> button but no <mark>"Debug"</mark> button:<br/>
    ![image](https://github.com/user-attachments/assets/a7d35d5a-057e-4b9b-843f-f02a476b3b9e)
@@ -20,9 +20,26 @@
           ![image](https://github.com/user-attachments/assets/a4676add-4836-4911-b38b-3f0f23a279c9)<br/>
           Then choose "Commerce Profiler":<br/>
           ![image](https://github.com/user-attachments/assets/351f04b4-3e35-449d-9d71-e00a819b6c42)<br/>
-          Click OK
+          Click OK<br/>
 
           Open Store Commerce, input the Customer Search Key words:<br/>
          ![image](https://github.com/user-attachments/assets/878c11b5-c4b4-4c9e-a542-a762ddf8be31)
+      6. When POS Customer Search is done, In Sql Profiler:<br/>
+         ![image](https://github.com/user-attachments/assets/3f7997f9-6225-4e9c-9161-636d21e56c86)<br/>
+
+      7.  Stop Trace and then Search "GETCUSTOMERSEARCHRESULTSBYFIELDS": <br/>
+           ![image](https://github.com/user-attachments/assets/8005bfcc-b56e-4d25-b7d6-b43f30f222da)<br/>
+          That is the SQL we debug as the starting point<br/>
+```
+declare @p1 crt.CUSTOMERSEARCHBYFIELDCRITERIATABLETYPE
+insert into @p1 values(N'Name',N'"Contoso*"',0)
+
+declare @p6 crt.QUERYRESULTSETTINGSTABLETYPE
+insert into @p6 values(0,81,0,N'',1)
+
+exec [crt].GETCUSTOMERSEARCHRESULTSBYFIELDS @tvp_CustomerSearchByFieldCriteria=@p1,@bi_ChannelId=5637144592,@nvc_DataAreaId=N'usrt',@i_MaxTop=2147483647,@i_MinCharsForWildcardEmailSearch=7,@TVP_QUERYRESULTSETTINGS=@p6
+```
+           
+
 
   
