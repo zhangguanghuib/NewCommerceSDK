@@ -15,3 +15,12 @@ https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide?
 Deploy DeepSeek on Azure:
 
 https://clemenssiebler.com/posts/deploying-deepseek-r1-azure-machine-learning/
+
+Utilize DeepSeek to create your knowledge based AI Agent:
+
+https://www.bilibili.com/video/BV11BN3e5E42/?spm_id_from=333.337.search-card.all.click&vd_source=61c7fc1d80038e052b00f64f85a9ea03
+
+1.CherryStudio下载：https://cherry-ai.com/
+2.DeepSeek满血版api注册链接（注册即送2000万Token）硅基流动：
+https://cloud.siliconflow.cn/i/q8l3k1eV
+3.文件解析工具doc2x：https://doc2x.noedgeai.com/
