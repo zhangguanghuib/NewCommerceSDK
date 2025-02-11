@@ -14,3 +14,5 @@ https://www.linkedin.com/pulse/adding-new-parameter-field-event-handling-existin
 https://alexdmeyer.com/2025/01/21/d365fo-security-myth-applying-company-restrictions-to-just-the-system-user-role/
 
 https://www.linkedin.com/pulse/copilot-sidecar-d365-fo-extending-through-x-rizwan-ahmed-kkfuc/
+
+https://www.linkedin.com/pulse/json-xml-messages-deserialization-d365-finance-maciej-sondej/?trackingId=LXROy55hRyChTXyGKoC6xw%3D%3D
