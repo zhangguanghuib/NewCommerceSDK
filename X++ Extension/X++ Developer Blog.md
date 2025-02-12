@@ -16,3 +16,5 @@ https://alexdmeyer.com/2025/01/21/d365fo-security-myth-applying-company-restrict
 https://www.linkedin.com/pulse/copilot-sidecar-d365-fo-extending-through-x-rizwan-ahmed-kkfuc/
 
 https://www.linkedin.com/pulse/json-xml-messages-deserialization-d365-finance-maciej-sondej/?trackingId=LXROy55hRyChTXyGKoC6xw%3D%3D
+
+https://www.youtube.com/watch?v=_a3vZfwn6HA  how to create workspace in FnO?
