@@ -18,3 +18,5 @@ https://www.linkedin.com/pulse/copilot-sidecar-d365-fo-extending-through-x-rizwa
 https://www.linkedin.com/pulse/json-xml-messages-deserialization-d365-finance-maciej-sondej/?trackingId=LXROy55hRyChTXyGKoC6xw%3D%3D
 
 https://www.youtube.com/watch?v=_a3vZfwn6HA  how to create workspace in FnO?
+    
+https://techwithmunna.com/how-to-set-up-postman-for-calling-d365-data-entities/   How to Set Up Postman for Calling D365 Data Entities
