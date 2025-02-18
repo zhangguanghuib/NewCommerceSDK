@@ -20,3 +20,5 @@ https://www.linkedin.com/pulse/json-xml-messages-deserialization-d365-finance-ma
 https://www.youtube.com/watch?v=_a3vZfwn6HA  how to create workspace in FnO?
     
 https://techwithmunna.com/how-to-set-up-postman-for-calling-d365-data-entities/   How to Set Up Postman for Calling D365 Data Entities
+
+One retail developer's linkedin blog:  https://www.linkedin.com/pulse/enhancing-customer-search-using-loyalty-id-phone-d365-ramakrishnan-n3pfc/?trackingId=lW64g4DLzdtBWHy%2Fiz%2BRPw%3D%3D
