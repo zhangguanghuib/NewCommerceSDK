@@ -30,7 +30,7 @@ export default class DownloadDocumentCommand extends ShowJournalView.ShowJournal
         super(context);
 
         this.id = "downloadDocumentCommand";
-        this.label = context.resources.getString("string_0");;
+        this.label = context.resources.getString("string_0");//"Quick Compare Products"
         this.extraClass = "iconInvoice";
         this.isVisible = true;
 

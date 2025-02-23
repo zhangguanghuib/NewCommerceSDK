@@ -2,7 +2,7 @@
 import { ClientEntities, ProxyEntities } from "PosApi/Entities";
 import { IExtensionCommandContext } from "PosApi/Extend/Views/AppBarCommands";
 import { StringExtensions } from "PosApi/TypeExtensions";
-import { StoreOperations } from "../../DataService/DataServiceRequests.g";
+import { StoreOperations } from "../../../DataService/DataServiceRequests.g";
 
 export default class GetReceiptBarCode extends ShowJournalView.ShowJournalExtensionCommandBase {
     public _selectedJournal: ProxyEntities.SalesOrder;
@@ -21,6 +21,7 @@ export default class GetReceiptBarCode extends ShowJournalView.ShowJournalExtens
         this.id = "GetReceiptBarCode";
         this.label = "Get Receipt BarCode";
         this.extraClass = "iconInvoice";
+        this.isVisible = true;
 
         this.journalSelectionHandler = (data: ShowJournalView.ShowJournalJournalSelectedData): void => {
             this._journalChanged(data);
@@ -34,15 +35,15 @@ export default class GetReceiptBarCode extends ShowJournalView.ShowJournalExtens
         };
 
         this.receiptSelectionHandler = (data: ShowJournalView.ShowJournalReceiptSelectedData): void => {
-            this.isVisible = false;
+            this.canExecute = true;
         };
 
         this.receiptSelectionClearedHandler = (): void => {
-            this.isVisible = true;
+            this.canExecute = false;
         };
 
         this.journalTransactionsLoadedHandler = (data: ShowJournalView.ShowJournalJournalTransactionsLoadedData): void => {
-            this.isVisible = this._mode === ClientEntities.ShowJournalMode.ShowJournal;
+            // this.isVisible = this._mode === ClientEntities.ShowJournalMode.ShowJournal;
             this.context.logger.logInformational("Executing journalTransactionsLoadedHandler for DownloadDocumentCommand: "
                 + JSON.stringify(data) + ".");
         };

@@ -11,7 +11,7 @@ export default class DisableEmailReceiptCommand extends JournalView.ShowJournalE
         this.id = "navigateToSimpleExtensionViewCommand";
         this.label = "Navigate to Samples View";
         this.extraClass = "iconGo";
-        this.isVisible = false;
+        this.isVisible = true;
     }
 
     protected init(state: JournalView.IShowJournalExtensionCommandState): void {

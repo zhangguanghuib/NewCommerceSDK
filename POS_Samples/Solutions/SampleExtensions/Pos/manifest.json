@@ -157,11 +157,14 @@
               "modulePath": "Extend/ViewExtensions/ShowJournal/DownloadDocumentCommand"
             },
             {
-              "modulePath": "ViewExtensions/ShowJournal/GetReceiptBarCode"
+              "modulePath": "Extend/ViewExtensions/ShowJournal/GetReceiptBarCode"
             }
           ],
           "searchFilters": [ { "modulePath": "ViewExtensions/ShowJournal/SampleTransactionSearchTextFilter" } ],
-          "transactionListConfiguration": { "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns" }
+          "transactionListConfiguration": { "modulePath": "ViewExtensions/ShowJournal/TransactionListColumns" },
+          "customerOrderHistoryListConfiguration": {
+            "modulePath": "Extend/ViewExtensions/ShowJournal/CustomerOrderHistoryListColumns"
+          }
         },
         "SimpleProductDetailsView": {
           "controlsConfig": {
