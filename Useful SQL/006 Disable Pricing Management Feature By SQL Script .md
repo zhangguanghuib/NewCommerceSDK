@@ -1,5 +1,5 @@
 # 1. SQL Script to disable the feature "Pricing Management"<br/>
-```
+```sql
 select T.RecId, T.DisplayName, T.enabledate, T.FeatureState, * from dbo.FEATUREMANAGEMENTMETADATA as T where T.displayname like '%Pricing management%'
 
 select * from dbo.FeatureManagementState where RecId in ( 5637178354,5637178358,5637181026);
