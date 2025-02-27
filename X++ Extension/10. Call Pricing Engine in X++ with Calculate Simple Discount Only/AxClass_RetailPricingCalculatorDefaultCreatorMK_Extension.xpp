@@ -1,0 +1,13 @@
+﻿[ExtensionOf(classStr(RetailPricingCalculatorDefaultCreator))]
+internal final class RetailPricingCalculatorDefaultCreatorMK_Extension
+{
+    public RetailPricingSimulator createPricingSimulator(RefRecId _salesTransactionId)
+    {
+        RetailPricingSimulator pricingSimulator = next createPricingSimulator(_salesTransactionId);
+
+        pricingSimulator = RetailPricingSimulatorExt::constructDefault(_salesTransactionId);
+
+        return pricingSimulator;
+    }
+
+}

@@ -1,0 +1,98 @@
+﻿final class PricingSimulatorExecutor
+{
+    /// <summary>
+    /// Class entry point. The system will call this method when a designated menu 
+    /// is selected or when execution starts and this class is set as the startup class.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {
+        PricingSimulatorExecutor executor = new PricingSimulatorExecutor();
+        executor.calcPrice('HOUSTON', 'PGGW01');
+    }
+
+    public container calcPrice(str _storeNum, str _itemId)
+    {
+        container conPrice;
+        RetailPricingSimulatorExt              pricingSimulator;
+        RetailPricingSimulatorSalesTransaction retailPricingSimulatorSalesTransaction, retailPricingSimulatorSalesTransactionDel;
+        RetailPricingSimulatorSalesLine        retailPricingSimulatorSalesLine;
+        RetailStoreTable retailStoreTable;
+        InventItemBarcode inventItemBarcode;
+        InventTable inventTable;
+        SalesPrice originalPirce,salesPrice;
+        InventDimCombination inventDimCombination;
+        int infoLines = infologline();
+ 
+        try
+        {
+            ttsbegin;
+            retailStoreTable = RetailStoreTable::find(_storeNum);
+            retailPricingSimulatorSalesTransaction.clear();
+            retailPricingSimulatorSalesTransaction.RetailChannelTable = retailStoreTable.RecId;
+            retailPricingSimulatorSalesTransaction.ChannelCurrency = retailStoreTable.Currency;
+            retailPricingSimulatorSalesTransaction.SimulationDateTime = DateTimeUtil::getSystemDateTime();
+            retailPricingSimulatorSalesTransaction.SimulationName = retailStoreTable.StoreNumber + datetime2Str(DateTimeUtil::getSystemDateTime());
+            retailPricingSimulatorSalesTransaction.insert();
+            inventTable = InventTable::find(_itemId);
+            retailPricingSimulatorSalesLine.clear();
+            retailPricingSimulatorSalesLine.initValue();
+            retailPricingSimulatorSalesLine.RetailPricingSimulatorSalesTransaction = retailPricingSimulatorSalesTransaction.RecId;
+            retailPricingSimulatorSalesLine.Product = inventTable.Product;
+            retailPricingSimulatorSalesLine.DisplayProductNumber = inventTable.itemId;
+
+            //retailPricingSimulatorSalesLine.DisplayProductVariantNumber = InventItemBarcode.RetailVariantId;
+            //inventDimCombination = InventDimCombination::findVariantId(InventItemBarcode.RetailVariantId);
+            //retailPricingSimulatorSalesLine.Variant = inventDimCombination.DistinctProductVariant;
+            //retailPricingSimulatorSalesLine.InventDimId = InventItemBarcode.inventDimId;
+            InventDim inventDim;
+            inventDim.InventLocationId = retailStoreTable.InventLocationIdForCustomerOrder;
+            inventDim.InventSiteId = InventLocation::find(retailStoreTable.InventLocationIdForCustomerOrder).InventSiteId;
+            inventDim = InventDim::findOrCreate(inventDim);
+            retailPricingSimulatorSalesLine.InventDimId = inventDim.inventDimId;
+
+            retailPricingSimulatorSalesLine.UoM = UnitOfMeasure::findBySymbol(inventTable.salesUnitId()).RecId;
+            retailPricingSimulatorSalesLine.insert();
+            //pricingSimulator = RetailPricingSimulator::constructDefault(retailPricingSimulatorSalesTransaction.RecId);
+            //pricingSimulator = RetailPricingSimulator::construct(retailPricingSimulatorSalesTransaction.RecId);
+            
+            pricingSimulator = RetailPricingSimulatorExt::constructDefault(retailPricingSimulatorSalesTransaction.RecId);
+            pricingSimulator.parmCalculateSimpleDiscountOnly(true);
+            //pricingSimulator.parmIsPropertyBasedMode(true);
+            pricingSimulator.calculatePricesAndDiscounts();
+ 
+            select retailPricingSimulatorSalesLine
+             where retailPricingSimulatorSalesLine.RetailPricingSimulatorSalesTransaction == retailPricingSimulatorSalesTransaction.RecId;
+            originalPirce = retailPricingSimulatorSalesLine.OriginalPrice;
+            salesPrice = retailPricingSimulatorSalesLine.SalesPrice ; 
+ 
+            conPrice = [originalPirce,salesPrice];
+ 
+            delete_from  retailPricingSimulatorSalesTransactionDel
+             where retailPricingSimulatorSalesTransactionDel.RecId == retailPricingSimulatorSalesTransaction.RecId;
+            ttscommit;
+        }
+        catch
+        {
+            str errMsg;
+            SysInfoLogEnumerator infoLogEnum = SysInfoLogEnumerator::newData(infolog.cut(infoLines + 1));
+            while(infoLogEnum.moveNext())
+            {
+                SysInfologMessageStruct infoMessageStruct = SysInfologMessageStruct::construct(infoLogEnum.currentMessage());
+                errMsg +=  infoMessageStruct.message() + ' ';
+            }
+            if (errMsg == '')
+            {
+                errMsg = "Exception occurred when calulating the price, please try again.";
+            }
+
+ 
+            delete_from  retailPricingSimulatorSalesTransactionDel
+                 where retailPricingSimulatorSalesTransactionDel.RecId == retailPricingSimulatorSalesTransaction.RecId;
+ 
+            throw error(errMsg);
+        }
+        return conPrice;
+    }
+
+}

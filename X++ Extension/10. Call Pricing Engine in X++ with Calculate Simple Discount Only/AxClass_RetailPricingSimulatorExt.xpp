@@ -1,0 +1,60 @@
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine;
+using CrtSalesTransaction = Microsoft.Dynamics.Commerce.Runtime.DataModel.SalesTransaction;
+using CrtSalesLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.SalesLine;
+using CrtDiscountLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.DiscountLine;
+using CrtPriceLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.PriceLine;
+using CrtPriceAdjustmentPriceLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.PriceAdjustmentPriceLine;
+using CrtTradeAgreementPriceLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.TradeAgreementPriceLine;
+using CrtSalesAffiliationLoyaltyTier = Microsoft.Dynamics.Commerce.Runtime.DataModel.SalesAffiliationLoyaltyTier;
+using CrtRetailAffiliationType = Microsoft.Dynamics.Commerce.Runtime.DataModel.RetailAffiliationType;
+using CrtSalesAgreementPriceLine = Microsoft.Dynamics.Commerce.Runtime.DataModel.SalesAgreementPriceLine;
+using CrtAttributeTextValue = Microsoft.Dynamics.Commerce.Runtime.DataModel.AttributeTextValue;
+using CrtPriceAndDiscountCalculationParameters = Microsoft.Dynamics.Commerce.Runtime.Services.PricingEngine.PriceAndDiscountCalculationParameters;
+
+
+final class RetailPricingSimulatorExt extends RetailPricingSimulator
+{
+    private boolean calculateSimpleDiscountOnly = false;
+
+    public boolean parmCalculateSimpleDiscountOnly(boolean _calculateSimpleDiscountOnly = calculateSimpleDiscountOnly)
+    {
+        this.calculateSimpleDiscountOnly = _calculateSimpleDiscountOnly;
+        return this.calculateSimpleDiscountOnly;
+    }
+
+    static RetailPricingSimulatorExt constructDefault(RefRecId _salesTransactionId)
+    {
+        return new RetailPricingSimulatorExt(_salesTransactionId);
+    }
+
+    protected void new(RefRecId _salesTransactionId)
+    {
+        super(_salesTransactionId);
+    }
+
+    protected void calculateDiscountsForOrder()
+    {
+        // Calculate discounts.
+        CrtPriceAndDiscountCalculationParameters calculationParameters = new CrtPriceAndDiscountCalculationParameters();
+
+        //if (!RetailPricingImprovedAlgorithmForArrangeLineGroupsFlight::instance().isEnabled())
+        //{
+              calculationParameters.MaxLoopCountForLegacyArrangeLineGroups = -1;
+        //}
+
+        PricingEngine::CalculateDiscountsForLines(
+            pricingManager,
+            crtSalesTransaction,
+            currencyAndRoundingHelper,
+            channelCurrency,
+            custTable.LineDisc,
+            custTable.MultiLineDisc,
+            custTable.EndDisc,
+            this.parmCalculateSimpleDiscountOnly(), // calculateSimpleDiscountOnly
+            dateTimeOffset,
+            calculationParameters);
+    }
+
+}
