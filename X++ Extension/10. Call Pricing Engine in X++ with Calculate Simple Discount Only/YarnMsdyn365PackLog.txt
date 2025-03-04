@@ -1,0 +1,276 @@
+PS C:\D\b\b2\Msdyn365.Commerce.Online> yarn msdyn365 pack 
+yarn run v1.22.22
+$ C:\D\b\b2\Msdyn365.Commerce.Online\node_modules\.bin\msdyn365 pack
+-- Running MSDyn365 CLI Version 1.52.1
+-- =====================================================================
+-- Task A:  Starting package validation
+-- Running package validation...
+error Command failed with exit code 1.
+-- Package validation failed...Continuing with the pack process.
+-- Please run 'yarn msdyn365 validate ./' to find and fix errors in your package.
+$ C:\D\b\b2\Msdyn365.Commerce.Online\node_modules\.bin\eslint src/**/*.{ts,tsx}
+-- Starting to run `yarn msdyn365 pack` command....
+
+[1740841921193] Attemping to read package.json
+[1740841921198] Attemping to parse package.json
+[1740841921199] Attempting to replace 'yarn msdyn365b start local --use-eslint' with 'pm2 start ecosystem.config.js --env production --no-daemon'
+[1740841921199] Attemping to write updated package.json
+[1740841921200] Done.
+-- Task B: Checking if yarn.lock file already exists...
+-- Cleaning SDK packages from yarn.lock file...
+-- =====================================================================
+-- Task C: Running `yarn` on partner application...
+warning Resolution field "fork-ts-checker-webpack-plugin@6.0.8" is incompatible with requested version "fork-ts-checker-webpack-plugin@^3.1.1"
+warning Resolution field "terser-webpack-plugin@5.1.1" is incompatible with requested version "terser-webpack-plugin@^2.3.8"
+warning Resolution field "testcafe@3.7.1" is incompatible with requested version "testcafe@^1.1.1"
+warning Resolution field "fork-ts-checker-webpack-plugin@6.0.8" is incompatible with requested version "fork-ts-checker-webpack-plugin@4.1.6"
+warning Resolution field "terser@5.5.0" is incompatible with requested version "terser@^5.10.0"
+warning Resolution field "terser@5.5.0" is incompatible with requested version "terser@^5.5.1"
+warning Resolution field "terser-webpack-plugin@5.1.1" is incompatible with requested version "terser-webpack-plugin@^5.3.11"
+warning Resolution field "testcafe-hammerhead@24.7.2" is incompatible with requested version "testcafe-hammerhead@31.7.4"
+warning Resolution field "testcafe-legacy-api@5.1.4" is incompatible with requested version "testcafe-legacy-api@5.1.8"
+warning Lockfile has incorrect entry for "terser@^5.10.0". Ignoring it.
+warning Resolution field "fork-ts-checker-webpack-plugin@6.0.8" is incompatible with requested version "fork-ts-checker-webpack-plugin@^3.1.1"
+warning Resolution field "terser-webpack-plugin@5.1.1" is incompatible with requested version "terser-webpack-plugin@^2.3.8"
+warning Resolution field "testcafe@3.7.1" is incompatible with requested version "testcafe@^1.1.1"
+warning Resolution field "fork-ts-checker-webpack-plugin@6.0.8" is incompatible with requested version "fork-ts-checker-webpack-plugin@4.1.6"
+warning Resolution field "terser@5.5.0" is incompatible with requested version "terser@^5.10.0"
+warning Resolution field "testcafe-hammerhead@24.7.2" is incompatible with requested version "testcafe-hammerhead@31.7.4"
+warning Resolution field "testcafe-legacy-api@5.1.4" is incompatible with requested version "testcafe-legacy-api@5.1.8"
+warning "@msdyn365-commerce/bootloader > babel-plugin-universal-import@3.1.2" has incorrect peer dependency "webpack@^4.4.0".
+warning " > css-loader@2.1.1" has incorrect peer dependency "webpack@^4.0.0".
+warning "@msdyn365-commerce/bootloader > error-overlay-webpack-plugin@0.4.2" has incorrect peer dependency "webpack@^4.0.0".
+warning " > mini-css-extract-plugin@0.5.0" has incorrect peer dependency "webpack@^4.4.0".
+warning "@msdyn365-commerce-modules/fabrikam-design-kit > bootstrap@4.6.2" has unmet peer dependency "jquery@1.9.1 - 3".
+warning "@msdyn365-commerce-modules/fabrikam-design-kit > bootstrap@4.6.2" has unmet peer dependency "popper.js@^1.16.1".
+warning "@msdyn365-commerce/bootloader > @msdyn365-commerce/runtime-internal > @msdyn365-commerce/action-internal > webpack-cli@3.3.12" has incorrect peer dependency "webpack@4.x.x".
+warning " > react-universal-component@4.5.0" has unmet peer dependency "react@^16.3.0 || ^17.0.0".
+warning " > react-test-renderer@16.14.0" has unmet peer dependency "react@^16.14.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react@7.152.2" has incorrect peer dependency "@types/react-dom@>=16.8.0 <17.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react@7.152.2" has unmet peer dependency "react-dom@>=16.8.0 <17.0.0".        
+warning "reactstrap > react-popper@0.10.4" has unmet peer dependency "react@0.14.x || ^15.0.0 || ^16.0.0".
+warning "reactstrap > react-popper@0.10.4" has unmet peer dependency "react-dom@0.14.x || ^15.0.0 || ^16.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @fluentui/react-focus@7.18.17" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @fluentui/react-focus@7.18.17" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @fluentui/react-window-provider@1.0.6" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @fluentui/react-window-provider@1.0.6" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/foundation@7.10.16" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/foundation@7.10.16" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/react-hooks@7.16.4" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/react-hooks@7.16.4" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/utilities@7.38.2" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/utilities@7.38.2" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/styling > @fluentui/theme@1.7.13" has incorrect peer dependency "@types/react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce-modules/search > office-ui-fabric-react > @uifabric/styling > @fluentui/theme@1.7.13" has unmet peer dependency "react-dom@>=16.8.0 <18.0.0".
+warning "@msdyn365-commerce-modules/starter-pack > @msdyn365-commerce/components > react-transition-group@4.4.5" has unmet peer dependency "react-dom@>=16.6.0".
+warning " > reactstrap@6.5.0" has unmet peer dependency "react@^16.0.0".
+warning " > reactstrap@6.5.0" has unmet peer dependency "react-dom@^16.0.0".
+warning "reactstrap > react-transition-group@2.9.0" has unmet peer dependency "react@>=15.0.0".
+warning "reactstrap > react-transition-group@2.9.0" has unmet peer dependency "react-dom@>=15.0.0".
+-- Successfully completed running `yarn` on the partner application !!
+-- =====================================================================
+files [
+  'C:/D/b/b2/Msdyn365.Commerce.Online/submission/src/modules/helloworld/tests/helloworld.test.tsx'
+] C:\D\b\b2\Msdyn365.Commerce.Online\submission\src\modules\**\*.test.tsx
+-- Task D: Starting build of partner application....
+$ yarn clean && yarn msdyn365b build --use-eslint --use-submission-v2 --disable-linter
+$ yarn rimraf build lib dist .tmp gendef.lock
+$ C:\D\b\b2\Msdyn365.Commerce.Online\submission\node_modules\.bin\rimraf build lib dist .tmp gendef.lock
+$ C:\D\b\b2\Msdyn365.Commerce.Online\submission\node_modules\.bin\msdyn365b build --use-eslint --use-submission-v2 --disable-linter
+-- Task 2: Starting module registration for installed modules... 
+
+-- Starting validation of module data action...
+-- Data-actions list from data definition files created. Completed module data-actions validation. 
+
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-customer with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- account-address-tile: server
+-- account-customer-balance: server
+-- account-customer-balance-tile: server
+-- account-management-address: server
+-- account-order-templates-tile: server
+-- account-profile: server
+-- account-welcome-tile: server
+-- b2b-requests-status: server
+-- b2b-requests-tile: server
+-- bulk-purchase: client
+-- business-organization-list: server
+-- buybox: server
+-- cart: server
+-- cart-icon: server
+-- checkout: server
+-- checkout-customer-account-payment: server
+-- checkout-guest-profile: server
+-- header: server
+-- invoices-list: server
+-- loyalty-sign-up: server
+-- msdyn365-pva-chat-connector: server
+-- order-confirmation: server
+-- order-details: server
+-- order-history: server
+-- order-history-with-search-and-filters: server
+-- organization-users-tile: server
+-- product-comparison: server
+-- product-comparison-button: server
+-- product-comparison-preview: server
+-- quick-order: server
+-- quick-order-grid: server
+-- quickview: server
+-- wishlist-items: server
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-current-business-partner-user with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- account-customer-balance: server
+-- b2b-requests-status: server
+-- business-partner-promotion: client
+-- invoices-list: server
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-wishlist-by-customer-id with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- account-wishlist-tile: server
+-- buybox: server
+-- cart: client
+-- header: server
+-- quickview: server
+-- wishlist-items: client
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-delivery-options-for-cartlines with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- cart: server
+-- checkout: client
+-- checkout-pickup: server
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/search-org-unit-locations with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- cart: server
+-- cart-icon: server
+-- checkout: client
+-- checkout-pickup: client
+-- Multiple data action definition for @msdyn365-commerce/global-state/dist/lib/data-actions/cart-state-data-action with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- buybox: server
+-- cart: server
+-- checkout-delivery-options: server
+-- checkout-express: server
+-- checkout-guest-profile: client
+-- checkout-shipping-address: server
+-- order-template: server
+-- quick-order: client
+-- quick-order-grid: client
+-- wishlist-items: server
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-loyalty-card with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- account-loyalty: server
+-- account-loyalty-tile: server
+-- checkout-loyalty: client
+-- checkout-order-confirmation: client
+-- loyalty-sign-up: server
+-- loyalty-terms: client
+-- order-confirmation: client
+-- order-details: client
+-- Multiple data action definition for @msdyn365-commerce-modules/retail-actions/dist/lib/get-ratings-summary with conflicting 'runOn' configuration (server/client/serverOnly) found. Action will be run on server by default
+-- Please find the modules & their runOn configuration below
+-- buybox: client
+-- ratings-histogram: server
+-- reviews-list: server
+-- Completed module registration for installed modules !! 
+
+-- Task 3: Starting module registration for local modules... 
+
+-- Starting validation of module data action...
+-- Data-actions list from data definition files created. Completed module data-actions validation. 
+
+-- Completed module registration for local modules !! 
+
+Webpack: Starting ...
+-- Task 1:  Starting module definition generation...
+-- Completed module definition generation !! 
+
+-- Task 4: Starting SASS/CSS compilation... 
+
+-- Task 5: Starting theme registration... 
+
+-- Completed SASS/CSS compilation successfully !!
+
+-- Task 6: Starting to build all themes... 
+
+-- Completed building all themes !! 
+
+-- Completed theme registration successfully !!
+
+-- Task 1:  Starting module definition generation...
+-- Completed module definition generation !! 
+
+-- Task 5: Starting theme registration... 
+
+-- Completed theme registration successfully !!
+
+`isModuleDeclaration` has been deprecated, please migrate to `isImportOrExportDeclaration`
+    at isModuleDeclaration (C:\D\b\b2\Msdyn365.Commerce.Online\submission\node_modules\@babel\types\lib\validators\generated\index.js:2765:35)
+    at PluginPass.Program (C:\D\b\b2\Msdyn365.Commerce.Online\submission\node_modules\babel-plugin-lodash\lib\index.js:102:44)
+Webpack: Starting ...
+
+  √ Compile modules
+  √ Build modules
+  √ Optimize modules
+  √ Emit files
+
+Webpack: Finished after 185.332 seconds.
+
+Completed with 30 warnings.  Please see 'stats-server-build-warnings.json' for details.
+Completed with 57 warnings.  Please see 'stats-client-build-warnings.json' for details.
+-- 
+Building of partner application successfully completed !!
+-- =====================================================================
+{
+  sdkVersion: '1.52.1',
+  sskVersion: '9.52.4',
+  retailServerProxyVersion: '9.52.2',
+  node_runtime_version: '16',
+  sdkCliVersion: '1.52.1'
+}
+found SDK version greater than 1.25.1
+cleaning stats-node.json: C:\D\b\b2\Msdyn365.Commerce.Online\submission\build\stats-node.json
+cleaning node modules directory
+preparing package with whitelisted files/folders and removing unnecessary files/folders
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\.eslintrc.js
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\.npmrc
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\.prettierrc
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\.yarnrc
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\clean-node-modules.js
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\fix-module-template.js
+Deleting directory : C:\D\b\b2\Msdyn365.Commerce.Online\submission\public
+Deleting directory : C:\D\b\b2\Msdyn365.Commerce.Online\submission\src
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\stats-client-build-warnings.json
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\stats-server-build-warnings.json
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\tsconfig.json
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\update-env.js
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\update-start-webapp.js
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\validate-package.js
+Deleting file : C:\D\b\b2\Msdyn365.Commerce.Online\submission\yarn.lock
+-- Starting server and performing health check
+-- Task E: Starting server and performing health check
+-- Server is not healty
+-- retrying...
+-- Server is not healty
+-- retrying...
+-- Server is not healty
+-- retrying...
+-- Server is not healty
+-- retrying...
+-- Server is not healty
+-- retrying...
+-- Server is healthy
+-- Server is running on background with process id - 27400, terminating the server
+-- error message, Command failed: npm run start:prod
+ApplicationInsights:An invalid instrumentation key was provided. There may be resulting telemetry loss [ ' ' ]
+(node:19832) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+-- error', ApplicationInsights:An invalid instrumentation key was provided. There may be resulting telemetry loss [ ' ' ]
+(node:19832) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Deleting 'file': C:\D\b\b2\Msdyn365.Commerce.Online\submission\.env
+-- Health check completed !!
+-- =====================================================================
+
+-- √ Package Msdyn365.Commerce.Online-1.0.0.zip successfully created !!
+-- pack command completed
+Done in 1003.89s.
