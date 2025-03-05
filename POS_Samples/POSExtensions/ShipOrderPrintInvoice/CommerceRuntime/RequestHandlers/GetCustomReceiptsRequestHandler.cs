@@ -43,13 +43,12 @@
 
                 if(request.ReceiptRetrievalCriteria.ReceiptType == ReceiptType.CustomReceipt6)
                 {
-                    InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("PrintSalesInvoice", salesOrder.SalesId);
+                    InvokeExtensionMethodRealtimeRequest extensionRequest = new InvokeExtensionMethodRealtimeRequest("printSalesInvoice", salesOrder.SalesId);
                     InvokeExtensionMethodRealtimeResponse response = await request.RequestContext.ExecuteAsync<InvokeExtensionMethodRealtimeResponse>(extensionRequest).ConfigureAwait(false);
                     ReadOnlyCollection<object> results = response.Result;
 
                     string resValue = (string)results[0];
                 }
-
 
                 Collection<Receipt> result = new Collection<Receipt>();
 
