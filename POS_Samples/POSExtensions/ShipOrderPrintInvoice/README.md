@@ -140,7 +140,7 @@ namespace Contoso
 ```
 
 ##  The Realtime Service in FnO is 
-```xpp
+```cs
 [ExtensionOf(classStr(RetailTransactionServiceEx))]
 public final class ContosoRetailTransactionService_Extension
 {
