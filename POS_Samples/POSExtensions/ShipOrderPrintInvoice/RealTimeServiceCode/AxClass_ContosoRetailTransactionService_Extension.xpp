@@ -1,0 +1,67 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Collections;
+using System.IO;
+using System.Text;
+using Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using Microsoft.Dynamics.Commerce.Runtime.TransactionService;
+using TS = Microsoft.Dynamics.Commerce.Runtime.TransactionService.Serialization;
+using DM = Microsoft.Dynamics.Commerce.Runtime.DataModel;
+using ContosoCRT = Contoso.GasStationSample.CommerceRuntime;
+using ContosoDM  = Contoso.GasStationSample.CommerceRuntime.Entities;
+
+
+[ExtensionOf(classStr(RetailTransactionServiceEx))]
+public final class ContosoRetailTransactionService_Extension
+{
+    public static container printSalesInvoice(SalesId _salesId)
+    {
+        boolean success = true;
+        str message = '';
+        int fromLine;
+        CustInvoiceJour         custInvoiceJour;
+      
+        try
+        {
+            select firstonly custInvoiceJour
+                order by custInvoiceJour.InvoiceId desc
+                where custInvoiceJour.SalesId == _salesId;
+
+            if (custInvoiceJour)
+            {
+                str ext = SRSPrintDestinationSettings::findFileNameType(SRSReportFileFormat::PDF, SRSImageFileFormat::BMP);
+                PrintMgmtReportFormatName printMgmtReportFormatName = PrintMgmtDocType::construct(PrintMgmtDocumentType::SalesOrderInvoice).getDefaultReportFormat();
+                                     
+                SalesInvoiceContract salesInvoiceContract = new SalesInvoiceContract();
+                salesInvoiceContract.parmRecordId(custInvoiceJour.RecId);
+
+                SrsReportRunController  srsReportRunController = new SrsReportRunController();
+                srsReportRunController.parmReportName(printMgmtReportFormatName);
+                srsReportRunController.parmExecutionMode(SysOperationExecutionMode::Synchronous);
+                srsReportRunController.parmShowDialog(false);
+                srsReportRunController.parmReportContract().parmRdpContract(salesInvoiceContract);
+
+                SRSPrintDestinationSettings printerSettings = srsReportRunController.parmReportContract().parmPrintSettings();
+                printerSettings.printMediumType(SRSPrintMediumType::File);
+                printerSettings.fileFormat(SRSReportFileFormat::PDF);
+                printerSettings.parmFileName(custInvoiceJour.InvoiceId + ext);
+                printerSettings.overwriteFile(true);
+                    
+                srsReportRunController.startOperation();
+
+                success = true;
+                message = 'Sales Invoice Print Successfully';
+            }
+        }
+        catch (Exception::Error)
+        {
+            success = false;
+            message = RetailTransactionServiceUtilities::getInfologMessages(fromLine);
+        }
+
+        return [success, "", message];
+    }
+
+}
