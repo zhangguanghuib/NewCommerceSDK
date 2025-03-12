@@ -11,7 +11,7 @@
     <ProjectReference Include="..\ChannelDatabase\Contoso.StoreCommercePackagingSample.ChannelDatabase.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\CommerceRuntime\Contoso.StoreCommercePackagingSample.CommerceRuntime.csproj">
+    <ProjectReference Include="..\CommerceRuntime\Contoso.StoreCommercePackagingSample.CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\HardwareStation\Contoso.StoreCommercePackagingSample.HardwareStation.csproj">

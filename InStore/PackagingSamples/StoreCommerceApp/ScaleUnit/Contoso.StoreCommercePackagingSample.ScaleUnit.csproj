@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChannelDatabase\Contoso.StoreCommercePackagingSample.ChannelDatabase.csproj" />
-    <ProjectReference Include="..\CommerceRuntime\Contoso.StoreCommercePackagingSample.CommerceRuntime.csproj" />
+    <ProjectReference Include="..\CommerceRuntime\Contoso.StoreCommercePackagingSample.CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true"  />
     <ProjectReference Include="..\Pos\Contoso.StoreCommercePackagingSample.Pos.csproj" />
   </ItemGroup>
 </Project>

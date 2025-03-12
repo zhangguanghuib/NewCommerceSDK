@@ -1,17 +1,11 @@
-/**
- * SAMPLE CODE NOTICE
- * 
- * THIS SAMPLE CODE IS MADE AVAILABLE AS IS.  MICROSOFT MAKES NO WARRANTIES, WHETHER EXPRESS OR IMPLIED,
- * OF FITNESS FOR A PARTICULAR PURPOSE, OF ACCURACY OR COMPLETENESS OF RESPONSES, OF RESULTS, OR CONDITIONS OF MERCHANTABILITY.
- * THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS SAMPLE CODE REMAINS WITH THE USER.
- * NO TECHNICAL SUPPORT IS PROVIDED.  YOU MAY NOT DISTRIBUTE THIS CODE UNLESS YOU HAVE A LICENSE AGREEMENT WITH MICROSOFT THAT ALLOWS YOU TO DO SO.
- */
- 
 namespace Contoso.CommerceRuntime.Hosting
 {
     using System.Threading.Tasks;
+    using Contoso.StoreCommercePackagingSample.CommerceRuntime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime;
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
+    using Microsoft.Dynamics.Commerce.Runtime.Messages;
 
     /// <summary>
     /// An extension controller to handle ping requests to CommerceRuntime.
@@ -38,6 +32,31 @@ namespace Contoso.CommerceRuntime.Hosting
         public Task<bool> SimplePingPost()
         {
             return Task.FromResult(true);
+        }
+
+        [HttpPost]
+        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Employee, CommerceRoles.Application, CommerceRoles.Application, CommerceRoles.Storefront)]
+        public async Task<Cart> OverrideCartLinePrice(IEndpointContext context, string cartId, string lineId, decimal newPrice)
+        {
+            if (string.IsNullOrWhiteSpace(cartId))
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_MissingParameter, "The cart identifier are missing.");
+            }
+            // Get the cart
+            CartSearchCriteria cartSearchCriteria = new CartSearchCriteria(cartId);
+            var request = new GetCartRequest(cartSearchCriteria, QueryResultSettings.SingleRecord);
+            var response = await context.ExecuteAsync<GetCartResponse>(request).ConfigureAwait(false);
+            Cart cart = response.Carts.SingleOrDefault();
+            if (cart == null)
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound, "The cart is not found.");
+            }
+
+            // Override the price
+            var overrideSalesTransactionLinePriceRequest = new OverrideSalesTransactionLinePriceRequest(cart, lineId, newPrice, CalculationModes.All);
+            var saveCartResponse = await context.ExecuteAsync<SaveCartResponse>(overrideSalesTransactionLinePriceRequest).ConfigureAwait(false);
+
+            return saveCartResponse.Cart;
         }
     }
 }
