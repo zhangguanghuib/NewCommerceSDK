@@ -14,6 +14,8 @@ import ExampleCreateDialog from "../Controls/Dialogs/Create/ExampleCreateDialogM
 import ExampleEditDialog from "../Controls/Dialogs/Edit/ExampleEditDialogModule";
 import PingResultDialog from "../Controls/Dialogs/Display/PingResultDialogModule";
 import { ObjectExtensions, ArrayExtensions } from "PosApi/TypeExtensions";
+import { ClientEntities } from "PosApi/Entities";
+
 
 /**
  * The ViewModel for ExampleView.
@@ -147,5 +149,16 @@ export default class ExampleViewModel {
                         return pingResultDialog.open(pingGetResponse.data.result, pingPostResponse.data.result);
                     });
             });
+    }
+
+    public GetCartList(): Promise<void> {
+        return this._context.runtime
+            .executeAsync(new Messages.StoreOperations.GetOnlineShoppingCartListRequest())
+            .then((getOnlineShoppingCartListResponse: ClientEntities.ICancelableDataResult<Messages.StoreOperations.GetOnlineShoppingCartListResponse>) => {
+                console.table(getOnlineShoppingCartListResponse.data.result);
+                return Promise.resolve();
+            }).catch((error: any): Promise<void> => {
+                return Promise.reject(error);
+            });   
     }
 }

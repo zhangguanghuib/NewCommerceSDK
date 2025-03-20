@@ -48,6 +48,13 @@
           "phonePageName": "ExampleView",
           "viewDirectory": "Views/",
           "viewControllerPath": "Views/ExampleView"
+        },
+        {
+          "title": "PostLogOnView",
+          "pageName": "PostLogOnView",
+          "phonePageName": "PostLogOnView",
+          "viewDirectory": "Views/",
+          "viewControllerPath": "Views/PostLogOnView"
         }
       ]
     },
@@ -70,6 +77,12 @@
           "description": "An extension to execute custom logic after the cart checkout is completed.",
           "triggerType": "PostCartCheckoutTransaction",
           "modulePath": "Triggers/PostCheckoutPrintFileTrigger"
+        },
+        {
+          "name": "PostLogonTrigger",
+          "description": "An extension to execute custom logic after the Store Commerce Logon.",
+          "triggerType": "PostLogon",
+          "modulePath": "Triggers/PostLogonTrigger"
         }
       ],
       "views": {
@@ -78,7 +91,10 @@
             "name": "Customized Product Search Columns",
             "description": "An extension providing a customized set of columns on the product search grid.",
             "modulePath": "ViewExtensions/CustomProductSearchColumns"
-          }
+          },
+          "productAppBarCommands": [
+            { "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand" }
+          ]
         }
       }
     }

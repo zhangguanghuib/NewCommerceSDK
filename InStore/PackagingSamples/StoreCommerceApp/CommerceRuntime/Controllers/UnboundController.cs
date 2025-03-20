@@ -35,7 +35,7 @@ namespace Contoso.CommerceRuntime.Hosting
         }
 
         [HttpPost]
-        [Authorization(CommerceRoles.Anonymous, CommerceRoles.Customer, CommerceRoles.Employee, CommerceRoles.Application, CommerceRoles.Application, CommerceRoles.Storefront)]
+        [Authorization(CommerceRoles.Employee, CommerceRoles.Application)]
         public async Task<Cart> OverrideCartLinePrice(IEndpointContext context, string cartId, string lineId, decimal newPrice)
         {
             if (string.IsNullOrWhiteSpace(cartId))
@@ -57,6 +57,43 @@ namespace Contoso.CommerceRuntime.Hosting
             var saveCartResponse = await context.ExecuteAsync<SaveCartResponse>(overrideSalesTransactionLinePriceRequest).ConfigureAwait(false);
 
             return saveCartResponse.Cart;
+        }
+
+        [HttpPost]
+        [Authorization(CommerceRoles.Employee, CommerceRoles.Application)]
+        public async Task<PagedResult<Cart>> GetOnlineShoppingCartList(IEndpointContext context, QueryResultSettings queryResultSettings)
+        {
+            CartSearchCriteria cartSearchCriteria = new CartSearchCriteria();
+            cartSearchCriteria.CartType = CartType.Checkout;
+            cartSearchCriteria.StaffId = "";
+            cartSearchCriteria.IncludeAnonymous = true;
+            cartSearchCriteria.LastModifiedDateTimeFrom = System.DateTime.Now.AddDays(-10);
+            cartSearchCriteria.LastModifiedDateTimeTo = System.DateTime.Now;
+
+            if (cartSearchCriteria == null)
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_MissingParameter, "The cart identifier are missing.");
+            }
+
+            // Get the cart
+            var request = new GetCartRequest(cartSearchCriteria, queryResultSettings);
+            var response = await context.ExecuteAsync<GetCartResponse>(request).ConfigureAwait(false);
+
+            return response.Carts;
+        }
+        [HttpPost]
+        [Authorization(CommerceRoles.Employee, CommerceRoles.Application)]
+        public async Task<Cart> GetCartById(IEndpointContext context, string id)
+        {
+            CartSearchCriteria cartSearchCriteria = new CartSearchCriteria(id);
+            var request = new GetCartRequest(cartSearchCriteria, QueryResultSettings.SingleRecord);
+            var response = await context.ExecuteAsync<GetCartResponse>(request).ConfigureAwait(false);
+            Cart cart = response.Carts.SingleOrDefault();
+            if (cart == null)
+            {
+                throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound, "The cart is not found.");
+            }
+            return cart;
         }
     }
 }

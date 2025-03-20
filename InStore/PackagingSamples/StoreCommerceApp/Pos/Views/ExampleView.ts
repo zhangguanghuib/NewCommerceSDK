@@ -84,6 +84,22 @@ export default class ExampleView extends Views.CustomViewControllerBase {
                                 this.state.isProcessing = false;
                             });
                         }
+                    },
+                    {
+                        name: "GetCartList",
+                        label: "Get Cart List",
+                        icon: Views.Icons.LightningBolt,
+                        isVisible: true,
+                        canExecute: true,
+                        execute: (args: Views.CustomViewControllerExecuteCommandArgs): void => {
+                            this.state.isProcessing = true;
+                            this.viewModel.GetCartList().then(() => {
+                                this.state.isProcessing = false;
+                            }).catch((error: any): Promise<void> => {
+                                this.state.isProcessing = false;
+                                return Promise.reject(error);
+                            });
+                        }
                     }
                 ]
             }
