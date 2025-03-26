@@ -83,6 +83,30 @@
           "description": "An extension to execute custom logic after the Store Commerce Logon.",
           "triggerType": "PostLogon",
           "modulePath": "Triggers/PostLogonTrigger"
+        },
+        {
+          "name": "PreUnlockTerminalTrigger",
+          "description": "A sample trigger showing how to add extra parameter in the logon request in unlock terminal scenario. PIN number will be added in this sample.",
+          "triggerType": "PreUnlockTerminal",
+          "modulePath": "Triggers/PreUnlockTerminalTrigger"
+        },
+        {
+          "name": "PreElevateUserTrigger",
+          "description": "A sample trigger showing how to add extra parameter in the logon request in manager override scenario. PIN number will be added in this sample.",
+          "triggerType": "PreElevateUser",
+          "modulePath": "Triggers/PreElevateUserTrigger"
+        },
+        {
+          "name": "PreLogOnTrigger",
+          "description": "A sample trigger showing how to add extra parameter in the logon request in POS logon scenario. PIN number will be added in this sample.",
+          "triggerType": "PreLogOn",
+          "modulePath": "Triggers/PreLogOnTrigger"
+        },
+        {
+          "name": "PreEnrollUserCredentialsTrigger",
+          "description": "A sample trigger showing how to add extra parameter on enrolling user credential scenario. PIN number will be added in this sample.",
+          "triggerType": "PreEnrollUserCredentials",
+          "modulePath": "Triggers/PreEnrollUserCredentialsTrigger"
         }
       ],
       "views": {
@@ -94,6 +118,13 @@
           },
           "productAppBarCommands": [
             { "modulePath": "ViewExtensions/Search/NavigateToExampleViewCommand" }
+          ]
+        },
+        "PaymentView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/Payment/PaymentViewCommand"
+            }
           ]
         }
       }
