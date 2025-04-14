@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\CustomizationPackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Dynamics.Commerce.Sdk.ScaleUnit" Version="$(CommerceSdkPackagesVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Settings included in the CommerceRuntimeExtensionSettings item group will be added to the generated CommerceRuntime config file and available at runtime in the CommerceRuntime extension. -->
+    <CommerceRuntimeExtensionSettings Include="ext.Contoso.GasolineItemId">
+      <Value>gasoline</Value>
+    </CommerceRuntimeExtensionSettings>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChannelDatabase\Contoso.StoreCommercePackagingSample.ChannelDatabase.csproj" />
+    <ProjectReference Include="..\CommerceRuntime\Contoso.StoreCommercePackagingSample.CommerceRuntime.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true"  />
+    <ProjectReference Include="..\Pos\Contoso.StoreCommercePackagingSample.Pos.csproj" />
+  </ItemGroup>
+</Project>
