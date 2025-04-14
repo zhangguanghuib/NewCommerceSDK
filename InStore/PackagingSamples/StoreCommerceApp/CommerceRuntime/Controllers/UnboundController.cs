@@ -6,6 +6,7 @@ namespace Contoso.CommerceRuntime.Hosting
     using Microsoft.Dynamics.Commerce.Runtime.DataModel;
     using Microsoft.Dynamics.Commerce.Runtime.Hosting.Contracts;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
+    using Microsoft.Dynamics.Commerce.Runtime.Services.Messages;
 
     /// <summary>
     /// An extension controller to handle ping requests to CommerceRuntime.
@@ -94,6 +95,18 @@ namespace Contoso.CommerceRuntime.Hosting
                 throw new DataValidationException(DataValidationErrors.Microsoft_Dynamics_Commerce_Runtime_ObjectNotFound, "The cart is not found.");
             }
             return cart;
+        }
+
+        [HttpPost]
+        [Authorization(CommerceRoles.Employee)]
+
+        public async Task<PagedResult<InventoryInboundOutboundDocumentLine>> SearchInventoryDocumentLine(IEndpointContext context, InventoryDocumentLineSearchCriteria searchCriteria, QueryResultSettings settings)
+        {
+            var request = new SearchInventoryDocumentLinesRequest(searchCriteria, settings);
+
+            var response = await context.ExecuteAsync<SearchInventoryDocumentLinesResponse>(request).ConfigureAwait(false);
+
+            return response.Lines;
         }
     }
 }

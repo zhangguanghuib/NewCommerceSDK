@@ -126,6 +126,13 @@
               "modulePath": "ViewExtensions/Payment/PaymentViewCommand"
             }
           ]
+        },
+        "InventoryDocumentShippingAndReceivingView": {
+          "appBarCommands": [
+            {
+              "modulePath": "ViewExtensions/InventoryDocumentShippingAndReceivingView/ExportFullOrderListCommand"
+            }
+          ]
         }
       }
     }
