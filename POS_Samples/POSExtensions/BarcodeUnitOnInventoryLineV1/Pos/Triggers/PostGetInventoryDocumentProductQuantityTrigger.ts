@@ -1,10 +1,9 @@
 ﻿import * as Triggers from "PosApi/Extend/Triggers/InventoryTriggers";
 import { ProxyEntities, ClientEntities } from "PosApi/Entities";
-import { ObjectExtensions } from "PosApi/TypeExtensions";
+import { ObjectExtensions, StringExtensions } from "PosApi/TypeExtensions";
 import * as Messages from "../DataService/DataServiceRequests.g";
 
 export default class PostGetInventoryDocumentProductQuantityTrigger extends Triggers.PostGetInventoryDocumentProductQuantityTrigger {
-
     public execute(options: Triggers.IPostGetInventoryDocumentProductQuantityTriggerOptions)
         : Promise<Commerce.Triggers.CancelableTriggerResult<Triggers.IPostGetInventoryDocumentProductQuantityTriggerOptions>> {
         let productExtensionProperties: ProxyEntities.CommerceProperty[] = options.product.ExtensionProperties;
@@ -36,6 +35,9 @@ export default class PostGetInventoryDocumentProductQuantityTrigger extends Trig
         let productId: number = options.product.RecordId;
         let convertedQty: number = 0;
 
+        if (StringExtensions.isEmptyOrWhitespace(itemBarcode) || StringExtensions.isEmptyOrWhitespace(fromUoM)) {
+            return Promise.resolve(new Commerce.Triggers.CancelableTriggerResult<Triggers.IPostGetInventoryDocumentProductQuantityTriggerOptions>(false, options));
+        }
 
         let request: Messages.StoreOperations.GetInventoryUnitOfMeasureByItemIdRequest<Messages.StoreOperations.GetInventoryUnitOfMeasureByItemIdResponse>
             = new Messages.StoreOperations.GetInventoryUnitOfMeasureByItemIdRequest<Messages.StoreOperations.GetInventoryUnitOfMeasureByItemIdResponse>(productId, itemId);

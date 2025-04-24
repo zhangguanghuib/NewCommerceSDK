@@ -32,6 +32,10 @@
         {
           "htmlPath": "Controls/Dialogs/Display/PingResultDialog.html",
           "modulePath": "Controls/Dialogs/Display/PingResultDialogModule"
+        },
+        {
+          "htmlPath": "Controls/Dialogs/Create/ImageCapture/ImageCaptureDialog.html",
+          "modulePath": "Controls/Dialogs/Create/ImageCapture/ImageCaptureDialogModule"
         }
       ],
       "views": [
@@ -118,6 +122,9 @@
       "requestHandlers": [
         {
           "modulePath": "RequestHandlers/GetScanResultClientRequestHandlerExt"
+        },
+        {
+          "modulePath": "RequestHandlers/AddTenderLineToCartClientRequestHandlerExt"
         }
       ],
       "views": {
@@ -142,6 +149,9 @@
           "appBarCommands": [
             {
               "modulePath": "ViewExtensions/InventoryDocumentShippingAndReceivingView/ExportFullOrderListCommand"
+            },
+            {
+              "modulePath": "ViewExtensions/InventoryDocumentShippingAndReceivingView/CaptureAttachPictureCommand"
             }
           ]
         }
