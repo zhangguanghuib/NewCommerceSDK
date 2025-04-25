@@ -13,42 +13,6 @@
     <canvas id="canvas" style="display: none;"></canvas>
     <h2>Captured Image:</h2>
     <img id="capturedImage" alt="Captured Image" />
-
-    <script>const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const captureButton = document.getElementById('capture');
-        const saveButton = document.getElementById('save');
-        const capturedImage = document.getElementById('capturedImage');
-        const context = canvas.getContext('2d');
-
-        // Access the camera
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-                video.srcObject = stream;
-            })
-            .catch((error) => {
-                console.error('Error accessing the camera:', error);
-            });
-
-        // Capture the image
-        captureButton.addEventListener('click', () => {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Display the captured image
-            const dataURL = canvas.toDataURL('image/png');
-            capturedImage.src = dataURL;
-        });
-
-        // Save the image
-        saveButton.addEventListener('click', () => {
-            const dataURL = canvas.toDataURL('image/png'); // Convert canvas to data URL
-            const link = document.createElement('a'); // Create a temporary <a> element
-            link.href = dataURL;
-            link.download = 'captured-image.png'; // Set the file name
-            link.click(); // Trigger the download
-        });</script>
 </body>
 </html>
 

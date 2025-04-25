@@ -41,8 +41,12 @@ export default class GetScanResultClientRequestHandlerExt extends GetScanResultC
                     itemBarcodeExtensionProperty.Value.StringValue = barcode;
 
                     const product: ProxyEntities.SimpleProduct = response.data.result.Product;
+                    while (product.ExtensionProperties.length >= 0) {
+                        product.ExtensionProperties.pop();
+                    }
                     product.ExtensionProperties.push(unitIdExtensionProperty);
                     product.ExtensionProperties.push(itemBarcodeExtensionProperty);
+                    product.Name = product.Name + " - " + barcodeUnitId;
                 }
                 return Promise.resolve({
                     canceled: response.canceled,
