@@ -115,7 +115,7 @@ namespace Contoso.StoreCommercePackagingSample.CommerceRuntime.RequestHandlers
 ```
 
 The controller code:
-```
+```cs
 public class CustomerDimensionController : IController
 {
     [HttpPost]
