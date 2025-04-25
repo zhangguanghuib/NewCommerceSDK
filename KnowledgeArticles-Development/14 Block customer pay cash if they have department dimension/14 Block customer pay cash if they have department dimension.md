@@ -229,6 +229,6 @@ export default class AddTenderLineToCartClientRequestHandlerExt extends AddTende
     }
 }
 ```
+## 6. The project is located: <br/>
 
-
-
+https://github.com/zhangguanghuib/NewCommerceSDK/tree/main/POS_Samples/POSExtensions/BarcodeUnitOnInventoryLineV1
