@@ -3,17 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.Dynamics.Commerce.Runtime;
-    using Microsoft.Dynamics.Commerce.Runtime.Data;
-    using Microsoft.Dynamics.Commerce.Runtime.DataAccess.SqlServer;
     using Microsoft.Dynamics.Commerce.Runtime.Messages;
-    using Contoso.CommerceRuntime.DataModel;
-    using Contoso.CommerceRuntime.Messages;
-    using Microsoft.Dynamics.Commerce.Runtime.DataModel;
-    using Microsoft.Dynamics.Commerce.Runtime.DataServices.Messages;
-    using Microsoft.Dynamics.Commerce.Runtime.Entities.DataModel;
     using Contoso.StoreCommercePackagingSample.CommerceRuntime.Messages;
     using Microsoft.Dynamics.Commerce.Runtime.RealtimeServices.Messages;
 
