@@ -1,25 +1,59 @@
-# 1. SQL Script to disable the feature "Pricing Management"<br/>
-```sql
-select T.RecId, T.DisplayName, T.enabledate, T.FeatureState, * from dbo.FEATUREMANAGEMENTMETADATA as T where T.displayname like '%Pricing management%'
+# 1. D365 Commerce:  how to create and config aler rules<br/>
 
-select * from dbo.FeatureManagementState where RecId in ( 5637178354,5637178358,5637181026);
+This document shows how to create an alert rule  https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/fin-ops/get-started/alerts-overview <br/>
 
-DECLARE @featureStateRecId BIGINT = 5637188827;
+# 2. The key classes that process the custom alert <br/>
+. EventActionAlert(method: execute)
+![image](https://github.com/user-attachments/assets/5cd1b531-02de-430b-a06f-020523557ec2)
 
-UPDATE [dbo].[featuremanagementmetadata]
-SET enabledate = '1900-01-01 00:00:00.000',
-    modifieddatetime = Getdate(),
-    modifiedby = 'Testing'
-WHERE featurestate = @featureStateRecId;
-
-UPDATE [dbo].[featuremanagementstate]
-SET isenabled = 0
-WHERE recid = @featureStateRecId;
-
-SELECT * FROM dbo.featuremanagementstate WHERE recid = @featureStateRecId;
-
-SELECT enabledate, modifieddatetime, modifiedby, * FROM dbo.featuremanagementmetadata WHERE featurestate = @featureStateRecId;
+. Method: sendAlertEmailNotifications
 ```
+ System.Exception ex;
+ try
+ {
+     Email _emailfrom;
+     if(_userInfo != null && _userInfo.RecId)
+     {
+         _emailfrom = _userInfo.emailDisplay();
+     }
+
+     var emailBody = this.getEmailBody(_eventInbox, _eventRule, _buffer);
+     
+     var messageBuilder = new SysMailerMessageBuilder();
+     
+     var recipients = _eventRule.getEmailRecipients();
+     var enumerator = recipients.getEnumerator();
+     while(enumerator.moveNext())
+     {
+         var recipient = enumerator.current();
+         if (recipient != '')
+         {
+             System.Exception e;
+             try
+             {
+                 messageBuilder.reset()
+                   .addTo(recipient)
+                   .setSubject(_eventInbox.Subject)
+                   .setBody(emailBody);
+
+                 if(_emailfrom)
+                 {
+                     messageBuilder.setFrom(_emailFrom);
+                 }
+                 
+
+                 mailer.sendNonInteractive(messageBuilder.getMessage());
+             }
+             catch(e)
+             {
+                 EventDefinitionAndProcessingProviderEventSource::EventWriteEventActionAlertInfo("sendAlertEmailNotifications", strFmt("Failed to send email. Exception: %1", e.ToString()));
+             }
+         }
+     }
+ }
+```
+
+
 # 2. You should check if the feature is really disabled:<br/>
 ![image](https://github.com/user-attachments/assets/2f5bff87-edc3-4bf6-938e-6ac96c835304)
 
