@@ -15,7 +15,7 @@ Here is the reversed order of the list:
 8. `EventActionAlert.execute()`
 9. `EventActionAlert.sendAlertEmailNotifications`
 <hr/>
-. Class: EventActionAlert (method: execute)<br/>
+. Class: EventActionAlert (method: execute), from this method we can see the EventInboxId is inserted into the database<br/>
 
 ![image](https://github.com/user-attachments/assets/5cd1b531-02de-430b-a06f-020523557ec2)
 
