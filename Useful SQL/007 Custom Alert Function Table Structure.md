@@ -3,7 +3,7 @@
 This document shows how to create an alert rule  https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/fin-ops/get-started/alerts-overview <br/>
 
 # 2. The key classes that process the custom alert <br/>
-. EventActionAlert(method: execute)
+. Class: EventActionAlert (method: execute)
 ![image](https://github.com/user-attachments/assets/5cd1b531-02de-430b-a06f-020523557ec2)
 
 . Method: sendAlertEmailNotifications
