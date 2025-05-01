@@ -17,7 +17,8 @@ Here is the reversed order of the list:
 <hr/>
 . Class: EventActionAlert (method: execute), from this method we can see the EventInboxId is inserted into the database<br/>
 
-![image](https://github.com/user-attachments/assets/5cd1b531-02de-430b-a06f-020523557ec2)
+![image](https://github.com/user-attachments/assets/13e11fe3-7a54-4a6d-8315-bf3881888458)
+
 
 . Method: sendAlertEmailNotifications
 ```
