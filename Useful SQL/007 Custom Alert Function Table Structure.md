@@ -54,8 +54,34 @@ This document shows how to create an alert rule  https://learn.microsoft.com/en-
 ```
 
 
-# 2. You should check if the feature is really disabled:<br/>
-![image](https://github.com/user-attachments/assets/2f5bff87-edc3-4bf6-938e-6ac96c835304)
+# 2. The Key Tables and the Relations:<br/>
+
+```sql
+
+-- From Table Name to get TableId
+select  T.ID, * from dbo.TABLEIDTABLE as T where T.Name = 'CustTable'
+-- From TableId to get the Alert Event Rule Id
+select T.RULEID,  * from dbo.EVENTRULE as T where T.ALERTTABLEID = 10347
+-- From Rule Id to get the Rule Details
+select  T.USERID, T.ALERTFIELDID, T.ALERTFIELDLABEL, T.ALERTTABLEID, T.COMPANYID, T.MESSAGE, T.SUBJECT, * from dbo.EVENTRULE as T where T.RULEID = 000263
+
+-- From EventInBox to get a lot of more details
+select T.ALERTTABLEID, T.RULEID, T.EMAILTEMPLATEID, T.EMAILID, T.INBOXID, T.ALERTEDFOR, T.SENDEMAIL, T.SUBJECT, T.MESSAGE, T.EMAILRECIPIENT, T.INBOXID, * from dbo.EVENTINBOX as T where T.ALERTTABLEID = 10347 and T.RULEID = 000263
+
+-- Get EmailTemplate
+select * from dbo.SYSEMAILTABLE as T where T.EMAILID = 'EmailTemplateId from EVENTINBOX' -- EmailTemplateId
+
+-- Get the Real Email
+select T.EMAILITEMID, * from dbo.SYSOUTGOINGEMAILTABLE as T where T.EMAILITEMID = 'EmailId from EVENTINBOX '
+
+-- Get the EventInboxData
+select * from dbo.EventInboxData(nolock) as T where T.INBOXID = 5637144581-- 'InBoxId from dbo.EVENTINBOX'
+
+select * from dbo.CUSTTABLE as T where T.RECID = 22565431406
+
+select T.CUDRECID, * from dbo.EventCUD as T where T.CUDTABLEID = 10347
+select * from dbo.EventCUD as T where T.CUDRECID = 22565431406
+```
 
 
 
