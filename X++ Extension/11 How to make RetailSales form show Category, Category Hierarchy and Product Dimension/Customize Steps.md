@@ -1,26 +1,12 @@
-https://community.dynamics.com/profile/?userid=98fdb150-5ee8-4a58-a962-03122f348ce0
-
-https://d365focodelibrary.com/
-
-
-https://www.linkedin.com/pulse/chain-command-event-handler-d365fo-x-code-example-sai-krishna-ttkcc/?trackingId=d02BSORRrmgQKd0%2BMVpuaQ%3D%3D
-
-https://anithasantosh.wordpress.com/2025/01/03/debugging-test-uat-data-from-development-vm-in-d365fo-configuration-and-best-practice/
+1.  Add data source on the existing RetailSales form:<br/>
+   ![image](https://github.com/user-attachments/assets/4579f37a-984f-4454-84ac-316517ec1f30)
 
 
-https://www.linkedin.com/pulse/adding-new-parameter-field-event-handling-existing-runbasebatch-k-knhjc/?trackingId=6qW6SDbaUcNfjBaXefKbBQ%3D%3D
+2. For those product with product dimension,  it looks like as this: <br/>
+   ![image](https://github.com/user-attachments/assets/e08bbfd7-6b4c-40b0-994b-a169a195e95c)
 
 
-https://alexdmeyer.com/2025/01/21/d365fo-security-myth-applying-company-restrictions-to-just-the-system-user-role/
+3. For those product which does not have product dimension, it looks like <br/>
+   ![image](https://github.com/user-attachments/assets/9f5ae2a0-445a-4992-9728-c395c466a00a)
 
-https://www.linkedin.com/pulse/copilot-sidecar-d365-fo-extending-through-x-rizwan-ahmed-kkfuc/
 
-https://www.linkedin.com/pulse/json-xml-messages-deserialization-d365-finance-maciej-sondej/?trackingId=LXROy55hRyChTXyGKoC6xw%3D%3D
-
-https://www.youtube.com/watch?v=_a3vZfwn6HA  how to create workspace in FnO?
-    
-https://techwithmunna.com/how-to-set-up-postman-for-calling-d365-data-entities/   How to Set Up Postman for Calling D365 Data Entities
-
-One retail developer's linkedin blog:  https://www.linkedin.com/pulse/enhancing-customer-search-using-loyalty-id-phone-d365-ramakrishnan-n3pfc/?trackingId=lW64g4DLzdtBWHy%2Fiz%2BRPw%3D%3D
-
-C#  functional programming:  https://www.linkedin.com/learning/advanced-c-sharp-functional-programming-patterns-25066789/functional-programming-patterns-24923399?u=3322
