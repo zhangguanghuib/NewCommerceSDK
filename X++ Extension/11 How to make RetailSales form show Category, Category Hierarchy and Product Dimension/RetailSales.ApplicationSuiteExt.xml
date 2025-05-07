@@ -9,6 +9,10 @@
 					<Name>Visible</Name>
 					<Value>No</Value>
 				</AxPropertyModification>
+				<AxPropertyModification>
+					<Name>Enabled</Name>
+					<Value>No</Value>
+				</AxPropertyModification>
 			</PropertyModifications>
 		</AxExtensionModification>
 		<AxExtensionModification xmlns="">
@@ -18,35 +22,39 @@
 					<Name>Visible</Name>
 					<Value>No</Value>
 				</AxPropertyModification>
+				<AxPropertyModification>
+					<Name>Enabled</Name>
+					<Value>No</Value>
+				</AxPropertyModification>
 			</PropertyModifications>
 		</AxExtensionModification>
 	</ControlModifications>
 	<Controls>
 		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControlxjqg0gx21</Name>
+			<Name>FormExtensionControlehoxixsm1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormReferenceGroupControl">
-				<Name>RetailGroupMemberLine_CategoryHierarchy</Name>
+				<Name>CategoryHierarchy</Name>
 				<Type>ReferenceGroup</Type>
 				<FormControlExtension
 					i:nil="true" />
 				<Controls />
-				<DataSource>RetailGroupMemberLine</DataSource>
+				<DataSource>EcoResProductCategory</DataSource>
 				<ReferenceField>CategoryHierarchy</ReferenceField>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
 			<PositionType>Begin</PositionType>
 		</AxFormExtensionControl>
 		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControlicexicep1</Name>
+			<Name>FormExtensionControlufjvmlvl1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormReferenceGroupControl">
-				<Name>RetailGroupMemberLine_Category</Name>
+				<Name>Category</Name>
 				<Type>ReferenceGroup</Type>
 				<FormControlExtension
 					i:nil="true" />
 				<Controls />
-				<DataSource>RetailGroupMemberLine</DataSource>
+				<DataSource>EcoResProductCategory</DataSource>
 				<ReferenceField>Category</ReferenceField>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
@@ -66,44 +74,41 @@
 			<Parent>SalesLineGrid</Parent>
 		</AxFormExtensionControl>
 		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControlnpdczfgv1</Name>
+			<Name>FormExtensionControlyt3ahzoo1</Name>
 			<FormControl xmlns=""
-				i:type="AxFormReferenceGroupControl">
-				<Name>Style</Name>
-				<Type>ReferenceGroup</Type>
+				i:type="AxFormStringControl">
+				<Name>configId</Name>
+				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
-				<Controls />
-				<DataSource>EcoResProductVariantStyle</DataSource>
-				<ReferenceField>Style</ReferenceField>
+				<DataField>configId</DataField>
+				<DataSource>InventDim2</DataSource>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
 		</AxFormExtensionControl>
 		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControlnroqyhea1</Name>
+			<Name>FormExtensionControlysflwqrv1</Name>
 			<FormControl xmlns=""
-				i:type="AxFormReferenceGroupControl">
+				i:type="AxFormStringControl">
 				<Name>Color</Name>
-				<Type>ReferenceGroup</Type>
+				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
-				<Controls />
-				<DataSource>EcoResProductVariantColor</DataSource>
-				<ReferenceField>Color</ReferenceField>
+				<DataField>InventColorId</DataField>
+				<DataSource>InventDim2</DataSource>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
 		</AxFormExtensionControl>
 		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControlnja5bhf41</Name>
+			<Name>FormExtensionControlr1ortkx51</Name>
 			<FormControl xmlns=""
-				i:type="AxFormReferenceGroupControl">
+				i:type="AxFormStringControl">
 				<Name>Size</Name>
-				<Type>ReferenceGroup</Type>
+				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
-				<Controls />
-				<DataSource>EcoResProductVariantSize</DataSource>
-				<ReferenceField>Size</ReferenceField>
+				<DataField>InventSizeId</DataField>
+				<DataSource>InventDim2</DataSource>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
 		</AxFormExtensionControl>
@@ -111,7 +116,7 @@
 			<Name>FormExtensionControliair2c5r1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormStringControl">
-				<Name>RetailTransactionSalesTrans_InventSiteId</Name>
+				<Name>InventSiteId</Name>
 				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
@@ -124,7 +129,7 @@
 			<Name>FormExtensionControl1xxzy4rh1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormStringControl">
-				<Name>RetailTransactionSalesTrans_InventLocationId</Name>
+				<Name>InventLocationId</Name>
 				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
@@ -137,7 +142,7 @@
 			<Name>FormExtensionControlheaf5xbz1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormStringControl">
-				<Name>RetailTransactionSalesTrans_InventBatchId</Name>
+				<Name>InventBatchId</Name>
 				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
@@ -150,38 +155,12 @@
 			<Name>FormExtensionControllzsjcylb1</Name>
 			<FormControl xmlns=""
 				i:type="AxFormStringControl">
-				<Name>RetailTransactionSalesTrans_InventSerialId</Name>
+				<Name>InventSerialId</Name>
 				<Type>String</Type>
 				<FormControlExtension
 					i:nil="true" />
 				<DataField>InventSerialId</DataField>
 				<DataSource>RetailTransactionSalesTrans</DataSource>
-			</FormControl>
-			<Parent>SalesLineGrid</Parent>
-		</AxFormExtensionControl>
-		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControl32zay2gw1</Name>
-			<FormControl xmlns=""
-				i:type="AxFormStringControl">
-				<Name>EcoResproduct_DisplayProductNumber</Name>
-				<Type>String</Type>
-				<FormControlExtension
-					i:nil="true" />
-				<DataField>DisplayProductNumber</DataField>
-				<DataSource>EcoResproduct</DataSource>
-			</FormControl>
-			<Parent>SalesLineGrid</Parent>
-		</AxFormExtensionControl>
-		<AxFormExtensionControl xmlns="">
-			<Name>FormExtensionControl5qq5q4bf1</Name>
-			<FormControl xmlns=""
-				i:type="AxFormStringControl">
-				<Name>EcoResproduct_SearchName</Name>
-				<Type>String</Type>
-				<FormControlExtension
-					i:nil="true" />
-				<DataField>SearchName</DataField>
-				<DataSource>EcoResproduct</DataSource>
 			</FormControl>
 			<Parent>SalesLineGrid</Parent>
 		</AxFormExtensionControl>
@@ -233,168 +212,131 @@
 			<ReferencedDataSources />
 			<JoinSource>RetailTransactionSalesTrans</JoinSource>
 			<LinkType>OuterJoin</LinkType>
-			<InsertIfEmpty>No</InsertIfEmpty>
 			<DataSourceLinks />
 			<DerivedDataSources />
 		</AxFormDataSource>
 		<AxFormDataSource xmlns="">
-			<Name>EcoResDistinctProductVariant</Name>
-			<Table>EcoResDistinctProductVariant</Table>
+			<Name>InventDim2</Name>
+			<Table>InventDim</Table>
 			<Fields>
 				<AxFormDataSourceField>
-					<DataField>DisplayProductNumber</DataField>
+					<DataField>configId</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
-					<DataField>InstanceRelationType</DataField>
+					<DataField>CreatedDateTime</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>DataAreaId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>inventBatchId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventColorId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension1</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension10</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension11</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension12</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension2</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension3</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension4</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension5</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension6</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension7</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension8</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventDimension9</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>inventDimId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventGtdId_RU</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventLocationId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventOwnerId_RU</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventProfileId_RU</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>inventSerialId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventSiteId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventSizeId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventStatusId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventStyleId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>InventVersionId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>LicensePlateId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ModifiedBy</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ModifiedDateTime</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
 					<DataField>Partition</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
-					<DataField>PdsCWProduct</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ProductMaster</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ProductType</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
 					<DataField>RecId</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
-					<DataField>RetaiTotalWeight</DataField>
+					<DataField>SHA1HashHex</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
-					<DataField>SearchName</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ServiceType</DataField>
+					<DataField>SHA3HashHex</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
 					<DataField>TableId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>wMSLocationId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>wMSPalletId</DataField>
 				</AxFormDataSourceField>
 			</Fields>
 			<ReferencedDataSources />
 			<JoinSource>InventDimCombination</JoinSource>
-			<LinkType>InnerJoin</LinkType>
-			<InsertIfEmpty>No</InsertIfEmpty>
-			<DataSourceLinks />
-			<DerivedDataSources />
-		</AxFormDataSource>
-		<AxFormDataSource xmlns="">
-			<Name>EcoResProductVariantSize</Name>
-			<Table>EcoResProductVariantSize</Table>
-			<Fields>
-				<AxFormDataSourceField>
-					<DataField>DistinctProductVariant</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>InstanceRelationType</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Partition</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ProductDimensionAttribute</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RecId</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailDisplayOrder</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailWeight</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Size</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>TableId</DataField>
-				</AxFormDataSourceField>
-			</Fields>
-			<ReferencedDataSources />
-			<JoinSource>EcoResDistinctProductVariant</JoinSource>
 			<LinkType>OuterJoin</LinkType>
-			<DataSourceLinks />
-			<DerivedDataSources />
-		</AxFormDataSource>
-		<AxFormDataSource xmlns="">
-			<Name>EcoResProductVariantColor</Name>
-			<Table>EcoResProductVariantColor</Table>
-			<Fields>
-				<AxFormDataSourceField>
-					<DataField>Color</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>DistinctProductVariant</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>InstanceRelationType</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Partition</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ProductDimensionAttribute</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RecId</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailDisplayOrder</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailWeight</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>TableId</DataField>
-				</AxFormDataSourceField>
-			</Fields>
-			<ReferencedDataSources />
-			<JoinSource>EcoResDistinctProductVariant</JoinSource>
-			<LinkType>OuterJoin</LinkType>
-			<AllowCheck>No</AllowCheck>
-			<DataSourceLinks />
-			<DerivedDataSources />
-		</AxFormDataSource>
-		<AxFormDataSource xmlns="">
-			<Name>EcoResProductVariantStyle</Name>
-			<Table>EcoResProductVariantStyle</Table>
-			<Fields>
-				<AxFormDataSourceField>
-					<DataField>DistinctProductVariant</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>InstanceRelationType</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Partition</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>ProductDimensionAttribute</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RecId</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailDisplayOrder</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>RetailWeight</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Style</DataField>
-				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>TableId</DataField>
-				</AxFormDataSourceField>
-			</Fields>
-			<ReferencedDataSources />
-			<JoinSource>EcoResDistinctProductVariant</JoinSource>
-			<LinkType>OuterJoin</LinkType>
-			<AllowCheck>No</AllowCheck>
 			<DataSourceLinks />
 			<DerivedDataSources />
 		</AxFormDataSource>
@@ -866,7 +808,7 @@
 				</AxFormDataSourceField>
 			</Fields>
 			<ReferencedDataSources />
-			<JoinSource>InventDimCombination</JoinSource>
+			<JoinSource>RetailTransactionSalesTrans</JoinSource>
 			<LinkType>InnerJoin</LinkType>
 			<InsertIfEmpty>No</InsertIfEmpty>
 			<DataSourceLinks />
@@ -909,7 +851,7 @@
 			</Fields>
 			<ReferencedDataSources />
 			<JoinSource>InventTable</JoinSource>
-			<LinkType>Active</LinkType>
+			<LinkType>InnerJoin</LinkType>
 			<InsertIfEmpty>No</InsertIfEmpty>
 			<DataSourceLinks />
 			<DerivedDataSources>
@@ -989,8 +931,8 @@
 			</DerivedDataSources>
 		</AxFormDataSource>
 		<AxFormDataSource xmlns="">
-			<Name>RetailGroupMemberLine</Name>
-			<Table>RetailGroupMemberLine</Table>
+			<Name>EcoResProductCategory</Name>
+			<Table>EcoResProductCategory</Table>
 			<Fields>
 				<AxFormDataSourceField>
 					<DataField>Category</DataField>
@@ -999,7 +941,10 @@
 					<DataField>CategoryHierarchy</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
-					<DataField>InventDimId</DataField>
+					<DataField>DisplayOrder</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ModifiedDateTime</DataField>
 				</AxFormDataSourceField>
 				<AxFormDataSourceField>
 					<DataField>Partition</DataField>
@@ -1013,14 +958,10 @@
 				<AxFormDataSourceField>
 					<DataField>TableId</DataField>
 				</AxFormDataSourceField>
-				<AxFormDataSourceField>
-					<DataField>Variant</DataField>
-				</AxFormDataSourceField>
 			</Fields>
 			<ReferencedDataSources />
 			<JoinSource>EcoResproduct</JoinSource>
-			<LinkType>Active</LinkType>
-			<InsertAtEnd>No</InsertAtEnd>
+			<LinkType>InnerJoin</LinkType>
 			<InsertIfEmpty>No</InsertIfEmpty>
 			<DataSourceLinks />
 			<DerivedDataSources />
