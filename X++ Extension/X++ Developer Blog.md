@@ -24,3 +24,7 @@ https://techwithmunna.com/how-to-set-up-postman-for-calling-d365-data-entities/ 
 One retail developer's linkedin blog:  https://www.linkedin.com/pulse/enhancing-customer-search-using-loyalty-id-phone-d365-ramakrishnan-n3pfc/?trackingId=lW64g4DLzdtBWHy%2Fiz%2BRPw%3D%3D
 
 C#  functional programming:  https://www.linkedin.com/learning/advanced-c-sharp-functional-programming-patterns-25066789/functional-programming-patterns-24923399?u=3322
+
+
+
+https://denistrunin.com/integration-inboundwebsales/   D365FO Integration: Import Sales Orders from an External Web Application  Github:  https://github.com/TrudAX/TestWebService_PurchaseOrderApp
