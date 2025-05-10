@@ -31,3 +31,5 @@ https://denistrunin.com/integration-inboundwebsales/   D365FO Integration: Impor
 
 
 https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations/tree/main  ISM-Telemetry-for-Finance-and-Operations  https://www.linkedin.com/feed/update/urn:li:activity:7325938600464785408/
+
+Approve F&O workflow with power automate
