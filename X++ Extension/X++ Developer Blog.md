@@ -28,3 +28,6 @@ C#  functional programming:  https://www.linkedin.com/learning/advanced-c-sharp-
 
 
 https://denistrunin.com/integration-inboundwebsales/   D365FO Integration: Import Sales Orders from an External Web Application  Github:  https://github.com/TrudAX/TestWebService_PurchaseOrderApp
+
+
+https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations/tree/main  ISM-Telemetry-for-Finance-and-Operations  https://www.linkedin.com/feed/update/urn:li:activity:7325938600464785408/
