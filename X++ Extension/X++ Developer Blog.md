@@ -33,3 +33,5 @@ https://denistrunin.com/integration-inboundwebsales/   D365FO Integration: Impor
 https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations/tree/main  ISM-Telemetry-for-Finance-and-Operations  https://www.linkedin.com/feed/update/urn:li:activity:7325938600464785408/
 
 Approve F&O workflow with power automate  https://www.linkedin.com/pulse/workflow-approval-ms-teams-dynamics-365-finance-yameen-dlesf/?trackingId=CN3nAg4ClXMa37upNsh8jw%3D%3D
+
+https://alexdmeyer.com/2025/05/06/ism-telemetry-for-finance-and-operations-overview/ 3rd-party telemetry
