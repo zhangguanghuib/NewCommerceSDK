@@ -35,3 +35,5 @@ https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations/tree/main 
 Approve F&O workflow with power automate  https://www.linkedin.com/pulse/workflow-approval-ms-teams-dynamics-365-finance-yameen-dlesf/?trackingId=CN3nAg4ClXMa37upNsh8jw%3D%3D
 
 https://alexdmeyer.com/2025/05/06/ism-telemetry-for-finance-and-operations-overview/ 3rd-party telemetry
+
+https://community.dynamics.com/blogs/post/?postid=fcfff418-da30-f011-8c4e-000d3a990cc2   Graph API sent email in FO
