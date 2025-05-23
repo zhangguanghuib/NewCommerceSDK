@@ -1,0 +1,13 @@
+let _startTime = datetime(2025-05-14 08:40);
+let _endTime = datetime(2025-05-14 08:50);
+let _provider = '';
+let _taskName = '';
+let _tenant = '';
+TraceLog_Local(_startTime,_endTime,_provider,_tenant,_taskName)
+| where Tenant startswith "BI-rsax-"
+| where ActivityiID == '3259995b-f5d6-4261-b887-6dd4bd19fb4e'
+//| where Level < 3
+
+Display name: Guanghui02 Zhang02
+Username: guazha02@dynftegcr.onmicrosoft.com
+Password: N)215467085068ac Hide
