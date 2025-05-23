@@ -1,6 +1,6 @@
 ### How to implement Product/Item or Shelf Report print in POS?
 1. Open AOT and find the RetailLabel Report,  add it into a project and open it as below:
-   ![image](https://github.com/user-attachments/assets/f8dd1980-9161-488d-b5f5-b21f6e48036d)
+  ![image](https://github.com/user-attachments/assets/c57e494d-d21c-4e16-8f62-c52f246d4e6e)
 
 2. Choose one report design and open it with report designer:
    ![image](https://github.com/user-attachments/assets/24d47d7a-b56a-4288-adfd-46d9ebc17136)
