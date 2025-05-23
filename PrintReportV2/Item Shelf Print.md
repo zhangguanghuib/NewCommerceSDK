@@ -64,77 +64,77 @@
     7.  As for the Retail Product & Shelf label,  in D365 HQ,  its logic is like:
        ![image](https://github.com/user-attachments/assets/ea89002c-7ef3-43a4-86ce-8c5fc88c4eb7)
 
-       ```
-     private void insertTmpTable(RetailInventItemLabel _table)
-    {
-        int qty;
-        RetailInventItemLabel   retailLabel;
-        //<GEERU>
-        RetailInventTable       retailInventTable;
-        InventTable             inventTable;
-        LanguageId              storeLanguage;
-        //</GEERU>
-
-        tmpTable.clear();
-        if (columnNumber > 3)
-        {
-            columnNumber = 1;
-        }
-
-        tmpTable = this.initRetailLabelTmp(_table, tmpTable);
-
-        retailInventTable = RetailInventTable::find(tmpTable.ItemId);
-
-        if (retailInventTable)
-        {
-            inventTable = InventTable::find(tmpTable.ItemId);
-
-            [storeLanguage, tmpTable.StoreAddress]   = this.getStoreInfo(_table.StoreId);
-
-            tmpTable.CompanyName    = companyName;
-            tmpTable.CompanyAddress = companyAddress;
-            tmpTable.ValidOnDate    = _table.ValidOnDate;
-
-            //<GEERU>
-            if (countryRegionRU)
-            {
-                this.fillAttributeFields(inventTable, retailInventTable, storeLanguage);
-            }
-            //</GEERU>
-
-            this.fillInventDimFields(inventTable, storeLanguage);
-        }
-
-        for (qty = 1; qty <= _table.Qty; qty++)
-        {
-            tmpTable.ColumnNumber = columnNumber;
-            tmpTable.insert();
-            columnNumber++;
-
-            if (columnNumber > 3)
-            {
-                columnNumber = 1;
-            }
-        }
-
-        eventSource.EventWriteReportingGenericMessage(classId2Name(ClassIdGet(this)), funcName(), strFmt('Records inserted into table: %1', tableStr(RetailLabelTmp)));
-
-        ttsBegin;
-        select forUpdate firstOnly retailLabel where retailLabel.RecId == _table.RecId;
-
-        if (retailLabel)
-        {
-            retailLabel.Printed = true;
-            retailLabel.update();
-        }
-        else
-        {
-            eventSource.EventWriteReportingGenericMessage(classId2Name(ClassIdGet(this)), funcName(), strFmt('Field Printed is unmarked into table: %1', tableStr(RetailInventItemLabel)));
-        }
-
-        ttsCommit;
-    }
-       ```
+      ```
+      private void insertTmpTable(RetailInventItemLabel _table)
+      {
+          int qty;
+          RetailInventItemLabel   retailLabel;
+          //<GEERU>
+          RetailInventTable       retailInventTable;
+          InventTable             inventTable;
+          LanguageId              storeLanguage;
+          //</GEERU>
+  
+          tmpTable.clear();
+          if (columnNumber > 3)
+          {
+              columnNumber = 1;
+          }
+  
+          tmpTable = this.initRetailLabelTmp(_table, tmpTable);
+  
+          retailInventTable = RetailInventTable::find(tmpTable.ItemId);
+  
+          if (retailInventTable)
+          {
+              inventTable = InventTable::find(tmpTable.ItemId);
+  
+              [storeLanguage, tmpTable.StoreAddress]   = this.getStoreInfo(_table.StoreId);
+  
+              tmpTable.CompanyName    = companyName;
+              tmpTable.CompanyAddress = companyAddress;
+              tmpTable.ValidOnDate    = _table.ValidOnDate;
+  
+              //<GEERU>
+              if (countryRegionRU)
+              {
+                  this.fillAttributeFields(inventTable, retailInventTable, storeLanguage);
+              }
+              //</GEERU>
+  
+              this.fillInventDimFields(inventTable, storeLanguage);
+          }
+  
+          for (qty = 1; qty <= _table.Qty; qty++)
+          {
+              tmpTable.ColumnNumber = columnNumber;
+              tmpTable.insert();
+              columnNumber++;
+  
+              if (columnNumber > 3)
+              {
+                  columnNumber = 1;
+              }
+          }
+  
+          eventSource.EventWriteReportingGenericMessage(classId2Name(ClassIdGet(this)), funcName(), strFmt('Records inserted into table: %1', tableStr(RetailLabelTmp)));
+  
+          ttsBegin;
+          select forUpdate firstOnly retailLabel where retailLabel.RecId == _table.RecId;
+  
+          if (retailLabel)
+          {
+              retailLabel.Printed = true;
+              retailLabel.update();
+          }
+          else
+          {
+              eventSource.EventWriteReportingGenericMessage(classId2Name(ClassIdGet(this)), funcName(), strFmt('Field Printed is unmarked into table: %1', tableStr(RetailInventItemLabel)));
+          }
+  
+          ttsCommit;
+      }
+      ```
 
 
    
